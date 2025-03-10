@@ -26,6 +26,11 @@ final class PermissionsTest extends UnitTestCase
     private const REGISTRATIONS_TABLE_NAME = 'tx_seminars_attendances';
 
     /**
+     * @var non-empty-string
+     */
+    private const USERS_TABLE_NAME = 'fe_users';
+
+    /**
      * @var BackendUserAuthentication&MockObject
      */
     private $backendUserMock;
@@ -75,8 +80,10 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -93,8 +100,10 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, true],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -111,8 +120,10 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -129,13 +140,55 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, true],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
 
         self::assertTrue($subject->hasReadAccessToRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasReadAccessToFrontEndUsersForNoAccessReturnsFalse(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertFalse($subject->hasReadAccessToFrontEndUsers());
+    }
+
+    /**
+     * @test
+     */
+    public function hasReadAccessToFrontEndUsersForAccessReturnsTrue(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, true],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertTrue($subject->hasReadAccessToFrontEndUsers());
     }
 
     /**
@@ -147,8 +200,10 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -165,8 +220,10 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, true],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -183,8 +240,10 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -201,12 +260,54 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, true],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
 
         self::assertTrue($subject->hasWriteAccessToRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWriteAccessToFrontEndUsersForNoAccessReturnsFalse(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, false],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertFalse($subject->hasWriteAccessToFrontEndUsers());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWriteAccessToFrontEndUsersForAccessReturnsTrue(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_select', self::USERS_TABLE_NAME, true],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::USERS_TABLE_NAME, true],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertTrue($subject->hasWriteAccessToFrontEndUsers());
     }
 }
