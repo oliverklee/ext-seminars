@@ -255,6 +255,10 @@
         <source>Room</source>
         <target state="needs-translation">Room</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_seminars.tab.attendeeInformation">
+        <source>Information for attendees</source>
+        <target state="needs-translation">Information for attendees</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelLodging">
         <source>Lodging/Food</source>
         <target state="needs-translation">Lodging/Food</target>
