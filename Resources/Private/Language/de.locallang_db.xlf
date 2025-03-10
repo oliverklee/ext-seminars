@@ -255,9 +255,9 @@
         <source>Room</source>
         <target state="final">Raum</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.tab.attendeeInformation">
+      <trans-unit id="tx_seminars_seminars.tab.attendeeInformation" approved="yes">
         <source>Information for attendees</source>
-        <target state="needs-translation">Information for attendees</target>
+        <target state="final">Teilnahmeinformationen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelLodging" approved="yes">
         <source>Lodging/Food</source>
