@@ -47,6 +47,10 @@ interface EventDateInterface
 
     public function getEffectiveRegistrationDeadline(): ?\DateTime;
 
+    public function getDownloadStartDate(): ?\DateTime;
+
+    public function areDownloadsPossibleByDate(): bool;
+
     public function isRegistrationRequired(): bool;
 
     public function isRegistrationPossibleByDate(): bool;
