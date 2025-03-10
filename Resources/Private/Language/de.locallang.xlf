@@ -2045,37 +2045,37 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Create event</source>
         <target state="final">Veranstaltung erstellen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.editEvent">
+      <trans-unit id="backEndModule.action.editEvent" approved="yes">
         <source>Edit event</source>
-        <target state="needs-translation">Edit event</target>
+        <target state="final">Veranstaltung bearbeiten</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.editRegistration">
+      <trans-unit id="backEndModule.action.editRegistration" approved="yes">
         <source>Edit registration</source>
-        <target state="needs-translation">Edit registration</target>
+        <target state="final">Anmeldung bearbeiten</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.editFrontEndUser">
+      <trans-unit id="backEndModule.action.editFrontEndUser" approved="yes">
         <source>Edit FE user</source>
-        <target state="needs-translation">Edit FE user</target>
+        <target state="final">FE-Benutzer bearbeiten</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.hideEvent">
+      <trans-unit id="backEndModule.action.hideEvent" approved="yes">
         <source>Hide event</source>
-        <target state="needs-translation">Hide event</target>
+        <target state="final">Veranstaltung ausblenden</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.unhideEvent">
+      <trans-unit id="backEndModule.action.unhideEvent" approved="yes">
         <source>Un-hide event</source>
-        <target state="needs-translation">Un-hide event</target>
+        <target state="final">Veranstaltung wieder einblenden</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.deleteEvent">
+      <trans-unit id="backEndModule.action.deleteEvent" approved="yes">
         <source>Delete event</source>
-        <target state="needs-translation">Delete event</target>
+        <target state="final">Veranstaltung löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.deleteRegistration">
+      <trans-unit id="backEndModule.action.deleteRegistration" approved="yes">
         <source>Delete registration</source>
-        <target state="needs-translation">Delete registration</target>
+        <target state="final">Anmeldung löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.duplicateEvent">
+      <trans-unit id="backEndModule.action.duplicateEvent" approved="yes">
         <source>Duplicate event</source>
-        <target state="needs-translation">Duplicate event</target>
+        <target state="final">Veranstaltung duplizieren</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.csvDownload" approved="yes">
         <source>Download as CSV file</source>
