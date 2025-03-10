@@ -115,6 +115,9 @@
 			<trans-unit id="tx_seminars_seminars.attached_files">
 				<source>Attached files</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.download_start_date">
+				<source>Downloads available starting at</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelSpeakers">
 				<source>Speakers</source>
 			</trans-unit>
