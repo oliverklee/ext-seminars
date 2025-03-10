@@ -42,6 +42,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Improve the hover texts in the BE module (#4195)
 - CSV-export the registration date by default (#4156)
 - !!! Always include the UID in the event slugs (#4152)
 - Improve some FE labels (#4141)

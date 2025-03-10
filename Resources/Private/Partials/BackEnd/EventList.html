@@ -52,7 +52,8 @@
                     <td class="col-title col-responsive">
                         <f:if condition="{permissions.writeAccessToEvents}">
                             <f:then>
-                                <be:link.editRecord uid="{event.uid}" table="{tableName}">
+                                <be:link.editRecord uid="{event.uid}" table="{tableName}"
+                                                    title="{f:translate(key: '{actionLabelPrefix}.editEvent')}">
                                     {event.internalTitle}
                                 </be:link.editRecord>
                             </f:then>
@@ -68,7 +69,7 @@
                         <td class="col-control nowrap">
                             <div class="btn-group" role="group">
                                 <be:link.editRecord uid="{event.uid}" table="{tableName}" class="btn btn-default"
-                                                    title="{f:translate(key: '{actionLabelPrefix}.edit')}">
+                                                    title="{f:translate(key: '{actionLabelPrefix}.editEvent')}">
                                     <core:icon identifier="actions-open"/>
                                 </be:link.editRecord>
                                 <f:if condition="{visible}">
@@ -76,7 +77,7 @@
                                         <f:form controller="BackEnd\Event" action="hide"
                                                 arguments="{eventUid: event.uid}">
                                             <button type="submit" class="btn btn-default"
-                                                    title="{f:translate(key: '{actionLabelPrefix}.hide')}">
+                                                    title="{f:translate(key: '{actionLabelPrefix}.hideEvent')}">
                                                 <core:icon identifier="actions-edit-hide"/>
                                             </button>
                                         </f:form>
@@ -85,7 +86,7 @@
                                         <f:form controller="BackEnd\Event" action="unhide"
                                                 arguments="{eventUid: event.uid}">
                                             <button type="submit" class="btn btn-default"
-                                                    title="{f:translate(key: '{actionLabelPrefix}.unhide')}">
+                                                    title="{f:translate(key: '{actionLabelPrefix}.unhideEvent')}">
                                                 <core:icon identifier="actions-edit-unhide"/>
                                             </button>
                                         </f:form>
@@ -97,7 +98,7 @@
                                         data="{title: confirmTitle, content: confirmContent, button-close-text: confirmCancel, button-ok-text: confirmOkay}"
                                 >
                                     <button type="submit" class="btn btn-default"
-                                            title="{f:translate(key: '{actionLabelPrefix}.delete')}">
+                                            title="{f:translate(key: '{actionLabelPrefix}.deleteEvent')}">
                                         <core:icon identifier="actions-delete"/>
                                     </button>
                                 </f:form>
@@ -105,7 +106,7 @@
                             <div class="btn-group" role="group">
                                 <f:form controller="BackEnd\Event" action="duplicate" arguments="{eventUid: event.uid}">
                                     <button type="submit" class="btn btn-default"
-                                            title="{f:translate(key: '{actionLabelPrefix}.duplicate')}">
+                                            title="{f:translate(key: '{actionLabelPrefix}.duplicateEvent')}">
                                         <core:icon identifier="actions-duplicates"/>
                                     </button>
                                 </f:form>
