@@ -2044,36 +2044,36 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Create event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.editEvent">
-        <source>Edit event record</source>
-        <target state="needs-translation">Edit event record</target>
+        <source>Edit event</source>
+        <target state="needs-translation">Edit event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.editRegistration">
-        <source>Edit registration record</source>
-        <target state="needs-translation">Edit registration record</target>
+        <source>Edit registration</source>
+        <target state="needs-translation">Edit registration</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.editFrontEndUser">
-        <source>Edit FE user record</source>
-        <target state="needs-translation">Edit FE user record</target>
+        <source>Edit FE user</source>
+        <target state="needs-translation">Edit FE user</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.hideEvent">
-        <source>Hide event record</source>
-        <target state="needs-translation">Hide event record</target>
+        <source>Hide event</source>
+        <target state="needs-translation">Hide event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.unhideEvent">
-        <source>Un-hide event record</source>
-        <target state="needs-translation">Un-hide event record</target>
+        <source>Un-hide event</source>
+        <target state="needs-translation">Un-hide event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.deleteEvent">
-        <source>Delete event record</source>
-        <target state="needs-translation">Delete event record</target>
+        <source>Delete event</source>
+        <target state="needs-translation">Delete event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.deleteRegistration">
-        <source>Delete registration record</source>
-        <target state="needs-translation">Delete registration record</target>
+        <source>Delete registration</source>
+        <target state="needs-translation">Delete registration</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.duplicateEvent">
-        <source>Duplicate event record</source>
-        <target state="needs-translation">Duplicate event record</target>
+        <source>Duplicate event</source>
+        <target state="needs-translation">Duplicate event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.csvDownload">
         <source>Download as CSV file</source>
