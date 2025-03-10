@@ -43,7 +43,8 @@
                     <td class="col-title col-responsive">
                         <f:if condition="{permissions.writeAccessToRegistrations}">
                             <f:then>
-                                <be:link.editRecord uid="{registration.uid}" table="{tableName}">
+                                <be:link.editRecord uid="{registration.uid}" table="{tableName}"
+                                                    title="{f:translate(key: '{actionLabelPrefix}.editRegistration')}">
                                     <f:variable name="user" value="{registration.user}"/>
                                     <f:if condition="{user}">
                                         <f:then>
@@ -80,7 +81,7 @@
                         <td class="col-control nowrap">
                             <div class="btn-group" role="group">
                                 <be:link.editRecord uid="{registration.uid}" table="{tableName}" class="btn btn-default"
-                                                    title="{f:translate(key: '{actionLabelPrefix}.edit')}">
+                                                    title="{f:translate(key: '{actionLabelPrefix}.editRegistration')}">
                                     <core:icon identifier="actions-open"/>
                                 </be:link.editRecord>
 
@@ -93,7 +94,7 @@
                                         data="{title: confirmTitle, content: confirmContent, button-close-text: confirmCancel, button-ok-text: confirmOkay}"
                                 >
                                     <button type="submit" class="btn btn-default"
-                                            title="{f:translate(key: '{actionLabelPrefix}.delete')}">
+                                            title="{f:translate(key: '{actionLabelPrefix}.deleteRegistration')}">
                                         <core:icon identifier="actions-delete"/>
                                     </button>
                                 </f:form>
