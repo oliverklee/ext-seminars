@@ -2053,6 +2053,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Edit registration record</source>
         <target state="final">Anmeldungsdatensatz bearbeiten</target>
       </trans-unit>
+      <trans-unit id="backEndModule.action.editFrontEndUser">
+        <source>Edit FE user record</source>
+        <target state="needs-translation">Edit FE user record</target>
+      </trans-unit>
       <trans-unit id="backEndModule.action.hideEvent" approved="yes">
         <source>Hide event record</source>
         <target state="final">Veranstaltungsdatensatz ausblenden</target>
