@@ -2051,6 +2051,10 @@ This event now has been confirmed.</target>
         <source>Edit registration record</source>
         <target state="needs-translation">Edit registration record</target>
       </trans-unit>
+      <trans-unit id="backEndModule.action.editFrontEndUser">
+        <source>Edit FE user record</source>
+        <target state="needs-translation">Edit FE user record</target>
+      </trans-unit>
       <trans-unit id="backEndModule.action.hideEvent">
         <source>Hide event record</source>
         <target state="needs-translation">Hide event record</target>
