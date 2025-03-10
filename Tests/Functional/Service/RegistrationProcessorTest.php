@@ -81,7 +81,7 @@ final class RegistrationProcessorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createTitlePutsFullUserNameInTitle(): void
+    public function createTitleForUserWithFullNamePutsFullUserNameInTitle(): void
     {
         $registration = new Registration();
         $registration->setEvent(new SingleEvent());
@@ -94,6 +94,45 @@ final class RegistrationProcessorTest extends FunctionalTestCase
         $this->subject->createTitle($registration);
 
         self::assertStringContainsString($fullUserName, $registration->getTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function createTitleForUserWithFirstAndLastNameOnlyPutsLastAndFirstNameInTitle(): void
+    {
+        $registration = new Registration();
+        $registration->setEvent(new SingleEvent());
+
+        $user = new FrontendUser();
+        $firstName = 'Saskia ';
+        $lastName = 'Doe';
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
+        $user->setEmail('saskia@example.com');
+        $registration->setUser($user);
+
+        $this->subject->createTitle($registration);
+
+        self::assertStringContainsString($lastName . ', ' . $firstName, $registration->getTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function createTitleForUserWithNoNamePutsEmailInTitle(): void
+    {
+        $registration = new Registration();
+        $registration->setEvent(new SingleEvent());
+
+        $user = new FrontendUser();
+        $email = 'saskia@example.com';
+        $user->setEmail($email);
+        $registration->setUser($user);
+
+        $this->subject->createTitle($registration);
+
+        self::assertStringContainsString($email, $registration->getTitle());
     }
 
     /**

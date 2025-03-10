@@ -137,6 +137,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Use the user's display name in the registration record title (#4194)
 - Improve some type annotations (#4014)
 - Make some billing address fields longer (#4143)
 - Improve display of users without a full name in the BE module (#4111)
