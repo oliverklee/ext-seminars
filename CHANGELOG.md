@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Allow editing the FE users from the BE module (#4197)
 - Allow creating registrations in the BE module (#4157)
 - Display the registration date in the registration TCEforms (#4154)
 - Include the attendance mode in the registration emails (#4148, #4151)

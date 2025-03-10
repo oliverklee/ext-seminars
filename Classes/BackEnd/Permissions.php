@@ -22,13 +22,22 @@ class Permissions implements SingletonInterface
      */
     private const REGISTRATIONS_TABLE_NAME = 'tx_seminars_attendances';
 
+    /**
+     * @var non-empty-string
+     */
+    private const USERS_TABLE_NAME = 'fe_users';
+
     private bool $readAccessToEvents;
 
     private bool $readAccessToRegistrations;
 
+    private bool $readAccessToFrontEndUsers;
+
     private bool $writeAccessToEvents;
 
     private bool $writeAccessToRegistrations;
+
+    private bool $writeAccessToFrontEndUsers;
 
     public function __construct()
     {
@@ -40,8 +49,10 @@ class Permissions implements SingletonInterface
 
         $this->readAccessToEvents = $user->check('tables_select', self::EVENTS_TABLE_NAME);
         $this->readAccessToRegistrations = $user->check('tables_select', self::REGISTRATIONS_TABLE_NAME);
+        $this->readAccessToFrontEndUsers = $user->check('tables_select', self::USERS_TABLE_NAME);
         $this->writeAccessToEvents = $user->check('tables_modify', self::EVENTS_TABLE_NAME);
         $this->writeAccessToRegistrations = $user->check('tables_modify', self::REGISTRATIONS_TABLE_NAME);
+        $this->writeAccessToFrontEndUsers = $user->check('tables_modify', self::USERS_TABLE_NAME);
     }
 
     public function hasReadAccessToEvents(): bool
@@ -54,6 +65,11 @@ class Permissions implements SingletonInterface
         return $this->readAccessToRegistrations;
     }
 
+    public function hasReadAccessToFrontEndUsers(): bool
+    {
+        return $this->readAccessToFrontEndUsers;
+    }
+
     public function hasWriteAccessToEvents(): bool
     {
         return $this->writeAccessToEvents;
@@ -62,5 +78,10 @@ class Permissions implements SingletonInterface
     public function hasWriteAccessToRegistrations(): bool
     {
         return $this->writeAccessToRegistrations;
+    }
+
+    public function hasWriteAccessToFrontEndUsers(): bool
+    {
+        return $this->writeAccessToFrontEndUsers;
     }
 }
