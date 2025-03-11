@@ -10,6 +10,8 @@ use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 use TYPO3\CMS\Extbase\Annotation\Validate;
@@ -32,6 +34,8 @@ trait EventDateTrait
     protected ?\DateTime $earlyBirdDeadline = null;
 
     protected ?\DateTime $registrationDeadline = null;
+
+    protected ?\DateTime $downloadStartDate = null;
 
     protected bool $registrationRequired = false;
 
@@ -223,6 +227,29 @@ trait EventDateTrait
         $registrationDeadline = $this->getRegistrationDeadline();
 
         return ($registrationDeadline instanceof \DateTime) ? $registrationDeadline : $this->getStart();
+    }
+
+    public function getDownloadStartDate(): ?\DateTime
+    {
+        return $this->downloadStartDate;
+    }
+
+    public function setDownloadStartDate(\DateTime $startDate): void
+    {
+        $this->downloadStartDate = $startDate;
+    }
+
+    public function areDownloadsPossibleByDate(): bool
+    {
+        $downloadStartDate = $this->getDownloadStartDate();
+        if (!($downloadStartDate instanceof \DateTimeInterface)) {
+            return true;
+        }
+
+        $now = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'full');
+        \assert($now instanceof \DateTimeInterface);
+
+        return $now >= $downloadStartDate;
     }
 
     public function isRegistrationRequired(): bool

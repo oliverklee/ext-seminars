@@ -20,6 +20,9 @@ use OliverKlee\Seminars\Domain\Model\RawDataInterface;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -34,6 +37,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SingleEventTest extends UnitTestCase
 {
+    protected bool $resetSingletonInstances = true;
+
     private SingleEvent $subject;
 
     protected function setUp(): void
@@ -1716,5 +1721,56 @@ final class SingleEventTest extends UnitTestCase
         $this->subject->setRoom($value);
 
         self::assertSame($value, $this->subject->getRoom());
+    }
+
+    /**
+     * @test
+     */
+    public function getDownloadStartDateInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getDownloadStartDate());
+    }
+
+    /**
+     * @test
+     */
+    public function setDownloadStartDateSetsDownloadStartDate(): void
+    {
+        $model = new \DateTime();
+        $this->subject->setDownloadStartDate($model);
+
+        self::assertSame($model, $this->subject->getDownloadStartDate());
+    }
+
+    /**
+     * @test
+     */
+    public function areDownloadsPossibleByDateForNoDownloadStartDateReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->areDownloadsPossibleByDate());
+    }
+
+    /**
+     * @test
+     */
+    public function areDownloadsPossibleByDateForDownloadStartInPastReturnsTrue(): void
+    {
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('now')));
+        $this->subject->setDownloadStartDate(new \DateTime('now -1 day'));
+
+        self::assertTrue($this->subject->areDownloadsPossibleByDate());
+    }
+
+    /**
+     * @test
+     */
+    public function areDownloadsPossibleByDateForDownloadStartInFutureReturnsFalse(): void
+    {
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('now')));
+        $this->subject->setDownloadStartDate(new \DateTime('now +1 day'));
+
+        self::assertFalse($this->subject->areDownloadsPossibleByDate());
     }
 }
