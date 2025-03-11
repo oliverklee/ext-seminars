@@ -151,6 +151,10 @@
         <source>Attached files</source>
         <target state="final">Angehängte Dateien</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_seminars.download_start_date">
+        <source>Downloads available starting at</source>
+        <target state="needs-translation">Downloads available starting at</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelSpeakers" approved="yes">
         <source>Speakers</source>
         <target state="final">Referent_innen</target>
