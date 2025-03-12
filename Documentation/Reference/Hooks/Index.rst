@@ -128,7 +128,7 @@ Implement the methods required by the interface:
          * @see AbstractBagBuilder::setWhereClausePart()
          *
          * This function will be called for these types of seminar lists: "topics", "seminars",
-         * "my vip seminars", "my entered events", "events next day", "other dates".
+         * "my vip seminars", "events next day", "other dates".
          *
          * @param DefaultController $controller the calling controller
          * @param EventBagBuilder $builder the bag builder
@@ -170,7 +170,7 @@ Implement the methods required by the interface:
          * Modifies the list view header row in a seminar list.
          *
          * This function will be called for all types of seminar lists ("topics",
-         * "seminars", "my seminars", "my vip seminars", "my entered events",
+         * "seminars", "my seminars", "my vip seminars",
          * "events next day", "other dates").
          *
          * @param DefaultController $controller the calling controller
@@ -184,7 +184,7 @@ Implement the methods required by the interface:
          * Modifies a list row in a seminar list.
          *
          * This function will be called for all types of seminar lists ("topics",
-         * "seminars", "my seminars", "my vip seminars", "my entered events",
+         * "seminars", "my seminars", "my vip seminars",
          * "events next day", "other dates").
          *
          * @param DefaultController $controller the calling controller
@@ -198,7 +198,7 @@ Implement the methods required by the interface:
          * Modifies a list view row in a "my seminars" list.
          *
          * This function will be called for "my seminars" , "my vip seminars",
-         * "my entered events" lists only.
+         * lists only.
          *
          * @param DefaultController $controller the calling controller
          */
@@ -211,7 +211,7 @@ Implement the methods required by the interface:
          * Modifies the list view footer in a seminars list.
          *
          * This function will be called for all types of seminar lists ("topics",
-         * "seminars", "my seminars", "my vip seminars", "my entered events",
+         * "seminars", "my seminars", "my vip seminars",
          * "events next day", "other dates").
          *
          * @param DefaultController $controller the calling controller
