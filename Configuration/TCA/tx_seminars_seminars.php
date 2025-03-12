@@ -981,18 +981,6 @@ $tca = [
                 'maxitems' => 1,
             ],
         ],
-        'vips' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.vips',
-            'config' => [
-                'type' => 'group',
-                'allowed' => 'fe_users',
-                'size' => 5,
-                'minitems' => 0,
-                'maxitems' => 999,
-                'MM' => 'tx_seminars_seminars_feusers_mm',
-            ],
-        ],
         'image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.image',
@@ -1046,7 +1034,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.tab.attendeeInformation, additional_email_text, attached_files, download_start_date, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_special, price_special_early, payment_methods, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, owner_feuser, vips',
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, owner_feuser',
         ],
         EventInterface::TYPE_EVENT_TOPIC => [
             'showitem' =>
@@ -1065,7 +1053,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAttendees, needs_registration, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, date_of_last_registration_digest, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.tab.attendeeInformation, additional_email_text, attached_files, download_start_date, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, vips',
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden',
         ],
     ],
 ];

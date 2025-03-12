@@ -19,18 +19,10 @@ their events in the front end.
 several speakers for an event (and even none). The speakers are listed
 on the event list view and the event single view. The speakers
 currently are not used for any email related activities; so they do
-not need to have an email address. If speakers should be able to view
-the registration lists for their events, their corresponding front-end
-user needs to be set as event manager for their events.
+not need to have an email address.
 
 **Tutors, partners, tutors and leaders** are just speakers that are
 listed under a different heading.
 
 **Owners** are the front-end users who have created an event record in
 the front end.
-
-**Event managers/VIPs** are special front-end users who are allowed to
-view the list of registrations for an event from their “my managed
-events” list. The extension can be configured so that all users from e
-a certain front-end user group are considered to be event managers for
-all events.

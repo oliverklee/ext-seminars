@@ -191,21 +191,6 @@ final class RegistrationsListTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @doesNotPerformAssertions
-     */
-    public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException(): void
-    {
-        new RegistrationsList(
-            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            'list_vip_registrations',
-            0,
-            $this->getFrontEndController()->cObj
-        );
-    }
-
     ///////////////////////
     // Tests for render()
     ///////////////////////
