@@ -59,8 +59,8 @@ override the corresponding value from TS Setup.**
    Description
          The kind of front-end plug-in to display. Allowed values are in:
          *seminar\_list, single\_view, topic\_list,*  *my\_events,
-         my\_vip\_events, seminar\_registration, list\_registrations,
-         list\_vip\_registrations, edit\_event,
+         seminar\_registration, list\_registrations,
+         edit\_event,
          category\_list, event\_headline* This must be set using flexforms.
 
    Default
@@ -659,37 +659,6 @@ override the corresponding value from TS Setup.**
 
    Description
          PID of the page that contains the registrations list for participants
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         registrationsVipListPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the page that contains the registrations list for editors
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         defaultEventVipsFeGroupID
-
-   Data type
-         integer
-
-   Description
-         UID of the FE user group that is allowed to see the registrations of
-         all events
 
    Default
          None

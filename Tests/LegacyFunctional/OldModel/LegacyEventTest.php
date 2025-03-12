@@ -6638,11 +6638,8 @@ final class LegacyEventTest extends FunctionalTestCase
      *               [loggedIn] boolean: whether a user is logged in
      *               [isRegistered] boolean: whether the logged-in user is
      *                              registered for that event
-     *               [isVip] boolean: whether the logged-in user is a VIP
-     *                                that event
      *               [whichPlugin] string: value for that parameter
      *               [registrationsListPID] integer: value for that parameter
-     *               [registrationsVipListPID] integer: value for that parameter
      */
     public function canViewRegistrationsListDataProvider(): array
     {
@@ -6651,133 +6648,51 @@ final class LegacyEventTest extends FunctionalTestCase
                 'expected' => false,
                 'loggedIn' => false,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListLoggedInWithListPid' => [
                 'expected' => false,
                 'loggedIn' => true,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListIsRegisteredWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListIsRegisteredWithoutListPid' => [
                 'expected' => false,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'seminarListIsVipWithListPid' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => true,
-                'whichPlugin' => 'seminar_list',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 1,
-            ],
-            'seminarListIsVipWithoutListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'seminar_list',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
             'myEventsIsRegisteredWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'my_events',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myEventsIsVipWithListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'my_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myVipEventsIsRegisteredWithListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => false,
-                'whichPlugin' => 'my_vip_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myVipEventsIsVipWithListPid' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'my_vip_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
             ],
             'listRegistrationsIsRegistered' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'list_registrations',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listRegistrationsIsVip' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'list_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listVipRegistrationsIsRegistered' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => false,
-                'whichPlugin' => 'list_vip_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listVipRegistrationsIsVip' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'list_vip_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
         ];
     }
 
     /**
      * @test
+     *
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      *
      * @dataProvider canViewRegistrationsListDataProvider
      */
@@ -6785,21 +6700,17 @@ final class LegacyEventTest extends FunctionalTestCase
         bool $expected,
         bool $loggedIn,
         bool $isRegistered,
-        bool $isVip,
         string $whichPlugin,
-        int $registrationsListPID,
-        int $registrationsVipListPID
+        int $registrationsListPID
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
+            ['needsRegistration', 'isUserRegistered']
         );
         $subject->method('needsRegistration')
             ->willReturn(true);
         $subject->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
-            ->willReturn($isVip);
 
         if ($loggedIn) {
             $rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -6812,14 +6723,15 @@ final class LegacyEventTest extends FunctionalTestCase
             $expected,
             $subject->canViewRegistrationsList(
                 $whichPlugin,
-                $registrationsListPID,
-                $registrationsVipListPID
+                $registrationsListPID
             )
         );
     }
 
     /**
      * @test
+     *
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      *
      * @dataProvider canViewRegistrationsListDataProvider
      */
@@ -6827,21 +6739,17 @@ final class LegacyEventTest extends FunctionalTestCase
         bool $expected,
         bool $loggedIn,
         bool $isRegistered,
-        bool $isVip,
         string $whichPlugin,
-        int $registrationsListPID,
-        int $registrationsVipListPID
+        int $registrationsListPID
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
+            ['needsRegistration', 'isUserRegistered']
         );
         $subject->method('needsRegistration')
             ->willReturn(true);
         $subject->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
-            ->willReturn($isVip);
 
         if ($loggedIn) {
             $rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -6854,77 +6762,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $expected,
             $subject->canViewRegistrationsList(
                 $whichPlugin,
-                $registrationsListPID,
-                $registrationsVipListPID
+                $registrationsListPID
             )
-        );
-    }
-
-    /**
-     * Data provider for the canViewRegistrationsForCsvExportListDataProvider
-     * test.
-     *
-     * @return bool[][] test data for canViewRegistrationsList with each row
-     *               having the following elements:
-     *               [expected] boolean: expected value (TRUE or FALSE)
-     *               [loggedIn] boolean: whether a user is logged in
-     *               [isVip] boolean: whether the logged-in user is a VIP
-     *                                that event
-     *               [allowCsvExportForVips] boolean: that configuration value
-     */
-    public function canViewRegistrationsForCsvExportListDataProvider(): array
-    {
-        return [
-            'notLoggedInButCsvExportAllowed' => [
-                'expected' => false,
-                'loggedIn' => false,
-                'isVip' => false,
-                'allowCsvExportForVips' => true,
-            ],
-            'loggedInAndCsvExportAllowedButNoVip' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isVip' => false,
-                'allowCsvExportForVips' => true,
-            ],
-            'loggedInAndCsvExportAllowedAndVip' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isVip' => true,
-                'allowCsvExportForVips' => true,
-            ],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider canViewRegistrationsForCsvExportListDataProvider
-     */
-    public function canViewRegistrationsListForCsvExport(
-        bool $expected,
-        bool $loggedIn,
-        bool $isVip,
-        bool $allowCsvExportForVips
-    ): void {
-        $this->configuration->setAsBoolean('allowCsvExportForVips', $allowCsvExportForVips);
-
-        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration', 'isUserVip']);
-        $subject->method('needsRegistration')
-            ->willReturn(true);
-        $subject->method('isUserVip')
-            ->willReturn($isVip);
-
-        if ($loggedIn) {
-            $rootPageUid = $this->testingFramework->createFrontEndPage();
-            $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-            $this->testingFramework->createFakeFrontEnd($rootPageUid);
-            $this->testingFramework->createAndLoginFrontEndUser();
-        }
-
-        self::assertSame(
-            $expected,
-            $subject->canViewRegistrationsList('csv_export')
         );
     }
 
@@ -6938,11 +6777,8 @@ final class LegacyEventTest extends FunctionalTestCase
      *               [loggedIn] boolean: whether a user is logged in
      *               [isRegistered] boolean: whether the logged-in user is
      *                              registered for that event
-     *               [isVip] boolean: whether the logged-in user is a VIP
-     *                                that event
      *               [whichPlugin] string: value for that parameter
      *               [registrationsListPID] integer: value for that parameter
-     *               [registrationsVipListPID] integer: value for that parameter
      */
     public function canViewRegistrationsListDataProviderForLoggedIn(): array
     {
@@ -6951,136 +6787,43 @@ final class LegacyEventTest extends FunctionalTestCase
                 'expected' => false,
                 'loggedIn' => false,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListLoggedInWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListIsRegisteredWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListIsRegisteredWithoutListPid' => [
                 'expected' => false,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'seminarListIsVipWithListPid' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => true,
-                'whichPlugin' => 'seminar_list',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
-            ],
-            'seminarListIsVipWithVipListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => true,
-                'whichPlugin' => 'seminar_list',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 1,
-            ],
-            'seminarListIsVipWithoutListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'seminar_list',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
             'myEventsIsRegisteredWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'my_events',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myEventsIsVipWithListPid' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'my_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myVipEventsIsRegisteredWithListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => false,
-                'whichPlugin' => 'my_vip_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myVipEventsIsVipWithListPid' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'my_vip_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
             ],
             'listRegistrationsIsRegistered' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'list_registrations',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listRegistrationsIsVip' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'list_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listVipRegistrationsIsRegistered' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => false,
-                'whichPlugin' => 'list_vip_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listVipRegistrationsIsVip' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'list_vip_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
         ];
     }
@@ -7088,27 +6831,25 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      *
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
+     *
      * @dataProvider canViewRegistrationsListDataProviderForLoggedIn
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndLoginAccess(
         bool $expected,
         bool $loggedIn,
         bool $isRegistered,
-        bool $isVip,
         string $whichPlugin,
-        int $registrationsListPID,
-        int $registrationsVipListPID
+        int $registrationsListPID
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
+            ['needsRegistration', 'isUserRegistered']
         );
         $subject->method('needsRegistration')
             ->willReturn(true);
         $subject->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
-            ->willReturn($isVip);
 
         if ($loggedIn) {
             $rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -7122,8 +6863,6 @@ final class LegacyEventTest extends FunctionalTestCase
             $subject->canViewRegistrationsList(
                 $whichPlugin,
                 $registrationsListPID,
-                $registrationsVipListPID,
-                0,
                 'login'
             )
         );
@@ -7139,11 +6878,8 @@ final class LegacyEventTest extends FunctionalTestCase
      *               [loggedIn] boolean: whether a user is logged in
      *               [isRegistered] boolean: whether the logged-in user is
      *                              registered for that event
-     *               [isVip] boolean: whether the logged-in user is a VIP
-     *                                that event
      *               [whichPlugin] string: value for that parameter
      *               [registrationsListPID] integer: value for that parameter
-     *               [registrationsVipListPID] integer: value for that parameter
      */
     public function canViewRegistrationsListDataProviderForWorld(): array
     {
@@ -7152,136 +6888,64 @@ final class LegacyEventTest extends FunctionalTestCase
                 'expected' => false,
                 'loggedIn' => false,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListWithListPid' => [
                 'expected' => true,
                 'loggedIn' => false,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListLoggedInWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => false,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListIsRegisteredWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 0,
             ],
             'seminarListIsRegisteredWithoutListPid' => [
                 'expected' => false,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
-            'seminarListIsVipWithListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => true,
-                'whichPlugin' => 'seminar_list',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 1,
-            ],
-            'seminarListIsVipWithoutListPid' => [
+            'seminarListWithoutListPid' => [
                 'expected' => false,
                 'loggedIn' => true,
                 'isRegistered' => false,
-                'isVip' => true,
                 'whichPlugin' => 'seminar_list',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
             'myEventsIsRegisteredWithListPid' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'my_events',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
             ],
-            'myEventsIsVipWithVipListPid' => [
+            'myEventsNotRegistered' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => false,
-                'isVip' => true,
                 'whichPlugin' => 'my_events',
                 'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myVipEventsIsRegisteredWithVipListPid' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => false,
-                'whichPlugin' => 'my_vip_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
-            ],
-            'myVipEventsIsVipWithVipListPid' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'my_vip_events',
-                'registrationsListPID' => 1,
-                'registrationsVipListPID' => 1,
             ],
             'listRegistrationsIsRegistered' => [
                 'expected' => true,
                 'loggedIn' => true,
                 'isRegistered' => true,
-                'isVip' => false,
                 'whichPlugin' => 'list_registrations',
                 'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listRegistrationsIsVip' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'list_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listVipRegistrationsIsRegistered' => [
-                'expected' => false,
-                'loggedIn' => true,
-                'isRegistered' => true,
-                'isVip' => false,
-                'whichPlugin' => 'list_vip_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
-            ],
-            'listVipRegistrationsIsVip' => [
-                'expected' => true,
-                'loggedIn' => true,
-                'isRegistered' => false,
-                'isVip' => true,
-                'whichPlugin' => 'list_vip_registrations',
-                'registrationsListPID' => 0,
-                'registrationsVipListPID' => 0,
             ],
         ];
     }
@@ -7289,27 +6953,22 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      *
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
+     *
      * @dataProvider canViewRegistrationsListDataProviderForWorld
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndWorldAccess(
         bool $expected,
         bool $loggedIn,
         bool $isRegistered,
-        bool $isVip,
         string $whichPlugin,
-        int $registrationsListPID,
-        int $registrationsVipListPID
+        int $registrationsListPID
     ): void {
-        $subject = $this->createPartialMock(
-            LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
-        );
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration', 'isUserRegistered']);
         $subject->method('needsRegistration')
             ->willReturn(true);
         $subject->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
-            ->willReturn($isVip);
 
         if ($loggedIn) {
             $rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -7323,8 +6982,6 @@ final class LegacyEventTest extends FunctionalTestCase
             $subject->canViewRegistrationsList(
                 $whichPlugin,
                 $registrationsListPID,
-                $registrationsVipListPID,
-                0,
                 'world'
             )
         );
@@ -7389,65 +7046,17 @@ final class LegacyEventTest extends FunctionalTestCase
     }
 
     /**
-     * Data provider that returns all possible access level codes for the
-     * FE registration lists.
-     *
-     * @return string[][] the possible access levels, will not be empty
-     */
-    public function registrationListAccessLevelsDataProvider(): array
-    {
-        return [
-            'attendeesAndManagers' => ['attendees_and_managers'],
-            'login' => ['login'],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider registrationListAccessLevelsDataProvider
-     */
-    public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
-        string $accessLevel
-    ): void {
-        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
-        $subject->method('needsRegistration')->willReturn(true);
-
-        self::assertSame(
-            $this->translate('message_notLoggedIn'),
-            $subject->canViewRegistrationsListMessage('list_vip_registrations', $accessLevel)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString(): void
-    {
-        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
-        $subject->method('needsRegistration')->willReturn(true);
-
-        self::assertSame(
-            '',
-            $subject->canViewRegistrationsListMessage('list_vip_registrations', 'world')
-        );
-    }
-
-    /**
      * Data provider that returns all possible parameter combinations for
      * canViewRegistrationsList as called from canViewRegistrationsListMessage.
      *
-     * @return string[][] the possible parameter combinations, will not be empty
+     * @return array<string, array{0: non-empty-string}>
      */
     public function registrationListParametersDataProvider(): array
     {
         return [
-            'attendeesAndManagers' => ['list_registrations', 'attendees_and_managers'],
-            'login' => ['list_registrations', 'login'],
-            'world' => ['list_registrations', 'world'],
-            'attendeesAndManagersVip' => ['list_vip_registrations', 'attendees_and_managers'],
-            'loginVip' => ['list_vip_registrations', 'login'],
-            'worldVip' => ['list_vip_registrations', 'world'],
+            'attendeesAndManagers' => ['attendees_and_managers'],
+            'login' => ['login'],
+            'world' => ['world'],
         ];
     }
 
@@ -7458,17 +7067,15 @@ final class LegacyEventTest extends FunctionalTestCase
      *
      * @dataProvider registrationListParametersDataProvider
      */
-    public function canViewRegistrationsListMessageWithLoginRoutesParameters(
-        string $whichPlugin,
-        string $accessLevel
-    ): void {
+    public function canViewRegistrationsListMessageWithLoginRoutesParameters(string $accessLevel): void
+    {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
         );
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')
-            ->with($whichPlugin, 0, 0, 0, $accessLevel)
+            ->with('list_registrations', 0, $accessLevel)
             ->willReturn(true);
 
         $rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -7476,7 +7083,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $subject->canViewRegistrationsListMessage($whichPlugin, $accessLevel);
+        $subject->canViewRegistrationsListMessage('list_registrations', $accessLevel);
     }
 
     /**

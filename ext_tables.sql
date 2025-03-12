@@ -212,7 +212,6 @@ CREATE TABLE tx_seminars_seminars (
     registrations int(11) unsigned DEFAULT '0' NOT NULL,
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
     owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
-    vips int(11) unsigned DEFAULT '0' NOT NULL,
     checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
     uses_terms_2 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     notes text,
@@ -237,19 +236,6 @@ CREATE TABLE tx_seminars_seminars (
     FULLTEXT index_event_searchfields (accreditation_number),
     FULLTEXT index_topic_searchfields (title,subtitle,description)
 ) ENGINE = MyISAM;
-
-
-#
-# Table structure for table 'tx_seminars_seminars_feusers_mm'
-#
-CREATE TABLE tx_seminars_seminars_feusers_mm (
-    uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-    uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    tablenames varchar(30) DEFAULT '' NOT NULL,
-    sorting int(11) unsigned DEFAULT '0' NOT NULL,
-    KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign)
-);
 
 
 #
