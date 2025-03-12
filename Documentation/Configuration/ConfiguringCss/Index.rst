@@ -22,9 +22,6 @@ automatically set:
 
 - tx-seminars-pi1-canceled for canceled events
 
-- tx-seminars-pi1-owner if the logged-in FE user had entered this event
-  record
-
 
 Configuring the colored square for the number of vacancies
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
