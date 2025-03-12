@@ -1,0 +1,14 @@
+"tt_content"
+,"uid","pid","CType","header","list_type","pi_flexform"
+,1,7,"list","Your events:","seminars_myregistrations","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?>
+                                                              <T3FlexForms>
+                                                                  <data>
+                                                                      <sheet index=""displayOptions"">
+                                                                          <language index=""lDEF"">
+                                                                              <field index=""settings.fieldsToShow"">
+                                                                                  <value index=""vDEF"">date,eventType,topic,registrationStatus</value>
+                                                                              </field>
+                                                                          </language>
+                                                                      </sheet>
+                                                                  </data>
+                                                              </T3FlexForms>"
