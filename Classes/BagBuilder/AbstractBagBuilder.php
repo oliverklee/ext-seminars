@@ -194,24 +194,6 @@ abstract class AbstractBagBuilder
         $this->additionalTableNames[$additionalTableName] = $additionalTableName;
     }
 
-    /**
-     * Removes the table name given in the parameter $additionalTableName from
-     * $this->additionalTableNames.
-     *
-     * @param non-empty-string $additionalTableName the table name to remove from the additional table names array
-     */
-    public function removeAdditionalTableName(string $additionalTableName): void
-    {
-        if (!isset($this->additionalTableNames[$additionalTableName])) {
-            throw new \InvalidArgumentException(
-                'The given additional table name does not exist in the list of additional table names.',
-                1333292582
-            );
-        }
-
-        unset($this->additionalTableNames[$additionalTableName]);
-    }
-
     public function setOrderBy(string $orderBy): void
     {
         $this->orderBy = $orderBy;

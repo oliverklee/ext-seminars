@@ -446,11 +446,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Call to an undefined method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\|OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder\\:\\:limitToEventManager\\(\\)\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Call to an undefined method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\|OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder\\:\\:limitToEventsNextDay\\(\\)\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -482,7 +477,7 @@ parameters:
 
 		-
 			message: "#^Cannot access property \\$id on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -492,7 +487,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method canViewRegistrationsList\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -796,11 +791,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method hasGroupMembership\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method hasImage\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1086,12 +1076,7 @@ parameters:
 			path: Classes/FrontEnd/RegistrationsList.php
 
 		-
-			message: "#^Parameter \\#4 \\$defaultEventVipsFeGroupID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationsList.php
-
-		-
-			message: "#^Parameter \\#5 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
+			message: "#^Parameter \\#3 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationsList.php
 
@@ -1436,23 +1421,8 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Parameter \\#1 \\$userUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
-			count: 3
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(int\\|string\\)\\: bool\\)\\|null, Closure\\(string\\)\\: bool given\\.$#"
 			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Parameter \\#2 \\$defaultEventVipsFeGroupUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int\\<1, max\\>, int\\<0, max\\> given\\.$#"
-			count: 9
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -1478,16 +1448,6 @@ parameters:
 		-
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between int\\<1, max\\> and 0 will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Switch condition type \\('list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list'\\) does not match case condition 'csv_export' \\(string\\)\\.$#"
-			count: 3
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -2777,17 +2737,12 @@ parameters:
 
 		-
 			message: "#^Binary operation \"\\+\" between mixed and 20 results in an error\\.$#"
-			count: 3
+			count: 2
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Binary operation \"\\+\" between mixed and 2000 results in an error\\.$#"
 			count: 2
-			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Binary operation \"\\+\" between mixed and 21 results in an error\\.$#"
-			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -2797,7 +2752,7 @@ parameters:
 
 		-
 			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
-			count: 24
+			count: 23
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -2813,11 +2768,6 @@ parameters:
 		-
 			message: "#^Binary operation \"\\+\" between mixed and 604800 results in an error\\.$#"
 			count: 8
-			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Binary operation \"\\-\" between mixed and 20 results in an error\\.$#"
-			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -2842,17 +2792,17 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
-			count: 6
+			count: 5
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 9
+			count: 8
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\SeminarListView' on mixed\\.$#"
-			count: 5
+			count: 4
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -2862,7 +2812,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 7
+			count: 6
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -3011,32 +2961,12 @@ parameters:
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$whichPlugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list', 'csv_export' given\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$whichPlugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list', string given\\.$#"
-			count: 4
-			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$whichPlugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsListMessage\\(\\) expects 'list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list', string given\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsListMessage\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
-			count: 2
+			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$registrationsListPID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
-			count: 4
-			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#3 \\$registrationsVipListPID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
