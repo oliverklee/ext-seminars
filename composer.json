@@ -163,7 +163,7 @@
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}';",
 		"ci:tests:legacy-functional": "find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}';",
 		"ci:tests:unit": ".Build/bin/phpunit -c Build/phpunit/UnitTests.xml Tests/Unit",
-		"ci:ts:lint": ".Build/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
+		"ci:ts:lint": ".Build/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript Tests/Functional/Controller/Fixtures/TypoScript",
 		"ci:xliff:lint": "php Build/xliff/xliff-lint lint:xliff Resources/Private/Language",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"fix": [
