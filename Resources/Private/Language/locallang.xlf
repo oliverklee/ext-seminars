@@ -1881,6 +1881,45 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
 				<source>register for the waiting list</source>
 			</trans-unit>
+			<trans-unit id="plugin.myEvents">
+				<source>&quot;My events&quot; list</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.tab.displayOptions">
+				<source>Display options</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns">
+				<source>Columns to show</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.date">
+				<source>date</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.eventType">
+				<source>event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.topic">
+				<source>topic</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.city">
+				<source>city</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.venue">
+				<source>venue</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.status">
+				<source>status</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.unregistration">
+				<source>unregistration</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.error.notLoggedIn">
+				<source>Please log in to view this page.</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.messages.noRegistrations_formal">
+				<source>You are not registered to any events yet.</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.messages.noRegistrations_informal">
+				<source>You are not registered to any events yet.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
