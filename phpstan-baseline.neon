@@ -161,6 +161,11 @@ parameters:
 			path: Classes/Controller/FrontEndEditorController.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Controller\\\\MyRegistrationsController\\:\\:\\$registrationRepository is never read, only written\\.$#"
+			count: 1
+			path: Classes/Controller/MyRegistrationsController.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:render\\(\\) should return string but returns mixed\\.$#"
 			count: 1
 			path: Classes/Csv/AbstractRegistrationListView.php
@@ -1769,6 +1774,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:assertBagContainsUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/MyRegistrationsControllerTest.php
 
 		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\{\\} and array\\{\\} will always evaluate to true\\.$#"

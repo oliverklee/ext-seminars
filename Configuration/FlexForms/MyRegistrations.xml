@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+    <sheets>
+        <displayOptions>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.tab.displayOptions
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.fieldsToShow>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns
+                            </label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectCheckBox</renderType>
+                                <minitems>1</minitems>
+                                <maxitems>99</maxitems>
+                                <default>date,eventType,topic,registrationStatus</default>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns.date
+                                        </numIndex>
+                                        <numIndex index="1">date</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns.eventType
+                                        </numIndex>
+                                        <numIndex index="1">eventType</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns.topic
+                                        </numIndex>
+                                        <numIndex index="1">topic</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns.registrationStatus
+                                        </numIndex>
+                                        <numIndex index="1">registrationStatus</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.fieldsToShow>
+                </el>
+            </ROOT>
+        </displayOptions>
+    </sheets>
+</T3DataStructure>

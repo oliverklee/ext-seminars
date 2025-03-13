@@ -1,0 +1,7 @@
+"tx_seminars_seminars"
+,"uid","pid","registrations"
+,1,1,1
+
+"tx_seminars_attendances"
+,"uid","pid","seminar","user"
+,1,1,1,2
