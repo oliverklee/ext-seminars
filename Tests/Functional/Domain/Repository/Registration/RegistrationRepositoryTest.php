@@ -1039,4 +1039,118 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/deleteViaDataHandler/DeletedRegistrationOnPage.csv');
     }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserCreatesResultWithRegistrations(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/RegularRegistration.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        $firstResult = $result->getFirst();
+        self::assertInstanceOf(Registration::class, $firstResult);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserFindsActiveRegularRegistrationWithMatchingUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/RegularRegistration.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserFindsRegistrationsOnAnyPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/RegistrationOnPage.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserIgnoresRegistrationsWithDifferentUser(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findActiveRegistrationsByUser/RegistrationFromDifferentUser.csv'
+        );
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserIgnoresHiddenRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/HiddenRegistration.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserIgnoresDeletedRegistrations(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/DeletedRegistration.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserFindsWaitingListRegistrations(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/WaitingListRegistration.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserFindsNonBindingReservations(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/NonBindingReservation.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findActiveRegistrationsByUserSortsByRegistrationUidInDescendingOrder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/RegistrationsForTwoEvents.csv');
+
+        $result = $this->subject->findActiveRegistrationsByUser(1)->toArray();
+
+        self::assertCount(2, $result);
+        $firstResult = $result[0];
+        self::assertInstanceOf(Registration::class, $firstResult);
+        self::assertSame(2, $firstResult->getUid());
+    }
 }
