@@ -2524,8 +2524,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">register for the waiting list</target>
       </trans-unit>
       <trans-unit id="plugin.myEvents">
-        <source>&quot;My events&quot; list</source>
-        <target state="needs-translation">"My events" list</target>
+        <source>My events</source>
+        <target state="needs-translation">My events</target>
       </trans-unit>
       <trans-unit id="plugin.myEvents.settings.tab.displayOptions">
         <source>Display options</source>
@@ -2555,9 +2555,9 @@ This event now has been confirmed.</target>
         <source>venue</source>
         <target state="needs-translation">venue</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.status">
-        <source>status</source>
-        <target state="needs-translation">status</target>
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.registrationStatus">
+        <source>registration status</source>
+        <target state="needs-translation">registration status</target>
       </trans-unit>
       <trans-unit id="plugin.myEvents.settings.displayOptions.columns.unregistration">
         <source>unregistration</source>
@@ -2574,6 +2574,46 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.myEvents.messages.noRegistrations_informal">
         <source>You are not registered to any events yet.</source>
         <target state="needs-translation">You are not registered to any events yet.</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.date">
+        <source>Date</source>
+        <target state="needs-translation">Date</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.eventType">
+        <source>Type</source>
+        <target state="needs-translation">Type</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.topic">
+        <source>Topic</source>
+        <target state="needs-translation">Topic</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.city">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.venue">
+        <source>Venue</source>
+        <target state="needs-translation">Venue</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.registrationStatus">
+        <source>Status</source>
+        <target state="needs-translation">Status</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.heading.unregistration">
+        <source>Unregistration</source>
+        <target state="needs-translation">Unregistration</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.property.status.0">
+        <source>regular</source>
+        <target state="needs-translation">regular</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.property.status.1">
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
+      </trans-unit>
+      <trans-unit id="plugin.myEvents.property.status.2">
+        <source>nonbinding reservation</source>
+        <target state="needs-translation">nonbinding reservation</target>
       </trans-unit>
     </body>
   </file>
