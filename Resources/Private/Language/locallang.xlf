@@ -1881,73 +1881,73 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
 				<source>register for the waiting list</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents">
-				<source>My events</source>
+			<trans-unit id="plugin.myRegistrations">
+				<source>My registrations</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.tab.displayOptions">
+			<trans-unit id="plugin.myRegistrations.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns">
 				<source>Columns to show</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.date">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.date">
 				<source>date</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.eventType">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.eventType">
 				<source>event type</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.topic">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.topic">
 				<source>topic</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.city">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.city">
 				<source>city</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.venue">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.venue">
 				<source>venue</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.registrationStatus">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.registrationStatus">
 				<source>registration status</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.unregistration">
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.unregistration">
 				<source>unregistration</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.error.notLoggedIn">
+			<trans-unit id="plugin.myRegistrations.error.notLoggedIn">
 				<source>Please log in to view this page.</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.messages.noRegistrations_formal">
+			<trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal">
 				<source>You are not registered to any events yet.</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.messages.noRegistrations_informal">
+			<trans-unit id="plugin.myRegistrations.messages.noRegistrations_informal">
 				<source>You are not registered to any events yet.</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.date">
+			<trans-unit id="plugin.myRegistrations.heading.date">
 				<source>Date</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.eventType">
+			<trans-unit id="plugin.myRegistrations.heading.eventType">
 				<source>Type</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.topic">
+			<trans-unit id="plugin.myRegistrations.heading.topic">
 				<source>Topic</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.city">
+			<trans-unit id="plugin.myRegistrations.heading.city">
 				<source>City</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.venue">
+			<trans-unit id="plugin.myRegistrations.heading.venue">
 				<source>Venue</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.registrationStatus">
+			<trans-unit id="plugin.myRegistrations.heading.registrationStatus">
 				<source>Status</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.heading.unregistration">
+			<trans-unit id="plugin.myRegistrations.heading.unregistration">
 				<source>Unregistration</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.property.status.0">
+			<trans-unit id="plugin.myRegistrations.property.status.0">
 				<source>regular</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.property.status.1">
+			<trans-unit id="plugin.myRegistrations.property.status.1">
 				<source>waiting list</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.property.status.2">
+			<trans-unit id="plugin.myRegistrations.property.status.2">
 				<source>nonbinding reservation</source>
 			</trans-unit>
 		</body>
