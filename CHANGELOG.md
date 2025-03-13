@@ -7,9 +7,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add a reimplemented "my events" plugin (#4207, #4209, #4210, #4124)
 - Add `RegistrationRepository::findActiveRegistrationsByUserUid()`
   (#4212, #4213)
-- Add a reimplemented "my events" plugin (#4207, #4209, #4210)
 - Add a field for the attachment download start date (#4202)
 - Allow editing the FE users from the BE module (#4197)
 - Allow creating registrations in the BE module (#4157)
