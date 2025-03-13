@@ -1,0 +1,13 @@
+"tx_seminars_seminars"
+,"uid","title","begin_date","end_date"
+,1,"earlier event",1,2
+,2,"later event",100,101
+
+"fe_users"
+,"uid"
+,1
+
+"tx_seminars_attendances"
+,"uid","seminar","user","title"
+,1,1,1,"registration for earlier event"
+,2,2,1,"registration for later event"

@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * @extends AbstractRawDataCapableRepository<Registration>
@@ -193,5 +194,22 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
         $tableName = $this->getTableName();
         $dataHandler->start([], [$tableName => [$uid => ['delete' => 1]]]);
         $dataHandler->process_cmdmap();
+    }
+
+    /**
+     * Finds non-hidden (i.e., non-canceled) registrations for the given user UID regardless of the storage page.
+     *
+     * @param int<1, max> $userUid
+     *
+     * @return QueryResultInterface<Registration>
+     */
+    public function findActiveRegistrationsByUser(int $userUid): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
+
+        $query->matching($query->equals('user', $userUid));
+
+        return $query->execute();
     }
 }
