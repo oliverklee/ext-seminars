@@ -1325,11 +1325,11 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="message_pleaseLogIn" approved="yes">
         <source>Please log in to view this page.</source>
-        <target state="final">Bitte loggen Sie sich ein um diese Seite zu sehen.</target>
+        <target state="final">Bitte loggen Sie sich ein, um diese Seite zu sehen.</target>
       </trans-unit>
       <trans-unit id="message_pleaseLogIn_informal" approved="yes">
         <source>Please log in to view this page.</source>
-        <target state="final">Bitte logge dich ein um diese Seite zu sehen.</target>
+        <target state="final">Bitte logge dich ein, um diese Seite zu sehen.</target>
       </trans-unit>
       <trans-unit id="message_noRegistrations" approved="yes">
         <source>For this event, there are no registrations yet.</source>
@@ -2247,7 +2247,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.displayOptions.columns" approved="yes">
         <source>Columns to show</source>
-        <target state="final">anzuzeigende Spalten</target>
+        <target state="final">Anzuzeigende Spalten</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.date" approved="yes">
         <source>date</source>
@@ -2323,7 +2323,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns" approved="yes">
         <source>Columns to show</source>
-        <target state="final">anzuzeigende Spalten</target>
+        <target state="final">Anzuzeigende Spalten</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.date" approved="yes">
         <source>date</source>
@@ -2525,57 +2525,57 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>register for the waiting list</source>
         <target state="final">auf die Warteliste eintragen</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents">
+      <trans-unit id="plugin.myEvents" approved="yes">
         <source>&quot;My events&quot; list</source>
-        <target state="needs-translation">"My events" list</target>
+        <target state="final">"Meine Veranstaltungen"-Liste</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.tab.displayOptions">
+      <trans-unit id="plugin.myEvents.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
-        <target state="needs-translation">Display options</target>
+        <target state="final">Anzeigeoptionen</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns" approved="yes">
         <source>Columns to show</source>
-        <target state="needs-translation">Columns to show</target>
+        <target state="final">Anzuzeigende Spalten</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.date">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.date" approved="yes">
         <source>date</source>
-        <target state="needs-translation">date</target>
+        <target state="final">Datum</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.eventType">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.eventType" approved="yes">
         <source>event type</source>
-        <target state="needs-translation">event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.topic">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.topic" approved="yes">
         <source>topic</source>
-        <target state="needs-translation">topic</target>
+        <target state="final">Thema</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.city">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.city" approved="yes">
         <source>city</source>
-        <target state="needs-translation">city</target>
+        <target state="final">Stadt</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.venue">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.venue" approved="yes">
         <source>venue</source>
-        <target state="needs-translation">venue</target>
+        <target state="final">Veranstaltungsort</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.status">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.status" approved="yes">
         <source>status</source>
-        <target state="needs-translation">status</target>
+        <target state="final">Status</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.unregistration">
+      <trans-unit id="plugin.myEvents.settings.displayOptions.columns.unregistration" approved="yes">
         <source>unregistration</source>
-        <target state="needs-translation">unregistration</target>
+        <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.error.notLoggedIn">
+      <trans-unit id="plugin.myEvents.error.notLoggedIn" approved="yes">
         <source>Please log in to view this page.</source>
-        <target state="needs-translation">Please log in to view this page.</target>
+        <target state="final">Bitte loggen Sie sich ein, um diese Seite zu sehen.</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.messages.noRegistrations_formal">
+      <trans-unit id="plugin.myEvents.messages.noRegistrations_formal" approved="yes">
         <source>You are not registered to any events yet.</source>
-        <target state="needs-translation">You are not registered to any events yet.</target>
+        <target state="final">Sie sind noch zu keiner Veranstaltung angemeldet.</target>
       </trans-unit>
-      <trans-unit id="plugin.myEvents.messages.noRegistrations_informal">
+      <trans-unit id="plugin.myEvents.messages.noRegistrations_informal" approved="yes">
         <source>You are not registered to any events yet.</source>
-        <target state="needs-translation">You are not registered to any events yet.</target>
+        <target state="final">Du bist noch zu keiner Veranstaltung angemeldet.</target>
       </trans-unit>
     </body>
   </file>
