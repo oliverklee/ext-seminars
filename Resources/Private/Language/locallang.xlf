@@ -1882,7 +1882,7 @@ This event now has been confirmed.</source>
 				<source>register for the waiting list</source>
 			</trans-unit>
 			<trans-unit id="plugin.myEvents">
-				<source>&quot;My events&quot; list</source>
+				<source>My events</source>
 			</trans-unit>
 			<trans-unit id="plugin.myEvents.settings.tab.displayOptions">
 				<source>Display options</source>
@@ -1905,8 +1905,8 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.venue">
 				<source>venue</source>
 			</trans-unit>
-			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.status">
-				<source>status</source>
+			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.registrationStatus">
+				<source>registration status</source>
 			</trans-unit>
 			<trans-unit id="plugin.myEvents.settings.displayOptions.columns.unregistration">
 				<source>unregistration</source>
@@ -1919,6 +1919,36 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.myEvents.messages.noRegistrations_informal">
 				<source>You are not registered to any events yet.</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.eventType">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.topic">
+				<source>Topic</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.venue">
+				<source>Venue</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.registrationStatus">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.heading.unregistration">
+				<source>Unregistration</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.property.status.0">
+				<source>regular</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.property.status.1">
+				<source>waiting list</source>
+			</trans-unit>
+			<trans-unit id="plugin.myEvents.property.status.2">
+				<source>nonbinding reservation</source>
 			</trans-unit>
 		</body>
 	</file>
