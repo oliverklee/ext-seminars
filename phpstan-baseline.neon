@@ -381,6 +381,11 @@ parameters:
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findActiveRegistrationsByUser\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findByEventAndStatus\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
