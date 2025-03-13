@@ -1049,7 +1049,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         $result = $this->subject->findActiveRegistrationsByUser(1);
 
-        $firstResult = $result->getFirst();
+        $firstResult = $result[0] ?? null;
         self::assertInstanceOf(Registration::class, $firstResult);
     }
 
@@ -1146,7 +1146,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/findActiveRegistrationsByUser/RegistrationsForTwoEvents.csv');
 
-        $result = $this->subject->findActiveRegistrationsByUser(1)->toArray();
+        $result = $this->subject->findActiveRegistrationsByUser(1);
 
         self::assertCount(2, $result);
         $firstResult = $result[0];

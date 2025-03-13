@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * @extends AbstractRawDataCapableRepository<Registration>
@@ -201,15 +200,15 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
      *
      * @param int<1, max> $userUid
      *
-     * @return QueryResultInterface<Registration>
+     * @return list<Registration>
      */
-    public function findActiveRegistrationsByUser(int $userUid): QueryResultInterface
+    public function findActiveRegistrationsByUser(int $userUid): array
     {
         $query = $this->createQuery();
-        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
 
-        $query->matching($query->equals('user', $userUid));
-
-        return $query->execute();
+        return $query
+            ->matching($query->equals('user', $userUid))
+            ->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING])
+            ->execute()->toArray();
     }
 }
