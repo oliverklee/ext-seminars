@@ -2603,15 +2603,15 @@ This event now has been confirmed.</target>
         <source>Unregistration</source>
         <target state="needs-translation">Unregistration</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.property.status.0">
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
         <source>regular</source>
         <target state="needs-translation">regular</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.property.status.1">
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.1">
         <source>waiting list</source>
         <target state="needs-translation">waiting list</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.property.status.2">
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
         <source>nonbinding reservation</source>
         <target state="needs-translation">nonbinding reservation</target>
       </trans-unit>
