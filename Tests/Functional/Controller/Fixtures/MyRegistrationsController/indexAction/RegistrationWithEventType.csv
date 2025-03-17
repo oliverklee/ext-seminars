@@ -1,0 +1,11 @@
+"tx_seminars_seminars"
+,"uid","pid","title","registrations","event_type"
+,1,1,"the event title",1,1
+
+"tx_seminars_event_types"
+,"uid","pid","title"
+,1,2,"workshop"
+
+"tx_seminars_attendances"
+,"uid","pid","seminar","user"
+,1,1,1,1

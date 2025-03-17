@@ -4,6 +4,7 @@ use OliverKlee\Seminars\Controller\EventController;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Controller\EventUnregistrationController;
 use OliverKlee\Seminars\Controller\FrontEndEditorController;
+use OliverKlee\Seminars\Controller\MyRegistrationsController;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\DataHandlerHook;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
@@ -146,6 +147,15 @@ defined('TYPO3') or die('Access denied.');
         [FrontEndEditorController::class => 'index, edit, update, new, create'],
         // non-cacheable actions
         [FrontEndEditorController::class => 'index, edit, update, new, create']
+    );
+
+    ExtensionUtility::configurePlugin(
+        'Seminars',
+        'MyRegistrations', // arbitrary, but unique plugin name (not visible in the BE)
+        // all actions
+        [MyRegistrationsController::class => 'index, notLoggedIn'],
+        // non-cacheable actions
+        [MyRegistrationsController::class => 'index']
     );
 })();
 

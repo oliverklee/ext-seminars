@@ -1,0 +1,8 @@
+"tx_seminars_seminars"
+,"uid","pid","title","registrations","topic","object_type"
+,1,1,"the date title",1,2,2
+,2,1,"the topic title",0,0,1
+
+"tx_seminars_attendances"
+,"uid","pid","seminar","user"
+,1,1,1,1

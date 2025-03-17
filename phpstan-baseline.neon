@@ -1771,6 +1771,11 @@ parameters:
 			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/MyRegistrationsControllerTest.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\{\\} and array\\{\\} will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
