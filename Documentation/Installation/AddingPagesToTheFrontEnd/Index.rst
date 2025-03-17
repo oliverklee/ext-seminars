@@ -18,7 +18,7 @@ like this:
    :alt: Page structure for a minimal setup with online registration
 
 For a full-blown registration with several list views, two archive
-pages, the “my events page” (where a user can see the events to which
+pages, the “my registrations page” (where a user can see the events to which
 they have signed up), registrations lists for participants and s and
 front-end editing, the page structure would look like this (usually,
 you only need some of these pages):
@@ -62,11 +62,15 @@ you only need some of these pages):
    Add a plug-in content element and set the type to "Registration form for
    events". Configure it to your needs using the settings in the FlexForms.
 
-#. Add another page that will contain the “my events” list (if you want
+#. Add another page that will contain the “my registrations” list (if you want
    to use that feature). Set the page access to “show at any login.”
 
-#. Add a “Seminar Manager”-plug-in content element to that page and set
-   the type to “My Events.” Set the content element's start pages to the
+#. To use the new "my registrations" plugin, add a plug-in content element to
+   that page. Save it and set the type to “My registrations”.
+
+#. Alternatively, to use the legacy "my events" plugin:
+   Add a “Seminar Manager”-plug-in content element to that page and set
+   the type to “My Events”. Set the content element's start pages to the
    page or pages that contain (or will contain) the seminar records. This
    element then works like the “Event List” content type, but it will
    only show those events to which the currently logged-in front-end user
