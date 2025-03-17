@@ -1938,9 +1938,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myRegistrations.heading.registrationStatus">
 				<source>Status</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.unregistration">
-				<source>Unregistration</source>
-			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
 				<source>regular</source>
 			</trans-unit>
@@ -1949,6 +1946,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
 				<source>nonbinding reservation</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.heading.unregistration">
+				<source>Unregistration</source>
 			</trans-unit>
 		</body>
 	</file>
