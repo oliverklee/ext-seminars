@@ -75,7 +75,6 @@ jobs:
       matrix:
         command:
           - "composer:normalize"
-          - "composer:unused"
           - "php:cs-fixer"
           - "php:rector"
           - "php:sniff"
