@@ -19,7 +19,7 @@ Key features
   “communication” and “speaking” before they can register for
   “facilitation”
 
-- “my events” list for logged-in front-end users, showing for which
+- “my registrations” list for logged-in front-end users, showing for which
   events they have signed up
 
 - front-end list of registrations for an event (visible to participants

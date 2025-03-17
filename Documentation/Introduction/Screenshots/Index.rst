@@ -10,4 +10,4 @@ Screenshots
    This is the top of a front-end detailed view for a seminar.
 
 .. figure:: ../../Images/manual_html_29daf544.png
-   This is the “my events” list for a logged-in front-end user.
+   This is the “my registrations” list for a logged-in front-end user.
