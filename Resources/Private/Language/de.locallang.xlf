@@ -2601,21 +2601,21 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Status</source>
         <target state="final">Status</target>
       </trans-unit>
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.0" approved="yes">
+        <source>regular</source>
+        <target state="final">regulär</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.1" approved="yes">
+        <source>waiting list</source>
+        <target state="final">Warteliste</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.2" approved="yes">
+        <source>nonbinding reservation</source>
+        <target state="final">unverbindliche Reservierung</target>
+      </trans-unit>
       <trans-unit id="plugin.myRegistrations.heading.unregistration" approved="yes">
         <source>Unregistration</source>
         <target state="final">Abmeldung</target>
-      </trans-unit>
-      <trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
-        <source>regular</source>
-        <target state="needs-translation">regular</target>
-      </trans-unit>
-      <trans-unit id="plugin.myRegistrations.property.registrationStatus.1">
-        <source>waiting list</source>
-        <target state="needs-translation">waiting list</target>
-      </trans-unit>
-      <trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
-        <source>nonbinding reservation</source>
-        <target state="needs-translation">nonbinding reservation</target>
       </trans-unit>
     </body>
   </file>
