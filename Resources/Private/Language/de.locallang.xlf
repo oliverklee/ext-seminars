@@ -2569,6 +2569,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Please log in to view this page.</source>
         <target state="final">Bitte loggen Sie sich ein, um diese Seite zu sehen.</target>
       </trans-unit>
+      <trans-unit id="plugin.myRegistrations.error.notFound">
+        <source>Sorry, this page does not exist.</source>
+        <target state="needs-translation">Sorry, this page does not exist.</target>
+      </trans-unit>
       <trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal" approved="yes">
         <source>You are not registered to any events yet.</source>
         <target state="final">Sie sind noch zu keiner Veranstaltung angemeldet.</target>
@@ -2617,21 +2621,21 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Unregistration</source>
         <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.index.toUnregistrationForm">
+      <trans-unit id="plugin.myRegistrations.index.toUnregistrationForm" approved="yes">
         <source>unregistration</source>
-        <target state="needs-translation">unregistration</target>
+        <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.show.heading.registrationStatus">
+      <trans-unit id="plugin.myRegistrations.show.heading.registrationStatus" approved="yes">
         <source>Registration status</source>
-        <target state="needs-translation">Registration status</target>
+        <target state="final">Anmeldestatus</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.show.heading.unregistration">
+      <trans-unit id="plugin.myRegistrations.show.heading.unregistration" approved="yes">
         <source>Unregistration</source>
-        <target state="needs-translation">Unregistration</target>
+        <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
+      <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm" approved="yes">
         <source>to the unregistration form</source>
-        <target state="needs-translation">to the unregistration form</target>
+        <target state="final">zum Abmeldeformular</target>
       </trans-unit>
     </body>
   </file>
