@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:variable name="event" value="{registration.event}"/>
+
+    <h1>
+        {event.displayTitle}
+    </h1>
+
+    <f:if condition="{event.eventType}">
+        <h2>
+            {event.eventType.title}
+        </h2>
+    </f:if>
+
+    <f:if condition="{event.start}">
+        <h3>
+            <f:translate key="plugin.eventSingleView.events.property.dateAndTime"/>
+        </h3>
+
+        <f:render partial="Event/DateAndTime" arguments="{event: event}"/>
+    </f:if>
+
+    <f:if condition="{event.venues}">
+        <h3>
+            <f:translate key="plugin.eventSingleView.events.property.venue"/>
+        </h3>
+
+        <f:render partial="Event/Venues" arguments="{event: event}"/>
+    </f:if>
+
+    <f:if condition="{event.room}">
+        <h3>
+            <f:translate key="plugin.eventSingleView.events.property.room"/>
+        </h3>
+        <p>
+            {event.room}
+        </p>
+    </f:if>
+
+    <h3>
+        <f:translate key="plugin.myRegistrations.show.heading.registrationStatus"/>
+    </h3>
+    <p>
+        <f:translate key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
+    </p>
+</html>

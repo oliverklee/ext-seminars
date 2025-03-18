@@ -1,0 +1,7 @@
+"tx_seminars_seminars"
+,"uid","pid","title","registrations","begin_date","end_date"
+,1,1,"the event title",1,2206342800,2206458000
+
+"tx_seminars_attendances"
+,"uid","pid","seminar","user"
+,1,1,1,1

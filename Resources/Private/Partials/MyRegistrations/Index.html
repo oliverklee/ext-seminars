@@ -44,7 +44,9 @@
                         </oelib:isFieldEnabled>
                         <oelib:isFieldEnabled fieldName="topic">
                             <td>
-                                {event.displayTitle}
+                                <f:link.action action="show" arguments="{registration: registration}">
+                                    {event.displayTitle}
+                                </f:link.action>
                             </td>
                         </oelib:isFieldEnabled>
                         <oelib:isFieldEnabled fieldName="registrationStatus">
