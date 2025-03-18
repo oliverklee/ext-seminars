@@ -2615,6 +2615,22 @@ This event now has been confirmed.</target>
         <source>Unregistration</source>
         <target state="needs-translation">Unregistration</target>
       </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.toUnregistrationForm">
+        <source>unregistration</source>
+        <target state="needs-translation">unregistration</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.heading.registrationStatus">
+        <source>Registration status</source>
+        <target state="needs-translation">Registration status</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.heading.unregistration">
+        <source>Unregistration</source>
+        <target state="needs-translation">Unregistration</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
+        <source>to the unregistration form</source>
+        <target state="needs-translation">to the unregistration form</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
