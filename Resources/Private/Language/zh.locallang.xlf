@@ -2567,6 +2567,10 @@ This event now has been confirmed.</target>
         <source>Please log in to view this page.</source>
         <target state="needs-translation">Please log in to view this page.</target>
       </trans-unit>
+      <trans-unit id="plugin.myRegistrations.error.notFound">
+        <source>Sorry, this page does not exist.</source>
+        <target state="needs-translation">Sorry, this page does not exist.</target>
+      </trans-unit>
       <trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal">
         <source>You are not registered to any events yet.</source>
         <target state="needs-translation">You are not registered to any events yet.</target>
