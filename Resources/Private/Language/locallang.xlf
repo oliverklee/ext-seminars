@@ -1914,6 +1914,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myRegistrations.error.notLoggedIn">
 				<source>Please log in to view this page.</source>
 			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.error.notFound">
+				<source>Sorry, this page does not exist.</source>
+			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal">
 				<source>You are not registered to any events yet.</source>
 			</trans-unit>
