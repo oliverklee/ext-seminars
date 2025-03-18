@@ -2569,9 +2569,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Please log in to view this page.</source>
         <target state="final">Bitte loggen Sie sich ein, um diese Seite zu sehen.</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.error.notFound">
+      <trans-unit id="plugin.myRegistrations.error.notFound" approved="yes">
         <source>Sorry, this page does not exist.</source>
-        <target state="needs-translation">Sorry, this page does not exist.</target>
+        <target state="final">Sorry, diese Seite existiert leider nicht.</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal" approved="yes">
         <source>You are not registered to any events yet.</source>
