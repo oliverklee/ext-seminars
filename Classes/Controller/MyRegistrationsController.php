@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -27,13 +30,32 @@ class MyRegistrationsController extends ActionController
 
     public function indexAction(): ResponseInterface
     {
-        $userUid = $this->getLoggedInUserUid();
-        if ($userUid <= 0) {
+        $loggedInUserUid = $this->getLoggedInUserUid();
+        if ($loggedInUserUid <= 0) {
             return new ForwardResponse('notLoggedIn');
         }
 
-        $registrations = $this->registrationRepository->findActiveRegistrationsByUser($userUid);
+        $registrations = $this->registrationRepository->findActiveRegistrationsByUser($loggedInUserUid);
         $this->view->assign('registrations', $registrations);
+
+        return $this->htmlResponse();
+    }
+
+    /**
+     * @IgnoreValidation("registration")
+     */
+    public function showAction(Registration $registration): ResponseInterface
+    {
+        $loggedInUserUid = $this->getLoggedInUserUid();
+        if ($loggedInUserUid <= 0) {
+            return new ForwardResponse('notLoggedIn');
+        }
+        $registrationUser = $registration->getUser();
+        if (!($registrationUser instanceof FrontendUser) || $registrationUser->getUid() !== $loggedInUserUid) {
+            return new ForwardResponse('notFound');
+        }
+
+        $this->view->assign('registration', $registration);
 
         return $this->htmlResponse();
     }
@@ -53,5 +75,10 @@ class MyRegistrationsController extends ActionController
     public function notLoggedInAction(): ResponseInterface
     {
         return $this->htmlResponse()->withStatus(403);
+    }
+
+    public function notFoundAction(): ResponseInterface
+    {
+        return $this->htmlResponse()->withStatus(404);
     }
 }

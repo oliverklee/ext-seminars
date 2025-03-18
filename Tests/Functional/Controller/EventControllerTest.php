@@ -975,7 +975,7 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function showActionCanRenderMultipleVenue(): void
+    public function showActionCanRenderMultipleVenues(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEventWithTwoVenuesInSameCity.csv');
