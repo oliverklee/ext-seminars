@@ -1950,6 +1950,18 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myRegistrations.index.heading.unregistration">
 				<source>Unregistration</source>
 			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.index.toUnregistrationForm">
+				<source>unregistration</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.show.heading.registrationStatus">
+				<source>Registration status</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.show.heading.unregistration">
+				<source>Unregistration</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
+				<source>to the unregistration form</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
