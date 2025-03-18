@@ -2577,29 +2577,29 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>You are not registered to any events yet.</source>
         <target state="final">Du bist noch zu keiner Veranstaltung angemeldet.</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.date" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.date">
         <source>Date</source>
-        <target state="final">Datum</target>
+        <target state="needs-translation">Date</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.eventType" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.eventType">
         <source>Type</source>
-        <target state="final">Art</target>
+        <target state="needs-translation">Type</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.topic" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.topic">
         <source>Topic</source>
-        <target state="final">Thema</target>
+        <target state="needs-translation">Topic</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.city" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.city">
         <source>City</source>
-        <target state="final">Stadt</target>
+        <target state="needs-translation">City</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.venue" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.venue">
         <source>Venue</source>
-        <target state="final">Ort</target>
+        <target state="needs-translation">Venue</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.registrationStatus" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.registrationStatus">
         <source>Status</source>
-        <target state="final">Status</target>
+        <target state="needs-translation">Status</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.property.registrationStatus.0" approved="yes">
         <source>regular</source>
@@ -2613,9 +2613,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>nonbinding reservation</source>
         <target state="final">unverbindliche Reservierung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.unregistration" approved="yes">
+      <trans-unit id="plugin.myRegistrations.index.heading.unregistration">
         <source>Unregistration</source>
-        <target state="final">Abmeldung</target>
+        <target state="needs-translation">Unregistration</target>
       </trans-unit>
     </body>
   </file>
