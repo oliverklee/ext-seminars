@@ -2575,33 +2575,29 @@ This event now has been confirmed.</target>
         <source>You are not registered to any events yet.</source>
         <target state="needs-translation">You are not registered to any events yet.</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.date">
+      <trans-unit id="plugin.myRegistrations.index.heading.date">
         <source>Date</source>
         <target state="needs-translation">Date</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.eventType">
+      <trans-unit id="plugin.myRegistrations.index.heading.eventType">
         <source>Type</source>
         <target state="needs-translation">Type</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.topic">
+      <trans-unit id="plugin.myRegistrations.index.heading.topic">
         <source>Topic</source>
         <target state="needs-translation">Topic</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.city">
+      <trans-unit id="plugin.myRegistrations.index.heading.city">
         <source>City</source>
         <target state="needs-translation">City</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.venue">
+      <trans-unit id="plugin.myRegistrations.index.heading.venue">
         <source>Venue</source>
         <target state="needs-translation">Venue</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.registrationStatus">
+      <trans-unit id="plugin.myRegistrations.index.heading.registrationStatus">
         <source>Status</source>
         <target state="needs-translation">Status</target>
-      </trans-unit>
-      <trans-unit id="plugin.myRegistrations.heading.unregistration">
-        <source>Unregistration</source>
-        <target state="needs-translation">Unregistration</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
         <source>regular</source>
@@ -2614,6 +2610,10 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
         <source>nonbinding reservation</source>
         <target state="needs-translation">nonbinding reservation</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.unregistration">
+        <source>Unregistration</source>
+        <target state="needs-translation">Unregistration</target>
       </trans-unit>
     </body>
   </file>
