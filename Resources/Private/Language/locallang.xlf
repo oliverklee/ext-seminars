@@ -1920,22 +1920,22 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myRegistrations.messages.noRegistrations_informal">
 				<source>You are not registered to any events yet.</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.date">
+			<trans-unit id="plugin.myRegistrations.index.heading.date">
 				<source>Date</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.eventType">
+			<trans-unit id="plugin.myRegistrations.index.heading.eventType">
 				<source>Type</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.topic">
+			<trans-unit id="plugin.myRegistrations.index.heading.topic">
 				<source>Topic</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.city">
+			<trans-unit id="plugin.myRegistrations.index.heading.city">
 				<source>City</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.venue">
+			<trans-unit id="plugin.myRegistrations.index.heading.venue">
 				<source>Venue</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.registrationStatus">
+			<trans-unit id="plugin.myRegistrations.index.heading.registrationStatus">
 				<source>Status</source>
 			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
@@ -1947,7 +1947,7 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
 				<source>nonbinding reservation</source>
 			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.heading.unregistration">
+			<trans-unit id="plugin.myRegistrations.index.heading.unregistration">
 				<source>Unregistration</source>
 			</trans-unit>
 		</body>
