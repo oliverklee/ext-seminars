@@ -573,22 +573,6 @@ only be configured using your TypoScript setup, but not via flexforms.
          0
 
 
-.. container:: table-row
-
-   Property
-         attendancesPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the sysfolder where event registrations (attendances) will be
-         stored
-
-   Default
-         None
-
-
 .. ###### END~OF~TABLE ######
 
 [tsref:plugin.tx\_seminars]

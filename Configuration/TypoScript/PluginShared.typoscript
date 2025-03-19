@@ -106,10 +106,4 @@ plugin.tx_seminars {
 
   # how many days before an events' begin date the organizers should be reminded about this event via email, zero disables the reminder
   sendEventTakesPlaceReminderDaysBeforeBeginDate = 0
-
-  # The following variables don't have any default values provided.
-  # You need to set them yourself for this extension to work correctly.
-
-  # PID of the folder where event registrations (attendances) will be stored
-  attendancesPID =
 }

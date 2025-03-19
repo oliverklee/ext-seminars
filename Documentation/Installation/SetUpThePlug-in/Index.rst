@@ -19,8 +19,6 @@ values for a basic setup:
 ::
 
    plugin.tx_seminars {
-     # PID of the sysfolder where event registrations (attendances) will be stored
-     attendancesPID =
    }
 
    # localizations for strings in emails and some FE parts go here (the example is for German)

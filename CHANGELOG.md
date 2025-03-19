@@ -106,6 +106,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the unused `attendancesPID` configuration (#4232)
 - Drop support for CSV-exporting waiting list registrations (#4184)
 - Remove the configuration for the CSV file name (#4185)
 - Drop the `strftime` date and time format configuration (#3990)
