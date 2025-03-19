@@ -15,6 +15,7 @@ References
 * `Bildungszentrum Kirkel <bzk>`__
 * `Deutsche Gesellschaft für Ernährung e.V. <dge>`__
 * `Elternschule Speyer <speyer>`__
+* `EU-Maschinenverordnung/EG-Maschinenrichtlinie <maschinenrichtlinie>`__
 * `GDCh-Fachgruppe Umweltchemie und Ökotoxikologie <gdch>`__
 * `Institut für klinische Hypnose und Ego-State-Therapie <ifhe>`__
 * `JuBi Babenhausen <jubi-babenhausen>`__
@@ -28,6 +29,7 @@ References
 .. _gdch: https://www.fachoekotoxikologie.de/kurse
 .. _ifhe: https://www.ifhe-berlin.de/
 .. _jubi-babenhausen: https://www.jubi-babenhausen.de/
+.. _maschinenrichtlinie: https://www.maschinenrichtlinie.de/fortbildung/termine-anmeldung/
 .. _mettmann: https://www.kultur-bergischesland.de/kulturwerkstatt/jahresprogramm
 .. _stahl: https://r-stahl.com/de/global/services-und-seminare/seminare/offene-seminare/
 .. _xxl: https://www.xxl-sicherheit.de/
