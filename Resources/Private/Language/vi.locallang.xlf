@@ -2632,8 +2632,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Unregistration</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
-        <source>to the unregistration form</source>
-        <target state="needs-translation">to the unregistration form</target>
+        <source>proceed to unregistration</source>
+        <target state="needs-translation">proceed to unregistration</target>
       </trans-unit>
     </body>
   </file>
