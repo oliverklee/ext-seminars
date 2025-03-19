@@ -990,8 +990,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', false);
-
         $subject = $this->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -1001,9 +999,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            [
-                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
-            ]
+            ['deadline_unregistration' => $this->now - Time::SECONDS_PER_DAY]
         );
 
         $pi1 = new DefaultController();
@@ -1017,8 +1013,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
-
         $subject = $this->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
@@ -1033,9 +1027,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            [
-                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
-            ]
+            ['deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY]
         );
 
         $pi1 = new DefaultController();

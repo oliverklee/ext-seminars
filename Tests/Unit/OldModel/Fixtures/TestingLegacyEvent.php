@@ -88,29 +88,6 @@ final class TestingLegacyEvent extends LegacyEvent
     }
 
     /**
-     * Sets the number of attendances on the registration queue.
-     *
-     * @param int<0, max> $number the number of attendances on the registration queue
-     */
-    public function setNumberOfAttendancesOnQueue(int $number): void
-    {
-        $this->numberOfAttendancesOnQueue = $number;
-        $this->statisticsHaveBeenCalculated = true;
-    }
-
-    /**
-     * Sets the number of places for this record.
-     *
-     * TODO: This function needs to be removed once the testing framework can update the counter for the number of places.
-     *
-     * @param int<0, max> $places the number of places that are associated with this event
-     */
-    public function setNumberOfPlaces(int $places): void
-    {
-        $this->setRecordPropertyInteger('place', $places);
-    }
-
-    /**
      * Sets the number of target groups for this record.
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of target groups.

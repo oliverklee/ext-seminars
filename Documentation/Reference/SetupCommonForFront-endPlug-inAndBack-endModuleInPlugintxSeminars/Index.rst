@@ -445,22 +445,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         allowUnregistrationWithEmptyWaitingList
-
-   Data type
-         Boolean
-
-   Description
-         Whether unregistration is possible even when there are no
-         registrations on the waiting list yet.
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          showVacanciesThreshold
 
    Data type

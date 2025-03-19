@@ -1996,7 +1996,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithoutDeadlineReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 0);
 
         $this->subject->setUnregistrationDeadline(0);
@@ -2013,7 +2012,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithNoBeginDateAndNoDeadlineReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 0);
 
         $this->subject->setUnregistrationDeadline(0);
@@ -2030,7 +2028,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithGlobalDeadlineInFutureReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setUnregistrationDeadline(0);
@@ -2047,7 +2044,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithGlobalDeadlineInPastReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 5);
 
         $this->subject->setUnregistrationDeadline(0);
@@ -2064,7 +2060,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithGlobalDeadlineReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setUnregistrationDeadline(0);
@@ -2081,7 +2076,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithFutureEventDeadlineReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 0);
 
         $this->subject->setUnregistrationDeadline($this->now + Time::SECONDS_PER_DAY);
@@ -2098,7 +2092,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithPastEventDeadlineReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 0);
 
         $this->subject->setUnregistrationDeadline($this->now - Time::SECONDS_PER_DAY);
@@ -2115,7 +2108,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithFutureEventDeadlineReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 0);
 
         $this->subject->setUnregistrationDeadline($this->now + Time::SECONDS_PER_DAY);
@@ -2132,7 +2124,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithPastEventDeadlineReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 0);
 
         $this->subject->setUnregistrationDeadline($this->now - Time::SECONDS_PER_DAY);
@@ -2149,7 +2140,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithBothDeadlinesInFutureReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setUnregistrationDeadline($this->now + Time::SECONDS_PER_DAY);
@@ -2166,7 +2156,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithBothDeadlinesInPastReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 2);
 
         $this->subject->setAttendancesMax(10);
@@ -2183,7 +2172,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithBothDeadlinesInFutureReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setUnregistrationDeadline($this->now + Time::SECONDS_PER_DAY);
@@ -2200,7 +2188,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithBothDeadlinesInPastReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setBeginDate(0);
@@ -2217,7 +2204,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithPassedEventUnregistrationDeadlineReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setBeginDate($this->now + 2 * Time::SECONDS_PER_DAY);
@@ -2234,7 +2220,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleWithNonZeroAttendancesMaxReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setAttendancesMax(10);
@@ -2251,7 +2236,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function isUnregistrationPossibleForNeedsRegistrationFalseReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setNeedsRegistration(false);
@@ -2266,16 +2250,14 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function isUnregistrationPossibleForEventWithEmptyWaitingListAndAllowUnregistrationWithEmptyWaitingListReturnsTrue(): void
+    public function isUnregistrationPossibleForEventWithEmptyWaitingListReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setAttendancesMax(10);
         $this->subject->setUnregistrationDeadline($this->now + Time::SECONDS_PER_DAY);
         $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setRegistrationQueue(true);
-        $this->subject->setNumberOfAttendancesOnQueue(0);
 
         self::assertTrue(
             $this->subject->isUnregistrationPossible()
@@ -2422,132 +2404,20 @@ final class LegacyEventTest extends FunctionalTestCase
         );
     }
 
-    // Tests concerning getAttendancesOnRegistrationQueue
-
     /**
      * @test
      */
-    public function getAttendancesOnRegistrationQueueIsInitiallyZero(): void
-    {
-        self::assertSame(
-            0,
-            $this->subject->getAttendancesOnRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAttendancesOnRegistrationQueueForNonEmptyRegistrationQueue(): void
-    {
-        $this->subject->setNumberOfAttendancesOnQueue(4);
-        self::assertSame(
-            4,
-            $this->subject->getAttendancesOnRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAttendancesOnRegistrationQueueIsFalseForNoRegistrations(): void
-    {
-        $this->subject->setAttendancesMax(1);
-        $this->subject->setRegistrationQueue(false);
-        $this->subject->setNumberOfAttendances(0);
-        $this->subject->setNumberOfAttendancesOnQueue(0);
-
-        self::assertFalse(
-            $this->subject->hasAttendancesOnRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAttendancesOnRegistrationQueueIsFalseForRegularRegistrationsOnly(): void
-    {
-        $this->subject->setAttendancesMax(1);
-        $this->subject->setRegistrationQueue(false);
-        $this->subject->setNumberOfAttendances(1);
-        $this->subject->setNumberOfAttendancesOnQueue(0);
-
-        self::assertFalse(
-            $this->subject->hasAttendancesOnRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAttendancesOnRegistrationQueueIsTrueForQueueRegistrations(): void
-    {
-        $this->subject->setAttendancesMax(1);
-        $this->subject->setRegistrationQueue(true);
-        $this->subject->setNumberOfAttendances(1);
-        $this->subject->setNumberOfAttendancesOnQueue(1);
-
-        self::assertTrue(
-            $this->subject->hasAttendancesOnRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isUnregistrationPossibleIsTrueWithNonEmptyQueueByDefault(): void
+    public function isUnregistrationPossibleWithEmptyQueueByDefaultIsTrue(): void
     {
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
 
         $this->subject->setAttendancesMax(1);
         $this->subject->setRegistrationQueue(true);
         $this->subject->setNumberOfAttendances(1);
-        $this->subject->setNumberOfAttendancesOnQueue(1);
         $this->subject->setUnregistrationDeadline($this->now + (6 * Time::SECONDS_PER_DAY));
         $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
 
-        self::assertTrue(
-            $this->subject->isUnregistrationPossible()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isUnregistrationPossibleIsFalseWithEmptyQueueByDefault(): void
-    {
-        $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
-
-        $this->subject->setAttendancesMax(1);
-        $this->subject->setRegistrationQueue(true);
-        $this->subject->setNumberOfAttendances(1);
-        $this->subject->setNumberOfAttendancesOnQueue(0);
-        $this->subject->setUnregistrationDeadline($this->now + (6 * Time::SECONDS_PER_DAY));
-        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
-
-        self::assertFalse(
-            $this->subject->isUnregistrationPossible()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isUnregistrationPossibleIsTrueWithEmptyQueueIfAllowedByConfiguration(): void
-    {
-        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
-        $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
-
-        $this->subject->setAttendancesMax(1);
-        $this->subject->setRegistrationQueue(true);
-        $this->subject->setNumberOfAttendances(1);
-        $this->subject->setNumberOfAttendancesOnQueue(0);
-        $this->subject->setUnregistrationDeadline($this->now + (6 * Time::SECONDS_PER_DAY));
-        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
-
-        self::assertTrue(
-            $this->subject->isUnregistrationPossible()
-        );
+        self::assertTrue($this->subject->isUnregistrationPossible());
     }
 
     // Tests regarding the target groups

@@ -8,10 +8,3 @@ events” page), you need two things:
    unregistration deadlines in the events for which unregistration should
    be possible, or you can set a global deadline for all events using
    plugin.tx\_seminars.unregistrationDeadlineDaysBeforeBeginDate.
-
-#. **Waiting list:** By default, unregistration is only possible if an
-   event is full and has some people on its waiting list. If you want to
-   enable unregistration if the waiting list is empty (or if there is no
-   waiting list), you can use
-   plugin.tx\_seminars.allowUnregistrationWithEmptyWaitingList = 1.
-
