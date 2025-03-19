@@ -26,7 +26,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         if ($this->configuration->getAsBoolean('enableRegistration')) {
             $this->checkAllowRegistrationForEventsWithoutDate();
             $this->checkAllowRegistrationForStartedEvents();
-            $this->checkAttendancesPid();
             $this->checkNotificationMail();
             $this->checkShowVacanciesThreshold();
             $this->checkThankYouMail();
@@ -83,19 +82,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'allowRegistrationForStartedEvents',
             'This value specifies whether registration is possible even when an event already has started.
             If this value is incorrect, registration might be possible even when this is not desired (or vice versa).'
-        );
-    }
-
-    private function checkAttendancesPid(): void
-    {
-        $this->checkIfPositiveInteger(
-            'attendancesPID',
-            'This value specifies the page on which registrations will be stored.
-            If this value is not set correctly, registration records will be dumped in the TYPO3 root page.
-            <br/>
-            If you explicitly do not wish to use the online registration feature, you can disable these checks
-            by setting <strong>plugin.tx_seminars.enableRegistration</strong> and
-            <strong>plugin.tx_seminars_pi1.enableRegistration</strong> to 0.'
         );
     }
 

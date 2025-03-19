@@ -17,12 +17,9 @@ happens:
    options. The total price then is calculated from the selected price
    and the number of seats.
 
-#. An  *attendance* record is entered into the database (into the page
-   configured via *plugin.tx\_seminars.attendancesPID* or, if the first
-   organizer for that event has a system folder for registrations
-   configured, in that page), making the connection between this front-
-   end user and the corresponding seminar. The statistics for that
-   seminar are immediately updated in the back end and front end,
+#. An  *attendance* record is entered into the database, making the connection
+   between this front-end user and the corresponding event. The statistics for
+   that event are immediately updated in the back end and front end,
    preventing overbooked seminars.
 
 #. A thank-you email is sent to the front-end user using the first
