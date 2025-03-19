@@ -15,7 +15,6 @@ use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
-use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
@@ -1352,10 +1351,6 @@ class DefaultController extends TemplateHelper
                         $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
-                    $configurationCheck->check();
-                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-                    $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-                    $configurationCheck = new CsvExportConfigurationCheck($configuration, 'plugin.tx_seminars');
                     $configurationCheck->check();
                     $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
                 }
