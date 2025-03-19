@@ -2633,9 +2633,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Unregistration</source>
         <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
+      <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm" approved="yes">
         <source>proceed to unregistration</source>
-        <target state="needs-translation">proceed to unregistration</target>
+        <target state="final">zur Abmeldung</target>
       </trans-unit>
     </body>
   </file>
