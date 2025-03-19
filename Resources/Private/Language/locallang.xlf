@@ -513,14 +513,8 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.my_events">
 				<source>My Events</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.my_vip_events">
-				<source>My Managed Events</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.list_registrations">
 				<source>List of Registrations (for attendees)</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.list_vip_registrations">
-				<source>List of Registrations (for event managers)</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.category_list">
 				<source>Category List</source>
@@ -542,9 +536,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.registrationsListPID">
 				<source>Page that contains the list of registrations (for attendees):</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.registrationsVipListPID">
-				<source>Page that contains the list of registrations (for event managers):</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.formal">
 				<source>formal</source>
@@ -666,9 +657,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.sortListViewByCategory">
 				<source>Sort the list view by category:</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.defaultEventVipsFeGroupID">
-				<source>FE user group for event managers:</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.hideColumns">
 				<source>Hide column names in list view (comma-separated):</source>
 			</trans-unit>
@@ -749,12 +737,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="label_myevents_informal">
 				<source>You are registered for the following events:</source>
-			</trans-unit>
-			<trans-unit id="label_myvipevents">
-				<source>You are an editor for the following events:</source>
-			</trans-unit>
-			<trans-unit id="label_myvipevents_informal">
-				<source>You are an editor for the following events:</source>
 			</trans-unit>
 			<trans-unit id="label_category">
 				<source>Category</source>

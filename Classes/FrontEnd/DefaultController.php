@@ -16,7 +16,6 @@ use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
-use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SingleViewConfigurationCheck;
@@ -213,9 +212,6 @@ class DefaultController extends TemplateHelper
             case 'single_view':
                 $result = $this->createSingleView();
                 break;
-            case 'list_vip_registrations':
-                // The fallthrough is intended
-                // because createRegistrationsListPage() will differentiate later.
             case 'list_registrations':
                 $registrationsList = GeneralUtility::makeInstance(
                     RegistrationsList::class,
@@ -250,9 +246,6 @@ class DefaultController extends TemplateHelper
                     $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
                 }
                 break;
-            case 'my_vip_events':
-                // The fallthrough is intended
-                // because createListView() will differentiate later.
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -353,9 +346,8 @@ class DefaultController extends TemplateHelper
     /**
      * Creates the link to the list of registrations for the current seminar.
      * Returns an empty string if this link is not allowed.
-     * For standard lists, a link is created if either the user is a VIP or is
-     * registered for that seminar (with the link to the VIP list taking
-     * precedence).
+     * For standard lists, a link is created if the user is
+     * registered for that seminar.
      *
      * @return string HTML for the link (may be an empty string)
      */
@@ -367,24 +359,10 @@ class DefaultController extends TemplateHelper
         if (
             $this->seminar->canViewRegistrationsList(
                 $this->whatToDisplay,
-                0,
-                $this->getConfValueInteger('registrationsVipListPID'),
-                $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'),
-                $this->getConfValueString('accessToFrontEndRegistrationLists')
-            )
-        ) {
-            // So a link to the VIP list is possible.
-            $targetPageId = $this->getConfValueInteger('registrationsVipListPID');
-        } elseif (
-            $this->seminar->canViewRegistrationsList(
-                $this->whatToDisplay,
                 $this->getConfValueInteger('registrationsListPID'),
-                0,
-                0,
                 $this->getConfValueString('accessToFrontEndRegistrationLists')
             )
         ) {
-            // No link to the VIP list ... so maybe to the list for the participants.
             $targetPageId = $this->getConfValueInteger('registrationsListPID');
         }
 
@@ -1157,8 +1135,6 @@ class DefaultController extends TemplateHelper
         $canViewListOfRegistrations = $this->seminar->canViewRegistrationsList(
             $this->whatToDisplay,
             $this->getConfValueInteger('registrationsListPID'),
-            $this->getConfValueInteger('registrationsVipListPID'),
-            0,
             $this->getConfValueString('accessToFrontEndRegistrationLists')
         );
 
@@ -1287,7 +1263,7 @@ class DefaultController extends TemplateHelper
     /**
      * Creates the HTML for the event list view.
      * This function is used for the normal event list as well as the
-     * "my events" and the "my VIP events" list.
+     * "my events" list.
      *
      * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
      *        (for the default list view), the value from "what_to_display" or "other_dates"
@@ -1333,29 +1309,6 @@ class DefaultController extends TemplateHelper
                     $isOkay = false;
                 }
                 break;
-            case 'my_vip_events':
-                if ($this->isLoggedIn()) {
-                    $result .= $this->getSubpart('MESSAGE_MY_VIP_EVENTS');
-                } else {
-                    $this->setMarker('error_text', $this->translate('message_notLoggedIn'));
-                    $result .= $this->getSubpart('ERROR_VIEW');
-                    $result .= $this->getLoginLink(
-                        $this->translate('message_pleaseLogIn'),
-                        (int)$this->getFrontEndController()->id
-                    );
-                    $isOkay = false;
-                }
-
-                if ($this->isConfigurationCheckEnabled()) {
-                    $configurationCheck = new MyVipEventsConfigurationCheck(
-                        $this->getConfigurationWithFlexForms(),
-                        'plugin.tx_seminars_pi1'
-                    );
-                    $configurationCheck->check();
-                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-                }
-
-                break;
             default:
                 // nothing to do
         }
@@ -1387,7 +1340,7 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Initializes the list view (normal list, my events or my VIP events) and
+     * Initializes the list view (normal list or my events) and
      * creates a seminar bag or a registration bag (for the "my events" view),
      * but does not create any actual HTML output.
      *
@@ -1455,17 +1408,6 @@ class DefaultController extends TemplateHelper
                 break;
             case 'my_events':
                 $builder->limitToAttendee($user);
-                break;
-            case 'my_vip_events':
-                $groupForDefaultVips = $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special');
-                $isDefaultVip = $groupForDefaultVips !== 0 && $user->hasGroupMembership((string)$groupForDefaultVips);
-
-                if (!$isDefaultVip) {
-                    // The current user is not listed as a default VIP for all
-                    // events. Change the query to show only events where the
-                    // current user is manually added as a VIP.
-                    $builder->limitToEventManager($this->getLoggedInFrontEndUserUid());
-                }
                 break;
             case 'events_next_day':
                 $builder->limitToEventsNextDay($this->seminar);
@@ -2057,14 +1999,10 @@ class DefaultController extends TemplateHelper
 
         switch ($whatToDisplay) {
             case 'seminar_list':
-                $hideIt = !$this->hasConfValueInteger('registrationsListPID')
-                    && !$this->hasConfValueInteger('registrationsVipListPID');
+                $hideIt = !$this->hasConfValueInteger('registrationsListPID');
                 break;
             case 'my_events':
                 $hideIt = !$this->hasConfValueInteger('registrationsListPID');
-                break;
-            case 'my_vip_events':
-                $hideIt = !$this->hasConfValueInteger('registrationsVipListPID');
                 break;
             default:
                 $hideIt = false;
@@ -2083,7 +2021,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideRegisterColumnIfNecessary(string $whatToDisplay): void
     {
-        if ($whatToDisplay === 'my_vip_events' || !$this->isRegistrationEnabled()) {
+        if (!$this->isRegistrationEnabled()) {
             $this->hideColumns(['registration']);
         }
     }

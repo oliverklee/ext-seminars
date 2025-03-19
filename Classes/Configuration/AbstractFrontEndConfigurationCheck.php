@@ -60,9 +60,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'single_view',
                 'topic_list',
                 'my_events',
-                'my_vip_events',
                 'list_registrations',
-                'list_vip_registrations',
                 'category_list',
             ]
         );
@@ -114,16 +112,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'detailPID',
             'This value specifies the page that contains the detailed view.
             If this value is not set correctly, the links to single events will not work as expected.'
-        );
-    }
-
-    protected function checkDefaultEventVipsFeGroupID(): void
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'defaultEventVipsFeGroupID',
-            'This value specifies the front-end user group that is allowed to see the registrations for all events
-            and get all events listed on their "my VIP events" page.
-            If this value is not set correctly, the users of this group will not be treated as VIPs for all events.'
         );
     }
 
