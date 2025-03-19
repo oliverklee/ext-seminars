@@ -805,4 +805,57 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         self::assertIsString($expected);
         self::assertStringContainsString($expected, (string)$response->getBody());
     }
+
+    /**
+     * @test
+     */
+    public function showActionForRegistrationWithUnregistrationPossibleShowsLinkToUnregistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithUnregistrationPossible.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $urlPrefix = '/my-events\\?tx_seminars_myregistrations%5Baction%5D=checkPrerequisites&amp;'
+            . 'tx_seminars_myregistrations%5Bcontroller%5D=EventUnregistration&amp;'
+            . 'tx_seminars_myregistrations%5Bregistration%5D=1';
+        $linkText = LocalizationUtility::translate('plugin.myRegistrations.show.toUnregistrationForm', 'seminars');
+        self::assertIsString($linkText);
+        self::assertMatchesRegularExpression(
+            '#' . $urlPrefix . '[^"]*">.*' . $linkText . '#s',
+            (string)$response->getBody()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForRegistrationWithUnregistrationNotPossibleDoesNotShowLinkToUnregistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithUnregistrationDeadlineOver.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $urlPrefix = '/my-events?tx_seminars_myregistrations%5Baction%5D=checkPrerequisites&amp;'
+            . 'tx_seminars_myregistrations%5Bcontroller%5D=EventUnregistration&amp;'
+            . 'tx_seminars_myregistrations%5Bregistration%5D=1';
+        self::assertStringNotContainsString($urlPrefix, (string)$response->getBody());
+    }
 }

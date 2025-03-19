@@ -6,7 +6,7 @@
     <f:section name="main">
         <f:if condition="{registrations}">
             <f:then>
-                <f:render partial="MyRegistrations/Index" arguments="{registrations: registrations}"/>
+                <f:render partial="MyRegistrations/Index" arguments="{_all}"/>
             </f:then>
             <f:else>
                 <p class="alert alert-info" role="alert">

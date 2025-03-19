@@ -7,8 +7,10 @@ namespace OliverKlee\Seminars\Controller;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -56,6 +58,7 @@ class MyRegistrationsController extends ActionController
         }
 
         $this->view->assign('registration', $registration);
+        $this->view->assign('unregistrationIsPossible', $this->isUnregistrationPossible($registration));
 
         return $this->htmlResponse();
     }
@@ -70,6 +73,13 @@ class MyRegistrationsController extends ActionController
         \assert(\is_int($uid) && $uid >= 0);
 
         return $uid;
+    }
+
+    private function isUnregistrationPossible(Registration $registration): bool
+    {
+        $legacyRegistration = GeneralUtility::makeInstance(LegacyRegistration::class, (int)$registration->getUid());
+
+        return $legacyRegistration->getSeminarObject()->isUnregistrationPossible();
     }
 
     public function notLoggedInAction(): ResponseInterface
