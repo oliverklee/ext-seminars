@@ -48,6 +48,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Drop the configuration check for the CSV export (#4233)
 - !!! Always allow unregistration before the unregistration deadline even
   with empty waiting list (#4231)
 - Move some event fields to a new tab "information for attendees" (#4201)
