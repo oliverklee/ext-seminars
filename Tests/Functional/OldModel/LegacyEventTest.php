@@ -187,18 +187,6 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesOnRegistrationQueueCountsQueueRegistrationsOnly(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
-
-        $subject = TestingLegacyEvent::fromUid(6);
-
-        self::assertSame(3, $subject->getAttendancesOnRegistrationQueue());
-    }
-
-    /**
-     * @test
-     */
     public function calculateStatisticsTakesNewOfflineRegistrationsIntoAccount(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
@@ -232,29 +220,6 @@ final class LegacyEventTest extends FunctionalTestCase
         $subject->calculateStatistics();
 
         self::assertSame(5, $subject->getAttendances());
-        self::assertSame(0, $subject->getAttendancesOnRegistrationQueue());
-    }
-
-    /**
-     * @test
-     */
-    public function calculateStatisticsTakesWaitingListRegistrationsIntoAccount(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
-
-        $eventUid = 4;
-        $subject = TestingLegacyEvent::fromUid($eventUid);
-        self::assertSame(3, $subject->getAttendances());
-
-        GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_attendances')
-            ->insert(
-                'tx_seminars_attendances',
-                ['seminar' => $eventUid, 'seats' => 1, 'registration_queue' => ExtbaseRegistration::STATUS_WAITING_LIST]
-            );
-        $subject->calculateStatistics();
-
-        self::assertSame(3, $subject->getAttendances());
-        self::assertSame(1, $subject->getAttendancesOnRegistrationQueue());
     }
 
     /**
@@ -280,7 +245,6 @@ final class LegacyEventTest extends FunctionalTestCase
         $subject->calculateStatistics();
 
         self::assertSame(3, $subject->getAttendances());
-        self::assertSame(0, $subject->getAttendancesOnRegistrationQueue());
     }
 
     /**

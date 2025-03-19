@@ -53,11 +53,6 @@ class LegacyEvent extends AbstractTimeSpan
      */
     protected int $numberOfAttendances = 0;
 
-    /**
-     * @var int<0, max>
-     */
-    protected int $numberOfAttendancesOnQueue = 0;
-
     protected bool $statisticsHaveBeenCalculated = false;
 
     private ?LegacyEvent $topic = null;
@@ -2411,7 +2406,6 @@ class LegacyEvent extends AbstractTimeSpan
 
         $this->numberOfAttendances = $this->getOfflineRegistrations()
             + $this->sumSeatsOfRegistrations($this->getRegularRegistrations());
-        $this->numberOfAttendancesOnQueue = $this->sumSeatsOfRegistrations($this->getWaitingListRegistrations());
 
         $this->statisticsHaveBeenCalculated = true;
     }
@@ -2427,20 +2421,6 @@ class LegacyEvent extends AbstractTimeSpan
             $this->registrations,
             static fn (array $registration): bool => (int)$registration['registration_queue']
                 === ExtbaseRegistration::STATUS_REGULAR
-        );
-    }
-
-    /**
-     * @return array<int, array<string, string|int>>
-     */
-    private function getWaitingListRegistrations(): array
-    {
-        $this->retrieveRegistrations();
-
-        return \array_filter(
-            $this->registrations,
-            static fn (array $registration): bool => (int)$registration['registration_queue']
-                === ExtbaseRegistration::STATUS_WAITING_LIST
         );
     }
 
@@ -2963,17 +2943,12 @@ class LegacyEvent extends AbstractTimeSpan
      * If the unregistration deadline is not set globally via TypoScript and not
      * set in the current event record, the unregistration will not be possible
      * and this method returns FALSE.
-     *
-     * @return bool TRUE if unregistration is possible, FALSE otherwise
      */
     public function isUnregistrationPossible(): bool
     {
         if (!$this->needsRegistration()) {
             return false;
         }
-
-        $canUnregisterByQueue = $this->getSharedConfiguration()->getAsBoolean('allowUnregistrationWithEmptyWaitingList')
-            || ($this->hasRegistrationQueue() && $this->hasAttendancesOnRegistrationQueue());
 
         $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
         if ($deadline !== 0 || $this->hasBeginDate()) {
@@ -2984,7 +2959,7 @@ class LegacyEvent extends AbstractTimeSpan
             $canUnregisterByDate = $this->getUnregistrationDeadlineFromConfiguration() !== 0;
         }
 
-        return $canUnregisterByQueue && $canUnregisterByDate;
+        return $canUnregisterByDate;
     }
 
     /**
@@ -2995,26 +2970,6 @@ class LegacyEvent extends AbstractTimeSpan
     public function hasRegistrationQueue(): bool
     {
         return $this->getRecordPropertyBoolean('queue_size');
-    }
-
-    /**
-     * @return int<0, max>
-     */
-    public function getAttendancesOnRegistrationQueue(): int
-    {
-        $this->calculateStatisticsIfNeeded();
-
-        return $this->numberOfAttendancesOnQueue;
-    }
-
-    /**
-     * Checks whether there is at least one registration on the waiting list.
-     *
-     * @return bool true if there is at least one registration on the waiting list, false otherwise
-     */
-    public function hasAttendancesOnRegistrationQueue(): bool
-    {
-        return $this->getAttendancesOnRegistrationQueue() > 0;
     }
 
     public function hasTimeslots(): bool

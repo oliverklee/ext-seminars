@@ -26,7 +26,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         if ($this->configuration->getAsBoolean('enableRegistration')) {
             $this->checkAllowRegistrationForEventsWithoutDate();
             $this->checkAllowRegistrationForStartedEvents();
-            $this->checkAllowUnregistrationWithEmptyWaitingList();
             $this->checkAttendancesPid();
             $this->checkNotificationMail();
             $this->checkShowVacanciesThreshold();
@@ -84,16 +83,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'allowRegistrationForStartedEvents',
             'This value specifies whether registration is possible even when an event already has started.
             If this value is incorrect, registration might be possible even when this is not desired (or vice versa).'
-        );
-    }
-
-    private function checkAllowUnregistrationWithEmptyWaitingList(): void
-    {
-        $this->checkIfBoolean(
-            'allowUnregistrationWithEmptyWaitingList',
-            'This value specifies whether unregistration is possible even when
-            there are no registrations on the waiting list yet.
-            If this value is incorrect, unregistration might be possible even when this is not desired (or vice versa).'
         );
     }
 
