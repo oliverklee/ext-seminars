@@ -239,13 +239,22 @@
 				<source>You already have registered for this event.</source>
 			</trans-unit>
 			<trans-unit id="message_missingSeminarNumber">
-				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<source>
+					The even UID is missing from the URL. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</source>
 			</trans-unit>
 			<trans-unit id="message_wrongSeminarNumber">
-				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<source>
+					There is no event with this number. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</source>
 			</trans-unit>
 			<trans-unit id="message_wrongSeminarNumber_informal">
-				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<source>
+					There is no event with this number. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</source>
 			</trans-unit>
 			<trans-unit id="message_noRegistrationNecessary">
 				<source>For this event, no registration is necessary.</source>
@@ -323,10 +332,16 @@
 				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
 			</trans-unit>
 			<trans-unit id="email_unregistrationNotice">
-				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+				<source>
+					You will be able to unregister for free until %s. After this date you will have to pay the event
+					fee.
+				</source>
 			</trans-unit>
 			<trans-unit id="email_unregistrationNotice_informal">
-				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+				<source>
+					You will be able to unregister for free until %s. After this date you will have to pay the event
+					fee.
+				</source>
 			</trans-unit>
 			<trans-unit id="email_additionalNotificationEnoughRegistrations">
 				<source>Your event has now enough registrations to be held.</source>
@@ -344,52 +359,71 @@
 				<source>Registration notification</source>
 			</trans-unit>
 			<trans-unit id="email_notificationHello">
-				<source>Hello,
+				<source>
+					Hello,
 
-someone just has registered for an event:</source>
+					someone just has registered for an event:
+				</source>
 			</trans-unit>
 			<trans-unit id="email_notificationOnUnregistrationSubject">
 				<source>Unregistration notification</source>
 			</trans-unit>
 			<trans-unit id="email_notificationOnUnregistrationHello">
-				<source>Hello,
+				<source>
+					Hello,
 
-someone just has unregistered from an event:</source>
+					someone just has unregistered from an event:
+				</source>
 			</trans-unit>
 			<trans-unit id="email_notificationOnRegistrationForQueueSubject">
 				<source>Registration for waiting list notification</source>
 			</trans-unit>
 			<trans-unit id="email_notificationOnRegistrationForQueueHello">
-				<source>Hello,
+				<source>
+					Hello,
 
-someone just has registered for the waiting list of an event:</source>
+					someone just has registered for the waiting list of an event:
+				</source>
 			</trans-unit>
 			<trans-unit id="email_notificationOnQueueUpdateSubject">
 				<source>Registration became a regular registration notification</source>
 			</trans-unit>
 			<trans-unit id="email_notificationOnQueueUpdateHello">
-				<source>Hello,
+				<source>
+					Hello,
 
-someone's registration just has become a regular registration of an event:</source>
+					someone's registration just has become a regular registration of an event:
+				</source>
 			</trans-unit>
 			<trans-unit id="email_eventTakesPlaceReminderSubject">
 				<source>&quot;%event&quot; begins in %days days</source>
 			</trans-unit>
 			<trans-unit id="email_eventTakesPlaceReminder">
-				<source>Hello %organizer,
+				<source>
+					Hello %organizer,
 
-the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
+					the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there
+					are %registrations registrations for this event.
+				</source>
 			</trans-unit>
 			<trans-unit id="email_cancelationDeadlineReminderSubject">
 				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
 			</trans-unit>
 			<trans-unit id="email_cancelationDeadlineReminder">
-				<source>Hello %organizer,
+				<source>
+					Hello %organizer,
 
-the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
+					the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number:
+					%uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are
+					%registrations registrations for this event.
+				</source>
 			</trans-unit>
 			<trans-unit id="label_planned_disclaimer">
-				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
+				<source>
+					For this event to take place, a minimum number of registrations is needed. In case this number
+					is not reached, the event will not take place. Of course, you then will be notified as soon as
+					possible.
+				</source>
 			</trans-unit>
 			<trans-unit id="email_hello_informal">
 				<source>Dear</source>
@@ -413,7 +447,10 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 				<source>Email notifications</source>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.mailNotifier.description">
-				<source>This tasks sends email notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+				<source>
+					This tasks sends email notifications, including reminders that an event will take place shortly
+					or that the cancelation deadline is due.
+				</source>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.fields.page-uid">
 				<source>UID of the page with the TypoScript configuration</source>
@@ -428,18 +465,22 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 				<source>Event confirmed: %eventTitle %eventDate</source>
 			</trans-unit>
 			<trans-unit id="email-event-canceled-body">
-				<source>%salutation
+				<source>
+					%salutation
 
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
+					you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
-Unfortunately, we had to cancel this event.</source>
+					Unfortunately, we had to cancel this event.
+				</source>
 			</trans-unit>
 			<trans-unit id="email-event-confirmed-body">
-				<source>%salutation
+				<source>
+					%salutation
 
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
+					you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
-This event now has been confirmed.</source>
+					This event now has been confirmed.
+				</source>
 			</trans-unit>
 			<trans-unit id="message_onRequest">
 				<source>on request</source>
@@ -475,10 +516,16 @@ This event now has been confirmed.</source>
 				<source>Error 403. Sorry, you don't have access to this data.</source>
 			</trans-unit>
 			<trans-unit id="message_404">
-				<source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<source>
+					Error 404. The requested page does not exist. If you get this error message using a link on this
+					page, please notify the webmaster. Thank you!
+				</source>
 			</trans-unit>
 			<trans-unit id="message_404_registrations">
-				<source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<source>
+					Error 404. There is no event with this number. If you get this error message using a link on
+					this page, please notify the webmaster. Thank you!
+				</source>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent">
 				<source>The email to the attendees has been sent.</source>
@@ -676,7 +723,10 @@ This event now has been confirmed.</source>
 				<source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.generalPriceInSingle">
-				<source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
+				<source>
+					Use &quot;Price&quot; as heading for the standard price in the single view and the registration
+					page:
+				</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails">
 				<source>Show speaker details</source>
@@ -736,7 +786,10 @@ This event now has been confirmed.</source>
 				<source>Next &gt;</source>
 			</trans-unit>
 			<trans-unit id="pi_list_browseresults_displays">
-				<source>Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</source>
+				<source>
+					Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of
+					###SPAN_BEGIN###%s&lt;/span&gt;
+				</source>
 			</trans-unit>
 			<trans-unit id="pi_list_browseresults_noResults">
 				<source>Sorry, no events were found.</source>
@@ -877,7 +930,9 @@ This event now has been confirmed.</source>
 				<source>Lodging and food</source>
 			</trans-unit>
 			<trans-unit id="label_accommodation">
-				<source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
+				<source>
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</source>
 			</trans-unit>
 			<trans-unit id="label_food">
 				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
@@ -964,10 +1019,16 @@ This event now has been confirmed.</source>
 				<source>Price</source>
 			</trans-unit>
 			<trans-unit id="label_searching_hints">
-				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
+				<source>
+					You can shorten the list of events by applying one ore more filter criteria. To see the whole
+					list, just reset the filter.
+				</source>
 			</trans-unit>
 			<trans-unit id="label_searching_hints_informal">
-				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
+				<source>
+					You can shorten the list of events by applying one ore more filter criteria. To see the whole
+					list, just reset the filter.
+				</source>
 			</trans-unit>
 			<trans-unit id="label_we_offer_events_in_categories">
 				<source>Currently, we offer you events in the following categories:</source>
