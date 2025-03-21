@@ -1436,14 +1436,9 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getLatestPossibleRegistrationTime(): int
     {
-        if ($this->hasRegistrationDeadline()) {
-            return $this->getRecordPropertyInteger('deadline_registration');
-        }
-        if (!$this->getSharedConfiguration()->getAsBoolean('allowRegistrationForStartedEvents')) {
-            return $this->getBeginDateAsTimestamp();
-        }
-
-        return $this->hasEndDate() ? $this->getEndDateAsTimestamp() : $this->getBeginDateAsTimestamp();
+        return $this->hasRegistrationDeadline()
+            ? $this->getRecordPropertyInteger('deadline_registration')
+            : $this->getBeginDateAsTimestamp();
     }
 
     /**
