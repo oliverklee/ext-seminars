@@ -148,8 +148,8 @@
         <target state="final">Note interne</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.attached_files">
-        <source>Attached files</source>
-        <target state="needs-translation">Attached files</target>
+        <source>Downloads for registered persons</source>
+        <target state="needs-translation">Downloads for registered persons</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.download_start_date">
         <source>Downloads available starting at</source>
