@@ -316,16 +316,34 @@
         <target state="final">Tu es déjà enregistré à cet événement.</target>
       </trans-unit>
       <trans-unit id="message_missingSeminarNumber">
-        <source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-        <target state="needs-translation">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target>
+        <source>
+					The even UID is missing from the URL. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</source>
+        <target state="needs-translation">
+					The even UID is missing from the URL. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</target>
       </trans-unit>
-      <trans-unit id="message_wrongSeminarNumber" approved="yes">
-        <source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-        <target state="final">Il n'y a aucun événement correspondant à ce numéro. Si vous voyez ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</target>
+      <trans-unit id="message_wrongSeminarNumber">
+        <source>
+					There is no event with this number. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</source>
+        <target state="needs-translation">
+					There is no event with this number. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</target>
       </trans-unit>
-      <trans-unit id="message_wrongSeminarNumber_informal" approved="yes">
-        <source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-        <target state="final">Il n'y a aucun événement correspondant à ce numéro. Si tu vois ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</target>
+      <trans-unit id="message_wrongSeminarNumber_informal">
+        <source>
+					There is no event with this number. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</source>
+        <target state="needs-translation">
+					There is no event with this number. If you get this error message using a link on this page,
+					please notify the webmaster. Thank you!
+				</target>
       </trans-unit>
       <trans-unit id="message_noRegistrationNecessary" approved="yes">
         <source>For this event, no registration is necessary.</source>
@@ -427,13 +445,25 @@
         <source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
         <target state="final">Ton inscription pour l'l'évènement  "%s" vient d'être confirmée</target>
       </trans-unit>
-      <trans-unit id="email_unregistrationNotice" approved="yes">
-        <source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
-        <target state="final">Vous avez la possibilité de vous désinscrire  gratuitement jusqu'au %s. Passé ce délais, vous devrez payer les frais d'inscription.</target>
+      <trans-unit id="email_unregistrationNotice">
+        <source>
+					You will be able to unregister for free until %s. After this date you will have to pay the event
+					fee.
+				</source>
+        <target state="needs-translation">
+					You will be able to unregister for free until %s. After this date you will have to pay the event
+					fee.
+				</target>
       </trans-unit>
-      <trans-unit id="email_unregistrationNotice_informal" approved="yes">
-        <source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
-        <target state="final">Tu as la possibilité de te désinscrire  gratuitement jusqu'au %s. Passé ce délais, tu devras payer les frais d'inscription.</target>
+      <trans-unit id="email_unregistrationNotice_informal">
+        <source>
+					You will be able to unregister for free until %s. After this date you will have to pay the event
+					fee.
+				</source>
+        <target state="needs-translation">
+					You will be able to unregister for free until %s. After this date you will have to pay the event
+					fee.
+				</target>
       </trans-unit>
       <trans-unit id="email_additionalNotificationEnoughRegistrations" approved="yes">
         <source>Your event has now enough registrations to be held.</source>
@@ -455,77 +485,115 @@
         <source>Registration notification</source>
         <target state="final">Avis d'inscription</target>
       </trans-unit>
-      <trans-unit id="email_notificationHello" approved="yes">
-        <source>Hello,
+      <trans-unit id="email_notificationHello">
+        <source>
+					Hello,
 
-someone just has registered for an event:</source>
-        <target state="final">Bonjour,
+					someone just has registered for an event:
+				</source>
+        <target state="needs-translation">
+					Hello,
 
-Quelqu'un vient de s'inscrire pour l'événement suivant :</target>
+					someone just has registered for an event:
+				</target>
       </trans-unit>
       <trans-unit id="email_notificationOnUnregistrationSubject" approved="yes">
         <source>Unregistration notification</source>
         <target state="final">Avis d'annulation d'inscription</target>
       </trans-unit>
-      <trans-unit id="email_notificationOnUnregistrationHello" approved="yes">
-        <source>Hello,
+      <trans-unit id="email_notificationOnUnregistrationHello">
+        <source>
+					Hello,
 
-someone just has unregistered from an event:</source>
-        <target state="final">Bonjour,
+					someone just has unregistered from an event:
+				</source>
+        <target state="needs-translation">
+					Hello,
 
-Quelqu'un vient d'annuler son inscription pour l'événement suivant :</target>
+					someone just has unregistered from an event:
+				</target>
       </trans-unit>
       <trans-unit id="email_notificationOnRegistrationForQueueSubject" approved="yes">
         <source>Registration for waiting list notification</source>
         <target state="final">Avis d'inscription à la liste d'attente</target>
       </trans-unit>
-      <trans-unit id="email_notificationOnRegistrationForQueueHello" approved="yes">
-        <source>Hello,
+      <trans-unit id="email_notificationOnRegistrationForQueueHello">
+        <source>
+					Hello,
 
-someone just has registered for the waiting list of an event:</source>
-        <target state="final">Bonjour,
+					someone just has registered for the waiting list of an event:
+				</source>
+        <target state="needs-translation">
+					Hello,
 
-Quelqu'un vient de s'inscrire sur la liste d'attente pour l'événement suivant :</target>
+					someone just has registered for the waiting list of an event:
+				</target>
       </trans-unit>
       <trans-unit id="email_notificationOnQueueUpdateSubject" approved="yes">
         <source>Registration became a regular registration notification</source>
         <target state="final">Avis de régularisation d'inscription</target>
       </trans-unit>
-      <trans-unit id="email_notificationOnQueueUpdateHello" approved="yes">
-        <source>Hello,
+      <trans-unit id="email_notificationOnQueueUpdateHello">
+        <source>
+					Hello,
 
-someone's registration just has become a regular registration of an event:</source>
-        <target state="final">Bonjour,
+					someone's registration just has become a regular registration of an event:
+				</source>
+        <target state="needs-translation">
+					Hello,
 
-Une inscription vient d'être régularisée pour l'événement suivant :</target>
+					someone's registration just has become a regular registration of an event:
+				</target>
       </trans-unit>
       <trans-unit id="email_eventTakesPlaceReminderSubject" approved="yes">
         <source>&quot;%event&quot; begins in %days days</source>
         <target state="final">"%event" débute dans %days jours</target>
       </trans-unit>
-      <trans-unit id="email_eventTakesPlaceReminder" approved="yes">
-        <source>Hello %organizer,
+      <trans-unit id="email_eventTakesPlaceReminder">
+        <source>
+					Hello %organizer,
 
-the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
-        <target state="final">Bonjour %organizer,
+					the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there
+					are %registrations registrations for this event.
+				</source>
+        <target state="needs-translation">
+					Hello %organizer,
 
-l'événement "%event" (Événement numéro : %uid) aura lieu dans %days jours. Actuellement, il y a %registrations inscriptions pour cet événement.</target>
+					the event "%event" (Event number: %uid) will take place in %days days. Currently, there
+					are %registrations registrations for this event.
+				</target>
       </trans-unit>
       <trans-unit id="email_cancelationDeadlineReminderSubject" approved="yes">
         <source>Cancelation deadline for &quot;%event&quot; has just passed</source>
         <target state="final">Le délais d'annulation pour "%event" est dépassé.</target>
       </trans-unit>
-      <trans-unit id="email_cancelationDeadlineReminder" approved="yes">
-        <source>Hello %organizer,
+      <trans-unit id="email_cancelationDeadlineReminder">
+        <source>
+					Hello %organizer,
 
-the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
-        <target state="final">Bonjour %organizer,
+					the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number:
+					%uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are
+					%registrations registrations for this event.
+				</source>
+        <target state="needs-translation">
+					Hello %organizer,
 
-L'échéance d'annulation pour les conférenciers de l'événement "%event" vient d'être atteinte (Événement numéro : %uid, date de début : %begin_date). Actuellement l'événement n'est ni confirmé ni annulé et il y a %registrations inscriptions pour cet événement.</target>
+					the speakers' cancelation deadline for the event "%event" has just passed (Event number:
+					%uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are
+					%registrations registrations for this event.
+				</target>
       </trans-unit>
-      <trans-unit id="label_planned_disclaimer" approved="yes">
-        <source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
-        <target state="final">Pour que cet événement puisse avoir lieu, un nombre minimal d'inscriptions est nécessaire. Si ce nombre n'est pas atteint, l'événement sera annulé. Vous serez bien sûr avertis aussi vite que possible.</target>
+      <trans-unit id="label_planned_disclaimer">
+        <source>
+					For this event to take place, a minimum number of registrations is needed. In case this number
+					is not reached, the event will not take place. Of course, you then will be notified as soon as
+					possible.
+				</source>
+        <target state="needs-translation">
+					For this event to take place, a minimum number of registrations is needed. In case this number
+					is not reached, the event will not take place. Of course, you then will be notified as soon as
+					possible.
+				</target>
       </trans-unit>
       <trans-unit id="email_hello_informal" approved="yes">
         <source>Dear</source>
@@ -556,8 +624,14 @@ L'échéance d'annulation pour les conférenciers de l'événement "%event" vien
         <target state="needs-translation">Email notifications</target>
       </trans-unit>
       <trans-unit id="schedulerTasks.mailNotifier.description">
-        <source>This tasks sends email notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
-        <target state="needs-translation">This tasks sends email notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</target>
+        <source>
+					This tasks sends email notifications, including reminders that an event will take place shortly
+					or that the cancelation deadline is due.
+				</source>
+        <target state="needs-translation">
+					This tasks sends email notifications, including reminders that an event will take place shortly
+					or that the cancelation deadline is due.
+				</target>
       </trans-unit>
       <trans-unit id="schedulerTasks.fields.page-uid">
         <source>UID of the page with the TypoScript configuration</source>
@@ -576,28 +650,36 @@ L'échéance d'annulation pour les conférenciers de l'événement "%event" vien
         <target state="needs-translation">Event confirmed: %eventTitle %eventDate</target>
       </trans-unit>
       <trans-unit id="email-event-canceled-body">
-        <source>%salutation
+        <source>
+					%salutation
 
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
+					you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
-Unfortunately, we had to cancel this event.</source>
-        <target state="needs-translation">%salutation
+					Unfortunately, we had to cancel this event.
+				</source>
+        <target state="needs-translation">
+					%salutation
 
-you registered for the event "%eventTitle" (%eventDate).
+					you registered for the event "%eventTitle" (%eventDate).
 
-Unfortunately, we had to cancel this event.</target>
+					Unfortunately, we had to cancel this event.
+				</target>
       </trans-unit>
       <trans-unit id="email-event-confirmed-body">
-        <source>%salutation
+        <source>
+					%salutation
 
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
+					you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
-This event now has been confirmed.</source>
-        <target state="needs-translation">%salutation
+					This event now has been confirmed.
+				</source>
+        <target state="needs-translation">
+					%salutation
 
-you registered for the event "%eventTitle" (%eventDate).
+					you registered for the event "%eventTitle" (%eventDate).
 
-This event now has been confirmed.</target>
+					This event now has been confirmed.
+				</target>
       </trans-unit>
       <trans-unit id="message_onRequest">
         <source>on request</source>
@@ -643,13 +725,25 @@ This event now has been confirmed.</target>
         <source>Error 403. Sorry, you don't have access to this data.</source>
         <target state="final">Erreur 403. Désolé, vous n'avez pas accès à ces données.</target>
       </trans-unit>
-      <trans-unit id="message_404" approved="yes">
-        <source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-        <target state="final">Erreur 404. La page demandée n'existe pas. Si vous voyez ce message après avoir cliqué sur un lien de cette page, merci de prévenir le responsable du site.</target>
+      <trans-unit id="message_404">
+        <source>
+					Error 404. The requested page does not exist. If you get this error message using a link on this
+					page, please notify the webmaster. Thank you!
+				</source>
+        <target state="needs-translation">
+					Error 404. The requested page does not exist. If you get this error message using a link on this
+					page, please notify the webmaster. Thank you!
+				</target>
       </trans-unit>
-      <trans-unit id="message_404_registrations" approved="yes">
-        <source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-        <target state="final">Erreur 404. Il n'y a aucun événement correspondant à ce numéro. Si vous voyez ce message après avoir cliqué sur un lien de cette page, merci de prévenir le responsable du site.</target>
+      <trans-unit id="message_404_registrations">
+        <source>
+					Error 404. There is no event with this number. If you get this error message using a link on
+					this page, please notify the webmaster. Thank you!
+				</source>
+        <target state="needs-translation">
+					Error 404. There is no event with this number. If you get this error message using a link on
+					this page, please notify the webmaster. Thank you!
+				</target>
       </trans-unit>
       <trans-unit id="message_emailToAttendeesSent">
         <source>The email to the attendees has been sent.</source>
@@ -911,9 +1005,15 @@ This event now has been confirmed.</target>
         <source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
         <target state="final">Utiliser "Prix" comme titre de colonne pour le prix standard dans la vue de liste :</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.generalPriceInSingle" approved="yes">
-        <source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
-        <target state="final">Utiliser "Prix" comme titre pour le prix standard dans la vue de détail et sur la page d'inscription :</target>
+      <trans-unit id="seminars.pi_flexform.generalPriceInSingle">
+        <source>
+					Use &quot;Price&quot; as heading for the standard price in the single view and the registration
+					page:
+				</source>
+        <target state="needs-translation">
+					Use "Price" as heading for the standard price in the single view and the registration
+					page:
+				</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.showSpeakerDetails" approved="yes">
         <source>Show speaker details</source>
@@ -991,9 +1091,15 @@ This event now has been confirmed.</target>
         <source>Next &gt;</source>
         <target state="final">Suivant &gt;</target>
       </trans-unit>
-      <trans-unit id="pi_list_browseresults_displays" approved="yes">
-        <source>Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</source>
-        <target state="final">Résultats ###SPAN_BEGIN###%s de %s&lt;/span&gt; sur un total de ###SPAN_BEGIN###%s&lt;/span&gt;</target>
+      <trans-unit id="pi_list_browseresults_displays">
+        <source>
+					Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of
+					###SPAN_BEGIN###%s&lt;/span&gt;
+				</source>
+        <target state="needs-translation">
+					Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of
+					###SPAN_BEGIN###%s&lt;/span&gt;
+				</target>
       </trans-unit>
       <trans-unit id="pi_list_browseresults_noResults" approved="yes">
         <source>Sorry, no events were found.</source>
@@ -1180,8 +1286,12 @@ This event now has been confirmed.</target>
         <target state="final">Hébergement et nourriture</target>
       </trans-unit>
       <trans-unit id="label_accommodation">
-        <source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
-        <target state="needs-translation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</target>
+        <source>
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</source>
+        <target state="needs-translation">
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</target>
       </trans-unit>
       <trans-unit id="label_food">
         <source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
@@ -1295,13 +1405,25 @@ This event now has been confirmed.</target>
         <source>Price</source>
         <target state="final">Prix</target>
       </trans-unit>
-      <trans-unit id="label_searching_hints" approved="yes">
-        <source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
-        <target state="final">Vous pouvez limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialisez les filtres.</target>
+      <trans-unit id="label_searching_hints">
+        <source>
+					You can shorten the list of events by applying one ore more filter criteria. To see the whole
+					list, just reset the filter.
+				</source>
+        <target state="needs-translation">
+					You can shorten the list of events by applying one ore more filter criteria. To see the whole
+					list, just reset the filter.
+				</target>
       </trans-unit>
-      <trans-unit id="label_searching_hints_informal" approved="yes">
-        <source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
-        <target state="final">Tu peux limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialise les filtres.</target>
+      <trans-unit id="label_searching_hints_informal">
+        <source>
+					You can shorten the list of events by applying one ore more filter criteria. To see the whole
+					list, just reset the filter.
+				</source>
+        <target state="needs-translation">
+					You can shorten the list of events by applying one ore more filter criteria. To see the whole
+					list, just reset the filter.
+				</target>
       </trans-unit>
       <trans-unit id="label_we_offer_events_in_categories" approved="yes">
         <source>Currently, we offer you events in the following categories:</source>
