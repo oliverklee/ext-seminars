@@ -2635,6 +2635,10 @@ This event now has been confirmed.</target>
         <source>proceed to unregistration</source>
         <target state="needs-translation">proceed to unregistration</target>
       </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.heading.downloads">
+        <source>Downloads</source>
+        <target state="needs-translation">Downloads</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
