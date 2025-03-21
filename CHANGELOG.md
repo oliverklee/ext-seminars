@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Event.downloadsForAttendees` (#4243)
 - Add unregistration to the `my registrations` single view (#4236)
 - Add a reimplemented "my registrations" plugin
   (#4207, #4209, #4210, #4214, #4217, #4219, #4225, #4226, #4228)

@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -612,6 +613,36 @@ final class EventRepositoryTest extends FunctionalTestCase
         $associatedModels = $result->getPaymentMethods();
         self::assertCount(1, $associatedModels);
         self::assertInstanceOf(PaymentMethod::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsDownloadsForAttendeesAssociationForSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/SingleEventWithOneDownloadForAttendees.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getDownloadsForAttendees();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(FileReference::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsDownloadsForAttendeesAssociationForEventDate(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventDateWithOneDownloadForAttendees.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getDownloadsForAttendees();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(FileReference::class, $associatedModels->toArray()[0]);
     }
 
     /**

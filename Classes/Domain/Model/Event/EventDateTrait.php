@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -144,6 +145,12 @@ trait EventDateTrait
         EventDateInterface::EVENT_FORMAT_ONLINE,
     ];
 
+    /**
+     * @var ObjectStorage<FileReference>
+     * @Lazy
+     */
+    protected ObjectStorage $downloadsForAttendees;
+
     private function initializeEventDate(): void
     {
         $this->venues = new ObjectStorage();
@@ -152,6 +159,7 @@ trait EventDateTrait
         $this->accommodationOptions = new ObjectStorage();
         $this->foodOptions = new ObjectStorage();
         $this->registrationCheckboxes = new ObjectStorage();
+        $this->downloadsForAttendees = new ObjectStorage();
     }
 
     public function getStart(): ?\DateTime
@@ -588,5 +596,21 @@ trait EventDateTrait
     public function setRoom(string $room): void
     {
         $this->room = $room;
+    }
+
+    /**
+     * @return ObjectStorage<FileReference>
+     */
+    public function getDownloadsForAttendees(): ObjectStorage
+    {
+        return $this->downloadsForAttendees;
+    }
+
+    /**
+     * @param ObjectStorage<FileReference> $files
+     */
+    public function setDownloadsForAttendees(ObjectStorage $files): void
+    {
+        $this->downloadsForAttendees = $files;
     }
 }
