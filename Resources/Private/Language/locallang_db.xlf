@@ -458,7 +458,9 @@
 				<source>Selected lodging options</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.accommodation">
-				<source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
+				<source>
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.foods">
 				<source>Selected food options</source>
