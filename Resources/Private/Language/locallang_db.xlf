@@ -113,7 +113,7 @@
 				<source>Internal Notes</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.attached_files">
-				<source>Attached files</source>
+				<source>Downloads for registered persons</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.download_start_date">
 				<source>Downloads available starting at</source>
