@@ -608,8 +608,12 @@
         <target state="needs-translation">Selected lodging options</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.accommodation">
-        <source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
-        <target state="needs-translation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</target>
+        <source>
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</source>
+        <target state="needs-translation">
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.foods">
         <source>Selected food options</source>
