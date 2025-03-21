@@ -25,7 +25,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
 
         if ($this->configuration->getAsBoolean('enableRegistration')) {
             $this->checkAllowRegistrationForEventsWithoutDate();
-            $this->checkAllowRegistrationForStartedEvents();
             $this->checkNotificationMail();
             $this->checkShowVacanciesThreshold();
             $this->checkThankYouMail();
@@ -72,15 +71,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'allowRegistrationForEventsWithoutDate',
             'This value specifies whether registration is possible for events without a fixed date.
-            If this value is incorrect, registration might be possible even when this is not desired (or vice versa).'
-        );
-    }
-
-    private function checkAllowRegistrationForStartedEvents(): void
-    {
-        $this->checkIfBoolean(
-            'allowRegistrationForStartedEvents',
-            'This value specifies whether registration is possible even when an event already has started.
             If this value is incorrect, registration might be possible even when this is not desired (or vice versa).'
         );
     }

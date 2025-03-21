@@ -5364,27 +5364,6 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesClassesForBeginDateInPastAndRegistrationForStartedEventsAllowedReturnsVacanciesAvailableClass(): void
-    {
-        $event = new TestingLegacyEvent($this->seminarUid);
-        $event->setNeedsRegistration(true);
-        $event->setBeginDate(
-            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
-                'date',
-                'timestamp'
-            ) - 45
-        );
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForStartedEvents', true);
-
-        self::assertStringContainsString(
-            'tx-seminars-pi1-vacancies-available',
-            $this->subject->getVacanciesClasses($event)
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getVacanciesClassesForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass(): void
     {
         $event = new TestingLegacyEvent($this->seminarUid);

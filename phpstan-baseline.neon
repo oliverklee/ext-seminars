@@ -2827,7 +2827,7 @@ parameters:
 
 		-
 			message: "#^Binary operation \"\\-\" between mixed and 45 results in an error\\.$#"
-			count: 3
+			count: 2
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
