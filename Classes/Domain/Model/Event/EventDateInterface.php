@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -169,4 +170,9 @@ interface EventDateInterface
     public function getAdditionalEmailText(): string;
 
     public function getRoom(): string;
+
+    /**
+     * @return ObjectStorage<FileReference>
+     */
+    public function getDownloadsForAttendees(): ObjectStorage;
 }

@@ -66,6 +66,7 @@ return [
             'accommodationOptions' => ['fieldName' => 'lodgings'],
             'foodOptions' => ['fieldName' => 'foods'],
             'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
+            'downloadsForAttendees' => ['fieldName' => 'attached_files'],
         ],
     ],
     EventTopic::class => [
@@ -104,6 +105,7 @@ return [
             'accommodationOptions' => ['fieldName' => 'lodgings'],
             'foodOptions' => ['fieldName' => 'foods'],
             'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
+            'downloadsForAttendees' => ['fieldName' => 'attached_files'],
         ],
     ],
     EventType::class => [

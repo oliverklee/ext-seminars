@@ -1,0 +1,7 @@
+"tx_seminars_seminars"
+,"uid","object_type","title","attached_files"
+,1,0,"Event with one download for attendees",1
+
+"sys_file_reference"
+,"uid","uid_foreign","tablenames","fieldname"
+,1,1,"tx_seminars_seminars","attached_files"

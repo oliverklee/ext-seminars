@@ -23,6 +23,7 @@ use OliverKlee\Seminars\Domain\Model\Venue;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -1651,5 +1652,28 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setDownloadStartDate(new \DateTime('now +1 day'));
 
         self::assertFalse($this->subject->areDownloadsPossibleByDate());
+    }
+
+    /**
+     * @test
+     */
+    public function getDownloadsForAttendeesInitiallyReturnsEmptyStorage(): void
+    {
+        $venues = $this->subject->getDownloadsForAttendees();
+
+        self::assertInstanceOf(ObjectStorage::class, $venues);
+        self::assertCount(0, $venues);
+    }
+
+    /**
+     * @test
+     */
+    public function setDownloadsForAttendeesSetsDownloadsForAttendees(): void
+    {
+        /** @var ObjectStorage<FileReference> $files */
+        $files = new ObjectStorage();
+        $this->subject->setDownloadsForAttendees($files);
+
+        self::assertSame($files, $this->subject->getDownloadsForAttendees());
     }
 }
