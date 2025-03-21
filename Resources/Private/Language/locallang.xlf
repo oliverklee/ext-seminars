@@ -1965,6 +1965,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
 				<source>proceed to unregistration</source>
 			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.show.heading.downloads">
+				<source>Downloads</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
