@@ -147,9 +147,9 @@
         <source>Internal Notes</source>
         <target state="final">Interne Notizen</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.attached_files">
+      <trans-unit id="tx_seminars_seminars.attached_files" approved="yes">
         <source>Downloads for registered persons</source>
-        <target state="needs-translation">Downloads for registered persons</target>
+        <target state="final">Downloads für angemeldete Personen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.download_start_date" approved="yes">
         <source>Downloads available starting at</source>
@@ -607,9 +607,13 @@
         <source>Selected lodging options</source>
         <target state="final">Gewählte Unterbringungsmöglichkeiten</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.accommodation" approved="yes">
-        <source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
-        <target state="final">Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung)</target>
+      <trans-unit id="tx_seminars_attendances.accommodation">
+        <source>
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</source>
+        <target state="needs-translation">
+					How are your lodging preferences (if possible a single room, a double room, no lodging)?
+				</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.foods" approved="yes">
         <source>Selected food options</source>
