@@ -152,6 +152,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fully initialize reconstituted domain models (#4246)
 - Use the user's display name in the registration record title (#4194)
 - Improve some type annotations (#4014)
 - Make some billing address fields longer (#4143)
