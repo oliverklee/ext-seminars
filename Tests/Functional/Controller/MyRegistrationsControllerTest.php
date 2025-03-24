@@ -858,4 +858,67 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
             . 'tx_seminars_myregistrations%5Bregistration%5D=1';
         self::assertStringNotContainsString($urlPrefix, (string)$response->getBody());
     }
+
+    /**
+     * @test
+     */
+    public function showActionForRegularRegistrationWithDownloadsRendersLinkToEventDownload(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithoutTitle.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringContainsString('/speaker.jpg', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForRegularRegistrationWithDownloadWithoutTitleUsesFilenameAsLinkText(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithoutTitle.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertMatchesRegularExpression('#>\\s*speaker\\.jpg\\s*</a>#', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForRegularRegistrationWithDownloadWithTitleUsesTitleAsLinkText(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithTitle.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertMatchesRegularExpression('#>\\s*speaker portrait\\s*</a>#', (string)$response->getBody());
+    }
 }

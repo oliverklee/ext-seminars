@@ -55,4 +55,27 @@
             </f:link.action>
         </p>
     </f:if>
+
+    <f:if condition="{event.downloadsForAttendees}">
+        <h3>
+            <f:translate key="plugin.myRegistrations.show.heading.downloads"/>
+        </h3>
+        <ul class="list-group">
+            <f:for each="{event.downloadsForAttendees}" as="fileReference">
+                <li class="list-group-item">
+                    <f:variable name="originalResource" value="{fileReference.originalResource}"/>
+                    <a href="{originalResource.publicUrl}" target="_blank">
+                        <f:if condition="{originalResource.title}">
+                            <f:then>
+                                {originalResource.title}
+                            </f:then>
+                            <f:else>
+                                {originalResource.name}
+                            </f:else>
+                        </f:if>
+                    </a>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>
 </html>
