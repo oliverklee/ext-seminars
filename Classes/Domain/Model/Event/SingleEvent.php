@@ -15,6 +15,11 @@ class SingleEvent extends Event implements EventDateInterface, EventTopicInterfa
 
     public function __construct()
     {
+        $this->initializeObject();
+    }
+
+    public function initializeObject(): void
+    {
         $this->initializeEventTopic();
         $this->initializeEventDate();
     }
