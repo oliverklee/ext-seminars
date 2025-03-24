@@ -56,7 +56,7 @@
         </p>
     </f:if>
 
-    <f:if condition="{event.downloadsForAttendees}">
+    <f:if condition="{event.downloadsForAttendees} && {event.downloadsPossibleByDate} && {registration.regularRegistration}">
         <h3>
             <f:translate key="plugin.myRegistrations.show.heading.downloads"/>
         </h3>
