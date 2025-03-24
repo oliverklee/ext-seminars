@@ -921,4 +921,88 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         self::assertMatchesRegularExpression('#>\\s*speaker portrait\\s*</a>#', (string)$response->getBody());
     }
+
+    /**
+     * @test
+     */
+    public function showActionForWaitingListRegistrationWithDownloadsDoesNotRendersDownload(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/WaitingListRegistrationWithDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringNotContainsString('speaker.jpg', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForNonBindingReservationWithDownloadsDoesNotRendersDownload(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/NonBindingReservationWithDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringNotContainsString('speaker.jpg', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForRegularRegistrationWithDownloadStartDateInPastRendersDownload(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithDownloadStartInPast.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringContainsString('speaker.jpg', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForRegularRegistrationWithDownloadStartDateInFuturesDoesNotRenderDownload(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithDownloadStartInFuture.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringNotContainsString('speaker.jpg', (string)$response->getBody());
+    }
 }
