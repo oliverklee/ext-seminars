@@ -26,6 +26,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
     protected array $pathsToLinkInTestInstance = [
         'typo3conf/ext/seminars/Tests/Functional/Controller/Fixtures/Sites/' => 'typo3conf/sites',
+        'typo3conf/ext/seminars/Tests/Functional/Controller/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/fileadmin/speaker.txt'
+        => 'fileadmin/speaker.txt',
     ];
 
     protected array $configurationToUseInTestInstance = [
@@ -858,7 +860,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function showActionForRegularRegistrationWithDownloadsRendersLinkToEventDownload(): void
+    public function showActionForRegularRegistrationWithDownloadsRendersLinkToAttachmentDownload(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
@@ -873,7 +875,12 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertStringContainsString('/speaker.txt', (string)$response->getBody());
+        $expected = 'href="/my-events?'
+            . 'tx_seminars_myregistrations%5Baction%5D=downloadAttendeeAttachment&amp;'
+            . 'tx_seminars_myregistrations%5Bcontroller%5D=MyRegistrations&amp;'
+            . 'tx_seminars_myregistrations%5BfileUid%5D=1&amp;'
+            . 'tx_seminars_myregistrations%5Bregistration%5D=1';
+        self::assertStringContainsString($expected, (string)$response->getBody());
     }
 
     /**
@@ -1000,5 +1007,212 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
         self::assertStringNotContainsString('speaker.txt', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionForRegistrationWithoutEventThrowsRuntimeException(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationWithoutEvent.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Event not found.');
+        $this->expectExceptionCode(1742846429);
+
+        $this->executeFrontendSubRequest($request, $requestContext);
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithUidOfInexistentFileThrowsRuntimeException(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationWithoutDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('File not found.');
+        $this->expectExceptionCode(1742847711);
+
+        $this->executeFrontendSubRequest($request, $requestContext);
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithUidOfFileFromOtherEventThrowsRuntimeException(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownloadFromOtherEvent.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('File not found.');
+        $this->expectExceptionCode(1742847711);
+
+        $this->executeFrontendSubRequest($request, $requestContext);
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithValidFileUidReturnsStatusOkay(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertSame(200, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithValidFileUidReturnsCacheControlPrivateHeader(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertSame('private', $response->getHeaderLine('Cache-Control'));
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithValidFileUidReturnsContentDispositionHeaderWithFilename(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertSame('filename="speaker.txt"', $response->getHeaderLine('Content-Disposition'));
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithValidFileUidReturnsContentLengthHeader(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertSame('7', $response->getHeaderLine('Content-Length'));
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithValidFileUidReturnsContentTypeHeaderWithFileMimeType(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertSame('text/plain', $response->getHeaderLine('Content-Type'));
+    }
+
+    /**
+     * @test
+     */
+    public function downloadAttendeeAttachmentActionWithValidFileUidReturnsFileContents(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(7)
+            ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
+            ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
+            ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
+            ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expectedFileContents = \file_get_contents(
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/fileadmin/speaker.txt'
+        );
+        self::assertSame($expectedFileContents, (string)$response->getBody());
     }
 }

@@ -82,7 +82,9 @@
                 <f:for each="{event.downloadsForAttendees}" as="fileReference">
                     <li class="list-group-item">
                         <f:variable name="originalResource" value="{fileReference.originalResource}"/>
-                        <a href="{originalResource.publicUrl}" target="_blank">
+                        <f:link.action action="downloadAttendeeAttachment"
+                                       arguments="{registration: registration, fileUid: originalResource.originalFile.uid}"
+                                       target="_blank">
                             <f:if condition="{originalResource.title}">
                                 <f:then>
                                     {originalResource.title}
@@ -91,7 +93,7 @@
                                     {originalResource.name}
                                 </f:else>
                             </f:if>
-                        </a>
+                        </f:link.action>
                     </li>
                 </f:for>
             </ul>
