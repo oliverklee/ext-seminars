@@ -24,6 +24,11 @@ class EventDate extends Event implements EventDateInterface
 
     public function __construct()
     {
+        $this->initializeObject();
+    }
+
+    public function initializeObject(): void
+    {
         $this->initializeEventDate();
     }
 

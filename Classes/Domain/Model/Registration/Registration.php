@@ -120,6 +120,11 @@ class Registration extends AbstractEntity implements RawDataInterface
 
     public function __construct()
     {
+        $this->initializeObject();
+    }
+
+    public function initializeObject(): void
+    {
         $this->additionalPersons = new ObjectStorage();
         $this->accommodationOptions = new ObjectStorage();
         $this->foodOptions = new ObjectStorage();

@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fully initialize reconstituted domain models (#4248)
 - Change the registration status from a checkbox to a drop-down (#4192)
 - Fix a copy'n'paste error in a label (#4127)
 - Avoid crashes for deleted lazy-loaded associations (#4110, #4116)
