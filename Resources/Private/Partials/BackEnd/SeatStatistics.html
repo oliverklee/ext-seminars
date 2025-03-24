@@ -14,14 +14,14 @@
                 title="{f:translate(key: '{propertyLabelPrefix}.seats.maximum')}">∞</span>
             </f:else>
         </f:if>
-        <f:if condition="({statistics.seatsLimit} && {statistics.fullyBooked})">
+        <f:if condition="{statistics.seatsLimit} && {statistics.fullyBooked}">
             <f:then>
                 <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.fullyBooked')}"
                       class="text-warning">
                     <core:icon identifier="actions-bolt"/>
                 </span>
             </f:then>
-            <f:else if="({statistics.minimumRequiredSeats} && {statistics.enoughRegistrations})">
+            <f:else if="{statistics.minimumRequiredSeats} && {statistics.enoughRegistrations}">
                 <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.enough')}" class="text-success">
                     <core:icon identifier="actions-check"/>
                 </span>

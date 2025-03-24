@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:variable name="statistics" value="{event.statistics}"/>
-    <f:if condition="({settings.registrationPage} && {event.registrationRequired}">
-        <f:if condition="({event.registrationPossibleByDate} && {statistics.anyVacancies})">
+    <f:if condition="{settings.registrationPage} && {event.registrationRequired}">
+        <f:if condition="{event.registrationPossibleByDate} && {statistics.anyVacancies}">
             <f:link.action controller="EventRegistration" action="checkPrerequisites"
                            pageUid="{settings.registrationPage}" arguments="{event: event}">
                 <f:if condition="{statistics.regularVacancies}">
