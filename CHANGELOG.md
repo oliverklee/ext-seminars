@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fully initialize reconstituted domain models (#4247)
 - Change the registration status from a checkbox to a drop-down (#4192)
 - Fix a copy'n'paste error in a label (#4127)
 - Make some billing address fields longer (#4144)
