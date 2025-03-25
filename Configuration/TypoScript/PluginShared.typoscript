@@ -72,10 +72,6 @@ plugin.tx_seminars {
   # whether registration for events without a date should be possible
   allowRegistrationForEventsWithoutDate = 0
 
-  # Whether unregistration is possible even when there are no registrations
-  # on the waiting list yet.
-  allowUnregistrationWithEmptyWaitingList = 0
-
   # whether to waiting list registrations automatically will succeed to regular registrations when someone unregisters
   # and hence a vacancy is created
   automaticallyFillVacanciesOnUnregistration = 1
