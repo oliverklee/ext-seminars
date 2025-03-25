@@ -87,10 +87,6 @@
         <source>Time</source>
         <target state="final">Tijd</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.language" approved="yes">
-        <source>Language</source>
-        <target state="final">Taal</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_seminars.accreditation_number" approved="yes">
         <source>Accreditation number</source>
         <target state="final">Accrediteringsnummer</target>
