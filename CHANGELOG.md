@@ -110,6 +110,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Remove public access feature for registration lists (#4277)
 - Drop `Venue.zip` (#4274)
 - Drop `Venue.country` (#4273, #4275)
 - Drop `Event.language` (#4271)

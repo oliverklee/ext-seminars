@@ -397,7 +397,7 @@ override the corresponding value from TS Setup.**
 
    Description
          who is allowed to view the list of registrations on the front end;
-         allowed values are: attendees\_and\_managers, login, world
+         allowed values are: attendees\_and\_managers, login
 
    Default
          attendees\_and\_managers

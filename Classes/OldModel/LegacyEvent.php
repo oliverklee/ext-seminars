@@ -1812,7 +1812,7 @@ class LegacyEvent extends AbstractTimeSpan
      * @param int<0, max> $registrationsVipListPID
      *        the value of the registrationsVipListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param 'attendees_and_managers'|'login'|'world' $accessLevel
+     * @param 'attendees_and_managers'|'login' $accessLevel
      *
      * @return bool TRUE if a FE user is logged in and the user may view
      *                 the registrations list or may see a link to that
@@ -1829,13 +1829,6 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         switch ($accessLevel) {
-            case 'world':
-                $result = $this->canViewRegistrationsListForWorldAccess(
-                    $whichPlugin,
-                    $registrationsListPID,
-                    $registrationsVipListPID
-                );
-                break;
             case 'login':
                 $result = $this->canViewRegistrationsListForLoginAccess(
                     $whichPlugin,
@@ -1969,61 +1962,12 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * Checks whether a FE user is logged in and whether he/she may view this
-     * seminar's registrations list or see a link to it.
-     *
-     * This function assumes that the access level for FE registration lists is
-     * "world".
-     *
-     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
-     * @param int<0, max> $registrationsListPID
-     *        the value of the registrationsListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $registrationsVipListPID
-     *        the value of the registrationsVipListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     *
-     * @return bool TRUE if a FE user is logged in and the user may view
-     *                 the registrations list or may see a link to that
-     *                 page, FALSE otherwise
-     */
-    protected function canViewRegistrationsListForWorldAccess(
-        string $whichPlugin,
-        int $registrationsListPID = 0,
-        int $registrationsVipListPID = 0
-    ): bool {
-        $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
-        \assert(\is_int($currentUserUid) && $currentUserUid >= 0);
-        $isLoggedIn = $currentUserUid > 0;
-
-        $hasListPid = $registrationsListPID > 0;
-        $hasVipListPid = $registrationsVipListPID > 0;
-
-        switch ($whichPlugin) {
-            case 'my_vip_events':
-                $result = $isLoggedIn && $this->isUserVip($currentUserUid)
-                    && $hasVipListPid;
-                break;
-            case 'list_vip_registrations':
-                $result = $isLoggedIn && $this->isUserVip($currentUserUid);
-                break;
-            case 'list_registrations':
-                $result = true;
-                break;
-            default:
-                $result = $hasListPid;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Checks whether a FE user is logged in and whether he/she may view this
      * seminar's registrations list.
      * This function is intended to be used from the registrations list,
      * NOT to check whether a link to that list should be shown.
      *
      * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
-     * @param 'attendees_and_managers'|'login'|'world' $accessLevel
+     * @param 'attendees_and_managers'|'login' $accessLevel
      *
      * @return string an empty string if everything is OK, a localized error
      *                message otherwise
@@ -2034,9 +1978,6 @@ class LegacyEvent extends AbstractTimeSpan
     ): string {
         if (!$this->needsRegistration()) {
             return $this->translate('message_noRegistrationNecessary');
-        }
-        if ($accessLevel === 'world') {
-            return '';
         }
         if (!GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn()) {
             return $this->translate('message_notLoggedIn');
