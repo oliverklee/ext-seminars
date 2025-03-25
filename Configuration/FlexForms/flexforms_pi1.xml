@@ -242,10 +242,6 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.searchForm.type</numIndex>
 										<numIndex index="1">event_type</numIndex>
 									</numIndex>
-									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.searchForm.language</numIndex>
-										<numIndex index="1">language</numIndex>
-									</numIndex>
 									<numIndex index="3" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.searchForm.city</numIndex>
 										<numIndex index="1">city</numIndex>

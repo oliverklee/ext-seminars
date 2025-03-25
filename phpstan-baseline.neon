@@ -107,7 +107,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 10
+			count: 9
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
@@ -1121,11 +1121,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createDateArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
@@ -1146,7 +1141,7 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
+			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'event_type'\\|'places', 'categories'\\|'city'\\|'event_type'\\|'organizer'\\|'place' given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
@@ -2527,7 +2522,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 40
+			count: 38
 			path: Tests/LegacyFunctional/BagBuilder/EventBagBuilderTest.php
 
 		-
@@ -2897,7 +2892,7 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on array\\|float\\|int\\|string\\.$#"
-			count: 12
+			count: 10
 			path: Tests/LegacyFunctional/FrontEnd/SelectorWidgetTest.php
 
 		-

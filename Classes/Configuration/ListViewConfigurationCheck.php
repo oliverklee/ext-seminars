@@ -241,7 +241,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             The search widget will not display any fields at all if this value is empty or contains only invalid keys.',
             [
                 'event_type',
-                'language',
                 'city',
                 'place',
                 'full_text_search',

@@ -14,7 +14,6 @@ use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
-use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -24,11 +23,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class SelectorWidget extends AbstractView
 {
-    /**
-     * needed for the list view to convert ISO codes to languages
-     */
-    protected ?PiBaseApi $staticInfo = null;
-
     /**
      * @var list<non-empty-string> the keys of the search fields which should be displayed in the search form
      */
@@ -68,7 +62,7 @@ class SelectorWidget extends AbstractView
         $this->initialize();
 
         $this->fillOrHideSearchSubpart('event_type');
-        $this->fillOrHideSearchSubpart('language');
+        $this->hideSubparts('language');
         $this->fillOrHideSearchSubpart('place');
         $this->hideSubparts('country');
         $this->fillOrHideSearchSubpart('city');
@@ -156,7 +150,7 @@ class SelectorWidget extends AbstractView
     /**
      * Creates the HTML code for a single option box of the selector widget.
      *
-     * @param 'event_type'|'language'|'city'|'places' $name
+     * @param 'event_type'|'city'|'places' $name
      * @param string[] $options
      *        the options for the option box with the option value as key and the option label as value, may be empty
      *
@@ -230,21 +224,6 @@ class SelectorWidget extends AbstractView
 
         $mapper = MapperRegistry::get(PlaceMapper::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);
-    }
-
-    /**
-     * Creates an instance of PiBaseApi if that has not happened yet.
-     */
-    protected function getStaticInfo(): PiBaseApi
-    {
-        if ($this->staticInfo instanceof PiBaseApi) {
-            return $this->staticInfo;
-        }
-
-        $this->staticInfo = GeneralUtility::makeInstance(PiBaseApi::class);
-        $this->staticInfo->init();
-
-        return $this->staticInfo;
     }
 
     /**
@@ -323,7 +302,7 @@ class SelectorWidget extends AbstractView
     /**
      * Fills or hides the subpart for the given search field.
      *
-     * @param 'event_type'|'language'|'place'|'city'|'organizer'|'categories' $searchField
+     * @param 'event_type'|'place'|'city'|'organizer'|'categories' $searchField
      */
     private function fillOrHideSearchSubpart(string $searchField): void
     {
@@ -335,9 +314,6 @@ class SelectorWidget extends AbstractView
         switch ($searchField) {
             case 'event_type':
                 $optionData = $this->getEventTypeData();
-                break;
-            case 'language':
-                $optionData = $this->getLanguageData();
                 break;
             case 'place':
                 $optionData = $this->getPlaceData();
@@ -354,7 +330,7 @@ class SelectorWidget extends AbstractView
             default:
                 throw new \InvalidArgumentException(
                     'The given search field . "' . $searchField . '" was not an allowed value. ' .
-                    'Allowed values are: "event_type", "language", "city", "place" or "organizer".',
+                    'Allowed values are: "event_type", "city", "place" or "organizer".',
                     1333293298
                 );
         }
@@ -461,33 +437,6 @@ class SelectorWidget extends AbstractView
                 $eventTypeName = $event->getEventType();
                 if (!isset($result[$eventTypeUid])) {
                     $result[$eventTypeUid] = $eventTypeName;
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Gets the data for the language search field options.
-     *
-     * @return array<string, string> the data for the language search field options,
-     *         the key will be the ISO code of the language and the value will be the localized title of the language,
-     *         will be empty if no data could be found
-     */
-    protected function getLanguageData(): array
-    {
-        $result = [];
-
-        /** @var LegacyEvent $event */
-        foreach ($this->seminarBag as $event) {
-            if ($event->hasLanguage()) {
-                // Reads the language from the event record.
-                $languageIsoCode = $event->getLanguage();
-                if (!empty($languageIsoCode) && !isset($result[$languageIsoCode])) {
-                    /** @var string $languageName */
-                    $languageName = $this->getStaticInfo()->getStaticInfoName('LANGUAGES', $languageIsoCode, '', '', 0);
-                    $result[$languageIsoCode] = $languageName;
                 }
             }
         }
