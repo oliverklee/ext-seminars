@@ -637,40 +637,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         );
     }
 
-    /////////////////////////////////////////////////
-    // Tests concerning removeAdditionalTableName()
-    /////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function removeAdditionalTableNameWithNotSetTableNameThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The given additional table name does not exist in the list ' .
-            'of additional table names.'
-        );
-
-        $this->subject->removeAdditionalTableName('tx_seminars_seminars');
-    }
-
-    /**
-     * @test
-     */
-    public function removeAdditionalTableNameWithSetTableNameRemovesAdditionalTableName(): void
-    {
-        $this->subject->addAdditionalTableName('tx_seminars_seminars');
-        $this->subject->removeAdditionalTableName('tx_seminars_seminars');
-
-        self::assertNotContains(
-            'tx_seminars_seminars',
-            $this->subject->getAdditionalTableNames()
-        );
-    }
-
     //////////////////////////////////
     // Tests concerning setOrderBy()
     //////////////////////////////////

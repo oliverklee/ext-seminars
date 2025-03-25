@@ -90,12 +90,11 @@ existing ones. See also :file:`Classes/BagBuilder/AbstractBagBuilder.php`,
 :file:`Classes/BagBuilder/EventBagBuilder.php` and :file:`Classes/BagBuilder/Registration.php`
 for available properties and methods.
 
-There are 7 types of lists your implementation must handle:
+There are the following types of lists your implementation must handle:
 
 * topic list (`topic_list`)
 * seminar list (`seminar_list`)
 * my seminars (`my_events`)
-* my VIP seminars (`my_vip_events`)
 * events next day (`events_next_day`)
 * other dates (`other_dates`)
 
@@ -128,12 +127,12 @@ Implement the methods required by the interface:
          * @see AbstractBagBuilder::setWhereClausePart()
          *
          * This function will be called for these types of seminar lists: "topics", "seminars",
-         * "my vip seminars", "events next day", "other dates".
+         * "events next day", "other dates".
          *
          * @param DefaultController $controller the calling controller
          * @param EventBagBuilder $builder the bag builder
          * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
-         *        'my_vip_events', 'events_next_day' or 'other_dates'
+         *        'events_next_day' or 'other_dates'
          */
         public function modifyEventBagBuilder(
             DefaultController $controller,
@@ -170,7 +169,7 @@ Implement the methods required by the interface:
          * Modifies the list view header row in a seminar list.
          *
          * This function will be called for all types of seminar lists ("topics",
-         * "seminars", "my seminars", "my vip seminars",
+         * "seminars", "my seminars"
          * "events next day", "other dates").
          *
          * @param DefaultController $controller the calling controller
@@ -184,7 +183,7 @@ Implement the methods required by the interface:
          * Modifies a list row in a seminar list.
          *
          * This function will be called for all types of seminar lists ("topics",
-         * "seminars", "my seminars", "my vip seminars",
+         * "seminars", "my seminars",
          * "events next day", "other dates").
          *
          * @param DefaultController $controller the calling controller
@@ -197,7 +196,7 @@ Implement the methods required by the interface:
         /**
          * Modifies a list view row in a "my seminars" list.
          *
-         * This function will be called for "my seminars" , "my vip seminars",
+         * This function will be called for "my seminars"
          * lists only.
          *
          * @param DefaultController $controller the calling controller
@@ -211,7 +210,7 @@ Implement the methods required by the interface:
          * Modifies the list view footer in a seminars list.
          *
          * This function will be called for all types of seminar lists ("topics",
-         * "seminars", "my seminars", "my vip seminars",
+         * "seminars", "my seminars",
          * "events next day", "other dates").
          *
          * @param DefaultController $controller the calling controller

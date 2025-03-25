@@ -1940,55 +1940,18 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether a certain user is entered as a default VIP for all events
-     * but also checks whether this user is entered as a VIP for this event,
-     * i.e., he/she is allowed to view the list of registrations for this event.
-     *
-     * @param positive-int $userUid UID of the FE user to check
-     * @param positive-int $defaultEventVipsFeGroupUid UID of the default event VIP front-end user group
-     *
-     * @return bool whether the user is a VIP for this event
-     */
-    public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
-    {
-        $loggedInUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
-        $loggedInUser = $loggedInUserUid > 0
-            ? MapperRegistry::get(FrontEndUserMapper::class)->find($loggedInUserUid) : null;
-        $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
-            && $loggedInUser instanceof FrontEndUser
-            && $loggedInUser->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
-
-        if ($isDefaultVip) {
-            $isVip = true;
-        } else {
-            $table = 'tx_seminars_seminars_feusers_mm';
-            $count = self::getConnectionForTable($table)
-                ->count('*', $table, ['uid_local' => $this->getUid(), 'uid_foreign' => $userUid]);
-            $isVip = $count > 0;
-        }
-
-        return $isVip;
-    }
-
-    /**
      * Checks whether a FE user is logged in and whether he/she may view this
      * seminar's registrations list or see a link to it.
      * This function can be used to check whether
      * a) a link may be created to the page with the list of registrations
-     *    (for $whichPlugin = (seminar_list|my_events|my_vip_events))
+     *    (for $whichPlugin = (seminar_list|my_events))
      * b) the user is allowed to view the list of registrations
-     *    (for $whichPlugin = (list_registrations|list_vip_registrations))
+     *    (for $whichPlugin = (list_registrations)
      *
-     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $registrationsVipListPID
-     *        the value of the registrationsVipListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $defaultEventVipsFeGroupID
-     *        the value of the defaultEventVipsGroupID parameter
-     *        (only relevant for (list_vip_registration|my_vip_events))
+     *        (only relevant for (seminar_list|my_events))
      * @param 'attendees_and_managers'|'login'|'world' $accessLevel
      *
      * @return bool TRUE if a FE user is logged in and the user may view
@@ -1998,8 +1961,6 @@ class LegacyEvent extends AbstractTimeSpan
     public function canViewRegistrationsList(
         string $whichPlugin,
         int $registrationsListPID = 0,
-        int $registrationsVipListPID = 0,
-        int $defaultEventVipsFeGroupID = 0,
         string $accessLevel = 'attendees_and_managers'
     ): bool {
         if (!$this->needsRegistration()) {
@@ -2008,30 +1969,15 @@ class LegacyEvent extends AbstractTimeSpan
 
         switch ($accessLevel) {
             case 'world':
-                $result = $this->canViewRegistrationsListForWorldAccess(
-                    $whichPlugin,
-                    $registrationsListPID,
-                    $registrationsVipListPID,
-                    $defaultEventVipsFeGroupID
-                );
+                $result = $this->canViewRegistrationsListForWorldAccess($whichPlugin, $registrationsListPID);
                 break;
             case 'login':
-                $result = $this->canViewRegistrationsListForLoginAccess(
-                    $whichPlugin,
-                    $registrationsListPID,
-                    $registrationsVipListPID,
-                    $defaultEventVipsFeGroupID
-                );
+                $result = $this->canViewRegistrationsListForLoginAccess($whichPlugin, $registrationsListPID);
                 break;
             case 'attendees_and_managers':
                 // The fall-through is intended.
             default:
-                $result = $this->canViewRegistrationsListForAttendeesAndManagersAccess(
-                    $whichPlugin,
-                    $registrationsListPID,
-                    $registrationsVipListPID,
-                    $defaultEventVipsFeGroupID
-                );
+                $result = $this->canViewRegistrationsListForAttendeesAccess($whichPlugin, $registrationsListPID);
         }
 
         return $result;
@@ -2044,26 +1990,18 @@ class LegacyEvent extends AbstractTimeSpan
      * This function assumes that the access level for FE registration lists is
      * "attendees and managers".
      *
-     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $registrationsVipListPID
-     *        the value of the registrationsVipListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $defaultEventVipsFeGroupID
-     *        the value of the defaultEventVipsGroupID parameter
-     *        (only relevant for (list_vip_registration|my_vip_events))
+     *        (only relevant for (seminar_list|my_events))
      *
      * @return bool TRUE if a FE user is logged in and the user may view
      *                 the registrations list or may see a link to that
      *                 page, FALSE otherwise
      */
-    protected function canViewRegistrationsListForAttendeesAndManagersAccess(
+    protected function canViewRegistrationsListForAttendeesAccess(
         string $whichPlugin,
-        int $registrationsListPID = 0,
-        int $registrationsVipListPID = 0,
-        int $defaultEventVipsFeGroupID = 0
+        int $registrationsListPID = 0
     ): bool {
         $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
         \assert(\is_int($currentUserUid) && $currentUserUid >= 0);
@@ -2072,30 +2010,17 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $hasListPid = ($registrationsListPID > 0);
-        $hasVipListPid = ($registrationsVipListPID > 0);
 
         switch ($whichPlugin) {
             case 'seminar_list':
                 // In the standard list view, we could have any kind of link.
-                $result = $this->canViewRegistrationsList('my_events', $registrationsListPID)
-                    || $this->canViewRegistrationsList(
-                        'my_vip_events',
-                        0,
-                        $registrationsVipListPID,
-                        $defaultEventVipsFeGroupID
-                    );
+                $result = $this->canViewRegistrationsList('my_events', $registrationsListPID);
                 break;
             case 'my_events':
                 $result = $this->isUserRegistered($currentUserUid) && $hasListPid;
                 break;
-            case 'my_vip_events':
-                $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
-                break;
             case 'list_registrations':
                 $result = $this->isUserRegistered($currentUserUid);
-                break;
-            case 'list_vip_registrations':
-                $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
                 break;
             default:
                 $result = false;
@@ -2111,42 +2036,25 @@ class LegacyEvent extends AbstractTimeSpan
      * This function assumes that the access level for FE registration lists is
      * "login".
      *
-     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $registrationsVipListPID
-     *        the value of the registrationsVipListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $defaultEventVipsFeGroupID
-     *        the value of the defaultEventVipsGroupID parameter
-     *        (only relevant for (list_vip_registration|my_vip_events))
+     *        (only relevant for (seminar_list|my_events))
      *
      * @return bool TRUE if a FE user is logged in and the user may view
      *                 the registrations list or may see a link to that
      *                 page, FALSE otherwise
      */
-    protected function canViewRegistrationsListForLoginAccess(
-        string $whichPlugin,
-        int $registrationsListPID = 0,
-        int $registrationsVipListPID = 0,
-        int $defaultEventVipsFeGroupID = 0
-    ): bool {
+    protected function canViewRegistrationsListForLoginAccess(string $whichPlugin, int $registrationsListPID = 0): bool
+    {
         $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
         if ($currentUserUid <= 0) {
             return false;
         }
 
         $hasListPid = ($registrationsListPID > 0);
-        $hasVipListPid = ($registrationsVipListPID > 0);
 
         switch ($whichPlugin) {
-            case 'my_vip_events':
-                $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
-                break;
-            case 'list_vip_registrations':
-                $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
-                break;
             case 'list_registrations':
                 $result = true;
                 break;
@@ -2164,16 +2072,10 @@ class LegacyEvent extends AbstractTimeSpan
      * This function assumes that the access level for FE registration lists is
      * "world".
      *
-     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $registrationsVipListPID
-     *        the value of the registrationsVipListPID parameter
-     *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int<0, max> $defaultEventVipsFeGroupID
-     *        the value of the defaultEventVipsGroupID parameter
-     *        (only relevant for (list_vip_registration|my_vip_events))
+     *        (only relevant for (seminar_list|my_events))
      *
      * @return bool TRUE if a FE user is logged in and the user may view
      *                 the registrations list or may see a link to that
@@ -2181,25 +2083,14 @@ class LegacyEvent extends AbstractTimeSpan
      */
     protected function canViewRegistrationsListForWorldAccess(
         string $whichPlugin,
-        int $registrationsListPID = 0,
-        int $registrationsVipListPID = 0,
-        int $defaultEventVipsFeGroupID = 0
+        int $registrationsListPID = 0
     ): bool {
         $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
         \assert(\is_int($currentUserUid) && $currentUserUid >= 0);
-        $isLoggedIn = $currentUserUid > 0;
 
         $hasListPid = $registrationsListPID > 0;
-        $hasVipListPid = $registrationsVipListPID > 0;
 
         switch ($whichPlugin) {
-            case 'my_vip_events':
-                $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $hasVipListPid;
-                break;
-            case 'list_vip_registrations':
-                $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
-                break;
             case 'list_registrations':
                 $result = true;
                 break;
@@ -2216,7 +2107,7 @@ class LegacyEvent extends AbstractTimeSpan
      * This function is intended to be used from the registrations list,
      * NOT to check whether a link to that list should be shown.
      *
-     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param 'seminar_list'|'my_events'|'list_registrations' $whichPlugin
      * @param 'attendees_and_managers'|'login'|'world' $accessLevel
      *
      * @return string an empty string if everything is OK, a localized error
@@ -2238,8 +2129,6 @@ class LegacyEvent extends AbstractTimeSpan
         if (
             !$this->canViewRegistrationsList(
                 $whichPlugin,
-                0,
-                0,
                 0,
                 $accessLevel
             )
