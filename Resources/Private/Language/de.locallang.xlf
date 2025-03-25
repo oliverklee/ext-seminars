@@ -1098,10 +1098,6 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Leaders</source>
         <target state="final">Kursleitung</target>
       </trans-unit>
-      <trans-unit id="label_language" approved="yes">
-        <source>Language</source>
-        <target state="final">Sprache</target>
-      </trans-unit>
       <trans-unit id="label_price_range" approved="yes">
         <source>Price</source>
         <target state="final">Preis</target>
