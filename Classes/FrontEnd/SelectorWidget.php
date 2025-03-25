@@ -62,9 +62,9 @@ class SelectorWidget extends AbstractView
         $this->initialize();
 
         $this->fillOrHideSearchSubpart('event_type');
-        $this->hideSubparts('language');
+        $this->hideSubparts(self::SUBPART_PREFIX . 'language');
         $this->fillOrHideSearchSubpart('place');
-        $this->hideSubparts('country');
+        $this->hideSubparts(self::SUBPART_PREFIX . 'country');
         $this->fillOrHideSearchSubpart('city');
         $this->fillOrHideSearchSubpart('organizer');
         $this->fillOrHideSearchSubpart('categories');
