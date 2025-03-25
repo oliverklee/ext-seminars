@@ -702,7 +702,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'country'
+            'place'
         );
 
         $this->subject->render();

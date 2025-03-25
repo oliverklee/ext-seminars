@@ -76,7 +76,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'place',
                 'city',
                 'seats',
-                'country',
                 'price_regular',
                 'price_special',
                 'total_price',

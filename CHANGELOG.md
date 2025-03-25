@@ -110,6 +110,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the country column from the FE list views (#4269)
 - Remove the language selector from the selector widget (#4262, #4268)
 - Remove the country selector from the selector widget (#4261, #4268)
 - Drop the `defaultEventVipsFeGroupID` configuration option (#4260)
