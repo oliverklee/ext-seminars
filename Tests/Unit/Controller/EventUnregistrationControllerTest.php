@@ -14,6 +14,7 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Information\Typo3Version;
@@ -21,6 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -30,6 +32,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class EventUnregistrationControllerTest extends UnitTestCase
 {
     use RedirectMockTrait;
+
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var EventUnregistrationController&MockObject&AccessibleObjectInterface
@@ -46,9 +50,6 @@ final class EventUnregistrationControllerTest extends UnitTestCase
      */
     private RegistrationManager $registrationManagerMock;
 
-    /**
-     * @var Context&MockObject
-     */
     private Context $context;
 
     /**
@@ -81,8 +82,7 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
 
-        $this->context = $this->createMock(Context::class);
-        GeneralUtility::setSingletonInstance(Context::class, $this->context);
+        $this->context = GeneralUtility::makeInstance(Context::class);
         $this->legacyRegistrationMock = $this->createMock(LegacyRegistration::class);
         GeneralUtility::addInstance(LegacyRegistration::class, $this->legacyRegistrationMock);
         $this->legacyConfigurationMock = $this->createMock(LegacyConfiguration::class);
@@ -148,7 +148,7 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $user->method('getUid')->willReturn(3);
         $registration = new Registration();
         $registration->setUser($user);
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(0);
+        $this->context->setAspect('frontend.user', new UserAspect());
 
         $result = $this->subject->checkPrerequisitesAction($registration);
 
@@ -168,8 +168,9 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $registration = new Registration();
         $registration->setUser($user);
 
-        $loggedInUserUid = 15;
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($loggedInUserUid);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => 15];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
 
         $result = $this->subject->checkPrerequisitesAction($registration);
 
@@ -188,7 +189,10 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $user->method('getUid')->willReturn($registeredUserUid);
         $registration = new Registration();
         $registration->setUser($user);
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($registeredUserUid);
+
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => $registeredUserUid];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
 
         $legacyEvent = $this->createMock(LegacyEvent::class);
         $this->legacyRegistrationMock->expects(self::once())->method('getSeminarObject')->willReturn($legacyEvent);
@@ -211,7 +215,10 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $user->method('getUid')->willReturn($registeredUserUid);
         $registration = new Registration();
         $registration->setUser($user);
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($registeredUserUid);
+
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => $registeredUserUid];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
 
         $legacyEvent = $this->createMock(LegacyEvent::class);
         $this->legacyRegistrationMock->expects(self::once())->method('getSeminarObject')->willReturn($legacyEvent);
