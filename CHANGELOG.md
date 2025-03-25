@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Registration::belongsToUser()` (#4255)
 - Provide downloads in the "my registrations" view (#4249, #4250, #4251)
 - Add `Event.downloadsForAttendees` (#4243)
 - Add unregistration to the `my registrations` single view (#4236)

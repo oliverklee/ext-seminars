@@ -65,6 +65,19 @@ trait AttendeesTrait
         $this->user = $user;
     }
 
+    public function belongsToUser(int $userUid): bool
+    {
+        if ($userUid <= 0) {
+            return false;
+        }
+        $user = $this->getUser();
+        if (!($user instanceof FrontendUser)) {
+            return false;
+        }
+
+        return $user->getUid() === $userUid;
+    }
+
     public function getSeats(): int
     {
         return $this->seats;
