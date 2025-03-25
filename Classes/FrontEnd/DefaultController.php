@@ -1863,11 +1863,6 @@ class DefaultController extends TemplateHelper
                 SelectorWidget::removeDummyOptionFromFormData($this->piVars['city'])
             );
         }
-        if (\is_array($this->piVars['country'] ?? null)) {
-            $builder->limitToCountries(
-                SelectorWidget::removeDummyOptionFromFormData($this->piVars['country'])
-            );
-        }
         $organizerUids = $this->getIntegerArrayFromRequest('organizer');
         if (\is_array($organizerUids)) {
             $builder->limitToOrganizers(\implode(',', SelectorWidget::removeDummyOptionFromFormData($organizerUids)));

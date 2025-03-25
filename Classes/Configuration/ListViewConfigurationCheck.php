@@ -242,7 +242,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             [
                 'event_type',
                 'language',
-                'country',
                 'city',
                 'place',
                 'full_text_search',
