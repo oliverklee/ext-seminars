@@ -110,8 +110,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Remove the language selector from the selector widget (#4262)
-- Remove the country selector from the selector widget (#4261)
+- Remove the language selector from the selector widget (#4262, #4268)
+- Remove the country selector from the selector widget (#4261, #4268)
 - Drop the `defaultEventVipsFeGroupID` configuration option (#4260)
 - Drop the `allowCsvExportForVips` configuration option (#4233, #4259)
 - Drop the `allowRegistrationForStartedEvents` configuration option (#4240)
