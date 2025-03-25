@@ -1978,8 +1978,6 @@ class LegacyEvent extends AbstractTimeSpan
      *    (for $whichPlugin = (seminar_list|my_events|my_vip_events))
      * b) the user is allowed to view the list of registrations
      *    (for $whichPlugin = (list_registrations|list_vip_registrations))
-     * c) the user is allowed to export the list of registrations as CSV
-     *    ($whichPlugin = csv_export)
      *
      * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
      * @param int<0, max> $registrationsListPID
@@ -2099,10 +2097,6 @@ class LegacyEvent extends AbstractTimeSpan
             case 'list_vip_registrations':
                 $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
                 break;
-            case 'csv_export':
-                $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $this->getSharedConfiguration()->getAsBoolean('allowCsvExportForVips');
-                break;
             default:
                 $result = false;
         }
@@ -2147,10 +2141,6 @@ class LegacyEvent extends AbstractTimeSpan
         $hasVipListPid = ($registrationsVipListPID > 0);
 
         switch ($whichPlugin) {
-            case 'csv_export':
-                $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $this->getSharedConfiguration()->getAsBoolean('allowCsvExportForVips');
-                break;
             case 'my_vip_events':
                 $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
                 break;
@@ -2203,10 +2193,6 @@ class LegacyEvent extends AbstractTimeSpan
         $hasVipListPid = $registrationsVipListPID > 0;
 
         switch ($whichPlugin) {
-            case 'csv_export':
-                $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $this->getSharedConfiguration()->getAsBoolean('allowCsvExportForVips');
-                break;
             case 'my_vip_events':
                 $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
                     && $hasVipListPid;

@@ -52,7 +52,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Drop the configuration check for the CSV export (#4233)
 - !!! Always allow unregistration before the unregistration deadline even
   with empty waiting list (#4231)
 - Move some event fields to a new tab "information for attendees" (#4201)
@@ -111,6 +110,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the `allowCsvExportForVips` configuration option (#4233, #4256)
 - Drop the `allowRegistrationForStartedEvents` configuration option (#4240)
 - Drop the unused `attendancesPID` configuration (#4232)
 - Drop support for CSV-exporting waiting list registrations (#4184)
