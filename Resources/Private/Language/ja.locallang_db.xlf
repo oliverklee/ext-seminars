@@ -87,10 +87,6 @@
         <source>Time</source>
         <target state="needs-translation">Time</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.language">
-        <source>Language</source>
-        <target state="needs-translation">Language</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_seminars.accreditation_number">
         <source>Accreditation number</source>
         <target state="needs-translation">Accreditation number</target>
