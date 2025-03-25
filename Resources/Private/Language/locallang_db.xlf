@@ -510,9 +510,6 @@
 			<trans-unit id="tx_seminars_sites.address">
 				<source>Full address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.zip">
-				<source>ZIP code</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_sites.city">
 				<source>City</source>
 			</trans-unit>

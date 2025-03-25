@@ -110,6 +110,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop `Venue.zip` (#4274)
 - Drop `Venue.country` (#4273)
 - Drop `Event.language` (#4271)
 - Drop the event language from the FE list and single view (#4270)

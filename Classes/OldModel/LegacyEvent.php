@@ -339,11 +339,6 @@ class LegacyEvent extends AbstractTimeSpan
             if ((string)($place['address'] ?? '') !== '') {
                 $descriptionParts[] = str_replace("\r", ',', $place['address']);
             }
-            if ((string)($place['city'] ?? '') !== '') {
-                $descriptionParts[] = trim(
-                    $place['zip'] . ' ' . $place['city']
-                );
-            }
 
             if (!empty($descriptionParts)) {
                 $placeText .= ', ' . implode(', ', $descriptionParts);
@@ -373,7 +368,7 @@ class LegacyEvent extends AbstractTimeSpan
         $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
 
         return $queryBuilder
-            ->select('uid', 'title', 'address', 'zip', 'city', 'homepage', 'directions')
+            ->select('uid', 'title', 'address', 'city', 'homepage', 'directions')
             ->from('tx_seminars_sites')
             ->leftJoin(
                 'tx_seminars_sites',

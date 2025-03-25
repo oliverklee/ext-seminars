@@ -85,19 +85,6 @@ final class PlaceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getZipWithNonEmptyZipReturnsZip(): void
-    {
-        $this->subject->setData(['zip' => '13373']);
-
-        self::assertEquals(
-            '13373',
-            $this->subject->getZip()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getCityWithNonEmptyCityReturnsCity(): void
     {
         $this->subject->setData(['city' => 'Hicksville']);
