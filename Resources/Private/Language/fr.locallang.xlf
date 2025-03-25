@@ -1157,10 +1157,6 @@
         <source>Leaders</source>
         <target state="final">Meneurs</target>
       </trans-unit>
-      <trans-unit id="label_language" approved="yes">
-        <source>Language</source>
-        <target state="final">Langue</target>
-      </trans-unit>
       <trans-unit id="label_price_range" approved="yes">
         <source>Price</source>
         <target state="final">Prix</target>
