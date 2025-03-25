@@ -133,9 +133,6 @@
 			<trans-unit id="label_city">
 				<source>City</source>
 			</trans-unit>
-			<trans-unit id="label_country">
-				<source>Country</source>
-			</trans-unit>
 			<trans-unit id="label_attendees">
 				<source>Attendees</source>
 			</trans-unit>
@@ -607,12 +604,6 @@
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.searchForm.type">
 				<source>Event type</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.language">
-				<source>Language</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.country">
-				<source>Country</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.searchForm.city">
 				<source>City</source>
