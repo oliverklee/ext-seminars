@@ -165,6 +165,71 @@ final class RegistrationTest extends UnitTestCase
 
     /**
      * @test
+     */
+    public function belongsToUserForRegistrationWithoutUserAndWithZeroUserUidReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->belongsToUser(0));
+    }
+
+    /**
+     * @test
+     */
+    public function belongsToUserForRegistrationWithoutUserAndWithNonZeroUserUidReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->belongsToUser(1));
+    }
+
+    /**
+     * @test
+     */
+    public function belongsToUserForRegistrationWithUserAndWithZeroUserUidReturnsFalse(): void
+    {
+        $user = $this->createMock(FrontendUser::class);
+        $user->method('getUid')->willReturn(3);
+        $this->subject->setUser($user);
+
+        self::assertFalse($this->subject->belongsToUser(0));
+    }
+
+    /**
+     * @test
+     */
+    public function belongsToUserForRegistrationWithUserAndWithNegativeUserUidReturnsFalse(): void
+    {
+        $user = $this->createMock(FrontendUser::class);
+        $user->method('getUid')->willReturn(3);
+        $this->subject->setUser($user);
+
+        self::assertFalse($this->subject->belongsToUser(-1));
+    }
+
+    /**
+     * @test
+     */
+    public function belongsToUserForRegistrationWithUserAndWithNonZeroDifferentUserUidReturnsFalse(): void
+    {
+        $user = $this->createMock(FrontendUser::class);
+        $user->method('getUid')->willReturn(3);
+        $this->subject->setUser($user);
+
+        self::assertFalse($this->subject->belongsToUser(4));
+    }
+
+    /**
+     * @test
+     */
+    public function belongsToUserForRegistrationWithUserAndWithIdenticalUserUidReturnsTrue(): void
+    {
+        $userUid = 7;
+        $user = $this->createMock(FrontendUser::class);
+        $user->method('getUid')->willReturn($userUid);
+        $this->subject->setUser($user);
+
+        self::assertTrue($this->subject->belongsToUser($userUid));
+    }
+
+    /**
+     * @test
      *
      * @dataProvider validEventTypesDataProvider
      */

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -52,8 +51,7 @@ class MyRegistrationsController extends ActionController
         if ($loggedInUserUid <= 0) {
             return new ForwardResponse('notLoggedIn');
         }
-        $registrationUser = $registration->getUser();
-        if (!($registrationUser instanceof FrontendUser) || $registrationUser->getUid() !== $loggedInUserUid) {
+        if (!$registration->belongsToUser($loggedInUserUid)) {
             return new ForwardResponse('notFound');
         }
 

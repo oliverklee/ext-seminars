@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
@@ -55,15 +54,10 @@ class EventUnregistrationController extends ActionController
 
     private function belongsToLoggedInUser(Registration $registration): bool
     {
-        $user = $registration->getUser();
-        if (!$user instanceof FrontendUser) {
-            return false;
-        }
-
         $loggedInUserUid = GeneralUtility::makeInstance(Context::class)
             ->getPropertyFromAspect('frontend.user', 'id', 0);
 
-        return $user->getUid() === $loggedInUserUid;
+        return \is_int($loggedInUserUid) && $registration->belongsToUser($loggedInUserUid);
     }
 
     private function isUnregistrationPossible(Registration $registration): bool
