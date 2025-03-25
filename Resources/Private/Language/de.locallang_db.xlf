@@ -677,17 +677,9 @@
         <source>Full address</source>
         <target state="final">Vollständige Adresse</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_sites.zip" approved="yes">
-        <source>ZIP code</source>
-        <target state="final">Postleitzahl</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_sites.city" approved="yes">
         <source>City</source>
         <target state="final">Stadt</target>
-      </trans-unit>
-      <trans-unit id="tx_seminars_sites.country" approved="yes">
-        <source>Country</source>
-        <target state="final">Land</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.homepage" approved="yes">
         <source>Homepage</source>
