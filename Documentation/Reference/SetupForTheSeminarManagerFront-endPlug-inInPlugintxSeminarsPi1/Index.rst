@@ -212,7 +212,7 @@ override the corresponding value from TS Setup.**
    Description
          comma-separated list of search options which should be shown in the
          search widget. If no field is displayed the search widget will be
-         hidden. Allowed values are in: event\_type, language, country, city,
+         hidden. Allowed values are in: event\_type, language, city,
          place, full\_text\_search, date, age, organizer, price, categories
 
    Default

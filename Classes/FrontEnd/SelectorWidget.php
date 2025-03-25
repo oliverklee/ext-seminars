@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class SelectorWidget extends AbstractView
 {
     /**
-     * needed for the list view to convert ISO codes to country names and languages
+     * needed for the list view to convert ISO codes to languages
      */
     protected ?PiBaseApi $staticInfo = null;
 
@@ -70,7 +70,7 @@ class SelectorWidget extends AbstractView
         $this->fillOrHideSearchSubpart('event_type');
         $this->fillOrHideSearchSubpart('language');
         $this->fillOrHideSearchSubpart('place');
-        $this->fillOrHideSearchSubpart('country');
+        $this->hideSubparts('country');
         $this->fillOrHideSearchSubpart('city');
         $this->fillOrHideSearchSubpart('organizer');
         $this->fillOrHideSearchSubpart('categories');
@@ -156,7 +156,7 @@ class SelectorWidget extends AbstractView
     /**
      * Creates the HTML code for a single option box of the selector widget.
      *
-     * @param 'event_type'|'language'|'country'|'city'|'places' $name
+     * @param 'event_type'|'language'|'city'|'places' $name
      * @param string[] $options
      *        the options for the option box with the option value as key and the option label as value, may be empty
      *
@@ -323,7 +323,7 @@ class SelectorWidget extends AbstractView
     /**
      * Fills or hides the subpart for the given search field.
      *
-     * @param 'event_type'|'language'|'place'|'city'|'country'|'organizer'|'categories' $searchField
+     * @param 'event_type'|'language'|'place'|'city'|'organizer'|'categories' $searchField
      */
     private function fillOrHideSearchSubpart(string $searchField): void
     {
@@ -345,9 +345,6 @@ class SelectorWidget extends AbstractView
             case 'city':
                 $optionData = $this->getCityData();
                 break;
-            case 'country':
-                $optionData = $this->getCountryData();
-                break;
             case 'organizer':
                 $optionData = $this->getOrganizerData();
                 break;
@@ -357,7 +354,7 @@ class SelectorWidget extends AbstractView
             default:
                 throw new \InvalidArgumentException(
                     'The given search field . "' . $searchField . '" was not an allowed value. ' .
-                    'Allowed values are: "event_type", "language", "country", "city", "place" or "organizer".',
+                    'Allowed values are: "event_type", "language", "city", "place" or "organizer".',
                     1333293298
                 );
         }
@@ -501,7 +498,7 @@ class SelectorWidget extends AbstractView
     /**
      * Gets the data for the place search field options.
      *
-     * @return array<int, string> the data for the country search field options;
+     * @return array<int, string> the data for the venue search field options;
      *         the key will be the UID of the place and the value will be the title of the place,
      *         will be empty if no data could be found
      */
@@ -542,38 +539,6 @@ class SelectorWidget extends AbstractView
         foreach ($this->places as $place) {
             $city = $place->getCity();
             $result[$city] = $city;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Gets the data for the country search field options.
-     *
-     * @return string[] the data for the country search field options; the key will
-     *               be the ISO-Alpha-2 code of the country the value will be
-     *               the name of the country, will be empty if no data could be
-     *               found
-     */
-    protected function getCountryData(): array
-    {
-        if ($this->seminarBag->isEmpty()) {
-            return [];
-        }
-
-        /** @var string[] $result */
-        $result = [];
-        $this->collectPlaces();
-
-        /** @var Place $place */
-        foreach ($this->places as $place) {
-            if ($place->hasCountry()) {
-                $countryIsoCode = $place->getCountry()->getIsoAlpha2Code();
-
-                if (!isset($result[$countryIsoCode])) {
-                    $result[$countryIsoCode] = $this->getStaticInfo()->getStaticInfoName('COUNTRIES', $countryIsoCode);
-                }
-            }
         }
 
         return $result;

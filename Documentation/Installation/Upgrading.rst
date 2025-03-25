@@ -16,5 +16,7 @@ The following steps are necessary to upgrade from seminars 5.x to 6.x:
     has been removed in seminars 6.0.)
 #.  Go through the venue records and make sure that the address field contains
     the full address (including ZIP code, city and country (if relevant)).
-#.  Upgrade to seminars 6.x
+#.  Upgrade to seminars 6.x.
 #.  Update the database schema and run all upgrade wizards.
+#.  If you are using the selector widget (the search form) in the frontend,
+    open the corresponding content element in the backend and save it again.

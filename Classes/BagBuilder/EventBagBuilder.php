@@ -337,33 +337,6 @@ class EventBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Limits the bag to events in the countries given in the first parameter
-     * $countries.
-     *
-     * @param array<array-key, non-empty-string> $countries ISO 3166-2 (alpha2) country codes,
-     *        invalid country codes are allowed, set to an empty array for no limitation, need not be SQL-safe
-     */
-    public function limitToCountries(array $countries = []): void
-    {
-        if (empty($countries)) {
-            unset($this->whereClauseParts['countries']);
-            return;
-        }
-
-        $this->whereClauseParts['countries'] = 'tx_seminars_seminars.uid IN(' .
-            'SELECT tx_seminars_seminars.uid' .
-            ' FROM tx_seminars_seminars' .
-            ' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
-            'tx_seminars_seminars.uid=' .
-            'tx_seminars_seminars_place_mm.uid_local' .
-            ' LEFT JOIN tx_seminars_sites ON ' .
-            'tx_seminars_seminars_place_mm.uid_foreign = ' .
-            'tx_seminars_sites.uid' .
-            ' WHERE tx_seminars_sites.country IN(' . $this->quoteAndImplodeForDatabaseQuery($countries) . ')' .
-            ')';
-    }
-
-    /**
      * Limits the bag to events in the languages given in the first parameter
      * $languages.
      *
