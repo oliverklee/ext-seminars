@@ -53,7 +53,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 - !!! Always allow unregistration before the unregistration deadline even
-  with empty waiting list (#4231)
+  with empty waiting list (#4231, #4276)
 - Move some event fields to a new tab "information for attendees" (#4201)
 - Improve the hover texts in the BE module (#4195)
 - CSV-export the registration date by default (#4156)
