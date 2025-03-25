@@ -6850,7 +6850,6 @@ final class LegacyEventTest extends FunctionalTestCase
                 $whichPlugin,
                 $registrationsListPID,
                 $registrationsVipListPID,
-                0,
                 'login'
             )
         );
@@ -7051,7 +7050,6 @@ final class LegacyEventTest extends FunctionalTestCase
                 $whichPlugin,
                 $registrationsListPID,
                 $registrationsVipListPID,
-                0,
                 'world'
             )
         );
@@ -7195,7 +7193,7 @@ final class LegacyEventTest extends FunctionalTestCase
         );
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')
-            ->with($whichPlugin, 0, 0, 0, $accessLevel)
+            ->with($whichPlugin, 0, 0, $accessLevel)
             ->willReturn(true);
 
         $rootPageUid = $this->testingFramework->createFrontEndPage();

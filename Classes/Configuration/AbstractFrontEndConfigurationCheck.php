@@ -117,16 +117,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         );
     }
 
-    protected function checkDefaultEventVipsFeGroupID(): void
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'defaultEventVipsFeGroupID',
-            'This value specifies the front-end user group that is allowed to see the registrations for all events
-            and get all events listed on their "my VIP events" page.
-            If this value is not set correctly, the users of this group will not be treated as VIPs for all events.'
-        );
-    }
-
     protected function checkLimitFileDownloadToAttendees(): void
     {
         $this->checkIfBoolean(

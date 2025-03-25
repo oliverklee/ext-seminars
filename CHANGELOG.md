@@ -110,7 +110,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Drop the `allowCsvExportForVips` configuration option (#4233, #4256)
+- Drop the `defaultEventVipsFeGroupID` configuration option (#4260)
+- Drop the `allowCsvExportForVips` configuration option (#4233, #4259)
 - Drop the `allowRegistrationForStartedEvents` configuration option (#4240)
 - Drop the unused `attendancesPID` configuration (#4232)
 - Drop support for CSV-exporting waiting list registrations (#4184)

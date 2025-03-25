@@ -29,7 +29,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkRegistrationsListPidOptional();
         $this->checkRegistrationsVipListPidOptional();
         $this->checkDetailPid();
-        $this->checkDefaultEventVipsFeGroupID();
         $this->checkSingleViewImageSizes();
         $this->checkLimitFileDownloadToAttendees();
         $this->checkShowOnlyEventsWithVacancies();
