@@ -173,7 +173,7 @@ override the corresponding value from TS Setup.**
          detail view, e.g.  *organizers,price\_special*
 
          The order of the elements in this list has no influence on the
-         output.Allowed values are in: event\_type, title, subtitle, language,
+         output.Allowed values are in: event\_type, title, subtitle,
          description, accreditation\_number, credit\_points, category, date,
          uid, time, place, room, expiry, speakers, partners, tutors, leaders, p
          rice\_regular,price\_special,additional\_information,

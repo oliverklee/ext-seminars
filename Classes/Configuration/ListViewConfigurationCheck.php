@@ -69,7 +69,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'credit_points',
                 'teaser',
                 'speakers',
-                'language',
                 'date',
                 'time',
                 'expiry',

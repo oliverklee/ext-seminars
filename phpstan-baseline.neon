@@ -596,11 +596,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method getLanguageName\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method getOrganizerBag\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -802,11 +797,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method hasImage\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot call method hasLanguage\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
