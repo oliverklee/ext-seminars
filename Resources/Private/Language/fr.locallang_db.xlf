@@ -679,17 +679,9 @@
         <source>Full address</source>
         <target state="needs-translation">Full address</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_sites.zip" approved="yes">
-        <source>ZIP code</source>
-        <target state="final">Code postal</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_sites.city" approved="yes">
         <source>City</source>
         <target state="final">Ville</target>
-      </trans-unit>
-      <trans-unit id="tx_seminars_sites.country" approved="yes">
-        <source>Country</source>
-        <target state="final">Pays</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.homepage" approved="yes">
         <source>Homepage</source>
