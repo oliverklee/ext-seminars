@@ -15,11 +15,13 @@ use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -28,6 +30,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class FrontEndEditorControllerTest extends UnitTestCase
 {
+    /**
+     * @var bool
+     */
+    protected $resetSingletonInstances = true;
+
     /**
      * @var FrontEndEditorController&MockObject&AccessibleObjectInterface
      */
@@ -64,7 +71,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     private $venueRepositoryMock;
 
     /**
-     * @var Context&MockObject
+     * @var Context
      */
     private $context;
 
@@ -94,15 +101,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->venueRepositoryMock = $this->createMock(VenueRepository::class);
         $this->subject->injectVenueRepository($this->venueRepositoryMock);
 
-        $this->context = $this->createMock(Context::class);
-        GeneralUtility::setSingletonInstance(Context::class, $this->context);
-    }
-
-    protected function tearDown(): void
-    {
-        GeneralUtility::purgeInstances();
-
-        parent::tearDown();
+        $this->context = GeneralUtility::makeInstance(Context::class);
     }
 
     /**
@@ -119,7 +118,9 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function indexActionsAssignsEventsOwnedByLoggedInUserToView(): void
     {
         $ownerUid = 42;
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($ownerUid);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => $ownerUid];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
 
         $events = [new SingleEvent()];
         $this->eventRepositoryMock->method('findSingleEventsByOwnerUid')->with($ownerUid)->willReturn($events);
@@ -184,7 +185,10 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     public function editActionWithEventFromOtherUserThrowsException(): void
     {
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => 1];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
+
         $event = new SingleEvent();
         $event->setOwnerUid(2);
 
@@ -200,7 +204,10 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     public function editActionWithEventWithoutOwnerThrowsException(): void
     {
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => 1];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
+
         $event = new SingleEvent();
 
         $this->expectException(\RuntimeException::class);
@@ -238,7 +245,10 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     public function updateActionWithEventFromOtherUserThrowsException(): void
     {
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => 1];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
+
         $event = new SingleEvent();
         $event->setOwnerUid(2);
 
@@ -254,7 +264,10 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     public function updateActionWithEventWithoutOwnerThrowsException(): void
     {
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => 1];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
+
         $event = new SingleEvent();
 
         $this->expectException(\RuntimeException::class);
@@ -360,7 +373,10 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function createActionSetsCurrentUserAsOwner(): void
     {
         $ownerUid = 42;
-        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($ownerUid);
+        $userAuthentication = new FrontendUserAuthentication();
+        $userAuthentication->user = ['uid' => $ownerUid];
+        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
+
         $event = new SingleEvent();
 
         $this->subject->createAction($event);
