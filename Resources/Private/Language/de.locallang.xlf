@@ -175,10 +175,6 @@
         <source>City</source>
         <target state="final">Stadt</target>
       </trans-unit>
-      <trans-unit id="label_country" approved="yes">
-        <source>Country</source>
-        <target state="final">Land:</target>
-      </trans-unit>
       <trans-unit id="label_attendees" approved="yes">
         <source>Attendees</source>
         <target state="final">Teilnehmer</target>
@@ -799,14 +795,6 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
       <trans-unit id="seminars.pi_flexform.searchForm.type" approved="yes">
         <source>Event type</source>
         <target state="final">Veranstaltungsart</target>
-      </trans-unit>
-      <trans-unit id="seminars.pi_flexform.searchForm.language" approved="yes">
-        <source>Language</source>
-        <target state="final">Sprache</target>
-      </trans-unit>
-      <trans-unit id="seminars.pi_flexform.searchForm.country" approved="yes">
-        <source>Country</source>
-        <target state="final">Land</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.searchForm.city" approved="yes">
         <source>City</source>
