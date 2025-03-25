@@ -337,24 +337,6 @@ class EventBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Limits the bag to events in the languages given in the first parameter
-     * $languages.
-     *
-     * @param array<array-key, non-empty-string> $languages ISO 639-1 (alpha2) language codes,
-     *        invalid language codes are allowed, set to an empty array for no limitation, need not be SQL-safe
-     */
-    public function limitToLanguages(array $languages = []): void
-    {
-        if (empty($languages)) {
-            unset($this->whereClauseParts['languages']);
-            return;
-        }
-
-        $this->whereClauseParts['languages'] = 'tx_seminars_seminars' .
-            '.language IN (' . $this->quoteAndImplodeForDatabaseQuery($languages) . ')';
-    }
-
-    /**
      * @param array<array-key, string> $array
      */
     private function quoteAndImplodeForDatabaseQuery(array $array): string

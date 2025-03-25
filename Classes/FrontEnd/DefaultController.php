@@ -1837,12 +1837,6 @@ class DefaultController extends TemplateHelper
     {
         // Adds the query parameter that result from the user selection in the
         // selector widget (including the search form).
-        if (\is_array($this->piVars['language'] ?? null)) {
-            $builder->limitToLanguages(
-                SelectorWidget::removeDummyOptionFromFormData($this->piVars['language'])
-            );
-        }
-
         $placeUids = $this->getIntegerArrayFromRequest('place');
         if (\is_array($placeUids)) {
             $builder->limitToPlaces(SelectorWidget::removeDummyOptionFromFormData($placeUids));

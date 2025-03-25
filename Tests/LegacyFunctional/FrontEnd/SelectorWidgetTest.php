@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
-use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -33,11 +32,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
     private SelectorWidget $subject;
 
     private TestingFramework $testingFramework;
-
-    /**
-     * @var PiBaseApi
-     */
-    protected $staticInfo;
 
     protected function setUp(): void
     {
@@ -101,35 +95,9 @@ final class SelectorWidgetTest extends FunctionalTestCase
     // Utility functions
     //////////////////////
 
-    /**
-     * Creates and initializes $this->staticInfo.
-     */
-    private function instantiateStaticInfo(): void
-    {
-        $this->staticInfo = new PiBaseApi();
-        $this->staticInfo->init();
-    }
-
     private function getFrontEndController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
-    }
-
-    ////////////////////////////////////
-    // Tests for the utility functions
-    ////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function instantiateStaticInfoCreateStaticInfoInstance(): void
-    {
-        $this->instantiateStaticInfo();
-
-        self::assertInstanceOf(
-            PiBaseApi::class,
-            $this->staticInfo
-        );
     }
 
     //////////////////////////////////////////
@@ -240,7 +208,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type,language'
+            'event_type,city'
         );
 
         $output = $this->subject->render();
@@ -250,7 +218,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
             $output
         );
         self::assertStringContainsString(
-            $this->translate('label_language'),
+            $this->translate('label_city'),
             $output
         );
     }
@@ -262,7 +230,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type,language,city,place,full_text_search,date,' .
+            'event_type,city,place,full_text_search,date,' .
             'age,organizer,price'
         );
 
@@ -511,7 +479,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
                 [
                     'hasSearchField',
                     'getEventTypeData',
-                    'getLanguageData',
                     'getPlaceData',
                     'getCityData',
                 ]
@@ -529,8 +496,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
             ->willReturn(true);
         $subject->expects(self::once())->method('getEventTypeData')
             ->willReturn([1 => 'Foo', 2 => 'Bar']);
-        $subject->method('getLanguageData')
-            ->willReturn([]);
         $subject->method('getPlaceData')
             ->willReturn([]);
         $subject->method('getCityData')
@@ -539,180 +504,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $output = $subject->render();
         self::assertTrue(
             strpos($output, 'Bar') < strpos($output, 'Foo')
-        );
-    }
-
-    //////////////////////////////////////////////////////////////
-    // Tests concerning the rendering of the language option box
-    //////////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function renderForLanguageOptionsHiddenInConfigurationHidesLanguageSubpart(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'city'
-        );
-
-        $this->subject->render();
-
-        self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_LANGUAGE')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForLanguageOptionsHiddenInConfigurationDoesNotShowLanguageOptionsMarker(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'city'
-        );
-
-        self::assertStringNotContainsString(
-            '###OPTIONS_LANGUAGE###',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledLanguageOptionsContainsLanguageOption(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'language'
-        );
-
-        $this->instantiateStaticInfo();
-
-        $languageIsoCode = 'DE';
-        $languageName = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES',
-            $languageIsoCode,
-            '',
-            '',
-            0
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['language' => $languageIsoCode]
-        );
-
-        self::assertStringContainsString(
-            '<option value="' . $languageIsoCode . '">' . $languageName .
-            '</option>',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledLanguageOptionsContainsSelectorForLanguages(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'language'
-        );
-
-        self::assertStringContainsString(
-            '<select name="tx_seminars_pi1[language][]" ' .
-            'id="tx_seminars_pi1-language" size="5" multiple="multiple">',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledLanguageOptionsCanPreselectSelectedLanguage(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'language'
-        );
-
-        $this->instantiateStaticInfo();
-
-        $languageIsoCode = 'DE';
-        $languageName = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES',
-            $languageIsoCode,
-            '',
-            '',
-            0
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['language' => $languageIsoCode]
-        );
-
-        $this->subject->piVars['language'][] = $languageIsoCode;
-
-        self::assertStringContainsString(
-            $languageIsoCode . '" selected="selected">' . $languageName .
-            '</option>',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledLanguageOptionsCanPreselectMultipleLanguages(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'language'
-        );
-        $this->instantiateStaticInfo();
-
-        $languageIsoCode = 'DE';
-        $languageName = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES',
-            $languageIsoCode,
-            '',
-            '',
-            0
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['language' => $languageIsoCode]
-        );
-
-        $languageIsoCode2 = 'EN';
-        $languageName2 = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES',
-            $languageIsoCode2,
-            '',
-            '',
-            0
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['language' => $languageIsoCode2]
-        );
-
-        $this->subject->piVars['language'][] = $languageIsoCode;
-        $this->subject->piVars['language'][] = $languageIsoCode2;
-
-        $output = $this->subject->render();
-
-        self::assertStringContainsString(
-            $languageIsoCode . '" selected="selected">' . $languageName .
-            '</option>',
-            $output
-        );
-        self::assertStringContainsString(
-            $languageIsoCode2 . '" selected="selected">' . $languageName2 .
-            '</option>',
-            $output
         );
     }
 

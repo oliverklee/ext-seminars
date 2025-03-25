@@ -47,7 +47,7 @@
       }
 
       var suffixes = ['from_day', 'from_month', 'from_year', 'to_day', 'to_month',
-        'to_year', 'event_type', 'language', 'city', 'place', 'date',
+        'to_year', 'event_type', 'city', 'place', 'date',
         'organizer', 'categories'
       ];
 
