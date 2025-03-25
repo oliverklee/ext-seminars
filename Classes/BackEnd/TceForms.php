@@ -16,23 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class TceForms
 {
     /**
-     * Creates the values for a language selector in the TCA, using the alpha 2 codes as array keys.
-     *
-     * @param array[] $parameters
-     */
-    public function createLanguageSelector(array &$parameters): void
-    {
-        $items = [['', '']];
-
-        /** @var string[] $language */
-        foreach (self::findAllLanguages() as $language) {
-            $items[] = [$language['lg_name_local'], $language['lg_iso_2']];
-        }
-
-        $parameters['items'] = $items;
-    }
-
-    /**
      * Creates the values for a country selector in the TCA, using the alpha 2 codes as array keys.
      *
      * @param array<string, array> $parameters
@@ -47,17 +30,6 @@ class TceForms
         }
 
         $parameters['items'] = $items;
-    }
-
-    /**
-     * @return array<int, array<string, string|int>>
-     */
-    private static function findAllLanguages(): array
-    {
-        $table = 'static_languages';
-
-        return self::getConnectionForTable($table)
-            ->select(['*'], $table, [], [], ['lg_name_local' => 'ASC'])->fetchAllAssociative();
     }
 
     /**

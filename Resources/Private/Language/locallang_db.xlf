@@ -67,9 +67,6 @@
 			<trans-unit id="tx_seminars_seminars.time">
 				<source>Time</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.language">
-				<source>Language</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.accreditation_number">
 				<source>Accreditation number</source>
 			</trans-unit>
