@@ -175,10 +175,6 @@
         <source>City</source>
         <target state="final">Città:</target>
       </trans-unit>
-      <trans-unit id="label_country" approved="yes">
-        <source>Country</source>
-        <target state="final">Stato:</target>
-      </trans-unit>
       <trans-unit id="label_attendees" approved="yes">
         <source>Attendees</source>
         <target state="final">Partecipanti</target>
@@ -852,14 +848,6 @@
       <trans-unit id="seminars.pi_flexform.searchForm.type">
         <source>Event type</source>
         <target state="needs-translation">Event type</target>
-      </trans-unit>
-      <trans-unit id="seminars.pi_flexform.searchForm.language">
-        <source>Language</source>
-        <target state="needs-translation">Language</target>
-      </trans-unit>
-      <trans-unit id="seminars.pi_flexform.searchForm.country">
-        <source>Country</source>
-        <target state="needs-translation">Country</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.searchForm.city">
         <source>City</source>
