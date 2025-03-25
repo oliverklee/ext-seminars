@@ -264,75 +264,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether the current event has at least one place set, and if
-     * this/these pace(s) have a country set.
-     * Returns a boolean TRUE if at least one of the set places has a
-     * country set, returns FALSE otherwise.
-     *
-     * IMPORTANT: This function does not check whether the saved ISO code is
-     * valid at all. As this field is filled through the BE from a prefilled
-     * list, this should never be an issue at all.
-     *
-     * @return bool whether at least one place with country are set for the current event
-     */
-    public function hasCountry(): bool
-    {
-        $placesWithCountry = $this->getPlacesWithCountry();
-
-        return $this->hasPlace() && !empty($placesWithCountry);
-    }
-
-    /**
-     * Returns an array of two-char ISO codes of countries for this event.
-     * These are fetched from the referenced place records of this event. If no
-     * place is set, or the set place(s) don't have any country set, an empty
-     * array will be returned.
-     *
-     * @return list<string> the list of ISO codes for the countries of this event, may be empty
-     */
-    public function getPlacesWithCountry(): array
-    {
-        if (!$this->hasPlace()) {
-            return [];
-        }
-
-        $countries = array_column($this->getPlacesAsArray(), 'country');
-        return array_filter(
-            $countries,
-            static fn (string $country): bool => $country !== ''
-        );
-    }
-
-    /**
-     * Returns a comma-separated list of country names that were set in the
-     * place record(s).
-     * If no places are set, or no countries are selected in the set places,
-     * an empty string will be returned.
-     *
-     * @return string comma-separated list of countries for this event, may be empty
-     */
-    public function getCountry(): string
-    {
-        if (!$this->hasCountry()) {
-            return '';
-        }
-
-        $countryList = [];
-
-        // Fetches the countries from the corresponding place records, may be
-        // an empty array.
-        // Get the real country names from the ISO codes.
-        foreach ($this->getPlacesWithCountry() as $currentCountry) {
-            $countryList[] = $this->getCountryNameFromIsoCode($currentCountry);
-        }
-
-        // Makes sure that each country is exactly once in the array and then
-        // returns this list.
-        $countryListUnique = array_unique($countryList);
-        return implode(', ', $countryListUnique);
-    }
-
-    /**
      * Returns a comma-separated list of city names that were set in the place
      * record(s).
      * If no places are set, or no cities are selected in the set places, an
@@ -382,25 +313,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns the name of the requested country from the static info tables.
-     * If the country with this ISO code could not be found in the database,
-     * an empty string is returned instead.
-     *
-     * @param string $isoCode the ISO 3166-1 alpha-2 code of the country, must not be empty
-     *
-     * @return string the short local name of the country or an empty
-     *                string if the country could not be found
-     */
-    public function getCountryNameFromIsoCode(string $isoCode): string
-    {
-        $table = 'static_countries';
-        $title = self::getConnectionForTable($table)
-            ->select(['cn_short_local'], $table, ['cn_iso_2' => $isoCode])->fetchOne();
-
-        return \is_string($title) ? $title : '';
-    }
-
-    /**
      * Gets our place (or places) with address and links as HTML, not RTE'ed yet,
      * separated by LF.
      *
@@ -432,12 +344,6 @@ class LegacyEvent extends AbstractTimeSpan
                     $place['zip'] . ' ' . $place['city']
                 );
             }
-            if ((string)($place['country'] ?? '') !== '') {
-                $countryName = $this->getCountryNameFromIsoCode($place['country']);
-                if ($countryName !== '') {
-                    $descriptionParts[] = $countryName;
-                }
-            }
 
             if (!empty($descriptionParts)) {
                 $placeText .= ', ' . implode(', ', $descriptionParts);
@@ -457,7 +363,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * The array will be two-dimensional: The first dimensional is just numeric.
      * The second dimension is associative with the following keys:
-     * title, address, city, country, homepage, directions
+     * title, address, city, homepage, directions
      *
      * @return list<array<string, string|int>>
      *         all places as a two-dimensional array, will be empty if there are no places assigned
@@ -467,7 +373,7 @@ class LegacyEvent extends AbstractTimeSpan
         $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
 
         return $queryBuilder
-            ->select('uid', 'title', 'address', 'zip', 'city', 'country', 'homepage', 'directions')
+            ->select('uid', 'title', 'address', 'zip', 'city', 'homepage', 'directions')
             ->from('tx_seminars_sites')
             ->leftJoin(
                 'tx_seminars_sites',

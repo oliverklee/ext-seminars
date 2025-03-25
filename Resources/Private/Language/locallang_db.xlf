@@ -516,9 +516,6 @@
 			<trans-unit id="tx_seminars_sites.city">
 				<source>City</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.country">
-				<source>Country</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_sites.homepage">
 				<source>Homepage</source>
 			</trans-unit>

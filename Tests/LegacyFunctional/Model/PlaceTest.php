@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\Model;
 
-use OliverKlee\Oelib\Mapper\CountryMapper;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Seminars\Model\Place;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -108,95 +105,6 @@ final class PlaceTest extends FunctionalTestCase
         self::assertEquals(
             'Hicksville',
             $this->subject->getCity()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getCountryWithoutCountryReturnsNull(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertNull(
-            $this->subject->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getCountryWithInvalidCountryCodeReturnsNull(): void
-    {
-        $this->subject->setData(['country' => '0']);
-
-        self::assertNull(
-            $this->subject->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getCountryWithCountryReturnsCountryInstance(): void
-    {
-        $country = MapperRegistry::get(CountryMapper::class)->find(54);
-        $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
-
-        self::assertInstanceOf(
-            Country::class,
-            $this->subject->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getCountryWithCountryReturnsCountryAsModel(): void
-    {
-        $country = MapperRegistry::get(CountryMapper::class)->find(54);
-        $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
-
-        self::assertSame(
-            $country,
-            $this->subject->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithoutCountryReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithInvalidCountryReturnsFalse(): void
-    {
-        $this->subject->setData(['country' => '0']);
-
-        self::assertFalse(
-            $this->subject->hasCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithCountryReturnsTrue(): void
-    {
-        $country = MapperRegistry::get(CountryMapper::class)->find(54);
-        $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
-
-        self::assertTrue(
-            $this->subject->hasCountry()
         );
     }
 }
