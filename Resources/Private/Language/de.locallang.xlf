@@ -940,10 +940,6 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Sort the list view by category:</source>
         <target state="final">Listenansicht nach Kategorien sortieren:</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.defaultEventVipsFeGroupID" approved="yes">
-        <source>FE user group for event managers:</source>
-        <target state="final">FE-Benutzergruppe für Verwalter:</target>
-      </trans-unit>
       <trans-unit id="seminars.pi_flexform.hideColumns" approved="yes">
         <source>Hide column names in list view (comma-separated):</source>
         <target state="final">Versteckte Felder in Listenansicht (komma-separiert):</target>
