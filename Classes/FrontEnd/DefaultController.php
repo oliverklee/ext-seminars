@@ -369,7 +369,6 @@ class DefaultController extends TemplateHelper
                 $this->whatToDisplay,
                 0,
                 $this->getConfValueInteger('registrationsVipListPID'),
-                $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'),
                 $this->getConfValueString('accessToFrontEndRegistrationLists')
             )
         ) {
@@ -379,7 +378,6 @@ class DefaultController extends TemplateHelper
             $this->seminar->canViewRegistrationsList(
                 $this->whatToDisplay,
                 $this->getConfValueInteger('registrationsListPID'),
-                0,
                 0,
                 $this->getConfValueString('accessToFrontEndRegistrationLists')
             )
@@ -1158,7 +1156,6 @@ class DefaultController extends TemplateHelper
             $this->whatToDisplay,
             $this->getConfValueInteger('registrationsListPID'),
             $this->getConfValueInteger('registrationsVipListPID'),
-            0,
             $this->getConfValueString('accessToFrontEndRegistrationLists')
         );
 
@@ -1457,15 +1454,7 @@ class DefaultController extends TemplateHelper
                 $builder->limitToAttendee($user);
                 break;
             case 'my_vip_events':
-                $groupForDefaultVips = $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special');
-                $isDefaultVip = $groupForDefaultVips !== 0 && $user->hasGroupMembership((string)$groupForDefaultVips);
-
-                if (!$isDefaultVip) {
-                    // The current user is not listed as a default VIP for all
-                    // events. Change the query to show only events where the
-                    // current user is manually added as a VIP.
-                    $builder->limitToEventManager($this->getLoggedInFrontEndUserUid());
-                }
+                $builder->limitToEventManager($this->getLoggedInFrontEndUserUid());
                 break;
             case 'events_next_day':
                 $builder->limitToEventsNextDay($this->seminar);

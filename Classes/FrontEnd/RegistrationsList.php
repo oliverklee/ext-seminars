@@ -83,7 +83,6 @@ class RegistrationsList extends AbstractView
                     $this->whatToDisplay,
                     0,
                     0,
-                    $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'),
                     $this->getConfValueString('accessToFrontEndRegistrationLists')
                 )
             ) {

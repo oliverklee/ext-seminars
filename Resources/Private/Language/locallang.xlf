@@ -713,9 +713,6 @@
 			<trans-unit id="seminars.pi_flexform.sortListViewByCategory">
 				<source>Sort the list view by category:</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.defaultEventVipsFeGroupID">
-				<source>FE user group for event managers:</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.hideColumns">
 				<source>Hide column names in list view (comma-separated):</source>
 			</trans-unit>

@@ -14,7 +14,6 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
     protected function checkAllConfigurationValues(): void
     {
         $this->checkRegistrationsVipListPid();
-        $this->checkDefaultEventVipsFeGroupID();
     }
 
     private function checkRegistrationsVipListPid(): void

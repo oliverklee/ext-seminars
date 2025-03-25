@@ -811,11 +811,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method hasGroupMembership\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method hasImage\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1096,12 +1091,7 @@ parameters:
 			path: Classes/FrontEnd/RegistrationsList.php
 
 		-
-			message: "#^Parameter \\#4 \\$defaultEventVipsFeGroupID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationsList.php
-
-		-
-			message: "#^Parameter \\#5 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
+			message: "#^Parameter \\#4 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationsList.php
 
@@ -1446,11 +1436,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Parameter \\#1 \\$userUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
 			count: 2
 			path: Classes/OldModel/LegacyEvent.php
@@ -1458,11 +1443,6 @@ parameters:
 		-
 			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(int\\|string\\)\\: bool\\)\\|null, Closure\\(string\\)\\: bool given\\.$#"
 			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Parameter \\#2 \\$defaultEventVipsFeGroupUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int\\<1, max\\>, int\\<0, max\\> given\\.$#"
-			count: 6
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -1487,11 +1467,6 @@ parameters:
 
 		-
 			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between int\\<1, max\\> and 0 will always evaluate to true\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 

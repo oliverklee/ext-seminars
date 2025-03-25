@@ -39,7 +39,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkAccessToFrontEndRegistrationLists();
         $this->checkRegistrationsListPidOptional();
         $this->checkRegistrationsVipListPidOptional();
-        $this->checkDefaultEventVipsFeGroupID();
         $this->checkLimitListViewToEventTypes();
         $this->checkLimitListViewToCategories();
         $this->checkLimitListViewToPlaces();
