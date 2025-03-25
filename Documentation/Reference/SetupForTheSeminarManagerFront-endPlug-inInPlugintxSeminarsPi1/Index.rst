@@ -147,7 +147,7 @@ override the corresponding value from TS Setup.**
          The order of the elements in this list has no influence on the
          output.Allowed values are in: category, title,subtitle,uid,
          event\_type, language, accreditation\_number, credit\_points, teaser,
-         speakers, date, time, expiry, place, city, country, seats,
+         speakers, date, time, expiry, place, city, seats,
          price\_regular, price\_special, total\_price, organizers,
          target\_groups, attached\_files, vacancies, status\_registration,
          registration, list\_registrations, status, edit, imagePlease note that
@@ -156,7 +156,7 @@ override the corresponding value from TS Setup.**
 
    Default
          Image,category,subtitle,event\_type,language,accreditation\_number,cre
-         dit\_points,teaser,time,expiry,place,country,price\_special,speakers,t
+         dit\_points,teaser,time,expiry,place,price\_special,speakers,t
          arget\_groups,attached\_files
 
 

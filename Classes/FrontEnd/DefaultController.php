@@ -1552,7 +1552,6 @@ class DefaultController extends TemplateHelper
             'date',
             'time',
             'place',
-            'country',
             'city',
             'seats',
             'price_regular',
@@ -1688,7 +1687,6 @@ class DefaultController extends TemplateHelper
             $this->setMarker('expiry', $this->seminar->getExpiry());
 
             $this->setMarker('place', \htmlspecialchars($this->seminar->getPlaceShort(), ENT_QUOTES | ENT_HTML5));
-            $this->setMarker('country', \htmlspecialchars($this->seminar->getCountry(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('city', \htmlspecialchars($this->seminar->getCities(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('seats', $attendanceData['seats']);
             $this->setMarker('price_regular', $this->seminar->getCurrentPriceRegular());
@@ -2113,6 +2111,7 @@ class DefaultController extends TemplateHelper
             $this->getConfValueString('hideColumns', 's_template_special'),
             true
         );
+        $columns[] = 'country';
         $this->hideColumns($columns);
     }
 

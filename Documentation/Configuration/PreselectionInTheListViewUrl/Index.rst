@@ -10,9 +10,7 @@ filter form):
    &tx_seminars_pi1[place][]=1
    &tx_seminars_pi1[event_type][]=3
    &tx_seminars_pi1[category]=1
-   &tx_seminars_pi1[country][]=DE etc. (the uppercase ISO 3166 alpha2 code)
    &tx_seminars_pi1[city][]=Berlin
-   &tx_seminars_pi1[language][]=EN (the uppercase ISO 639 alpha2 code)
 
 This also works with combinations of these:
 
