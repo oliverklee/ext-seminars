@@ -5575,7 +5575,6 @@ final class LegacyEventTest extends FunctionalTestCase
             'homepage' => '',
             'address' => 'Kaiser-Karl-Ring 91, 53111 Bonn',
             'city' => 'Bonn',
-            'country' => '',
             'directions' => '',
         ];
 
@@ -5599,7 +5598,6 @@ final class LegacyEventTest extends FunctionalTestCase
             'homepage' => '',
             'address' => '',
             'city' => '',
-            'country' => '',
             'directions' => '',
         ];
         $place2 = [
@@ -5607,7 +5605,6 @@ final class LegacyEventTest extends FunctionalTestCase
             'homepage' => '',
             'address' => '',
             'city' => '',
-            'country' => '',
             'directions' => '',
         ];
 
@@ -5630,7 +5627,6 @@ final class LegacyEventTest extends FunctionalTestCase
             'title' => 'Hotel Ibis',
             'address' => 'Kaiser-Karl-Ring 91, 53111 Bonn',
             'city' => 'Bonn',
-            'country' => '',
             'homepage' => '',
             'directions' => '',
         ];
