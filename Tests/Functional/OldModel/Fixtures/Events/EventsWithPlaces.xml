@@ -88,27 +88,6 @@
         <homepage>www.example.com</homepage>
     </tx_seminars_sites>
     <tx_seminars_sites>
-        <uid>2</uid>
-        <title>with valid country</title>
-        <country>ch</country>
-    </tx_seminars_sites>
-    <tx_seminars_sites>
-        <uid>3</uid>
-        <title>with invalid country</title>
-        <country>xy</country>
-    </tx_seminars_sites>
-    <tx_seminars_sites>
-        <uid>4</uid>
-        <title>with deleted country</title>
-        <deleted>1</deleted>
-        <country>de</country>
-    </tx_seminars_sites>
-    <tx_seminars_sites>
-        <uid>5</uid>
-        <title>with another valid country</title>
-        <country>de</country>
-    </tx_seminars_sites>
-    <tx_seminars_sites>
         <uid>6</uid>
         <title>The garden (without country)</title>
     </tx_seminars_sites>

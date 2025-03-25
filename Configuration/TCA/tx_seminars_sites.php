@@ -1,7 +1,5 @@
 <?php
 
-use OliverKlee\Seminars\BackEnd\TceForms;
-
 defined('TYPO3') or die();
 
 $tca = [
@@ -51,19 +49,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'required,trim',
-            ],
-        ],
-        'country' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [['', '0']],
-                'itemsProcFunc' => TceForms::class . '->createCountrySelector',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
             ],
         ],
         'homepage' => [
@@ -128,7 +113,7 @@ $tca = [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'title, address, zip, city, country, homepage, directions, '
+            'showitem' => 'title, address, zip, city, homepage, directions, '
                 . 'contact_person, email_address, phone_number, notes',
         ],
     ],

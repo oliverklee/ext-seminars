@@ -341,7 +341,6 @@ CREATE TABLE tx_seminars_sites (
     address text,
     zip tinytext,
     city tinytext,
-    country char(2) DEFAULT '' NOT NULL,
     homepage tinytext,
     directions text,
     notes text,
