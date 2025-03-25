@@ -185,8 +185,6 @@ the front end:
 
 - event type
 
-- language
-
 - separate details page  **(using this field will in effect disable
   online registration for this event)**
 

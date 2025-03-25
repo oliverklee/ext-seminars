@@ -833,9 +833,6 @@
 			<trans-unit id="label_leaders">
 				<source>Leaders</source>
 			</trans-unit>
-			<trans-unit id="label_language">
-				<source>Language</source>
-			</trans-unit>
 			<trans-unit id="label_price_range">
 				<source>Price</source>
 			</trans-unit>

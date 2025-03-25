@@ -57,7 +57,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'room',
                 'expiry',
                 'speakers',
-                'language',
                 'partners',
                 'tutors',
                 'leaders',

@@ -464,6 +464,7 @@ class DefaultController extends TemplateHelper
     protected function createSingleView(): string
     {
         $this->hideSubparts($this->getConfValueString('hideFields', 's_template_special'), 'FIELD_WRAPPER');
+        $this->hideSubparts('language', 'FIELD_WRAPPER');
 
         if ($this->showUid <= 0) {
             $this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
@@ -542,8 +543,6 @@ class DefaultController extends TemplateHelper
         $this->setTutorsMarker();
         $this->setHeading('leaders');
         $this->setLeadersMarker();
-
-        $this->setLanguageMarker();
 
         $this->setSingleViewPriceMarkers();
         $this->setPaymentMethodsMarker();
@@ -830,19 +829,6 @@ class DefaultController extends TemplateHelper
             ? $this->seminar->getSpeakersWithDetails($this, $speakerType)
             : $this->seminar->getSpeakersShort($speakerType);
         $this->setMarker($speakerType, $speakerContent);
-    }
-
-    /**
-     * Fills in the matching marker for the language or hides the unused subpart.
-     */
-    private function setLanguageMarker(): void
-    {
-        if (!$this->seminar->hasLanguage()) {
-            $this->hideSubparts('language', 'field_wrapper');
-            return;
-        }
-
-        $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
     }
 
     /**
@@ -1548,7 +1534,6 @@ class DefaultController extends TemplateHelper
             'accreditation_number',
             'credit_points',
             'speakers',
-            'language',
             'date',
             'time',
             'place',
@@ -1674,7 +1659,6 @@ class DefaultController extends TemplateHelper
             $this->setMarker('credit_points', $this->seminar->getCreditPoints());
             $this->setMarker('teaser', $this->createSingleViewLink($event, $event->getTeaser()));
             $this->setMarker('speakers', $this->seminar->getSpeakersShort());
-            $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
 
             if ($whatToDisplay === 'other_dates') {
                 $dateToShow = $this->createSingleViewLink($event, $this->seminar->getDate(), false);
@@ -2112,6 +2096,7 @@ class DefaultController extends TemplateHelper
             true
         );
         $columns[] = 'country';
+        $columns[] = 'language';
         $this->hideColumns($columns);
     }
 
