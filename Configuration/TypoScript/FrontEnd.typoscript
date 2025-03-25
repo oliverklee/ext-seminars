@@ -74,7 +74,7 @@ plugin.tx_seminars_pi1 {
   generalPriceInSingle = 0
 
   # who is allowed to view the list of registrations on the front end:
-  # "attendees_and_managers", "login" or "world"
+  # "attendees_and_managers" or "login"
   accessToFrontEndRegistrationLists = attendees_and_managers
 
   # whether detailed information for the speakers is shown in the single view

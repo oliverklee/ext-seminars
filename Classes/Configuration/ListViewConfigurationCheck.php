@@ -146,7 +146,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies who is able to see the registered persons an event in the front end .
             If this value is incorrect, persons may access the registration lists although they should not be allowed to
             (or vice versa).',
-            ['attendees_and_managers', 'login', 'world']
+            ['attendees_and_managers', 'login']
         );
     }
 
