@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Configuration;
 
 use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Configuration check for all settings in `plugin.tx_seminars`.
@@ -17,7 +15,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
 {
     protected function checkAllConfigurationValues(): void
     {
-        $this->checkCurrency();
         $this->checkGeneralPriceInMail();
         $this->checkRegistrationFlag();
         $this->checkSalutationMode();
@@ -30,22 +27,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             $this->checkThankYouMail();
             $this->checkUnregistrationDeadlineDaysBeforeBeginDate();
         }
-    }
-
-    /**
-     * Checks whether `plugin.tx_seminars.currency` is not empty and a valid ISO 4217 alpha 3.
-     */
-    private function checkCurrency(): void
-    {
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_currencies');
-        $result = $connection->select(['cu_iso_3'], 'static_currencies')->fetchAllAssociative();
-        $allowedValues = \array_column($result, 'cu_iso_3');
-
-        $this->checkIfSingleInSetNotEmpty(
-            'currency',
-            'The specified currency setting is either empty or not a valid ISO 4217 alpha 3 code.',
-            $allowedValues
-        );
     }
 
     private function checkGeneralPriceInMail(): void

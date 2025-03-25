@@ -116,11 +116,6 @@ parameters:
 			path: Classes/Configuration/EventRegistrationFlexForms.php
 
 		-
-			message: "#^Parameter \\#3 \\$allowedValues of method OliverKlee\\\\Oelib\\\\Configuration\\\\AbstractConfigurationCheck\\:\\:checkIfSingleInSetNotEmpty\\(\\) expects array\\<string\\>, array\\<int, mixed\\> given\\.$#"
-			count: 1
-			path: Classes/Configuration/SharedConfigurationCheck.php
-
-		-
 			message: "#^Provide more specific return type \"OliverKlee\\\\Seminars\\\\Csv\\\\CsvResponse\" over abstract one$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
