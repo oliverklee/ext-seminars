@@ -1157,10 +1157,6 @@
         <source>Leaders</source>
         <target state="needs-translation">Leaders</target>
       </trans-unit>
-      <trans-unit id="label_language">
-        <source>Language</source>
-        <target state="needs-translation">Language</target>
-      </trans-unit>
       <trans-unit id="label_price_range">
         <source>Price</source>
         <target state="needs-translation">Price</target>
