@@ -2124,7 +2124,7 @@ class DefaultController extends TemplateHelper
      */
     private function setHeading(string $speakerType): void
     {
-        if (!\in_array($speakerType, ['speakers', 'partners', 'tutors', 'leaders'])) {
+        if (!\in_array($speakerType, ['speakers', 'partners', 'tutors', 'leaders'], true)) {
             throw new \InvalidArgumentException(
                 'The given speaker type "' . $speakerType .
                 '" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',

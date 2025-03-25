@@ -486,11 +486,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot access property \\$currentRecord on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1111,11 +1106,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
 			message: "#^Cannot cast array\\|float\\|int\\|string to string\\.$#"
 			count: 2
 			path: Classes/FrontEnd/SelectorWidget.php
@@ -1142,11 +1132,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'event_type'\\|'places', 'categories'\\|'city'\\|'event_type'\\|'organizer'\\|'place' given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|float\\|int\\|string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 

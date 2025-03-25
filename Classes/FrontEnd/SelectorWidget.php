@@ -168,7 +168,8 @@ class SelectorWidget extends AbstractView
             $this->setMarker('option_value', $key);
 
             // Preselects the option if it was selected by the user.
-            if (isset($this->piVars[$name]) && \in_array((string)$key, $this->piVars[$name], true)) {
+            $selectedFields = $this->piVars[$name] ?? null;
+            if (\is_array($selectedFields) && \in_array((string)$key, $selectedFields, true)) {
                 $selected = ' selected="selected"';
             } else {
                 $selected = '';
@@ -236,7 +237,7 @@ class SelectorWidget extends AbstractView
      */
     protected function hasSearchField(string $fieldToCheck): bool
     {
-        return in_array($fieldToCheck, $this->displayedSearchFields);
+        return \in_array($fieldToCheck, $this->displayedSearchFields, true);
     }
 
     /**
