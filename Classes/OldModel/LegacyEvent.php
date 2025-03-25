@@ -781,50 +781,6 @@ class LegacyEvent extends AbstractTimeSpan
         return $this->getSpeakerBag($speakerType)->count() > 1 ? $speakerType : ($speakerType . '_single_unknown');
     }
 
-    public function hasLanguage(): bool
-    {
-        return $this->hasRecordPropertyString('language');
-    }
-
-    /**
-     * Returns the localized name of the language for this event. In the case
-     * that no language is selected, an empty string will be returned.
-     *
-     * @return string the localized name of the language of this event or
-     *                an empty string if no language is set
-     */
-    public function getLanguageName(): string
-    {
-        $language = '';
-        if ($this->hasLanguage()) {
-            $language = $this->getLanguageNameFromIsoCode(
-                $this->getRecordPropertyString('language')
-            );
-        }
-        return $language;
-    }
-
-    /**
-     * Returns the language ISO code for this event. In the case that no
-     * language is selected, an empty string will be returned.
-     *
-     * @return string the ISO code of the language of this event or an empty string if no language is set
-     */
-    public function getLanguage(): string
-    {
-        return $this->getRecordPropertyString('language');
-    }
-
-    /**
-     * Sets the language ISO code for this event.
-     *
-     * @param string $language the ISO code of the language for this event to set, may be empty
-     */
-    public function setLanguage(string $language): void
-    {
-        $this->setRecordPropertyString('language', $language);
-    }
-
     /**
      * Gets our regular price as a string containing amount and currency. If
      * no regular price has been set, this will be "free".
@@ -1173,24 +1129,6 @@ class LegacyEvent extends AbstractTimeSpan
         \assert($number >= 0);
 
         return $number;
-    }
-
-    /**
-     * Returns the name of the requested language from the static info tables.
-     * If no language with this ISO code could not be found in the database,
-     * an empty string is returned instead.
-     *
-     * @param string $isoCode the ISO 639 alpha-2 code of the language
-     *
-     * @return string the short local name of the language or an empty string if the language could not be found
-     */
-    public function getLanguageNameFromIsoCode(string $isoCode): string
-    {
-        $table = 'static_languages';
-        $data = self::getConnectionForTable($table)
-            ->select(['lg_name_local'], $table, ['lg_iso_2' => $isoCode])->fetchAssociative();
-
-        return \is_array($data) ? (string)$data['lg_name_local'] : '';
     }
 
     /**

@@ -190,7 +190,6 @@ CREATE TABLE tx_seminars_seminars (
     partners int(11) unsigned DEFAULT '0' NOT NULL,
     tutors int(11) unsigned DEFAULT '0' NOT NULL,
     leaders int(11) unsigned DEFAULT '0' NOT NULL,
-    language char(2) DEFAULT '' NOT NULL,
     price_regular decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_regular_early decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_special decimal(10,2) DEFAULT '0.00' NOT NULL,
