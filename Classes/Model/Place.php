@@ -25,14 +25,6 @@ class Place extends AbstractModel
     }
 
     /**
-     * @return string the ZIP code, might be empty
-     */
-    public function getZip(): string
-    {
-        return $this->getAsString('zip');
-    }
-
-    /**
      * @return string the city name, will not be empty
      */
     public function getCity(): string

@@ -33,15 +33,6 @@ $tca = [
                 'eval' => 'trim',
             ],
         ],
-        'zip' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim',
-            ],
-        ],
         'city' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city',
@@ -113,7 +104,7 @@ $tca = [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'title, address, zip, city, homepage, directions, '
+            'showitem' => 'title, address, city, homepage, directions, '
                 . 'contact_person, email_address, phone_number, notes',
         ],
     ],

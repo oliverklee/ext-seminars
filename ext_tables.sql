@@ -339,7 +339,6 @@ CREATE TABLE tx_seminars_attendances (
 CREATE TABLE tx_seminars_sites (
     title tinytext,
     address text,
-    zip tinytext,
     city tinytext,
     homepage tinytext,
     directions text,

@@ -5573,9 +5573,8 @@ final class LegacyEventTest extends FunctionalTestCase
         $place = [
             'title' => 'Hotel Ibis',
             'homepage' => '',
-            'address' => 'Kaiser-Karl-Ring 91',
+            'address' => 'Kaiser-Karl-Ring 91, 53111 Bonn',
             'city' => 'Bonn',
-            'zip' => '',
             'country' => '',
             'directions' => '',
         ];
@@ -5585,7 +5584,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $subject->method('hasPlace')->willReturn(true);
 
         self::assertSame(
-            'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
+            'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
             $subject->getEventData('place')
         );
     }
@@ -5629,33 +5628,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $place = [
             'title' => 'Hotel Ibis',
-            'address' => 'Kaiser-Karl-Ring 91',
-            'zip' => '',
-            'city' => 'Bonn',
-            'country' => '',
-            'homepage' => '',
-            'directions' => '',
-        ];
-
-        $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
-        $subject->method('getPlacesAsArray')->willReturn([$place]);
-        $subject->method('hasPlace')->willReturn(true);
-
-        self::assertSame(
-            'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
-            $subject->getEventData('place')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getEventDataForPlaceWithZipContainsTitleAndAddressAndZipAndCity(): void
-    {
-        $place = [
-            'title' => 'Hotel Ibis',
-            'address' => 'Kaiser-Karl-Ring 91',
-            'zip' => '53111',
+            'address' => 'Kaiser-Karl-Ring 91, 53111 Bonn',
             'city' => 'Bonn',
             'country' => '',
             'homepage' => '',
