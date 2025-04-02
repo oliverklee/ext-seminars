@@ -179,7 +179,6 @@
 		"phpstan:baseline": ".Build/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
-			"rm -rf .git",
 			"rm -rf .github",
 			"rm -rf .idea",
 			"rm -rf .phive",
@@ -189,10 +188,8 @@
 			"rm .editorconfig",
 			"rm .gitattributes",
 			"rm .gitignore",
-			"rm .php-cs-fixer.cache",
 			"rm .php-cs-fixer.php",
 			"rm Configuration/TypoScriptLint.yaml",
-			"rm composer.lock",
 			"rm crowdin.yml",
 			"rm phpcs.xml.dist",
 			"rm phpstan-baseline.neon",
