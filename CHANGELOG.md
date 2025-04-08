@@ -52,6 +52,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Do not mention in the thank-you email that unregistration is free (#4309)
 - !!! Always allow unregistration before the unregistration deadline even
   with empty waiting list (#4231, #4276)
 - Move some event fields to a new tab "information for attendees" (#4201)
