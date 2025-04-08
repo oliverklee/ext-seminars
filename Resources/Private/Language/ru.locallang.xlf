@@ -442,24 +442,12 @@
         <target state="needs-translation">your registration just has become a regular registration for the event "%s"</target>
       </trans-unit>
       <trans-unit id="email_unregistrationNotice">
-        <source>
-					You will be able to unregister for free until %s. After this date you will have to pay the event
-					fee.
-				</source>
-        <target state="needs-translation">
-					You will be able to unregister for free until %s. After this date you will have to pay the event
-					fee.
-				</target>
+        <source>You will be able to unregister online until %s.</source>
+        <target state="needs-translation">You will be able to unregister online until %s.</target>
       </trans-unit>
       <trans-unit id="email_unregistrationNotice_informal">
-        <source>
-					You will be able to unregister for free until %s. After this date you will have to pay the event
-					fee.
-				</source>
-        <target state="needs-translation">
-					You will be able to unregister for free until %s. After this date you will have to pay the event
-					fee.
-				</target>
+        <source>You will be able to unregister online until %s.</source>
+        <target state="needs-translation">You will be able to unregister online until %s.</target>
       </trans-unit>
       <trans-unit id="email_additionalNotificationEnoughRegistrations" approved="yes">
         <source>Your event has now enough registrations to be held.</source>
