@@ -50,6 +50,72 @@
                             </config>
                         </TCEforms>
                     </settings.columnsToShow>
+                    <settings.fieldsToShow>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields
+                            </label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectCheckBox</renderType>
+                                <minitems>1</minitems>
+                                <maxitems>99</maxitems>
+                                <default>
+                                    topic,eventType,registrationStatus,dateAndTime,venue,room,unregistration,downloads
+                                </default>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.topic
+                                        </numIndex>
+                                        <numIndex index="1">topic</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.eventType
+                                        </numIndex>
+                                        <numIndex index="1">eventType</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.registrationStatus
+                                        </numIndex>
+                                        <numIndex index="1">registrationStatus</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.dateAndTime
+                                        </numIndex>
+                                        <numIndex index="1">dateAndTime</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.venue
+                                        </numIndex>
+                                        <numIndex index="1">venue</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.room
+                                        </numIndex>
+                                        <numIndex index="1">room</numIndex>
+                                    </numIndex>
+                                    <numIndex index="6" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.unregistration
+                                        </numIndex>
+                                        <numIndex index="1">unregistration</numIndex>
+                                    </numIndex>
+                                    <numIndex index="7" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.fields.downloads
+                                        </numIndex>
+                                        <numIndex index="1">downloads</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.fieldsToShow>
                 </el>
             </ROOT>
         </displayOptions>
