@@ -1928,7 +1928,7 @@
 				<source>Display options</source>
 			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns">
-				<source>Columns to show</source>
+				<source>Columns to show in the list view</source>
 			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.date">
 				<source>date</source>
@@ -1950,6 +1950,33 @@
 			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.unregistration">
 				<source>unregistration</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields">
+				<source>Fields to show in the single view</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.topic">
+				<source>topic</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.eventType">
+				<source>event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.registrationStatus">
+				<source>registration status</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.dateAndTime">
+				<source>date and time</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.venue">
+				<source>venue</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.room">
+				<source>room</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.unregistration">
+				<source>unregistration</source>
+			</trans-unit>
+			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.downloads">
+				<source>downloads</source>
 			</trans-unit>
 			<trans-unit id="plugin.myRegistrations.error.notLoggedIn">
 				<source>Please log in to view this page.</source>
