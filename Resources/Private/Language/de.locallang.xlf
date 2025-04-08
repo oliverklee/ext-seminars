@@ -432,19 +432,13 @@
         <source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
         <target state="final">deine Anmeldung wurde gerade zu einer regulären Anmeldung der Veranstaltung "%s"</target>
       </trans-unit>
-      <trans-unit id="email_unregistrationNotice" approved="yes">
-        <source>
-					You will be able to unregister for free until %s. After this date you will have to pay the event
-					fee.
-				</source>
-        <target state="final">Bis zum %s können Sie Ihre Anmeldung kostenfrei stornieren; danach sind Sie zur Zahlung der Veranstaltungsgebühr verpflichtet.</target>
+      <trans-unit id="email_unregistrationNotice">
+        <source>You will be able to unregister online until %s.</source>
+        <target state="needs-translation">You will be able to unregister online until %s.</target>
       </trans-unit>
-      <trans-unit id="email_unregistrationNotice_informal" approved="yes">
-        <source>
-					You will be able to unregister for free until %s. After this date you will have to pay the event
-					fee.
-				</source>
-        <target state="final">Bis zum %s kannst du deine Anmeldung kostenfrei stornieren; danach bist du zur Zahlung der Veranstaltungsgebühr verpflichtet.</target>
+      <trans-unit id="email_unregistrationNotice_informal">
+        <source>You will be able to unregister online until %s.</source>
+        <target state="needs-translation">You will be able to unregister online until %s.</target>
       </trans-unit>
       <trans-unit id="email_additionalNotificationEnoughRegistrations" approved="yes">
         <source>Your event has now enough registrations to be held.</source>
