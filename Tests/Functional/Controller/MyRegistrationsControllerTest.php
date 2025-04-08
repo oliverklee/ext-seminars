@@ -43,9 +43,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         parent::setUp();
 
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Sites/SiteStructure.csv');
-        $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/MyRegistrationsContentElement.csv'
-        );
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/MyRegistrationsContentElement.csv');
         $this->setUpFrontendRootPage(1, [
             'constants' => [
                 'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript',
