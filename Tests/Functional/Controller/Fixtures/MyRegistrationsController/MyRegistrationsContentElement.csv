@@ -8,6 +8,9 @@
                                                                               <field index=""settings.columnsToShow"">
                                                                                   <value index=""vDEF"">date,eventType,topic,registrationStatus</value>
                                                                               </field>
+                                                                              <field index=""settings.fieldsToShow"">
+                                                                                  <value index=""vDEF"">topic,eventType,registrationStatus,dateAndTime,venue,room,unregistration,downloads</value>
+                                                                              </field>
                                                                           </language>
                                                                       </sheet>
                                                                   </data>

@@ -1,84 +1,100 @@
 <!DOCTYPE html>
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
+      data-namespace-typo3-fluid="true">
     <f:variable name="event" value="{registration.event}"/>
 
-    <h1>
-        {event.displayTitle}
-    </h1>
+    <oelib:isFieldEnabled fieldName="topic">
+        <h1>
+            {event.displayTitle}
+        </h1>
+    </oelib:isFieldEnabled>
 
-    <f:if condition="{event.eventType}">
-        <h2>
-            {event.eventType.title}
-        </h2>
-    </f:if>
+    <oelib:isFieldEnabled fieldName="eventType">
+        <f:if condition="{event.eventType}">
+            <h2>
+                {event.eventType.title}
+            </h2>
+        </f:if>
+    </oelib:isFieldEnabled>
 
+    <oelib:isFieldEnabled fieldName="registrationStatus">
+        <h4>
+            <f:translate key="plugin.myRegistrations.show.heading.registrationStatus"/>
+        </h4>
+        <f:variable name="alertStyles" value="{0: 'success', 1: 'danger', 2: 'warning'}"/>
+        <div class="alert alert-{alertStyles.{registration.status}}">
+            <f:translate key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
+        </div>
+    </oelib:isFieldEnabled>
 
-    <h4>
-        <f:translate key="plugin.myRegistrations.show.heading.registrationStatus"/>
-    </h4>
-    <f:variable name="alertStyles" value="{0: 'success', 1: 'danger', 2: 'warning'}"/>
-    <div class="alert alert-{alertStyles.{registration.status}}">
-        <f:translate key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
-    </div>
+    <oelib:isFieldEnabled fieldName="dateAndTime">
+        <f:if condition="{event.start}">
+            <h3>
+                <f:translate key="plugin.eventSingleView.events.property.dateAndTime"/>
+            </h3>
 
-    <f:if condition="{event.start}">
-        <h3>
-            <f:translate key="plugin.eventSingleView.events.property.dateAndTime"/>
-        </h3>
+            <f:render partial="Event/DateAndTime" arguments="{event: event}"/>
+        </f:if>
+    </oelib:isFieldEnabled>
 
-        <f:render partial="Event/DateAndTime" arguments="{event: event}"/>
-    </f:if>
+    <oelib:isFieldEnabled fieldName="venue">
+        <f:if condition="{event.venues}">
+            <h3>
+                <f:translate key="plugin.eventSingleView.events.property.venue"/>
+            </h3>
 
-    <f:if condition="{event.venues}">
-        <h3>
-            <f:translate key="plugin.eventSingleView.events.property.venue"/>
-        </h3>
+            <f:render partial="Event/Venues" arguments="{event: event}"/>
+        </f:if>
+    </oelib:isFieldEnabled>
 
-        <f:render partial="Event/Venues" arguments="{event: event}"/>
-    </f:if>
+    <oelib:isFieldEnabled fieldName="room">
+        <f:if condition="{event.room}">
+            <h3>
+                <f:translate key="plugin.eventSingleView.events.property.room"/>
+            </h3>
+            <p>
+                {event.room}
+            </p>
+        </f:if>
+    </oelib:isFieldEnabled>
 
-    <f:if condition="{event.room}">
-        <h3>
-            <f:translate key="plugin.eventSingleView.events.property.room"/>
-        </h3>
-        <p>
-            {event.room}
-        </p>
-    </f:if>
+    <oelib:isFieldEnabled fieldName="unregistration">
+        <f:if condition="{unregistrationIsPossible}">
+            <h3>
+                <f:translate key="plugin.myRegistrations.show.heading.unregistration"/>
+            </h3>
+            <p>
+                <f:link.action controller="EventUnregistration" action="checkPrerequisites"
+                               arguments="{registration: registration}">
+                    <f:translate key="plugin.myRegistrations.show.toUnregistrationForm"/>
+                </f:link.action>
+            </p>
+        </f:if>
+    </oelib:isFieldEnabled>
 
-    <f:if condition="{unregistrationIsPossible}">
-        <h3>
-            <f:translate key="plugin.myRegistrations.show.heading.unregistration"/>
-        </h3>
-        <p>
-            <f:link.action controller="EventUnregistration" action="checkPrerequisites"
-                           arguments="{registration: registration}">
-                <f:translate key="plugin.myRegistrations.show.toUnregistrationForm"/>
-            </f:link.action>
-        </p>
-    </f:if>
-
-    <f:if
-        condition="{event.downloadsForAttendees} && {event.downloadsPossibleByDate} && {registration.regularRegistration}">
-        <h3>
-            <f:translate key="plugin.myRegistrations.show.heading.downloads"/>
-        </h3>
-        <ul class="list-group">
-            <f:for each="{event.downloadsForAttendees}" as="fileReference">
-                <li class="list-group-item">
-                    <f:variable name="originalResource" value="{fileReference.originalResource}"/>
-                    <a href="{originalResource.publicUrl}" target="_blank">
-                        <f:if condition="{originalResource.title}">
-                            <f:then>
-                                {originalResource.title}
-                            </f:then>
-                            <f:else>
-                                {originalResource.name}
-                            </f:else>
-                        </f:if>
-                    </a>
-                </li>
-            </f:for>
-        </ul>
-    </f:if>
+    <oelib:isFieldEnabled fieldName="downloads">
+        <f:if
+            condition="{event.downloadsForAttendees} && {event.downloadsPossibleByDate} && {registration.regularRegistration}">
+            <h3>
+                <f:translate key="plugin.myRegistrations.show.heading.downloads"/>
+            </h3>
+            <ul class="list-group">
+                <f:for each="{event.downloadsForAttendees}" as="fileReference">
+                    <li class="list-group-item">
+                        <f:variable name="originalResource" value="{fileReference.originalResource}"/>
+                        <a href="{originalResource.publicUrl}" target="_blank">
+                            <f:if condition="{originalResource.title}">
+                                <f:then>
+                                    {originalResource.title}
+                                </f:then>
+                                <f:else>
+                                    {originalResource.name}
+                                </f:else>
+                            </f:if>
+                        </a>
+                    </li>
+                </f:for>
+            </ul>
+        </f:if>
+    </oelib:isFieldEnabled>
 </html>
