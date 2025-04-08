@@ -2562,9 +2562,9 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns" approved="yes">
         <source>Columns to show in the list view</source>
-        <target state="needs-translation">Columns to show in the list view</target>
+        <target state="final">Spalten in der Listenansicht anzeigen</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.date" approved="yes">
         <source>date</source>
@@ -2594,41 +2594,41 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>unregistration</source>
         <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields" approved="yes">
         <source>Fields to show in the single view</source>
-        <target state="needs-translation">Fields to show in the single view</target>
+        <target state="final">Felder in der Einzelansicht anzeigen</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.topic">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.topic" approved="yes">
         <source>topic</source>
-        <target state="needs-translation">topic</target>
+        <target state="final">Thema</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.eventType">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.eventType" approved="yes">
         <source>event type</source>
-        <target state="needs-translation">event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.registrationStatus">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.registrationStatus" approved="yes">
         <source>registration status</source>
-        <target state="needs-translation">registration status</target>
+        <target state="final">Anmeldestatus</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.dateAndTime">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.dateAndTime" approved="yes">
         <source>date and time</source>
-        <target state="needs-translation">date and time</target>
+        <target state="final">Datum und Zeit</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.venue">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.venue" approved="yes">
         <source>venue</source>
-        <target state="needs-translation">venue</target>
+        <target state="final">Veranstaltungsort</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.room">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.room" approved="yes">
         <source>room</source>
-        <target state="needs-translation">room</target>
+        <target state="final">Raum</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.unregistration">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.unregistration" approved="yes">
         <source>unregistration</source>
-        <target state="needs-translation">unregistration</target>
+        <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.downloads">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.downloads" approved="yes">
         <source>downloads</source>
-        <target state="needs-translation">downloads</target>
+        <target state="final">Downloads</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.error.notLoggedIn" approved="yes">
         <source>Please log in to view this page.</source>
