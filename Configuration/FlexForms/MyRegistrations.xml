@@ -10,7 +10,7 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <settings.fieldsToShow>
+                    <settings.columnsToShow>
                         <TCEforms>
                             <label>
                                 LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns
@@ -49,7 +49,7 @@
                                 </items>
                             </config>
                         </TCEforms>
-                    </settings.fieldsToShow>
+                    </settings.columnsToShow>
                 </el>
             </ROOT>
         </displayOptions>
