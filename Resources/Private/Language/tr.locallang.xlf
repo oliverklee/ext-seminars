@@ -2622,8 +2622,8 @@
         <target state="needs-translation">Display options</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns">
-        <source>Columns to show</source>
-        <target state="needs-translation">Columns to show</target>
+        <source>Columns to show in the list view</source>
+        <target state="needs-translation">Columns to show in the list view</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.date">
         <source>date</source>
@@ -2652,6 +2652,42 @@
       <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.unregistration">
         <source>unregistration</source>
         <target state="needs-translation">unregistration</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields">
+        <source>Fields to show in the single view</source>
+        <target state="needs-translation">Fields to show in the single view</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.topic">
+        <source>topic</source>
+        <target state="needs-translation">topic</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.eventType">
+        <source>event type</source>
+        <target state="needs-translation">event type</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.registrationStatus">
+        <source>registration status</source>
+        <target state="needs-translation">registration status</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.dateAndTime">
+        <source>date and time</source>
+        <target state="needs-translation">date and time</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.venue">
+        <source>venue</source>
+        <target state="needs-translation">venue</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.room">
+        <source>room</source>
+        <target state="needs-translation">room</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.unregistration">
+        <source>unregistration</source>
+        <target state="needs-translation">unregistration</target>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.downloads">
+        <source>downloads</source>
+        <target state="needs-translation">downloads</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.error.notLoggedIn">
         <source>Please log in to view this page.</source>
