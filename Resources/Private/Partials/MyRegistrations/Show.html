@@ -12,6 +12,15 @@
         </h2>
     </f:if>
 
+
+    <h4>
+        <f:translate key="plugin.myRegistrations.show.heading.registrationStatus"/>
+    </h4>
+    <f:variable name="alertStyles" value="{0: 'success', 1: 'danger', 2: 'warning'}"/>
+    <div class="alert alert-{alertStyles.{registration.status}}">
+        <f:translate key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
+    </div>
+
     <f:if condition="{event.start}">
         <h3>
             <f:translate key="plugin.eventSingleView.events.property.dateAndTime"/>
@@ -37,13 +46,6 @@
         </p>
     </f:if>
 
-    <h3>
-        <f:translate key="plugin.myRegistrations.show.heading.registrationStatus"/>
-    </h3>
-    <p>
-        <f:translate key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
-    </p>
-
     <f:if condition="{unregistrationIsPossible}">
         <h3>
             <f:translate key="plugin.myRegistrations.show.heading.unregistration"/>
@@ -56,7 +58,8 @@
         </p>
     </f:if>
 
-    <f:if condition="{event.downloadsForAttendees} && {event.downloadsPossibleByDate} && {registration.regularRegistration}">
+    <f:if
+        condition="{event.downloadsForAttendees} && {event.downloadsPossibleByDate} && {registration.regularRegistration}">
         <h3>
             <f:translate key="plugin.myRegistrations.show.heading.downloads"/>
         </h3>
