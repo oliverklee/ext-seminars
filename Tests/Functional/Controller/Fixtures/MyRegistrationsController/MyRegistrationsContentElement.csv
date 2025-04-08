@@ -5,7 +5,7 @@
                                                                   <data>
                                                                       <sheet index=""displayOptions"">
                                                                           <language index=""lDEF"">
-                                                                              <field index=""settings.fieldsToShow"">
+                                                                              <field index=""settings.columnsToShow"">
                                                                                   <value index=""vDEF"">date,eventType,topic,registrationStatus</value>
                                                                               </field>
                                                                           </language>
