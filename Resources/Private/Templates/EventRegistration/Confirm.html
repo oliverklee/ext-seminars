@@ -24,225 +24,230 @@
                 <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationData"/>
             </h3>
 
-            <table class="table table-hover table-striped table-responsive">
-                <tbody>
-                    <oelib:isFieldEnabled fieldName="attendanceMode">
-                        <f:if condition="{registration.attendanceMode}">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <oelib:isFieldEnabled fieldName="attendanceMode">
+                            <f:if condition="{registration.attendanceMode}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.attendanceMode"/>
+                                    </th>
+                                    <td>
+                                        <f:translate key="{labelPrefix}.attendanceMode.{registration.attendanceMode}"/>
+                                    </td>
+                                </tr>
+                            </f:if>
+                        </oelib:isFieldEnabled>
+
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.seats"/>
+                            </th>
+                            <td>
+                                {registration.seats}
+                            </td>
+                        </tr>
+
+                        <oelib:isFieldEnabled fieldName="attendeesNames|registeredThemselves">
                             <tr>
                                 <th scope="row">
-                                    <f:translate key="{labelPrefix}.attendanceMode"/>
+                                    <f:translate key="{labelPrefix}.attendeesNames"/>
                                 </th>
                                 <td>
-                                    <f:translate key="{labelPrefix}.attendanceMode.{registration.attendanceMode}"/>
+                                    <oelib:isFieldEnabled fieldName="registeredThemselves">
+                                        <f:if condition="{registration.registeredThemselves}">
+                                            <f:then>
+                                                <f:translate key="{labelPrefix}.registeredThemselves"/>
+                                            </f:then>
+                                            <f:else>
+                                                <f:translate key="{labelPrefix}.registeredThemselves.not"/>
+                                            </f:else>
+                                        </f:if>
+                                        <br/>
+                                    </oelib:isFieldEnabled>
+
+                                    <f:if condition="{registration.attendeesNames}">
+                                        {registration.attendeesNames -> f:format.nl2br()}
+                                    </f:if>
+                                </td>
+                            </tr>
+                        </oelib:isFieldEnabled>
+
+                        <f:comment>
+                            We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
+                            only returns the first option. This is probably a bug in Extbase.
+                        </f:comment>
+                        <f:variable name="accommodationOptionTitles" value="{registration.accommodationOptionTitles}"/>
+                        <f:if condition="{accommodationOptionTitles}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.accommodationOptions"/>
+                                </th>
+                                <td>
+                                    <ul>
+                                        <f:for each="{accommodationOptionTitles}" as="accommodationOptionTitle">
+                                            <li>
+                                                {accommodationOptionTitle}
+                                            </li>
+                                        </f:for>
+                                    </ul>
                                 </td>
                             </tr>
                         </f:if>
-                    </oelib:isFieldEnabled>
 
-                    <tr>
-                        <th scope="row">
-                            <f:translate key="{labelPrefix}.seats"/>
-                        </th>
-                        <td>
-                            {registration.seats}
-                        </td>
-                    </tr>
+                        <f:comment>
+                            We cannot directly iterate over `registration.foodOptions` here, as Extbase then
+                            only returns the first option. This is probably a bug in Extbase.
+                        </f:comment>
+                        <f:variable name="foodOptionTitles" value="{registration.foodOptionTitles}"/>
+                        <f:if condition="{foodOptionTitles}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.foodOptions"/>
+                                </th>
+                                <td>
+                                    <ul>
+                                        <f:for each="{foodOptionTitles}" as="foodOptionTitle">
+                                            <li>
+                                                {foodOptionTitle}
+                                            </li>
+                                        </f:for>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <oelib:isFieldEnabled fieldName="attendeesNames|registeredThemselves">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.attendeesNames"/>
-                            </th>
-                            <td>
-                                <oelib:isFieldEnabled fieldName="registeredThemselves">
-                                    <f:if condition="{registration.registeredThemselves}">
+                        <f:comment>
+                            We cannot directly iterate over `registration.registrationCheckboxes` here, as Extbase then
+                            only returns the first option. This is probably a bug in Extbase.
+                        </f:comment>
+                        <f:variable name="registrationCheckboxTitles"
+                                    value="{registration.registrationCheckboxTitles}"/>
+                        <f:if condition="{registrationCheckboxTitles}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.registrationCheckboxes"/>
+                                </th>
+                                <td>
+                                    <ul>
+                                        <f:for each="{registrationCheckboxTitles}" as="registrationCheckboxTitle">
+                                            <li>
+                                                {registrationCheckboxTitle}
+                                            </li>
+                                        </f:for>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </f:if>
+
+                        <f:if condition="{registration.interests}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
+                                </th>
+                                <td>
+                                    {registration.interests -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
+
+                        <f:if condition="{registration.expectations}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
+                                </th>
+                                <td>
+                                    {registration.expectations -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
+
+                        <f:if condition="{registration.backgroundKnowledge}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
+                                </th>
+                                <td>
+                                    {registration.backgroundKnowledge -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
+
+                        <f:if condition="{registration.knownFrom}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
+                                </th>
+                                <td>
+                                    {registration.knownFrom -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
+
+                        <f:if condition="{registration.comments}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
+                                </th>
+                                <td>
+                                    {registration.comments -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
+
+                        <f:if condition="{selectedPrice}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.priceCode"/>
+                                </th>
+                                <td>
+                                    <f:if condition="{registration.onWaitingList} && {selectedPrice.amount} > 0}">
                                         <f:then>
-                                            <f:translate key="{labelPrefix}.registeredThemselves"/>
+                                            <p>
+                                                <f:translate key="{selectedPrice.labelKey}"/>
+                                                <f:render partial="PriceWithVat"
+                                                          arguments="{amount: selectedPrice.amount}"/>
+                                            </p>
+                                            <p class="alert alert-info" role="alert">
+                                                <s:salutationAwareTranslate
+                                                    key="plugin.eventRegistration.message.priceOnlyForRegularRegistration"/>
+                                            </p>
                                         </f:then>
                                         <f:else>
-                                            <f:translate key="{labelPrefix}.registeredThemselves.not"/>
+                                            <f:translate key="{selectedPrice.labelKey}"/>
+                                            <f:render partial="PriceWithVat"
+                                                      arguments="{amount: selectedPrice.amount}"/>
                                         </f:else>
                                     </f:if>
-                                    <br/>
-                                </oelib:isFieldEnabled>
+                                </td>
+                            </tr>
+                        </f:if>
 
-                                <f:if condition="{registration.attendeesNames}">
-                                    {registration.attendeesNames -> f:format.nl2br()}
-                                </f:if>
-                            </td>
-                        </tr>
-                    </oelib:isFieldEnabled>
+                        <f:if condition="{registration.paymentMethod}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.paymentMethod"/>
+                                </th>
+                                <td>
+                                    {registration.paymentMethod.title}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:comment>
-                        We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
-                        only returns the first option. This is probably a bug in Extbase.
-                    </f:comment>
-                    <f:variable name="accommodationOptionTitles" value="{registration.accommodationOptionTitles}"/>
-                    <f:if condition="{accommodationOptionTitles}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.accommodationOptions"/>
-                            </th>
-                            <td>
-                                <ul>
-                                    <f:for each="{accommodationOptionTitles}" as="accommodationOptionTitle">
-                                        <li>
-                                            {accommodationOptionTitle}
-                                        </li>
-                                    </f:for>
-                                </ul>
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:comment>
-                        We cannot directly iterate over `registration.foodOptions` here, as Extbase then
-                        only returns the first option. This is probably a bug in Extbase.
-                    </f:comment>
-                    <f:variable name="foodOptionTitles" value="{registration.foodOptionTitles}"/>
-                    <f:if condition="{foodOptionTitles}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.foodOptions"/>
-                            </th>
-                            <td>
-                                <ul>
-                                    <f:for each="{foodOptionTitles}" as="foodOptionTitle">
-                                        <li>
-                                            {foodOptionTitle}
-                                        </li>
-                                    </f:for>
-                                </ul>
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:comment>
-                        We cannot directly iterate over `registration.registrationCheckboxes` here, as Extbase then
-                        only returns the first option. This is probably a bug in Extbase.
-                    </f:comment>
-                    <f:variable name="registrationCheckboxTitles" value="{registration.registrationCheckboxTitles}"/>
-                    <f:if condition="{registrationCheckboxTitles}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.registrationCheckboxes"/>
-                            </th>
-                            <td>
-                                <ul>
-                                    <f:for each="{registrationCheckboxTitles}" as="registrationCheckboxTitle">
-                                        <li>
-                                            {registrationCheckboxTitle}
-                                        </li>
-                                    </f:for>
-                                </ul>
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.interests}">
-                        <tr>
-                            <th scope="row">
-                                <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
-                            </th>
-                            <td>
-                                {registration.interests -> f:format.nl2br()}
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.expectations}">
-                        <tr>
-                            <th scope="row">
-                                <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
-                            </th>
-                            <td>
-                                {registration.expectations -> f:format.nl2br()}
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.backgroundKnowledge}">
-                        <tr>
-                            <th scope="row">
-                                <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
-                            </th>
-                            <td>
-                                {registration.backgroundKnowledge -> f:format.nl2br()}
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.knownFrom}">
-                        <tr>
-                            <th scope="row">
-                                <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
-                            </th>
-                            <td>
-                                {registration.knownFrom -> f:format.nl2br()}
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.comments}">
-                        <tr>
-                            <th scope="row">
-                                <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
-                            </th>
-                            <td>
-                                {registration.comments -> f:format.nl2br()}
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{selectedPrice}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.priceCode"/>
-                            </th>
-                            <td>
-                                <f:if condition="{registration.onWaitingList} && {selectedPrice.amount} > 0}">
-                                    <f:then>
-                                        <p>
-                                            <f:translate key="{selectedPrice.labelKey}"/>
-                                            <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
-                                        </p>
-                                        <p class="alert alert-info" role="alert">
-                                            <s:salutationAwareTranslate
-                                                key="plugin.eventRegistration.message.priceOnlyForRegularRegistration"/>
-                                        </p>
-                                    </f:then>
-                                    <f:else>
-                                        <f:translate key="{selectedPrice.labelKey}"/>
-                                        <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
-                                    </f:else>
-                                </f:if>
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.paymentMethod}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.paymentMethod"/>
-                            </th>
-                            <td>
-                                {registration.paymentMethod.title}
-                            </td>
-                        </tr>
-                    </f:if>
-
-                    <f:if condition="{registration.orderReference}">
-                        <tr>
-                            <th scope="row">
-                                <s:salutationAwareTranslate key="{labelPrefix}.orderReference"/>
-                            </th>
-                            <td>
-                                {registration.orderReference}
-                            </td>
-                        </tr>
-                    </f:if>
-                </tbody>
-            </table>
+                        <f:if condition="{registration.orderReference}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.orderReference"/>
+                                </th>
+                                <td>
+                                    {registration.orderReference}
+                                </td>
+                            </tr>
+                        </f:if>
+                    </tbody>
+                </table>
+            </div>
 
             <oelib:isFieldEnabled fieldName="personalData">
                 <h3>
@@ -250,194 +255,198 @@
                 </h3>
                 <f:variable name="user" value="{registration.user}"/>
 
-                <table class="table table-hover table-striped table-responsive">
-                    <tbody>
-                        <f:if condition="{user.company}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.company"/>
-                                </th>
-                                <td>
-                                    {user.company}
-                                </td>
-                            </tr>
-                        </f:if>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <f:if condition="{user.company}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.company"/>
+                                    </th>
+                                    <td>
+                                        {user.company}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.name}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.fullName"/>
-                                </th>
-                                <td>
-                                    {user.name}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{user.name}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.fullName"/>
+                                    </th>
+                                    <td>
+                                        {user.name}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.address}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.streetAddress"/>
-                                </th>
-                                <td>
-                                    {user.address -> f:format.nl2br()}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{user.address}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.streetAddress"/>
+                                    </th>
+                                    <td>
+                                        {user.address -> f:format.nl2br()}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.zip}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.zipCode"/>
-                                </th>
-                                <td>
-                                    {user.zip}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{user.zip}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.zipCode"/>
+                                    </th>
+                                    <td>
+                                        {user.zip}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.city}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.city"/>
-                                </th>
-                                <td>
-                                    {user.city}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{user.city}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.city"/>
+                                    </th>
+                                    <td>
+                                        {user.city}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.country}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.country"/>
-                                </th>
-                                <td>
-                                    {user.country}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{user.country}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.country"/>
+                                    </th>
+                                    <td>
+                                        {user.country}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.telephone}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.phoneNumber"/>
-                                </th>
-                                <td>
-                                    {user.telephone}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{user.telephone}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.phoneNumber"/>
+                                    </th>
+                                    <td>
+                                        {user.telephone}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{user.email}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.emailAddress"/>
-                                </th>
-                                <td>
-                                    {user.email}
-                                </td>
-                            </tr>
-                        </f:if>
-                    </tbody>
-                </table>
+                            <f:if condition="{user.email}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.emailAddress"/>
+                                    </th>
+                                    <td>
+                                        {user.email}
+                                    </td>
+                                </tr>
+                            </f:if>
+                        </tbody>
+                    </table>
+                </div>
             </oelib:isFieldEnabled>
 
             <f:if condition="{registration.separateBillingAddress}}">
                 <h4>
                     <f:translate key="{labelPrefix}.separateBillingAddress"/>
                 </h4>
-                <table class="table table-hover table-striped table-responsive">
-                    <tbody>
-                        <f:if condition="{registration.billingCompany}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.company"/>
-                                </th>
-                                <td>
-                                    {registration.billingCompany}
-                                </td>
-                            </tr>
-                        </f:if>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <f:if condition="{registration.billingCompany}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.company"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingCompany}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingFullName}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.fullName"/>
-                                </th>
-                                <td>
-                                    {registration.billingFullName}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{registration.billingFullName}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.fullName"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingFullName}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingStreetAddress}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.streetAddress"/>
-                                </th>
-                                <td>
-                                    {registration.billingStreetAddress -> f:format.nl2br()}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{registration.billingStreetAddress}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.streetAddress"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingStreetAddress -> f:format.nl2br()}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingZipCode}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.zipCode"/>
-                                </th>
-                                <td>
-                                    {registration.billingZipCode}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{registration.billingZipCode}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.zipCode"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingZipCode}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingCity}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.city"/>
-                                </th>
-                                <td>
-                                    {registration.billingZipCode}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{registration.billingCity}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.city"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingZipCode}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingCountry}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.country"/>
-                                </th>
-                                <td>
-                                    {registration.billingCountry}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{registration.billingCountry}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.country"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingCountry}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingPhoneNumber}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.phoneNumber"/>
-                                </th>
-                                <td>
-                                    {registration.billingPhoneNumber}
-                                </td>
-                            </tr>
-                        </f:if>
+                            <f:if condition="{registration.billingPhoneNumber}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.phoneNumber"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingPhoneNumber}
+                                    </td>
+                                </tr>
+                            </f:if>
 
-                        <f:if condition="{registration.billingEmailAddress}">
-                            <tr>
-                                <th scope="row">
-                                    <f:translate key="{labelPrefix}.emailAddress"/>
-                                </th>
-                                <td>
-                                    {registration.billingEmailAddress}
-                                </td>
-                            </tr>
-                        </f:if>
-                    </tbody>
-                </table>
+                            <f:if condition="{registration.billingEmailAddress}">
+                                <tr>
+                                    <th scope="row">
+                                        <f:translate key="{labelPrefix}.emailAddress"/>
+                                    </th>
+                                    <td>
+                                        {registration.billingEmailAddress}
+                                    </td>
+                                </tr>
+                            </f:if>
+                        </tbody>
+                    </table>
+                </div>
             </f:if>
 
             <f:if
@@ -516,50 +525,52 @@
                 <f:translate key="plugin.eventRegistration.heading.summary"/>
             </h3>
 
-            <table class="table table-hover table-primary table-responsive">
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <f:translate key="{labelPrefix}.event"/>
-                        </th>
-                        <td>
-                            <f:render partial="EventTitleAndDateAndUid" arguments="{event: event}"/>
-                        </td>
-                    </tr>
-
-                    <f:if condition="{selectedPrice}">
+            <div class="table-responsive">
+                <table class="table table-hover table-primary">
+                    <tbody>
                         <tr>
                             <th scope="row">
-                                <f:translate key="{labelPrefix}.priceCode"/>
+                                <f:translate key="{labelPrefix}.event"/>
                             </th>
                             <td>
-                                <f:translate key="{selectedPrice.labelKey}"/>
-                                <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
+                                <f:render partial="EventTitleAndDateAndUid" arguments="{event: event}"/>
                             </td>
                         </tr>
-                    </f:if>
 
-                    <tr>
-                        <th scope="row">
-                            <f:translate key="{labelPrefix}.seats"/>
-                        </th>
-                        <td>
-                            {registration.seats}
-                        </td>
-                    </tr>
+                        <f:if condition="{selectedPrice}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.priceCode"/>
+                                </th>
+                                <td>
+                                    <f:translate key="{selectedPrice.labelKey}"/>
+                                    <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <tr>
-                        <th scope="row">
-                            <f:translate key="{labelPrefix}.totalPrice"/>
-                        </th>
-                        <td>
-                            <strong>
-                                <f:render partial="PriceWithVat" arguments="{amount: registration.totalPrice}"/>
-                            </strong>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.seats"/>
+                            </th>
+                            <td>
+                                {registration.seats}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.totalPrice"/>
+                            </th>
+                            <td>
+                                <strong>
+                                    <f:render partial="PriceWithVat" arguments="{amount: registration.totalPrice}"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="d-none tx-seminars-display-none">
                 <f:form.hidden name="event" value="{event}"/>

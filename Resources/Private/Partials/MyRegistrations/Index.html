@@ -1,63 +1,65 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
       data-namespace-typo3-fluid="true">
-    <table class="table table-hover table-striped table-responsive w-auto">
-        <thead>
-            <tr>
-                <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="date">
-                    <th scope="col">
-                        <f:translate key="plugin.myRegistrations.index.heading.date"/>
-                    </th>
-                </oelib:isFieldEnabled>
-                <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="eventType">
-                    <th scope="col">
-                        <f:translate key="plugin.myRegistrations.index.heading.eventType"/>
-                    </th>
-                </oelib:isFieldEnabled>
-                <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="topic">
-                    <th scope="col">
-                        <f:translate key="plugin.myRegistrations.index.heading.topic"/>
-                    </th>
-                </oelib:isFieldEnabled>
-                <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="registrationStatus">
-                    <th scope="col">
-                        <f:translate key="plugin.myRegistrations.index.heading.registrationStatus"/>
-                    </th>
-                </oelib:isFieldEnabled>
-            </tr>
-        </thead>
-        <tbody>
-            <f:for each="{registrations}" as="registration">
-                <f:variable name="event" value="{registration.event}"/>
-                <f:if condition="{event}">
-                    <tr>
-                        <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="date">
-                            <td>
-                                <f:render partial="EventDate" arguments="{event: event}"/>
-                            </td>
-                        </oelib:isFieldEnabled>
-                        <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="eventType">
-                            <td>
-                                <f:if condition="{event.eventType}">
-                                    {event.eventType.title}
-                                </f:if>
-                            </td>
-                        </oelib:isFieldEnabled>
-                        <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="topic">
-                            <td>
-                                <f:link.action action="show" arguments="{registration: registration}">
-                                    {event.displayTitle}
-                                </f:link.action>
-                            </td>
-                        </oelib:isFieldEnabled>
-                        <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="registrationStatus">
-                            <td>
-                                <f:translate
-                                    key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
-                            </td>
-                        </oelib:isFieldEnabled>
-                    </tr>
-                </f:if>
-            </f:for>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped w-auto">
+            <thead>
+                <tr>
+                    <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="date">
+                        <th scope="col">
+                            <f:translate key="plugin.myRegistrations.index.heading.date"/>
+                        </th>
+                    </oelib:isFieldEnabled>
+                    <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="eventType">
+                        <th scope="col">
+                            <f:translate key="plugin.myRegistrations.index.heading.eventType"/>
+                        </th>
+                    </oelib:isFieldEnabled>
+                    <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="topic">
+                        <th scope="col">
+                            <f:translate key="plugin.myRegistrations.index.heading.topic"/>
+                        </th>
+                    </oelib:isFieldEnabled>
+                    <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="registrationStatus">
+                        <th scope="col">
+                            <f:translate key="plugin.myRegistrations.index.heading.registrationStatus"/>
+                        </th>
+                    </oelib:isFieldEnabled>
+                </tr>
+            </thead>
+            <tbody>
+                <f:for each="{registrations}" as="registration">
+                    <f:variable name="event" value="{registration.event}"/>
+                    <f:if condition="{event}">
+                        <tr>
+                            <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="date">
+                                <td>
+                                    <f:render partial="EventDate" arguments="{event: event}"/>
+                                </td>
+                            </oelib:isFieldEnabled>
+                            <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="eventType">
+                                <td>
+                                    <f:if condition="{event.eventType}">
+                                        {event.eventType.title}
+                                    </f:if>
+                                </td>
+                            </oelib:isFieldEnabled>
+                            <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="topic">
+                                <td>
+                                    <f:link.action action="show" arguments="{registration: registration}">
+                                        {event.displayTitle}
+                                    </f:link.action>
+                                </td>
+                            </oelib:isFieldEnabled>
+                            <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="registrationStatus">
+                                <td>
+                                    <f:translate
+                                        key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
+                                </td>
+                            </oelib:isFieldEnabled>
+                        </tr>
+                    </f:if>
+                </f:for>
+            </tbody>
+        </table>
+    </div>
 </html>

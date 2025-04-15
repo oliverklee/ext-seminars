@@ -165,6 +165,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Make the tables in the FE and BE responsive (#4318)
 - Fully initialize reconstituted domain models (#4246)
 - Use the user's display name in the registration record title (#4194)
 - Improve some type annotations (#4014)
