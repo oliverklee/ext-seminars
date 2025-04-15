@@ -38,26 +38,28 @@
                              arguments="{0: event.internalTitle, 1: eventDate, 2: event.uid}"/>
             </h2>
 
-            <table class="table table-hover table-responsive w-auto">
-                <tbody>
-                    <tr>
-                        <th scope="row" class="nowrap">
-                            <f:translate key="{propertyLabelPrefix}.seats"/>
-                        </th>
-                        <td class="nowrap">
-                            <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="nowrap">
-                            <f:translate key="{propertyLabelPrefix}.registrations"/>
-                        </th>
-                        <td class="nowrap">
-                            <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover w-auto">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="nowrap">
+                                <f:translate key="{propertyLabelPrefix}.seats"/>
+                            </th>
+                            <td class="nowrap">
+                                <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="nowrap">
+                                <f:translate key="{propertyLabelPrefix}.registrations"/>
+                            </th>
+                            <td class="nowrap">
+                                <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>
                 <core:icon identifier="actions-check"/>
