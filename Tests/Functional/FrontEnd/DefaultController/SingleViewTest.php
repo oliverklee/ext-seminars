@@ -20,10 +20,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 final class SingleViewTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
-        'typo3conf/ext/static_info_tables',
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
+        'sjbr/static-info-tables',
+        'oliverklee/feuserextrafields',
+        'oliverklee/oelib',
+        'oliverklee/seminars',
     ];
 
     private TestingFramework $testingFramework;
