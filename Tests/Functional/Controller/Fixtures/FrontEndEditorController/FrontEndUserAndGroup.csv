@@ -1,0 +1,7 @@
+"fe_groups"
+,"uid","pid","title"
+,1,1,"editors"
+
+"fe_users"
+,"uid","pid","username","usergroup"
+,1,1,"max","1"
