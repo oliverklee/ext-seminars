@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\Model;
 
 use OliverKlee\Seminars\Model\Place;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -15,7 +13,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 final class PlaceTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',
@@ -26,24 +23,6 @@ final class PlaceTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $countriesConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('static_countries');
-        if ($countriesConnection->count('*', 'static_countries', []) === 0) {
-            $countriesConnection->insert(
-                'static_countries',
-                [
-                    'uid' => 54,
-                    'cn_iso_2' => 'DE',
-                    'cn_iso_3' => 'DEU',
-                    'cn_iso_nr' => 276,
-                    'cn_official_name_local' => 'Bundesrepublik Deutschland',
-                    'cn_official_name_en' => 'Federal Republic of Germany',
-                    'cn_short_local' => 'Deutschland',
-                    'cn_short_en' => 'Germany',
-                ]
-            );
-        }
 
         $this->subject = new Place();
     }

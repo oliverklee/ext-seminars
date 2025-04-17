@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -23,7 +22,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
     use LanguageHelper;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',
@@ -43,37 +41,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->getLanguageService();
-
-        $countriesConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('static_countries');
-        if ($countriesConnection->count('*', 'static_countries', []) === 0) {
-            $countriesConnection->insert(
-                'static_countries',
-                [
-                    'uid' => 54,
-                    'cn_iso_2' => 'DE',
-                    'cn_iso_3' => 'DEU',
-                    'cn_iso_nr' => 276,
-                    'cn_official_name_local' => 'Bundesrepublik Deutschland',
-                    'cn_official_name_en' => 'Federal Republic of Germany',
-                    'cn_short_local' => 'Deutschland',
-                    'cn_short_en' => 'Germany',
-                ]
-            );
-            $countriesConnection->insert(
-                'static_countries',
-                [
-                    'uid' => 74,
-                    'cn_iso_2' => 'GB',
-                    'cn_iso_3' => 'GBR',
-                    'cn_iso_nr' => 826,
-                    'cn_official_name_local' => 'United Kingdom of Great Britain and Northern Ireland',
-                    'cn_official_name_en' => 'United Kingdom of Great Britain and Northern Ireland',
-                    'cn_short_local' => 'United Kingdom',
-                    'cn_short_en' => 'United Kingdom',
-                ]
-            );
-        }
 
         $this->subject = new SelectorWidget(
             [
