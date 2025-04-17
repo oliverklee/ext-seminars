@@ -18,7 +18,6 @@ final class EventMapperTest extends FunctionalTestCase
     use CollectionHelper;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

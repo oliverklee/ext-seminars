@@ -17,7 +17,6 @@ final class LegacySpeakerTest extends FunctionalTestCase
     use FalHelper;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

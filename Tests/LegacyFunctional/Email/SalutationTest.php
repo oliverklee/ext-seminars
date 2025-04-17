@@ -35,7 +35,6 @@ final class SalutationTest extends FunctionalTestCase
     private const TIME_FORMAT = 'H:i';
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

@@ -16,7 +16,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 final class SlugGeneratorTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

@@ -25,7 +25,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     private const TABLE_SEMINARS = 'tx_seminars_seminars';
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',
