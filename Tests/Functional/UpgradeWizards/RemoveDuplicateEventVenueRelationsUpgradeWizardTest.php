@@ -21,7 +21,6 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
     private const FIXTURES_PREFIX = __DIR__ . '/Fixtures/RemoveDuplicateEventVenueRelationsUpgradeWizard/';
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

@@ -15,7 +15,6 @@ final class ResponseHeadersModifierTest extends FunctionalTestCase
     protected bool $initializeDatabase = false;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

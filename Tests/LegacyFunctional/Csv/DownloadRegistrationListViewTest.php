@@ -19,7 +19,6 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
     use LanguageHelper;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

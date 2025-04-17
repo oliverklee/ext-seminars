@@ -37,7 +37,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     use BackEndTestsTrait;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

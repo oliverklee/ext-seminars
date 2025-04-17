@@ -22,7 +22,6 @@ final class AbstractModelTest extends FunctionalTestCase
     private int $now;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

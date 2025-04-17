@@ -16,7 +16,6 @@ final class SpeakerBagTest extends FunctionalTestCase
     use BagHelper;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

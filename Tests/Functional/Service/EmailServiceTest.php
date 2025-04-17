@@ -30,7 +30,6 @@ final class EmailServiceTest extends FunctionalTestCase
     use MakeInstanceTrait;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

@@ -16,7 +16,6 @@ use TYPO3Fluid\Fluid\Core\Variables\StandardVariableProvider;
 final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

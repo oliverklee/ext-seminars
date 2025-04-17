@@ -20,7 +20,6 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
     private const FIXTURES_PREFIX = __DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/';
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

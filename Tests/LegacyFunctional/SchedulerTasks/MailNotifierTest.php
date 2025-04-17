@@ -39,7 +39,6 @@ final class MailNotifierTest extends FunctionalTestCase
     protected array $coreExtensionsToLoad = ['scheduler'];
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',

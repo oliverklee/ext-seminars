@@ -17,7 +17,6 @@ final class TranslateTraitTest extends FunctionalTestCase
     use TranslateTrait;
 
     protected array $testExtensionsToLoad = [
-        'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',
