@@ -20,7 +20,6 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     ];
 
     protected array $coreExtensionsToLoad = [
-        'typo3/cms-extensionmanager',
         'typo3/cms-fluid-styled-content',
     ];
 
