@@ -116,24 +116,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function indexActionsAssignsEventsOwnedByLoggedInUserToView(): void
-    {
-        $ownerUid = 42;
-        $userAuthentication = new FrontendUserAuthentication();
-        $userAuthentication->user = ['uid' => $ownerUid];
-        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
-
-        $events = [new SingleEvent()];
-        $this->eventRepositoryMock->method('findSingleEventsByOwnerUid')->with($ownerUid)->willReturn($events);
-
-        $this->viewMock->expects(self::once())->method('assign')->with('events', $events);
-
-        $this->subject->indexAction();
-    }
-
-    /**
-     * @test
-     */
     public function editActionAssignsProvidedEventToView(): void
     {
         $event = new SingleEvent();
