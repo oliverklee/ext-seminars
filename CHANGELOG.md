@@ -166,6 +166,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Update the slug after editing or creating an event in the FE editor (#4332)
 - Make the tables in the FE and BE responsive (#4318)
 - Fully initialize reconstituted domain models (#4246)
 - Use the user's display name in the registration record title (#4194)

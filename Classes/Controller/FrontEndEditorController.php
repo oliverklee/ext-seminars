@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
+use OliverKlee\Seminars\Seo\SlugGenerator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,18 +32,22 @@ class FrontEndEditorController extends ActionController
 
     private VenueRepository $venueRepository;
 
+    private SlugGenerator $slugGenerator;
+
     public function __construct(
         EventRepository $eventRepository,
         EventTypeRepository $eventTypeRepository,
         OrganizerRepository $organizerRepository,
         SpeakerRepository $speakerRepository,
-        VenueRepository $venueRepository
+        VenueRepository $venueRepository,
+        SlugGenerator $slugGenerator
     ) {
         $this->eventRepository = $eventRepository;
         $this->eventTypeRepository = $eventTypeRepository;
         $this->organizerRepository = $organizerRepository;
         $this->speakerRepository = $speakerRepository;
         $this->venueRepository = $venueRepository;
+        $this->slugGenerator = $slugGenerator;
     }
 
     private function getLoggedInUserUid(): int
@@ -99,6 +104,11 @@ class FrontEndEditorController extends ActionController
     {
         $this->checkEventOwner($event);
 
+        $uid = $event->getUid();
+        \assert(\is_int($uid) && $uid > 0);
+        $recordData = ['uid' => $uid, 'title' => $event->getInternalTitle()];
+        $event->setSlug($this->slugGenerator->generateSlug(['record' => $recordData]));
+
         $this->eventRepository->update($event);
         $this->eventRepository->persistAll();
 
@@ -124,7 +134,16 @@ class FrontEndEditorController extends ActionController
         $folderUid = \is_string($folderSettings) ? (int)$folderSettings : 0;
         $event->setPid($folderUid);
 
+        // We first need to persist the event to get a UID for it, so we can generate a slug.
         $this->eventRepository->add($event);
+        $this->eventRepository->persistAll();
+
+        $uid = $event->getUid();
+        \assert(\is_int($uid) && $uid > 0);
+        $recordData = ['uid' => $uid, 'title' => $event->getInternalTitle()];
+        $event->setSlug($this->slugGenerator->generateSlug(['record' => $recordData]));
+
+        $this->eventRepository->update($event);
         $this->eventRepository->persistAll();
 
         $this->redirect('index');
