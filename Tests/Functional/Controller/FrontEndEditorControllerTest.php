@@ -171,7 +171,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      */
     public function editActionWithOwnEventAssignsProvidedEventToView(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/editAction/EventWithOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[action]' => 'edit',
@@ -213,7 +213,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      */
     public function editActionWithEventWithoutOwnerThrowsException(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithoutOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/editAction/EventWithoutOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[action]' => 'edit',
@@ -233,7 +233,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      */
     public function updateActionWithOwnEventUpdatesEvent(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/updateAction/EventWithOwner.csv');
 
         $newTitle = 'Karaoke party';
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
@@ -246,7 +246,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->executeFrontendSubRequest($request, $context);
 
-        self::assertSame($newTitle, $this->getAllRecords('tx_seminars_seminars')[0]['title'] ?? null);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/updateAction/UpdatedEvent.csv');
     }
 
     /**
@@ -296,6 +296,6 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->executeFrontendSubRequest($request, $context);
 
-        self::assertSame(1, $this->getAllRecords('tx_seminars_seminars')[0]['owner_feuser'] ?? null);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/createAction/NewlyCreatedEvent.csv');
     }
 }
