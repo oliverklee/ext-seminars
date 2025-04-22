@@ -13,7 +13,9 @@ use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
+use OliverKlee\Seminars\Seo\SlugGenerator;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Http\HtmlResponse;
@@ -69,6 +71,11 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     private VenueRepository $venueRepositoryMock;
 
+    /**
+     * @var SlugGenerator&Stub
+     */
+    private SlugGenerator $slugGeneratorStub;
+
     private Context $context;
 
     protected function setUp(): void
@@ -80,6 +87,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->organizerRepositoryMock = $this->createMock(OrganizerRepository::class);
         $this->speakerRepositoryMock = $this->createMock(SpeakerRepository::class);
         $this->venueRepositoryMock = $this->createMock(VenueRepository::class);
+        $this->slugGeneratorStub = $this->createStub(SlugGenerator::class);
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var FrontEndEditorController&AccessibleObjectInterface&MockObject $subject */
@@ -92,6 +100,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
                 $this->organizerRepositoryMock,
                 $this->speakerRepositoryMock,
                 $this->venueRepositoryMock,
+                $this->slugGeneratorStub,
             ]
         );
         $this->subject = $subject;
@@ -150,6 +159,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function updateActionRedirectsToIndexAction(): void
     {
         $event = new SingleEvent();
+        $event->_setProperty('uid', 1);
 
         $this->mockRedirect('index');
 
@@ -271,6 +281,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $pageUid = 42;
         $event = new SingleEvent();
+        $event->_setProperty('uid', 1);
         $this->subject->_set('settings', ['folderForCreatedEvents' => (string)$pageUid]);
 
         $this->subject->createAction($event);
@@ -284,6 +295,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function createActionWithoutPageUidInConfigurationSetsZeroPageUid(): void
     {
         $event = new SingleEvent();
+        $event->_setProperty('uid', 1);
 
         $this->subject->createAction($event);
 
@@ -296,6 +308,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function createActionRedirectsToIndexAction(): void
     {
         $event = new SingleEvent();
+        $event->_setProperty('uid', 1);
 
         $this->mockRedirect('index');
 

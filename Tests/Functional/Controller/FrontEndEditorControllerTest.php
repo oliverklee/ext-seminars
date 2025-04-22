@@ -252,6 +252,27 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function updateActionUpdatesSlug(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/updateAction/EventWithOwner.csv');
+
+        $newTitle = 'Karaoke party';
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'update',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => $newTitle,
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/updateAction/UpdatedEventWithSlug.csv');
+    }
+
+    /**
+     * @test
+     */
     public function newActionWithNoProvidedEventCanBeRendered(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
@@ -297,5 +318,22 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->executeFrontendSubRequest($request, $context);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/createAction/NewlyCreatedEvent.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function createActionSetsSlug(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewForm(1),
+            'tx_seminars_frontendeditor[action]' => 'create',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/createAction/CreatedEventWithSlug.csv');
     }
 }
