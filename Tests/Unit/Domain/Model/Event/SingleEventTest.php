@@ -1797,4 +1797,23 @@ final class SingleEventTest extends UnitTestCase
 
         self::assertSame($files, $this->subject->getDownloadsForAttendees());
     }
+
+    /**
+     * @test
+     */
+    public function getSlugInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getSlug());
+    }
+
+    /**
+     * @test
+     */
+    public function setSlugSetsSlug(): void
+    {
+        $value = 'best-thing-ever/3';
+        $this->subject->setSlug($value);
+
+        self::assertSame($value, $this->subject->getSlug());
+    }
 }

@@ -31,6 +31,11 @@ trait EventTrait
      */
     protected int $ownerUid = 0;
 
+    /**
+     * @Validate("StringLength", options={"maximum": 262})
+     */
+    protected string $slug = '';
+
     public function isHidden(): bool
     {
         return $this->hidden;
@@ -62,5 +67,15 @@ trait EventTrait
     public function setOwnerUid(int $ownerUid): void
     {
         $this->ownerUid = $ownerUid;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

@@ -110,4 +110,8 @@ interface EventInterface
      * @internal
      */
     public function getStatistics(): ?EventStatistics;
+
+    public function getSlug(): string;
+
+    public function setSlug(string $slug): void;
 }
