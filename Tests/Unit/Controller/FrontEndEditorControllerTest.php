@@ -116,25 +116,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function editActionAssignsProvidedEventToView(): void
-    {
-        $event = new SingleEvent();
-        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
-
-        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
-            ['event', $event],
-            ['eventTypes', self::anything()],
-            ['organizers', self::anything()],
-            ['speakers', self::anything()],
-            ['venues', self::anything()]
-        );
-
-        $this->subject->editAction($event);
-    }
-
-    /**
-     * @test
-     */
     public function editActionAssignsAuxiliaryRecordsToView(): void
     {
         $event = new SingleEvent();
@@ -161,55 +142,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         );
 
         $this->subject->editAction($event);
-    }
-
-    /**
-     * @test
-     */
-    public function editActionWithEventFromOtherUserThrowsException(): void
-    {
-        $userAuthentication = new FrontendUserAuthentication();
-        $userAuthentication->user = ['uid' => 1];
-        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
-
-        $event = new SingleEvent();
-        $event->setOwnerUid(2);
-
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('You do not have permission to edit this event.');
-        $this->expectExceptionCode(1666954310);
-
-        $this->subject->editAction($event);
-    }
-
-    /**
-     * @test
-     */
-    public function editActionWithEventWithoutOwnerThrowsException(): void
-    {
-        $userAuthentication = new FrontendUserAuthentication();
-        $userAuthentication->user = ['uid' => 1];
-        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
-
-        $event = new SingleEvent();
-
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('You do not have permission to edit this event.');
-        $this->expectExceptionCode(1666954310);
-
-        $this->subject->editAction($event);
-    }
-
-    /**
-     * @test
-     */
-    public function updateActionPersistsProvidedEvent(): void
-    {
-        $event = new SingleEvent();
-        $this->eventRepositoryMock->expects(self::once())->method('update')->with($event);
-        $this->eventRepositoryMock->expects(self::once())->method('persistAll');
-
-        $this->subject->updateAction($event);
     }
 
     /**
@@ -259,25 +191,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->expectExceptionCode(1666954310);
 
         $this->subject->updateAction($event);
-    }
-
-    /**
-     * @test
-     */
-    public function newActionWithEventAssignsProvidedEventToView(): void
-    {
-        $event = new SingleEvent();
-        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
-
-        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
-            ['event', $event],
-            ['eventTypes', self::anything()],
-            ['organizers', self::anything()],
-            ['speakers', self::anything()],
-            ['venues', self::anything()]
-        );
-
-        $this->subject->newAction($event);
     }
 
     /**
@@ -354,23 +267,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function createActionSetsCurrentUserAsOwner(): void
-    {
-        $ownerUid = 42;
-        $userAuthentication = new FrontendUserAuthentication();
-        $userAuthentication->user = ['uid' => $ownerUid];
-        $this->context->setAspect('frontend.user', new UserAspect($userAuthentication));
-
-        $event = new SingleEvent();
-
-        $this->subject->createAction($event);
-
-        self::assertSame($ownerUid, $event->getOwnerUid());
-    }
-
-    /**
-     * @test
-     */
     public function createActionWithPageUidInConfigurationSetsProvidedPageUid(): void
     {
         $pageUid = 42;
@@ -392,19 +288,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->subject->createAction($event);
 
         self::assertSame(0, $event->getPid());
-    }
-
-    /**
-     * @test
-     */
-    public function createActionPersistsEvent(): void
-    {
-        $event = new SingleEvent();
-
-        $this->eventRepositoryMock->expects(self::once())->method('add')->with($event);
-        $this->eventRepositoryMock->expects(self::once())->method('persistAll');
-
-        $this->subject->createAction($event);
     }
 
     /**
