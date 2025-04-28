@@ -26,3 +26,7 @@ The following steps are necessary to upgrade from seminars 5.x to 6.x:
     check warnings and fix them.
 #.  Disable the automatic configuration check for the seminars extension in the
     extension manager again.
+#.  If you have some events that have no fixed date (yet) and for which
+    registration should be possible, edit those events, go to the "Registration"
+    tab and check the "Allows registration even if no date has been set"
+    checkbox.

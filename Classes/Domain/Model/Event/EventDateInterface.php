@@ -175,4 +175,6 @@ interface EventDateInterface
      * @return ObjectStorage<FileReference>
      */
     public function getDownloadsForAttendees(): ObjectStorage;
+
+    public function isRegistrationAllowedWithoutDate(): bool;
 }
