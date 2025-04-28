@@ -115,6 +115,10 @@
         <source>Needs registration</source>
         <target state="needs-translation">Needs registration</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_seminars.registration_allowed_without_date">
+        <source>Allows registration even if no date has been set</source>
+        <target state="needs-translation">Allows registration even if no date has been set</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_seminars.allows_multiple_registrations" approved="yes">
         <source>Allows multiple registrations from the same person</source>
         <target state="final">Позволять множественные регистрации от одного человека</target>
