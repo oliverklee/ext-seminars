@@ -118,6 +118,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('Some more text for the attendees', $result->getAdditionalEmailText());
         self::assertSame('conference room 2', $result->getRoom());
         self::assertSame('jousting/1', $result->getSlug());
+        self::assertTrue($result->isRegistrationAllowedWithoutDate());
     }
 
     /**
