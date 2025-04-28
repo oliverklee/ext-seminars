@@ -167,6 +167,114 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     }
 
     /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function nonDateFormFieldKeysForSingleEventDataProvider(): array
+    {
+        return [
+            'internalTitle' => ['internalTitle'],
+            'description' => ['description'],
+            'registrationRequired' => ['registrationRequired'],
+            'waitingList' => ['waitingList'],
+            'minimumNumberOfRegistrations' => ['minimumNumberOfRegistrations'],
+            'maximumNumberOfRegistrations' => ['maximumNumberOfRegistrations'],
+            'standardPrice' => ['standardPrice'],
+            'earlyBirdPrice' => ['earlyBirdPrice'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider nonDateFormFieldKeysForSingleEventDataProvider
+     */
+    public function editActionHasAllNonDateFormFields(string $key): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/editAction/EventWithOwner.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'edit',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function dateFormFieldKeysForSingleEventDataProvider(): array
+    {
+        return [
+            'start' => ['start'],
+            'end' => ['end'],
+            'earlyBirdDeadline' => ['earlyBirdDeadline'],
+            'registrationDeadline' => ['registrationDeadline'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider dateFormFieldKeysForSingleEventDataProvider
+     */
+    public function editActionHasAllDateFormFields(string $key): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/editAction/EventWithOwner.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'edit',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . '][date]"', $html);
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . '][dateFormat]"', $html);
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function associationFormFieldKeysForSingleEventDataProvider(): array
+    {
+        return [
+            'eventType' => ['eventType'],
+            'venues' => ['venues'],
+            'speakers' => ['speakers'],
+            'organizers' => ['organizers'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider associationFormFieldKeysForSingleEventDataProvider
+     */
+    public function editActionHasAllAssociationFormFields(string $key): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/editAction/EventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/editAction/AuxiliaryRecords.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'edit',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
      * @test
      */
     public function editActionWithOwnEventAssignsProvidedEventToView(): void
@@ -283,6 +391,63 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
 
         self::assertStringContainsString('Create new event', $html);
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider nonDateFormFieldKeysForSingleEventDataProvider
+     */
+    public function newActionHasAllNonDateFormFields(string $key): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'new',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider dateFormFieldKeysForSingleEventDataProvider
+     */
+    public function newActionHasAllDateFormFields(string $key): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'new',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . '][date]"', $html);
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . '][dateFormat]"', $html);
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider associationFormFieldKeysForSingleEventDataProvider
+     */
+    public function newActionHasAllAssociationFormFields(string $key): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/newAction/AuxiliaryRecords.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'new',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
     }
 
     /**
