@@ -88,6 +88,9 @@
 			<trans-unit id="tx_seminars_seminars.needs_registration">
 				<source>Needs registration</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.registration_allowed_without_date">
+				<source>Allows registration even if no date has been set</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations">
 				<source>Allows multiple registrations from the same person</source>
 			</trans-unit>
