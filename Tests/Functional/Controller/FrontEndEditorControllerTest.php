@@ -175,7 +175,6 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
             'internalTitle' => ['internalTitle'],
             'description' => ['description'],
             'registrationRequired' => ['registrationRequired'],
-            'registrationAllowedWithoutDate' => ['registrationAllowedWithoutDate'],
             'waitingList' => ['waitingList'],
             'minimumNumberOfRegistrations' => ['minimumNumberOfRegistrations'],
             'maximumNumberOfRegistrations' => ['maximumNumberOfRegistrations'],

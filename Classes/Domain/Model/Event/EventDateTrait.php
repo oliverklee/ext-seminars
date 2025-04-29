@@ -151,8 +151,6 @@ trait EventDateTrait
      */
     protected ObjectStorage $downloadsForAttendees;
 
-    protected bool $registrationAllowedWithoutDate = false;
-
     private function initializeEventDate(): void
     {
         $this->venues = new ObjectStorage();
@@ -614,15 +612,5 @@ trait EventDateTrait
     public function setDownloadsForAttendees(ObjectStorage $files): void
     {
         $this->downloadsForAttendees = $files;
-    }
-
-    public function isRegistrationAllowedWithoutDate(): bool
-    {
-        return $this->registrationAllowedWithoutDate;
-    }
-
-    public function setRegistrationAllowedWithoutDate(bool $registrationAllowedWithoutDate): void
-    {
-        $this->registrationAllowedWithoutDate = $registrationAllowedWithoutDate;
     }
 }
