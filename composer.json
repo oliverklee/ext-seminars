@@ -120,8 +120,8 @@
 		],
 		"ci:php:cs-fixer": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --dry-run --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
-		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
+		"ci:php:sniff": "phpcs Classes Configuration Tests",
+		"ci:php:stan": "phpstan --no-progress",
 		"ci:static": [
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
@@ -131,8 +131,8 @@
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:legacy-functional": "find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
-		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
-		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
+		"ci:tests:unit": "phpunit -c Configuration/UnitTests.xml Tests/Unit",
+		"ci:ts:lint": "typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"fix": [
 			"@fix:composer",
 			"@fix:php"
@@ -147,7 +147,7 @@
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
 			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
 		],
-		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
+		"phpstan:baseline": "phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
 			"rm -rf .github",
