@@ -1099,6 +1099,9 @@
 			<trans-unit id="plugin.frontEndEditor.property.registrationRequired">
 				<source>Registration is required</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.registrationAllowedWithoutDate">
+				<source>Allows registration even if no date has been set</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.waitingList">
 				<source>Has a waiting list</source>
 			</trans-unit>
