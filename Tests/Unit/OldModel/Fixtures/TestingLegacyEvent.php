@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures;
 
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -12,17 +11,6 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
  */
 final class TestingLegacyEvent extends LegacyEvent
 {
-    /**
-     * Sets the event data.
-     *
-     * @param array $eventData event data array
-     */
-    public function setEventData(array $eventData): void
-    {
-        $this->recordData = $eventData;
-        $this->isPersisted = true;
-    }
-
     /**
      * Sets the event's unregistration deadline.
      *
@@ -208,16 +196,6 @@ final class TestingLegacyEvent extends LegacyEvent
     }
 
     /**
-     * Sets the record type for this event record.
-     *
-     * @param EventInterface::TYPE_* $recordType
-     */
-    public function setRecordType(int $recordType): void
-    {
-        $this->setRecordPropertyInteger('object_type', $recordType);
-    }
-
-    /**
      * Sets the "hidden" flag of this record (concerning the visibility in
      * TYPO3).
      *
@@ -229,26 +207,6 @@ final class TestingLegacyEvent extends LegacyEvent
     }
 
     /**
-     * Sets this record's start timestamp (concerning the visibility in TYPO3).
-     *
-     * @param int $timeStamp this record's start time as a UNIX timestamp, set to 0 to set no start time
-     */
-    public function setRecordStartTime(int $timeStamp): void
-    {
-        $this->setRecordPropertyInteger('starttime', $timeStamp);
-    }
-
-    /**
-     * Sets this record's end timestamp (concerning the visibility in TYPO3).
-     *
-     * @param int $timeStamp this record's end time as a UNIX timestamp, set to 0 to set no start time
-     */
-    public function setRecordEndTime(int $timeStamp): void
-    {
-        $this->setRecordPropertyInteger('endtime', $timeStamp);
-    }
-
-    /**
      * Sets the UID of the owner FE user.
      *
      * @param int $ownerUid the UID of the owner FE user, must be >= 0
@@ -256,16 +214,6 @@ final class TestingLegacyEvent extends LegacyEvent
     public function setOwnerUid(int $ownerUid): void
     {
         $this->setRecordPropertyInteger('owner_feuser', $ownerUid);
-    }
-
-    /**
-     * Sets the number of time slots.
-     *
-     * @param int<0, max> $numberOfTimeSlots the number of time slots for this event
-     */
-    public function setNumberOfTimeSlots(int $numberOfTimeSlots): void
-    {
-        $this->setRecordPropertyInteger('timeslots', $numberOfTimeSlots);
     }
 
     /**
@@ -474,15 +422,5 @@ final class TestingLegacyEvent extends LegacyEvent
     public function setRecordPropertyString(string $key, string $value): void
     {
         parent::setRecordPropertyString($key, $value);
-    }
-
-    /**
-     * Sets the ID of the separate details page for this event.
-     *
-     * @param string|int $pageId the page UID or alias, may also be empty
-     */
-    public function setDetailsPage($pageId): void
-    {
-        $this->setRecordPropertyString('details_page', (string)$pageId);
     }
 }
