@@ -349,10 +349,6 @@
         <source>Alas, this event has been canceled.</source>
         <target state="final">К сожалению, мероприятие было отменено</target>
       </trans-unit>
-      <trans-unit id="message_noDate" approved="yes">
-        <source>This event has no date yet.</source>
-        <target state="final">Для этого мероприятия не указана дата.</target>
-      </trans-unit>
       <trans-unit id="message_seminarRegistrationIsClosed" approved="yes">
         <source>Sorry, the registration period for this event is over.</source>
         <target state="final">Срок регистрации на это мероприятие истёк.</target>
