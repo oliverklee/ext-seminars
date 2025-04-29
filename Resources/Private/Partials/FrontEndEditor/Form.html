@@ -107,6 +107,16 @@
                     </label>
                     <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationRequired'}"/>
                 </div>
+
+                <div class="form-check">
+                    <f:form.checkbox property="registrationAllowedWithoutDate" id="{idPrefix}-registrationAllowedWithoutDate"
+                                     class="form-check-input" errorClass="is-invalid"
+                                     value="1" checked="{event.registrationAllowedWithoutDate}"/>
+                    <label for="{idPrefix}-registrationAllowedWithoutDate" class="form-check-label">
+                        <f:translate key="{propertyLabelPrefix}.registrationAllowedWithoutDate"/>
+                    </label>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationAllowedWithoutDate'}"/>
+                </div>
             </div>
 
             <div class="col-sm-4 offset-sm-2">
