@@ -115,10 +115,6 @@
         <source>Needs registration</source>
         <target state="final">Anmeldung nötig</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.registration_allowed_without_date" approved="yes">
-        <source>Allows registration even if no date has been set</source>
-        <target state="final">Erlaubt Anmeldungen, auch wenn kein Datum festgelegt wurde</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_seminars.allows_multiple_registrations" approved="yes">
         <source>Allows multiple registrations from the same person</source>
         <target state="final">Lässt mehrfache Anmeldungen derselben Person zu</target>
