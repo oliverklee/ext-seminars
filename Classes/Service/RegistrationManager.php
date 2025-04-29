@@ -925,21 +925,15 @@ class RegistrationManager implements SingletonInterface
     /**
      * Checks whether the given event allows registration, as far as its date is concerned.
      *
-     * @param LegacyEvent $event the event to check the registration for
-     *
-     * @return bool TRUE if the event allows registration by date, FALSE otherwise
-     *
      * @deprecated will be removed in version 6.0.0 in #3439
      */
     public function allowsRegistrationByDate(LegacyEvent $event): bool
     {
-        if ($event->hasDate()) {
-            $result = !$event->isRegistrationDeadlineOver();
-        } else {
-            $result = $this->getSharedConfiguration()->getAsBoolean('allowRegistrationForEventsWithoutDate');
+        if (!$event->needsRegistration()) {
+            return false;
         }
 
-        return $result && $this->registrationHasStarted($event);
+        return $this->registrationHasStarted($event) && !$event->isRegistrationDeadlineOver();
     }
 
     /**

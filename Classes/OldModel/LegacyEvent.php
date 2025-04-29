@@ -1998,9 +1998,8 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * Checks whether it is possible at all to register for this seminar,
-     * ie. it needs registration at all,
+     * ie., it needs registration at all,
      *     has not been canceled,
-     *     has a date set (or registration for events without a date is allowed),
      *     has not begun yet,
      *     the registration deadline is not over yet,
      *     and there are still vacancies.
@@ -2023,7 +2022,6 @@ class LegacyEvent extends AbstractTimeSpan
      * Checks whether it is possible at all to register for this seminar,
      * i.e., it needs registration at all,
      *     has not been canceled,
-     *     has either a date set (registration for events without a date is allowed),
      *     has not begun yet,
      *     the registration deadline is not over yet
      *     and there are still vacancies,
@@ -2042,19 +2040,12 @@ class LegacyEvent extends AbstractTimeSpan
             $message = $this->translate('message_noRegistrationNecessary');
         } elseif ($this->isCanceled()) {
             $message = $this->translate('message_seminarCancelled');
-        } elseif (
-            !$this->hasDate() && !$this->getSharedConfiguration()->getAsBoolean('allowRegistrationForEventsWithoutDate')
-        ) {
-            $message = $this->translate('message_noDate');
         } elseif ($this->hasDate() && $this->isRegistrationDeadlineOver()) {
             $message = $this->translate('message_seminarRegistrationIsClosed');
         } elseif (!$registrationManager->allowsRegistrationBySeats($this)) {
             $message = $this->translate('message_noVacancies');
         } elseif (!$registrationManager->registrationHasStarted($this)) {
-            $message = sprintf(
-                $this->translate('message_registrationOpensOn'),
-                $this->getRegistrationBegin()
-            );
+            $message = \sprintf($this->translate('message_registrationOpensOn'), $this->getRegistrationBegin());
         }
 
         return $message;
@@ -2074,8 +2065,14 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isRegistrationDeadlineOver(): bool
     {
-        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
-            >= $this->getLatestPossibleRegistrationTime();
+        $registrationDeadline = $this->getLatestPossibleRegistrationTime();
+        if ($registrationDeadline === 0) {
+            return false;
+        }
+
+        $now = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+
+        return $now >= $registrationDeadline;
     }
 
     /**
@@ -2085,8 +2082,9 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isEarlyBirdDeadlineOver(): bool
     {
-        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
-            >= $this->getLatestPossibleEarlyBirdRegistrationTime();
+        $now = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+
+        return $now >= $this->getLatestPossibleEarlyBirdRegistrationTime();
     }
 
     /**

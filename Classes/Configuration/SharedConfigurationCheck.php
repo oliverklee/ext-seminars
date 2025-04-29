@@ -21,7 +21,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkStaticIncluded();
 
         if ($this->configuration->getAsBoolean('enableRegistration')) {
-            $this->checkAllowRegistrationForEventsWithoutDate();
             $this->checkNotificationMail();
             $this->checkShowVacanciesThreshold();
             $this->checkThankYouMail();
@@ -44,15 +43,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'enableRegistration',
             'This value specifies whether the extension will provide online registration.
             If this value is incorrect, the online  registration will not be enabled or disabled correctly.'
-        );
-    }
-
-    private function checkAllowRegistrationForEventsWithoutDate(): void
-    {
-        $this->checkIfBoolean(
-            'allowRegistrationForEventsWithoutDate',
-            'This value specifies whether registration is possible for events without a fixed date.
-            If this value is incorrect, registration might be possible even when this is not desired (or vice versa).'
         );
     }
 

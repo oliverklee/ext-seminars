@@ -4235,7 +4235,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             ]
         );
 
-        self::assertStringNotContainsString(
+        self::assertStringContainsString(
             $this->translate('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
@@ -5033,7 +5033,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertStringNotContainsString(
+        self::assertStringContainsString(
             $this->translate('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
@@ -5407,18 +5407,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         );
     }
 
-    //////////////////////////////////////////////////////////////////////////
-    // Tests concerning getVacanciesClasses for events without date and with
-    // configuration variable 'allowRegistrationForEventsWithoutDate' TRUE.
-    //////////////////////////////////////////////////////////////////////////
+    // Tests concerning getVacanciesClasses for events without date
 
     /**
      * @test
      */
     public function getVacanciesClassesForEventWithoutDateAndWithEnoughVacanciesReturnsAvailableClass(): void
     {
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
@@ -5434,8 +5429,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithOneVacancyReturnsVacancyOneClass(): void
     {
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
@@ -5451,8 +5444,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithTwoVacanciesReturnsVacancyTwoClass(): void
     {
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
@@ -5468,8 +5459,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithNoVacanciesReturnsVacancyZeroClass(): void
     {
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
@@ -5485,8 +5474,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesReturnsAvailableClass(): void
     {
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
@@ -5501,8 +5488,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesDoesNotReturnDeadlineOverClass(): void
     {
-        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);

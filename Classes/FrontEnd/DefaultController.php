@@ -1921,11 +1921,7 @@ class DefaultController extends TemplateHelper
      */
     public function getVacanciesClasses(LegacyEvent $event): string
     {
-        if (
-            !$event->needsRegistration()
-            || (!$event->hasDate()
-                && !$this->getSharedConfiguration()->getAsBoolean('allowRegistrationForEventsWithoutDate'))
-        ) {
+        if (!$event->needsRegistration()) {
             return '';
         }
 

@@ -430,21 +430,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         allowRegistrationForEventsWithoutDate
-
-   Data type
-         Boolean
-
-   Description
-         Whether registration for events without a date is possible
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          showVacanciesThreshold
 
    Data type
