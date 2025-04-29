@@ -134,7 +134,7 @@
 		],
 		"ci:coverage:unit": [
 			"@coverage:create-directories",
-			".Build/bin/phpunit -c Build/phpunit/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
+			"phpunit -c Build/phpunit/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
 		],
 		"ci:php": [
 			"@ci:php:cs-fixer",
@@ -145,8 +145,8 @@
 		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:rector": "rector --dry-run",
-		"ci:php:sniff": ".Build/bin/phpcs *.php Classes Configuration Tests",
-		"ci:php:stan": ".Build/bin/phpstan --no-progress",
+		"ci:php:sniff": "phpcs *.php Classes Configuration Tests",
+		"ci:php:stan": "phpstan --no-progress",
 		"ci:static": [
 			"@ci:composer:normalize",
 			"@ci:php:cs-fixer",
@@ -159,8 +159,8 @@
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}';",
 		"ci:tests:legacy-functional": "find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}';",
-		"ci:tests:unit": ".Build/bin/phpunit -c Build/phpunit/UnitTests.xml Tests/Unit",
-		"ci:ts:lint": ".Build/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript Tests/Functional/Controller/Fixtures/TypoScript",
+		"ci:tests:unit": "phpunit -c Build/phpunit/UnitTests.xml Tests/Unit",
+		"ci:ts:lint": "typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript Tests/Functional/Controller/Fixtures/TypoScript",
 		"ci:xliff:lint": "php Build/xliff/xliff-lint lint:xliff Resources/Private/Language",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"fix": [
@@ -176,7 +176,7 @@
 		"fix:php:cs": "php-cs-fixer fix",
 		"fix:php:rector": "rector",
 		"fix:php:sniff": "phpcbf *.php Classes Configuration Tests",
-		"phpstan:baseline": ".Build/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
+		"phpstan:baseline": "phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
 			"rm -rf .github",
