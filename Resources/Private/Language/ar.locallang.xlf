@@ -349,10 +349,6 @@
         <source>Alas, this event has been canceled.</source>
         <target state="needs-translation">Alas, this event has been canceled.</target>
       </trans-unit>
-      <trans-unit id="message_noDate">
-        <source>This event has no date yet.</source>
-        <target state="needs-translation">This event has no date yet.</target>
-      </trans-unit>
       <trans-unit id="message_seminarRegistrationIsClosed">
         <source>Sorry, the registration period for this event is over.</source>
         <target state="needs-translation">Sorry, the registration period for this event is over.</target>
