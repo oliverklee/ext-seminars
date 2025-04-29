@@ -3281,11 +3281,6 @@ parameters:
 			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\:\\:setEventData\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Unit/OldModel/Fixtures/TestingLegacyEvent.php
-
-		-
 			message: "#^Cannot access offset 'LOG' on mixed\\.$#"
 			count: 1
 			path: Tests/Unit/OldModel/LegacyEventTest.php

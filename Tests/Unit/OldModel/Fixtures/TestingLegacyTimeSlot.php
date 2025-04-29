@@ -20,14 +20,4 @@ final class TestingLegacyTimeSlot extends LegacyTimeSlot
     {
         $this->setRecordPropertyInteger('place', $place);
     }
-
-    /**
-     * Sets the begin date and time.
-     *
-     * @param int $beginDate the begin date as a UNIX timestamp (has to be >= 0, 0 will unset the begin date)
-     */
-    public function setBeginDate(int $beginDate): void
-    {
-        $this->setRecordPropertyInteger('begin_date', $beginDate);
-    }
 }
