@@ -284,6 +284,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $event->_setProperty('uid', 1);
         $this->subject->_set('settings', ['folderForCreatedEvents' => (string)$pageUid]);
 
+        $this->stubRedirect();
+
         $this->subject->createAction($event);
 
         self::assertSame($pageUid, $event->getPid());
@@ -296,6 +298,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $event->_setProperty('uid', 1);
+
+        $this->stubRedirect();
 
         $this->subject->createAction($event);
 

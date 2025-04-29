@@ -100,7 +100,7 @@ class FrontEndEditorController extends ActionController
         $this->view->assign('venues', $this->venueRepository->findAll());
     }
 
-    public function updateAction(SingleEvent $event): void
+    public function updateAction(SingleEvent $event): ResponseInterface
     {
         $this->checkEventOwner($event);
 
@@ -112,7 +112,7 @@ class FrontEndEditorController extends ActionController
         $this->eventRepository->update($event);
         $this->eventRepository->persistAll();
 
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
@@ -127,7 +127,7 @@ class FrontEndEditorController extends ActionController
         return $this->htmlResponse();
     }
 
-    public function createAction(SingleEvent $event): void
+    public function createAction(SingleEvent $event): ResponseInterface
     {
         $event->setOwnerUid($this->getLoggedInUserUid());
         $folderSettings = $this->settings['folderForCreatedEvents'] ?? null;
@@ -146,6 +146,6 @@ class FrontEndEditorController extends ActionController
         $this->eventRepository->update($event);
         $this->eventRepository->persistAll();
 
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 }
