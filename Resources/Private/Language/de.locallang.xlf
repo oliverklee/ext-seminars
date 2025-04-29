@@ -340,10 +340,6 @@
         <source>Alas, this event has been canceled.</source>
         <target state="final">Diese Veranstaltung wurde leider abgesagt.</target>
       </trans-unit>
-      <trans-unit id="message_noDate" approved="yes">
-        <source>This event has no date yet.</source>
-        <target state="final">Diese Veranstaltung hat noch keinen fixen Termin.</target>
-      </trans-unit>
       <trans-unit id="message_seminarRegistrationIsClosed" approved="yes">
         <source>Sorry, the registration period for this event is over.</source>
         <target state="final">Die Anmeldefrist für diese Veranstaltung ist leider schon vorbei.</target>
