@@ -54,6 +54,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Allow registrations for events without a date by default (#4347)
 - Do not mention in the thank-you email that unregistration is free (#4309)
 - !!! Always allow unregistration before the unregistration deadline even
   with empty waiting list (#4231, #4276)
@@ -113,6 +114,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the `allowRegistrationForEventsWithoutDate` option (#4347)
 - Remove public access feature for registration lists (#4277)
 - Drop `Venue.zip` (#4274)
 - Drop `Venue.country` (#4273, #4275)

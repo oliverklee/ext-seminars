@@ -3301,11 +3301,6 @@ parameters:
 			path: Tests/Unit/Service/RegistrationGuardTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Service\\\\RegistrationGuardTest\\:\\:registrationNotPossibleDataProvider\\(\\) should return array\\<string, array\\{start\\: DateTimeImmutable\\|null, registrationStart\\: DateTimeImmutable\\|null, registrationDeadline\\: DateTimeImmutable\\|null\\}\\> but returns array\\{no dates at all\\: array\\{start\\: null, registrationStart\\: null, registrationDeadline\\: null\\}, start in the past\\: array\\{start\\: DateTime, registrationStart\\: null, registrationDeadline\\: null\\}, start now\\: array\\{start\\: DateTime, registrationStart\\: null, registrationDeadline\\: null\\}, no start, but registration start in the past\\: array\\{start\\: null, registrationStart\\: DateTime, registrationDeadline\\: null\\}, no start, but registration start now\\: array\\{start\\: null, registrationStart\\: DateTime, registrationDeadline\\: null\\}, no start, but registration start in the future\\: array\\{start\\: null, registrationStart\\: DateTime, registrationDeadline\\: null\\}, start now and registration start in the past\\: array\\{start\\: DateTime, registrationStart\\: DateTime, registrationDeadline\\: null\\}, start and registration start in the future\\: array\\{start\\: DateTime, registrationStart\\: DateTime, registrationDeadline\\: null\\}, \\.\\.\\.\\}\\.$#"
-			count: 1
-			path: Tests/Unit/Service/RegistrationGuardTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$json of method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:setJsonEncodedAdditionAttendees\\(\\) expects string, string\\|false given\\.$#"
 			count: 15
 			path: Tests/Unit/Service/RegistrationProcessorTest.php

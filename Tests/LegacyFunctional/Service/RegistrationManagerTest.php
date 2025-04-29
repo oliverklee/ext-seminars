@@ -1926,29 +1926,23 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateAllowedReturnsTrue(): void
+    public function allowsRegistrationByDateForEventWithoutDateWithRegistrationRequiredReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate(0);
 
-        self::assertTrue(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertTrue($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
      * @test
      */
-    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedIsFalse(): void
+    public function allowsRegistrationByDateForEventWithoutDateWithoutRegistrationRequiredReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', false);
-
+        $this->seminar->setNeedsRegistration(false);
         $this->seminar->setBeginDate(0);
 
-        self::assertFalse(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertFalse($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
@@ -1956,12 +1950,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineOverReturnsFalse(): void
     {
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate($this->now + 42);
         $this->seminar->setRegistrationDeadline($this->now - 42);
 
-        self::assertFalse(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertFalse($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
@@ -1969,12 +1962,23 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineInFutureReturnsTrue(): void
     {
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate($this->now + 42);
         $this->seminar->setRegistrationDeadline($this->now + 42);
 
-        self::assertTrue(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertTrue($this->subject->allowsRegistrationByDate($this->seminar));
+    }
+
+    /**
+     * @test
+     */
+    public function allowsRegistrationByDateForRegistrationDeadlineInFutureAndNoRegistrationNeededReturnsFalse(): void
+    {
+        $this->seminar->setNeedsRegistration(false);
+        $this->seminar->setBeginDate($this->now + 42);
+        $this->seminar->setRegistrationDeadline($this->now + 42);
+
+        self::assertFalse($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
@@ -1982,12 +1986,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForRegistrationBeginInFutureReturnsFalse(): void
     {
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate($this->now + 42);
         $this->seminar->setRegistrationBeginDate($this->now + 10);
 
-        self::assertFalse(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertFalse($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
@@ -1995,12 +1998,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForRegistrationBeginInPastReturnsTrue(): void
     {
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate($this->now + 42);
         $this->seminar->setRegistrationBeginDate($this->now - 42);
 
-        self::assertTrue(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertTrue($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
@@ -2008,12 +2010,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForNoRegistrationBeginReturnsTrue(): void
     {
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate($this->now + 42);
         $this->seminar->setRegistrationBeginDate(0);
 
-        self::assertTrue(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertTrue($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     /**
@@ -2021,12 +2022,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForBeginDateInPastAndRegistrationBeginInPastReturnsFalse(): void
     {
+        $this->seminar->setNeedsRegistration(true);
         $this->seminar->setBeginDate($this->now - 42);
         $this->seminar->setRegistrationBeginDate($this->now - 50);
 
-        self::assertFalse(
-            $this->subject->allowsRegistrationByDate($this->seminar)
-        );
+        self::assertFalse($this->subject->allowsRegistrationByDate($this->seminar));
     }
 
     // Tests concerning allowsRegistrationBySeats

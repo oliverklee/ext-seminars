@@ -16,6 +16,10 @@ The following steps are necessary to upgrade from seminars 5.x to 6.x:
     has been removed in seminars 6.0.)
 #.  Go through the venue records and make sure that the address field contains
     the full address (including ZIP code, city and country (if relevant)).
+#.  If you have any events for which no registration should not be possible and
+    which have no date yet, make sure that these events have the "needs
+    registration" checkbox set to "no". (seminars 6.0 by default allows
+    registration for all events that have no date yet as well.)
 #.  Upgrade to seminars 6.x.
 #.  Update the database schema and run all upgrade wizards.
 #.  If you are using the selector widget (the search form) in the frontend,

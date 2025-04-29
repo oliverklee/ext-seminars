@@ -69,9 +69,6 @@ plugin.tx_seminars {
   # Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just leave this value empty.)
   unregistrationDeadlineDaysBeforeBeginDate =
 
-  # whether registration for events without a date should be possible
-  allowRegistrationForEventsWithoutDate = 0
-
   # whether to waiting list registrations automatically will succeed to regular registrations when someone unregisters
   # and hence a vacancy is created
   automaticallyFillVacanciesOnUnregistration = 1

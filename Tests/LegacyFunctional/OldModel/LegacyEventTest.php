@@ -1080,10 +1080,8 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterIsTrueForEventWithFutureDateAndRegistrationWithoutDateActivated(): void
+    public function canSomebodyRegisterForEventWithFutureDateReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $this->subject->setBeginDate($this->now + 3600);
         self::assertTrue(
             $this->subject->canSomebodyRegister()
@@ -1105,10 +1103,8 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterIsFalseForPastEventWithRegistrationWithoutDateActivated(): void
+    public function canSomebodyRegisterForPastEventReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $this->subject->setBeginDate($this->now - 7200);
         $this->subject->setEndDate($this->now - 3600);
         self::assertFalse(
@@ -1131,10 +1127,8 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterIsFalseForCurrentlyRunningEventWithRegistrationWithoutDateActivated(): void
+    public function canSomebodyRegisterForCurrentlyRunningEventReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $this->subject->setBeginDate($this->now - 3600);
         $this->subject->setEndDate($this->now + 3600);
         self::assertFalse(
@@ -1145,23 +1139,23 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterIsFalseForEventWithoutDate(): void
+    public function canSomebodyRegisterForEventWithoutDateWithRegistrationDisabledReturnsFalse(): void
     {
-        self::assertFalse(
-            $this->subject->canSomebodyRegister()
-        );
+        $this->subject->setNeedsRegistration(false);
+        $this->subject->setBeginDate(0);
+
+        self::assertFalse($this->subject->canSomebodyRegister());
     }
 
     /**
      * @test
      */
-    public function canSomebodyRegisterIsTrueForEventWithoutDateAndRegistrationWithoutDateActivated(): void
+    public function canSomebodyRegisterForEventWithoutDateWithRegistrationEnabledReturnsTrue(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+        $this->subject->setNeedsRegistration(true);
+        $this->subject->setBeginDate(0);
 
-        self::assertTrue(
-            $this->subject->canSomebodyRegister()
-        );
+        self::assertTrue($this->subject->canSomebodyRegister());
     }
 
     /**
@@ -1182,8 +1176,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function canSomebodyRegisterForCancelledEventReturnsFalse(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
@@ -1329,10 +1321,8 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterMessageForPastEventWithRegistrationWithoutDateActivatedReturnsRegistrationDeadlineOverMessage(): void
+    public function canSomebodyRegisterMessageForPastEventReturnsRegistrationDeadlineOverMessage(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $this->subject->setBeginDate($this->now - 7200);
         $this->subject->setEndDate($this->now - 3600);
 
@@ -1359,37 +1349,8 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterMessageForCurrentlyRunningEventWithRegistrationWithoutDateActivatedReturnsSeminarRegistrationClosesMessage(): void
+    public function canSomebodyRegisterMessageForEventWithoutDateReturnsEmptyString(): void
     {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
-        $this->subject->setBeginDate($this->now - 3600);
-        $this->subject->setEndDate($this->now + 3600);
-
-        self::assertSame(
-            $this->translate('message_seminarRegistrationIsClosed'),
-            $this->subject->canSomebodyRegisterMessage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canSomebodyRegisterMessageForEventWithoutDateReturnsNoDateMessage(): void
-    {
-        self::assertSame(
-            $this->translate('message_noDate'),
-            $this->subject->canSomebodyRegisterMessage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canSomebodyRegisterMessageForEventWithoutDateAndRegistrationWithoutDateActivatedReturnsEmptyString(): void
-    {
-        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
-
         $this->subject->setBeginDate(0);
         $this->subject->setRegistrationDeadline(0);
 
@@ -1402,7 +1363,7 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterMessageForEventWithUnlimitedVacanviesReturnsEmptyString(): void
+    public function canSomebodyRegisterMessageForEventWithUnlimitedVacanciesReturnsEmptyString(): void
     {
         $this->subject->setBeginDate($this->now + 3600);
         $this->subject->setUnlimitedVacancies();

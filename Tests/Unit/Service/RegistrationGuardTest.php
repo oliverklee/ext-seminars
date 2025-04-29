@@ -203,7 +203,7 @@ final class RegistrationGuardTest extends UnitTestCase
      * @return array<string, array{
      *             start: ?\DateTime,
      *             registrationStart: ?\DateTime,
-     *             registrationDeadline: ?\DateTime,
+     *             registrationDeadline: ?\DateTime
      *         }>
      */
     public function registrationPossibleDataProvider(): array
@@ -240,14 +240,29 @@ final class RegistrationGuardTest extends UnitTestCase
                 'registrationStart' => null,
                 'registrationDeadline' => $future,
             ],
+            'no dates at all' => [
+                'start' => null,
+                'registrationStart' => null,
+                'registrationDeadline' => null,
+            ],
+            'no start, but registration start in the past' => [
+                'start' => null,
+                'registrationStart' => $past,
+                'registrationDeadline' => null,
+            ],
+            'no start, but registration start now' => [
+                'start' => null,
+                'registrationStart' => $now,
+                'registrationDeadline' => null,
+            ],
         ];
     }
 
     /**
      * @return array<string, array{
-     *             start: ?\DateTimeImmutable,
-     *             registrationStart: ?\DateTimeImmutable,
-     *             registrationDeadline: ?\DateTimeImmutable,
+     *             start: ?\DateTime,
+     *             registrationStart: ?\DateTime,
+     *             registrationDeadline: ?\DateTime
      *         }>
      */
     public function registrationNotPossibleDataProvider(): array
@@ -259,11 +274,6 @@ final class RegistrationGuardTest extends UnitTestCase
         $past = (clone $now)->modify('-1 day');
 
         return [
-            'no dates at all' => [
-                'start' => null,
-                'registrationStart' => null,
-                'registrationDeadline' => null,
-            ],
             'start in the past' => [
                 'start' => $past,
                 'registrationStart' => null,
@@ -272,16 +282,6 @@ final class RegistrationGuardTest extends UnitTestCase
             'start now' => [
                 'start' => $now,
                 'registrationStart' => null,
-                'registrationDeadline' => null,
-            ],
-            'no start, but registration start in the past' => [
-                'start' => null,
-                'registrationStart' => $now,
-                'registrationDeadline' => null,
-            ],
-            'no start, but registration start now' => [
-                'start' => null,
-                'registrationStart' => $now,
                 'registrationDeadline' => null,
             ],
             'no start, but registration start in the future' => [

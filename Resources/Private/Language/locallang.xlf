@@ -259,9 +259,6 @@
 			<trans-unit id="message_seminarCancelled">
 				<source>Alas, this event has been canceled.</source>
 			</trans-unit>
-			<trans-unit id="message_noDate">
-				<source>This event has no date yet.</source>
-			</trans-unit>
 			<trans-unit id="message_seminarRegistrationIsClosed">
 				<source>Sorry, the registration period for this event is over.</source>
 			</trans-unit>

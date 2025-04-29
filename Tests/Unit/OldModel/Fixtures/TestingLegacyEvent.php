@@ -320,10 +320,7 @@ final class TestingLegacyEvent extends LegacyEvent
      */
     public function setNeedsRegistration(bool $needsRegistration): void
     {
-        $this->setRecordPropertyBoolean(
-            'needs_registration',
-            $needsRegistration
-        );
+        $this->setRecordPropertyBoolean('needs_registration', $needsRegistration);
     }
 
     /**

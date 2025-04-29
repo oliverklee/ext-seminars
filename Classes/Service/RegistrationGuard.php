@@ -83,18 +83,20 @@ class RegistrationGuard implements SingletonInterface
 
     public function isRegistrationPossibleByDate(EventDateInterface $event): bool
     {
-        $registrationDeadline = $event->getEffectiveRegistrationDeadline();
-        if (!$registrationDeadline instanceof \DateTimeInterface) {
-            return false;
-        }
-
         $now = $this->now();
-        $registrationIsEarlyEnough = $now < $registrationDeadline;
-        $registrationIsLateEnough = true;
 
         $registrationStart = $event->getRegistrationStart();
         if ($registrationStart instanceof \DateTimeInterface) {
             $registrationIsLateEnough = $now >= $registrationStart;
+        } else {
+            $registrationIsLateEnough = true;
+        }
+
+        $registrationDeadline = $event->getEffectiveRegistrationDeadline();
+        if ($registrationDeadline instanceof \DateTimeInterface) {
+            $registrationIsEarlyEnough = $now < $registrationDeadline;
+        } else {
+            $registrationIsEarlyEnough = true;
         }
 
         return $registrationIsEarlyEnough && $registrationIsLateEnough;
