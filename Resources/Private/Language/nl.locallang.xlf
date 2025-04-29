@@ -349,10 +349,6 @@
         <source>Alas, this event has been canceled.</source>
         <target state="final">Helaas, dit evenement is geannuleerd.</target>
       </trans-unit>
-      <trans-unit id="message_noDate" approved="yes">
-        <source>This event has no date yet.</source>
-        <target state="final">Dit evenement heeft nog geen datum.</target>
-      </trans-unit>
       <trans-unit id="message_seminarRegistrationIsClosed" approved="yes">
         <source>Sorry, the registration period for this event is over.</source>
         <target state="final">De registratieperiode voor dit evenement is helaas al voorbij.</target>
