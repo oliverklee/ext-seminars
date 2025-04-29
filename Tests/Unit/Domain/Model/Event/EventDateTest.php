@@ -1695,22 +1695,4 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getSlug());
     }
-
-    /**
-     * @test
-     */
-    public function isRegistrationAllowedWithoutDateInitiallyReturnsFalse(): void
-    {
-        self::assertFalse($this->subject->isRegistrationAllowedWithoutDate());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationAllowedWithoutDateSetsRegistrationAllowedWithoutDate(): void
-    {
-        $this->subject->setRegistrationAllowedWithoutDate(true);
-
-        self::assertTrue($this->subject->isRegistrationAllowedWithoutDate());
-    }
 }
