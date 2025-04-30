@@ -125,7 +125,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function editActionAssignsAuxiliaryRecordsToView(): void
+    public function editSingleEventActionAssignsAuxiliaryRecordsToView(): void
     {
         $event = new SingleEvent();
 
@@ -150,26 +150,26 @@ final class FrontEndEditorControllerTest extends UnitTestCase
             ['venues', $venues]
         );
 
-        $this->subject->editAction($event);
+        $this->subject->editSingleEventAction($event);
     }
 
     /**
      * @test
      */
-    public function updateActionRedirectsToIndexAction(): void
+    public function updateSingleEventActionRedirectsToIndexAction(): void
     {
         $event = new SingleEvent();
         $event->_setProperty('uid', 1);
 
         $this->mockRedirect('index');
 
-        $this->subject->updateAction($event);
+        $this->subject->updateSingleEventAction($event);
     }
 
     /**
      * @test
      */
-    public function updateActionWithEventFromOtherUserThrowsException(): void
+    public function updateSingleEventActionWithEventFromOtherUserThrowsException(): void
     {
         $userAuthentication = new FrontendUserAuthentication();
         $userAuthentication->user = ['uid' => 1];
@@ -182,13 +182,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->expectExceptionMessage('You do not have permission to edit this event.');
         $this->expectExceptionCode(1666954310);
 
-        $this->subject->updateAction($event);
+        $this->subject->updateSingleEventAction($event);
     }
 
     /**
      * @test
      */
-    public function updateActionWithEventWithoutOwnerThrowsException(): void
+    public function updateSingleEventActionWithEventWithoutOwnerThrowsException(): void
     {
         $userAuthentication = new FrontendUserAuthentication();
         $userAuthentication->user = ['uid' => 1];
@@ -200,13 +200,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->expectExceptionMessage('You do not have permission to edit this event.');
         $this->expectExceptionCode(1666954310);
 
-        $this->subject->updateAction($event);
+        $this->subject->updateSingleEventAction($event);
     }
 
     /**
      * @test
      */
-    public function newActionWithNullEventAssignsNewEventToView(): void
+    public function newSingleEventActionWithNullEventAssignsNewEventToView(): void
     {
         $event = new SingleEvent();
         GeneralUtility::addInstance(SingleEvent::class, $event);
@@ -220,13 +220,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
             ['venues', self::anything()]
         );
 
-        $this->subject->newAction(null);
+        $this->subject->newSingleEventAction(null);
     }
 
     /**
      * @test
      */
-    public function newActionWithoutEventAssignsNewEventToView(): void
+    public function newSingleEventActionWithoutEventAssignsNewEventToView(): void
     {
         $event = new SingleEvent();
         GeneralUtility::addInstance(SingleEvent::class, $event);
@@ -240,13 +240,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
             ['venues', self::anything()]
         );
 
-        $this->subject->newAction();
+        $this->subject->newSingleEventAction();
     }
 
     /**
      * @test
      */
-    public function newActionAssignsAuxiliaryRecordsToView(): void
+    public function newSingleEventActionAssignsAuxiliaryRecordsToView(): void
     {
         $event = new SingleEvent();
 
@@ -271,13 +271,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
             ['venues', $venues]
         );
 
-        $this->subject->newAction($event);
+        $this->subject->newSingleEventAction($event);
     }
 
     /**
      * @test
      */
-    public function createActionWithPageUidInConfigurationSetsProvidedPageUid(): void
+    public function createSingleEventActionWithPageUidInConfigurationSetsProvidedPageUid(): void
     {
         $pageUid = 42;
         $event = new SingleEvent();
@@ -286,7 +286,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
 
         $this->stubRedirect();
 
-        $this->subject->createAction($event);
+        $this->subject->createSingleEventAction($event);
 
         self::assertSame($pageUid, $event->getPid());
     }
@@ -294,14 +294,14 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function createActionWithoutPageUidInConfigurationSetsZeroPageUid(): void
+    public function createSingleEventActionWithoutPageUidInConfigurationSetsZeroPageUid(): void
     {
         $event = new SingleEvent();
         $event->_setProperty('uid', 1);
 
         $this->stubRedirect();
 
-        $this->subject->createAction($event);
+        $this->subject->createSingleEventAction($event);
 
         self::assertSame(0, $event->getPid());
     }
@@ -309,13 +309,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function createActionRedirectsToIndexAction(): void
+    public function createSingleEventActionRedirectsToIndexAction(): void
     {
         $event = new SingleEvent();
         $event->_setProperty('uid', 1);
 
         $this->mockRedirect('index');
 
-        $this->subject->createAction($event);
+        $this->subject->createSingleEventAction($event);
     }
 }
