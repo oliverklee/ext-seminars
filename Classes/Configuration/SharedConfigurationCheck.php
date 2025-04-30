@@ -24,7 +24,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             $this->checkNotificationMail();
             $this->checkShowVacanciesThreshold();
             $this->checkThankYouMail();
-            $this->checkUnregistrationDeadlineDaysBeforeBeginDate();
         }
     }
 
@@ -301,17 +300,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'sendConfirmationOnUnregistration',
             'This value specifies whether a confirmation email should be sent to the user after they have unregistered.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
-        );
-    }
-
-    private function checkUnregistrationDeadlineDaysBeforeBeginDate(): void
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'unregistrationDeadlineDaysBeforeBeginDate',
-            'This value specifies the number of days before the start of an event until unregistration is possible.
-            (If you want to disable this feature, just leave this value empty.)
-            If this value is incorrect, unregistration will fail to work
-            or the unregistration period will be a different number of days than desired.'
         );
     }
 }

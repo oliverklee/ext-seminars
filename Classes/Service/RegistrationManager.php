@@ -1094,11 +1094,15 @@ class RegistrationManager implements SingletonInterface
      *
      * @param LegacyEvent $event the event to get the unregistration deadline from
      *
-     * @return string the unregistration notice with the event's unregistration deadline, will not be empty
+     * @return string the unregistration notice with the event's unregistration deadline
      */
     protected function getUnregistrationNotice(LegacyEvent $event): string
     {
-        $unregistrationDeadline = $event->getUnregistrationDeadlineFromModelAndConfiguration();
+        $unregistrationDeadline = $event->getEffectiveUnregistrationDeadline();
+        if (!\is_int($unregistrationDeadline)) {
+            return '';
+        }
+
         $format = LocalizationUtility::translate('dateFormat', 'seminars');
         \assert(\is_string($format));
 

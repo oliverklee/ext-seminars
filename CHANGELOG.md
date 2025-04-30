@@ -115,6 +115,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the `unregistrationDeadlineDaysBeforeBeginDate` setting (#4251)
 - Drop the `allowRegistrationForEventsWithoutDate` option (#4348)
 - Remove public access feature for registration lists (#4277)
 - Drop `Venue.zip` (#4274)

@@ -2662,12 +2662,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns TRUE if unregistration is possible. That means the unregistration
-     * deadline hasn't been reached yet.
-     *
-     * If the unregistration deadline is not set globally via TypoScript and not
-     * set in the current event record, the unregistration will not be possible
-     * and this method returns FALSE.
+     * Returns whether unregistration is possible. That means the unregistration deadline hasn't passed yet.
      */
     public function isUnregistrationPossible(): bool
     {
@@ -2675,13 +2670,12 @@ class LegacyEvent extends AbstractTimeSpan
             return false;
         }
 
-        $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
-        if ($deadline !== 0 || $this->hasBeginDate()) {
-            $canUnregisterByDate = (int)GeneralUtility::makeInstance(Context::class)
-                    ->getPropertyFromAspect('date', 'timestamp')
-                < $deadline;
+        $deadline = $this->getEffectiveUnregistrationDeadline();
+        if (\is_int($deadline)) {
+            $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+            $canUnregisterByDate = $now < $deadline;
         } else {
-            $canUnregisterByDate = $this->getUnregistrationDeadlineFromConfiguration() !== 0;
+            $canUnregisterByDate = true;
         }
 
         return $canUnregisterByDate;
@@ -3144,46 +3138,26 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns the unregistration deadline set by configuration and the begin
-     * date as UNIX timestamp.
+     * Returns the effective unregistration deadline for this event as UNIX timestamp.
      *
-     * This function may only be called if this event has a begin date.
+     * @return int<1, max>|null the unregistration deadline for this event as UNIX timestamp,
+     *         will be `null` if this event has no unregistration deadline
      *
-     * @return int<0, max> the unregistration deadline as UNIX timestamp determined
-     *                 by configuration and the begin date, will be 0 if the
-     *                 unregistrationDeadlineDaysBeforeBeginDate is not set
+     * @internal
      */
-    private function getUnregistrationDeadlineFromConfiguration(): int
-    {
-        $configuration = $this->getSharedConfiguration();
-        if (!$configuration->hasInteger('unregistrationDeadlineDaysBeforeBeginDate')) {
-            return 0;
-        }
-
-        $secondsForUnregistration = Time::SECONDS_PER_DAY
-            * $configuration->getAsNonNegativeInteger('unregistrationDeadlineDaysBeforeBeginDate');
-
-        return \max(0, $this->getBeginDateAsTimestamp() - $secondsForUnregistration);
-    }
-
-    /**
-     * Returns the effective unregistration deadline for this event as UNIX
-     * timestamp.
-     *
-     * @return int<0, max> the unregistration deadline for this event as UNIX
-     *                 timestamp, will be 0 if this event has no begin date
-     */
-    public function getUnregistrationDeadlineFromModelAndConfiguration(): int
+    public function getEffectiveUnregistrationDeadline(): ?int
     {
         if ($this->hasUnregistrationDeadline()) {
-            return $this->getUnregistrationDeadlineAsTimestamp();
+            $deadline = $this->getUnregistrationDeadlineAsTimestamp();
+            \assert($deadline > 0);
+        } elseif ($this->hasBeginDate()) {
+            $deadline = $this->getBeginDateAsTimestamp();
+            \assert($deadline > 0);
+        } else {
+            $deadline = null;
         }
 
-        if (!$this->hasBeginDate()) {
-            return 0;
-        }
-
-        return $this->getUnregistrationDeadlineFromConfiguration();
+        return $deadline;
     }
 
     /**
