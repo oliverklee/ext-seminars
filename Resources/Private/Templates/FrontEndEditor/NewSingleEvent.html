@@ -4,9 +4,9 @@
 
     <f:section name="main">
         <h2>
-            <f:translate key="plugin.frontEndEditor.edit.headline"/>
+            <f:translate key="plugin.frontEndEditor.new.headline"/>
         </h2>
-        <f:form action="update" name="event" object="{event}" class="tx-seminars-frontendeditor">
+        <f:form action="createSingleEvent" name="event" object="{event}" class="tx-seminars-frontendeditor">
             <f:render partial="FrontEndEditor/Form" arguments="{_all}"/>
         </f:form>
     </f:section>

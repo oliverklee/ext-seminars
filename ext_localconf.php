@@ -140,13 +140,20 @@ defined('TYPO3') or die('Access denied.');
         ]
     );
 
+    $frontEndEditorActions = [
+        'index',
+        'editSingleEvent',
+        'updateSingleEvent',
+        'newSingleEvent',
+        'createSingleEvent',
+    ];
     ExtensionUtility::configurePlugin(
         'Seminars',
         'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
         // all actions
-        [FrontEndEditorController::class => 'index, edit, update, new, create'],
+        [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)],
         // non-cacheable actions
-        [FrontEndEditorController::class => 'index, edit, update, new, create']
+        [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)]
     );
 
     ExtensionUtility::configurePlugin(
