@@ -342,6 +342,8 @@ class EventRepository extends AbstractRawDataCapableRepository
     {
         $query = $this->createQuery();
         $matchers = $this->createMatchersForFrontFrontEndListViews($query);
+        $matchers[] = $query->greaterThan('start', 0);
+        $matchers[] = $query->greaterThan('end', 0);
         $matchers[] = $query->lessThan('end', $this->now());
 
         return $query->matching($query->logicalAnd(...$matchers))
@@ -350,9 +352,11 @@ class EventRepository extends AbstractRawDataCapableRepository
     }
 
     /**
-     * Finds single events and event dates that have not ended yet.
+     * Finds single events and event dates that have not ended yet (but that have a start date set).
      *
-     * This method ignores events that have no start or end date set.Also, it ignores canceled events.
+     * This method also finds events that have no start or end date set.
+     *
+     * It ignores canceled events.
      *
      * @return array<Event>
      */
@@ -360,7 +364,9 @@ class EventRepository extends AbstractRawDataCapableRepository
     {
         $query = $this->createQuery();
         $matchers = $this->createMatchersForFrontFrontEndListViews($query);
-        $matchers[] = $query->greaterThan('end', $this->now());
+        $endMatcher = $query->logicalAnd($query->greaterThan('start', 0), $query->greaterThan('end', $this->now()));
+        $noDateMatcher = $query->logicalAnd($query->equals('start', 0), $query->equals('end', 0));
+        $matchers[] = $query->logicalOr($endMatcher, $noDateMatcher);
 
         return $query->matching($query->logicalAnd(...$matchers))
             ->setOrderings(['start' => QueryInterface::ORDER_ASCENDING])
@@ -370,17 +376,15 @@ class EventRepository extends AbstractRawDataCapableRepository
     /**
      * @param QueryInterface<Event> $query
      *
-     * @return array<ConstraintInterface>
+     * @return list<ConstraintInterface>
      */
     private function createMatchersForFrontFrontEndListViews(QueryInterface $query): array
     {
         $objectTypesWithDate = [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE];
         $objectTypeMatcher = $query->in('objectType', $objectTypesWithDate);
         $statusMatcher = $query->in('status', [EventInterface::STATUS_PLANNED, EventInterface::STATUS_CONFIRMED]);
-        $startMatcher = $query->greaterThan('start', 0);
-        $endMatcher = $query->greaterThan('end', 0);
 
-        return [$objectTypeMatcher, $statusMatcher, $startMatcher, $endMatcher];
+        return [$objectTypeMatcher, $statusMatcher];
     }
 
     private function now(): \DateTimeInterface

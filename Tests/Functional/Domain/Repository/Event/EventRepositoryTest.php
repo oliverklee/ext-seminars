@@ -2232,9 +2232,24 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findUpcomingIgnoresPlannedSingleEventWithoutStartAndWithoutEnd(): void
+    public function findUpcomingFindsPlannedSingleEventWithoutStartAndWithoutEnd(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithoutEnd.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresSingleEventWithPastStartAndWithoutEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithPastStartAndWithoutEnd.csv');
 
         $result = $this->subject->findUpcoming();
 
@@ -2244,9 +2259,9 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findUpcomingIgnoresSingleEventWithPastStartAndWithoutEnd(): void
+    public function findUpcomingIgnoresSingleEventWithOutStartAndWithEndInFuture(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithPastStartAndWithoutEnd.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithEndInFuture.csv');
 
         $result = $this->subject->findUpcoming();
 
