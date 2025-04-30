@@ -398,22 +398,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         unregistrationDeadlineDaysBeforeBeginDate
-
-   Data type
-         integer
-
-   Description
-         Number of days before the start of an event until unregistration is
-         possible. (If you want to disable this feature just leave the value
-         empty.)
-
-   Default
-
-
-.. container:: table-row
-
-   Property
          allowRegistrationForStartedEvents
 
    Data type
