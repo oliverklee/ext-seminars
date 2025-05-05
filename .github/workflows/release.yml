@@ -1,5 +1,5 @@
 ---
-name: "TER deployment"
+name: TER deployment
 
 on:
   push:
@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 4
     steps:
-      - name: "Checkout"
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: "Publish new version to TER"
+      - name: Publish new version to TER
         uses: tomasnorre/typo3-upload-ter@v2
         with:
           api-token: ${{ secrets.TYPO3_API_TOKEN }}
