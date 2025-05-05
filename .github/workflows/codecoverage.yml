@@ -7,7 +7,7 @@ on:
   pull_request:
 jobs:
   code-coverage:
-    name: "Calculate code coverage"
+    name: Calculate code coverage
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -16,9 +16,9 @@ jobs:
       DATABASE_PASSWORD: root
       DATABASE_NAME: typo3
     steps:
-      - name: "Checkout"
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: "Install PHP"
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "${{ matrix.php-version }}"
@@ -26,65 +26,65 @@ jobs:
           coverage: xdebug
           extensions: mysqli
           tools: composer:v2, phive
-      - name: "Show Composer version"
+      - name: Show Composer version
         run: composer --version
-      - name: "Show the Composer configuration"
+      - name: Show the Composer configuration
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
+      - name: Cache dependencies installed with composer
         uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
           restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
-      - name: "Install TYPO3 Core"
+      - name: Install TYPO3 Core
         env:
           TYPO3: "${{ matrix.typo3-version }}"
         run: |
           composer require --no-ansi --no-interaction --no-progress --no-install typo3/cms-core:"$TYPO3"
           composer show
-      - name: "Install lowest dependencies with composer"
+      - name: Install lowest dependencies with composer
         if: "matrix.composer-dependencies == 'lowest'"
         run: |
           composer update --no-ansi --no-interaction --no-progress --with-dependencies --prefer-lowest
           composer show
-      - name: "Install highest dependencies with composer"
+      - name: Install highest dependencies with composer
         if: "matrix.composer-dependencies == 'highest'"
         run: |
           composer update --no-ansi --no-interaction --no-progress --with-dependencies
           composer show
-      - name: "Install development tools"
+      - name: Install development tools
         run: phive --no-progress install --trust-gpg-keys D8406D0D82947747293778314AA394086372C20A
-      - name: "Start MySQL"
+      - name: Start MySQL
         run: "sudo /etc/init.d/mysql start"
-      - name: "Create the tests directory"
+      - name: Create the tests directory
         run: "mkdir -p .Build/public/typo3temp/var/tests"
-      - name: "Run unit tests with coverage"
+      - name: Run unit tests with coverage
         run: composer ci:coverage:unit
-      - name: "Show generated coverage files"
+      - name: Show generated coverage files
         run: "ls -lahR .Build/coverage/"
-      - name: "Run functional tests with coverage"
+      - name: Run functional tests with coverage
         run: |
           export typo3DatabaseName="typo3";
           export typo3DatabaseHost="127.0.0.1";
           export typo3DatabaseUsername="root";
           export typo3DatabasePassword="root";
           composer ci:coverage:functional
-      - name: "Show generated coverage files"
+      - name: Show generated coverage files
         run: "ls -lahR .Build/coverage/"
-      - name: "Run legacy functional tests with coverage"
+      - name: Run legacy functional tests with coverage
         run: |
           export typo3DatabaseName="typo3";
           export typo3DatabaseHost="127.0.0.1";
           export typo3DatabaseUsername="root";
           export typo3DatabasePassword="root";
           composer ci:coverage:legacy-functional
-      - name: "Show generated coverage files"
+      - name: Show generated coverage files
         run: "ls -lahR .Build/coverage/"
-      - name: "Merge coverage results"
+      - name: Merge coverage results
         run: composer ci:coverage:merge
-      - name: "Show merged coverage files"
+      - name: Show merged coverage files
         run: "ls -lahR build/logs/"
-      - name: "Upload coverage results to Coveralls"
+      - name: Upload coverage results to Coveralls
         uses: coverallsapp/github-action@v2
         env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
