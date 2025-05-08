@@ -1051,8 +1051,56 @@
 			<trans-unit id="plugin.frontEndEditor">
 				<source>Front-end editor for events</source>
 			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents">
+			<trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders">
+				<source>Pages and folders</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents">
 				<source>Folder for the created events</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions">
+				<source>Display options</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow">
+				<source>categories</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType">
+				<source>eventType</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.dateAndTime">
+				<source>date and time</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdDeadline">
+				<source>early-bird deadline</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationDeadline">
+				<source>registration deadline</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationRequired">
+				<source>registration required</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.waitingList">
+				<source>waiting list</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.minimumNumberOfRegistrations">
+				<source>required number of registrations</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations">
+				<source>maximum number of registrations</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
+				<source>standard price</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdPrice">
+				<source>early-bird price</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.venues">
+				<source>venues</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.speakers">
+				<source>speakers</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.index.headline">
 				<source>Events I have created</source>
@@ -1103,10 +1151,10 @@
 				<source>Has a waiting list</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
-				<source>Required registrations</source>
+				<source>Required number of registrations</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
-				<source>Maximum registrations</source>
+				<source>Maximum number of registrations</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.venues">
 				<source>Venues</source>
@@ -1115,7 +1163,7 @@
 				<source>Speakers</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.organizers">
-				<source>Organizers</source>
+				<source>Organizer</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.action.new">
 				<source>Create a new event</source>

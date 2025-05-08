@@ -1,4 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
+      data-namespace-typo3-fluid="true">
     <f:variable name="labelPrefix" value="plugin.frontEndEditor"/>
     <f:variable name="propertyLabelPrefix" value="{labelPrefix}.property"/>
     <f:variable name="idPrefix" value="event-editor"/>
@@ -15,207 +16,249 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <label for="{idPrefix}-description" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.description"/>
-            </label>
-            <div class="col-sm-10">
-                <f:form.textarea property="description" id="{idPrefix}-description"
-                                 class="form-control" rows="5" errorClass="is-invalid"
-                                 additionalAttributes="{maxlength: 16383}"/>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'description'}"/>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="{idPrefix}-eventType" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.eventType"/>
-            </label>
-            <div class="col-sm-10">
-                <f:comment>
-                    We need to set the `optionValueField` to allow saving events without an event type
-                    (i.e., with the `NullEventType` that sits on top of the event types in the FE dropdown).
-                </f:comment>
-                <f:form.select property="eventType" id="{idPrefix}-eventType"
-                               options="{eventTypes}" optionLabelField="title" optionValueField="uid"
-                               class="form-select" errorClass="is-invalid"/>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'eventType'}"/>
-            </div>
-        </div>
-
-    </fieldset>
-
-    <fieldset class="mb-3">
-        <div class="row mb-3">
-            <label for="{idPrefix}-start" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.start"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield name="event[start][date]" id="{idPrefix}-start" maxlength="16"
-                                  class="form-control" type="datetime-local"
-                                  value="{event.start -> f:format.date(format: 'Y-m-d H:i')}"/>
-                <f:form.hidden name="event[start][dateFormat]" value="Y-m-d\TH:i"/>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'start'}"/>
-            </div>
-
-            <label for="{idPrefix}-end" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.end"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield name="event[end][date]" id="{idPrefix}-end" maxlength="16"
-                                  class="form-control" type="datetime-local"
-                                  value="{event.end -> f:format.date(format: 'Y-m-d H:i')}"/>
-                <f:form.hidden name="event[end][dateFormat]" value="Y-m-d\TH:i"/>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'end'}"/>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="{idPrefix}-earlyBirdDeadline" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.earlyBirdDeadline"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield name="event[earlyBirdDeadline][date]" id="{idPrefix}-earlyBirdDeadline" maxlength="16"
-                                  class="form-control" type="datetime-local"
-                                  value="{event.earlyBirdDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
-                <f:form.hidden name="event[earlyBirdDeadline][dateFormat]" value="Y-m-d\TH:i"/>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'earlyBirdDeadline'}"/>
-            </div>
-
-            <label for="{idPrefix}-registrationDeadline" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.registrationDeadline"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield name="event[registrationDeadline][date]" id="{idPrefix}-registrationDeadline"
-                                  maxlength="16"
-                                  class="form-control" type="datetime-local"
-                                  value="{event.registrationDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
-                <f:form.hidden name="event[registrationDeadline][dateFormat]" value="Y-m-d\TH:i"/>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationDeadline'}"/>
-            </div>
-        </div>
-    </fieldset>
-
-    <fieldset class="mb-3">
-        <div class="row mb-3">
-            <div class="col-sm-4 offset-sm-2">
-                <div class="form-check">
-                    <f:form.checkbox property="registrationRequired" id="{idPrefix}-registrationRequired"
-                                     class="form-check-input" errorClass="is-invalid"
-                                     value="1" checked="{event.registrationRequired}"/>
-                    <label for="{idPrefix}-registrationRequired" class="form-check-label">
-                        <f:translate key="{propertyLabelPrefix}.registrationRequired"/>
-                    </label>
-                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationRequired'}"/>
+        <oelib:isFieldEnabled fieldName="description">
+            <div class="row mb-3">
+                <label for="{idPrefix}-description" class="col-sm-2 col-form-label">
+                    <f:translate key="{propertyLabelPrefix}.description"/>
+                </label>
+                <div class="col-sm-10">
+                    <f:form.textarea property="description" id="{idPrefix}-description"
+                                     class="form-control" rows="5" errorClass="is-invalid"
+                                     additionalAttributes="{maxlength: 16383}"/>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'description'}"/>
                 </div>
             </div>
+        </oelib:isFieldEnabled>
 
-            <div class="col-sm-4 offset-sm-2">
-                <div class="form-check">
-                    <f:form.checkbox property="waitingList" id="{idPrefix}-waitingList"
-                                     class="form-check-input" errorClass="is-invalid"
-                                     value="1" checked="{event.waitingList}"/>
-                    <label for="{idPrefix}-waitingList" class="form-check-label">
-                        <f:translate key="{propertyLabelPrefix}.waitingList"/>
-                    </label>
-                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'waitingList'}"/>
+        <oelib:isFieldEnabled fieldName="eventType">
+            <div class="row mb-3">
+                <label for="{idPrefix}-eventType" class="col-sm-2 col-form-label">
+                    <f:translate key="{propertyLabelPrefix}.eventType"/>
+                </label>
+                <div class="col-sm-10">
+                    <f:comment>
+                        We need to set the `optionValueField` to allow saving events without an event type
+                        (i.e., with the `NullEventType` that sits on top of the event types in the FE dropdown).
+                    </f:comment>
+                    <f:form.select property="eventType" id="{idPrefix}-eventType"
+                                   options="{eventTypes}" optionLabelField="title" optionValueField="uid"
+                                   class="form-select" errorClass="is-invalid"/>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'eventType'}"/>
                 </div>
             </div>
-        </div>
+        </oelib:isFieldEnabled>
     </fieldset>
 
-    <fieldset class="mb-3">
-        <div class="row mb-3">
-            <label for="{idPrefix}-minimumNumberOfRegistrations" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.minimumNumberOfRegistrations"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield property="minimumNumberOfRegistrations" id="{idPrefix}-minimumNumberOfRegistrations"
-                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="4"
-                                  additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
-                />
-                <f:render partial="FrontEndEditor/ValidationResult"
-                          arguments="{property: 'minimumNumberOfRegistrations'}"/>
-            </div>
-
-            <label for="{idPrefix}-maximumNumberOfRegistrations" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.maximumNumberOfRegistrations"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield property="maximumNumberOfRegistrations" id="{idPrefix}-maximumNumberOfRegistrations"
-                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="4"
-                                  additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
-                />
-                <f:render partial="FrontEndEditor/ValidationResult"
-                          arguments="{property: 'maximumNumberOfRegistrations'}"/>
-            </div>
-        </div>
-    </fieldset>
-
-    <fieldset class="mb-3">
-        <div class="row mb-3">
-            <label for="{idPrefix}-standardPrice" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.standardPrice"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield property="standardPrice" id="{idPrefix}-standardPrice" maxlength="8"
-                                  class="form-control" errorClass="is-invalid"
-                                  additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
-                />
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'standardPrice'}"/>
-            </div>
-
-            <label for="{idPrefix}-earlyBirdPrice" class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.earlyBirdPrice"/>
-            </label>
-            <div class="col-sm-4">
-                <f:form.textfield property="earlyBirdPrice" id="{idPrefix}-earlyBirdPrice" maxlength="8"
-                                  class="form-control" errorClass="is-invalid"
-                                  additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
-                />
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'earlyBirdPrice'}"/>
-            </div>
-        </div>
-    </fieldset>
-
-    <fieldset class="mb-3">
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.venues"/>
-            </label>
-            <div class="col-sm-10">
-                <f:for each="{venues}" as="venue">
-                    <div class="form-check">
-                        <f:form.checkbox property="venues" id="{idPrefix}-venues-{venue.uid}"
-                                         class="form-check-input" errorClass="is-invalid"
-                                         value="{venue.uid}"/>
-                        <label for="{idPrefix}-venues-{venue.uid}" class="form-check-label">
-                            {venue.title}
-                        </label>
+    <oelib:isFieldEnabled fieldName="dateAndTime|earlyBirdDeadline|registrationDeadline">
+        <fieldset class="mb-3">
+            <oelib:isFieldEnabled fieldName="dateAndTime">
+                <div class="row mb-3">
+                    <label for="{idPrefix}-start" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.start"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield name="event[start][date]" id="{idPrefix}-start" maxlength="16"
+                                          class="form-control" type="datetime-local"
+                                          value="{event.start -> f:format.date(format: 'Y-m-d H:i')}"/>
+                        <f:form.hidden name="event[start][dateFormat]" value="Y-m-d\TH:i"/>
+                        <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'start'}"/>
                     </div>
-                </f:for>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'venues'}"/>
+
+                    <label for="{idPrefix}-end" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.end"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield name="event[end][date]" id="{idPrefix}-end" maxlength="16"
+                                          class="form-control" type="datetime-local"
+                                          value="{event.end -> f:format.date(format: 'Y-m-d H:i')}"/>
+                        <f:form.hidden name="event[end][dateFormat]" value="Y-m-d\TH:i"/>
+                        <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'end'}"/>
+                    </div>
+                </div>
+            </oelib:isFieldEnabled>
+            <oelib:isFieldEnabled fieldName="earlyBirdDeadline|registrationDeadline">
+                <div class="row mb-3">
+                    <oelib:isFieldEnabled fieldName="earlyBirdDeadline">
+                        <label for="{idPrefix}-earlyBirdDeadline" class="col-sm-2 col-form-label">
+                            <f:translate key="{propertyLabelPrefix}.earlyBirdDeadline"/>
+                        </label>
+                        <div class="col-sm-4">
+                            <f:form.textfield name="event[earlyBirdDeadline][date]" id="{idPrefix}-earlyBirdDeadline"
+                                              maxlength="16" class="form-control" type="datetime-local"
+                                              value="{event.earlyBirdDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
+                            <f:form.hidden name="event[earlyBirdDeadline][dateFormat]" value="Y-m-d\TH:i"/>
+                            <f:render partial="FrontEndEditor/ValidationResult"
+                                      arguments="{property: 'earlyBirdDeadline'}"/>
+                        </div>
+                    </oelib:isFieldEnabled>
+
+                    <oelib:isFieldEnabled fieldName="registrationDeadline">
+                        <label for="{idPrefix}-registrationDeadline" class="col-sm-2 col-form-label">
+                            <f:translate key="{propertyLabelPrefix}.registrationDeadline"/>
+                        </label>
+                        <div class="col-sm-4">
+                            <f:form.textfield name="event[registrationDeadline][date]"
+                                              id="{idPrefix}-registrationDeadline" maxlength="16"
+                                              class="form-control" type="datetime-local"
+                                              value="{event.registrationDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
+                            <f:form.hidden name="event[registrationDeadline][dateFormat]" value="Y-m-d\TH:i"/>
+                            <f:render partial="FrontEndEditor/ValidationResult"
+                                      arguments="{property: 'registrationDeadline'}"/>
+                        </div>
+                    </oelib:isFieldEnabled>
+                </div>
+            </oelib:isFieldEnabled>
+        </fieldset>
+    </oelib:isFieldEnabled>
+
+    <oelib:isFieldEnabled fieldName="registrationRequired|waitingList">
+        <fieldset class="mb-3">
+            <div class="row mb-3">
+                <oelib:isFieldEnabled fieldName="registrationRequired">
+                    <div class="col-sm-4 offset-sm-2">
+                        <div class="form-check">
+                            <f:form.checkbox property="registrationRequired" id="{idPrefix}-registrationRequired"
+                                             class="form-check-input" errorClass="is-invalid"
+                                             value="1" checked="{event.registrationRequired}"/>
+                            <label for="{idPrefix}-registrationRequired" class="form-check-label">
+                                <f:translate key="{propertyLabelPrefix}.registrationRequired"/>
+                            </label>
+                            <f:render partial="FrontEndEditor/ValidationResult"
+                                      arguments="{property: 'registrationRequired'}"/>
+                        </div>
+                    </div>
+                </oelib:isFieldEnabled>
+
+                <oelib:isFieldEnabled fieldName="waitingList">
+                    <div class="col-sm-4 offset-sm-2">
+                        <div class="form-check">
+                            <f:form.checkbox property="waitingList" id="{idPrefix}-waitingList"
+                                             class="form-check-input" errorClass="is-invalid"
+                                             value="1" checked="{event.waitingList}"/>
+                            <label for="{idPrefix}-waitingList" class="form-check-label">
+                                <f:translate key="{propertyLabelPrefix}.waitingList"/>
+                            </label>
+                            <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'waitingList'}"/>
+                        </div>
+                    </div>
+                </oelib:isFieldEnabled>
             </div>
-        </div>
-    </fieldset>
+        </fieldset>
+    </oelib:isFieldEnabled>
+
+    <oelib:isFieldEnabled fieldName="minimumNumberOfRegistrations|maximumNumberOfRegistrations">
+        <fieldset class="mb-3">
+            <div class="row mb-3">
+                <oelib:isFieldEnabled fieldName="minimumNumberOfRegistrations">
+                    <label for="{idPrefix}-minimumNumberOfRegistrations" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.minimumNumberOfRegistrations"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield property="minimumNumberOfRegistrations"
+                                          id="{idPrefix}-minimumNumberOfRegistrations"
+                                          class="form-control" errorClass="is-invalid" type="number" size="4"
+                                          maxlength="4"
+                                          additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
+                        />
+                        <f:render partial="FrontEndEditor/ValidationResult"
+                                  arguments="{property: 'minimumNumberOfRegistrations'}"/>
+                    </div>
+                </oelib:isFieldEnabled>
+
+                <oelib:isFieldEnabled fieldName="maximumNumberOfRegistrations">
+                    <label for="{idPrefix}-maximumNumberOfRegistrations" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.maximumNumberOfRegistrations"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield property="maximumNumberOfRegistrations"
+                                          id="{idPrefix}-maximumNumberOfRegistrations"
+                                          class="form-control" errorClass="is-invalid" type="number" size="4"
+                                          maxlength="4"
+                                          additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
+                        />
+                        <f:render partial="FrontEndEditor/ValidationResult"
+                                  arguments="{property: 'maximumNumberOfRegistrations'}"/>
+                    </div>
+                </oelib:isFieldEnabled>
+            </div>
+        </fieldset>
+    </oelib:isFieldEnabled>
+
+    <oelib:isFieldEnabled fieldName="standardPrice|earlyBirdPrice">
+        <fieldset class="mb-3">
+            <div class="row mb-3">
+                <oelib:isFieldEnabled fieldName="standardPrice">
+                    <label for="{idPrefix}-standardPrice" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.standardPrice"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield property="standardPrice" id="{idPrefix}-standardPrice" maxlength="8"
+                                          class="form-control" errorClass="is-invalid"
+                                          additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
+                        />
+                        <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'standardPrice'}"/>
+                    </div>
+                </oelib:isFieldEnabled>
+
+                <oelib:isFieldEnabled fieldName="earlyBirdPrice">
+                    <label for="{idPrefix}-earlyBirdPrice" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.earlyBirdPrice"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield property="earlyBirdPrice" id="{idPrefix}-earlyBirdPrice" maxlength="8"
+                                          class="form-control" errorClass="is-invalid"
+                                          additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
+                        />
+                        <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'earlyBirdPrice'}"/>
+                    </div>
+                </oelib:isFieldEnabled>
+            </div>
+        </fieldset>
+    </oelib:isFieldEnabled>
+
+    <oelib:isFieldEnabled fieldName="venues">
+        <fieldset class="mb-3">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">
+                    <f:translate key="{propertyLabelPrefix}.venues"/>
+                </label>
+                <div class="col-sm-10">
+                    <f:for each="{venues}" as="venue">
+                        <div class="form-check">
+                            <f:form.checkbox property="venues" id="{idPrefix}-venues-{venue.uid}"
+                                             class="form-check-input" errorClass="is-invalid"
+                                             value="{venue.uid}"/>
+                            <label for="{idPrefix}-venues-{venue.uid}" class="form-check-label">
+                                {venue.title}
+                            </label>
+                        </div>
+                    </f:for>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'venues'}"/>
+                </div>
+            </div>
+        </fieldset>
+    </oelib:isFieldEnabled>
 
     <fieldset class="mb-3">
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.speakers"/>
-            </label>
-            <div class="col-sm-4">
-                <f:for each="{speakers}" as="speaker">
-                    <div class="form-check">
-                        <f:form.checkbox property="speakers" id="{idPrefix}-speakers-{speaker.uid}"
-                                         class="form-check-input" errorClass="is-invalid"
-                                         value="{speaker.uid}"/>
-                        <label for="{idPrefix}-speakers-{speaker.uid}" class="form-check-label">
-                            {speaker.name}
-                        </label>
-                    </div>
-                </f:for>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'speakers'}"/>
-            </div>
+            <oelib:isFieldEnabled fieldName="speakers">
+                <label class="col-sm-2 col-form-label">
+                    <f:translate key="{propertyLabelPrefix}.speakers"/>
+                </label>
+                <div class="col-sm-4">
+                    <f:for each="{speakers}" as="speaker">
+                        <div class="form-check">
+                            <f:form.checkbox property="speakers" id="{idPrefix}-speakers-{speaker.uid}"
+                                             class="form-check-input" errorClass="is-invalid"
+                                             value="{speaker.uid}"/>
+                            <label for="{idPrefix}-speakers-{speaker.uid}" class="form-check-label">
+                                {speaker.name}
+                            </label>
+                        </div>
+                    </f:for>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'speakers'}"/>
+                </div>
+            </oelib:isFieldEnabled>
 
             <label class="col-sm-2 col-form-label">
                 <f:translate key="{propertyLabelPrefix}.organizers"/>
