@@ -1449,9 +1449,73 @@
         <source>Front-end editor for events</source>
         <target state="needs-translation">Front-end editor for events</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents">
+      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents">
         <source>Folder for the created events</source>
         <target state="needs-translation">Folder for the created events</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow">
+        <source>categories</source>
+        <target state="needs-translation">categories</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
+        <source>description</source>
+        <target state="needs-translation">description</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType">
+        <source>eventType</source>
+        <target state="needs-translation">eventType</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.dateAndTime">
+        <source>date and time</source>
+        <target state="needs-translation">date and time</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdDeadline">
+        <source>early-bird deadline</source>
+        <target state="needs-translation">early-bird deadline</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationDeadline">
+        <source>registration deadline</source>
+        <target state="needs-translation">registration deadline</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationRequired">
+        <source>registration required</source>
+        <target state="needs-translation">registration required</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.waitingList">
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.minimumNumberOfRegistrations">
+        <source>required number of registrations</source>
+        <target state="needs-translation">required number of registrations</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations">
+        <source>maximum number of registrations</source>
+        <target state="needs-translation">maximum number of registrations</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
+        <source>standard price</source>
+        <target state="needs-translation">standard price</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdPrice">
+        <source>early-bird price</source>
+        <target state="needs-translation">early-bird price</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.venues">
+        <source>venues</source>
+        <target state="needs-translation">venues</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.speakers">
+        <source>speakers</source>
+        <target state="needs-translation">speakers</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.index.headline">
         <source>Events I have created</source>
@@ -1518,12 +1582,12 @@
         <target state="needs-translation">Has a waiting list</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
-        <source>Required registrations</source>
-        <target state="needs-translation">Required registrations</target>
+        <source>Required number of registrations</source>
+        <target state="needs-translation">Required number of registrations</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
-        <source>Maximum registrations</source>
-        <target state="needs-translation">Maximum registrations</target>
+        <source>Maximum number of registrations</source>
+        <target state="needs-translation">Maximum number of registrations</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.venues">
         <source>Venues</source>
@@ -1534,8 +1598,8 @@
         <target state="needs-translation">Speakers</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.organizers">
-        <source>Organizers</source>
-        <target state="needs-translation">Organizers</target>
+        <source>Organizer</source>
+        <target state="needs-translation">Organizer</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.action.new">
         <source>Create a new event</source>
