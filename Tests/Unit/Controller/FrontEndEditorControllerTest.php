@@ -206,27 +206,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newSingleEventActionWithNullEventAssignsNewEventToView(): void
-    {
-        $event = new SingleEvent();
-        GeneralUtility::addInstance(SingleEvent::class, $event);
-        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
-
-        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
-            ['event', $event],
-            ['eventTypes', self::anything()],
-            ['organizers', self::anything()],
-            ['speakers', self::anything()],
-            ['venues', self::anything()]
-        );
-
-        $this->subject->newSingleEventAction(null);
-    }
-
-    /**
-     * @test
-     */
-    public function newSingleEventActionWithoutEventAssignsNewEventToView(): void
+    public function newSingleEventActionAssignsNewEventToView(): void
     {
         $event = new SingleEvent();
         GeneralUtility::addInstance(SingleEvent::class, $event);
@@ -248,8 +228,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     public function newSingleEventActionAssignsAuxiliaryRecordsToView(): void
     {
-        $event = new SingleEvent();
-
         /** @var list<EventTypeInterface> $eventTypes */
         $eventTypes = [new NullEventType()];
         $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
@@ -271,7 +249,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
             ['venues', $venues]
         );
 
-        $this->subject->newSingleEventAction($event);
+        $this->subject->newSingleEventAction();
     }
 
     /**

@@ -403,7 +403,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function newSingleEventActionWithNoProvidedEventCanBeRendered(): void
+    public function newSingleEventActionCanBeRendered(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[action]' => 'newSingleEvent',
@@ -472,24 +472,6 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
 
         self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
-    }
-
-    /**
-     * @test
-     */
-    public function newSingleEventActionWithEventProvidedRendersProvidedEventData(): void
-    {
-        $newTitle = 'Karaoke party';
-        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewForm(1),
-            'tx_seminars_frontendeditor[action]' => 'newSingleEvent',
-            'tx_seminars_frontendeditor[event][internalTitle]' => $newTitle,
-        ]);
-        $context = (new InternalRequestContext())->withFrontendUserId(1);
-
-        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
-
-        self::assertStringContainsString($newTitle, $html);
     }
 
     /**
