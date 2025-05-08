@@ -1388,73 +1388,73 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Front-end editor for events</source>
         <target state="final">Front-end-Editor für Veranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders">
+      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders" approved="yes">
         <source>Pages and folders</source>
-        <target state="needs-translation">Pages and folders</target>
+        <target state="final">Seiten und Ordner</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents">
+      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents" approved="yes">
         <source>Folder for the created events</source>
-        <target state="needs-translation">Folder for the created events</target>
+        <target state="final">Ordner für die angelegten Veranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions" approved="yes">
         <source>Display options</source>
-        <target state="needs-translation">Display options</target>
+        <target state="final">Anzeigeoptionen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow" approved="yes">
         <source>categories</source>
-        <target state="needs-translation">categories</target>
+        <target state="final">Kategorien</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description" approved="yes">
         <source>description</source>
-        <target state="needs-translation">description</target>
+        <target state="final">Beschreibung</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType" approved="yes">
         <source>eventType</source>
-        <target state="needs-translation">eventType</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.dateAndTime">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.dateAndTime" approved="yes">
         <source>date and time</source>
-        <target state="needs-translation">date and time</target>
+        <target state="final">Datum und Zeit</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdDeadline">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdDeadline" approved="yes">
         <source>early-bird deadline</source>
-        <target state="needs-translation">early-bird deadline</target>
+        <target state="final">Frühbucherfrist</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationDeadline">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationDeadline" approved="yes">
         <source>registration deadline</source>
-        <target state="needs-translation">registration deadline</target>
+        <target state="final">Anmeldefrist</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationRequired">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationRequired" approved="yes">
         <source>registration required</source>
-        <target state="needs-translation">registration required</target>
+        <target state="final">Anmeldung erforderlich</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.waitingList">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.waitingList" approved="yes">
         <source>waiting list</source>
-        <target state="needs-translation">waiting list</target>
+        <target state="final">Warteliste</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.minimumNumberOfRegistrations">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.minimumNumberOfRegistrations" approved="yes">
         <source>required number of registrations</source>
-        <target state="needs-translation">required number of registrations</target>
+        <target state="final">erforderliche Anzahl von Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations" approved="yes">
         <source>maximum number of registrations</source>
-        <target state="needs-translation">maximum number of registrations</target>
+        <target state="final">Maximale Anzahl an Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice" approved="yes">
         <source>standard price</source>
-        <target state="needs-translation">standard price</target>
+        <target state="final">Standardpreis</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdPrice">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdPrice" approved="yes">
         <source>early-bird price</source>
-        <target state="needs-translation">early-bird price</target>
+        <target state="final">Frühbucherpreis</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.venues">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.venues" approved="yes">
         <source>venues</source>
-        <target state="needs-translation">venues</target>
+        <target state="final">Veranstaltungsorte</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.speakers">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.speakers" approved="yes">
         <source>speakers</source>
-        <target state="needs-translation">speakers</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.index.headline" approved="yes">
         <source>Events I have created</source>
@@ -1520,13 +1520,13 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Has a waiting list</source>
         <target state="final">Hat eine Warteliste</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
+      <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations" approved="yes">
         <source>Required number of registrations</source>
-        <target state="needs-translation">Required number of registrations</target>
+        <target state="final">Erforderliche Anzahl von Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
+      <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations" approved="yes">
         <source>Maximum number of registrations</source>
-        <target state="needs-translation">Maximum number of registrations</target>
+        <target state="final">Maximale Anzahl an Anmeldungen</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.venues" approved="yes">
         <source>Venues</source>
@@ -1536,9 +1536,9 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Speakers</source>
         <target state="final">Referent_innen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.organizers">
+      <trans-unit id="plugin.frontEndEditor.property.organizers" approved="yes">
         <source>Organizer</source>
-        <target state="needs-translation">Organizer</target>
+        <target state="final">Veranstalter</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.action.new" approved="yes">
         <source>Create a new event</source>
