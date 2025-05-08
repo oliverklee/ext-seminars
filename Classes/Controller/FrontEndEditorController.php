@@ -115,12 +115,9 @@ class FrontEndEditorController extends ActionController
         return $this->redirect('index');
     }
 
-    /**
-     * @IgnoreValidation("event")
-     */
-    public function newSingleEventAction(?SingleEvent $event = null): ResponseInterface
+    public function newSingleEventAction(): ResponseInterface
     {
-        $eventToCreate = $event instanceof SingleEvent ? $event : GeneralUtility::makeInstance(SingleEvent::class);
+        $eventToCreate = GeneralUtility::makeInstance(SingleEvent::class);
         $this->view->assign('event', $eventToCreate);
         $this->assignAuxiliaryRecordsToView();
 
