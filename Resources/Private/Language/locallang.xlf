@@ -133,6 +133,9 @@
 			<trans-unit id="label_city">
 				<source>City</source>
 			</trans-unit>
+			<trans-unit id="label_country">
+				<source>Country</source>
+			</trans-unit>
 			<trans-unit id="label_attendees">
 				<source>Attendees</source>
 			</trans-unit>
