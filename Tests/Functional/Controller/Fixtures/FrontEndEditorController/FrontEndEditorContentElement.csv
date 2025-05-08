@@ -10,5 +10,12 @@
                                                                               </field>
                                                                           </language>
                                                                       </sheet>
+                                                                      <sheet index=""displayOptions"">
+                                                                          <language index=""lDEF"">
+                                                                              <field index=""settings.fieldsToShow"">
+                                                                                  <value index=""vDEF"">categories,description,eventType,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,standardPrice,earlyBirdPrice,venues,speakers</value>
+                                                                              </field>
+                                                                          </language>
+                                                                      </sheet>
                                                                   </data>
                                                               </T3FlexForms>"
