@@ -175,6 +175,10 @@
         <source>City</source>
         <target state="final">Città:</target>
       </trans-unit>
+      <trans-unit id="label_country">
+        <source>Country</source>
+        <target state="needs-translation">Country</target>
+      </trans-unit>
       <trans-unit id="label_attendees" approved="yes">
         <source>Attendees</source>
         <target state="final">Partecipanti</target>
