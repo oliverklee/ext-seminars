@@ -175,9 +175,9 @@
         <source>City</source>
         <target state="final">Stadt</target>
       </trans-unit>
-      <trans-unit id="label_country">
+      <trans-unit id="label_country" approved="yes">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="final">Land</target>
       </trans-unit>
       <trans-unit id="label_attendees" approved="yes">
         <source>Attendees</source>
