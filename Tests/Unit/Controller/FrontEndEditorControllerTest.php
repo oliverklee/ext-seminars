@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller;
 
 use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
-use OliverKlee\Seminars\Domain\Model\EventTypeInterface;
-use OliverKlee\Seminars\Domain\Model\NullEventType;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
@@ -21,7 +19,6 @@ use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
@@ -42,34 +39,34 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     private $subject;
 
     /**
-     * @var TemplateView&MockObject
+     * @var TemplateView&Stub
      */
-    private TemplateView $viewMock;
+    private TemplateView $viewStub;
 
     /**
-     * @var EventRepository&MockObject
+     * @var EventRepository&Stub
      */
-    private EventRepository $eventRepositoryMock;
+    private EventRepository $eventRepositoryStub;
 
     /**
-     * @var EventTypeRepository&MockObject
+     * @var EventTypeRepository&Stub
      */
-    private EventTypeRepository $eventTypeRepositoryMock;
+    private EventTypeRepository $eventTypeRepositoryStub;
 
     /**
-     * @var OrganizerRepository&MockObject
+     * @var OrganizerRepository&Stub
      */
-    private OrganizerRepository $organizerRepositoryMock;
+    private OrganizerRepository $organizerRepositoryStub;
 
     /**
-     * @var SpeakerRepository&MockObject
+     * @var SpeakerRepository&Stub
      */
-    private SpeakerRepository $speakerRepositoryMock;
+    private SpeakerRepository $speakerRepositoryStub;
 
     /**
-     * @var VenueRepository&MockObject
+     * @var VenueRepository&Stub
      */
-    private VenueRepository $venueRepositoryMock;
+    private VenueRepository $venueRepositoryStub;
 
     /**
      * @var SlugGenerator&Stub
@@ -82,11 +79,11 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
-        $this->eventTypeRepositoryMock = $this->createMock(EventTypeRepository::class);
-        $this->organizerRepositoryMock = $this->createMock(OrganizerRepository::class);
-        $this->speakerRepositoryMock = $this->createMock(SpeakerRepository::class);
-        $this->venueRepositoryMock = $this->createMock(VenueRepository::class);
+        $this->eventRepositoryStub = $this->createStub(EventRepository::class);
+        $this->eventTypeRepositoryStub = $this->createStub(EventTypeRepository::class);
+        $this->organizerRepositoryStub = $this->createStub(OrganizerRepository::class);
+        $this->speakerRepositoryStub = $this->createStub(SpeakerRepository::class);
+        $this->venueRepositoryStub = $this->createStub(VenueRepository::class);
         $this->slugGeneratorStub = $this->createStub(SlugGenerator::class);
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
@@ -95,11 +92,11 @@ final class FrontEndEditorControllerTest extends UnitTestCase
             FrontEndEditorController::class,
             $methodsToMock,
             [
-                $this->eventRepositoryMock,
-                $this->eventTypeRepositoryMock,
-                $this->organizerRepositoryMock,
-                $this->speakerRepositoryMock,
-                $this->venueRepositoryMock,
+                $this->eventRepositoryStub,
+                $this->eventTypeRepositoryStub,
+                $this->organizerRepositoryStub,
+                $this->speakerRepositoryStub,
+                $this->venueRepositoryStub,
                 $this->slugGeneratorStub,
             ]
         );
@@ -108,8 +105,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $responseStub = $this->createStub(HtmlResponse::class);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
 
-        $this->viewMock = $this->createMock(TemplateView::class);
-        $this->subject->_set('view', $this->viewMock);
+        $this->viewStub = $this->createStub(TemplateView::class);
+        $this->subject->_set('view', $this->viewStub);
 
         $this->context = GeneralUtility::makeInstance(Context::class);
     }
@@ -120,37 +117,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function isActionController(): void
     {
         self::assertInstanceOf(ActionController::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
-    public function editSingleEventActionAssignsAuxiliaryRecordsToView(): void
-    {
-        $event = new SingleEvent();
-
-        /** @var list<EventTypeInterface> $eventTypes */
-        $eventTypes = [new NullEventType()];
-        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
-
-        $organizers = $this->createStub(QueryResultInterface::class);
-        $this->organizerRepositoryMock->method('findAll')->willReturn($organizers);
-
-        $speakers = $this->createStub(QueryResultInterface::class);
-        $this->speakerRepositoryMock->method('findAll')->willReturn($speakers);
-
-        $venues = $this->createStub(QueryResultInterface::class);
-        $this->venueRepositoryMock->method('findAll')->willReturn($venues);
-
-        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
-            ['event', self::anything()],
-            ['eventTypes', $eventTypes],
-            ['organizers', $organizers],
-            ['speakers', $speakers],
-            ['venues', $venues]
-        );
-
-        $this->subject->editSingleEventAction($event);
     }
 
     /**
@@ -201,55 +167,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->expectExceptionCode(1666954310);
 
         $this->subject->updateSingleEventAction($event);
-    }
-
-    /**
-     * @test
-     */
-    public function newSingleEventActionAssignsNewEventToView(): void
-    {
-        $event = new SingleEvent();
-        GeneralUtility::addInstance(SingleEvent::class, $event);
-        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
-
-        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
-            ['event', $event],
-            ['eventTypes', self::anything()],
-            ['organizers', self::anything()],
-            ['speakers', self::anything()],
-            ['venues', self::anything()]
-        );
-
-        $this->subject->newSingleEventAction();
-    }
-
-    /**
-     * @test
-     */
-    public function newSingleEventActionAssignsAuxiliaryRecordsToView(): void
-    {
-        /** @var list<EventTypeInterface> $eventTypes */
-        $eventTypes = [new NullEventType()];
-        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
-
-        $organizers = $this->createStub(QueryResultInterface::class);
-        $this->organizerRepositoryMock->method('findAll')->willReturn($organizers);
-
-        $speakers = $this->createStub(QueryResultInterface::class);
-        $this->speakerRepositoryMock->method('findAll')->willReturn($speakers);
-
-        $venues = $this->createStub(QueryResultInterface::class);
-        $this->venueRepositoryMock->method('findAll')->willReturn($venues);
-
-        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
-            ['event', self::anything()],
-            ['eventTypes', $eventTypes],
-            ['organizers', $organizers],
-            ['speakers', $speakers],
-            ['venues', $venues]
-        );
-
-        $this->subject->newSingleEventAction();
     }
 
     /**

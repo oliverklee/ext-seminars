@@ -284,6 +284,45 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     }
 
     /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function auxiliaryRecordTitlesDataProvider(): array
+    {
+        return [
+            'eventType' => ['workshop'],
+            'venues' => ['Jugendherberge Bonn'],
+            'speakers' => ['Ned Knowledge'],
+            'organizers' => ['Training Inc.'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $title
+     * @dataProvider auxiliaryRecordTitlesDataProvider
+     */
+    public function editSingleEventActionHasTitlesOfAuxiliaryRecords(string $title): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editSingleEvent',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString($title, $html);
+    }
+
+    /**
      * @test
      */
     public function editSingleEventActionWithOwnEventAssignsProvidedEventToView(): void
@@ -493,6 +532,28 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
 
         self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $title
+     * @dataProvider auxiliaryRecordTitlesDataProvider
+     */
+    public function newSingleEventActionHasTitlesOfAuxiliaryRecords(string $title): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/newSingleEventAction/AuxiliaryRecords.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'newSingleEvent',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString($title, $html);
     }
 
     /**
