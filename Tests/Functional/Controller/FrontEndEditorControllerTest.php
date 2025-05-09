@@ -178,6 +178,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
             'waitingList' => ['waitingList'],
             'minimumNumberOfRegistrations' => ['minimumNumberOfRegistrations'],
             'maximumNumberOfRegistrations' => ['maximumNumberOfRegistrations'],
+            'numberOfOfflineRegistrations' => ['numberOfOfflineRegistrations'],
             'standardPrice' => ['standardPrice'],
             'earlyBirdPrice' => ['earlyBirdPrice'],
         ];
@@ -309,6 +310,26 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function editSingleEventActionWithOwnEventRendersNumberOfOfflineRegistrations(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editSingleEvent',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('value="59"', $html);
+    }
+
+    /**
+     * @test
+     */
     public function editSingleEventActionWithEventFromOtherUserThrowsException(): void
     {
         $this->importCSVDataSet(
@@ -359,12 +380,12 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
             __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwner.csv'
         );
 
-        $newTitle = 'Karaoke party';
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditForm(1, 1),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
-            'tx_seminars_frontendeditor[event][internalTitle]' => $newTitle,
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+            'tx_seminars_frontendeditor[event][numberOfOfflineRegistrations]' => 5,
         ]);
         $context = (new InternalRequestContext())->withFrontendUserId(1);
 
@@ -509,6 +530,26 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(
             __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithSlug.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function createSingleEventActionSetsNumberOfOfflineRegistrations(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewForm(1),
+            'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+            'tx_seminars_frontendeditor[event][numberOfOfflineRegistrations]' => 3,
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithOfflineRegistrations.csv'
         );
     }
 }

@@ -1090,6 +1090,9 @@
 			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations">
 				<source>maximum number of registrations</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.numberOfOfflineRegistrations">
+				<source>offline registrations</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
 				<source>standard price</source>
 			</trans-unit>
@@ -1155,6 +1158,9 @@
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
 				<source>Maximum number of registrations</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.numberOfOfflineRegistrations">
+				<source>Offline registrations</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.venues">
 				<source>Venues</source>

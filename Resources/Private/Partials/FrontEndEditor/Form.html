@@ -146,7 +146,8 @@
         </fieldset>
     </oelib:isFieldEnabled>
 
-    <oelib:isFieldEnabled fieldName="minimumNumberOfRegistrations|maximumNumberOfRegistrations">
+    <oelib:isFieldEnabled
+        fieldName="minimumNumberOfRegistrations|maximumNumberOfRegistrations|numberOfOfflineRegistrations">
         <fieldset class="mb-3">
             <div class="row mb-3">
                 <oelib:isFieldEnabled fieldName="minimumNumberOfRegistrations">
@@ -181,6 +182,24 @@
                     </div>
                 </oelib:isFieldEnabled>
             </div>
+
+            <oelib:isFieldEnabled fieldName="numberOfOfflineRegistrations">
+                <div class="row mb-3">
+                    <label for="{idPrefix}-numberOfOfflineRegistrations" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.numberOfOfflineRegistrations"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:form.textfield property="numberOfOfflineRegistrations"
+                                          id="{idPrefix}-numberOfOfflineRegistrations"
+                                          class="form-control" errorClass="is-invalid" type="number" size="4"
+                                          maxlength="4"
+                                          additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
+                        />
+                        <f:render partial="FrontEndEditor/ValidationResult"
+                                  arguments="{property: 'numberOfOfflineRegistrations'}"/>
+                    </div>
+                </div>
+            </oelib:isFieldEnabled>
         </fieldset>
     </oelib:isFieldEnabled>
 
