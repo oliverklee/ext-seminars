@@ -633,6 +633,9 @@
 			<trans-unit id="owner_feuser">
 				<source>Front-end user who has created this record</source>
 			</trans-unit>
+			<trans-unit id="fe_users.divLabel.seminars">
+				<source>Event management</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
