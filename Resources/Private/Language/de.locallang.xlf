@@ -1440,6 +1440,10 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>maximum number of registrations</source>
         <target state="final">Maximale Anzahl an Anmeldungen</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.numberOfOfflineRegistrations">
+        <source>offline registrations</source>
+        <target state="needs-translation">offline registrations</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice" approved="yes">
         <source>standard price</source>
         <target state="final">Standardpreis</target>
@@ -1527,6 +1531,10 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
       <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations" approved="yes">
         <source>Maximum number of registrations</source>
         <target state="final">Maximale Anzahl an Anmeldungen</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.numberOfOfflineRegistrations">
+        <source>Offline registrations</source>
+        <target state="needs-translation">Offline registrations</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.venues" approved="yes">
         <source>Venues</source>
