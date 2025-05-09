@@ -1501,6 +1501,10 @@
         <source>maximum number of registrations</source>
         <target state="needs-translation">maximum number of registrations</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.numberOfOfflineRegistrations">
+        <source>offline registrations</source>
+        <target state="needs-translation">offline registrations</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
         <source>standard price</source>
         <target state="needs-translation">standard price</target>
@@ -1588,6 +1592,10 @@
       <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
         <source>Maximum number of registrations</source>
         <target state="needs-translation">Maximum number of registrations</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.numberOfOfflineRegistrations">
+        <source>Offline registrations</source>
+        <target state="needs-translation">Offline registrations</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.venues">
         <source>Venues</source>
