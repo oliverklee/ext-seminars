@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add the number of offline registrations to the FE editor (#4364, #4365)
 - Make the fields in the FE editor configurable (#4362)
 - Add an `Event.slug` property (#4331)
 - Add `Registration::belongsToUser()` (#4255)

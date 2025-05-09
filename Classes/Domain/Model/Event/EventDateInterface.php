@@ -106,6 +106,9 @@ interface EventDateInterface
      */
     public function getFirstOrganizer(): Organizer;
 
+    /**
+     * @return int<0, 9999>
+     */
     public function getNumberOfOfflineRegistrations(): int;
 
     /**

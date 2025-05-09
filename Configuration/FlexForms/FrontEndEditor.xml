@@ -49,7 +49,7 @@
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
                                 <default>
-                                    description,eventType,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,standardPrice,earlyBirdPrice,venues,speakers
+                                    description,eventType,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,numberOfOfflineRegistrations,standardPrice,earlyBirdPrice,venues,speakers
                                 </default>
                                 <items type="array">
                                     <numIndex index="1" type="array">
@@ -105,6 +105,12 @@
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations
                                         </numIndex>
                                         <numIndex index="1">maximumNumberOfRegistrations</numIndex>
+                                    </numIndex>
+                                    <numIndex index="10" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.displayOptions.fieldsToShow.numberOfOfflineRegistrations
+                                        </numIndex>
+                                        <numIndex index="1">numberOfOfflineRegistrations</numIndex>
                                     </numIndex>
                                     <numIndex index="11" type="array">
                                         <numIndex index="0">

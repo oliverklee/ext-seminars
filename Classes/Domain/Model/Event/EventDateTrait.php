@@ -82,6 +82,10 @@ trait EventDateTrait
      */
     protected ObjectStorage $organizers;
 
+    /**
+     * @phpstan-var int<0, 9999>
+     * @Validate("NumberRange", options={"minimum": 0, "maximum": 9999})
+     */
     protected int $numberOfOfflineRegistrations = 0;
 
     /**
@@ -434,11 +438,17 @@ trait EventDateTrait
         return $organizers->current();
     }
 
+    /**
+     * @return int<0, 9999>
+     */
     public function getNumberOfOfflineRegistrations(): int
     {
         return $this->numberOfOfflineRegistrations;
     }
 
+    /**
+     * @param int<0, 9999> $numberOfOfflineRegistrations
+     */
     public function setNumberOfOfflineRegistrations(int $numberOfOfflineRegistrations): void
     {
         $this->numberOfOfflineRegistrations = $numberOfOfflineRegistrations;

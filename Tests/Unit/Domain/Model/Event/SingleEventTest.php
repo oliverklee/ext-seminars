@@ -875,7 +875,7 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setNumberOfOfflineRegistrationsSetsNumberOfOfflineRegistrations(): void
     {
-        $value = 123456;
+        $value = 1234;
         $this->subject->setNumberOfOfflineRegistrations($value);
 
         self::assertSame($value, $this->subject->getNumberOfOfflineRegistrations());
