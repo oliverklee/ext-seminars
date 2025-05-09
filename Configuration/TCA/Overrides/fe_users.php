@@ -7,8 +7,9 @@ defined('TYPO3') or die('Access denied.');
 ExtensionManagementUtility::addTCAcolumns(
     'fe_users',
     [
+        // not visible in the BE
         'tx_seminars_registration' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'registration (not visible in the BE)',
             'config' => [
                 'type' => 'group',
@@ -20,4 +21,11 @@ ExtensionManagementUtility::addTCAcolumns(
             ],
         ],
     ]
+);
+
+ExtensionManagementUtility::addToAllTCAtypes(
+    'fe_users',
+    '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_users.divLabel.seminars',
+    '',
+    'after:image'
 );
