@@ -841,6 +841,10 @@
         <source>Front-end user who has created this record</source>
         <target state="final">Frontend-User, der diesen Datensatz eingetragen hat</target>
       </trans-unit>
+      <trans-unit id="fe_users.divLabel.seminars">
+        <source>Event management</source>
+        <target state="needs-translation">Event management</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
