@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Email\EmailBuilder;

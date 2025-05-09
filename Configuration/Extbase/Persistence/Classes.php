@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
+use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
@@ -113,6 +114,9 @@ return [
     ],
     FoodOption::class => [
         'tableName' => 'tx_seminars_foods',
+    ],
+    FrontendUser::class => [
+        'tableName' => 'fe_users',
     ],
     Organizer::class => [
         'tableName' => 'tx_seminars_organizers',

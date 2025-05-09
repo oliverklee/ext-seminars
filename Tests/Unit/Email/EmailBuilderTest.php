@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Email;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Tests\Unit\Email\Fixtures\TestingMailRole;
 use Symfony\Component\Mime\Part\DataPart;
