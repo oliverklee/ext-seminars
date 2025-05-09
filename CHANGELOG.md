@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add seminars-specific frontend user model and repository (#4370)
 - Add the number of offline registrations to the FE editor (#4364, #4365)
 - Make the fields in the FE editor configurable (#4362)
 - Add an `Event.slug` property (#4331)

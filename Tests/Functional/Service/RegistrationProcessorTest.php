@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;

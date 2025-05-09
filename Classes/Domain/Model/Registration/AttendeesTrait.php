@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Registration;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 use TYPO3\CMS\Extbase\Annotation\Validate;

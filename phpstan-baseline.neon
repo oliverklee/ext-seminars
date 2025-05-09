@@ -286,12 +286,7 @@ parameters:
 			path: Classes/Domain/Model/Registration/Registration.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getUser\\(\\) should return OliverKlee\\\\FeUserExtraFields\\\\Domain\\\\Model\\\\FrontendUser\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: Classes/Domain/Model/Registration/Registration.php
-
-		-
-			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\FeUserExtraFields\\\\Domain\\\\Model\\\\FrontendUser\\>\" types as the only types passed to this method$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getUser\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\FrontendUser\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: Classes/Domain/Model/Registration/Registration.php
 
@@ -302,6 +297,11 @@ parameters:
 
 		-
 			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\FoodOption\\>\" types as the only types passed to this method$#"
+			count: 1
+			path: Classes/Domain/Model/Registration/Registration.php
+
+		-
+			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\FrontendUser\\>\" types as the only types passed to this method$#"
 			count: 1
 			path: Classes/Domain/Model/Registration/Registration.php
 
@@ -1526,7 +1526,7 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:to\\(\\) expects OliverKlee\\\\FeUserExtraFields\\\\Domain\\\\Model\\\\FrontendUser\\|OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:to\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole\\|OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\FrontendUser, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null given\\.$#"
 			count: 2
 			path: Classes/Service/RegistrationManager.php
 
