@@ -266,10 +266,10 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function editSingleEventActionHasAllAssociationFormFields(string $key): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
         );
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
@@ -305,10 +305,10 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function editSingleEventActionHasTitlesOfAuxiliaryRecords(string $title): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
         );
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
@@ -441,10 +441,10 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function updateSingleEventActionCanSetOrganizer(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwner.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/AuxiliaryRecords.csv'
         );
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/AuxiliaryRecords.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwner.csv'
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
