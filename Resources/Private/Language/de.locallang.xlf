@@ -1404,9 +1404,9 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>categories</source>
         <target state="final">Kategorien</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories">
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories" approved="yes">
         <source>categories</source>
-        <target state="needs-translation">categories</target>
+        <target state="final">Kategorien</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description" approved="yes">
         <source>description</source>
@@ -1484,9 +1484,9 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.categories">
+      <trans-unit id="plugin.frontEndEditor.property.categories" approved="yes">
         <source>Categories</source>
-        <target state="needs-translation">Categories</target>
+        <target state="final">Kategorien</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.date" approved="yes">
         <source>Date</source>
