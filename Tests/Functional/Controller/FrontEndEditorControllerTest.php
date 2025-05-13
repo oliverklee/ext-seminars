@@ -349,6 +349,32 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function editSingleEventActionForUserWithDefaultOrganizerHasNoOrganizerFormField(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/FrontEndUserWithDefaultOrganizer.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editSingleEvent',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(2);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringNotContainsString('name="tx_seminars_frontendeditor[event][organizers]"', $html);
+    }
+
+    /**
+     * @test
+     */
     public function editSingleEventActionWithOwnEventRendersNumberOfOfflineRegistrations(): void
     {
         $this->importCSVDataSet(
@@ -467,6 +493,36 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function updateSingleEventActionForUserWithDefaultOrganizerKeepsOrganizerUnchanged(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/FrontEndUserWithDefaultOrganizer.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditForm(1, 2),
+            'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'event with owner',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(2);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function updateSingleEventActionUpdatesSlug(): void
     {
         $this->importCSVDataSet(
@@ -561,6 +617,28 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
 
         self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function newSingleEventActionForUserWithDefaultOrganizerHasNoOrganizerFormField(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/newSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/newSingleEventAction/FrontEndUserWithDefaultOrganizer.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'newSingleEvent',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(2);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringNotContainsString('name="tx_seminars_frontendeditor[event][organizers]"', $html);
     }
 
     /**
@@ -665,6 +743,32 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(
             __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithOrganizer.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function createSingleEventForUserWithDefaultOrganizerSetsDefaultOrganizer(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/FrontEndUserWithDefaultOrganizer.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewForm(2),
+            'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(2);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithDefaultOrganizer.csv'
         );
     }
 }

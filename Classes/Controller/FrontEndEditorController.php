@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
+use OliverKlee\Seminars\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
@@ -32,6 +35,8 @@ class FrontEndEditorController extends ActionController
 
     private VenueRepository $venueRepository;
 
+    private FrontendUserRepository $userRepository;
+
     private SlugGenerator $slugGenerator;
 
     public function __construct(
@@ -40,6 +45,7 @@ class FrontEndEditorController extends ActionController
         OrganizerRepository $organizerRepository,
         SpeakerRepository $speakerRepository,
         VenueRepository $venueRepository,
+        FrontendUserRepository $userRepository,
         SlugGenerator $slugGenerator
     ) {
         $this->eventRepository = $eventRepository;
@@ -47,12 +53,37 @@ class FrontEndEditorController extends ActionController
         $this->organizerRepository = $organizerRepository;
         $this->speakerRepository = $speakerRepository;
         $this->venueRepository = $venueRepository;
+        $this->userRepository = $userRepository;
         $this->slugGenerator = $slugGenerator;
     }
 
+    /**
+     * @return int<0, max>
+     */
     private function getLoggedInUserUid(): int
     {
-        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        $uid = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        \assert($uid >= 0);
+
+        return $uid;
+    }
+
+    /**
+     * @return int<0, max>
+     */
+    private function getDefaultOrganizerUid(): int
+    {
+        $userUid = $this->getLoggedInUserUid();
+        if ($userUid <= 0) {
+            return 0;
+        }
+
+        $user = $this->userRepository->findByUid($userUid);
+        if (!($user instanceof FrontendUser)) {
+            return 0;
+        }
+
+        return $user->getDefaultOrganizerUid();
     }
 
     public function indexAction(): ResponseInterface
@@ -88,6 +119,7 @@ class FrontEndEditorController extends ActionController
 
         $this->view->assign('event', $event);
         $this->assignAuxiliaryRecordsToView();
+        $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
 
         return $this->htmlResponse();
     }
@@ -113,6 +145,7 @@ class FrontEndEditorController extends ActionController
         $eventToCreate = GeneralUtility::makeInstance(SingleEvent::class);
         $this->view->assign('event', $eventToCreate);
         $this->assignAuxiliaryRecordsToView();
+        $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
 
         return $this->htmlResponse();
     }
@@ -120,6 +153,14 @@ class FrontEndEditorController extends ActionController
     public function createSingleEventAction(SingleEvent $event): ResponseInterface
     {
         $event->setOwnerUid($this->getLoggedInUserUid());
+        $defaultOrganizerUid = $this->getDefaultOrganizerUid();
+        if ($defaultOrganizerUid > 0) {
+            $organizer = $this->organizerRepository->findByUid($defaultOrganizerUid);
+            if ($organizer instanceof Organizer) {
+                $event->setSingleOrganizer($organizer);
+            }
+        }
+
         $folderSettings = $this->settings['folderForCreatedEvents'] ?? null;
         $folderUid = \is_string($folderSettings) ? (int)$folderSettings : 0;
         $event->setPid($folderUid);

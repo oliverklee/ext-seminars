@@ -279,22 +279,24 @@
                 </div>
             </oelib:isFieldEnabled>
 
-            <label class="col-sm-2 col-form-label">
-                <f:translate key="{propertyLabelPrefix}.organizers"/>
-            </label>
-            <div class="col-sm-4">
-                <f:for each="{organizers}" as="organizer">
-                    <div class="form-check">
-                        <f:form.checkbox property="organizers" id="{idPrefix}-organizers-{organizer.uid}"
-                                         class="form-check-input" errorClass="is-invalid"
-                                         value="{organizer.uid}"/>
-                        <label for="{idPrefix}-organizers-{organizer.uid}" class="form-check-label">
-                            {organizer.name}
-                        </label>
-                    </div>
-                </f:for>
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'organizers'}"/>
-            </div>
+            <f:if condition="!{defaultOrganizerUid} && {organizers}">
+                <label class="col-sm-2 col-form-label">
+                    <f:translate key="{propertyLabelPrefix}.organizers"/>
+                </label>
+                <div class="col-sm-4">
+                    <f:for each="{organizers}" as="organizer">
+                        <div class="form-check">
+                            <f:form.checkbox property="organizers" id="{idPrefix}-organizers-{organizer.uid}"
+                                             class="form-check-input" errorClass="is-invalid"
+                                             value="{organizer.uid}"/>
+                            <label for="{idPrefix}-organizers-{organizer.uid}" class="form-check-label">
+                                {organizer.name}
+                            </label>
+                        </div>
+                    </f:for>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'organizers'}"/>
+                </div>
+            </f:if>
         </div>
     </fieldset>
 
