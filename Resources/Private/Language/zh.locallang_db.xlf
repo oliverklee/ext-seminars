@@ -847,6 +847,10 @@
         <source>Event management</source>
         <target state="needs-translation">Event management</target>
       </trans-unit>
+      <trans-unit id="fe_users.default_organizer">
+        <source>Default organizer (for the FE editor)</source>
+        <target state="needs-translation">Default organizer (for the FE editor)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
