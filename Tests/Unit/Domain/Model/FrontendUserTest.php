@@ -38,4 +38,23 @@ final class FrontendUserTest extends UnitTestCase
     {
         self::assertInstanceOf(ExtraFieldsFrontendUser::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function getDefaultOrganizerUidInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getDefaultOrganizerUid());
+    }
+
+    /**
+     * @test
+     */
+    public function setDefaultOrganizerUidSetsDefaultOrganizerUid(): void
+    {
+        $value = 123456;
+        $this->subject->setDefaultOrganizerUid($value);
+
+        self::assertSame($value, $this->subject->getDefaultOrganizerUid());
+    }
 }

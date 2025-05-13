@@ -117,6 +117,9 @@ return [
     ],
     FrontendUser::class => [
         'tableName' => 'fe_users',
+        'properties' => [
+            'defaultOrganizerUid' => ['fieldName' => 'default_organizer'],
+        ],
     ],
     Organizer::class => [
         'tableName' => 'tx_seminars_organizers',
