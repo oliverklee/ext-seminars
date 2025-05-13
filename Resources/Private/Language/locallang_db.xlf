@@ -636,6 +636,9 @@
 			<trans-unit id="fe_users.divLabel.seminars">
 				<source>Event management</source>
 			</trans-unit>
+			<trans-unit id="fe_users.default_organizer">
+				<source>Default organizer (for the FE editor)</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

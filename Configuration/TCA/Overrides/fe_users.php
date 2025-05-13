@@ -20,12 +20,24 @@ ExtensionManagementUtility::addTCAcolumns(
                 'maxitems' => 1,
             ],
         ],
+        'default_organizer' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_users.default_organizer',
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'tx_seminars_organizers',
+                'default' => 0,
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
+            ],
+        ],
     ]
 );
 
 ExtensionManagementUtility::addToAllTCAtypes(
     'fe_users',
-    '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_users.divLabel.seminars',
+    '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_users.divLabel.seminars, default_organizer',
     '',
     'after:image'
 );
