@@ -781,6 +781,38 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function setSingleOrganizerSetsOrganizer(): void
+    {
+        $organizer = new Organizer();
+        $this->subject->setSingleOrganizer($organizer);
+
+        self::assertCount(1, $this->subject->getOrganizers());
+        self::assertSame($organizer, $this->subject->getFirstOrganizer());
+    }
+
+    /**
+     * @test
+     */
+    public function setSingleOrganizerReplacesExistingOrganizers(): void
+    {
+        /** @var ObjectStorage<Organizer> $organizers */
+        $organizers = new ObjectStorage();
+        $organizer1 = new Organizer();
+        $organizers->attach($organizer1);
+        $organizer2 = new Organizer();
+        $organizers->attach($organizer2);
+        $this->subject->setOrganizers($organizers);
+
+        $newOrganizer = new Organizer();
+        $this->subject->setSingleOrganizer($newOrganizer);
+
+        self::assertCount(1, $this->subject->getOrganizers());
+        self::assertSame($newOrganizer, $this->subject->getFirstOrganizer());
+    }
+
+    /**
+     * @test
+     */
     public function getOwnerUidInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getOwnerUid());

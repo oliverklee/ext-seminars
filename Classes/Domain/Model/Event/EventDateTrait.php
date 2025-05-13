@@ -439,6 +439,17 @@ trait EventDateTrait
     }
 
     /**
+     * Sets the given organizer as the only organizer of this event, removing all other organizers.
+     */
+    public function setSingleOrganizer(Organizer $organizer): void
+    {
+        /** @var ObjectStorage<Organizer> $organizers */
+        $organizers = new ObjectStorage();
+        $organizers->attach($organizer);
+        $this->setOrganizers($organizers);
+    }
+
+    /**
      * @return int<0, 9999>
      */
     public function getNumberOfOfflineRegistrations(): int

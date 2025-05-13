@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Event.setSingleOrganizer()` (#4377)
 - Add a default organizer for the FE editor to FE users (#4374)
 - Add seminars-specific frontend user model and repository (#4370)
 - Add the number of offline registrations to the FE editor (#4364, #4365)
