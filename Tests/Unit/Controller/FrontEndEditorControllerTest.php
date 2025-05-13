@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
+use OliverKlee\Seminars\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
@@ -69,6 +70,11 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     private VenueRepository $venueRepositoryStub;
 
     /**
+     * @var FrontendUserRepository&Stub
+     */
+    private FrontendUserRepository $userRepositoryStub;
+
+    /**
      * @var SlugGenerator&Stub
      */
     private SlugGenerator $slugGeneratorStub;
@@ -84,6 +90,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->organizerRepositoryStub = $this->createStub(OrganizerRepository::class);
         $this->speakerRepositoryStub = $this->createStub(SpeakerRepository::class);
         $this->venueRepositoryStub = $this->createStub(VenueRepository::class);
+        $this->userRepositoryStub = $this->createStub(FrontendUserRepository::class);
         $this->slugGeneratorStub = $this->createStub(SlugGenerator::class);
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
@@ -97,6 +104,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
                 $this->organizerRepositoryStub,
                 $this->speakerRepositoryStub,
                 $this->venueRepositoryStub,
+                $this->userRepositoryStub,
                 $this->slugGeneratorStub,
             ]
         );
