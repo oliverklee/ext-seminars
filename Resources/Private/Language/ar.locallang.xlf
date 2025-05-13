@@ -1465,6 +1465,10 @@
         <source>categories</source>
         <target state="needs-translation">categories</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories">
+        <source>categories</source>
+        <target state="needs-translation">categories</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
         <source>description</source>
         <target state="needs-translation">description</target>
@@ -1540,6 +1544,10 @@
       <trans-unit id="plugin.frontEndEditor.property.internalTitle">
         <source>Title</source>
         <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.categories">
+        <source>Categories</source>
+        <target state="needs-translation">Categories</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.date">
         <source>Date</source>
