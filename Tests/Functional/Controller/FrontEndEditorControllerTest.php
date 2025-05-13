@@ -247,10 +247,19 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @return array<string, array{0: non-empty-string}>
      */
-    public static function associationFormFieldKeysForSingleEventDataProvider(): array
+    public static function singleAssociationFormFieldKeysForSingleEventDataProvider(): array
     {
         return [
             'eventType' => ['eventType'],
+        ];
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function multiAssociationFormFieldKeysForSingleEventDataProvider(): array
+    {
+        return [
             'venues' => ['venues'],
             'speakers' => ['speakers'],
             'organizers' => ['organizers'],
@@ -261,7 +270,8 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      * @test
      *
      * @param non-empty-string $key
-     * @dataProvider associationFormFieldKeysForSingleEventDataProvider
+     * @dataProvider singleAssociationFormFieldKeysForSingleEventDataProvider
+     * @dataProvider multiAssociationFormFieldKeysForSingleEventDataProvider
      */
     public function editSingleEventActionHasAllAssociationFormFields(string $key): void
     {
@@ -281,6 +291,59 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
 
         self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider multiAssociationFormFieldKeysForSingleEventDataProvider
+     */
+    public function editSingleEventActionForEventWithAllAssociationsHasSelectedMultiAssociationOptions(
+        string $key
+    ): void {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwnerAndAllAssociations.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editSingleEvent',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString(
+            'name="tx_seminars_frontendeditor[event][' . $key . '][]" value="1" checked="checked"',
+            $html
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function editSingleEventActionForEventWithAllAssociationsHasSelectedEventTypeOption(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwnerAndAllAssociations.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editSingleEvent',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('<option value="1" selected="selected">workshop</option>', $html);
     }
 
     /**
@@ -601,7 +664,8 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      * @test
      *
      * @param non-empty-string $key
-     * @dataProvider associationFormFieldKeysForSingleEventDataProvider
+     * @dataProvider multiAssociationFormFieldKeysForSingleEventDataProvider
+     * @dataProvider singleAssociationFormFieldKeysForSingleEventDataProvider
      */
     public function newSingleEventActionHasAllAssociationFormFields(string $key): void
     {
