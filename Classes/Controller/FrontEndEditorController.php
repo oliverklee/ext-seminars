@@ -103,14 +103,7 @@ class FrontEndEditorController extends ActionController
     public function updateSingleEventAction(SingleEvent $event): ResponseInterface
     {
         $this->checkEventOwner($event);
-
-        $uid = $event->getUid();
-        \assert(\is_int($uid) && $uid > 0);
-        $recordData = ['uid' => $uid, 'title' => $event->getInternalTitle()];
-        $event->setSlug($this->slugGenerator->generateSlug(['record' => $recordData]));
-
-        $this->eventRepository->update($event);
-        $this->eventRepository->persistAll();
+        $this->updateAndSlaveSlug($event);
 
         return $this->redirect('index');
     }
@@ -134,7 +127,13 @@ class FrontEndEditorController extends ActionController
         // We first need to persist the event to get a UID for it, so we can generate a slug.
         $this->eventRepository->add($event);
         $this->eventRepository->persistAll();
+        $this->updateAndSlaveSlug($event);
 
+        return $this->redirect('index');
+    }
+
+    private function updateAndSlaveSlug(SingleEvent $event): void
+    {
         $uid = $event->getUid();
         \assert(\is_int($uid) && $uid > 0);
         $recordData = ['uid' => $uid, 'title' => $event->getInternalTitle()];
@@ -142,7 +141,5 @@ class FrontEndEditorController extends ActionController
 
         $this->eventRepository->update($event);
         $this->eventRepository->persistAll();
-
-        return $this->redirect('index');
     }
 }
