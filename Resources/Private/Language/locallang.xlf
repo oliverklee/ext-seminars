@@ -1063,6 +1063,9 @@
 			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow">
 				<source>categories</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories">
+				<source>categories</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
 				<source>description</source>
 			</trans-unit>
@@ -1119,6 +1122,9 @@
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.internalTitle">
 				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.categories">
+				<source>Categories</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.date">
 				<source>Date</source>
