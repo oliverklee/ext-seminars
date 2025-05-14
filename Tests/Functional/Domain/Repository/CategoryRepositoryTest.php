@@ -50,4 +50,31 @@ final class CategoryRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Category::class, $result);
         self::assertSame('cooking', $result->getTitle());
     }
+
+    /**
+     * @test
+     */
+    public function findsRecordOnPages(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/CategoryRepository/CategoryOnPage.csv');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function sortsRecordsByTitleInAscendingOrder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/CategoryRepository/TwoCategoriesInReverseOrder.csv');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(2, $result);
+        $first = $result->getFirst();
+        self::assertInstanceOf(Category::class, $first);
+        self::assertSame('cooking', $first->getTitle());
+    }
 }
