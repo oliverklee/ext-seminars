@@ -7,10 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Allow editing the event categories in the FE editor (#4380, #4389)
 - Add `Event.categories` (#4388)
 - Add a `Category` model and repository (#4384, #4385)
 - Add more validations for FE editor to the `Event` model (#4382)
-- Allow editing the event categories in the FE editor (#4380)
 - Add a default organizer for the FE editor to FE users (#4374, #4379)
 - Add `Event.setSingleOrganizer()` (#4377)
 - Add seminars-specific frontend user model and repository (#4370)

@@ -13,3 +13,7 @@
 "tx_seminars_organizers"
 ,"uid","pid","title"
 ,1,2,"Training Inc."
+
+"tx_seminars_categories"
+,"uid","pid","title"
+,1,2,"cooking"

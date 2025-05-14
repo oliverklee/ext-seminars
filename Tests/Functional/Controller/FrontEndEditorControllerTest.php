@@ -260,6 +260,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public static function multiAssociationFormFieldKeysForSingleEventDataProvider(): array
     {
         return [
+            'categories' => ['categories'],
             'venues' => ['venues'],
             'speakers' => ['speakers'],
             'organizers' => ['organizers'],
@@ -352,6 +353,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public static function auxiliaryRecordTitlesDataProvider(): array
     {
         return [
+            'categories' => ['cooking'],
             'eventType' => ['workshop'],
             'venues' => ['Jugendherberge Bonn'],
             'speakers' => ['Ned Knowledge'],
@@ -580,6 +582,35 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(
             __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function updateSingleEventActionCanSetCategory(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+            'tx_seminars_frontendeditor[event][categories]' => '',
+            'tx_seminars_frontendeditor[event][categories][]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/UpdatedEventWithCategory.csv'
         );
     }
 
@@ -833,6 +864,31 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(
             __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithDefaultOrganizer.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function createSingleEventActionCanSetCategory(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/AuxiliaryRecords.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewForm(1),
+            'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+            'tx_seminars_frontendeditor[event][categories]' => '',
+            'tx_seminars_frontendeditor[event][categories][]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithCategory.csv'
         );
     }
 }

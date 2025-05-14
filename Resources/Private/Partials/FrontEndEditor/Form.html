@@ -30,21 +30,42 @@
             </div>
         </oelib:isFieldEnabled>
 
-        <oelib:isFieldEnabled fieldName="eventType">
+        <oelib:isFieldEnabled fieldName="eventType|categories">
             <div class="row mb-3">
-                <label for="{idPrefix}-eventType" class="col-sm-2 col-form-label">
-                    <f:translate key="{propertyLabelPrefix}.eventType"/>
-                </label>
-                <div class="col-sm-10">
-                    <f:comment>
-                        We need to set the `optionValueField` to allow saving events without an event type
-                        (i.e., with the `NullEventType` that sits on top of the event types in the FE dropdown).
-                    </f:comment>
-                    <f:form.select property="eventType" id="{idPrefix}-eventType"
-                                   options="{eventTypes}" optionLabelField="title" optionValueField="uid"
-                                   class="form-select" errorClass="is-invalid"/>
-                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'eventType'}"/>
-                </div>
+                <oelib:isFieldEnabled fieldName="eventType">
+                    <label for="{idPrefix}-eventType" class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.eventType"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:comment>
+                            We need to set the `optionValueField` to allow saving events without an event type
+                            (i.e., with the `NullEventType` that sits on top of the event types in the FE dropdown).
+                        </f:comment>
+                        <f:form.select property="eventType" id="{idPrefix}-eventType"
+                                       options="{eventTypes}" optionLabelField="title" optionValueField="uid"
+                                       class="form-select" errorClass="is-invalid"/>
+                        <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'eventType'}"/>
+                    </div>
+                </oelib:isFieldEnabled>
+
+                <oelib:isFieldEnabled fieldName="categories">
+                    <label class="col-sm-2 col-form-label">
+                        <f:translate key="{propertyLabelPrefix}.categories"/>
+                    </label>
+                    <div class="col-sm-4">
+                        <f:for each="{categories}" as="category">
+                            <div class="form-check">
+                                <f:form.checkbox property="categories" id="{idPrefix}-categories-{category.uid}"
+                                                 class="form-check-input" errorClass="is-invalid"
+                                                 value="{category.uid}"/>
+                                <label for="{idPrefix}-categories-{category.uid}" class="form-check-label">
+                                    {category.title}
+                                </label>
+                            </div>
+                        </f:for>
+                        <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'categories'}"/>
+                    </div>
+                </oelib:isFieldEnabled>
             </div>
         </oelib:isFieldEnabled>
     </fieldset>
