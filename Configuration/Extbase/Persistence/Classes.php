@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
+use OliverKlee\Seminars\Domain\Model\Category;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -21,6 +22,9 @@ use OliverKlee\Seminars\Domain\Model\Venue;
 return [
     AccommodationOption::class => [
         'tableName' => 'tx_seminars_lodgings',
+    ],
+    Category::class => [
+        'tableName' => 'tx_seminars_categories',
     ],
     Event::class => [
         'tableName' => 'tx_seminars_seminars',
