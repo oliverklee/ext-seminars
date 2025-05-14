@@ -67,7 +67,7 @@ final class EventTypeRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sortRecordsByTitleInAscendingOrder(): void
+    public function sortsRecordsByTitleInAscendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventTypeRepository/TwoEventTypesInReverseOrder.xml');
 

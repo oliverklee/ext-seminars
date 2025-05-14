@@ -71,7 +71,7 @@ final class VenueRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sortRecordsByTitleInAscendingOrder(): void
+    public function sortsRecordsByTitleInAscendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/VenueRepository/TwoVenuesInReverseOrder.xml');
 

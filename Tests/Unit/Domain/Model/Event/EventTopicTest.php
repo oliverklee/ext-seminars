@@ -350,7 +350,7 @@ final class EventTopicTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPaymentMethodsSetsCheckboxes(): void
+    public function setPaymentMethodsSetsPaymentMethods(): void
     {
         /** @var ObjectStorage<PaymentMethod> $associatedModels */
         $associatedModels = new ObjectStorage();
