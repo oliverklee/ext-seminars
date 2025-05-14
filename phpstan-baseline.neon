@@ -221,6 +221,11 @@ parameters:
 			path: Classes/Domain/Model/Event/EventTopic.php
 
 		-
+			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Category\\>\" types as the only types passed to this method$#"
+			count: 1
+			path: Classes/Domain/Model/Event/EventTopic.php
+
+		-
 			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\PaymentMethod\\>\" types as the only types passed to this method$#"
 			count: 1
 			path: Classes/Domain/Model/Event/EventTopic.php
@@ -232,6 +237,11 @@ parameters:
 
 		-
 			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\AccommodationOption\\>\" types as the only types passed to this method$#"
+			count: 1
+			path: Classes/Domain/Model/Event/SingleEvent.php
+
+		-
+			message: "#^Parameters should have \"TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Category\\>\" types as the only types passed to this method$#"
 			count: 1
 			path: Classes/Domain/Model/Event/SingleEvent.php
 
