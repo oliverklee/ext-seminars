@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add more validations for FE editor to the `Event` model (#4382)
 - Allow editing the event categories in the FE editor (#4380)
 - Add a default organizer for the FE editor to FE users (#4374, #4379)
 - Add `Event.setSingleOrganizer()` (#4377)
