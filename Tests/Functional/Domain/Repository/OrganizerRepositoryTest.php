@@ -68,7 +68,7 @@ final class OrganizerRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sortRecordsByTitleInAscendingOrder(): void
+    public function sortsRecordsByNameInAscendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/OrganizerRepository/TwoOrganizersInReverseOrder.xml');
 

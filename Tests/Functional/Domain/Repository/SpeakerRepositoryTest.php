@@ -69,7 +69,7 @@ final class SpeakerRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sortRecordsByTitleInAscendingOrder(): void
+    public function sortsRecordsByNameInAscendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SpeakerRepository/TwoSpeakersInReverseOrder.xml');
 
