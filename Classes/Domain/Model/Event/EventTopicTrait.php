@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\Category;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
@@ -50,9 +51,16 @@ trait EventTopicTrait
      */
     protected ObjectStorage $paymentMethods;
 
+    /**
+     * @var ObjectStorage<Category>
+     * @Lazy
+     */
+    protected ObjectStorage $categories;
+
     private function initializeEventTopic(): void
     {
         $this->paymentMethods = new ObjectStorage();
+        $this->categories = new ObjectStorage();
     }
 
     public function getDisplayTitle(): string
@@ -229,5 +237,21 @@ trait EventTopicTrait
         }
 
         return $allPrices[$priceCode];
+    }
+
+    /**
+     * @return ObjectStorage<Category>
+     */
+    public function getCategories(): ObjectStorage
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param ObjectStorage<Category> $categories
+     */
+    public function setCategories(ObjectStorage $categories): void
+    {
+        $this->categories = $categories;
     }
 }

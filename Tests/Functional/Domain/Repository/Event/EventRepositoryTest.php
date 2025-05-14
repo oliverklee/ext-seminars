@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Event;
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
+use OliverKlee\Seminars\Domain\Model\Category;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -643,6 +644,36 @@ final class EventRepositoryTest extends FunctionalTestCase
         $associatedModels = $result->getDownloadsForAttendees();
         self::assertCount(1, $associatedModels);
         self::assertInstanceOf(FileReference::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsCategoriesAssociationForSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/SingleEventWithCategory.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getCategories();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Category::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsCategoriesAssociationForEventTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventTopicWithCategory.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventTopic::class, $result);
+
+        $associatedModels = $result->getCategories();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Category::class, $associatedModels->toArray()[0]);
     }
 
     /**
@@ -2261,7 +2292,9 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findUpcomingIgnoresSingleEventWithOutStartAndWithEndInFuture(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithEndInFuture.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithEndInFuture.csv'
+        );
 
         $result = $this->subject->findUpcoming();
 

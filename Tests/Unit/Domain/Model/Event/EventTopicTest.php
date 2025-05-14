@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\Category;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
@@ -607,5 +608,28 @@ final class EventTopicTest extends UnitTestCase
         $this->subject->setSlug($value);
 
         self::assertSame($value, $this->subject->getSlug());
+    }
+
+    /**
+     * @test
+     */
+    public function getCategoriesInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getCategories();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setCategoriesSetsCategories(): void
+    {
+        /** @var ObjectStorage<Category> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setCategories($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getCategories());
     }
 }
