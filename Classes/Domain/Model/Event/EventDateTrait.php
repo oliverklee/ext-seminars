@@ -56,11 +56,13 @@ trait EventDateTrait
 
     /**
      * @phpstan-var int<0, max>
+     * @Validate("NumberRange", options={"minimum": 0})
      */
     protected int $minimumNumberOfRegistrations = 0;
 
     /**
      * @phpstan-var int<0, max>
+     * @Validate("NumberRange", options={"minimum": 0})
      */
     protected int $maximumNumberOfRegistrations = 0;
 
@@ -90,6 +92,7 @@ trait EventDateTrait
 
     /**
      * @var EventInterface::STATUS_*
+     * @Validate("NumberRange", options={"minimum": 0, "maximum": 2})
      */
     protected int $status = EventInterface::STATUS_PLANNED;
 
@@ -120,6 +123,7 @@ trait EventDateTrait
 
     /**
      * @var EventDateInterface::EVENT_FORMAT_*
+     * @Validate("NumberRange", options={"minimum": 0, "maximum": 2})
      */
     protected int $eventFormat = EventDateInterface::EVENT_FORMAT_ON_SITE;
 
