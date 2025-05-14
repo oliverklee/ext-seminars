@@ -1,6 +1,10 @@
 "tx_seminars_seminars"
-,"uid","pid","title","owner_feuser","event_type","place","speakers","organizers"
-,1,2,"event with owner",1,1,1,1,1
+,"uid","pid","title","owner_feuser","categories","event_type","place","speakers","organizers"
+,1,2,"event with owner",1,1,1,1,1,1
+
+"tx_seminars_seminars_categories_mm"
+,"uid_local","uid_foreign"
+,1,1
 
 "tx_seminars_seminars_place_mm"
 ,"uid_local","uid_foreign"

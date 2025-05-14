@@ -13,7 +13,7 @@
                                                                       <sheet index=""displayOptions"">
                                                                           <language index=""lDEF"">
                                                                               <field index=""settings.fieldsToShow"">
-                                                                                  <value index=""vDEF"">categories,description,eventType,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,numberOfOfflineRegistrations,standardPrice,earlyBirdPrice,venues,speakers</value>
+                                                                                  <value index=""vDEF"">description,eventType,categories,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,numberOfOfflineRegistrations,standardPrice,earlyBirdPrice,venues,speakers</value>
                                                                               </field>
                                                                           </language>
                                                                       </sheet>

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Controller;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Repository\CategoryRepository;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use OliverKlee\Seminars\Domain\Repository\FrontendUserRepository;
@@ -35,6 +36,8 @@ class FrontEndEditorController extends ActionController
 
     private VenueRepository $venueRepository;
 
+    private CategoryRepository $categoryRepository;
+
     private FrontendUserRepository $userRepository;
 
     private SlugGenerator $slugGenerator;
@@ -45,6 +48,7 @@ class FrontEndEditorController extends ActionController
         OrganizerRepository $organizerRepository,
         SpeakerRepository $speakerRepository,
         VenueRepository $venueRepository,
+        CategoryRepository $categoryRepository,
         FrontendUserRepository $userRepository,
         SlugGenerator $slugGenerator
     ) {
@@ -53,6 +57,7 @@ class FrontEndEditorController extends ActionController
         $this->organizerRepository = $organizerRepository;
         $this->speakerRepository = $speakerRepository;
         $this->venueRepository = $venueRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->userRepository = $userRepository;
         $this->slugGenerator = $slugGenerator;
     }
@@ -130,6 +135,7 @@ class FrontEndEditorController extends ActionController
         $this->view->assign('organizers', $this->organizerRepository->findAll());
         $this->view->assign('speakers', $this->speakerRepository->findAll());
         $this->view->assign('venues', $this->venueRepository->findAll());
+        $this->view->assign('categories', $this->categoryRepository->findAll());
     }
 
     public function updateSingleEventAction(SingleEvent $event): ResponseInterface

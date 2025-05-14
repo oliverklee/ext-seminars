@@ -49,20 +49,26 @@
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
                                 <default>
-                                    description,eventType,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,numberOfOfflineRegistrations,standardPrice,earlyBirdPrice,venues,speakers
+                                    description,eventType,categories,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,numberOfOfflineRegistrations,standardPrice,earlyBirdPrice,venues,speakers
                                 </default>
                                 <items type="array">
-                                    <numIndex index="1" type="array">
+                                    <numIndex index="0" type="array">
                                         <numIndex index="0">
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description
                                         </numIndex>
                                         <numIndex index="1">description</numIndex>
                                     </numIndex>
-                                    <numIndex index="2" type="array">
+                                    <numIndex index="1" type="array">
                                         <numIndex index="0">
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType
                                         </numIndex>
                                         <numIndex index="1">eventType</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories
+                                        </numIndex>
+                                        <numIndex index="1">categories</numIndex>
                                     </numIndex>
                                     <numIndex index="3" type="array">
                                         <numIndex index="0">
