@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Domain\Repository\Event;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
@@ -16,6 +17,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * @extends AbstractRawDataCapableRepository<Event>
@@ -390,5 +392,21 @@ class EventRepository extends AbstractRawDataCapableRepository
     private function now(): \DateTimeInterface
     {
         return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'full');
+    }
+
+    /**
+     * @return QueryResultInterface<EventTopic>
+     */
+    public function findAllTopics(): QueryResultInterface
+    {
+        $query = $this->createQuery();
+
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $query->setQuerySettings($querySettings->setRespectStoragePage(false));
+
+        return $query
+            ->matching($query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC))
+            ->setOrderings(['internalTitle' => QueryInterface::ORDER_ASCENDING])
+            ->execute();
     }
 }
