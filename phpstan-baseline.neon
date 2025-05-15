@@ -362,7 +362,7 @@ parameters:
 
 		-
 			message: "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\:\\:logicalAnd\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 3
+			count: 4
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
