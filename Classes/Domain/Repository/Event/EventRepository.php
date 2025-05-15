@@ -400,13 +400,38 @@ class EventRepository extends AbstractRawDataCapableRepository
     public function findAllTopics(): QueryResultInterface
     {
         $query = $this->createQuery();
-
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $query->setQuerySettings($querySettings->setRespectStoragePage(false));
+        $this->setQuerySettingsForFindingTopics($query);
 
         return $query
             ->matching($query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC))
-            ->setOrderings(['internalTitle' => QueryInterface::ORDER_ASCENDING])
             ->execute();
+    }
+
+    /**
+     * @param non-empty-array<int<0, max>> $uids
+     *
+     * @return QueryResultInterface<EventTopic>
+     */
+    public function findTopicsByUids(array $uids): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $this->setQuerySettingsForFindingTopics($query);
+
+        $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC);
+        $uidMatcher = $query->in('uid', $uids);
+
+        return $query
+            ->matching($query->logicalAnd($uidMatcher, $objectTypeMatcher))
+            ->execute();
+    }
+
+    /**
+     * @param QueryInterface<Event> $query
+     */
+    private function setQuerySettingsForFindingTopics(QueryInterface $query): void
+    {
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $query->setQuerySettings($querySettings->setRespectStoragePage(false));
+        $query->setOrderings(['internalTitle' => QueryInterface::ORDER_ASCENDING]);
     }
 }
