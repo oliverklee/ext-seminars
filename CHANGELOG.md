@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `EventRepository::findAllTopics()` (#4391)
 - Allow editing the event categories in the FE editor (#4380, #4389)
 - Add `Event.categories` (#4388)
 - Add a `Category` model and repository (#4384, #4385)
