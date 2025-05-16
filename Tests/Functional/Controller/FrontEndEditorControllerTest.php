@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Controller;
 
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequestContext;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -127,6 +128,34 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function indexActionHasHeadline(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expected = LocalizationUtility::translate('plugin.frontEndEditor.index.headline', 'seminars');
+        self::assertIsString($expected);
+        self::assertStringContainsString($expected, (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionHasLinkToNewSingleEventAction(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=newSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
+        self::assertStringContainsString($expected, (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
     public function indexActionWithLoggedInUserDoesNotRenderEventsWithoutOwner(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithoutOwner.csv');
@@ -155,7 +184,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function indexActionWithLoggedInUserRendersEventsFromOwnedByLoggedInUser(): void
+    public function indexActionWithLoggedInUserRendersSingleEventsOwnedByLoggedInUser(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
 
@@ -164,6 +193,45 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
         self::assertStringContainsString('event with owner', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionWithSingleEventShowsEditSingleEventLink(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=editSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor'
+            . '&amp;tx_seminars_frontendeditor%5Bevent%5D=1';
+        self::assertStringContainsString($expected, (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function editSingleEventActionHasUpdateSingleEventFormAction(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editSingleEventAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editSingleEvent',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=updateSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
+        self::assertStringContainsString($expected, $html);
     }
 
     /**
@@ -350,7 +418,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @return array<string, array{0: non-empty-string}>
      */
-    public static function auxiliaryRecordTitlesDataProvider(): array
+    public static function auxiliaryRecordTitlesForSingleEventDataProvider(): array
     {
         return [
             'categories' => ['cooking'],
@@ -365,7 +433,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      * @test
      *
      * @param non-empty-string $title
-     * @dataProvider auxiliaryRecordTitlesDataProvider
+     * @dataProvider auxiliaryRecordTitlesForSingleEventDataProvider
      */
     public function editSingleEventActionHasTitlesOfAuxiliaryRecords(string $title): void
     {
@@ -529,6 +597,30 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function updateSingleEventActionKeepsPidUnchanged(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/SingleEventWithDifferentPid.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/SingleEventWithDifferentPid.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function updateSingleEventActionCanSetOrganizer(): void
     {
         $this->importCSVDataSet(
@@ -656,6 +748,23 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
     /**
      * @test
+     */
+    public function newSingleEventActionHasLinkToCreateSingleEventAction(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'newSingleEvent',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=createSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
+        self::assertStringContainsString($expected, $html);
+    }
+
+    /**
+     * @test
      *
      * @param non-empty-string $key
      * @dataProvider nonDateFormFieldKeysForSingleEventDataProvider
@@ -740,7 +849,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      * @test
      *
      * @param non-empty-string $title
-     * @dataProvider auxiliaryRecordTitlesDataProvider
+     * @dataProvider auxiliaryRecordTitlesForSingleEventDataProvider
      */
     public function newSingleEventActionHasTitlesOfAuxiliaryRecords(string $title): void
     {
@@ -774,6 +883,25 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(
             __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/NewlyCreatedEvent.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function createSingleEventActionSetsPidFromConfiguration(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewForm(1),
+            'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/NewlyCreatedEventWithPid.csv'
         );
     }
 
