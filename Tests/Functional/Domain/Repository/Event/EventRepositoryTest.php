@@ -718,7 +718,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwner.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithOwner.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(42);
 
@@ -733,7 +733,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidForUidZeroIgnoresEventWithoutOwner(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutOwner.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithoutOwner.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(0);
 
@@ -745,7 +745,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUidOnAnyPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwnerOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithOwnerOnPage.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(42);
 
@@ -760,7 +760,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidIgnoresSingleEventWithOtherOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwner.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithOwner.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(5);
 
@@ -772,7 +772,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidIgnoresEventDatesWithTheProvidedOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithOwner.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/EventDateWithOwner.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(5);
 
@@ -784,7 +784,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidIgnoresEventTopicsWithTheProvidedOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithOwner.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/EventTopicWithOwner.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(5);
 
@@ -796,7 +796,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidSortsEventByInternalTitleInAscendingOrder(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsWithOwner.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/TwoSingleEventsWithOwner.csv');
 
         $result = $this->subject->findSingleEventsByOwnerUid(42);
 
@@ -808,7 +808,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function updateRegistrationCounterCacheForNoRegistrationsSetsCounterCacheAtZero(): void
+    public function updateRegistrationCounterCacheForNoRegistrationsSetsCounterCacheToZero(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/SingleEventWithAllFields.csv');
         $event = $this->subject->findByUid(1);
