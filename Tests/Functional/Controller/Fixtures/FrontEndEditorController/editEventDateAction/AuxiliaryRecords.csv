@@ -1,0 +1,19 @@
+"tx_seminars_event_types"
+,"uid","pid","title"
+,1,2,"workshop"
+
+"tx_seminars_sites"
+,"uid","pid","title"
+,1,2,"Jugendherberge Bonn"
+
+"tx_seminars_speakers"
+,"uid","pid","title"
+,1,2,"Ned Knowledge"
+
+"tx_seminars_organizers"
+,"uid","pid","title"
+,1,2,"Training Inc."
+
+"tx_seminars_categories"
+,"uid","pid","title"
+,1,2,"cooking"

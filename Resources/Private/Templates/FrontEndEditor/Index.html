@@ -38,9 +38,18 @@
                             <f:render partial="EventDate" arguments="{event: event}"/>
                         </td>
                         <td>
-                            <f:link.action action="editSingleEvent" arguments="{event: event}">
-                                <f:translate key="plugin.frontEndEditor.action.edit"/>
-                            </f:link.action>
+                            <f:if condition="{event.singleEvent}">
+                                <f:then>
+                                    <f:link.action action="editSingleEvent" arguments="{event: event}">
+                                        <f:translate key="plugin.frontEndEditor.action.edit"/>
+                                    </f:link.action>
+                                </f:then>
+                                <f:else if="{event.eventDate}">
+                                    <f:link.action action="editEventDate" arguments="{event: event}">
+                                        <f:translate key="plugin.frontEndEditor.action.edit"/>
+                                    </f:link.action>
+                                </f:else>
+                            </f:if>
                         </td>
                     </tr>
                 </f:for>
