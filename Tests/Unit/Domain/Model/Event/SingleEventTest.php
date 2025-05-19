@@ -1872,4 +1872,28 @@ final class SingleEventTest extends UnitTestCase
 
         self::assertSame($associatedModels, $this->subject->getCategories());
     }
+
+    /**
+     * @test
+     */
+    public function isSingleEventAlwaysReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->isSingleEvent());
+    }
+
+    /**
+     * @test
+     */
+    public function isEventDateAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isEventDate());
+    }
+
+    /**
+     * @test
+     */
+    public function isEventTopicAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isEventTopic());
+    }
 }

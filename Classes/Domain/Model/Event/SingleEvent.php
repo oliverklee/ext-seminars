@@ -23,4 +23,19 @@ class SingleEvent extends Event implements EventDateInterface, EventTopicInterfa
         $this->initializeEventTopic();
         $this->initializeEventDate();
     }
+
+    public function isSingleEvent(): bool
+    {
+        return true;
+    }
+
+    public function isEventDate(): bool
+    {
+        return false;
+    }
+
+    public function isEventTopic(): bool
+    {
+        return false;
+    }
 }
