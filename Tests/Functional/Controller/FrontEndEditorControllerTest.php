@@ -630,7 +630,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function updateSingleEventActionKeepsPidUnchanged(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/SingleEventWithDifferentPid.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithDifferentPid.csv'
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
@@ -644,7 +644,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->executeFrontendSubRequest($request, $context);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/SingleEventWithDifferentPid.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithDifferentPid.csv'
         );
     }
 
