@@ -123,13 +123,13 @@ class FrontEndEditorController extends ActionController
         $this->checkEventOwner($event);
 
         $this->view->assign('event', $event);
-        $this->assignAuxiliaryRecordsToView();
+        $this->assignAuxiliaryRecordsForSingleEventToView();
         $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
 
         return $this->htmlResponse();
     }
 
-    private function assignAuxiliaryRecordsToView(): void
+    private function assignAuxiliaryRecordsForSingleEventToView(): void
     {
         $this->view->assign('eventTypes', $this->eventTypeRepository->findAllPlusNullEventType());
         $this->view->assign('organizers', $this->organizerRepository->findAll());
@@ -150,7 +150,7 @@ class FrontEndEditorController extends ActionController
     {
         $eventToCreate = GeneralUtility::makeInstance(SingleEvent::class);
         $this->view->assign('event', $eventToCreate);
-        $this->assignAuxiliaryRecordsToView();
+        $this->assignAuxiliaryRecordsForSingleEventToView();
         $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
 
         return $this->htmlResponse();
