@@ -94,7 +94,7 @@ class EventRepository extends AbstractRawDataCapableRepository
     }
 
     /**
-     * @return list<Event>
+     * @return array<Event>
      */
     public function findSingleEventsAndEventDatesByOwnerUid(int $ownerUid): array
     {
@@ -160,7 +160,7 @@ class EventRepository extends AbstractRawDataCapableRepository
      *
      * @param int<0, max> $pageUid
      *
-     * @return list<Event>
+     * @return array<Event>
      */
     public function findByPageUidInBackEndMode(int $pageUid): array
     {
@@ -185,7 +185,7 @@ class EventRepository extends AbstractRawDataCapableRepository
      *
      * @param int<0, max> $pageUid
      *
-     * @return list<Event>
+     * @return array<Event>
      */
     public function findBySearchTermInBackEndMode(int $pageUid, string $searchTerm): array
     {
@@ -215,7 +215,7 @@ class EventRepository extends AbstractRawDataCapableRepository
      * @param int<0, max> $eventUid
      * @param int<1, max> $pageUid
      *
-     * @return list<Event>
+     * @return array<Event>
      */
     private function findByEventUidAndPageUidInBackEndMode(int $eventUid, int $pageUid): array
     {
@@ -235,7 +235,7 @@ class EventRepository extends AbstractRawDataCapableRepository
      * @param non-empty-string $searchTerm
      * @param int<1, max> $pageUid
      *
-     * @return list<Event>
+     * @return array<Event>
      */
     private function findBySearchTermAndPageUidInBackEndMode(string $searchTerm, int $pageUid): array
     {

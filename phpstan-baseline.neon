@@ -336,26 +336,6 @@ parameters:
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository\\:\\:findByEventUidAndPageUidInBackEndMode\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Event/EventRepository.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository\\:\\:findByPageUidInBackEndMode\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Event/EventRepository.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository\\:\\:findBySearchTermAndPageUidInBackEndMode\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Event/EventRepository.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository\\:\\:findSingleEventsAndEventDatesByOwnerUid\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Event/EventRepository.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository\\:\\:now\\(\\) should return DateTimeInterface but returns mixed\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Event/EventRepository.php
@@ -382,16 +362,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:countSeatsByEvent\\(\\) should return int\\<0, max\\> but returns int\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findActiveRegistrationsByUser\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findByEventAndStatus\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
