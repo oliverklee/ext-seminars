@@ -29,6 +29,21 @@ class EventDate extends Event implements EventDateInterface
         $this->initializeEventDate();
     }
 
+    public function isSingleEvent(): bool
+    {
+        return false;
+    }
+
+    public function isEventDate(): bool
+    {
+        return true;
+    }
+
+    public function isEventTopic(): bool
+    {
+        return false;
+    }
+
     public function getTopic(): ?EventTopic
     {
         return $this->topic;

@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Allow editing event date records in the FE editor (#4399)
+- Allow editing event date records in the FE editor (#4399, #4401)
 - Add `EventRepository::findAllTopics()`/`::findTopicsByUids()` (#4391, #4392)
 - Allow editing the event categories in the FE editor (#4380, #4389)
 - Add `Event.categories` (#4388)

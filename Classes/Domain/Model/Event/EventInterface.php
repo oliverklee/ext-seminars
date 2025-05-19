@@ -48,6 +48,12 @@ interface EventInterface
 
     public function setHidden(bool $hidden): void;
 
+    public function isSingleEvent(): bool;
+
+    public function isEventDate(): bool;
+
+    public function isEventTopic(): bool;
+
     public function getInternalTitle(): string;
 
     public function getDisplayTitle(): string;

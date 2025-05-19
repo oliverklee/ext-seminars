@@ -22,6 +22,21 @@ class EventTopic extends Event implements EventTopicInterface
         $this->initializeEventTopic();
     }
 
+    public function isSingleEvent(): bool
+    {
+        return false;
+    }
+
+    public function isEventDate(): bool
+    {
+        return false;
+    }
+
+    public function isEventTopic(): bool
+    {
+        return true;
+    }
+
     /**
      * @internal
      */

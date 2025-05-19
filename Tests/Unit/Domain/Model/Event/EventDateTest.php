@@ -1727,4 +1727,28 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getSlug());
     }
+
+    /**
+     * @test
+     */
+    public function isSingleEventAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isSingleEvent());
+    }
+
+    /**
+     * @test
+     */
+    public function isEventDateAlwaysReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->isEventDate());
+    }
+
+    /**
+     * @test
+     */
+    public function isEventTopicAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isEventTopic());
+    }
 }
