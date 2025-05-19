@@ -716,11 +716,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUid(): void
+    public function findSingleEventsAndEventDatesByOwnerUidFindsSingleEventWithTheProvidedOwnerUid(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithOwner.csv');
 
-        $result = $this->subject->findSingleEventsByOwnerUid(42);
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
 
         self::assertCount(1, $result);
         $firstMatch = $result[0];
@@ -731,11 +731,13 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findSingleEventsByOwnerUidForUidZeroIgnoresEventWithoutOwner(): void
+    public function findSingleEventsAndEventDatesByOwnerUidForUidZeroIgnoresEventWithoutOwner(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithoutOwner.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithoutOwner.csv'
+        );
 
-        $result = $this->subject->findSingleEventsByOwnerUid(0);
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(0);
 
         self::assertSame([], $result);
     }
@@ -743,11 +745,13 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUidOnAnyPage(): void
+    public function findSingleEventsAndEventDatesByOwnerUidFindsSingleEventWithTheProvidedOwnerUidOnAnyPage(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithOwnerOnPage.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithOwnerOnPage.csv'
+        );
 
-        $result = $this->subject->findSingleEventsByOwnerUid(42);
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
 
         self::assertCount(1, $result);
         $firstMatch = $result[0];
@@ -758,11 +762,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findSingleEventsByOwnerUidIgnoresSingleEventWithOtherOwnerUid(): void
+    public function findSingleEventsAndEventDatesByOwnerUidIgnoresSingleEventWithOtherOwnerUid(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/SingleEventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithOwner.csv');
 
-        $result = $this->subject->findSingleEventsByOwnerUid(5);
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(5);
 
         self::assertSame([], $result);
     }
@@ -770,11 +774,26 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findSingleEventsByOwnerUidIgnoresEventDatesWithTheProvidedOwnerUid(): void
+    public function findSingleEventsAndEventDatesByOwnerUidFindsEventDatesWithTheProvidedOwnerUid(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/EventDateWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/EventDateWithOwner.csv');
 
-        $result = $this->subject->findSingleEventsByOwnerUid(5);
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findSingleEventsAndEventDatesByOwnerUidIgnoresEventTopicsWithTheProvidedOwnerUid(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/EventTopicWithOwner.csv');
+
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
 
         self::assertSame([], $result);
     }
@@ -782,23 +801,13 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findSingleEventsByOwnerUidIgnoresEventTopicsWithTheProvidedOwnerUid(): void
+    public function findSingleEventsAndEventDatesByOwnerUidSortsEventByInternalTitleInAscendingOrder(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/EventTopicWithOwner.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/TwoSingleEventsWithOwner.csv'
+        );
 
-        $result = $this->subject->findSingleEventsByOwnerUid(5);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidSortsEventByInternalTitleInAscendingOrder(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findSingleEventsByOwnerUid/TwoSingleEventsWithOwner.csv');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(42);
+        $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
 
         self::assertCount(2, $result);
         $firstMatch = $result[0];
