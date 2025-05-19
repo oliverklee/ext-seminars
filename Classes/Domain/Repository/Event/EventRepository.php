@@ -96,7 +96,7 @@ class EventRepository extends AbstractRawDataCapableRepository
     /**
      * @return list<Event>
      */
-    public function findSingleEventsByOwnerUid(int $ownerUid): array
+    public function findSingleEventsAndEventDatesByOwnerUid(int $ownerUid): array
     {
         if ($ownerUid <= 0) {
             return [];
@@ -108,7 +108,8 @@ class EventRepository extends AbstractRawDataCapableRepository
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $query->setQuerySettings($querySettings->setRespectStoragePage(false));
 
-        $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_SINGLE_EVENT);
+        $allowedObjectTypes = [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE];
+        $objectTypeMatcher = $query->in('objectType', $allowedObjectTypes);
         $ownerMatcher = $query->equals('ownerUid', $ownerUid);
         $query->matching($query->logicalAnd($objectTypeMatcher, $ownerMatcher));
 

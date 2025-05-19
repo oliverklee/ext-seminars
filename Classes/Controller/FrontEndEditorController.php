@@ -93,7 +93,7 @@ class FrontEndEditorController extends ActionController
 
     public function indexAction(): ResponseInterface
     {
-        $events = $this->eventRepository->findSingleEventsByOwnerUid($this->getLoggedInUserUid());
+        $events = $this->eventRepository->findSingleEventsAndEventDatesByOwnerUid($this->getLoggedInUserUid());
         $this->view->assign('events', $events);
 
         return $this->htmlResponse();

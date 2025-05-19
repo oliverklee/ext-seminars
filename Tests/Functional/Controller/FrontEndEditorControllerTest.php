@@ -104,7 +104,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      */
     public function indexActionWithoutLoggedInUserDoesNotRenderEventsWithoutOwner(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithoutOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithoutOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $response = $this->executeFrontendSubRequest($request);
@@ -117,7 +117,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      */
     public function indexActionWithoutLoggedInUserDoesNotRenderEventsWithOwner(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $response = $this->executeFrontendSubRequest($request);
@@ -156,9 +156,9 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function indexActionWithLoggedInUserDoesNotRenderEventsWithoutOwner(): void
+    public function indexActionWithLoggedInUserDoesNotRenderSingleEventsWithoutOwner(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithoutOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithoutOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
@@ -170,9 +170,11 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function indexActionWithLoggedInUserDoesNotRenderEventsFromOtherOwner(): void
+    public function indexActionWithLoggedInUserDoesNotRenderSingleEventsFromOtherOwner(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventFromDifferentOwner.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventFromDifferentOwner.csv'
+        );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
@@ -186,7 +188,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
      */
     public function indexActionWithLoggedInUserRendersSingleEventsOwnedByLoggedInUser(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
@@ -198,9 +200,37 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function indexActionWithLoggedInUserRendersEventDateOwnedByLoggedInUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventDateWithOwner.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringContainsString('event date with owner', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionWithLoggedInUserDoesNotRenderEventTopicOwnedByLoggedInUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventTopicWithOwner.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringNotContainsString('event topic with owner', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
     public function indexActionWithSingleEventShowsEditSingleEventLink(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventWithOwner.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwner.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
