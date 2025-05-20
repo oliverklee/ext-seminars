@@ -95,6 +95,23 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         return $this->getTrustedPropertiesFromHtml($html);
     }
 
+    /**
+     * @param positive-int $eventUid
+     * @param positive-int $userUid
+     */
+    private function getTrustedPropertiesFromEditEventDateForm(int $eventUid, int $userUid): string
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => $eventUid,
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId($userUid);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        return $this->getTrustedPropertiesFromHtml($html);
+    }
+
     private function getTrustedPropertiesFromHtml(string $html): string
     {
         $matches = [];
@@ -235,7 +252,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function indexActionWithSingleEventShowsEditSingleEventLink(): void
+    public function indexActionWithSingleEventHasEditSingleEventLink(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwner.csv');
 
@@ -244,6 +261,23 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
         $expected = '?tx_seminars_frontendeditor%5Baction%5D=editSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor'
+            . '&amp;tx_seminars_frontendeditor%5Bevent%5D=1';
+        self::assertStringContainsString($expected, (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionWithEventDateHasEditEventDateLink(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/EventDateWithOwner.csv');
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=editEventDate'
             . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor'
             . '&amp;tx_seminars_frontendeditor%5Bevent%5D=1';
         self::assertStringContainsString($expected, (string)$response->getBody());
@@ -771,6 +805,521 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(
             __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/UpdatedEventWithSlug.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function editEventDateActionHasUpdateEventDateFormAction(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=updateEventDate'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
+        self::assertStringContainsString($expected, $html);
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function nonDateFormFieldKeysForEventDateDataProvider(): array
+    {
+        return [
+            'internalTitle' => ['internalTitle'],
+            'registrationRequired' => ['registrationRequired'],
+            'waitingList' => ['waitingList'],
+            'minimumNumberOfRegistrations' => ['minimumNumberOfRegistrations'],
+            'maximumNumberOfRegistrations' => ['maximumNumberOfRegistrations'],
+            'numberOfOfflineRegistrations' => ['numberOfOfflineRegistrations'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider nonDateFormFieldKeysForEventDateDataProvider
+     */
+    public function editEventDateActionHasAllNonDateFormFields(string $key): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function dateFormFieldKeysForEventDateDataProvider(): array
+    {
+        return [
+            'start' => ['start'],
+            'end' => ['end'],
+            'earlyBirdDeadline' => ['earlyBirdDeadline'],
+            'registrationDeadline' => ['registrationDeadline'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider dateFormFieldKeysForEventDateDataProvider
+     */
+    public function editEventDateActionHasAllDateFormFields(string $key): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . '][date]"', $html);
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . '][dateFormat]"', $html);
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function multiAssociationFormFieldKeysForEventDateDataProvider(): array
+    {
+        return [
+            'venues' => ['venues'],
+            'speakers' => ['speakers'],
+            'organizers' => ['organizers'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider multiAssociationFormFieldKeysForEventDateDataProvider
+     */
+    public function editEventDateActionHasAllAssociationFormFields(string $key): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function formFieldKeysIrrelevantForEventDatesDataProvider(): array
+    {
+        return [
+            'description' => ['description'],
+            'eventType' => ['eventType'],
+            'categories' => ['categories'],
+            'standardPrice' => ['standardPrice'],
+            'earlyBirdPrice' => ['earlyBirdPrice'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider formFieldKeysIrrelevantForEventDatesDataProvider
+     */
+    public function editEventDateActionHasNoFieldsIrrelevantForEventDates(string $key): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringNotContainsString('name="tx_seminars_frontendeditor[event][' . $key . ']"', $html);
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $key
+     * @dataProvider multiAssociationFormFieldKeysForEventDateDataProvider
+     */
+    public function editEventDateActionForEventWithAllAssociationsHasSelectedMultiAssociationOptions(
+        string $key
+    ): void {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwnerAndAllAssociations.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString(
+            'name="tx_seminars_frontendeditor[event][' . $key . '][]" value="1" checked="checked"',
+            $html
+        );
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public static function auxiliaryRecordTitlesForEventDateDataProvider(): array
+    {
+        return [
+            'venues' => ['Jugendherberge Bonn'],
+            'speakers' => ['Ned Knowledge'],
+            'organizers' => ['Training Inc.'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $title
+     * @dataProvider auxiliaryRecordTitlesForEventDateDataProvider
+     */
+    public function editEventDateActionHasTitlesOfAuxiliaryRecords(string $title): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString($title, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function editEventDateActionWithOwnEventAssignsProvidedEventToView(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString(
+            '<input type="hidden" name="tx_seminars_frontendeditor[event][__identity]" value="1" />',
+            $html
+        );
+        self::assertStringContainsString('event with owner', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function editEventDateActionForUserWithDefaultOrganizerHasNoOrganizerFormField(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/FrontEndUserWithDefaultOrganizer.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(2);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringNotContainsString('name="tx_seminars_frontendeditor[event][organizers]"', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function editEventDateActionWithOwnEventRendersNumberOfOfflineRegistrations(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request, $context)->getBody();
+
+        self::assertStringContainsString('value="59"', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function editEventDateActionWithEventFromOtherUserThrowsException(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventFromDifferentOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You do not have permission to edit this event.');
+        $this->expectExceptionCode(1666954310);
+
+        $this->executeFrontendSubRequest($request, $context);
+    }
+
+    /**
+     * @test
+     */
+    public function editEventDateActionWithEventWithoutOwnerThrowsException(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/editEventDateAction/EventWithoutOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[action]' => 'editEventDate',
+            'tx_seminars_frontendeditor[event]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You do not have permission to edit this event.');
+        $this->expectExceptionCode(1666954310);
+
+        $this->executeFrontendSubRequest($request, $context);
+    }
+
+    /**
+     * @test
+     */
+    public function updateEventDateActionWithOwnEventUpdatesEvent(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditEventDateForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateEventDate',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+            'tx_seminars_frontendeditor[event][numberOfOfflineRegistrations]' => '5',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/UpdatedEvent.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function updateEventDateActionKeepsPidUnchanged(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithDifferentPid.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditEventDateForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateEventDate',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithDifferentPid.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function updateEventDateActionCanSetOrganizer(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditEventDateForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateEventDate',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+            'tx_seminars_frontendeditor[event][organizers]' => '',
+            'tx_seminars_frontendeditor[event][organizers][]' => '1',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/UpdatedEventWithOrganizer.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function updateEventDateActionForUserWithDefaultOrganizerKeepsOrganizerUnchanged(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/AuxiliaryRecords.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/FrontEndUserWithDefaultOrganizer.csv'
+        );
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditEventDateForm(1, 2),
+            'tx_seminars_frontendeditor[action]' => 'updateEventDate',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'event with owner',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(2);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwnerWithDefaultOrganizer.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function updateEventDateActionForEventWithTopicUpdatesSlug(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithTopicAndOwner.csv'
+        );
+
+        $newTitle = 'Karaoke party';
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditEventDateForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateEventDate',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => $newTitle,
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/UpdatedEventWithTopicAndSlug.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function updateEventDateActionForEventWithoutTopicSetsSlugToUidOnly(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwner.csv'
+        );
+
+        $newTitle = 'Karaoke party';
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromEditEventDateForm(1, 1),
+            'tx_seminars_frontendeditor[action]' => 'updateEventDate',
+            'tx_seminars_frontendeditor[event][__identity]' => '1',
+            'tx_seminars_frontendeditor[event][internalTitle]' => $newTitle,
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/UpdatedEventWithUidOnlySlug.csv'
         );
     }
 

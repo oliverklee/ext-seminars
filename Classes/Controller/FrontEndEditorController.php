@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Organizer;
@@ -106,9 +109,11 @@ class FrontEndEditorController extends ActionController
      *
      * Note: This cannot go into an `initialize*Action()` method because the event is not available there.
      *
+     * @param SingleEvent|EventDate $event
+     *
      * @throws \RuntimeException
      */
-    private function checkEventOwner(SingleEvent $event): void
+    private function checkEventOwner($event): void
     {
         if ($event->getOwnerUid() !== $this->getLoggedInUserUid()) {
             throw new \RuntimeException('You do not have permission to edit this event.', 1666954310);
@@ -141,7 +146,7 @@ class FrontEndEditorController extends ActionController
     public function updateSingleEventAction(SingleEvent $event): ResponseInterface
     {
         $this->checkEventOwner($event);
-        $this->updateAndSlaveSlug($event);
+        $this->updateAndSlaveSlugForSingleEvent($event);
 
         return $this->redirect('index');
     }
@@ -174,16 +179,61 @@ class FrontEndEditorController extends ActionController
         // We first need to persist the event to get a UID for it, so we can generate a slug.
         $this->eventRepository->add($event);
         $this->eventRepository->persistAll();
-        $this->updateAndSlaveSlug($event);
+        $this->updateAndSlaveSlugForSingleEvent($event);
 
         return $this->redirect('index');
     }
 
-    private function updateAndSlaveSlug(SingleEvent $event): void
+    private function updateAndSlaveSlugForSingleEvent(SingleEvent $event): void
     {
         $uid = $event->getUid();
         \assert(\is_int($uid) && $uid > 0);
-        $recordData = ['uid' => $uid, 'title' => $event->getInternalTitle()];
+        $recordData = [
+            'uid' => $uid,
+            'object_type' => EventInterface::TYPE_SINGLE_EVENT,
+            'title' => $event->getInternalTitle(),
+        ];
+        $event->setSlug($this->slugGenerator->generateSlug(['record' => $recordData]));
+
+        $this->eventRepository->update($event);
+        $this->eventRepository->persistAll();
+    }
+
+    /**
+     * @IgnoreValidation("event")
+     */
+    public function editEventDateAction(EventDate $event): ResponseInterface
+    {
+        $this->checkEventOwner($event);
+
+        $this->view->assign('event', $event);
+        $this->assignAuxiliaryRecordsForSingleEventToView();
+        $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
+
+        return $this->htmlResponse();
+    }
+
+    public function updateEventDateAction(EventDate $event): ResponseInterface
+    {
+        $this->checkEventOwner($event);
+        $this->updateAndSlaveSlugForEventDate($event);
+
+        return $this->redirect('index');
+    }
+
+    private function updateAndSlaveSlugForEventDate(EventDate $event): void
+    {
+        $uid = $event->getUid();
+        \assert(\is_int($uid) && $uid > 0);
+        $topic = $event->getTopic();
+        $topicUid = $topic instanceof EventTopic ? $topic->getUid() : 0;
+        \assert(\is_int($topicUid) && $topicUid >= 0);
+        $recordData = [
+            'uid' => $uid,
+            'object_type' => EventInterface::TYPE_EVENT_DATE,
+            'topic' => $topicUid,
+            'title' => $event->getInternalTitle(),
+        ];
         $event->setSlug($this->slugGenerator->generateSlug(['record' => $recordData]));
 
         $this->eventRepository->update($event);

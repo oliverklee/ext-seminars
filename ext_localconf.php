@@ -146,6 +146,8 @@ defined('TYPO3') or die('Access denied.');
         'updateSingleEvent',
         'newSingleEvent',
         'createSingleEvent',
+        'editEventDate',
+        'updateEventDate',
     ];
     ExtensionUtility::configurePlugin(
         'Seminars',
