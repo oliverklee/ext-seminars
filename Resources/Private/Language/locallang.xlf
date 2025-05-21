@@ -1123,6 +1123,9 @@
 			<trans-unit id="plugin.frontEndEditor.property.internalTitle">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.topic">
+				<source>Topic</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.categories">
 				<source>Categories</source>
 			</trans-unit>
