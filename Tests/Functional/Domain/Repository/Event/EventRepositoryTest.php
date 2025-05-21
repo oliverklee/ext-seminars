@@ -2389,7 +2389,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findAllTopics();
 
         self::assertCount(1, $result);
-        $firstMatch = $result->toArray()[0];
+        $firstMatch = $result[0];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
     }
 
@@ -2463,7 +2463,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findAllTopics();
 
         self::assertCount(2, $result);
-        $firstMatch = $result->toArray()[0];
+        $firstMatch = $result[0];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
         self::assertSame('acrobatics', $firstMatch->getInternalTitle());
     }
@@ -2478,7 +2478,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findTopicsByUids([1]);
 
         self::assertCount(1, $result);
-        $firstMatch = $result->toArray()[0];
+        $firstMatch = $result[0];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
     }
 
@@ -2492,7 +2492,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findTopicsByUids([1, 2]);
 
         self::assertCount(1, $result);
-        $firstMatch = $result->toArray()[0];
+        $firstMatch = $result[0];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
     }
 
@@ -2506,7 +2506,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findTopicsByUids([2, 1]);
 
         self::assertCount(1, $result);
-        $firstMatch = $result->toArray()[0];
+        $firstMatch = $result[0];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
     }
 
@@ -2592,7 +2592,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findTopicsByUids([1, 2]);
 
         self::assertCount(2, $result);
-        $firstMatch = $result->toArray()[0];
+        $firstMatch = $result[0];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
         self::assertSame('acrobatics', $firstMatch->getInternalTitle());
     }
