@@ -9,6 +9,9 @@ namespace OliverKlee\Seminars\Domain\Model;
  */
 interface EventTypeInterface
 {
+    /**
+     * @return int<1, max>|null
+     */
     public function getUid(): ?int;
 
     public function getTitle(): string;
