@@ -17,7 +17,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * @extends AbstractRawDataCapableRepository<Event>
@@ -396,24 +395,27 @@ class EventRepository extends AbstractRawDataCapableRepository
     }
 
     /**
-     * @return QueryResultInterface<EventTopic>
+     * @return array<EventTopic>
      */
-    public function findAllTopics(): QueryResultInterface
+    public function findAllTopics(): array
     {
         $query = $this->createQuery();
         $this->setQuerySettingsForFindingTopics($query);
 
-        return $query
+        /** @var array<EventTopic> $result */
+        $result = $query
             ->matching($query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC))
-            ->execute();
+            ->execute()->toArray();
+
+        return $result;
     }
 
     /**
      * @param non-empty-array<int<0, max>> $uids
      *
-     * @return QueryResultInterface<EventTopic>
+     * @return array<EventTopic>
      */
-    public function findTopicsByUids(array $uids): QueryResultInterface
+    public function findTopicsByUids(array $uids): array
     {
         $query = $this->createQuery();
         $this->setQuerySettingsForFindingTopics($query);
@@ -421,9 +423,12 @@ class EventRepository extends AbstractRawDataCapableRepository
         $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC);
         $uidMatcher = $query->in('uid', $uids);
 
-        return $query
+        /** @var array<EventTopic> $result */
+        $result = $query
             ->matching($query->logicalAnd($uidMatcher, $objectTypeMatcher))
-            ->execute();
+            ->execute()->toArray();
+
+        return $result;
     }
 
     /**
