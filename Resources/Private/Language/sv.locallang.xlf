@@ -1545,6 +1545,10 @@
         <source>Title</source>
         <target state="needs-translation">Title</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.topic">
+        <source>Topic</source>
+        <target state="needs-translation">Topic</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.categories">
         <source>Categories</source>
         <target state="needs-translation">Categories</target>
