@@ -207,7 +207,7 @@ class FrontEndEditorController extends ActionController
         $this->checkEventOwner($event);
 
         $this->view->assign('event', $event);
-        $this->view->assign('topics', $this->eventRepository->findAllTopics());
+        $this->view->assign('topics', $this->eventRepository->findAllTopicsPlusNullTopic());
         $this->assignAuxiliaryRecordsForSingleEventToView();
         $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
 

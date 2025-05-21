@@ -15,7 +15,7 @@
                 <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'internalTitle'}"/>
             </div>
 
-            <f:if condition="{event.eventDate} && {topics}">
+            <f:if condition="{event.eventDate}">
                 <label for="{idPrefix}-topic" class="col-sm-2 col-form-label">
                     <f:translate key="{propertyLabelPrefix}.topic"/>
                 </label>
