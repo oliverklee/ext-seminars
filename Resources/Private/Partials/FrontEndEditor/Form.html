@@ -9,11 +9,23 @@
             <label for="{idPrefix}-internalTitle" class="col-sm-2 col-form-label">
                 <f:translate key="{propertyLabelPrefix}.internalTitle"/>
             </label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <f:form.textfield property="internalTitle" id="{idPrefix}-internalTitle" maxlength="255"
                                   class="form-control" errorClass="is-invalid" required="required"/>
                 <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'internalTitle'}"/>
             </div>
+
+            <f:if condition="{event.eventDate} && {topics}">
+                <label for="{idPrefix}-topic" class="col-sm-2 col-form-label">
+                    <f:translate key="{propertyLabelPrefix}.topic"/>
+                </label>
+                <div class="col-sm-4">
+                    <f:form.select property="topic" id="{idPrefix}-topic" required="required"
+                                   options="{topics}" optionLabelField="displayTitle" optionValueField="uid"
+                                   class="form-select" errorClass="is-invalid"/>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'topic'}"/>
+                </div>
+            </f:if>
         </div>
 
         <f:if condition="{event.singleEvent}">
