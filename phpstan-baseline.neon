@@ -351,6 +351,11 @@ parameters:
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
+			message: "#^PHPDoc tag @var with type array\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\EventTopicInterface\\> is not subtype of type array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\.$#"
+			count: 2
+			path: Classes/Domain/Repository/Event/EventRepository.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/PageRepository.php
