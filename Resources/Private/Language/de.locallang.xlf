@@ -1484,6 +1484,10 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Title</source>
         <target state="final">Titel</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.topic">
+        <source>Topic</source>
+        <target state="needs-translation">Topic</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.categories" approved="yes">
         <source>Categories</source>
         <target state="final">Kategorien</target>
