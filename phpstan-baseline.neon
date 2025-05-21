@@ -3156,11 +3156,6 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with '' and '' will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/Unit/Domain/Model/NullEventTypeTest.php
-
-		-
 			message: "#^Call to static method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Price\\:\\:isPriceCodeValid\\(\\) with 'price_regular'\\|'price_regular_early'\\|'price_special'\\|'price_special_early' will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Model/PriceTest.php
