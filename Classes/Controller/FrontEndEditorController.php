@@ -207,11 +207,18 @@ class FrontEndEditorController extends ActionController
         $this->checkEventOwner($event);
 
         $this->view->assign('event', $event);
-        $this->view->assign('topics', $this->eventRepository->findAllTopicsPlusNullTopic());
-        $this->assignAuxiliaryRecordsForSingleEventToView();
+        $this->assignAuxiliaryRecordsForEventDateToView();
         $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
 
         return $this->htmlResponse();
+    }
+
+    private function assignAuxiliaryRecordsForEventDateToView(): void
+    {
+        $this->view->assign('topics', $this->eventRepository->findAllTopicsPlusNullTopic());
+        $this->view->assign('organizers', $this->organizerRepository->findAll());
+        $this->view->assign('speakers', $this->speakerRepository->findAll());
+        $this->view->assign('venues', $this->venueRepository->findAll());
     }
 
     public function updateEventDateAction(EventDate $event): ResponseInterface
