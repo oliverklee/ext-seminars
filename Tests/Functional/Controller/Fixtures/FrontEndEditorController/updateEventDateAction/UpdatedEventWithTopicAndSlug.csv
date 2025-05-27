@@ -1,4 +1,4 @@
 "tx_seminars_seminars"
-,"uid","pid","object_type","topic","title","owner_feuser","slug"
-,1,2,2,2,"Karaoke party",1,"introduction-to-karaoke/1"
-,2,2,1,0,"Introduction to karaoke",0,"old-slug"
+,"uid","object_type","topic","title","slug"
+,1,2,2,"Karaoke party","introduction-to-karaoke/1"
+,2,1,0,"Introduction to karaoke","introduction-to-karaoke/2"
