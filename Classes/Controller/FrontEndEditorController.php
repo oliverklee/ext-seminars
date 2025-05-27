@@ -229,6 +229,39 @@ class FrontEndEditorController extends ActionController
         return $this->redirect('index');
     }
 
+    public function newEventDateAction(): ResponseInterface
+    {
+        $eventToCreate = GeneralUtility::makeInstance(EventDate::class);
+        $this->view->assign('event', $eventToCreate);
+        $this->assignAuxiliaryRecordsForEventDateToView();
+        $this->view->assign('defaultOrganizerUid', $this->getDefaultOrganizerUid());
+
+        return $this->htmlResponse();
+    }
+
+    public function createEventDateAction(EventDate $event): ResponseInterface
+    {
+        $event->setOwnerUid($this->getLoggedInUserUid());
+        $defaultOrganizerUid = $this->getDefaultOrganizerUid();
+        if ($defaultOrganizerUid > 0) {
+            $organizer = $this->organizerRepository->findByUid($defaultOrganizerUid);
+            if ($organizer instanceof Organizer) {
+                $event->setSingleOrganizer($organizer);
+            }
+        }
+
+        $folderSettings = $this->settings['folderForCreatedEvents'] ?? null;
+        $folderUid = \is_string($folderSettings) ? (int)$folderSettings : 0;
+        $event->setPid($folderUid);
+
+        // We first need to persist the event to get a UID for it, so we can generate a slug.
+        $this->eventRepository->add($event);
+        $this->eventRepository->persistAll();
+        $this->updateAndSlaveSlugForEventDate($event);
+
+        return $this->redirect('index');
+    }
+
     private function updateAndSlaveSlugForEventDate(EventDate $event): void
     {
         $uid = $event->getUid();
