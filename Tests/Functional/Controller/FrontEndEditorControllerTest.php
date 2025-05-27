@@ -1582,6 +1582,25 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function createSingleEventActionCreatesSingleEvent(): void
+    {
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesFromNewSingleEventForm(1),
+            'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
+            'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
+        ]);
+        $context = (new InternalRequestContext())->withFrontendUserId(1);
+
+        $this->executeFrontendSubRequest($request, $context);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedSingleEvent.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function createSingleEventActionSetsLoggedInUserAsOwnerOfProvidedEvent(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
@@ -1594,7 +1613,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->executeFrontendSubRequest($request, $context);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/NewlyCreatedEvent.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithOwner.csv'
         );
     }
 
@@ -1613,7 +1632,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->executeFrontendSubRequest($request, $context);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/NewlyCreatedEventWithPid.csv'
+            __DIR__ . '/Fixtures/FrontEndEditorController/createSingleEventAction/CreatedEventWithPid.csv'
         );
     }
 
