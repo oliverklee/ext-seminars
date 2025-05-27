@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\NullEventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
@@ -2382,178 +2383,37 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findAllTopicsFindsEventTopic(): void
+    public function findAllTopicsPlusNullTopicForNoEventsReturnsNullEventTopicOnly(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/EventTopic.csv');
-
-        $result = $this->subject->findAllTopics();
+        $result = $this->subject->findAllTopicsPlusNullTopic();
 
         self::assertCount(1, $result);
         $firstMatch = $result[0];
-        self::assertInstanceOf(EventTopic::class, $firstMatch);
+        self::assertInstanceOf(NullEventTopic::class, $firstMatch);
     }
 
     /**
      * @test
      */
-    public function findAllTopicsIgnoresEventDate(): void
+    public function findAllTopicsPlusNullTopicFindsEventTopic(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/EventDate.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/EventTopic.csv');
 
-        $result = $this->subject->findAllTopics();
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findAllTopicsIgnoresSingleEvent(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/SingleEvent.csv');
-
-        $result = $this->subject->findAllTopics();
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findAllTopicsFindsTopicOnPage(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/EventTopicOnPage.csv');
-
-        $result = $this->subject->findAllTopics();
-
-        self::assertCount(1, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findAllTopicsIgnoresHiddenTopic(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/HiddenEventTopic.csv');
-
-        $result = $this->subject->findAllTopics();
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findAllTopicsIgnoresDeletedTopic(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/DeletedEventTopic.csv');
-
-        $result = $this->subject->findAllTopics();
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findAllTopicsOrdersByInternalTitleInAscendingOrder(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopics/TwoEventTopicsInReverseOrder.csv');
-
-        $result = $this->subject->findAllTopics();
+        $result = $this->subject->findAllTopicsPlusNullTopic();
 
         self::assertCount(2, $result);
-        $firstMatch = $result[0];
-        self::assertInstanceOf(EventTopic::class, $firstMatch);
-        self::assertSame('acrobatics', $firstMatch->getInternalTitle());
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsFindsEventTopicWithMatchingOnlyUid(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/EventTopic.csv');
-
-        $result = $this->subject->findTopicsByUids([1]);
-
-        self::assertCount(1, $result);
-        $firstMatch = $result[0];
+        $firstMatch = $result[1];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
     }
 
     /**
      * @test
      */
-    public function findTopicsByUidsFindsEventTopicWithMatchingFirstUidOfTwo(): void
+    public function findAllTopicsPlusNullTopicIgnoresEventDate(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/EventTopic.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/EventDate.csv');
 
-        $result = $this->subject->findTopicsByUids([1, 2]);
-
-        self::assertCount(1, $result);
-        $firstMatch = $result[0];
-        self::assertInstanceOf(EventTopic::class, $firstMatch);
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsFindsEventTopicWithMatchingLastUidOfTwo(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/EventTopic.csv');
-
-        $result = $this->subject->findTopicsByUids([2, 1]);
-
-        self::assertCount(1, $result);
-        $firstMatch = $result[0];
-        self::assertInstanceOf(EventTopic::class, $firstMatch);
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsIgnoresEventTopicWithNonMatchingUid(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/EventTopic.csv');
-
-        $result = $this->subject->findTopicsByUids([2]);
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsIgnoresEventDateWithMatchingUid(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/EventDate.csv');
-
-        $result = $this->subject->findTopicsByUids([1]);
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsIgnoresSingleEventWithMatchingUid(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/SingleEvent.csv');
-
-        $result = $this->subject->findTopicsByUids([1]);
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsFindsTopicOnPage(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/EventTopicOnPage.csv');
-
-        $result = $this->subject->findTopicsByUids([1]);
+        $result = $this->subject->findAllTopicsPlusNullTopic();
 
         self::assertCount(1, $result);
     }
@@ -2561,39 +2421,214 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findTopicsByUidsIgnoresHiddenTopic(): void
+    public function findAllTopicsPlusNullTopicIgnoresSingleEvent(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/HiddenEventTopic.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/SingleEvent.csv');
 
-        $result = $this->subject->findTopicsByUids([1]);
+        $result = $this->subject->findAllTopicsPlusNullTopic();
 
-        self::assertCount(0, $result);
+        self::assertCount(1, $result);
     }
 
     /**
      * @test
      */
-    public function findTopicsByUidsIgnoresDeletedTopic(): void
+    public function findAllTopicsPlusNullTopicFindsTopicOnPage(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/DeletedEventTopic.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/EventTopicOnPage.csv');
 
-        $result = $this->subject->findTopicsByUids([1]);
-
-        self::assertCount(0, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findTopicsByUidsOrdersByInternalTitleInAscendingOrder(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUids/TwoEventTopicsInReverseOrder.csv');
-
-        $result = $this->subject->findTopicsByUids([1, 2]);
+        $result = $this->subject->findAllTopicsPlusNullTopic();
 
         self::assertCount(2, $result);
+        $firstMatch = $result[1];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+    }
+
+    /**
+     * @test
+     */
+    public function findAllTopicsPlusNullTopicIgnoresHiddenTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/HiddenEventTopic.csv');
+
+        $result = $this->subject->findAllTopicsPlusNullTopic();
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findAllTopicsPlusNullTopicIgnoresDeletedTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/DeletedEventTopic.csv');
+
+        $result = $this->subject->findAllTopicsPlusNullTopic();
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findAllTopicsPlusNullTopicOrdersInAscendingOrderByInternalTitle(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findAllTopicsPlusNullTopic/TwoEventTopicsInReverseOrder.csv');
+
+        $result = $this->subject->findAllTopicsPlusNullTopic();
+
+        self::assertCount(3, $result);
+        $firstTopic = $result[1];
+        self::assertInstanceOf(EventTopic::class, $firstTopic);
+        self::assertSame('acrobatics', $firstTopic->getInternalTitle());
+        $secondTopic = $result[2];
+        self::assertInstanceOf(EventTopic::class, $secondTopic);
+        self::assertSame('juggling', $secondTopic->getInternalTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicWithoutEventsReturnsNullEventTopicOnly(): void
+    {
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(1, $result);
         $firstMatch = $result[0];
+        self::assertInstanceOf(NullEventTopic::class, $firstMatch);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicFindsEventTopicWithMatchingOnlyUid(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/EventTopic.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[1];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicFindsEventTopicWithMatchingFirstUidOfTwo(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/EventTopic.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1, 2]);
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[1];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicFindsEventTopicWithMatchingLastUidOfTwo(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/EventTopic.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([2, 1]);
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[1];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicIgnoresEventTopicWithNonMatchingUid(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/EventTopic.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([2]);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicIgnoresEventDateWithMatchingUid(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/EventDate.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicIgnoresSingleEventWithMatchingUid(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/SingleEvent.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicFindsTopicOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/EventTopicOnPage.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[1];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicIgnoresHiddenTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/HiddenEventTopic.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicIgnoresDeletedTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/DeletedEventTopic.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1]);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findTopicsByUidsPlusNullTopicOrdersInAscendingOrderByInternalTitle(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findTopicsByUidsPlusNullTopic/TwoEventTopicsInReverseOrder.csv');
+
+        $result = $this->subject->findTopicsByUidsPlusNullTopic([1, 2]);
+
+        self::assertCount(3, $result);
+        $firstMatch = $result[1];
         self::assertInstanceOf(EventTopic::class, $firstMatch);
         self::assertSame('acrobatics', $firstMatch->getInternalTitle());
+        $secondMatch = $result[2];
+        self::assertInstanceOf(EventTopic::class, $secondMatch);
+        self::assertSame('juggling', $secondMatch->getInternalTitle());
     }
 }

@@ -6,7 +6,8 @@ namespace OliverKlee\Seminars\Domain\Repository\Event;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
+use OliverKlee\Seminars\Domain\Model\Event\NullEventTopic;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
@@ -395,27 +396,27 @@ class EventRepository extends AbstractRawDataCapableRepository
     }
 
     /**
-     * @return array<EventTopic>
+     * @return array<EventTopicInterface>
      */
-    public function findAllTopics(): array
+    public function findAllTopicsPlusNullTopic(): array
     {
         $query = $this->createQuery();
         $this->setQuerySettingsForFindingTopics($query);
 
-        /** @var array<EventTopic> $result */
+        /** @var array<EventTopicInterface> $result */
         $result = $query
             ->matching($query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC))
             ->execute()->toArray();
 
-        return $result;
+        return \array_merge([new NullEventTopic()], $result);
     }
 
     /**
      * @param non-empty-array<int<0, max>> $uids
      *
-     * @return array<EventTopic>
+     * @return array<EventTopicInterface>
      */
-    public function findTopicsByUids(array $uids): array
+    public function findTopicsByUidsPlusNullTopic(array $uids): array
     {
         $query = $this->createQuery();
         $this->setQuerySettingsForFindingTopics($query);
@@ -423,12 +424,12 @@ class EventRepository extends AbstractRawDataCapableRepository
         $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_EVENT_TOPIC);
         $uidMatcher = $query->in('uid', $uids);
 
-        /** @var array<EventTopic> $result */
+        /** @var array<EventTopicInterface> $result */
         $result = $query
             ->matching($query->logicalAnd($uidMatcher, $objectTypeMatcher))
             ->execute()->toArray();
 
-        return $result;
+        return \array_merge([new NullEventTopic()], $result);
     }
 
     /**
