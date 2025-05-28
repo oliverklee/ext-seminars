@@ -1449,11 +1449,11 @@
         <source>Front-end editor for events</source>
         <target state="needs-translation">Front-end editor for events</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders">
-        <source>Pages and folders</source>
-        <target state="needs-translation">Pages and folders</target>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation">
+        <source>Event creation</source>
+        <target state="needs-translation">Event creation</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
         <source>Folder for the created events</source>
         <target state="needs-translation">Folder for the created events</target>
       </trans-unit>
