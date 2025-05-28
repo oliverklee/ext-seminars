@@ -1388,13 +1388,13 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Front-end editor for events</source>
         <target state="final">Front-end-Editor für Veranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders" approved="yes">
-        <source>Pages and folders</source>
-        <target state="final">Seiten und Ordner</target>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation">
+        <source>Event creation</source>
+        <target state="needs-translation">Event creation</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents" approved="yes">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
         <source>Folder for the created events</source>
-        <target state="final">Ordner für die angelegten Veranstaltungen</target>
+        <target state="needs-translation">Folder for the created events</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.displayOptions" approved="yes">
         <source>Display options</source>
