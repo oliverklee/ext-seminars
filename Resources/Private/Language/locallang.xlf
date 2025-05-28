@@ -1051,10 +1051,10 @@
 			<trans-unit id="plugin.frontEndEditor">
 				<source>Front-end editor for events</source>
 			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders">
-				<source>Pages and folders</source>
+			<trans-unit id="plugin.frontEndEditor.settings.eventCreation">
+				<source>Event creation</source>
 			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.pagesAndFolders.folderForCreatedEvents">
+			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
 				<source>Folder for the created events</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.settings.displayOptions">
