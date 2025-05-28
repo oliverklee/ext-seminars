@@ -1388,13 +1388,25 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Front-end editor for events</source>
         <target state="final">Front-end-Editor für Veranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.eventCreation">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation" approved="yes">
         <source>Event creation</source>
-        <target state="needs-translation">Event creation</target>
+        <target state="final">Veranstaltungen anlegen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType">
+        <source>Event type to create</source>
+        <target state="needs-translation">Event type to create</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents">
+        <source>single events</source>
+        <target state="needs-translation">single events</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates">
+        <source>event dates</source>
+        <target state="needs-translation">event dates</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents" approved="yes">
         <source>Folder for the created events</source>
-        <target state="needs-translation">Folder for the created events</target>
+        <target state="final">Ordner für die angelegten Veranstaltungen</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.displayOptions" approved="yes">
         <source>Display options</source>
