@@ -1392,17 +1392,17 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Event creation</source>
         <target state="final">Veranstaltungen anlegen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType" approved="yes">
         <source>Event type to create</source>
-        <target state="needs-translation">Event type to create</target>
+        <target state="final">Veranstaltungsart, die erstellt wird</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents" approved="yes">
         <source>single events</source>
-        <target state="needs-translation">single events</target>
+        <target state="final">Einzelveranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates">
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates" approved="yes">
         <source>event dates</source>
-        <target state="needs-translation">event dates</target>
+        <target state="final">Veranstaltungstermine für bestehende Themen</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents" approved="yes">
         <source>Folder for the created events</source>
