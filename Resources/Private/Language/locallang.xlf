@@ -1054,6 +1054,15 @@
 			<trans-unit id="plugin.frontEndEditor.settings.eventCreation">
 				<source>Event creation</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType">
+				<source>Event type to create</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents">
+				<source>single events</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates">
+				<source>event dates</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
 				<source>Folder for the created events</source>
 			</trans-unit>
