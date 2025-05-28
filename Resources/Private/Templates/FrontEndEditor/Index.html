@@ -7,9 +7,18 @@
             <f:translate key="plugin.frontEndEditor.index.headline"/>
         </h2>
         <p>
-            <f:link.action action="newSingleEvent">
-                <f:translate key="plugin.frontEndEditor.action.new"/>
-            </f:link.action>
+            <f:if condition="{settings.eventType} == 'eventDates'">
+                <f:then>
+                    <f:link.action action="newEventDate">
+                        <f:translate key="plugin.frontEndEditor.action.new"/>
+                    </f:link.action>
+                </f:then>
+                <f:else>
+                    <f:link.action action="newSingleEvent">
+                        <f:translate key="plugin.frontEndEditor.action.new"/>
+                    </f:link.action>
+                </f:else>
+            </f:if>
         </p>
         <div class="table-responsive">
             <table class="table table-hover table-striped w-auto">

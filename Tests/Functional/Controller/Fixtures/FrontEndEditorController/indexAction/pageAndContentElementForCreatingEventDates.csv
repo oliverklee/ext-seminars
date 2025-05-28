@@ -1,0 +1,28 @@
+"pages"
+,"uid","pid","title","slug"
+,99,1,"FE editor for event dates","/fe-editor-for-event-dates"
+
+"tt_content"
+,"uid","pid","CType","header","list_type","pi_flexform"
+,99,99,"list","FE editor page title","seminars_frontendeditor","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?>
+                                                              <T3FlexForms>
+                                                                  <data>
+                                                                      <sheet index=""general"">
+                                                                          <language index=""lDEF"">
+                                                                              <field index=""settings.eventType"">
+                                                                                  <value index=""vDEF"">eventDates</value>
+                                                                              </field>
+                                                                              <field index=""settings.folderForCreatedEvents"">
+                                                                                  <value index=""vDEF"">2</value>
+                                                                              </field>
+                                                                          </language>
+                                                                      </sheet>
+                                                                      <sheet index=""displayOptions"">
+                                                                          <language index=""lDEF"">
+                                                                              <field index=""settings.fieldsToShow"">
+                                                                                  <value index=""vDEF"">description,eventType,categories,dateAndTime,earlyBirdDeadline,registrationDeadline,registrationRequired,waitingList,minimumNumberOfRegistrations,maximumNumberOfRegistrations,numberOfOfflineRegistrations,standardPrice,earlyBirdPrice,venues,speakers</value>
+                                                                              </field>
+                                                                          </language>
+                                                                      </sheet>
+                                                                  </data>
+                                                              </T3FlexForms>"
