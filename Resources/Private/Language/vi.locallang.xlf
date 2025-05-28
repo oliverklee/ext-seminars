@@ -1453,6 +1453,18 @@
         <source>Event creation</source>
         <target state="needs-translation">Event creation</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType">
+        <source>Event type to create</source>
+        <target state="needs-translation">Event type to create</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents">
+        <source>single events</source>
+        <target state="needs-translation">single events</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates">
+        <source>event dates</source>
+        <target state="needs-translation">event dates</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
         <source>Folder for the created events</source>
         <target state="needs-translation">Folder for the created events</target>
