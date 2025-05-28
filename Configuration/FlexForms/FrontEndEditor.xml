@@ -10,6 +10,31 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
+                    <settings.eventType>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.eventCreation.eventType
+                            </label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents
+                                        </numIndex>
+                                        <numIndex index="1">singleEvents</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor.settings.eventCreation.eventType.eventDates
+                                        </numIndex>
+                                        <numIndex index="1">eventDates</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.eventType>
                     <settings.folderForCreatedEvents>
                         <TCEforms>
                             <label>

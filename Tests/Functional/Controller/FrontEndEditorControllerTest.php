@@ -181,13 +181,49 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function indexActionHasLinkToNewSingleEventAction(): void
+    public function indexActionByDefaultHasLinkToNewSingleEventAction(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID);
         $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
         $expected = '?tx_seminars_frontendeditor%5Baction%5D=newSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
+        self::assertStringContainsString($expected, (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionConfiguredForSingleEventsHasLinkToNewSingleEventAction(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/pageAndContentElementForCreatingSingleEvents.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(99);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=newSingleEvent'
+            . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
+        self::assertStringContainsString($expected, (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionConfiguredForEventDatesHasLinkToNewEventDateAction(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/pageAndContentElementForCreatingEventDates.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(99);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        $expected = '?tx_seminars_frontendeditor%5Baction%5D=newEventDate'
             . '&amp;tx_seminars_frontendeditor%5Bcontroller%5D=FrontEndEditor';
         self::assertStringContainsString($expected, (string)$response->getBody());
     }
