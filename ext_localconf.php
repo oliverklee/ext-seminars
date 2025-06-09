@@ -5,6 +5,7 @@ use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Controller\EventUnregistrationController;
 use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Controller\MyRegistrationsController;
+use OliverKlee\Seminars\Form\Element\EventDetailsElement;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\DataHandlerHook;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
@@ -174,6 +175,13 @@ defined('TYPO3') or die('Access denied.');
             EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
         ]
     );
+
+    // Register the custom render types.
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1749486974] = [
+        'nodeName' => 'eventDetails',
+        'priority' => 30,
+        'class' => EventDetailsElement::class,
+    ];
 })();
 
 // Ensure human-readable URLs as canonicals even if the original page does not have them.
