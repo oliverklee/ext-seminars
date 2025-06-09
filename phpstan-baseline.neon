@@ -396,6 +396,11 @@ parameters:
 			path: Classes/Email/Salutation.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Form\\\\Element\\\\EventDetailsElement\\:\\:render\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Form/Element/EventDetailsElement.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractView\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/AbstractView.php
@@ -3331,6 +3336,11 @@ parameters:
 			path: ext_localconf.php
 
 		-
+			message: "#^Cannot access offset 'SYS' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
 			message: "#^Cannot access offset 'additionalCanonical…' on mixed\\.$#"
 			count: 2
 			path: ext_localconf.php
@@ -3338,6 +3348,16 @@ parameters:
 		-
 			message: "#^Cannot access offset 'ext/install' on mixed\\.$#"
 			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'formEngine' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'nodeRegistry' on mixed\\.$#"
+			count: 1
 			path: ext_localconf.php
 
 		-
@@ -3378,6 +3398,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 'update' on mixed\\.$#"
 			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 1749486974 on mixed\\.$#"
+			count: 1
 			path: ext_localconf.php
 
 		-
