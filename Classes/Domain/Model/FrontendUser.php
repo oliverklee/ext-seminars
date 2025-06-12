@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFieldsFrontendUser;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
@@ -17,6 +18,8 @@ class FrontendUser extends ExtraFieldsFrontendUser
      * @Validate("NumberRange", options={"minimum": 0})
      */
     protected int $defaultOrganizerUid = 0;
+
+    protected string $concatenatedUidsOfAvailableTopicsForFrontEndEditor = '';
 
     /**
      * @return int<0, max>
@@ -32,5 +35,25 @@ class FrontendUser extends ExtraFieldsFrontendUser
     public function setDefaultOrganizerUid(int $defaultOrganizerUid): void
     {
         $this->defaultOrganizerUid = $defaultOrganizerUid;
+    }
+
+    public function getConcatenatedUidsOfAvailableTopicsForFrontEndEditor(): string
+    {
+        return $this->concatenatedUidsOfAvailableTopicsForFrontEndEditor;
+    }
+
+    public function setConcatenatedUidsOfAvailableTopicsForFrontEndEditor(string $concatenatedUids): void
+    {
+        $this->concatenatedUidsOfAvailableTopicsForFrontEndEditor = $concatenatedUids;
+    }
+
+    /**
+     * @return array<int<0, max>, int>
+     */
+    public function getUidsOfAvailableTopicsForFrontEndEditor(): array
+    {
+        $concatenatedUids = $this->getConcatenatedUidsOfAvailableTopicsForFrontEndEditor();
+
+        return GeneralUtility::intExplode(',', $concatenatedUids, true);
     }
 }

@@ -44,7 +44,9 @@ final class FrontendUserRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFields(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontendUserRepository/propertyMapping/FrontendUserWithAllScalarData.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontendUserRepository/propertyMapping/FrontendUserWithAllScalarData.csv'
+        );
 
         $model = $this->subject->findByUid(1);
 
@@ -79,5 +81,6 @@ final class FrontendUserRepositoryTest extends FunctionalTestCase
         self::assertSame(FrontendUser::STATUS_JOB_SEEKING_FULL_TIME, $model->getStatus());
         self::assertSame('Here we go!', $model->getComments());
         self::assertSame(17, $model->getDefaultOrganizerUid());
+        self::assertSame([1, 2], $model->getUidsOfAvailableTopicsForFrontEndEditor());
     }
 }
