@@ -412,7 +412,7 @@ class EventRepository extends AbstractRawDataCapableRepository
     }
 
     /**
-     * @param non-empty-array<int<0, max>> $uids
+     * @param non-empty-array<int> $uids
      *
      * @return array<EventTopicInterface>
      */

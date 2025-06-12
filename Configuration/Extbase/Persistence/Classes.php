@@ -125,6 +125,7 @@ return [
         'tableName' => 'fe_users',
         'properties' => [
             'defaultOrganizerUid' => ['fieldName' => 'default_organizer'],
+            'concatenatedUidsOfAvailableTopicsForFrontEndEditor' => ['fieldName' => 'available_topics'],
         ],
     ],
     Organizer::class => [

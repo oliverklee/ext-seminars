@@ -57,4 +57,67 @@ final class FrontendUserTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getDefaultOrganizerUid());
     }
+
+    /**
+     * @test
+     */
+    public function getConcatenatedUidsOfAvailableTopicsForFrontEndEditorInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getConcatenatedUidsOfAvailableTopicsForFrontEndEditor());
+    }
+
+    /**
+     * @test
+     */
+    public function setConcatenatedUidsOfAvailableTopicsForFrontEndEditorSetsValue(): void
+    {
+        $value = '1,2,3';
+        $this->subject->setConcatenatedUidsOfAvailableTopicsForFrontEndEditor($value);
+
+        self::assertSame($value, $this->subject->getConcatenatedUidsOfAvailableTopicsForFrontEndEditor());
+    }
+
+    /**
+     * @test
+     */
+    public function getUidsOfAvailableTopicsForFrontEndEditorForEmptyValueReturnsEmptyArray(): void
+    {
+        $this->subject->setConcatenatedUidsOfAvailableTopicsForFrontEndEditor('');
+
+        self::assertSame([], $this->subject->getUidsOfAvailableTopicsForFrontEndEditor());
+    }
+
+    /**
+     * @test
+     */
+    public function getUidsOfAvailableTopicsForFrontEndEditorReturnsExplodedValues(): void
+    {
+        $this->subject->setConcatenatedUidsOfAvailableTopicsForFrontEndEditor('1,2,3');
+
+        self::assertSame([1, 2, 3], $this->subject->getUidsOfAvailableTopicsForFrontEndEditor());
+    }
+
+    /**
+     * @test
+     */
+    public function getUidsOfAvailableTopicsForFrontEndEditorDropsEmptyValues(): void
+    {
+        $this->subject->setConcatenatedUidsOfAvailableTopicsForFrontEndEditor('1,,2');
+
+        $result = $this->subject->getUidsOfAvailableTopicsForFrontEndEditor();
+
+        self::assertSame([1, 2], \array_values($result));
+    }
+
+    /**
+     * @test
+     */
+    public function getUidsOfAvailableTopicsForFrontEndEditorCastsNonIntegerValuesToZero(): void
+    {
+        $this->subject->setConcatenatedUidsOfAvailableTopicsForFrontEndEditor('1,bla,2');
+
+        $result = $this->subject->getUidsOfAvailableTopicsForFrontEndEditor();
+
+        self::assertSame([1, 0, 2], \array_values($result));
+    }
 }
