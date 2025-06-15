@@ -69,6 +69,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Move prices from topic records to date records (#4427)
 - !!! Allow registrations for events without a date by default (#4348)
 - Do not mention in the thank-you email that unregistration is free (#4309)
 - !!! Always allow unregistration before the unregistration deadline even
