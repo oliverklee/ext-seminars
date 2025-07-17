@@ -49,10 +49,11 @@ $tca = [
             ],
         ],
         'seminar' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.seminar',
             'config' => [
                 'type' => 'group',
+                'renderType' => 'eventDetails',
                 'allowed' => 'tx_seminars_seminars',
                 'default' => 0,
                 'size' => 1,
