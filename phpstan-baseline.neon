@@ -406,6 +406,11 @@ parameters:
 			path: Classes/Email/Salutation.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Form\\\\Element\\\\EventDetailsElement\\:\\:render\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Form/Element/EventDetailsElement.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractView\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/AbstractView.php
