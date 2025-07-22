@@ -116,6 +116,13 @@ defined('TYPO3') or die('Access denied.');
             => 'checkPrerequisites, confirm, unregister',
         ]
     );
+
+    // Register the custom render types.
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1749486974] = [
+        'nodeName' => 'eventDetails',
+        'priority' => 30,
+        'class' => \OliverKlee\Seminars\Form\Element\EventDetailsElement::class,
+    ];
 })();
 
 // Ensure human-readable URLs as canonicals even if the original page does not have them.
