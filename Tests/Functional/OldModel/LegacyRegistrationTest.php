@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFrontEndUser;
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFieldsFrontEndUser;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
@@ -414,14 +414,14 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<string, array{0: ExtraFrontEndUser::GENDER_*}>
+     * @return array<string, array{0: ExtraFieldsFrontEndUser::GENDER_*}>
      */
     public function genderDataProvider(): array
     {
         return [
-            'male' => [ExtraFrontEndUser::GENDER_MALE],
-            'female' => [ExtraFrontEndUser::GENDER_FEMALE],
-            'diverse' => [ExtraFrontEndUser::GENDER_DIVERSE],
+            'male' => [ExtraFieldsFrontEndUser::GENDER_MALE],
+            'female' => [ExtraFieldsFrontEndUser::GENDER_FEMALE],
+            'diverse' => [ExtraFieldsFrontEndUser::GENDER_DIVERSE],
         ];
     }
 
