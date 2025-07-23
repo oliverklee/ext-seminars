@@ -186,6 +186,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fix crash in the registration form (#4453)
 - Update the slug after editing or creating an event in the FE editor (#4332)
 - Make the tables in the FE and BE responsive (#4318)
 - Fully initialize reconstituted domain models (#4246)
