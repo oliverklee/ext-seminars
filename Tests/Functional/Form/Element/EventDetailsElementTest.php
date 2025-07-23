@@ -90,6 +90,7 @@ final class EventDetailsElementTest extends FunctionalTestCase
             'elementBaseName' => '[tx_seminars_attendances][8][seminar]',
             'inlineStructure' => [],
             'renderType' => 'eventDetails',
+            'tableName' => 'tx_seminars_attendances',
             'fieldName' => 'seminar',
             'parameterArray' => [
                 'fieldConf' => [
