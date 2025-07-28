@@ -70,6 +70,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Require Emogrifier >= 8.0.0 (#4455)
 - !!! Allow registrations for events without a date by default (#4348)
 - Do not mention in the thank-you email that unregistration is free (#4309)
 - !!! Always allow unregistration before the unregistration deadline even
