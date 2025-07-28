@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Allow Emogrifier >= 8.0.0 (#4457)
 - Make the event statistics internal (#4075)
 - Move the webinar URL further up in the TCEforms (#3976)
 
