@@ -4,7 +4,7 @@
 
 "sys_file"
 ,"uid","storage","type","folder_hash","identifier","identifier_hash","name","extension","mime_type"
-,1,1,0,"42099b4af021e53fd8fd4e056c2568d7c2e3ffa8","/speaker.jpg","f538498838e47c912a95d34187872e879f8285b6","speaker.jpg","jpg","image/jpeg"
+,1,1,0,"42099b4af021e53fd8fd4e056c2568d7c2e3ffa8","/speaker.txt","f538498838e47c912a95d34187872e879f8285b6","speaker.txt","txt","text/plain"
 
 "sys_file_reference"
 ,"uid","uid_local","uid_foreign","tablenames","fieldname"
