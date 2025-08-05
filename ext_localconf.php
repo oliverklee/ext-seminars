@@ -166,12 +166,12 @@ defined('TYPO3') or die('Access denied.');
         'MyRegistrations', // arbitrary, but unique plugin name (not visible in the BE)
         // all actions
         [
-            MyRegistrationsController::class => 'index, show, notLoggedIn, notFound',
+            MyRegistrationsController::class => 'index, show, notLoggedIn, notFound, downloadAttendeeAttachment',
             EventUnregistrationController::class => 'checkPrerequisites, deny, confirm, unregister, thankYou',
         ],
         // non-cacheable actions
         [
-            MyRegistrationsController::class => 'index, show',
+            MyRegistrationsController::class => 'index, show, downloadAttendeeAttachment',
             EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
         ]
     );
