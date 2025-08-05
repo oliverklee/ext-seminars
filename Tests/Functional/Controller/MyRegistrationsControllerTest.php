@@ -873,7 +873,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertStringContainsString('/speaker.jpg', (string)$response->getBody());
+        self::assertStringContainsString('/speaker.txt', (string)$response->getBody());
     }
 
     /**
@@ -894,7 +894,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertMatchesRegularExpression('#>\\s*speaker\\.jpg\\s*</a>#', (string)$response->getBody());
+        self::assertMatchesRegularExpression('#>\\s*speaker\\.txt\\s*</a>#', (string)$response->getBody());
     }
 
     /**
@@ -936,7 +936,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertStringNotContainsString('speaker.jpg', (string)$response->getBody());
+        self::assertStringNotContainsString('speaker.txt', (string)$response->getBody());
     }
 
     /**
@@ -957,7 +957,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertStringNotContainsString('speaker.jpg', (string)$response->getBody());
+        self::assertStringNotContainsString('speaker.txt', (string)$response->getBody());
     }
 
     /**
@@ -978,7 +978,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertStringContainsString('speaker.jpg', (string)$response->getBody());
+        self::assertStringContainsString('speaker.txt', (string)$response->getBody());
     }
 
     /**
@@ -999,6 +999,6 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
-        self::assertStringNotContainsString('speaker.jpg', (string)$response->getBody());
+        self::assertStringNotContainsString('speaker.txt', (string)$response->getBody());
     }
 }
