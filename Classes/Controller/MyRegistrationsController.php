@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
+use OliverKlee\Seminars\Controller\Event\BeforeAttendeeDownloadSentEvent;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
@@ -122,16 +123,20 @@ class MyRegistrationsController extends ActionController
 
         $foundOriginalResource = $foundFileReference->getOriginalResource();
         $foundOriginalFile = $foundOriginalResource->getOriginalFile();
-        $pathOfCopyWithWatermark = $foundOriginalResource->getForLocalProcessing(false);
+        $filePath = $foundOriginalResource->getForLocalProcessing(false);
+        $contentStream = $this->streamFactory->createStreamFromFile($filePath);
+
+        $event = new BeforeAttendeeDownloadSentEvent($registration, $foundOriginalResource, $contentStream);
+        $this->eventDispatcher->dispatch($event);
 
         $response = $this->responseFactory->createResponse()
             // Must not be cached by a shared cache, such as a proxy server
             ->withHeader('Cache-Control', 'private')
             // Should be downloaded with the given filename
             ->withHeader('Content-Disposition', \sprintf('filename="%s"', $foundOriginalFile->getName()))
-            ->withHeader('Content-Length', (string)filesize($pathOfCopyWithWatermark))
+            ->withHeader('Content-Length', (string)filesize($filePath))
             ->withHeader('Content-Type', $foundOriginalResource->getMimeType())
-            ->withBody($this->streamFactory->createStreamFromFile($pathOfCopyWithWatermark));
+            ->withBody($event->getContentStream());
 
         throw new PropagateResponseException($response, 200);
     }
