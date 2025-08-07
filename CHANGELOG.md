@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add documentation for the PSR-14 event for slug generation (#4467)
+
 ### Changed
 
 - Allow Emogrifier >= 8.0.0 (#4457)
