@@ -1,5 +1,10 @@
+..  include:: /Includes.rst.txt
+..  index:: Hooks
+..  _hooks:
+
+=====
 Hooks
-^^^^^
+=====
 
 .. warning::
     Using hooks requires in-depth knowledge of PHP classes, implementation of

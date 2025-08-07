@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add documentation for the PSR-14 event for slug generation (#4465)
 - Show event details in the registration TCEforms (#4423, #4447)
 - Add a configuration for available topics in FE editor to FE users (#4425)
 - Allow creating event date records in the FE editor (#4414, #4420)
