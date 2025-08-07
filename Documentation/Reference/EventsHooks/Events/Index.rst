@@ -15,3 +15,4 @@ The following list contains the PSR-14 events of the seminars extension.
     :glob:
 
     AfterSlugGeneratedEvent
+    BeforeAttendeeDownloadSentEvent

@@ -4,4 +4,4 @@ services:
   MyVendor\MyExtension\EventListener\Seo\SlugGeneratorEventListener:
     tags:
       - name: event.listener
-        identifier: 'generateEventSlugsWithUid'
+        identifier: 'generate-event-slugs-with-underscore'
