@@ -23,6 +23,7 @@ return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/Classes/',
         __DIR__ . '/Configuration/',
+        __DIR__ . '/Documentation/',
         __DIR__ . '/Tests/',
         __DIR__ . '/ext_emconf.php',
         __DIR__ . '/ext_localconf.php',

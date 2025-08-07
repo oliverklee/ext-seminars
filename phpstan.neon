@@ -12,6 +12,7 @@ parameters:
 
   paths:
     - Classes
+    - Documentation
     - Tests
     - ext_localconf.php
     - ext_tables.php
