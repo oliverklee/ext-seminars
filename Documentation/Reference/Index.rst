@@ -30,4 +30,4 @@ extension: plugin.tx\_seminars and plugin.tx\_seminars\_pi1.
    SetupForTheListView/Index
    SetupForTheRegistrationDigestEmail
    ConstantsForTheSeminar-managerFront-endPlug-inInPlugintxSeminarsPi1/Index
-   Hooks/Index
+   EventsHooks/Index
