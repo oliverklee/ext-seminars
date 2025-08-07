@@ -14,5 +14,5 @@ $config->addRules([
 // @TODO 4.0 no need to call this manually
 $config->setParallelConfig(ParallelConfigFactory::detect());
 
-$config->getFinder()->in('Classes')->in('Configuration')->in('Tests');
+$config->getFinder()->in('Classes')->in('Configuration')->in('Documentation')->in('Tests');
 return $config;

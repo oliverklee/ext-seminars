@@ -143,9 +143,9 @@
 			"@ci:php:stan"
 		],
 		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --diff",
-		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:lint": "find .*.php *.php Classes Configuration Documentation Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:rector": "rector --dry-run",
-		"ci:php:sniff": "phpcs *.php Classes Configuration Tests",
+		"ci:php:sniff": "phpcs *.php Classes Documentation Configuration Tests",
 		"ci:php:stan": "phpstan --no-progress",
 		"ci:static": [
 			"@ci:composer:normalize",
@@ -175,7 +175,7 @@
 		],
 		"fix:php:cs": "php-cs-fixer fix",
 		"fix:php:rector": "rector",
-		"fix:php:sniff": "phpcbf *.php Classes Configuration Tests",
+		"fix:php:sniff": "phpcbf *.php Classes Configuration Documentation Tests",
 		"phpstan:baseline": "phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
