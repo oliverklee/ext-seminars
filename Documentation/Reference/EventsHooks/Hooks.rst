@@ -1,20 +1,10 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
+..  include:: /Includes.rst.txt
+..  index:: Hooks
+..  _hooks:
 
-.. ==================================================
-.. DEFINE SOME TEXTROLES
-.. --------------------------------------------------
-.. role::   underline
-.. role::   typoscript(code)
-.. role::   ts(typoscript)
-   :class:  typoscript
-.. role::   php(code)
-
-
+=====
 Hooks
-^^^^^
+=====
 
 .. warning::
     Using hooks requires in-depth knowledge of PHP classes, implementation of

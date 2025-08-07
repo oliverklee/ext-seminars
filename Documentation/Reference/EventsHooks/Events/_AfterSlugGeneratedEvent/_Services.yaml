@@ -1,0 +1,7 @@
+services:
+  # Place here the default dependency injection configuration
+
+  MyVendor\MyExtension\EventListener\Seo\SlugGeneratorEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'generateEventSlugsWithUid'
