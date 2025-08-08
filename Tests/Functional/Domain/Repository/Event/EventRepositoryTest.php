@@ -143,7 +143,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTopicWithAllFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventTopicWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
@@ -166,7 +166,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventDateWithAllFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventDateAndTopicWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
@@ -299,7 +299,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTopicAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventDateAndTopicWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -341,7 +341,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEmptyEventTypeAssociationForEventTopicAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventTopicWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventTopic::class, $result);
@@ -354,7 +354,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEmptyEventTypeAssociationForEventDateAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/EventDateAndTopicWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
