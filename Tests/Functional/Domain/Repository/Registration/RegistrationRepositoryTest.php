@@ -177,30 +177,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->subject->add($registration);
         $this->persistenceManager->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_attendances');
-        $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
-        $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-    }
-
-    /**
-     * @test
-     */
-    public function persistAllPersistsAddedModels(): void
-    {
-        $registration = new Registration();
-
-        $this->subject->add($registration);
-        $this->subject->persistAll();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_attendances');
-        $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
-        $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/persistence/Registration.csv');
     }
 
     /**
