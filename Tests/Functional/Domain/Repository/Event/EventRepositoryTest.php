@@ -207,91 +207,50 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function persistAllPersistsAddedModels(): void
-    {
-        $event = new SingleEvent();
-
-        $this->subject->add($event);
-        $this->subject->persistAll();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-    }
-
-    /**
-     * @test
-     */
-    public function persistsSingleEventWithSingleEventRecordType(): void
+    public function canPersistSingleEvent(): void
     {
         $event = new SingleEvent();
         $this->subject->add($event);
         $this->subject->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-        self::assertSame(EventInterface::TYPE_SINGLE_EVENT, $databaseRow['object_type']);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/persistence/SingleEvent.csv');
     }
 
     /**
      * @test
      */
-    public function persistsEventTopicWithEventTopicType(): void
+    public function canPersistEventTopic(): void
     {
         $event = new EventTopic();
         $this->subject->add($event);
         $this->subject->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-        self::assertSame(EventInterface::TYPE_EVENT_TOPIC, $databaseRow['object_type']);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/persistence/EventTopic.csv');
     }
 
     /**
      * @test
      */
-    public function persistsEventDateWithEventDateType(): void
+    public function canPersistEventDate(): void
     {
         $event = new EventDate();
         $this->subject->add($event);
         $this->subject->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-        self::assertSame(EventInterface::TYPE_EVENT_DATE, $databaseRow['object_type']);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/persistence/EventDate.csv');
     }
 
     /**
      * @test
      */
-    public function canPersistsSingleEventWithStatistics(): void
+    public function canPersistSingleEventWithStatistics(): void
     {
         $event = new SingleEvent();
         $event->setStatistics(new EventStatistics(0, 0, 0, 0, 0, false));
         $this->subject->add($event);
         $this->subject->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/persistence/SingleEvent.csv');
     }
 
     /**
@@ -825,13 +784,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $this->subject->updateRegistrationCounterCache($event);
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
-        $result = $connection->executeQuery($query, ['uid' => 1]);
-        $databaseRow = $result->fetchAssociative();
-        self::assertIsArray($databaseRow);
-
-        self::assertSame(0, (int)$databaseRow['registrations']);
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/persistence/SingleEventWithZeroRegistrations.csv');
     }
 
     /**
@@ -839,18 +792,16 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function updateRegistrationCounterCacheForRegistrationsSetsCounterCacheToRegistrationsCount(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithTwoRegistrationsWithZeroCounterCache.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/persistence/SingleEventWithTwoRegistrationsWithZeroCounterCache.csv'
+        );
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
-        $result = $connection->executeQuery($query, ['uid' => 1]);
-        $databaseRow = $result->fetchAssociative();
-        self::assertIsArray($databaseRow);
-
-        self::assertSame(2, (int)$databaseRow['registrations']);
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/persistence/SingleEventWithTwoRegistrationsWithTwoCounterCache.csv'
+        );
     }
 
     /**
@@ -858,18 +809,16 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function updateRegistrationCounterCacheIgnoresHiddenRegistrations(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithHiddenRegistrationWithZeroCounterCache.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/persistence/SingleEventWithHiddenRegistrationWithZeroCounterCache.csv'
+        );
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
-        $result = $connection->executeQuery($query, ['uid' => 1]);
-        $databaseRow = $result->fetchAssociative();
-        self::assertIsArray($databaseRow);
-
-        self::assertSame(0, (int)$databaseRow['registrations']);
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/persistence/SingleEventWithHiddenRegistrationWithZeroCounterCache.csv'
+        );
     }
 
     /**
@@ -877,18 +826,16 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function updateRegistrationCounterCacheIgnoresDeletedRegistrations(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithHiddenRegistrationWithZeroCounterCache.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/persistence/SingleEventWithDeletedRegistrationWithZeroCounterCache.csv'
+        );
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
-        $result = $connection->executeQuery($query, ['uid' => 1]);
-        $databaseRow = $result->fetchAssociative();
-        self::assertIsArray($databaseRow);
-
-        self::assertSame(0, (int)$databaseRow['registrations']);
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/persistence/SingleEventWithDeletedRegistrationWithZeroCounterCache.csv'
+        );
     }
 
     /**

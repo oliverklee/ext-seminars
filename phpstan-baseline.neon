@@ -1697,7 +1697,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 5
+			count: 1
 			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
 
 		-
