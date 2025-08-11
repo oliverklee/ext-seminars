@@ -38,6 +38,8 @@ trait EventDateTrait
 
     protected ?\DateTime $downloadStartDate = null;
 
+    protected ?\DateTime $billingStart = null;
+
     protected bool $registrationRequired = false;
 
     /**
@@ -637,5 +639,15 @@ trait EventDateTrait
     public function setDownloadsForAttendees(ObjectStorage $files): void
     {
         $this->downloadsForAttendees = $files;
+    }
+
+    public function getBillingStart(): ?\DateTime
+    {
+        return $this->billingStart;
+    }
+
+    public function setBillingStart(\DateTime $billingStart): void
+    {
+        $this->billingStart = $billingStart;
     }
 }

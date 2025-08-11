@@ -182,6 +182,7 @@ CREATE TABLE tx_seminars_seminars (
 	deadline_early_bird                       int(11) unsigned    DEFAULT '0'    NOT NULL,
 	deadline_unregistration                   int(11) unsigned    DEFAULT '0'    NOT NULL,
 	download_start_date                       int(11) unsigned    DEFAULT '0'    NOT NULL,
+	billing_start                             int(11) unsigned    DEFAULT '0'    NOT NULL,
 	expiry                                    int(11) unsigned    DEFAULT '0'    NOT NULL,
 	details_page                              tinytext,
 	place                                     int(11) unsigned    DEFAULT '0'    NOT NULL,

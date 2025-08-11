@@ -1751,4 +1751,23 @@ final class EventDateTest extends UnitTestCase
     {
         self::assertFalse($this->subject->isEventTopic());
     }
+
+    /**
+     * @test
+     */
+    public function getBillingStartByDefaultReturnsNull(): void
+    {
+        self::assertNull($this->subject->getBillingStart());
+    }
+
+    /**
+     * @test
+     */
+    public function setBillingStartSetsBillingStart(): void
+    {
+        $date = new \DateTime();
+        $this->subject->setBillingStart($date);
+
+        self::assertSame($date, $this->subject->getBillingStart());
+    }
 }

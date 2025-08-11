@@ -50,6 +50,8 @@ interface EventDateInterface
 
     public function getDownloadStartDate(): ?\DateTime;
 
+    public function getBillingStart(): ?\DateTime;
+
     public function isDownloadsPossibleByDate(): bool;
 
     public function isRegistrationRequired(): bool;
