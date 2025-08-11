@@ -259,6 +259,12 @@
 			<trans-unit id="tx_seminars_seminars.payment_methods">
 				<source>Allowed methods of payment</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.divLabelBilling">
+				<source>Billing</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.billing_start">
+				<source>Start of the billing process</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelAccess">
 				<source>Access</source>
 			</trans-unit>
