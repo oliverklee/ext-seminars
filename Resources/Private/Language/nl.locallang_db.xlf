@@ -343,6 +343,14 @@
         <source>Allowed methods of payment</source>
         <target state="final">Toegestane Betaalwijzen</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelBilling">
+        <source>Billing</source>
+        <target state="needs-translation">Billing</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.billing_start">
+        <source>Start of the billing process</source>
+        <target state="needs-translation">Start of the billing process</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelAccess">
         <source>Access</source>
         <target state="needs-translation">Access</target>
