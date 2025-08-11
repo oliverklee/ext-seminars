@@ -101,6 +101,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
         self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
         self::assertEquals(new \DateTime('2023-04-01 10:00'), $result->getDownloadStartDate());
+        self::assertEquals(new \DateTime('2025-04-01 10:00'), $result->getBillingStart());
         self::assertTrue($result->isRegistrationRequired());
         self::assertTrue($result->hasWaitingList());
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
@@ -179,6 +180,8 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEquals(new \DateTime('2022-01-01 00:00'), $result->getRegistrationStart());
         self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
         self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+        self::assertEquals(new \DateTime('2023-04-01 10:00'), $result->getDownloadStartDate());
+        self::assertEquals(new \DateTime('2025-04-01 10:00'), $result->getBillingStart());
         self::assertTrue($result->isRegistrationRequired());
         self::assertTrue($result->hasWaitingList());
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
