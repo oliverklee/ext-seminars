@@ -73,6 +73,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Change the label for the TCEforms billing tab of registrations (#4478)
 - Require Emogrifier >= 8.0.0 (#4455)
 - !!! Allow registrations for events without a date by default (#4348)
 - Do not mention in the thank-you email that unregistration is free (#4309)

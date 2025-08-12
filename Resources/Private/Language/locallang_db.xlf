@@ -344,7 +344,7 @@
 				<source>Registration Comments</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation">
-				<source>Payment Information</source>
+				<source>Billing</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress">
 				<source>Billing Address</source>
