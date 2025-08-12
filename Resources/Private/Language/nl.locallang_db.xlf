@@ -131,9 +131,9 @@
         <source>canceled</source>
         <target state="needs-translation">canceled</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.cancelled_confirmed">
+      <trans-unit id="tx_seminars_seminars.cancelled_confirmed" approved="yes">
         <source>confirmed</source>
-        <target state="needs-translation">confirmed</target>
+        <target state="final">bevestigd</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation">
         <source>Set the status automatically</source>
@@ -211,9 +211,9 @@
         <source>online</source>
         <target state="needs-translation">online</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.webinar_url">
+      <trans-unit id="tx_seminars_seminars.webinar_url" approved="yes">
         <source>Webinar URL</source>
-        <target state="needs-translation">Webinar URL</target>
+        <target state="final">Webinar-URL</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.begin_date" approved="yes">
         <source>Begin time and date</source>
@@ -403,9 +403,9 @@
         <source>Description</source>
         <target state="final">Omschrijving</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_speakers.image">
+      <trans-unit id="tx_seminars_speakers.image" approved="yes">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="final">Afbeelding</target>
       </trans-unit>
       <trans-unit id="tx_seminars_speakers.skills" approved="yes">
         <source>Skills</source>
