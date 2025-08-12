@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Reduce the length of the billing address fields (#4481)
 - Allow Emogrifier >= 8.0.0 (#4456)
 - Improve the hover texts in the BE module (#4196)
 - Make the event statistics internal (#4075)
