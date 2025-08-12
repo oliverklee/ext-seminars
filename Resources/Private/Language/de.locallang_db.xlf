@@ -455,9 +455,9 @@
         <source>Registration Comments</source>
         <target state="final">Anmeldekommentare</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.divLabelPaymentInformation" approved="yes">
-        <source>Payment Information</source>
-        <target state="final">Zahlungsinformationen</target>
+      <trans-unit id="tx_seminars_attendances.divLabelPaymentInformation">
+        <source>Billing</source>
+        <target state="needs-translation">Billing</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.divLabelBillingAddress" approved="yes">
         <source>Billing Address</source>
