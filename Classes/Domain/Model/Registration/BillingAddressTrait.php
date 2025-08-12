@@ -20,49 +20,49 @@ trait BillingAddressTrait
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("StringLength", options={"maximum": 80})
      */
     protected $billingCompany = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("StringLength", options={"maximum": 80})
      */
     protected $billingFullName = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("StringLength", options={"maximum": 40})
      */
     protected $billingStreetAddress = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 16})
+     * @Extbase\Validate("StringLength", options={"maximum": 10})
      */
     protected $billingZipCode = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("StringLength", options={"maximum": 40})
      */
     protected $billingCity = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("StringLength", options={"maximum": 40})
      */
     protected $billingCountry = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 32})
+     * @Extbase\Validate("StringLength", options={"maximum": 40})
      */
     protected $billingPhoneNumber = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("StringLength", options={"maximum": 50})
      */
     protected $billingEmailAddress = '';
 
