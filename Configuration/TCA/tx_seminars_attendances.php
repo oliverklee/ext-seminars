@@ -405,6 +405,8 @@ $tca = [
                 'type' => 'text',
                 'cols' => 20,
                 'rows' => 3,
+                'max' => 80,
+                'eval' => 'trim',
             ],
         ],
         'gender' => [
@@ -451,6 +453,8 @@ $tca = [
                 'type' => 'text',
                 'cols' => 20,
                 'rows' => 3,
+                'max' => 40,
+                'eval' => 'trim',
             ],
         ],
         'zip' => [
@@ -471,7 +475,7 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'max' => 50,
+                'max' => 40,
                 'eval' => 'trim',
             ],
         ],
@@ -493,7 +497,7 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'max' => 20,
+                'max' => 40,
                 'eval' => 'trim',
             ],
         ],
@@ -504,7 +508,7 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'max' => 80,
+                'max' => 50,
                 'eval' => 'trim',
             ],
         ],

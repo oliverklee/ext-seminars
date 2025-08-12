@@ -16,42 +16,42 @@ trait BillingAddressTrait
     protected bool $separateBillingAddress = false;
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 80})
      */
     protected string $billingCompany = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 80})
      */
     protected string $billingFullName = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 40})
      */
     protected string $billingStreetAddress = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 16})
+     * @Validate("StringLength", options={"maximum": 10})
      */
     protected string $billingZipCode = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 40})
      */
     protected string $billingCity = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 40})
      */
     protected string $billingCountry = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 40})
      */
     protected string $billingPhoneNumber = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 50})
      */
     protected string $billingEmailAddress = '';
 

@@ -111,7 +111,7 @@
                                             </label>
                                             <div class="col-sm-4">
                                                 <input type="text" id="{idPrefix}-attendee-name-xxx" name="attendeeName"
-                                                       class="form-control" maxlength="160" autocomplete="name"/>
+                                                       class="form-control" maxlength="80" autocomplete="name"/>
                                             </div>
 
                                             <label for="{idPrefix}-attendee-email-xxx" class="col-sm-2 col-form-label">
@@ -120,7 +120,7 @@
                                             <div class="col-sm-4">
                                                 <input type="email" id="{idPrefix}-attendee-email-xxx"
                                                        name="attendeeEmail"
-                                                       class="form-control" maxlength="255" autocomplete="email"/>
+                                                       class="form-control" maxlength="50" autocomplete="email"/>
                                             </div>
                                         </div>
                                     </li>
@@ -135,7 +135,7 @@
                                             <div class="col-sm-10">
                                                 <input type="text" id="{idPrefix}-attendee-name-xxx" name="attendeeName"
                                                        class="form-control"
-                                                       maxlength="160" autocomplete="name"/>
+                                                       maxlength="80" autocomplete="name"/>
                                             </div>
                                         </div>
                                     </li>
@@ -411,7 +411,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <f:form.textfield property="billingCompany" id="{idPrefix}-billingCompany"
-                                                      maxlength="256"
+                                                      maxlength="80"
                                                       class="form-control" errorClass="is-invalid"
                                                       additionalAttributes="{autocomplete: 'organization'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
@@ -446,7 +446,7 @@
                                                      id="{idPrefix}-billingStreetAddress"
                                                      class="form-control" errorClass="is-invalid"
                                                      additionalAttributes="{autocomplete: 'street-address'}"
-                                                     additionalAttributes="{maxlength: 255}"/>
+                                                     additionalAttributes="{maxlength: 40}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
                                               arguments="{property: 'billingStreetAddress'}"/>
                                 </div>
@@ -460,7 +460,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <f:form.textfield property="billingZipCode" id="{idPrefix}-billingZipCode"
-                                                      maxlength="20"
+                                                      maxlength="10"
                                                       class="form-control" errorClass="is-invalid"
                                                       additionalAttributes="{autocomplete: 'postal-code'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
@@ -475,7 +475,7 @@
                                     <f:translate key="{labelPrefix}.city"/>
                                 </label>
                                 <div class="col-sm-10">
-                                    <f:form.textfield property="billingCity" id="{idPrefix}-billingCity" maxlength="50"
+                                    <f:form.textfield property="billingCity" id="{idPrefix}-billingCity" maxlength="40"
                                                       class="form-control" errorClass="is-invalid"
                                                       additionalAttributes="{autocomplete: 'address-level2'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
@@ -491,7 +491,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <f:form.textfield property="billingCountry" id="{idPrefix}-billingCountry"
-                                                      maxlength="60"
+                                                      maxlength="40"
                                                       class="form-control" errorClass="is-invalid"
                                                       additionalAttributes="{autocomplete: 'country-name'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
@@ -507,7 +507,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <f:form.textfield property="billingPhoneNumber" id="{idPrefix}-billingPhoneNumber"
-                                                      maxlength="255" class="form-control" errorClass="is-invalid"
+                                                      maxlength="40" class="form-control" errorClass="is-invalid"
                                                       type="tel" additionalAttributes="{autocomplete: 'tel'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
                                               arguments="{property: 'billingPhoneNumber'}"/>
@@ -522,7 +522,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <f:form.textfield property="billingEmailAddress" id="{idPrefix}-billingEmailAddress"
-                                                      maxlength="80" class="form-control" errorClass="is-invalid"
+                                                      maxlength="50" class="form-control" errorClass="is-invalid"
                                                       type="email" additionalAttributes="{autocomplete: 'email'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
                                               arguments="{property: 'billingEmailAddress'}"/>

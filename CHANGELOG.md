@@ -73,6 +73,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Reduce the length of the billing address fields (#4480)
 - Change the label for the TCEforms billing tab of registrations (#4478)
 - Require Emogrifier >= 8.0.0 (#4455)
 - !!! Allow registrations for events without a date by default (#4348)
