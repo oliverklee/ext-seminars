@@ -61,7 +61,8 @@
                                 </div>
                             </f:then>
                             <f:else>
-                                <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"
+                                <f:form.hidden property="registeredThemselves"
+                                               value="{settings.registerThemselvesDefault}"
                                                data="{behavior: 'tx-seminars-registered-themselves'}"/>
                             </f:else>
                         </oelib:isFieldEnabled>
@@ -90,7 +91,8 @@
                                                 <f:translate key="{labelPrefix}.emailAddress"/>
                                             </label>
                                             <div class="col-sm-4">
-                                                <input type="email" id="{idPrefix}-attendee-email-xxx" name="attendeeEmail"
+                                                <input type="email" id="{idPrefix}-attendee-email-xxx"
+                                                       name="attendeeEmail"
                                                        class="form-control" maxlength="50" autocomplete="email"/>
                                             </div>
                                         </div>
