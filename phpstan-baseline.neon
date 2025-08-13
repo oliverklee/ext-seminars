@@ -1591,6 +1591,31 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
+			message: "#^Binary operation \"\\.\" between mixed and ' ' results in an error\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/CopyBillingAddressToRegistrationsUpgradeWizard.php
+
+		-
+			message: "#^Binary operation \"\\.\" between non\\-falsy\\-string and mixed results in an error\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/CopyBillingAddressToRegistrationsUpgradeWizard.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 3
+			path: Classes/UpgradeWizards/CopyBillingAddressToRegistrationsUpgradeWizard.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, mixed given\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/CopyBillingAddressToRegistrationsUpgradeWizard.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function substr expects string, mixed given\\.$#"
+			count: 7
+			path: Classes/UpgradeWizards/CopyBillingAddressToRegistrationsUpgradeWizard.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/UpgradeWizards/GenerateEventSlugsUpgradeWizard.php
@@ -3332,7 +3357,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'SC_OPTIONS' on mixed\\.$#"
-			count: 5
+			count: 6
 			path: ext_localconf.php
 
 		-
@@ -3347,7 +3372,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'ext/install' on mixed\\.$#"
-			count: 2
+			count: 3
 			path: ext_localconf.php
 
 		-
@@ -3382,7 +3407,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'seminars…' on mixed\\.$#"
-			count: 2
+			count: 3
 			path: ext_localconf.php
 
 		-
@@ -3397,7 +3422,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'update' on mixed\\.$#"
-			count: 2
+			count: 3
 			path: ext_localconf.php
 
 		-

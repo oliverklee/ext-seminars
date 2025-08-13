@@ -1,0 +1,7 @@
+"fe_users"
+,"uid","name","first_name","last_name"
+,1,"","Mark","S."
+
+"tx_seminars_attendances"
+,"uid","user","separate_billing_address","name"
+,1,1,0,""
