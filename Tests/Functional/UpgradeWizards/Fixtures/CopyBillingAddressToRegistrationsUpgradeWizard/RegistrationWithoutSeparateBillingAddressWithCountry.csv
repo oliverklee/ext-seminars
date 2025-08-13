@@ -1,0 +1,7 @@
+"fe_users"
+,"uid","country"
+,1,"Germany"
+
+"tx_seminars_attendances"
+,"uid","user","separate_billing_address","country"
+,1,1,0,""
