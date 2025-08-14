@@ -390,17 +390,15 @@ $tca = [
             ],
         ],
         'separate_billing_address' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.separate_billing_address',
-            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'company' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.company',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'text',
                 'cols' => 20,
@@ -410,9 +408,8 @@ $tca = [
             ],
         ],
         'gender' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -435,9 +432,8 @@ $tca = [
             ],
         ],
         'name' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.name',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 40,
@@ -446,9 +442,8 @@ $tca = [
             ],
         ],
         'address' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.address',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'text',
                 'cols' => 20,
@@ -458,9 +453,8 @@ $tca = [
             ],
         ],
         'zip' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.zip',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 8,
@@ -469,9 +463,8 @@ $tca = [
             ],
         ],
         'city' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.city',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -480,9 +473,8 @@ $tca = [
             ],
         ],
         'country' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.country',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 16,
@@ -491,9 +483,8 @@ $tca = [
             ],
         ],
         'telephone' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.telephone',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -502,9 +493,8 @@ $tca = [
             ],
         ],
         'email' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.email',
-            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 20,

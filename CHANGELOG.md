@@ -73,7 +73,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- !!! Make the billing address for registrations required (#4487)
+- !!! Make the billing address for registrations required (#4487, #4491)
 - !!! Reduce the length of the billing address fields (#4480, #4488)
 - Change the label for the TCEforms billing tab of registrations (#4478)
 - Require Emogrifier >= 8.0.0 (#4455)
