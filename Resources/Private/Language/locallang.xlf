@@ -1489,6 +1489,9 @@
 			<trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
 				<source>Separate billing address</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingAddress">
+				<source>Billing address</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.company">
 				<source>Company</source>
 			</trans-unit>
