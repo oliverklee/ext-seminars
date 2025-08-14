@@ -193,6 +193,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Hide payment-related fields in the registration form for free events (#4490)
 - Fix crash in the registration form (#4453)
 - Update the slug after editing or creating an event in the FE editor (#4332)
 - Make the tables in the FE and BE responsive (#4318)
