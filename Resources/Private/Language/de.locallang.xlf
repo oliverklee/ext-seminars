@@ -1978,9 +1978,9 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Separate billing address</source>
         <target state="final">Separate Rechnungsadresse</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.billingAddress">
+      <trans-unit id="plugin.eventRegistration.property.billingAddress" approved="yes">
         <source>Billing address</source>
-        <target state="needs-translation">Billing address</target>
+        <target state="final">Rechnungsadresse</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.company" approved="yes">
         <source>Company</source>
