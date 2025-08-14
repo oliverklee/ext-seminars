@@ -81,7 +81,6 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
     public function billingAddressFieldKeysDataProvider(): array
     {
         return [
-            'separateBillingAddress' => ['separateBillingAddress'],
             'billingCompany' => ['billingCompany'],
             'billingFullName' => ['billingFullName'],
             'billingStreetAddress' => ['billingStreetAddress'],
