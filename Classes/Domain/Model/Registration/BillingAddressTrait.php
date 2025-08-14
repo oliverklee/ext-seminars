@@ -13,8 +13,6 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
  */
 trait BillingAddressTrait
 {
-    protected bool $separateBillingAddress = false;
-
     /**
      * @Validate("StringLength", options={"maximum": 80})
      */
@@ -54,16 +52,6 @@ trait BillingAddressTrait
      * @Validate("StringLength", options={"maximum": 50})
      */
     protected string $billingEmailAddress = '';
-
-    public function hasSeparateBillingAddress(): bool
-    {
-        return $this->separateBillingAddress;
-    }
-
-    public function setSeparateBillingAddress(bool $separateBillingAddress): void
-    {
-        $this->separateBillingAddress = $separateBillingAddress;
-    }
 
     public function getBillingCompany(): string
     {

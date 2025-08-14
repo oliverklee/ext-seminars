@@ -74,7 +74,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 - !!! Make the billing address for registrations required
-  (#4487, #4491, #4492, #4493, #4494)
+  (#4487, #4491, #4492, #4493, #4494, #4495)
 - !!! Reduce the length of the billing address fields (#4480, #4488)
 - Change the label for the TCEforms billing tab of registrations (#4478)
 - Require Emogrifier >= 8.0.0 (#4455)
@@ -139,6 +139,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the checkbox for the separate billing address (#4495)
 - Drop the `unregistrationDeadlineDaysBeforeBeginDate` setting (#4251)
 - Drop the `allowRegistrationForEventsWithoutDate` option (#4348)
 - Remove public access feature for registration lists (#4277)

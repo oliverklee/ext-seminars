@@ -39,7 +39,6 @@ class EventRegistrationFlexForms
             'orderReference',
         ],
         'billingAddress' => [
-            'separateBillingAddress',
             'billingCompany',
             'billingFullName',
             'billingStreetAddress',
