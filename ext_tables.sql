@@ -308,7 +308,7 @@ CREATE TABLE tx_seminars_attendances (
 	additional_persons       int(11) unsigned    DEFAULT '0'    NOT NULL,
 	datepaid                 int(11) unsigned    DEFAULT '0'    NOT NULL,
 	method_of_payment        int(11) unsigned    DEFAULT '0'    NOT NULL,
-	separate_billing_address tinyint(1) unsigned DEFAULT '0'    NOT NULL,
+	separate_billing_address tinyint(1) unsigned DEFAULT '1'    NOT NULL,
 	company                  varchar(80)         DEFAULT '',
 	name                     varchar(80)         DEFAULT ''     NOT NULL,
 	gender                   tinyint(1) unsigned DEFAULT '0'    NOT NULL,
