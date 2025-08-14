@@ -78,8 +78,6 @@
     findRegistrationFormElements() {
       const selectors = {
         registrationForm: 'form[data-behavior="tx-seminars-registration-form"]',
-        billingAddressCheckbox: 'input[data-behavior="tx-seminars-billing-address-toggle"]',
-        billingAddressFields: '[data-behavior="tx-seminars-billing-address-fields"]',
         seats: '[data-behavior="tx-seminars-seats"]',
         registeredThemselves: '[data-behavior="tx-seminars-registered-themselves"]',
         separateAttendeeNames: '[data-behavior="tx-seminars-separate-attendee-names"]',
@@ -103,9 +101,6 @@
         return;
       }
 
-      this.updateBillingAddressVisibility();
-      this.addBillingAddressCheckboxListener();
-
       this.showOrHideAttendeeNames();
       this.restoreAttendeeNames();
       this.addSeatsListener();
@@ -124,14 +119,6 @@
       history.back();
     }
 
-    addBillingAddressCheckboxListener() {
-      if (!(this.elements.billingAddressCheckbox instanceof Element)) {
-        return;
-      }
-
-      this.elements.billingAddressCheckbox.addEventListener('change', this.updateBillingAddressVisibility.bind(this));
-    }
-
     addSeatsListener() {
       if (this.elements.seats instanceof Element) {
         this.elements.seats.addEventListener('change', this.showOrHideAttendeeNames.bind(this));
@@ -139,21 +126,6 @@
       if (this.elements.registeredThemselves instanceof Element) {
         this.elements.registeredThemselves
           .addEventListener('change', this.showOrHideAttendeeNames.bind(this));
-      }
-    }
-
-    updateBillingAddressVisibility() {
-      if (!(this.elements.billingAddressCheckbox instanceof Element)
-        || !(this.elements.billingAddressFields instanceof Element)
-      ) {
-        return;
-      }
-
-      const shouldShowBillingAddress = !!this.elements.billingAddressCheckbox.checked;
-      if (shouldShowBillingAddress) {
-        this.showElement(this.elements.billingAddressFields);
-      } else {
-        this.hideElement(this.elements.billingAddressFields);
       }
     }
 
