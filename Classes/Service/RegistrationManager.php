@@ -887,7 +887,8 @@ class RegistrationManager implements SingletonInterface
         );
 
         if ($useHtml) {
-            $emailBody = $this->addCssToHtmlEmail($template->getSubpart('MAIL_THANKYOU_HTML'));
+            $html = $template->getSubpart('MAIL_THANKYOU_HTML');
+            $emailBody = ($html !== '') ? $this->addCssToHtmlEmail($html) : '';
         } else {
             $emailBody = $template->getSubpart('MAIL_THANKYOU');
         }
@@ -900,6 +901,9 @@ class RegistrationManager implements SingletonInterface
         return \nl2br(\htmlspecialchars($plainText, ENT_QUOTES | ENT_HTML5));
     }
 
+    /**
+     * @param non-empty-string $emailBody
+     */
     private function addCssToHtmlEmail(string $emailBody): string
     {
         // The CSS inlining uses a Composer-provided library and hence is a Composer-only feature.
