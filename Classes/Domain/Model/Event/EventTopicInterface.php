@@ -10,7 +10,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * This interface is required for events that contain topic information: `SingleEvent` and `EventTopic`.
  */
-interface EventTopicInterface
+interface EventTopicInterface extends EventInterface
 {
     /**
      * @return ObjectStorage<Category>
