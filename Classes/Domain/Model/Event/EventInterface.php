@@ -7,12 +7,13 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
+use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * This interface is required for all kinds of events: `SingleEvent`, `EventTopic`, and `EventDate`.
  */
-interface EventInterface
+interface EventInterface extends DomainObjectInterface
 {
     /**
      * @var int

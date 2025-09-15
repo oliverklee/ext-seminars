@@ -17,7 +17,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * This interface is required for events that have dates: `SingleEvent` and `EventDate`.
  */
-interface EventDateInterface
+interface EventDateInterface extends EventInterface
 {
     /**
      * @var int<0, 2>
