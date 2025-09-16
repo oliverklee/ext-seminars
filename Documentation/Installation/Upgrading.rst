@@ -27,6 +27,8 @@ The following steps are necessary to upgrade from seminars 5.x to 6.x:
     themselves, set the unregistration deadline to a date in the past for all
     future events. (By default, attendees will be able to cancel their
     registration themselves until the event starts.)
+#.  If you are using custom Fluid templates for the registration form, remove
+    the `separateBillingAddress` field from all registration form templates.
 #.  Upgrade to seminars 6.x.
 #.  Update the database schema and run all upgrade wizards.
 #.  If you are using the selector widget (the search form) in the frontend,

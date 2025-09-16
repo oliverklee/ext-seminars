@@ -140,7 +140,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Drop the checkbox for the separate billing address (#4495)
+- !!! Drop the checkbox for the separate billing address (#4495)
 - Drop the `unregistrationDeadlineDaysBeforeBeginDate` setting (#4251)
 - Drop the `allowRegistrationForEventsWithoutDate` option (#4348)
 - Remove public access feature for registration lists (#4277)
