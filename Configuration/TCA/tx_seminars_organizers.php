@@ -50,7 +50,7 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,trim,nospace',
+                'eval' => 'email, required, trim',
             ],
         ],
         'email_footer' => [

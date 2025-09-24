@@ -200,6 +200,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Validate email fields in the BE as emails (#4537)
 - Drop `approved="yes"` from the English locallang files (#3172)
 - Avoid using the `HtmlViewHelper` in a non-Extbase context (#3171)
 - Avoid crash with `typo3fluid/fluid` 2.12.0 and 2.14.0 due to signature change
