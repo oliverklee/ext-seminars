@@ -338,6 +338,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Do not make the name in the billing address required (#4539)
 - Increase the height of the content area in the BE module email form (#3174)
 - Convert the "hide event" button-links in the BE module to real buttons
   (#3136, #3137, #3148, #3149, #3150)
