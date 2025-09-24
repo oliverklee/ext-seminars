@@ -152,7 +152,7 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,nospace',
+                'eval' => 'email, trim',
             ],
         ],
         'cancelation_period' => [

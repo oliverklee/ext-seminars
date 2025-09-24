@@ -198,6 +198,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Validate email fields in the BE as emails (#4536)
 - Hide the billing address fieldset and heading if no billing address fields
   are enabled (#4528)
 - Hide payment-related fields in the registration form for free events (#4490)
