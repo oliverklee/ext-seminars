@@ -425,7 +425,7 @@
 				<source>diverse</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.address">
-				<source>Address</source>
+				<source>Street address</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.zip">
 				<source>ZIP</source>

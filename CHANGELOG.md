@@ -73,6 +73,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Make a BE label in the billing address more specific (#4533)
 - Make the registration title editable in the backend (#4531)
 - Add inheritance to the event interfaces (#4523)
 - !!! Make the billing address for registrations required
