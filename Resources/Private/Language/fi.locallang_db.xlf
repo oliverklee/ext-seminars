@@ -564,8 +564,8 @@
         <target state="needs-translation">diverse</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.address">
-        <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <source>Street address</source>
+        <target state="needs-translation">Street address</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.zip">
         <source>ZIP</source>
