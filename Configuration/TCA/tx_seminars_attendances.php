@@ -22,7 +22,9 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.title',
             'config' => [
                 'type' => 'input',
-                'readOnly' => 1,
+                'size' => 30,
+                'max' => 255,
+                'eval' => 'trim',
             ],
         ],
         'crdate' => [
