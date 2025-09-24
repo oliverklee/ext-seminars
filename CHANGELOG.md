@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Make a BE label in the billing address more specific (#4534)
 - Make the registration title editable in the backend (#4532)
 - Reduce the length of the billing address fields (#4481)
 - Allow Emogrifier >= 8.0.0 (#4456)
