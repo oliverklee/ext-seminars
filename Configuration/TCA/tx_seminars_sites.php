@@ -79,7 +79,7 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,email',
+                'eval' => 'email, trim',
             ],
         ],
         'phone_number' => [
