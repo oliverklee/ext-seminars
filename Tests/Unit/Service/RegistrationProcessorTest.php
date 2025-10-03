@@ -484,6 +484,27 @@ final class RegistrationProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    public function createAdditionalPersonsSetsLastLoginOnCreatedAttendee(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['name' => 'Baba Doe', 'email' => 'baba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            if (\method_exists($attendee, 'getLastLogin')) {
+                self::assertInstanceOf(\DateTimeInterface::class, $attendee->getLastLogin());
+            }
+        }
+    }
+
+    /**
+     * @test
+     */
     public function createAdditionalPersonsWithCreatesRandomUserName(): void
     {
         $registration = new Registration();
