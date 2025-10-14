@@ -198,6 +198,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Make displaying the billing address on the registation confirmation page
+  more reliable (#4545)
 - Validate email fields in the BE as emails (#4536)
 - Hide the billing address fieldset and heading if no billing address fields
   are enabled (#4528)
