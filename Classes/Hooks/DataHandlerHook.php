@@ -207,7 +207,7 @@ class DataHandlerHook implements SingletonInterface
      */
     public function processCmdmap_preProcess(string $command, string $table): void
     {
-        if (\in_array($command, ['copy', 'localize'], true) && $table === self::TABLE_EVENTS) {
+        if (\in_array($command, ['copy', 'move', 'localize'], true) && $table === self::TABLE_EVENTS) {
             $GLOBALS['TCA'][self::TABLE_EVENTS]['columns']['registrations']['config']['type'] = 'none';
         }
     }
@@ -217,7 +217,7 @@ class DataHandlerHook implements SingletonInterface
      */
     public function processCmdmap_postProcess(string $command, string $table): void
     {
-        if (\in_array($command, ['copy', 'localize'], true) && $table === self::TABLE_EVENTS) {
+        if (\in_array($command, ['copy', 'move', 'localize'], true) && $table === self::TABLE_EVENTS) {
             $GLOBALS['TCA'][self::TABLE_EVENTS]['columns']['registrations']['config']['type'] = 'inline';
         }
     }

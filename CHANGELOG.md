@@ -198,6 +198,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Do not move registrations when moving event records (#4549)
 - Display the billing city on the registration confirmation page (#4546)
 - Make displaying the billing address on the registation confirmation page
   more reliable (#4545)
