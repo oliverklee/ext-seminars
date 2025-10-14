@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Do not move registrations when moving event records (#4550)
 - Display the billing city on the registration confirmation page (#4547)
 - Fully initialize reconstituted domain models (#4247)
 - Change the registration status from a checkbox to a drop-down (#4192)
