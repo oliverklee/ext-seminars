@@ -838,4 +838,38 @@ final class DataHandlerHookTest extends FunctionalTestCase
             __DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv'
         );
     }
+
+    /**
+     * @test
+     */
+    public function canMoveRegistration(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventOnPage.csv');
+
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start([], ['tx_seminars_seminars' => [1 => ['move' => 2]]]);
+        $dataHandler->process_cmdmap();
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventOnPageAfterMoving.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function doesNotMoveRegistrationsWhenMovingEvent(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventWithOneRegistrationOnPage.csv');
+
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start([], ['tx_seminars_seminars' => [1 => ['move' => 2]]]);
+        $dataHandler->process_cmdmap();
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventWithOneRegistrationOnPageAfterMoving.csv'
+        );
+    }
 }
