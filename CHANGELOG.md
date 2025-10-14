@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Display the billing city on the registration confirmation page (#4548)
 - Fully initialize reconstituted domain models (#4248)
 - Change the registration status from a checkbox to a drop-down (#4192)
 - Fix a copy'n'paste error in a label (#4127)
