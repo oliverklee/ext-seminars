@@ -169,6 +169,10 @@ class RegistrationProcessor implements SingletonInterface
             $person->setName($name);
             $email = (string)($singleUserData['email'] ?? '');
             $person->setEmail($email);
+            // Consider additional attendees as having just logged in, so set their last login to now
+            if (\method_exists($person, 'setLastLogin')) {
+                $person->setLastLogin(new \DateTimeImmutable());
+            }
             $person->setUsername($this->generateRandomUserName());
             $registration->addAdditionalPerson($person);
         }
