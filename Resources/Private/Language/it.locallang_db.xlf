@@ -527,9 +527,21 @@
         <source>Total price for this attendance</source>
         <target state="final">Prezzo totale per i partecipanti</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_attendances.invoice_date">
+        <source>Invoice date</source>
+        <target state="needs-translation">Invoice date</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_attendances.datepaid" approved="yes">
         <source>Date of payment</source>
         <target state="final">Data di pagamento</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.invoice_number">
+        <source>Invoice number</source>
+        <target state="needs-translation">Invoice number</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.customer_number">
+        <source>Customer number</source>
+        <target state="needs-translation">Customer number</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.method_of_payment" approved="yes">
         <source>Method of payment</source>
