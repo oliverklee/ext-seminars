@@ -68,7 +68,7 @@
 		"typo3/cms-scheduler": "^11.5.41 || ^12.4.24",
 		"typo3/coding-standards": "0.6.1",
 		"typo3/testing-framework": "7.1.1",
-		"webmozart/assert": "^1.11.0"
+		"webmozart/assert": "^1.12.0"
 	},
 	"replace": {
 		"typo3-ter/seminars": "self.version"
