@@ -397,8 +397,17 @@
 			<trans-unit id="tx_seminars_attendances.total_price">
 				<source>Total price for this attendance</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.invoice_date">
+				<source>Invoice date</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.datepaid">
 				<source>Date of payment</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.invoice_number">
+				<source>Invoice number</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.customer_number">
+				<source>Customer number</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.method_of_payment">
 				<source>Method of payment</source>

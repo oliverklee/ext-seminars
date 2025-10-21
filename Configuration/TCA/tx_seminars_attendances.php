@@ -17,7 +17,7 @@ $tca = [
             'disabled' => 'hidden',
         ],
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Registration.gif',
-        'searchFields' => 'title, order_reference',
+        'searchFields' => 'title, order_reference, invoice_number, customer_number',
     ],
     'columns' => [
         'title' => [
@@ -365,6 +365,17 @@ $tca = [
                 'rows' => 5,
             ],
         ],
+        'invoice_date' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.invoice_date',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'eval' => 'datetime, int',
+                'size' => 12,
+                'default' => 0,
+            ],
+        ],
         'datepaid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.datepaid',
@@ -374,6 +385,26 @@ $tca = [
                 'size' => 8,
                 'eval' => 'date, int',
                 'default' => 0,
+            ],
+        ],
+        'invoice_number' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars_premium/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.invoice_number',
+            'config' => [
+                'type' => 'input',
+                'size' => 8,
+                'eval' => 'num, null',
+                'default' => null,
+            ],
+        ],
+        'customer_number' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars_premium/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.customer_number',
+            'config' => [
+                'type' => 'input',
+                'size' => 8,
+                'eval' => 'num, null',
+                'default' => null,
             ],
         ],
         'method_of_payment' => [
@@ -504,7 +535,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, crdate, uid, seminar, user, been_there, hidden, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, attendance_mode, registered_themselves, seats, price, price_code, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, order_reference, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, method_of_payment, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, invoice_date, datepaid, invoice_number, customer_number, method_of_payment, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email',
         ],
     ],
