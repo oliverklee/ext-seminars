@@ -18,6 +18,7 @@ use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -152,6 +153,35 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertSame(199.99, $result->getTotalPrice());
         self::assertNull($result->getPaymentMethod());
         self::assertSame('order-1234', $result->getOrderReference());
+        self::assertEquals(new \DateTime('2023-04-01T10:00:00'), $result->getInvoiceDate());
+        self::assertSame(45, $result->getCustomerNumber());
+        self::assertSame(1000003, $result->getInvoiceNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function collmexInvoiceNumberDefaultsToNull(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithoutData.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertNull($result->getInvoiceNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function collmexCustomerNumberDefaultsToNull(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithoutData.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertNull($result->getCustomerNumber());
     }
 
     /**

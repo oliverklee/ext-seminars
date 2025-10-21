@@ -42,6 +42,18 @@ trait PaymentTrait
      */
     protected string $orderReference = '';
 
+    protected ?\DateTime $invoiceDate = null;
+
+    /**
+     * @phpstan-var int<1, 99999999>|null
+     */
+    protected ?int $invoiceNumber = null;
+
+    /**
+     * @phpstan-var int<1, 99999999>|null
+     */
+    protected ?int $customerNumber = null;
+
     /**
      * @return Price::PRICE_*
      */
@@ -107,5 +119,47 @@ trait PaymentTrait
     public function setOrderReference(string $orderReference): void
     {
         $this->orderReference = $orderReference;
+    }
+
+    public function getInvoiceDate(): ?\DateTime
+    {
+        return $this->invoiceDate;
+    }
+
+    public function setInvoiceDate(\DateTime $invoiceDate): void
+    {
+        $this->invoiceDate = $invoiceDate;
+    }
+
+    /**
+     * @return int<1, 99999999>|null
+     */
+    public function getInvoiceNumber(): ?int
+    {
+        return $this->invoiceNumber;
+    }
+
+    /**
+     * @param int<1, 99999999> $invoiceNumber
+     */
+    public function setInvoiceNumber(int $invoiceNumber): void
+    {
+        $this->invoiceNumber = $invoiceNumber;
+    }
+
+    /**
+     * @return int<1, 99999999>|null
+     */
+    public function getCustomerNumber(): ?int
+    {
+        return $this->customerNumber;
+    }
+
+    /**
+     * @param int<1, 99999999> $customerNumber
+     */
+    public function setCustomerNumber(int $customerNumber): void
+    {
+        $this->customerNumber = $customerNumber;
     }
 }
