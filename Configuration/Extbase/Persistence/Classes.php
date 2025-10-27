@@ -155,6 +155,7 @@ return [
             'billingCountry' => ['fieldName' => 'country'],
             'billingPhoneNumber' => ['fieldName' => 'telephone'],
             'billingEmailAddress' => ['fieldName' => 'email'],
+            'paymentDate' => ['fieldName' => 'datepaid'],
             'paymentMethod' => ['fieldName' => 'method_of_payment'],
             'humanReadablePrice' => ['fieldName' => 'price'],
         ],

@@ -54,6 +54,8 @@ trait PaymentTrait
      */
     protected ?int $customerNumber = null;
 
+    protected ?\DateTime $paymentDate = null;
+
     /**
      * @return Price::PRICE_*
      */
@@ -147,6 +149,12 @@ trait PaymentTrait
         $this->invoiceNumber = $invoiceNumber;
     }
 
+    public function hasInvoice(): bool
+    {
+        return \is_int($this->getInvoiceNumber())
+            && ($this->getInvoiceDate() instanceof \DateTime);
+    }
+
     /**
      * @return int<1, 99999999>|null
      */
@@ -161,5 +169,20 @@ trait PaymentTrait
     public function setCustomerNumber(int $customerNumber): void
     {
         $this->customerNumber = $customerNumber;
+    }
+
+    public function getPaymentDate(): ?\DateTime
+    {
+        return $this->paymentDate;
+    }
+
+    public function setPaymentDate(\DateTime $paymentDate): void
+    {
+        $this->paymentDate = $paymentDate;
+    }
+
+    public function isPaid(): bool
+    {
+        return $this->getPaymentDate() instanceof \DateTime;
     }
 }

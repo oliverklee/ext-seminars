@@ -152,6 +152,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertSame(199.99, $result->getTotalPrice());
         self::assertNull($result->getPaymentMethod());
         self::assertSame('order-1234', $result->getOrderReference());
+        self::assertEquals(new \DateTime('2025-04-01T10:00:00'), $result->getPaymentDate());
         self::assertEquals(new \DateTime('2023-04-01T10:00:00'), $result->getInvoiceDate());
         self::assertSame(45, $result->getCustomerNumber());
         self::assertSame(1000003, $result->getInvoiceNumber());
