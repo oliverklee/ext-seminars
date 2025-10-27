@@ -1339,6 +1339,45 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function hasInvoiceWithoutInvoiceNumberAndWithoutInvoiceDateReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasInvoice());
+    }
+
+    /**
+     * @test
+     */
+    public function hasInvoiceWithoutInvoiceNumberAndWithInvoiceDateReturnsFalse(): void
+    {
+        $this->subject->setInvoiceDate(new \DateTime());
+
+        self::assertFalse($this->subject->hasInvoice());
+    }
+
+    /**
+     * @test
+     */
+    public function hasInvoiceWithInvoiceNumberAndWithoutInvoiceDateReturnsFalse(): void
+    {
+        $this->subject->setInvoiceNumber(123456);
+
+        self::assertFalse($this->subject->hasInvoice());
+    }
+
+    /**
+     * @test
+     */
+    public function hasInvoiceWithInvoiceNumberAndWithInvoiceDateReturnsTrue(): void
+    {
+        $this->subject->setInvoiceNumber(123456);
+        $this->subject->setInvoiceDate(new \DateTime());
+
+        self::assertTrue($this->subject->hasInvoice());
+    }
+
+    /**
+     * @test
+     */
     public function getCustomerNumberInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getCustomerNumber());
@@ -1353,5 +1392,43 @@ final class RegistrationTest extends UnitTestCase
         $this->subject->setCustomerNumber($value);
 
         self::assertSame($value, $this->subject->getCustomerNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function getPaymentDateInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getPaymentDate());
+    }
+
+    /**
+     * @test
+     */
+    public function setPaymentDateSetsPaymentDate(): void
+    {
+        $date = new \DateTime();
+        $this->subject->setPaymentDate($date);
+
+        self::assertSame($date, $this->subject->getPaymentDate());
+    }
+
+    /**
+     * @test
+     */
+    public function isPaidWithoutPaymentDateReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isPaid());
+    }
+
+    /**
+     * @test
+     */
+    public function isPaidWithPaymentDateReturnsTrue(): void
+    {
+        $model = new \DateTime();
+        $this->subject->setPaymentDate($model);
+
+        self::assertTrue($this->subject->isPaid());
     }
 }
