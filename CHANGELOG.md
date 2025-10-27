@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Show the invoicing status of registrations in the BE module (#4562)
 - Add accessors for the payment status of registrations (#4560)
 - Add more invoicing-related fields to registrations (#4556)
 - Add a field for the billing start for an event (#4476)

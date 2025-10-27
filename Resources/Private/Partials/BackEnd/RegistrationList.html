@@ -19,6 +19,9 @@
                     <th scope="col" class="nowrap">
                         <f:translate key="{propertyLabelPrefix}.seats"/>
                     </th>
+                    <th scope="col" class="nowrap">
+                        <f:translate key="{propertyLabelPrefix}.invoicingStatus"/>
+                    </th>
                     <f:if condition="{permissions.writeAccessToRegistrations}">
                         <th scope="col" class="col-control nowrap">&nbsp;</th>
                     </f:if>
@@ -78,6 +81,16 @@
                         </td>
                         <td class="text-end text-right nowrap">
                             {registration.seats}
+                        </td>
+                        <td class="nowrap">
+                            <f:if condition="{registration.paid}">
+                                <f:then>
+                                    <f:translate key="{propertyLabelPrefix}.invoicingStatus.paid"/>
+                                </f:then>
+                                <f:else if="{registration.invoice}">
+                                    <f:translate key="{propertyLabelPrefix}.invoicingStatus.invoiced"/>
+                                </f:else>
+                            </f:if>
                         </td>
                         <f:if condition="{permissions.writeAccessToRegistrations}">
                             <td class="col-control nowrap">
