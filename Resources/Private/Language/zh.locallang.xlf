@@ -2197,6 +2197,18 @@
         <source>This event allows an unlimited registrations.</source>
         <target state="needs-translation">This event allows an unlimited registrations.</target>
       </trans-unit>
+      <trans-unit id="backEndModule.events.property.invoicingStatus">
+        <source>Invoicing</source>
+        <target state="needs-translation">Invoicing</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.invoicingStatus.invoiced">
+        <source>⏳ invoiced</source>
+        <target state="needs-translation">⏳ invoiced</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.invoicingStatus.paid">
+        <source>✅ paid</source>
+        <target state="needs-translation">✅ paid</target>
+      </trans-unit>
       <trans-unit id="backEndModule.events.property.registrations">
         <source>Registrations</source>
         <target state="needs-translation">Registrations</target>
