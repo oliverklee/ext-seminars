@@ -1609,6 +1609,15 @@
 			<trans-unit id="backEndModule.events.property.seats.noLimit">
 				<source>This event allows an unlimited registrations.</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.events.property.invoicingStatus">
+				<source>Invoicing</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.invoicingStatus.invoiced">
+				<source>⏳ invoiced</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.invoicingStatus.paid">
+				<source>✅ paid</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.events.property.registrations">
 				<source>Registrations</source>
 			</trans-unit>
