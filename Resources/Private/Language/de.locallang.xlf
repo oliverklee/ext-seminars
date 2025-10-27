@@ -2138,17 +2138,17 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>This event allows an unlimited registrations.</source>
         <target state="final">Bei dieser Veranstaltung sind unbegrenzt viele Anmeldungen möglich.</target>
       </trans-unit>
-      <trans-unit id="backEndModule.events.property.invoicingStatus">
+      <trans-unit id="backEndModule.events.property.invoicingStatus" approved="yes">
         <source>Invoicing</source>
-        <target state="needs-translation">Invoicing</target>
+        <target state="final">Abrechnung</target>
       </trans-unit>
-      <trans-unit id="backEndModule.events.property.invoicingStatus.invoiced">
+      <trans-unit id="backEndModule.events.property.invoicingStatus.invoiced" approved="yes">
         <source>⏳ invoiced</source>
-        <target state="needs-translation">⏳ invoiced</target>
+        <target state="final">⏳ berechnet</target>
       </trans-unit>
-      <trans-unit id="backEndModule.events.property.invoicingStatus.paid">
+      <trans-unit id="backEndModule.events.property.invoicingStatus.paid" approved="yes">
         <source>✅ paid</source>
-        <target state="needs-translation">✅ paid</target>
+        <target state="final">✅ bezahlt</target>
       </trans-unit>
       <trans-unit id="backEndModule.events.property.registrations" approved="yes">
         <source>Registrations</source>
