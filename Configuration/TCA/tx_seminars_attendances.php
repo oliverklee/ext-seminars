@@ -389,7 +389,7 @@ $tca = [
         ],
         'invoice_number' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:seminars_premium/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.invoice_number',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.invoice_number',
             'config' => [
                 'type' => 'input',
                 'size' => 8,
@@ -399,7 +399,7 @@ $tca = [
         ],
         'customer_number' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:seminars_premium/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.customer_number',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.customer_number',
             'config' => [
                 'type' => 'input',
                 'size' => 8,
