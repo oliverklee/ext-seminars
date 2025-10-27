@@ -45,12 +45,12 @@ trait PaymentTrait
     protected ?\DateTime $invoiceDate = null;
 
     /**
-     * @phpstan-var int<1, 99999999>|null
+     * @phpstan-var int<0, 99999999>|null
      */
     protected ?int $invoiceNumber = null;
 
     /**
-     * @phpstan-var int<1, 99999999>|null
+     * @phpstan-var int<0, 99999999>|null
      */
     protected ?int $customerNumber = null;
 
@@ -134,7 +134,7 @@ trait PaymentTrait
     }
 
     /**
-     * @return int<1, 99999999>|null
+     * @return int<0, 99999999>|null
      */
     public function getInvoiceNumber(): ?int
     {
@@ -142,7 +142,7 @@ trait PaymentTrait
     }
 
     /**
-     * @param int<1, 99999999> $invoiceNumber
+     * @param int<0, 99999999> $invoiceNumber
      */
     public function setInvoiceNumber(int $invoiceNumber): void
     {
@@ -151,12 +151,13 @@ trait PaymentTrait
 
     public function hasInvoice(): bool
     {
-        return \is_int($this->getInvoiceNumber())
+        $invoiceNumber = $this->getInvoiceNumber();
+        return \is_int($invoiceNumber) && $invoiceNumber > 0
             && ($this->getInvoiceDate() instanceof \DateTime);
     }
 
     /**
-     * @return int<1, 99999999>|null
+     * @return int<0, 99999999>|null
      */
     public function getCustomerNumber(): ?int
     {
@@ -164,7 +165,7 @@ trait PaymentTrait
     }
 
     /**
-     * @param int<1, 99999999> $customerNumber
+     * @param int<0, 99999999> $customerNumber
      */
     public function setCustomerNumber(int $customerNumber): void
     {

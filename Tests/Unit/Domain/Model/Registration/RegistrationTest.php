@@ -1357,6 +1357,17 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function hasInvoiceWithZeroInvoiceNumberAndWithInvoiceDateReturnsFalse(): void
+    {
+        $this->subject->setInvoiceNumber(0);
+        $this->subject->setInvoiceDate(new \DateTime());
+
+        self::assertFalse($this->subject->hasInvoice());
+    }
+
+    /**
+     * @test
+     */
     public function hasInvoiceWithInvoiceNumberAndWithoutInvoiceDateReturnsFalse(): void
     {
         $this->subject->setInvoiceNumber(123456);
