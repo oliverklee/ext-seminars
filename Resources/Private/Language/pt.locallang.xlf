@@ -1569,6 +1569,10 @@
         <source>Date</source>
         <target state="needs-translation">Date</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.regularRegistrations">
+        <source>Registrations</source>
+        <target state="needs-translation">Registrations</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.description">
         <source>Description</source>
         <target state="needs-translation">Description</target>
