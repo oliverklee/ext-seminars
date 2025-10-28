@@ -160,29 +160,8 @@ jobs:
             php-version: "7.4"
             composer-dependencies: highest
           - typo3-version: "^11.5"
-            php-version: "8.0"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.0"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.1"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.1"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.2"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.2"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
             php-version: "8.3"
             composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.3"
-            composer-dependencies: highest
 #          - typo3-version: "^11.5"
 #            php-version: "8.4"
 #            composer-dependencies: lowest
@@ -261,30 +240,6 @@ jobs:
             php-version: "7.4"
             composer-dependencies: highest
           - typo3-version: "^11.5"
-            php-version: "8.0"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.0"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.1"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.1"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.2"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.2"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.3"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.3"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
             php-version: "8.4"
             composer-dependencies: lowest
           - typo3-version: "^11.5"
@@ -360,30 +315,6 @@ jobs:
             composer-dependencies: lowest
           - typo3-version: "^11.5"
             php-version: "7.4"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.0"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.0"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.1"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.1"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.2"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.2"
-            composer-dependencies: highest
-          - typo3-version: "^11.5"
-            php-version: "8.3"
-            composer-dependencies: lowest
-          - typo3-version: "^11.5"
-            php-version: "8.3"
             composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "8.4"
