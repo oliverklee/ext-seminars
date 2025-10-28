@@ -1508,6 +1508,10 @@ Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.			
         <source>Date</source>
         <target state="final">Datum</target>
       </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.regularRegistrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Anmeldungen</target>
+      </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.description" approved="yes">
         <source>Description</source>
         <target state="final">Beschreibung</target>
