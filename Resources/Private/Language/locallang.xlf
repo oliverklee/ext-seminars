@@ -1141,6 +1141,9 @@
 			<trans-unit id="plugin.frontEndEditor.property.date">
 				<source>Date</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.regularRegistrations">
+				<source>Registrations</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.description">
 				<source>Description</source>
 			</trans-unit>

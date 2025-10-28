@@ -18,6 +18,7 @@ use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
 use OliverKlee\Seminars\Seo\SlugGenerator;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -45,6 +46,8 @@ class FrontEndEditorController extends ActionController
 
     private SlugGenerator $slugGenerator;
 
+    private EventStatisticsCalculator $eventStatisticsCalculator;
+
     public function __construct(
         EventRepository $eventRepository,
         EventTypeRepository $eventTypeRepository,
@@ -53,7 +56,8 @@ class FrontEndEditorController extends ActionController
         VenueRepository $venueRepository,
         CategoryRepository $categoryRepository,
         FrontendUserRepository $userRepository,
-        SlugGenerator $slugGenerator
+        SlugGenerator $slugGenerator,
+        EventStatisticsCalculator $eventStatisticsCalculator
     ) {
         $this->eventRepository = $eventRepository;
         $this->eventTypeRepository = $eventTypeRepository;
@@ -63,6 +67,7 @@ class FrontEndEditorController extends ActionController
         $this->categoryRepository = $categoryRepository;
         $this->userRepository = $userRepository;
         $this->slugGenerator = $slugGenerator;
+        $this->eventStatisticsCalculator = $eventStatisticsCalculator;
     }
 
     /**
@@ -97,6 +102,9 @@ class FrontEndEditorController extends ActionController
     public function indexAction(): ResponseInterface
     {
         $events = $this->eventRepository->findSingleEventsAndEventDatesByOwnerUid($this->getLoggedInUserUid());
+        foreach ($events as $event) {
+            $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        }
         $this->view->assign('events', $events);
 
         return $this->htmlResponse();
