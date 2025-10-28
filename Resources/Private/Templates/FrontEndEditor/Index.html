@@ -33,9 +33,14 @@
                         <f:translate key="plugin.frontEndEditor.property.date"/>
                     </th>
                     <th scope="col">
+                        <f:translate key="plugin.frontEndEditor.property.regularRegistrations"/>
+                    </th>
+                    <th scope="col">
                     </th>
                 </tr>
                 <f:for each="{events}" as="event">
+                    <f:variable name="statistics" value="{event.statistics}"/>
+
                     <tr>
                         <td>
                             {event.uid}
@@ -45,6 +50,11 @@
                         </td>
                         <td>
                             <f:render partial="EventDate" arguments="{event: event}"/>
+                        </td>
+                        <td class="text-end">
+                            <f:if condition="{statistics} && {statistics.regularSeatsCount}">
+                                {statistics.regularSeatsCount}
+                            </f:if>
                         </td>
                         <td>
                             <f:if condition="{event.singleEvent}">

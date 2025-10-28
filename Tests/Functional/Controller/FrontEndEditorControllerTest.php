@@ -353,6 +353,23 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function indexActionForEventWithRegularRegistrationsRendersRegistrationCount(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithRegistrations.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+        $body = (string)$response->getBody();
+
+        self::assertStringContainsString(' 4', $body);
+    }
+
+    /**
+     * @test
+     */
     public function indexActionWithSingleEventHasEditSingleEventLink(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwner.csv');
