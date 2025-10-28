@@ -303,6 +303,56 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function indexActionRendersEventUid(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwnerAndHigherUid.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringContainsString('1337', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionRendersDateOfOneDayEvent(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/OneDaySingleEventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+
+        self::assertStringContainsString('2025-10-28', (string)$response->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionRendersDateOfMultiDayEvent(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/FrontEndEditorController/indexAction/TwoDaySingleEventWithOwner.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(self::PAGE_UID);
+        $requestContext = (new InternalRequestContext())->withFrontendUserId(1);
+        $response = $this->executeFrontendSubRequest($request, $requestContext);
+        $body = (string)$response->getBody();
+
+        self::assertStringContainsString('2025-10-28', $body);
+        self::assertStringContainsString('2025-10-29', $body);
+    }
+
+    /**
+     * @test
+     */
     public function indexActionWithSingleEventHasEditSingleEventLink(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/indexAction/SingleEventWithOwner.csv');
