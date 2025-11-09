@@ -29,126 +29,6 @@ CREATE TABLE tx_seminars_test_test_mm (
 
 
 #
-# Table structure for table 'tx_seminars_seminars_place_mm'
-#
-CREATE TABLE tx_seminars_seminars_place_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_speakers_mm'
-#
-CREATE TABLE tx_seminars_seminars_speakers_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_speakers_mm_partners'
-#
-CREATE TABLE tx_seminars_seminars_speakers_mm_partners (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_speakers_mm_tutors'
-#
-CREATE TABLE tx_seminars_seminars_speakers_mm_tutors (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_speakers_mm_leaders'
-#
-CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_target_groups_mm'
-#
-CREATE TABLE tx_seminars_seminars_target_groups_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_categories_mm'
-#
-CREATE TABLE tx_seminars_seminars_categories_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_organizers_mm'
-#
-CREATE TABLE tx_seminars_seminars_organizers_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_organizing_partners_mm'
-#
-CREATE TABLE tx_seminars_seminars_organizing_partners_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_payment_methods_mm'
-#
-CREATE TABLE tx_seminars_seminars_payment_methods_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
 # Table structure for table 'tx_seminars_seminars'
 #
 CREATE TABLE tx_seminars_seminars (
@@ -232,18 +112,6 @@ CREATE TABLE tx_seminars_seminars (
 
 
 #
-# Table structure for table 'tx_seminars_seminars_feusers_mm'
-#
-CREATE TABLE tx_seminars_seminars_feusers_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
 # Table structure for table 'tx_seminars_speakers'
 #
 CREATE TABLE tx_seminars_speakers (
@@ -264,18 +132,6 @@ CREATE TABLE tx_seminars_speakers (
 	FULLTEXT index_searchfields(title)
 )
 	ENGINE = MyISAM;
-
-
-#
-# Table structure for table 'tx_seminars_speakers_skills_mm'
-#
-CREATE TABLE tx_seminars_speakers_skills_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
 
 
 #
@@ -390,30 +246,6 @@ CREATE TABLE tx_seminars_checkboxes (
 
 
 #
-# Table structure for table 'tx_seminars_seminars_checkboxes_mm'
-#
-CREATE TABLE tx_seminars_seminars_checkboxes_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_attendances_checkboxes_mm'
-#
-CREATE TABLE tx_seminars_attendances_checkboxes_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
 # Table structure for table 'tx_seminars_lodgings'
 #
 CREATE TABLE tx_seminars_lodgings (
@@ -422,58 +254,10 @@ CREATE TABLE tx_seminars_lodgings (
 
 
 #
-# Table structure for table 'tx_seminars_seminars_lodgings_mm'
-#
-CREATE TABLE tx_seminars_seminars_lodgings_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_attendances_lodgings_mm'
-#
-CREATE TABLE tx_seminars_attendances_lodgings_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
 # Table structure for table 'tx_seminars_foods'
 #
 CREATE TABLE tx_seminars_foods (
 	title tinytext
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_foods_mm'
-#
-CREATE TABLE tx_seminars_seminars_foods_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_attendances_foods_mm'
-#
-CREATE TABLE tx_seminars_attendances_foods_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
 );
 
 
@@ -521,30 +305,4 @@ CREATE TABLE tx_seminars_categories (
 #
 CREATE TABLE tx_seminars_skills (
 	title tinytext
-);
-
-
-#
-# Table structure for table 'tx_seminars_seminars_requirements_mm'
-#
-CREATE TABLE tx_seminars_seminars_requirements_mm (
-	uid_local       int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign     int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting         int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
-);
-
-
-#
-# Table structure for table 'tx_seminars_usergroups_categories_mm'
-#
-CREATE TABLE tx_seminars_usergroups_categories_mm (
-	uid_local   int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting     int(11) unsigned DEFAULT '0' NOT NULL,
-	KEY uid_local(uid_local),
-	KEY uid_foreign(uid_foreign)
 );
