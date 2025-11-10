@@ -78,7 +78,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Rely on the Core to autogenerate the MM tables (#4578)
+- Rely on the Core to autogenerate the MM tables (#4577, #4578)
 - Make a BE label in the billing address more specific (#4533)
 - Make the registration title editable in the backend (#4531)
 - Add inheritance to the event interfaces (#4523)
