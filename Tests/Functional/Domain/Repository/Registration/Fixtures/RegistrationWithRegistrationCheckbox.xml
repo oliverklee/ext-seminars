@@ -10,6 +10,5 @@
     <tx_seminars_attendances_checkboxes_mm>
         <uid_local>1</uid_local>
         <uid_foreign>2</uid_foreign>
-        <tablenames>tx_seminars_checkboxes</tablenames>
     </tx_seminars_attendances_checkboxes_mm>
 </dataset>
