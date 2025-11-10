@@ -8,6 +8,6 @@
 ,2,2,"Kameha Grand","Am Bonner Bogen 1, 53227 Bonn","Bonn"
 
 "tx_seminars_seminars_place_mm"
-,"uid_local","uid_foreign","tablenames"
-,1,1,"tx_seminars_sites"
-,1,2,"tx_seminars_sites"
+,"uid_local","uid_foreign"
+,1,1
+,1,2

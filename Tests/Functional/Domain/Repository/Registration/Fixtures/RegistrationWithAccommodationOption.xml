@@ -10,6 +10,5 @@
     <tx_seminars_attendances_lodgings_mm>
         <uid_local>1</uid_local>
         <uid_foreign>2</uid_foreign>
-        <tablenames>tx_seminars_lodgings</tablenames>
     </tx_seminars_attendances_lodgings_mm>
 </dataset>
