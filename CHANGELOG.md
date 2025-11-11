@@ -148,6 +148,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the optional `product-name` attribute from XLIFF files (#4581)
 - !!! Drop the checkbox for the separate billing address (#4495)
 - Drop the `unregistrationDeadlineDaysBeforeBeginDate` setting (#4251)
 - Drop the `allowRegistrationForEventsWithoutDate` option (#4348)
