@@ -36,6 +36,9 @@
                         <f:translate key="plugin.frontEndEditor.property.regularRegistrations"/>
                     </th>
                     <th scope="col">
+                        <f:translate key="plugin.frontEndEditor.property.vacancies"/>
+                    </th>
+                    <th scope="col">
                     </th>
                 </tr>
                 <f:for each="{events}" as="event">
@@ -55,6 +58,10 @@
                             <f:if condition="{statistics} && {statistics.regularSeatsCount}">
                                 {statistics.regularSeatsCount}
                             </f:if>
+                        </td>
+                        <td class="text-end">
+                            <f:render partial="Event/Vacancies"
+                                      arguments="{event: event, viewName: 'frontEndEditor'}"/>
                         </td>
                         <td>
                             <f:if condition="{event.singleEvent}">

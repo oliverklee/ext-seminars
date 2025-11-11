@@ -1143,6 +1143,12 @@
 			<trans-unit id="plugin.frontEndEditor.property.regularRegistrations">
 				<source>Registrations</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.vacancies">
+				<source>Vacancies</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.events.property.vacancies.unlimited">
+				<source>unlimited</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.description">
 				<source>Description</source>
 			</trans-unit>
