@@ -424,7 +424,7 @@ class EventBagBuilder extends AbstractBagBuilder
         if (!$event->hasEndDate()) {
             throw new \InvalidArgumentException(
                 'The event object given in the first parameter $event must have an end date set.',
-                1333292744
+                1333292744,
             );
         }
 
@@ -447,7 +447,7 @@ class EventBagBuilder extends AbstractBagBuilder
         if (!$event->isEventDate() && !$event->isEventTopic()) {
             throw new \InvalidArgumentException(
                 'The first parameter $event must be either a date or a topic record.',
-                1333292764
+                1333292764,
             );
         }
 
@@ -505,7 +505,7 @@ class EventBagBuilder extends AbstractBagBuilder
                 $this->getSearchWherePartForPlaces($safeKeyword),
                 $this->getSearchWherePartForEventTypes($safeKeyword),
                 $this->getSearchWherePartForCategories($safeKeyword),
-                $this->getSearchWherePartForTargetGroups($safeKeyword)
+                $this->getSearchWherePartForTargetGroups($safeKeyword),
             );
             $allWhereParts[] = '(' . \implode(' OR ', $wherePartsForCurrentSearchWord) . ')';
         }
@@ -575,7 +575,7 @@ class EventBagBuilder extends AbstractBagBuilder
             $quotedSearchWord,
             'categories',
             'tx_seminars_categories',
-            'tx_seminars_seminars_categories_mm'
+            'tx_seminars_seminars_categories_mm',
         );
     }
 
@@ -593,7 +593,7 @@ class EventBagBuilder extends AbstractBagBuilder
             $quotedSearchWord,
             'target_groups',
             'tx_seminars_target_groups',
-            'tx_seminars_seminars_target_groups_mm'
+            'tx_seminars_seminars_target_groups_mm',
         );
     }
 
@@ -633,7 +633,7 @@ class EventBagBuilder extends AbstractBagBuilder
             $quotedSearchWord,
             'places',
             'tx_seminars_sites',
-            'tx_seminars_seminars_place_mm'
+            'tx_seminars_seminars_place_mm',
         );
     }
 
@@ -699,7 +699,7 @@ class EventBagBuilder extends AbstractBagBuilder
             $quotedSearchWord,
             'speakers',
             'tx_seminars_speakers',
-            'tx_seminars_seminars_speakers_mm'
+            'tx_seminars_seminars_speakers_mm',
         );
     }
 
@@ -768,7 +768,7 @@ class EventBagBuilder extends AbstractBagBuilder
         $matchQueryPart = \sprintf(
             'MATCH (%s) AGAINST (%s IN BOOLEAN MODE)',
             \implode(',', self::$searchFieldList[$searchFieldKey]),
-            $quotedSearchWord
+            $quotedSearchWord,
         );
 
         $queryBuilder = $this->getQueryBuilderForTable($foreignTable);
@@ -839,7 +839,7 @@ class EventBagBuilder extends AbstractBagBuilder
         if (!\array_key_exists($searchFieldKey, self::$searchFieldList)) {
             throw new \InvalidArgumentException(
                 'The second parameter $searchFieldKey must be a valid key of self::$searchFieldList.',
-                1333292815
+                1333292815,
             );
         }
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
@@ -881,7 +881,7 @@ class EventBagBuilder extends AbstractBagBuilder
             'tx_seminars_seminars.uid';
         $this->addAdditionalTableName('tx_seminars_seminars_requirements_mm');
         $this->setOrderBy(
-            'tx_seminars_seminars_requirements_mm.sorting_foreign ASC'
+            'tx_seminars_seminars_requirements_mm.sorting_foreign ASC',
         );
     }
 
@@ -1005,18 +1005,18 @@ class EventBagBuilder extends AbstractBagBuilder
             ->where(
                 $queryBuilder->expr()->lte(
                     'minimum_age',
-                    $queryBuilder->createNamedParameter($age, Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter($age, Connection::PARAM_INT),
                 ),
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->eq(
                         'maximum_age',
-                        $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
+                        $queryBuilder->createNamedParameter(0, Connection::PARAM_INT),
                     ),
                     $queryBuilder->expr()->gte(
                         'maximum_age',
-                        $queryBuilder->createNamedParameter($age, Connection::PARAM_INT)
-                    )
-                )
+                        $queryBuilder->createNamedParameter($age, Connection::PARAM_INT),
+                    ),
+                ),
             )
             ->executeQuery();
         $resultWithTargetGroups = $queryResultWithTargetGroups->fetchAllAssociative();
@@ -1031,17 +1031,17 @@ class EventBagBuilder extends AbstractBagBuilder
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->eq(
                         'object_type',
-                        $queryBuilder->createNamedParameter(EventInterface::TYPE_SINGLE_EVENT, Connection::PARAM_INT)
+                        $queryBuilder->createNamedParameter(EventInterface::TYPE_SINGLE_EVENT, Connection::PARAM_INT),
                     ),
                     $queryBuilder->expr()->eq(
                         'object_type',
-                        $queryBuilder->createNamedParameter(EventInterface::TYPE_EVENT_TOPIC, Connection::PARAM_INT)
-                    )
+                        $queryBuilder->createNamedParameter(EventInterface::TYPE_EVENT_TOPIC, Connection::PARAM_INT),
+                    ),
                 ),
                 $queryBuilder->expr()->eq(
                     'target_groups',
-                    $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
-                )
+                    $queryBuilder->createNamedParameter(0, Connection::PARAM_INT),
+                ),
             )
             ->executeQuery();
         $resultWithoutTargetGroups = $queryResultWithoutTargetGroups->fetchAllAssociative();

@@ -58,7 +58,7 @@ final class TemplateHelperTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -81,11 +81,11 @@ final class TemplateHelperTest extends FunctionalTestCase
     {
         $templateCode = "This is a test including\na linefeed.\n";
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             $templateCode,
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -99,12 +99,12 @@ final class TemplateHelperTest extends FunctionalTestCase
     public function setNewSubpartNotEmptyGetSubpart(): void
     {
         $this->subject->processTemplate(
-            'Some text.'
+            'Some text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -120,7 +120,7 @@ final class TemplateHelperTest extends FunctionalTestCase
         $this->subject->processTemplate(
             '<!-- ###my_subpart### -->'
             . 'Some text.'
-            . '<!-- ###my_subpart### -->'
+            . '<!-- ###my_subpart### -->',
         );
 
         $this->expectException(NotFoundException::class);
@@ -138,7 +138,7 @@ final class TemplateHelperTest extends FunctionalTestCase
         $this->subject->processTemplate(
             '<!-- ###my_subpart### -->'
             . 'Some text.'
-            . '<!-- ###my_subpart### -->'
+            . '<!-- ###my_subpart### -->',
         );
 
         $this->expectException(NotFoundException::class);

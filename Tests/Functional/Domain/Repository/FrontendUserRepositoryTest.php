@@ -45,7 +45,7 @@ final class FrontendUserRepositoryTest extends FunctionalTestCase
     public function mapsAllModelFields(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontendUserRepository/propertyMapping/FrontendUserWithAllScalarData.csv'
+            __DIR__ . '/Fixtures/FrontendUserRepository/propertyMapping/FrontendUserWithAllScalarData.csv',
         );
 
         $model = $this->subject->findByUid(1);

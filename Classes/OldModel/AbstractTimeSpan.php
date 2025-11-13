@@ -71,7 +71,7 @@ abstract class AbstractTimeSpan extends AbstractModel
                 'modifyDateSpan',
                 $resultBeforeHook,
                 $this,
-                $dash
+                $dash,
             );
         }
 
@@ -117,7 +117,7 @@ abstract class AbstractTimeSpan extends AbstractModel
                 'modifyTimeSpan',
                 $result,
                 $this,
-                $dash
+                $dash,
             );
         }
         $hours = $this->translate('label_hours');
@@ -192,7 +192,7 @@ abstract class AbstractTimeSpan extends AbstractModel
                     0,
                     $splitBeginDate['mon'],
                     $splitBeginDate['mday'] + 1,
-                    $splitBeginDate['year']
+                    $splitBeginDate['year'],
                 );
             } else {
                 $result = $this->getEndDateAsTimestamp();

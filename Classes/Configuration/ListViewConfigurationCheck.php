@@ -85,7 +85,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'status_registration',
                 'registration',
                 'list_registrations',
-            ]
+            ],
         );
     }
 
@@ -96,7 +96,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies whether the option boxes in the selector widget will contain
             a dummy entry called &quot;not selected&quot;.
             This is only needed if you changed the HTML template to show the selectors as drop-down menus.
-            If this value is incorrect, the dummy entry might get displayed when this is not intended (or vice versa).'
+            If this value is incorrect, the dummy entry might get displayed when this is not intended (or vice versa).',
         );
     }
 
@@ -105,7 +105,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfBoolean(
             'hidePageBrowser',
             'This value specifies whether the page browser in the list view will be displayed.
-            If this value is incorrect, the page browser might get displayed when this is not intended (or vice versa).'
+            If this value is incorrect, the page browser might get displayed when this is not intended (or vice versa).',
         );
     }
 
@@ -114,7 +114,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfBoolean(
             'hideCanceledEvents',
             'This value specifies whether canceled events will be removed from the list view.
-            If this value is incorrect, canceled events might get displayed when this is not intended (or vice versa).'
+            If this value is incorrect, canceled events might get displayed when this is not intended (or vice versa).',
         );
     }
 
@@ -124,7 +124,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'sortListViewByCategory',
             'This value specifies whether the list view should be sorted by category before applying the normal sorting.
             If this value is incorrect, the list view might get sorted by category when this is not intended
-            (or vice versa).'
+            (or vice versa).',
         );
     }
 
@@ -135,7 +135,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies whether the column header for the standard
             price in the list view will be just <em>Price</em> instead
             of <em>Standard price</em>.
-            If this value is incorrect, the wrong label might be used.'
+            If this value is incorrect, the wrong label might be used.',
         );
     }
 
@@ -146,7 +146,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies who is able to see the registered persons an event in the front end .
             If this value is incorrect, persons may access the registration lists although they should not be allowed to
             (or vice versa).',
-            ['attendees_and_managers', 'login']
+            ['attendees_and_managers', 'login'],
         );
     }
 
@@ -155,7 +155,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfNonNegativeIntegerOrEmpty(
             'registrationsListPID',
             'This value specifies the page that contains the list of registrations for an event.
-            If this value is not set correctly, the link to that page will not work.'
+            If this value is not set correctly, the link to that page will not work.',
         );
     }
 
@@ -164,7 +164,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfNonNegativeIntegerOrEmpty(
             'registrationsVipListPID',
             'This value specifies the page that contains the list of registrations for an event.
-            If this value is not set correctly, the link to that page will not work.'
+            If this value is not set correctly, the link to that page will not work.',
         );
     }
 
@@ -173,7 +173,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfIntegerListOrEmpty(
             'limitListViewToEventTypes',
             'This value specifies the event types by which the list view should be filtered.
-            If this value is not set correctly, some events might unintentionally get hidden or shown.'
+            If this value is not set correctly, some events might unintentionally get hidden or shown.',
         );
     }
 
@@ -182,7 +182,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfIntegerListOrEmpty(
             'limitListViewToCategories',
             'This value specifies the categories by which the list view should be filtered.
-            If this value is not set correctly, some events might unintentionally get hidden or shown.'
+            If this value is not set correctly, some events might unintentionally get hidden or shown.',
         );
     }
 
@@ -191,7 +191,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfIntegerListOrEmpty(
             'limitListViewToPlaces',
             'This value specifies the places for which the list view should be filtered.
-            If this value is not set correctly, some events might unintentionally get hidden or shown.'
+            If this value is not set correctly, some events might unintentionally get hidden or shown.',
         );
     }
 
@@ -200,7 +200,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfIntegerListOrEmpty(
             'limitListViewToOrganizers',
             'This value specifies the organizers for which the list view should be filtered.
-            If this value is not set correctly, some events might unintentionally get hidden or shown.'
+            If this value is not set correctly, some events might unintentionally get hidden or shown.',
         );
     }
 
@@ -218,7 +218,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfPositiveInteger(
             'seminarImageListViewWidth',
             'This value specifies the width of the image of a seminar.
-            If this value is not set, the image will be shown in full size.'
+            If this value is not set, the image will be shown in full size.',
         );
     }
 
@@ -227,7 +227,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfPositiveInteger(
             'seminarImageListViewHeight',
             'This value specifies the height of the image of a seminar.
-            If this value is not set, the image will be shown in full size.'
+            If this value is not set, the image will be shown in full size.',
         );
     }
 
@@ -247,7 +247,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'organizer',
                 'categories',
                 'price',
-            ]
+            ],
         );
     }
 
@@ -256,7 +256,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfPositiveInteger(
             'numberOfYearsInDateFilter',
             'This value specifies the number years of years the user can search for events in the event list.
-            The date search will have an empty drop-down for the year if this variable is misconfigured.'
+            The date search will have an empty drop-down for the year if this variable is misconfigured.',
         );
     }
 
@@ -265,7 +265,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfBoolean(
             'enableSortingLinksInListView',
             'This value specifies whether the list view header should be sorting links.
-            If this value is incorrect, the sorting might be enabled even when this is not desired (or vice versa).'
+            If this value is incorrect, the sorting might be enabled even when this is not desired (or vice versa).',
         );
     }
 
@@ -276,7 +276,7 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies when the list view will link to the single view.
             If this value is not set correctly, the single view might not be linked although this is intended
             (or vice versa).',
-            ['always', 'never', 'onlyForNonEmptyDescription']
+            ['always', 'never', 'onlyForNonEmptyDescription'],
         );
     }
 }

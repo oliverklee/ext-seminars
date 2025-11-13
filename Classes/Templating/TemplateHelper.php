@@ -206,13 +206,13 @@ abstract class TemplateHelper
         if ($name !== 'cObj') {
             throw new \InvalidArgumentException(
                 'Cannot set other properties than `cObj` via a magic setter.',
-                1727698230
+                1727698230,
             );
         }
         if (!$value instanceof ContentObjectRenderer) {
             throw new \InvalidArgumentException(
                 'Can only set `cObj` to an instance of `ContentObjectRenderer`.',
-                1727698270
+                1727698270,
             );
         }
 
@@ -692,7 +692,7 @@ abstract class TemplateHelper
         $this->getTemplate()->unhideSubparts(
             $subparts,
             $permanentlyHiddenSubparts,
-            $prefix
+            $prefix,
         );
     }
 
@@ -756,7 +756,7 @@ abstract class TemplateHelper
             $condition,
             $content,
             $markerPrefix,
-            $wrapperPrefix
+            $wrapperPrefix,
         );
     }
 
@@ -789,7 +789,7 @@ abstract class TemplateHelper
             $markerName,
             $content,
             $markerPrefix,
-            $wrapperPrefix
+            $wrapperPrefix,
         );
     }
 
@@ -822,7 +822,7 @@ abstract class TemplateHelper
             $markerName,
             $content,
             $markerPrefix,
-            $wrapperPrefix
+            $wrapperPrefix,
         );
     }
 
@@ -875,7 +875,7 @@ abstract class TemplateHelper
                 $key = \strtolower($matches[1]);
                 return $translator->translate($key);
             },
-            $renderedSubpart
+            $renderedSubpart,
         );
     }
 
@@ -1432,9 +1432,9 @@ abstract class TemplateHelper
                 $this->pi_linkTP_keepPIvars(
                     \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
                     ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
-                    $pi_isOnlyFields
+                    $pi_isOnlyFields,
                 ),
-                $wrapper['inactiveLinkWrap']
+                $wrapper['inactiveLinkWrap'],
             );
         }
         // Links to pages
@@ -1447,18 +1447,18 @@ abstract class TemplateHelper
                     $this->pi_linkTP_keepPIvars(
                         $pageText,
                         ['pointer' => $a > 0 ? $a : ''],
-                        $pi_isOnlyFields
+                        $pi_isOnlyFields,
                     ),
-                    $wrapper['activeLinkWrap']
+                    $wrapper['activeLinkWrap'],
                 );
             } else {
                 $links[] = $this->cObj->wrap(
                     $this->pi_linkTP_keepPIvars(
                         $pageText,
                         ['pointer' => $a > 0 ? $a : ''],
-                        $pi_isOnlyFields
+                        $pi_isOnlyFields,
                     ),
-                    $wrapper['inactiveLinkWrap']
+                    $wrapper['inactiveLinkWrap'],
                 );
             }
         }
@@ -1468,7 +1468,7 @@ abstract class TemplateHelper
                 $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
                 $links[] = $this->cObj->wrap(
                     \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                    $wrapper['disabledLinkWrap']
+                    $wrapper['disabledLinkWrap'],
                 );
             } else {
                 $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
@@ -1476,9 +1476,9 @@ abstract class TemplateHelper
                     $this->pi_linkTP_keepPIvars(
                         \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
                         ['pointer' => $pointer + 1],
-                        $pi_isOnlyFields
+                        $pi_isOnlyFields,
                     ),
-                    $wrapper['inactiveLinkWrap']
+                    $wrapper['inactiveLinkWrap'],
                 );
             }
         }
@@ -1493,12 +1493,12 @@ abstract class TemplateHelper
                 '<span' . $this->pi_classParam('browsebox-strong') . '>',
                 $this->pi_getLL(
                     'pi_list_browseresults_displays',
-                    'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
-                )
+                    'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>',
+                ),
             ),
             $count > 0 ? $pR1 : 0,
             \min($count, $pR2),
-            $count
+            $count,
         );
         $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
 

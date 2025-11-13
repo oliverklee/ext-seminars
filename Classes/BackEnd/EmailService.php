@@ -69,7 +69,7 @@ class EmailService implements SingletonInterface
             LocalizationUtility::translate('message_emailToAttendeesSent', 'seminars'),
             '',
             FlashMessage::OK,
-            true
+            true,
         );
         $this->addFlashMessage($message);
     }

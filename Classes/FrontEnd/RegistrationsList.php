@@ -44,7 +44,7 @@ class RegistrationsList extends AbstractView
         if (!\in_array($whatToDisplay, ['list_registrations', 'list_vip_registrations'], true)) {
             throw new \InvalidArgumentException(
                 'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.',
-                1333293210
+                1333293210,
             );
         }
         $this->whatToDisplay = $whatToDisplay;
@@ -83,7 +83,7 @@ class RegistrationsList extends AbstractView
                     $this->whatToDisplay,
                     0,
                     0,
-                    $this->getConfValueString('accessToFrontEndRegistrationLists')
+                    $this->getConfValueString('accessToFrontEndRegistrationLists'),
                 )
             ) {
                 $isOkay = true;
@@ -107,7 +107,7 @@ class RegistrationsList extends AbstractView
 
         $this->setMarker(
             'backlink',
-            $this->cObj->getTypoLink($this->translate('label_back'), (string)$this->getConfValueInteger('listPID'))
+            $this->cObj->getTypoLink($this->translate('label_back'), (string)$this->getConfValueInteger('listPID')),
         );
 
         return $this->getSubpart('REGISTRATIONS_LIST_VIEW');
@@ -239,7 +239,7 @@ class RegistrationsList extends AbstractView
         $keys = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('showFeUserFieldsInRegistrationsList', 's_template_special'),
-            true
+            true,
         );
 
         return $keys;
@@ -256,7 +256,7 @@ class RegistrationsList extends AbstractView
         $keys = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('showRegistrationFieldsInRegistrationList', 's_template_special'),
-            true
+            true,
         );
 
         return $keys;

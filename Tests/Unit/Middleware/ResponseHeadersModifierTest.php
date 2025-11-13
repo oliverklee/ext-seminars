@@ -200,7 +200,7 @@ final class ResponseHeadersModifierTest extends UnitTestCase
                 $headerName1 => $headerValue1,
                 $headerName2 => $headerValue2,
             ],
-            $this->subject->getOverrideHeaders()
+            $this->subject->getOverrideHeaders(),
         );
     }
 

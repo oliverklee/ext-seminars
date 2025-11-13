@@ -91,7 +91,8 @@ class DataHandlerHook implements SingletonInterface
      */
     private function processSingleEvent(int $uid): void
     {
-        $originalData = $this->getConnectionForTable(self::TABLE_EVENTS)
+        $originalData = $this
+            ->getConnectionForTable(self::TABLE_EVENTS)
             ->select(['*'], self::TABLE_EVENTS, ['uid' => $uid])->fetchAssociative();
         if (!\is_array($originalData)) {
             return;
@@ -110,7 +111,7 @@ class DataHandlerHook implements SingletonInterface
         $dataSanitizationHookProvider = GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class);
         $updatedData = array_merge(
             $updatedData,
-            $dataSanitizationHookProvider->executeHookReturningMergedArray('sanitizeEventData', $uid, $updatedData)
+            $dataSanitizationHookProvider->executeHookReturningMergedArray('sanitizeEventData', $uid, $updatedData),
         );
 
         if ($updatedData !== $originalData) {
@@ -124,7 +125,8 @@ class DataHandlerHook implements SingletonInterface
             return;
         }
 
-        $timeSlots = $this->getConnectionForTable(self::TABLE_TIME_SLOTS)
+        $timeSlots = $this
+            ->getConnectionForTable(self::TABLE_TIME_SLOTS)
             ->select(['*'], self::TABLE_TIME_SLOTS, ['seminar' => $uid])->fetchAllAssociative();
 
         /** @var list<positive-int> $placesUids */
@@ -159,7 +161,8 @@ class DataHandlerHook implements SingletonInterface
     private function copyBeginDateFromTimeSlots(int $uid, array &$data): void
     {
         $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
-        $queryResult = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
+        $queryResult = $query
+            ->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
             ->from(self::TABLE_TIME_SLOTS)
             ->where($query->expr()->eq('seminar', $uid))
             ->executeQuery();
@@ -173,7 +176,8 @@ class DataHandlerHook implements SingletonInterface
     private function copyEndDateFromTimeSlots(int $uid, array &$data): void
     {
         $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
-        $queryResult = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
+        $queryResult = $query
+            ->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
             ->from(self::TABLE_TIME_SLOTS)
             ->where($query->expr()->eq('seminar', $uid))
             ->executeQuery();

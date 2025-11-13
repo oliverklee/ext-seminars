@@ -58,14 +58,14 @@ final class SingleEventMapperTest extends FunctionalTestCase
     public function getTopicForSingleRecordThrowsException(): void
     {
         $this->expectException(
-            \BadMethodCallException::class
+            \BadMethodCallException::class,
         );
         $this->expectExceptionMessage(
-            'This function may only be called for date records.'
+            'This function may only be called for date records.',
         );
 
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         $testingModel->getTopic();
@@ -79,7 +79,7 @@ final class SingleEventMapperTest extends FunctionalTestCase
     public function getCategoriesForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCategories());
@@ -92,7 +92,7 @@ final class SingleEventMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
         $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
         \assert($categoryUid > 0);
@@ -100,7 +100,7 @@ final class SingleEventMapperTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $uid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         $model = $this->subject->find($uid);
@@ -114,7 +114,7 @@ final class SingleEventMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
         $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
         \assert($categoryUid > 0);
@@ -122,13 +122,13 @@ final class SingleEventMapperTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $uid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$categoryUid,
-            $model->getCategories()->getUids()
+            $model->getCategories()->getUids(),
         );
     }
 
@@ -140,7 +140,7 @@ final class SingleEventMapperTest extends FunctionalTestCase
     public function getEventTypeForSingleEventWithoutEventTypeReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         self::assertNull($testingModel->getEventType());
@@ -157,7 +157,7 @@ final class SingleEventMapperTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $eventType->getUid(),
-            ]
+            ],
         );
 
         self::assertInstanceOf(EventType::class, $testingModel->getEventType());

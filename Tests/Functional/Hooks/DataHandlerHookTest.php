@@ -118,7 +118,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $data = $result->fetchAssociative();
 
         $hook = $this->createMock(DataSanitization::class);
-        $hook->expects(self::once())->method('sanitizeEventData')
+        $hook
+            ->expects(self::once())->method('sanitizeEventData')
             ->with($uid, $data)
             ->willReturn([]);
 
@@ -142,7 +143,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $expectedTitle = 'ModifiedUpdateTitle';
 
         $hook = $this->createMock(DataSanitization::class);
-        $hook->expects(self::once())->method('sanitizeEventData')
+        $hook
+            ->expects(self::once())->method('sanitizeEventData')
             ->with($uid, $data)
             ->willReturn(['title' => $expectedTitle]);
 
@@ -171,7 +173,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $data = $result->fetchAssociative();
 
         $hook = $this->createMock(DataSanitization::class);
-        $hook->expects(self::once())->method('sanitizeEventData')
+        $hook
+            ->expects(self::once())->method('sanitizeEventData')
             ->with($uid, $data)
             ->willReturn([]);
 
@@ -195,7 +198,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $expectedTitle = 'ModifiedNewTitle';
 
         $hook = $this->createMock(DataSanitization::class);
-        $hook->expects(self::once())->method('sanitizeEventData')
+        $hook
+            ->expects(self::once())->method('sanitizeEventData')
             ->with($uid, $data)
             ->willReturn(['title' => $expectedTitle]);
 
@@ -701,7 +705,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $dataHandler->process_cmdmap();
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv'
+            __DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv',
         );
     }
 
@@ -718,7 +722,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $dataHandler->process_cmdmap();
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventOnPageAfterMoving.csv'
+            __DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventOnPageAfterMoving.csv',
         );
     }
 
@@ -735,7 +739,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $dataHandler->process_cmdmap();
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventWithOneRegistrationOnPageAfterMoving.csv'
+            __DIR__ . '/Fixtures/DataHandlerHook/move/SingleEventWithOneRegistrationOnPageAfterMoving.csv',
         );
     }
 }

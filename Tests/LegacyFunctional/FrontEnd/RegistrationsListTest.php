@@ -76,7 +76,7 @@ final class RegistrationsListTest extends FunctionalTestCase
                 'title' => 'Test event & more',
                 'attendees_max' => 10,
                 'needs_registration' => 1,
-            ]
+            ],
         );
 
         $this->subject = new RegistrationsList(
@@ -86,7 +86,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ],
             'list_registrations',
             $this->seminarUid,
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -116,14 +116,14 @@ final class RegistrationsListTest extends FunctionalTestCase
     {
         $this->feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
             '',
-            ['name' => 'Tom & Jerry']
+            ['name' => 'Tom & Jerry'],
         );
         $this->registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'seminar' => $this->seminarUid,
                 'user' => $this->feUserUid,
-            ]
+            ],
         );
     }
 
@@ -152,7 +152,7 @@ final class RegistrationsListTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_attendances', [])
+            $connection->count('*', 'tx_seminars_attendances', []),
         );
     }
 
@@ -171,7 +171,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'foo',
             0,
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -186,7 +186,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -201,7 +201,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_vip_registrations',
             0,
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -226,7 +226,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             -1,
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
         $subject->render();
 
@@ -242,7 +242,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
         $subject->render();
 
@@ -348,7 +348,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'fe_users',
             $this->feUserUid,
-            ['name' => 'Tom & Jerry']
+            ['name' => 'Tom & Jerry'],
         );
         $result = $this->subject->render();
 
@@ -399,7 +399,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $this->registrationUid,
-            ['seats' => 42]
+            ['seats' => 42],
         );
 
         self::assertStringContainsString('<td>42</td>', $this->subject->render());
@@ -415,12 +415,12 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $this->registrationUid,
-            ['interests' => 'everything practical & theoretical']
+            ['interests' => 'everything practical & theoretical'],
         );
 
         self::assertStringContainsString(
             '<td>everything practical &amp; theoretical</td>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -446,7 +446,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $this->registrationUid,
-            ['seats' => 42]
+            ['seats' => 42],
         );
 
         self::assertStringContainsString('<td>' . $this->registrationUid . '</td>', $this->subject->render());
@@ -487,7 +487,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'fe_users',
             $this->feUserUid,
-            ['deleted' => 1]
+            ['deleted' => 1],
         );
 
         self::assertStringNotContainsString('<td>' . $this->registrationUid . '</td>', $this->subject->render());
@@ -510,13 +510,13 @@ final class RegistrationsListTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'crdate' => $now + 500,
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression(
             '/' . $this->registrationUid . '<\\/td>.*<\\/tr>' .
             '.*<tr>.*<td>' . $secondRegistration . '/s',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -531,7 +531,7 @@ final class RegistrationsListTest extends FunctionalTestCase
     {
         self::assertStringNotContainsString(
             $this->translate('label_waiting_list'),
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -550,7 +550,7 @@ final class RegistrationsListTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'registration_queue' => 1,
-            ]
+            ],
         );
 
         self::assertStringContainsString($this->translate('label_waiting_list'), $this->subject->render());
@@ -563,7 +563,7 @@ final class RegistrationsListTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
-            'uid'
+            'uid',
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -574,7 +574,7 @@ final class RegistrationsListTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'registration_queue' => 1,
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression('/<td>' . $secondRegistration . '/s', $this->subject->render());

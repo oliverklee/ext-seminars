@@ -84,7 +84,7 @@ $tca = [
                         ],
                         'fileUploadAllowed' => true,
                     ],
-                ]
+                ],
             ),
         ],
         'skills' => [

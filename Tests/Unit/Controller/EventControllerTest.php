@@ -29,7 +29,7 @@ final class EventControllerTest extends UnitTestCase
         $this->subject = new EventController(
             $eventRepositoryStub,
             $eventStatisticsCalculatorStub,
-            $registrationGuardStub
+            $registrationGuardStub,
         );
     }
 

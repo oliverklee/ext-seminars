@@ -908,7 +908,7 @@ $tca = [
                         ],
                         'fileUploadAllowed' => true,
                     ],
-                ]
+                ],
             ),
         ],
         'download_start_date' => [
@@ -997,7 +997,7 @@ $tca = [
                         ],
                         'fileUploadAllowed' => true,
                     ],
-                ]
+                ],
             ),
         ],
         'price_on_request' => [

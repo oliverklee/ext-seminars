@@ -35,11 +35,11 @@ final class AbstractBagTest extends FunctionalTestCase
 
         $this->uidOfFirstRecord = $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'test 1']
+            ['title' => 'test 1'],
         );
         $this->uidOfSecondRecord = $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'test 2']
+            ['title' => 'test 2'],
         );
 
         $this->subject = new TestingBag();
@@ -65,7 +65,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             '',
-            $bag->getUids()
+            $bag->getUids(),
         );
     }
 
@@ -78,7 +78,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             (string)$this->uidOfFirstRecord,
-            $bag->getUids()
+            $bag->getUids(),
         );
     }
 
@@ -89,7 +89,7 @@ final class AbstractBagTest extends FunctionalTestCase
     {
         self::assertEquals(
             $this->uidOfFirstRecord . ',' . $this->uidOfSecondRecord,
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -100,13 +100,13 @@ final class AbstractBagTest extends FunctionalTestCase
     {
         self::assertEquals(
             $this->uidOfFirstRecord,
-            $this->subject->current()->getUid()
+            $this->subject->current()->getUid(),
         );
 
         $this->subject->next();
         self::assertEquals(
             $this->uidOfSecondRecord,
-            $this->subject->current()->getUid()
+            $this->subject->current()->getUid(),
         );
     }
 
@@ -123,7 +123,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -136,7 +136,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -147,7 +147,7 @@ final class AbstractBagTest extends FunctionalTestCase
     {
         self::assertEquals(
             2,
-            $this->subject->count()
+            $this->subject->count(),
         );
     }
 
@@ -161,7 +161,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $this->subject->count()
+            $this->subject->count(),
         );
     }
 
@@ -188,7 +188,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             0,
-            $bag->countWithoutLimit()
+            $bag->countWithoutLimit(),
         );
     }
 
@@ -201,7 +201,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->countWithoutLimit()
+            $bag->countWithoutLimit(),
         );
     }
 
@@ -212,7 +212,7 @@ final class AbstractBagTest extends FunctionalTestCase
     {
         self::assertEquals(
             2,
-            $this->subject->countWithoutLimit()
+            $this->subject->countWithoutLimit(),
         );
     }
 
@@ -226,7 +226,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $this->subject->countWithoutLimit()
+            $this->subject->countWithoutLimit(),
         );
     }
 
@@ -239,7 +239,7 @@ final class AbstractBagTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->countWithoutLimit()
+            $bag->countWithoutLimit(),
         );
     }
 
@@ -255,7 +255,7 @@ final class AbstractBagTest extends FunctionalTestCase
         $bag = new TestingBag('1=2');
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -267,7 +267,7 @@ final class AbstractBagTest extends FunctionalTestCase
         $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
         self::assertFalse(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -277,7 +277,7 @@ final class AbstractBagTest extends FunctionalTestCase
     public function isEmptyForBagWithTwoElementsReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 }

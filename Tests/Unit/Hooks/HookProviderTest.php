@@ -415,7 +415,7 @@ final class HookProviderTest extends UnitTestCase
 
         self::assertSame(
             ['me' => 'ok', 'overwritten' => 'initial'],
-            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray')
+            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray'),
         );
     }
 
@@ -432,7 +432,7 @@ final class HookProviderTest extends UnitTestCase
 
         self::assertSame(
             ['me' => 'ok', 'overwritten' => 'replaced', 'me2' => 'ok'],
-            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray')
+            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray'),
         );
     }
 
@@ -453,7 +453,7 @@ final class HookProviderTest extends UnitTestCase
                 'me1' => ['status' => true],
                 'me2' => ['status' => false, 'newValue' => 'new2'],
             ],
-            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsNestedArray')
+            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsNestedArray'),
         );
     }
 
@@ -477,11 +477,11 @@ final class HookProviderTest extends UnitTestCase
         self::assertTrue($hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedBool', true));
         self::assertSame(
             1234,
-            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedInt', 1234)
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedInt', 1234),
         );
         self::assertSame(
             'test',
-            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test')
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test'),
         );
     }
 
@@ -550,7 +550,7 @@ final class HookProviderTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedInt', 0)
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedInt', 0),
         );
     }
 
@@ -567,7 +567,7 @@ final class HookProviderTest extends UnitTestCase
 
         self::assertSame(
             'test test 1 2',
-            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test test')
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test test'),
         );
     }
 }

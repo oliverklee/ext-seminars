@@ -43,12 +43,12 @@ final class SingleEventTest extends FunctionalTestCase
     public function getTeaserForSingleEventWithoutTeaserReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         self::assertEquals(
             '',
-            $this->subject->getTeaser()
+            $this->subject->getTeaser(),
         );
     }
 
@@ -61,12 +61,12 @@ final class SingleEventTest extends FunctionalTestCase
             [
                 'teaser' => 'wow, this is teasing',
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
 
         self::assertEquals(
             'wow, this is teasing',
-            $this->subject->getTeaser()
+            $this->subject->getTeaser(),
         );
     }
 
@@ -80,11 +80,11 @@ final class SingleEventTest extends FunctionalTestCase
     public function hasDescriptionForSingleEventWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         self::assertFalse(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 
@@ -97,11 +97,11 @@ final class SingleEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'description' => 'this is a great event.',
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 }

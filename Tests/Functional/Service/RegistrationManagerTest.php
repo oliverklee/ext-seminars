@@ -92,7 +92,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration = new DummyConfiguration(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html',
-            ]
+            ],
         );
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
@@ -152,7 +152,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test organizer',
                 'email' => 'mail@example.com',
-            ]
+            ],
         );
         $originalEventData = [
             'title' => 'test event',
@@ -169,7 +169,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $this->organizerUid
+            $this->organizerUid,
         );
     }
 
@@ -187,7 +187,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'name' => 'Harry Callagan',
                 'email' => 'foo@bar.com',
-            ]
+            ],
         );
 
         $registrationUid = $this->testingFramework->createRecord(
@@ -198,7 +198,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'food' => 'something nice to eat',
                 'accommodation' => 'a nice, dry place',
                 'interests' => 'learning Ruby on Rails',
-            ]
+            ],
         );
 
         return new LegacyRegistration($registrationUid);
@@ -230,7 +230,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/RegistrationManager/notifyOrganizers/RegistrationForEventWithOneVacancy.csv'
+            __DIR__ . '/Fixtures/RegistrationManager/notifyOrganizers/RegistrationForEventWithOneVacancy.csv',
         );
         $this->addMockedInstance(MailMessage::class, $this->email);
         $registration = LegacyRegistration::fromUid(1);
@@ -487,7 +487,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $registration = new LegacyRegistration($registrationUid);
 
@@ -514,12 +514,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
             self::isInstanceOf(MailMessage::class),
             $registration,
-            'confirmation'
+            'confirmation',
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
             self::isInstanceOf(Template::class),
             $registration,
-            'confirmation'
+            'confirmation',
         );
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
@@ -552,17 +552,17 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
             self::isInstanceOf(MailMessage::class),
             $registration,
-            'confirmation'
+            'confirmation',
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
             self::isInstanceOf(Template::class),
             $registration,
-            'confirmation'
+            'confirmation',
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyHtml')->with(
             self::isInstanceOf(Template::class),
             $registration,
-            'confirmation'
+            'confirmation',
         );
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
@@ -593,7 +593,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('email_confirmationSubject'),
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -715,7 +715,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test event',
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -872,7 +872,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'fe_users',
             $userUid,
-            ['email' => 'foo@bar.com']
+            ['email' => 'foo@bar.com'],
         );
         $controller = new DefaultController();
         $controller->init();
@@ -899,7 +899,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_organizers',
             $this->organizerUid,
-            ['email_footer' => $footer]
+            ['email_footer' => $footer],
         );
 
         $this->subject->notifyAttendee($registration, $controller);
@@ -926,7 +926,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_organizers',
             $this->organizerUid,
-            ['email_footer' => $footer]
+            ['email_footer' => $footer],
         );
 
         $this->subject->notifyAttendee($registration, $controller);
@@ -952,7 +952,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_organizers',
             $this->organizerUid,
-            ['email_footer' => $footer]
+            ['email_footer' => $footer],
         );
 
         $this->subject->notifyAttendee($registration, $controller);
@@ -979,7 +979,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_organizers',
             $this->organizerUid,
-            ['email_footer' => $footer]
+            ['email_footer' => $footer],
         );
 
         $this->subject->notifyAttendee($registration, $controller);
@@ -1019,7 +1019,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            EventInterface::STATUS_CONFIRMED
+            EventInterface::STATUS_CONFIRMED,
         );
 
         $controller = new DefaultController();
@@ -1029,7 +1029,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->extractTextBodyFromEmail($this->email)
+            $this->extractTextBodyFromEmail($this->email),
         );
     }
 
@@ -1043,7 +1043,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            EventInterface::STATUS_CANCELED
+            EventInterface::STATUS_CANCELED,
         );
 
         $controller = new DefaultController();
@@ -1053,7 +1053,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->extractTextBodyFromEmail($this->email)
+            $this->extractTextBodyFromEmail($this->email),
         );
     }
 
@@ -1067,7 +1067,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            EventInterface::STATUS_PLANNED
+            EventInterface::STATUS_PLANNED,
         );
 
         $controller = new DefaultController();
@@ -1077,7 +1077,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->extractTextBodyFromEmail($this->email)
+            $this->extractTextBodyFromEmail($this->email),
         );
     }
 
@@ -1092,7 +1092,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            EventInterface::STATUS_PLANNED
+            EventInterface::STATUS_PLANNED,
         );
 
         $controller = new DefaultController();
@@ -1102,7 +1102,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->extractTextBodyFromEmail($this->email)
+            $this->extractTextBodyFromEmail($this->email),
         );
     }
 
@@ -1115,7 +1115,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
-            'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+            'EXT:seminars/Resources/Private/CSS/thankYouMail.css',
         );
 
         $controller = new DefaultController();
@@ -1173,7 +1173,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
-            'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+            'EXT:seminars/Resources/Private/CSS/thankYouMail.css',
         );
 
         $controller = new DefaultController();
@@ -1201,13 +1201,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'foo_place']
+            ['title' => 'foo_place'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1230,13 +1230,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'foo_street']
+            ['address' => 'foo_street'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1264,7 +1264,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('message_willBeAnnounced'),
-            $this->extractTextBodyFromEmail($this->email)
+            $this->extractTextBodyFromEmail($this->email),
         );
     }
 
@@ -1278,13 +1278,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'place_title', 'address' => 'place_address']
+            ['title' => 'place_title', 'address' => 'place_address'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1305,19 +1305,19 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
-            'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+            'EXT:seminars/Resources/Private/CSS/thankYouMail.css',
         );
 
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'place_title', 'address' => 'place_address']
+            ['title' => 'place_title', 'address' => 'place_address'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1342,13 +1342,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'place_title', 'address' => 'place<h2>_address</h2>']
+            ['title' => 'place_title', 'address' => 'place<h2>_address</h2>'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1370,13 +1370,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "address1\naddress2"]
+            ['address' => "address1\naddress2"],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1398,13 +1398,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . "\r" . 'address2']
+            ['address' => 'address1' . "\r" . 'address2'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1426,13 +1426,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "address1\r\naddress2"]
+            ['address' => "address1\r\naddress2"],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1454,13 +1454,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . "\r" . "\r" . 'address2']
+            ['address' => 'address1' . "\r" . "\r" . 'address2'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1482,13 +1482,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "address1\n\naddress2"]
+            ['address' => "address1\n\naddress2"],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1509,19 +1509,19 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
-            'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+            'EXT:seminars/Resources/Private/CSS/thankYouMail.css',
         );
 
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "address1\n\naddress2"]
+            ['address' => "address1\n\naddress2"],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1542,19 +1542,19 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
-            'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+            'EXT:seminars/Resources/Private/CSS/thankYouMail.css',
         );
 
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "address1\naddress2\r\r\naddress3"]
+            ['address' => "address1\naddress2\r\r\naddress3"],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1576,13 +1576,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "On the Hill 12\n12345 Footown", 'city' => 'Footown']
+            ['address' => "On the Hill 12\n12345 Footown", 'city' => 'Footown'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1604,19 +1604,19 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
-            'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+            'EXT:seminars/Resources/Private/CSS/thankYouMail.css',
         );
 
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => "On the Hill 12\n12345 Footown", 'city' => 'Footown']
+            ['address' => "On the Hill 12\n12345 Footown", 'city' => 'Footown'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $uid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1876,13 +1876,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $venueAddress = 'Born in the USA';
         $venueUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $venueTitle, 'address' => $venueAddress]
+            ['title' => $venueTitle, 'address' => $venueAddress],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1911,13 +1911,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $venueAddress = 'Born in the USA';
         $venueUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $venueTitle, 'address' => $venueAddress]
+            ['title' => $venueTitle, 'address' => $venueAddress],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid,
-            'place'
+            'place',
         );
 
         $controller = new DefaultController();
@@ -1944,23 +1944,23 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $venueUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'Hotel California', 'address' => 'Born in the USA']
+            ['title' => 'Hotel California', 'address' => 'Born in the USA'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid1,
-            'place'
+            'place',
         );
         $venueUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'JH Bonn', 'address' => 'Bonn']
+            ['title' => 'JH Bonn', 'address' => 'Bonn'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid2,
-            'place'
+            'place',
         );
         $controller = new DefaultController();
         $controller->init();
@@ -2011,13 +2011,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $venueAddress = 'Born in the USA';
         $venueUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $venueTitle, 'address' => $venueAddress]
+            ['title' => $venueTitle, 'address' => $venueAddress],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid,
-            'place'
+            'place',
         );
         $controller = new DefaultController();
         $controller->init();
@@ -2075,13 +2075,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $venueAddress = 'Born in the USA';
         $venueUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $venueTitle, 'address' => $venueAddress]
+            ['title' => $venueTitle, 'address' => $venueAddress],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid,
-            'place'
+            'place',
         );
         $controller = new DefaultController();
         $controller->init();
@@ -2163,13 +2163,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $venueAddress = 'Born in the USA';
         $venueUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $venueTitle, 'address' => $venueAddress]
+            ['title' => $venueTitle, 'address' => $venueAddress],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid,
-            'place'
+            'place',
         );
         $controller = new DefaultController();
         $controller->init();
@@ -2277,13 +2277,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         ]);
         $venueUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'Hotel California', 'address' => 'Born in the USA']
+            ['title' => 'Hotel California', 'address' => 'Born in the USA'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $venueUid,
-            'place'
+            'place',
         );
         $controller = new DefaultController();
         $controller->init();
@@ -2452,7 +2452,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<a href="' . $webinarUrl . '">' . $webinarUrl . '</a>',
-            $this->extractHtmlBodyFromEmail($this->email)
+            $this->extractHtmlBodyFromEmail($this->email),
         );
     }
 
@@ -2497,7 +2497,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<a href="' . $webinarUrl . '">' . $webinarUrl . '</a>',
-            $this->extractHtmlBodyFromEmail($this->email)
+            $this->extractHtmlBodyFromEmail($this->email),
         );
     }
 
@@ -2554,7 +2554,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<p>' . $additionalEmailText . '</p>',
-            $this->extractHtmlBodyFromEmail($this->email)
+            $this->extractHtmlBodyFromEmail($this->email),
         );
     }
 
@@ -2575,7 +2575,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             \htmlspecialchars($additionalEmailText, ENT_QUOTES | ENT_HTML5),
-            $this->extractHtmlBodyFromEmail($this->email)
+            $this->extractHtmlBodyFromEmail($this->email),
         );
     }
 

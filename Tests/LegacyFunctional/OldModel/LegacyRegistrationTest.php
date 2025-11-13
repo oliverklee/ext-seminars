@@ -69,7 +69,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
                     'cu_decimal_point' => ',',
                     'cu_decimal_digits' => 2,
                     'cu_sub_divisor' => 100,
-                ]
+                ],
             );
         }
 
@@ -84,18 +84,18 @@ final class LegacyRegistrationTest extends FunctionalTestCase
             [
                 'title' => 'test organizer',
                 'email' => 'mail@example.com',
-            ]
+            ],
         );
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 1, 'title' => 'foo_event']
+            ['organizers' => 1, 'title' => 'foo_event'],
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $organizerUid
+            $organizerUid,
         );
 
         $feUserUid = $this->testingFramework->createFrontEndUser(
@@ -103,7 +103,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
             [
                 'name' => 'foo_user',
                 'email' => 'foo@bar.com',
-            ]
+            ],
         );
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -115,7 +115,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
                 'background_knowledge' => "foo\nbar",
                 'known_from' => "foo\rbar",
                 'user' => $feUserUid,
-            ]
+            ],
         );
 
         $this->subject = new LegacyRegistration($registrationUid);
@@ -155,7 +155,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     public function setPaymentMethodRelationReturnsUid(): void
     {
         self::assertTrue(
-            $this->setPaymentMethodRelation([]) > 0
+            $this->setPaymentMethodRelation([]) > 0,
         );
     }
 
@@ -166,7 +166,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertNotEquals(
             $this->setPaymentMethodRelation([]),
-            $this->setPaymentMethodRelation([])
+            $this->setPaymentMethodRelation([]),
         );
     }
 
@@ -225,7 +225,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $title,
-            $this->subject->getRegistrationData('method_of_payment')
+            $this->subject->getRegistrationData('method_of_payment'),
         );
     }
 
@@ -238,7 +238,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('label_no'),
-            $this->subject->getRegistrationData('registered_themselves')
+            $this->subject->getRegistrationData('registered_themselves'),
         );
     }
 
@@ -251,7 +251,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('label_yes'),
-            $this->subject->getRegistrationData('registered_themselves')
+            $this->subject->getRegistrationData('registered_themselves'),
         );
     }
 
@@ -264,7 +264,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             (string)$this->subject->getUid(),
-            $this->subject->dumpAttendanceValues('uid')
+            $this->subject->dumpAttendanceValues('uid'),
         );
     }
 
@@ -275,7 +275,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             'nothing',
-            $this->subject->dumpAttendanceValues('interests')
+            $this->subject->dumpAttendanceValues('interests'),
         );
     }
 
@@ -286,7 +286,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             'nothing',
-            $this->subject->dumpAttendanceValues('email, interests')
+            $this->subject->dumpAttendanceValues('email, interests'),
         );
     }
 
@@ -297,7 +297,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             'nothing',
-            $this->subject->dumpAttendanceValues('interests ,email')
+            $this->subject->dumpAttendanceValues('interests ,email'),
         );
     }
 
@@ -308,7 +308,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             $this->translate('label_interests'),
-            $this->subject->dumpAttendanceValues('interests')
+            $this->subject->dumpAttendanceValues('interests'),
         );
     }
 
@@ -319,7 +319,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             $this->translate('label_interests'),
-            $this->subject->dumpAttendanceValues('interests, expectations')
+            $this->subject->dumpAttendanceValues('interests, expectations'),
         );
     }
 
@@ -330,7 +330,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             $this->translate('label_interests'),
-            $this->subject->dumpAttendanceValues('interests ,expectations')
+            $this->subject->dumpAttendanceValues('interests ,expectations'),
         );
     }
 
@@ -341,7 +341,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             "\nfoo\nbar",
-            $this->subject->dumpAttendanceValues('background_knowledge')
+            $this->subject->dumpAttendanceValues('background_knowledge'),
         );
     }
 
@@ -352,7 +352,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             "\nfoo\nbar",
-            $this->subject->dumpAttendanceValues('known_from')
+            $this->subject->dumpAttendanceValues('known_from'),
         );
     }
 
@@ -363,7 +363,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             'label_pid: 0',
-            $this->subject->dumpAttendanceValues('pid')
+            $this->subject->dumpAttendanceValues('pid'),
         );
     }
 
@@ -439,8 +439,8 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         new LegacyRegistration(
             $this->testingFramework->createRecord(
                 'tx_seminars_attendances',
-                ['seminar' => $this->seminarUid]
-            )
+                ['seminar' => $this->seminarUid],
+            ),
         );
     }
 
@@ -452,7 +452,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     public function hasExistingFrontEndUserWithExistingFrontEndUserReturnsTrue(): void
     {
         self::assertTrue(
-            $this->subject->hasExistingFrontEndUser()
+            $this->subject->hasExistingFrontEndUser(),
         );
     }
 
@@ -467,11 +467,11 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'fe_users',
             $userUid,
-            ['deleted' => 1]
+            ['deleted' => 1],
         );
 
         self::assertFalse(
-            $this->subject->hasExistingFrontEndUser()
+            $this->subject->hasExistingFrontEndUser(),
         );
     }
 
@@ -483,7 +483,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $this->subject->setFrontEndUserUid(0);
 
         self::assertFalse(
-            $this->subject->hasExistingFrontEndUser()
+            $this->subject->hasExistingFrontEndUser(),
         );
     }
 
@@ -496,7 +496,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getTotalPrice()
+            $this->subject->getTotalPrice(),
         );
     }
 
@@ -510,7 +510,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             '€ 42,42',
-            $this->subject->getTotalPrice()
+            $this->subject->getTotalPrice(),
         );
     }
 
@@ -520,7 +520,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     public function hasTotalPriceWithoutTotalPriceReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasTotalPrice()
+            $this->subject->hasTotalPrice(),
         );
     }
 
@@ -532,7 +532,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $this->subject->setTotalPrice('42.42');
 
         self::assertTrue(
-            $this->subject->hasTotalPrice()
+            $this->subject->hasTotalPrice(),
         );
     }
 
@@ -547,7 +547,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             '<ol><li>foo</li><li>bar</li></ol>',
-            $subject->getEnumeratedAttendeeNames(true)
+            $subject->getEnumeratedAttendeeNames(true),
         );
     }
 
@@ -560,7 +560,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $subject->getEnumeratedAttendeeNames(true)
+            $subject->getEnumeratedAttendeeNames(true),
         );
     }
 
@@ -573,7 +573,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             "1. foo\n2. bar",
-            $subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames(),
         );
     }
 
@@ -586,7 +586,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames(),
         );
     }
 
@@ -602,7 +602,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             '1. foo_user',
-            $subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames(),
         );
     }
 
@@ -618,7 +618,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             "1. foo_user\n2. foo",
-            $subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames(),
         );
     }
 }

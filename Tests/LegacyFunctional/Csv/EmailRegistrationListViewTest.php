@@ -59,9 +59,9 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                 'pid' => $pageUid,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ),
-            ]
+            ],
         );
 
         $this->subject = new EmailRegistrationListView();
@@ -92,12 +92,12 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -120,14 +120,14 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
-                    ['first_name' => $firstName, 'last_name' => $lastName]
+                    ['first_name' => $firstName, 'last_name' => $lastName],
                 ),
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             $firstName,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -150,14 +150,14 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
-                    ['first_name' => $firstName, 'last_name' => $lastName]
+                    ['first_name' => $firstName, 'last_name' => $lastName],
                 ),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $lastName,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -181,12 +181,12 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             $knownFrom,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -210,12 +210,12 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $notes,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -235,12 +235,12 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => true,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

@@ -63,11 +63,11 @@ final class EventTest extends UnitTestCase
     public function isEventDateForSingleRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         self::assertFalse(
-            $this->subject->isEventDate()
+            $this->subject->isEventDate(),
         );
     }
 
@@ -77,11 +77,11 @@ final class EventTest extends UnitTestCase
     public function isEventDateForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
 
         self::assertFalse(
-            $this->subject->isEventDate()
+            $this->subject->isEventDate(),
         );
     }
 
@@ -94,11 +94,11 @@ final class EventTest extends UnitTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => new Event(),
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->isEventDate()
+            $this->subject->isEventDate(),
         );
     }
 
@@ -111,11 +111,11 @@ final class EventTest extends UnitTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => null,
-            ]
+            ],
         );
 
         self::assertFalse(
-            $this->subject->isEventDate()
+            $this->subject->isEventDate(),
         );
     }
 
@@ -132,7 +132,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             'Superhero',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -145,7 +145,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             'Superhero',
-            $this->subject->getRawTitle()
+            $this->subject->getRawTitle(),
         );
     }
 
@@ -162,7 +162,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getRegistrationDeadlineAsUnixTimeStamp()
+            $this->subject->getRegistrationDeadlineAsUnixTimeStamp(),
         );
     }
 
@@ -175,7 +175,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getRegistrationDeadlineAsUnixTimeStamp()
+            $this->subject->getRegistrationDeadlineAsUnixTimeStamp(),
         );
     }
 
@@ -187,7 +187,7 @@ final class EventTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasRegistrationDeadline()
+            $this->subject->hasRegistrationDeadline(),
         );
     }
 
@@ -199,7 +199,7 @@ final class EventTest extends UnitTestCase
         $this->subject->setData(['deadline_registration' => 42]);
 
         self::assertTrue(
-            $this->subject->hasRegistrationDeadline()
+            $this->subject->hasRegistrationDeadline(),
         );
     }
 
@@ -216,7 +216,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getDetailsPage()
+            $this->subject->getDetailsPage(),
         );
     }
 
@@ -229,7 +229,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             'https://example.com',
-            $this->subject->getDetailsPage()
+            $this->subject->getDetailsPage(),
         );
     }
 
@@ -241,7 +241,7 @@ final class EventTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasDetailsPage()
+            $this->subject->hasDetailsPage(),
         );
     }
 
@@ -253,7 +253,7 @@ final class EventTest extends UnitTestCase
         $this->subject->setData(['details_page' => 'https://example.com']);
 
         self::assertTrue(
-            $this->subject->hasDetailsPage()
+            $this->subject->hasDetailsPage(),
         );
     }
 
@@ -270,7 +270,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -283,12 +283,12 @@ final class EventTest extends UnitTestCase
             [
                 'details_page' => '5',
                 'categories' => new Collection(),
-            ]
+            ],
         );
 
         self::assertSame(
             '5',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -301,12 +301,12 @@ final class EventTest extends UnitTestCase
             [
                 'details_page' => 'www.example.com',
                 'categories' => new Collection(),
-            ]
+            ],
         );
 
         self::assertSame(
             'www.example.com',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -321,12 +321,12 @@ final class EventTest extends UnitTestCase
             [
                 'event_type' => $eventType,
                 'categories' => new Collection(),
-            ]
+            ],
         );
 
         self::assertSame(
             '',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -341,12 +341,12 @@ final class EventTest extends UnitTestCase
             [
                 'event_type' => $eventType,
                 'categories' => new Collection(),
-            ]
+            ],
         );
 
         self::assertSame(
             '42',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -363,7 +363,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -380,7 +380,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             '42',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -400,7 +400,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             '42',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -411,13 +411,14 @@ final class EventTest extends UnitTestCase
     {
         $subject = $this->createPartialMock(
             Event::class,
-            ['getCombinedSingleViewPage']
+            ['getCombinedSingleViewPage'],
         );
-        $subject->expects(self::atLeastOnce())
+        $subject
+            ->expects(self::atLeastOnce())
             ->method('getCombinedSingleViewPage')->willReturn('');
 
         self::assertFalse(
-            $subject->hasCombinedSingleViewPage()
+            $subject->hasCombinedSingleViewPage(),
         );
     }
 
@@ -428,13 +429,14 @@ final class EventTest extends UnitTestCase
     {
         $subject = $this->createPartialMock(
             Event::class,
-            ['getCombinedSingleViewPage']
+            ['getCombinedSingleViewPage'],
         );
-        $subject->expects(self::atLeastOnce())
+        $subject
+            ->expects(self::atLeastOnce())
             ->method('getCombinedSingleViewPage')->willReturn('42');
 
         self::assertTrue(
-            $subject->hasCombinedSingleViewPage()
+            $subject->hasCombinedSingleViewPage(),
         );
     }
 
@@ -451,12 +453,12 @@ final class EventTest extends UnitTestCase
                 'details_page' => '5',
                 'event_type' => $eventType,
                 'categories' => new Collection(),
-            ]
+            ],
         );
 
         self::assertSame(
             '5',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -476,12 +478,12 @@ final class EventTest extends UnitTestCase
             [
                 'event_type' => $eventType,
                 'categories' => $categories,
-            ]
+            ],
         );
 
         self::assertSame(
             '42',
-            $this->subject->getCombinedSingleViewPage()
+            $this->subject->getCombinedSingleViewPage(),
         );
     }
 
@@ -498,7 +500,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getMinimumAttendees()
+            $this->subject->getMinimumAttendees(),
         );
     }
 
@@ -511,7 +513,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getMinimumAttendees()
+            $this->subject->getMinimumAttendees(),
         );
     }
 
@@ -528,7 +530,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getMaximumAttendees()
+            $this->subject->getMaximumAttendees(),
         );
     }
 
@@ -541,7 +543,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getMaximumAttendees()
+            $this->subject->getMaximumAttendees(),
         );
     }
 
@@ -556,7 +558,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             EventInterface::STATUS_PLANNED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -566,12 +568,12 @@ final class EventTest extends UnitTestCase
     public function getStatusWithStatusPlannedReturnsStatusPlanned(): void
     {
         $this->subject->setData(
-            ['cancelled' => EventInterface::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED],
         );
 
         self::assertSame(
             EventInterface::STATUS_PLANNED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -581,12 +583,12 @@ final class EventTest extends UnitTestCase
     public function getStatusWithStatusCanceledReturnStatusCanceled(): void
     {
         $this->subject->setData(
-            ['cancelled' => EventInterface::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED],
         );
 
         self::assertSame(
             EventInterface::STATUS_CANCELED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -596,12 +598,12 @@ final class EventTest extends UnitTestCase
     public function getStatusWithStatusConfirmedReturnsStatusConfirmed(): void
     {
         $this->subject->setData(
-            ['cancelled' => EventInterface::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED],
         );
 
         self::assertSame(
             EventInterface::STATUS_CONFIRMED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -614,7 +616,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             EventInterface::STATUS_PLANNED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -627,7 +629,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             EventInterface::STATUS_CANCELED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -640,7 +642,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             EventInterface::STATUS_CONFIRMED,
-            $this->subject->getStatus()
+            $this->subject->getStatus(),
         );
     }
 
@@ -817,7 +819,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getOfflineRegistrations()
+            $this->subject->getOfflineRegistrations(),
         );
     }
 
@@ -830,7 +832,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             2,
-            $this->subject->getOfflineRegistrations()
+            $this->subject->getOfflineRegistrations(),
         );
     }
 
@@ -847,7 +849,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             $registrations,
-            $this->subject->getRegistrations()
+            $this->subject->getRegistrations(),
         );
     }
 
@@ -862,7 +864,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             $registrations,
-            $this->subject->getRegistrations()
+            $this->subject->getRegistrations(),
         );
     }
 
@@ -928,15 +930,16 @@ final class EventTest extends UnitTestCase
     {
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegularRegistrations']
+            ['getRegularRegistrations'],
         );
         $event->setData([]);
-        $event->method('getRegularRegistrations')
+        $event
+            ->method('getRegularRegistrations')
             ->willReturn(new Collection());
 
         self::assertSame(
             0,
-            $event->getRegisteredSeats()
+            $event->getRegisteredSeats(),
         );
     }
 
@@ -947,15 +950,16 @@ final class EventTest extends UnitTestCase
     {
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegularRegistrations']
+            ['getRegularRegistrations'],
         );
         $event->setData(['offline_attendees' => 2]);
-        $event->method('getRegularRegistrations')
+        $event
+            ->method('getRegularRegistrations')
             ->willReturn(new Collection());
 
         self::assertSame(
             2,
-            $event->getRegisteredSeats()
+            $event->getRegisteredSeats(),
         );
     }
 
@@ -970,14 +974,15 @@ final class EventTest extends UnitTestCase
     {
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegisteredSeats']
+            ['getRegisteredSeats'],
         );
         $event->setData(['attendees_min' => 0]);
-        $event->method('getRegisteredSeats')
+        $event
+            ->method('getRegisteredSeats')
             ->willReturn(0);
 
         self::assertTrue(
-            $event->hasEnoughRegistrations()
+            $event->hasEnoughRegistrations(),
         );
     }
 
@@ -988,14 +993,15 @@ final class EventTest extends UnitTestCase
     {
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegisteredSeats']
+            ['getRegisteredSeats'],
         );
         $event->setData(['attendees_min' => 2]);
-        $event->method('getRegisteredSeats')
+        $event
+            ->method('getRegisteredSeats')
             ->willReturn(1);
 
         self::assertFalse(
-            $event->hasEnoughRegistrations()
+            $event->hasEnoughRegistrations(),
         );
     }
 
@@ -1006,14 +1012,15 @@ final class EventTest extends UnitTestCase
     {
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegisteredSeats']
+            ['getRegisteredSeats'],
         );
         $event->setData(['attendees_min' => 2]);
-        $event->method('getRegisteredSeats')
+        $event
+            ->method('getRegisteredSeats')
             ->willReturn(2);
 
         self::assertTrue(
-            $event->hasEnoughRegistrations()
+            $event->hasEnoughRegistrations(),
         );
     }
 
@@ -1024,14 +1031,15 @@ final class EventTest extends UnitTestCase
     {
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegisteredSeats']
+            ['getRegisteredSeats'],
         );
         $event->setData(['attendees_min' => 1]);
-        $event->method('getRegisteredSeats')
+        $event
+            ->method('getRegisteredSeats')
             ->willReturn(2);
 
         self::assertTrue(
-            $event->hasEnoughRegistrations()
+            $event->hasEnoughRegistrations(),
         );
     }
 
@@ -1045,7 +1053,7 @@ final class EventTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->shouldAutomaticallyConfirmOrCancel()
+            $this->subject->shouldAutomaticallyConfirmOrCancel(),
         );
     }
 
@@ -1055,11 +1063,11 @@ final class EventTest extends UnitTestCase
     public function shouldAutomaticallyConfirmOrCancelReturnsTrueValueFromDatabase(): void
     {
         $this->subject->setData(
-            ['automatic_confirmation_cancelation' => 1]
+            ['automatic_confirmation_cancelation' => 1],
         );
 
         self::assertTrue(
-            $this->subject->shouldAutomaticallyConfirmOrCancel()
+            $this->subject->shouldAutomaticallyConfirmOrCancel(),
         );
     }
 
@@ -1144,7 +1152,7 @@ final class EventTest extends UnitTestCase
                 'registered_themselves' => true,
                 'additional_persons' => new Collection(),
                 'crdate' => 2,
-            ]
+            ],
         );
         $registrations = new Collection();
         $registrations->add($registration);
@@ -1153,7 +1161,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             [$firstName . ' ' . $lastName],
-            $this->subject->getAttendeeNamesAfterLastDigest()
+            $this->subject->getAttendeeNamesAfterLastDigest(),
         );
     }
 
@@ -1175,7 +1183,7 @@ final class EventTest extends UnitTestCase
                 'registered_themselves' => true,
                 'additional_persons' => new Collection(),
                 'crdate' => 1,
-            ]
+            ],
         );
         $registrations = new Collection();
         $registrations->add($registration);
@@ -1196,7 +1204,7 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp()
+            $this->subject->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp(),
         );
     }
 

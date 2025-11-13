@@ -225,7 +225,7 @@ final class PriceFinderTest extends UnitTestCase
             Price::PRICE_SPECIAL_EARLY_BIRD => new Price(
                 $specialEarlyBirdPriceAmount,
                 'price.specialEarlyBird',
-                Price::PRICE_SPECIAL_EARLY_BIRD
+                Price::PRICE_SPECIAL_EARLY_BIRD,
             ),
         ];
 
@@ -278,7 +278,7 @@ final class PriceFinderTest extends UnitTestCase
             Price::PRICE_SPECIAL_EARLY_BIRD => new Price(
                 $specialEarlyBirdPriceAmount,
                 'price.specialEarlyBird',
-                Price::PRICE_SPECIAL_EARLY_BIRD
+                Price::PRICE_SPECIAL_EARLY_BIRD,
             ),
         ];
 
@@ -308,7 +308,7 @@ final class PriceFinderTest extends UnitTestCase
             Price::PRICE_SPECIAL_EARLY_BIRD => new Price(
                 $specialEarlyBirdPriceAmount,
                 'price.specialEarlyBird',
-                Price::PRICE_SPECIAL_EARLY_BIRD
+                Price::PRICE_SPECIAL_EARLY_BIRD,
             ),
         ];
 

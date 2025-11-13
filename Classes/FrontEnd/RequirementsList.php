@@ -35,7 +35,7 @@ class RequirementsList extends AbstractView
         if (!$this->event instanceof LegacyEvent) {
             throw new \BadMethodCallException(
                 'No event was set, please set an event before calling render.',
-                1333293250
+                1333293250,
             );
         }
 
@@ -56,12 +56,12 @@ class RequirementsList extends AbstractView
             $singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);
             $this->setMarker(
                 'requirement_url',
-                \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5)
+                \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5),
             );
 
             $this->setMarker(
                 'requirement_title',
-                \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5)
+                \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5),
             );
             $output .= $this->getSubpart('SINGLE_REQUIREMENT');
         }

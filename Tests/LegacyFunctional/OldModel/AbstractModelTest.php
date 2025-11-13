@@ -52,14 +52,14 @@ final class AbstractModelTest extends FunctionalTestCase
                 'root' => 1,
                 'clear' => 3,
                 'include_static_file' => 'EXT:seminars/Configuration/TypoScript/',
-            ]
+            ],
         );
         $this->subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_test',
             [
                 'pid' => $systemFolderUid,
                 'title' => 'Test',
-            ]
+            ],
         );
         $this->subject = new TestingModel($this->subjectUid);
     }
@@ -82,7 +82,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         self::assertEquals(
             $this->subjectUid,
-            $this->subject->getUid()
+            $this->subject->getUid(),
         );
     }
 
@@ -93,10 +93,10 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         self::assertNotEquals(
             0,
-            $this->subjectUid
+            $this->subjectUid,
         );
         self::assertTrue(
-            $this->subject->hasUid()
+            $this->subject->hasUid(),
         );
     }
 
@@ -109,10 +109,10 @@ final class AbstractModelTest extends FunctionalTestCase
 
         self::assertEquals(
             0,
-            $virginFixture->getUid()
+            $virginFixture->getUid(),
         );
         self::assertFalse(
-            $virginFixture->hasUid()
+            $virginFixture->hasUid(),
         );
     }
 
@@ -123,7 +123,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         self::assertEquals(
             'Test',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -137,12 +137,12 @@ final class AbstractModelTest extends FunctionalTestCase
     public function setAndGetRecordBooleanTest(): void
     {
         self::assertFalse(
-            $this->subject->getBooleanTest()
+            $this->subject->getBooleanTest(),
         );
 
         $this->subject->setBooleanTest(true);
         self::assertTrue(
-            $this->subject->getBooleanTest()
+            $this->subject->getBooleanTest(),
         );
     }
 
@@ -156,7 +156,7 @@ final class AbstractModelTest extends FunctionalTestCase
 
         self::assertEquals(
             $title,
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -170,13 +170,13 @@ final class AbstractModelTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_test',
             $this->subjectUid,
-            ['pid' => 42]
+            ['pid' => 42],
         );
         $subject = new TestingModel($this->subjectUid);
 
         self::assertEquals(
             42,
-            $subject->getPageUid()
+            $subject->getPageUid(),
         );
     }
 
@@ -188,13 +188,13 @@ final class AbstractModelTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_test',
             $this->subjectUid,
-            ['pid' => 0]
+            ['pid' => 0],
         );
         $subject = new TestingModel($this->subjectUid);
 
         self::assertEquals(
             0,
-            $subject->getPageUid()
+            $subject->getPageUid(),
         );
     }
 }

@@ -31,7 +31,7 @@ final class LegacyEventTest extends UnitTestCase
         \assert(\is_int($end));
 
         $this->subject = TestingLegacyEvent::fromData(
-            ['title' => 'A nice event', 'begin_date' => $begin, 'end_date' => $end]
+            ['title' => 'A nice event', 'begin_date' => $begin, 'end_date' => $end],
         );
     }
 

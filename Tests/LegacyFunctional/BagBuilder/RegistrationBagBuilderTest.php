@@ -74,9 +74,9 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
                 'title' => 'Title 2',
                 'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -84,23 +84,23 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
                 'title' => 'Title 1',
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
-            ]
+            ],
         );
 
         $registrationBag = $this->subject->build();
         self::assertEquals(
             2,
-            $registrationBag->count()
+            $registrationBag->count(),
         );
 
         self::assertEquals(
             'Title 1',
-            $registrationBag->current()->getTitle()
+            $registrationBag->current()->getTitle(),
         );
         $registrationBag->next();
         self::assertEquals(
             'Title 2',
-            $registrationBag->current()->getTitle()
+            $registrationBag->current()->getTitle(),
         );
     }
 
@@ -110,21 +110,21 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     public function buildWithoutLimitReturnsBagWithAllRegistrations(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Attendance 1', 'seminar' => $eventUid1]
+            ['title' => 'Attendance 1', 'seminar' => $eventUid1],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Attendance 2', 'seminar' => $eventUid1]
+            ['title' => 'Attendance 2', 'seminar' => $eventUid1],
         );
         $registrationBag = $this->subject->build();
 
         self::assertEquals(
             2,
-            $registrationBag->count()
+            $registrationBag->count(),
         );
     }
 
@@ -138,18 +138,18 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     public function limitToEventWithValidEventUidFindsRegistrationOfEvent(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Attendance 1', 'seminar' => $eventUid1]
+            ['title' => 'Attendance 1', 'seminar' => $eventUid1],
         );
         $this->subject->limitToEvent($eventUid1);
         $registrationBag = $this->subject->build();
 
         self::assertEquals(
             'Attendance 1',
-            $registrationBag->current()->getTitle()
+            $registrationBag->current()->getTitle(),
         );
     }
 
@@ -159,20 +159,20 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     public function limitToEventWithValidEventUidIgnoresRegistrationOfOtherEvent(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Attendance 2', 'seminar' => $eventUid2]
+            ['title' => 'Attendance 2', 'seminar' => $eventUid2],
         );
         $this->subject->limitToEvent($eventUid1);
         $registrationBag = $this->subject->build();
 
         self::assertTrue(
-            $registrationBag->isEmpty()
+            $registrationBag->isEmpty(),
         );
     }
 
@@ -187,7 +187,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => Registration::STATUS_WAITING_LIST]
+            ['registration_queue' => Registration::STATUS_WAITING_LIST],
         );
         $this->subject->limitToOnQueue();
         /** @var LegacyRegistration $currentModel */
@@ -203,7 +203,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => Registration::STATUS_REGULAR]
+            ['registration_queue' => Registration::STATUS_REGULAR],
         );
         $this->subject->limitToOnQueue();
         $registrationBag = $this->subject->build();
@@ -218,7 +218,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => Registration::STATUS_NONBINDING_RESERVATION]
+            ['registration_queue' => Registration::STATUS_NONBINDING_RESERVATION],
         );
         $this->subject->limitToOnQueue();
         $registrationBag = $this->subject->build();
@@ -237,7 +237,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => Registration::STATUS_REGULAR]
+            ['registration_queue' => Registration::STATUS_REGULAR],
         );
         $this->subject->limitToRegular();
         /** @var LegacyRegistration $currentModel */
@@ -253,7 +253,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => Registration::STATUS_WAITING_LIST]
+            ['registration_queue' => Registration::STATUS_WAITING_LIST],
         );
         $this->subject->limitToRegular();
         $registrationBag = $this->subject->build();
@@ -268,7 +268,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => Registration::STATUS_NONBINDING_RESERVATION]
+            ['registration_queue' => Registration::STATUS_NONBINDING_RESERVATION],
         );
         $this->subject->limitToRegular();
         $registrationBag = $this->subject->build();
@@ -287,7 +287,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => 0]
+            ['registration_queue' => 0],
         );
         $this->subject->limitToOnQueue();
         $this->subject->removeQueueLimitation();
@@ -304,7 +304,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => 1]
+            ['registration_queue' => 1],
         );
         $this->subject->limitToRegular();
         $this->subject->removeQueueLimitation();
@@ -325,7 +325,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seats' => 2]
+            ['seats' => 2],
         );
         $this->subject->limitToSeatsAtMost(2);
         /** @var LegacyRegistration $currentModel */
@@ -341,7 +341,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seats' => 1]
+            ['seats' => 1],
         );
         $this->subject->limitToSeatsAtMost(2);
         /** @var LegacyRegistration $currentModel */
@@ -357,13 +357,13 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seats' => 2]
+            ['seats' => 2],
         );
         $this->subject->limitToSeatsAtMost(1);
         $registrationBag = $this->subject->build();
 
         self::assertTrue(
-            $registrationBag->isEmpty()
+            $registrationBag->isEmpty(),
         );
     }
 
@@ -374,14 +374,14 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seats' => 2]
+            ['seats' => 2],
         );
         $this->subject->limitToSeatsAtMost(1);
         $this->subject->limitToSeatsAtMost();
         $registrationBag = $this->subject->build();
 
         self::assertFalse(
-            $registrationBag->isEmpty()
+            $registrationBag->isEmpty(),
         );
     }
 
@@ -396,11 +396,11 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'user' => $feUserUid]
+            ['seminar' => $eventUid, 'user' => $feUserUid],
         );
 
         $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
@@ -409,7 +409,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             $registrationUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -419,15 +419,15 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     public function limitToAttendeeWithUserFindsRegistrationsWithUserAsAdditionalRegisteredPerson(): void
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'additional_persons' => 1]
+            ['seminar' => $eventUid, 'additional_persons' => 1],
         );
         $feUserUid = $this->testingFramework->createFrontEndUser(
             '',
-            ['tx_seminars_registration' => $registrationUid]
+            ['tx_seminars_registration' => $registrationUid],
         );
 
         $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
@@ -436,7 +436,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             $registrationUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -453,7 +453,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -468,7 +468,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'user' => $feUserUid2]
+            ['seminar' => $eventUid, 'user' => $feUserUid2],
         );
 
         $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
@@ -476,7 +476,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -491,7 +491,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'user' => $feUserUid2]
+            ['seminar' => $eventUid, 'user' => $feUserUid2],
         );
 
         $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
@@ -501,7 +501,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             $registrationUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -514,34 +514,34 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'test title 1']
+            ['title' => 'test title 1'],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'test title 2']
+            ['title' => 'test title 2'],
         );
         $registrationUid1 = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid1]
+            ['seminar' => $eventUid1],
         );
         $registrationUid2 = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid2]
+            ['seminar' => $eventUid2],
         );
 
         $this->subject->setOrderByEventColumn(
-            'tx_seminars_seminars.title ASC'
+            'tx_seminars_seminars.title ASC',
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             $bag->current()->getUid(),
-            $registrationUid1
+            $registrationUid1,
         );
         $bag->next();
         self::assertEquals(
             $bag->current()->getUid(),
-            $registrationUid2
+            $registrationUid2,
         );
     }
 
@@ -552,34 +552,34 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'test title 1']
+            ['title' => 'test title 1'],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'test title 2']
+            ['title' => 'test title 2'],
         );
         $registrationUid1 = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid1]
+            ['seminar' => $eventUid1],
         );
         $registrationUid2 = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid2]
+            ['seminar' => $eventUid2],
         );
 
         $this->subject->setOrderByEventColumn(
-            'tx_seminars_seminars.title DESC'
+            'tx_seminars_seminars.title DESC',
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             $bag->current()->getUid(),
-            $registrationUid2
+            $registrationUid2,
         );
         $bag->next();
         self::assertEquals(
             $bag->current()->getUid(),
-            $registrationUid1
+            $registrationUid1,
         );
     }
 
@@ -594,13 +594,13 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['user' => $this->testingFramework->createFrontEndUser()]
+            ['user' => $this->testingFramework->createFrontEndUser()],
         );
         $this->subject->limitToExistingUsers();
         $bag = $this->subject->build();
 
         self::assertFalse(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -614,17 +614,17 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'fe_users',
             $feUserUid,
-            ['deleted' => 1]
+            ['deleted' => 1],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['user' => $feUserUid]
+            ['user' => $feUserUid],
         );
         $this->subject->limitToExistingUsers();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 }

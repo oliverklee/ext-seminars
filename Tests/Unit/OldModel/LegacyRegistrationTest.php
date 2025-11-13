@@ -372,7 +372,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         self::assertSame(
             (string)$this->subject->getUid(),
-            $this->subject->getRegistrationData('uid')
+            $this->subject->getRegistrationData('uid'),
         );
     }
 
@@ -385,7 +385,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertStringNotContainsString(
             "\r\n",
-            $subject->getRegistrationData('notes')
+            $subject->getRegistrationData('notes'),
         );
     }
 
@@ -398,7 +398,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             "foo\nbar",
-            $subject->getRegistrationData('notes')
+            $subject->getRegistrationData('notes'),
         );
     }
 
@@ -411,7 +411,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             "1. foo\n2. bar",
-            $subject->getRegistrationData('attendees_names')
+            $subject->getRegistrationData('attendees_names'),
         );
     }
 
@@ -424,7 +424,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         self::assertSame(
             1,
-            $this->subject->getSeats()
+            $this->subject->getSeats(),
         );
     }
 
@@ -437,7 +437,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             1,
-            $this->subject->getSeats()
+            $this->subject->getSeats(),
         );
     }
 
@@ -450,7 +450,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getSeats()
+            $this->subject->getSeats(),
         );
     }
 
@@ -460,7 +460,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     public function hasSeatsWithoutSeatsReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasSeats()
+            $this->subject->hasSeats(),
         );
     }
 
@@ -472,7 +472,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $this->subject->setSeats(42);
 
         self::assertTrue(
-            $this->subject->hasSeats()
+            $this->subject->hasSeats(),
         );
     }
 
@@ -485,7 +485,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getAttendeesNames()
+            $this->subject->getAttendeesNames(),
         );
     }
 
@@ -498,7 +498,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             'John Doe',
-            $this->subject->getAttendeesNames()
+            $this->subject->getAttendeesNames(),
         );
     }
 
@@ -508,7 +508,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     public function hasAttendeesNamesWithoutAttendeesNamesReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasAttendeesNames()
+            $this->subject->hasAttendeesNames(),
         );
     }
 
@@ -520,7 +520,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $this->subject->setAttendeesNames('John Doe');
 
         self::assertTrue(
-            $this->subject->hasAttendeesNames()
+            $this->subject->hasAttendeesNames(),
         );
     }
 
@@ -533,7 +533,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfKids()
+            $this->subject->getNumberOfKids(),
         );
     }
 
@@ -546,7 +546,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getNumberOfKids()
+            $this->subject->getNumberOfKids(),
         );
     }
 
@@ -559,7 +559,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getNumberOfKids()
+            $this->subject->getNumberOfKids(),
         );
     }
 
@@ -569,7 +569,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     public function hasKidsWithoutKidsReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasKids()
+            $this->subject->hasKids(),
         );
     }
 
@@ -581,7 +581,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $this->subject->setNumberOfKids(42);
 
         self::assertTrue(
-            $this->subject->hasKids()
+            $this->subject->hasKids(),
         );
     }
 
@@ -594,7 +594,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getPrice()
+            $this->subject->getPrice(),
         );
     }
 
@@ -607,7 +607,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             'Regular price: 42.42',
-            $this->subject->getPrice()
+            $this->subject->getPrice(),
         );
     }
 
@@ -617,7 +617,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     public function hasPriceWithoutPriceReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasPrice()
+            $this->subject->hasPrice(),
         );
     }
 
@@ -629,7 +629,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $this->subject->setPrice('Regular price: 42.42');
 
         self::assertTrue(
-            $this->subject->hasPrice()
+            $this->subject->hasPrice(),
         );
     }
 
@@ -642,7 +642,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getMethodOfPaymentUid()
+            $this->subject->getMethodOfPaymentUid(),
         );
     }
 
@@ -655,7 +655,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getMethodOfPaymentUid()
+            $this->subject->getMethodOfPaymentUid(),
         );
     }
 
@@ -668,7 +668,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getMethodOfPaymentUid()
+            $this->subject->getMethodOfPaymentUid(),
         );
     }
 
@@ -678,7 +678,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     public function hasMethodOfPaymentWithoutMethodOfPaymentReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasMethodOfPayment()
+            $this->subject->hasMethodOfPayment(),
         );
     }
 
@@ -690,7 +690,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $this->subject->setMethodOfPaymentUid(42);
 
         self::assertTrue(
-            $this->subject->hasMethodOfPayment()
+            $this->subject->hasMethodOfPayment(),
         );
     }
 
@@ -706,7 +706,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             $food,
-            $subject->getFood()
+            $subject->getFood(),
         );
     }
 
@@ -718,7 +718,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $subject = LegacyRegistration::fromData(['food' => '']);
 
         self::assertFalse(
-            $subject->hasFood()
+            $subject->hasFood(),
         );
     }
 
@@ -730,7 +730,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $subject = LegacyRegistration::fromData(['food' => 'two donuts']);
 
         self::assertTrue(
-            $subject->hasFood()
+            $subject->hasFood(),
         );
     }
 
@@ -747,7 +747,7 @@ final class LegacyRegistrationTest extends UnitTestCase
 
         self::assertSame(
             $accommodation,
-            $subject->getAccommodation()
+            $subject->getAccommodation(),
         );
     }
 
@@ -759,7 +759,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $subject = LegacyRegistration::fromData(['accommodation' => '']);
 
         self::assertFalse(
-            $subject->hasAccommodation()
+            $subject->hasAccommodation(),
         );
     }
 
@@ -771,7 +771,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $subject = LegacyRegistration::fromData(['accommodation' => 'a youth hostel']);
 
         self::assertTrue(
-            $subject->hasAccommodation()
+            $subject->hasAccommodation(),
         );
     }
 
@@ -797,7 +797,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $subject = LegacyRegistration::fromData(['interests' => '']);
 
         self::assertFalse(
-            $subject->hasInterests()
+            $subject->hasInterests(),
         );
     }
 
@@ -809,7 +809,7 @@ final class LegacyRegistrationTest extends UnitTestCase
         $subject = LegacyRegistration::fromData(['interests' => 'meeting people']);
 
         self::assertTrue(
-            $subject->hasInterests()
+            $subject->hasInterests(),
         );
     }
 }

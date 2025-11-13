@@ -105,7 +105,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 $this->eventStatisticsCalculatorMock,
                 $this->permissionsMock,
                 $this->pageRendererMock,
-            ]
+            ],
         );
         $this->subject = $subject;
 
@@ -189,7 +189,8 @@ final class RegistrationControllerTest extends UnitTestCase
         $eventUid = 5;
         $event = $this->createMock(EventTopic::class);
         $event->method('getUid')->willReturn($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $result = $this->subject->showForEventAction($eventUid);
@@ -205,12 +206,15 @@ final class RegistrationControllerTest extends UnitTestCase
         $eventUid = 5;
         $event = $this->createMock(EventTopic::class);
         $event->method('getUid')->willReturn($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->registrationRepositoryMock->expects(self::never())->method('findRegularRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::never())->method('findRegularRegistrationsByEvent')
             ->with(self::anything());
-        $this->registrationRepositoryMock->expects(self::never())->method('findWaitingListRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::never())->method('findWaitingListRegistrationsByEvent')
             ->with(self::anything());
 
         $this->subject->showForEventAction($eventUid);
@@ -223,7 +227,8 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')->with($event);
@@ -238,16 +243,18 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->viewMock->expects(self::exactly(5))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
                 ['pageUid', self::anything()],
                 ['event', self::anything()],
                 ['regularRegistrations', self::anything()],
-                ['waitingListRegistrations', self::anything()]
+                ['waitingListRegistrations', self::anything()],
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -262,16 +269,18 @@ final class RegistrationControllerTest extends UnitTestCase
         $_GET['id'] = (string)$pageUid;
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->viewMock->expects(self::exactly(5))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', $pageUid],
                 ['event', self::anything()],
                 ['regularRegistrations', self::anything()],
-                ['waitingListRegistrations', self::anything()]
+                ['waitingListRegistrations', self::anything()],
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -284,16 +293,18 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->viewMock->expects(self::exactly(5))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['event', $event],
                 ['regularRegistrations', self::anything()],
-                ['waitingListRegistrations', self::anything()]
+                ['waitingListRegistrations', self::anything()],
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -305,7 +316,8 @@ final class RegistrationControllerTest extends UnitTestCase
     public function showForEventActionForEventNotFoundThrowsException(): void
     {
         $eventUid = 5;
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn(null);
 
         $this->expectException(\RuntimeException::class);
@@ -322,20 +334,23 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $regularRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('findRegularRegistrationsByEvent')
             ->with($eventUid)->willReturn($regularRegistrations);
 
-        $this->viewMock->expects(self::exactly(5))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['event', self::anything()],
                 ['regularRegistrations', $regularRegistrations],
-                ['waitingListRegistrations', self::anything()]
+                ['waitingListRegistrations', self::anything()],
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -348,13 +363,16 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $regularRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('findRegularRegistrationsByEvent')
             ->with($eventUid)->willReturn($regularRegistrations);
-        $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
+        $this->registrationRepositoryMock
+            ->expects(self::exactly(2))->method('enrichWithRawData')
             ->withConsecutive([$regularRegistrations], [self::anything()]);
 
         $this->subject->showForEventAction($eventUid);
@@ -367,21 +385,24 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(true);
         $waitingListRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('findWaitingListRegistrationsByEvent')
             ->with($eventUid)->willReturn($waitingListRegistrations);
 
-        $this->viewMock->expects(self::exactly(5))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['event', self::anything()],
                 ['regularRegistrations', self::anything()],
-                ['waitingListRegistrations', $waitingListRegistrations]
+                ['waitingListRegistrations', $waitingListRegistrations],
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -394,21 +415,24 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(false);
         $waitingListRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('findWaitingListRegistrationsByEvent')
             ->with($eventUid)->willReturn($waitingListRegistrations);
 
-        $this->viewMock->expects(self::exactly(5))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['event', self::anything()],
                 ['regularRegistrations', self::anything()],
-                ['waitingListRegistrations', $waitingListRegistrations]
+                ['waitingListRegistrations', $waitingListRegistrations],
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -421,14 +445,17 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(true);
         $waitingListRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('findWaitingListRegistrationsByEvent')
             ->with($eventUid)->willReturn($waitingListRegistrations);
-        $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
+        $this->registrationRepositoryMock
+            ->expects(self::exactly(2))->method('enrichWithRawData')
             ->withConsecutive([self::anything()], [$waitingListRegistrations]);
 
         $this->subject->showForEventAction($eventUid);
@@ -441,14 +468,17 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(false);
         $waitingListRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('findWaitingListRegistrationsByEvent')
             ->with($eventUid)->willReturn($waitingListRegistrations);
-        $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
+        $this->registrationRepositoryMock
+            ->expects(self::exactly(2))->method('enrichWithRawData')
             ->withConsecutive([self::anything()], [$waitingListRegistrations]);
 
         $this->subject->showForEventAction($eventUid);
@@ -461,10 +491,12 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->eventRepositoryMock->expects(self::once())
+        $this->eventRepositoryMock
+            ->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+        $this->pageRendererMock
+            ->expects(self::once())->method('loadRequireJsModule')
             ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $this->subject->showForEventAction($eventUid);
@@ -507,7 +539,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         self::assertSame(
             'text/csv; header=present; charset=utf-8',
-            $result->getHeaders()['Content-Type'][0]
+            $result->getHeaders()['Content-Type'][0],
         );
     }
 
@@ -520,7 +552,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         self::assertSame(
             'attachment; filename=registrations.csv',
-            $result->getHeaders()['Content-Disposition'][0]
+            $result->getHeaders()['Content-Disposition'][0],
         );
     }
 
@@ -561,7 +593,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         self::assertSame(
             'text/csv; header=present; charset=utf-8',
-            $result->getHeaders()['Content-Type'][0]
+            $result->getHeaders()['Content-Type'][0],
         );
     }
 
@@ -574,7 +606,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         self::assertSame(
             'attachment; filename=registrations.csv',
-            $result->getHeaders()['Content-Disposition'][0]
+            $result->getHeaders()['Content-Disposition'][0],
         );
     }
 
@@ -586,7 +618,8 @@ final class RegistrationControllerTest extends UnitTestCase
         $registrationUid = 15;
         $this->stubRedirect();
 
-        $this->registrationRepositoryMock->expects(self::once())->method('deleteViaDataHandler')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('deleteViaDataHandler')
             ->with($registrationUid);
 
         $this->subject->deleteAction($registrationUid, 1);
@@ -600,9 +633,10 @@ final class RegistrationControllerTest extends UnitTestCase
         $localizedMessage = 'Registration deleted!';
         $this->stubRedirect();
 
-        $this->languageServiceMock->expects(self::once())->method('sL')
+        $this->languageServiceMock
+            ->expects(self::once())->method('sL')
             ->with(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.registrationDeleted'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.registrationDeleted',
             )
             ->willReturn($localizedMessage);
         $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);

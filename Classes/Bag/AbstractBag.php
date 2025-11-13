@@ -169,7 +169,7 @@ abstract class AbstractBag implements \Iterator
         if (!\in_array($showHidden, [-1, 0, 1], true)) {
             throw new \InvalidArgumentException(
                 '$showHidden may only be -1, 0 or 1, but actually is ' . $showHidden,
-                1331319963
+                1331319963,
             );
         }
 
@@ -207,7 +207,8 @@ abstract class AbstractBag implements \Iterator
         $sql .= $this->orderBy !== '' ? ' ORDER BY ' . $this->orderBy : '';
         $sql .= $this->limit !== '' ? ' LIMIT ' . $this->limit : '';
 
-        $this->queryResult = $this->getConnectionPool()->getConnectionForTable($this->allTableNames)
+        $this->queryResult = $this
+            ->getConnectionPool()->getConnectionForTable($this->allTableNames)
             ->query($sql)->fetchAll();
 
         $this->queryHasBeenExecuted = true;

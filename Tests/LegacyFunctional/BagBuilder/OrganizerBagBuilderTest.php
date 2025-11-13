@@ -62,16 +62,16 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
     public function limitToEventFindsOneOrganizerOfEvent(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 1]
+            ['organizers' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid,
-            $organizerUid
+            $organizerUid,
         );
 
         $this->subject->limitToEvent($eventUid);
@@ -79,7 +79,7 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->countWithoutLimit()
+            $bag->countWithoutLimit(),
         );
     }
 
@@ -90,23 +90,23 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 2]
+            ['organizers' => 2],
         );
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid,
-            $organizerUid1
+            $organizerUid1,
         );
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid,
-            $organizerUid2
+            $organizerUid2,
         );
 
         $this->subject->limitToEvent($eventUid);
@@ -114,7 +114,7 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->countWithoutLimit()
+            $bag->countWithoutLimit(),
         );
     }
 
@@ -125,25 +125,25 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 1]
+            ['organizers' => 1],
         );
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid1,
-            $organizerUid
+            $organizerUid,
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->subject->limitToEvent($eventUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -154,24 +154,24 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 2]
+            ['organizers' => 2],
         );
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid,
-            $organizerUid2
+            $organizerUid2,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid,
-            $organizerUid1
+            $organizerUid1,
         );
 
         $this->subject->limitToEvent($eventUid);
@@ -180,7 +180,7 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             $organizerUid2,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 }

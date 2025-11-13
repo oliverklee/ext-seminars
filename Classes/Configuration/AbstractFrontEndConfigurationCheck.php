@@ -45,7 +45,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         $this->checkIfBoolean(
             'enableRegistration',
             'This value specifies whether the extension will provide online registration.
-            If this value is incorrect, the online registration will not be enabled or disabled correctly.'
+            If this value is incorrect, the online registration will not be enabled or disabled correctly.',
         );
     }
 
@@ -64,7 +64,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'list_registrations',
                 'list_vip_registrations',
                 'category_list',
-            ]
+            ],
         );
     }
 
@@ -74,7 +74,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'listPID',
             'This value specifies the page that contains the list of events.
             If this value is not set correctly, the links in the list view
-            and the back link on the list of registrations will not work.'
+            and the back link on the list of registrations will not work.',
         );
     }
 
@@ -84,7 +84,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'generalPriceInSingle',
             'This value specifies whether the heading for the standard price in the detailed view
             and on the registration page will be just <em>Price</em> instead of <em>Standard price</em>.
-            If this value is incorrect, the wrong label might be used.'
+            If this value is incorrect, the wrong label might be used.',
         );
     }
 
@@ -94,7 +94,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'registerPID',
             'This value specifies the page that contains the registration form.
             If this value is not set correctly, the link to the registration page will not work.'
-            . $this->getMessageAboutRegistrationSwitch()
+            . $this->getMessageAboutRegistrationSwitch(),
         );
     }
 
@@ -104,7 +104,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'loginPID',
             'This value specifies the page that contains the login form.
             If this value is not set correctly, the link to the login page will not work.'
-            . $this->getMessageAboutRegistrationSwitch()
+            . $this->getMessageAboutRegistrationSwitch(),
         );
     }
 
@@ -113,7 +113,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         $this->checkIfPositiveInteger(
             'detailPID',
             'This value specifies the page that contains the detailed view.
-            If this value is not set correctly, the links to single events will not work as expected.'
+            If this value is not set correctly, the links to single events will not work as expected.',
         );
     }
 
@@ -124,7 +124,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'This value specifies whether the list of attached files is only shown to logged in
             and registered attendees.
             If this value is incorrect, the attached files may be shown to the public
-            although they should be visible only to the attendees (or vice versa).'
+            although they should be visible only to the attendees (or vice versa).',
         );
     }
 
@@ -133,7 +133,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         $this->checkIfBoolean(
             'showOnlyEventsWithVacancies',
             'This value specifies whether only events with vacancies should be shown in the list view.
-            If this value is not configured properly, events with no vacancies will be shown in the list view.'
+            If this value is not configured properly, events with no vacancies will be shown in the list view.',
         );
     }
 
@@ -142,7 +142,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         $this->checkIfPositiveIntegerOrEmpty(
             'showSingleEvent',
             'This value specifies which fixed single event should be shown.
-            If this value is not set correctly, an error message will be shown instead.'
+            If this value is not set correctly, an error message will be shown instead.',
         );
     }
 
@@ -151,7 +151,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         $this->checkIfIntegerListNotEmpty(
             'pages',
             'This value specifies the system folders that contain the event records for the list view.
-            If this value is not set correctly, some events might not get displayed in the list view.'
+            If this value is not set correctly, some events might not get displayed in the list view.',
         );
     }
 
@@ -161,7 +161,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'recursive',
             'This value specifies the how deep the recursion will be for selecting
             the pages that contain the event records for the list view.
-            If this value is not set correctly, some events might not get displayed in the list view.'
+            If this value is not set correctly, some events might not get displayed in the list view.',
         );
     }
 
@@ -181,7 +181,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'upcoming',
                 'deadlineNotOver',
                 'today',
-            ]
+            ],
         );
     }
 }

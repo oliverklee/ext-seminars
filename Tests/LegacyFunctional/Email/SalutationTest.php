@@ -95,7 +95,7 @@ final class SalutationTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             'Foo',
-            $this->subject->getSalutation($this->createFrontEndUser())
+            $this->subject->getSalutation($this->createFrontEndUser()),
         );
     }
 
@@ -108,7 +108,7 @@ final class SalutationTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('email_hello_formal_99'),
-            $this->subject->getSalutation($user)
+            $this->subject->getSalutation($user),
         );
     }
 
@@ -121,7 +121,7 @@ final class SalutationTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('email_salutation_title_99') . ' ' . $user->getName(),
-            $this->subject->getSalutation($user)
+            $this->subject->getSalutation($user),
         );
     }
 
@@ -135,7 +135,7 @@ final class SalutationTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('email_hello_informal'),
-            $this->subject->getSalutation($user)
+            $this->subject->getSalutation($user),
         );
     }
 
@@ -162,19 +162,19 @@ final class SalutationTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             '_',
-            $salutation
+            $salutation,
         );
         self::assertStringNotContainsString(
             'salutation',
-            $salutation
+            $salutation,
         );
         self::assertStringNotContainsString(
             'email',
-            $salutation
+            $salutation,
         );
         self::assertStringNotContainsString(
             'formal',
-            $salutation
+            $salutation,
         );
     }
 
@@ -228,7 +228,7 @@ final class SalutationTest extends FunctionalTestCase
         $frontendUser = $this->createFrontEndUser();
         $salutationHookMock->expects(self::atLeastOnce())->method('modifySalutation')->with(
             self::isType('array'),
-            self::identicalTo($frontendUser)
+            self::identicalTo($frontendUser),
         );
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName] = $hookClassName;
@@ -243,22 +243,24 @@ final class SalutationTest extends FunctionalTestCase
     public function getSalutationCanCallMultipleSetHooks(): void
     {
         $hookClassName1 = 'AnEmailSalutationHook';
-        $salutationHookMock1 = $this->getMockBuilder(EmailSalutationHookInterface::class)
+        $salutationHookMock1 = $this
+            ->getMockBuilder(EmailSalutationHookInterface::class)
             ->setMockClassName($hookClassName1)->getMock();
         $frontendUser = $this->createFrontEndUser();
         $salutationHookMock1->expects(self::atLeastOnce())->method('modifySalutation')->with(
             self::isType('array'),
-            self::identicalTo($frontendUser)
+            self::identicalTo($frontendUser),
         );
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName1] = $hookClassName1;
         GeneralUtility::addInstance($hookClassName1, $salutationHookMock1);
 
         $hookClassName2 = 'AnotherEmailSalutationHook';
-        $salutationHookMock2 = $this->getMockBuilder(EmailSalutationHookInterface::class)
+        $salutationHookMock2 = $this
+            ->getMockBuilder(EmailSalutationHookInterface::class)
             ->setMockClassName($hookClassName2)->getMock();
         $salutationHookMock2->expects(self::atLeastOnce())->method('modifySalutation')->with(
             self::isType('array'),
-            self::identicalTo($frontendUser)
+            self::identicalTo($frontendUser),
         );
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName2] = $hookClassName2;
         GeneralUtility::addInstance($hookClassName2, $salutationHookMock2);
@@ -289,14 +291,14 @@ final class SalutationTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $this->now]
+            ['begin_date' => $this->now],
         );
 
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
             \date(self::DATE_FORMAT, $this->now),
-            $this->subject->createIntroduction('%s', $event)
+            $this->subject->createIntroduction('%s', $event),
         );
     }
 
@@ -310,13 +312,13 @@ final class SalutationTest extends FunctionalTestCase
             [
                 'begin_date' => $this->now,
                 'end_date' => $this->now + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
             \date(self::DATE_FORMAT, $this->now) . '-' . \date(self::DATE_FORMAT, $this->now + Time::SECONDS_PER_DAY),
-            $this->subject->createIntroduction('%s', $event)
+            $this->subject->createIntroduction('%s', $event),
         );
     }
 
@@ -329,14 +331,14 @@ final class SalutationTest extends FunctionalTestCase
             'tx_seminars_seminars',
             [
                 'begin_date' => $this->now,
-            ]
+            ],
         );
 
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
             \date(self::TIME_FORMAT, $this->now),
-            $this->subject->createIntroduction('%s', $event)
+            $this->subject->createIntroduction('%s', $event),
         );
     }
 
@@ -351,7 +353,7 @@ final class SalutationTest extends FunctionalTestCase
             [
                 'begin_date' => $this->now,
                 'end_date' => $endDate,
-            ]
+            ],
         );
 
         $event = new TestingLegacyEvent($eventUid);
@@ -361,7 +363,7 @@ final class SalutationTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             \sprintf($this->translate('email_timeFrom'), $timeInsert),
-            $this->subject->createIntroduction('%s', $event)
+            $this->subject->createIntroduction('%s', $event),
         );
     }
 
@@ -376,7 +378,7 @@ final class SalutationTest extends FunctionalTestCase
             [
                 'begin_date' => $this->now,
                 'end_date' => $endDate,
-            ]
+            ],
         );
 
         $event = new TestingLegacyEvent($eventUid);
@@ -384,7 +386,7 @@ final class SalutationTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $formattedDate,
-            $this->subject->createIntroduction('%s', $event)
+            $this->subject->createIntroduction('%s', $event),
         );
     }
 
@@ -398,7 +400,7 @@ final class SalutationTest extends FunctionalTestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $this->now]
+            ['begin_date' => $this->now],
         );
 
         $event = new TestingLegacyEvent($eventUid);
@@ -418,7 +420,7 @@ final class SalutationTest extends FunctionalTestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $this->now]
+            ['begin_date' => $this->now],
         );
 
         $event = new TestingLegacyEvent($eventUid);
@@ -438,7 +440,7 @@ final class SalutationTest extends FunctionalTestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $this->now]
+            ['begin_date' => $this->now],
         );
 
         $event = new TestingLegacyEvent($eventUid);

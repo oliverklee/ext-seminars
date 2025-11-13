@@ -59,9 +59,9 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                 'pid' => $pageUid,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ),
-            ]
+            ],
         );
 
         $this->subject = new DownloadRegistrationListView();
@@ -90,12 +90,12 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -118,14 +118,14 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
-                    ['first_name' => $firstName, 'last_name' => $lastName]
+                    ['first_name' => $firstName, 'last_name' => $lastName],
                 ),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $firstName,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -148,14 +148,14 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
-                    ['first_name' => $firstName, 'last_name' => $lastName]
+                    ['first_name' => $firstName, 'last_name' => $lastName],
                 ),
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             $lastName,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -179,12 +179,12 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $knownFrom,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -208,12 +208,12 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             $notes,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -233,12 +233,12 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => true,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

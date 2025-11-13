@@ -61,13 +61,13 @@ final class RegistrationMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'registration for event']
+            ['title' => 'registration for event'],
         );
 
         $model = $this->subject->find($uid);
         self::assertEquals(
             'registration for event',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 
@@ -119,17 +119,17 @@ final class RegistrationMapperTest extends FunctionalTestCase
     {
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['additional_persons' => 1]
+            ['additional_persons' => 1],
         );
         $personUid = $this->testingFramework->createFrontEndUser(
             '',
-            ['tx_seminars_registration' => $registrationUid]
+            ['tx_seminars_registration' => $registrationUid],
         );
 
         $model = $this->subject->find($registrationUid);
         self::assertEquals(
             (string)$personUid,
-            $model->getAdditionalPersons()->getUids()
+            $model->getAdditionalPersons()->getUids(),
         );
     }
 }

@@ -62,7 +62,8 @@ class SlugGenerator implements SingletonInterface
 
         $title = '';
         if ($recordType === EventInterface::TYPE_EVENT_DATE) {
-            $result = $this->getQueryBuilder()->select('title')->from(self::TABLE_NAME_EVENTS)
+            $result = $this
+                ->getQueryBuilder()->select('title')->from(self::TABLE_NAME_EVENTS)
                 ->where('uid = :uid')->setParameter('uid', $topicUid)
                 ->executeQuery();
             $data = $result->fetchAssociative();

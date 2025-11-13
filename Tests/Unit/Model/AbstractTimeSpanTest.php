@@ -36,7 +36,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp(),
         );
     }
 
@@ -49,7 +49,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp(),
         );
     }
 
@@ -59,10 +59,10 @@ final class AbstractTimeSpanTest extends UnitTestCase
     public function setBeginDateAsUnixTimeStampWithNegativeTimeStampThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The parameter $beginDate must be >= 0.'
+            'The parameter $beginDate must be >= 0.',
         );
 
         $this->subject->setBeginDateAsUnixTimeStamp(-1);
@@ -77,7 +77,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp(),
         );
     }
 
@@ -90,7 +90,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp(),
         );
     }
 
@@ -102,7 +102,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasBeginDate()
+            $this->subject->hasBeginDate(),
         );
     }
 
@@ -114,7 +114,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         $this->subject->setBeginDateAsUnixTimeStamp(42);
 
         self::assertTrue(
-            $this->subject->hasBeginDate()
+            $this->subject->hasBeginDate(),
         );
     }
 
@@ -129,7 +129,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp(),
         );
     }
 
@@ -142,7 +142,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp(),
         );
     }
 
@@ -152,10 +152,10 @@ final class AbstractTimeSpanTest extends UnitTestCase
     public function setEndDateAsUnixTimeStampWithNegativeTimeStampThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The parameter $endDate must be >= 0.'
+            'The parameter $endDate must be >= 0.',
         );
 
         $this->subject->setEndDateAsUnixTimeStamp(-1);
@@ -170,7 +170,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp(),
         );
     }
 
@@ -183,7 +183,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp(),
         );
     }
 
@@ -195,7 +195,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasEndDate()
+            $this->subject->hasEndDate(),
         );
     }
 
@@ -207,7 +207,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         $this->subject->setEndDateAsUnixTimeStamp(42);
 
         self::assertTrue(
-            $this->subject->hasEndDate()
+            $this->subject->hasEndDate(),
         );
     }
 }

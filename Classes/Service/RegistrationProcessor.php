@@ -128,7 +128,7 @@ class RegistrationProcessor implements SingletonInterface
         $title = LocalizationUtility::translate(
             'registrationTitleFormat',
             'seminars',
-            [$event->getDisplayTitle(), $user->getDisplayName(), $formattedDate]
+            [$event->getDisplayTitle(), $user->getDisplayName(), $formattedDate],
         );
 
         $registration->setTitle($title);

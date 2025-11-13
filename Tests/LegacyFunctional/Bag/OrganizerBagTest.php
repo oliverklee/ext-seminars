@@ -51,7 +51,7 @@ final class OrganizerBagTest extends FunctionalTestCase
     public function bagCanHaveAtLeastOneElement(): void
     {
         self::assertFalse(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 }

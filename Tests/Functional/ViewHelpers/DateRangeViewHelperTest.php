@@ -57,7 +57,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             LocalizationUtility::translate('message_willBeAnnounced', 'seminars'),
-            $this->subject->render($timeSpan)
+            $this->subject->render($timeSpan),
         );
     }
 
@@ -71,7 +71,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             \date('Y-m-d', self::BEGIN_DATE),
-            $this->subject->render($timeSpan)
+            $this->subject->render($timeSpan),
         );
     }
 
@@ -86,7 +86,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             \date('Y-m-d', self::BEGIN_DATE),
-            $this->subject->render($timeSpan)
+            $this->subject->render($timeSpan),
         );
     }
 
@@ -101,7 +101,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             \date('Y-m-d', self::BEGIN_DATE),
-            $this->subject->render($timeSpan)
+            $this->subject->render($timeSpan),
         );
     }
 
@@ -117,7 +117,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             \date('Y-m-d', self::BEGIN_DATE) . '&#8211;' . \date('Y-m-d', $endDate),
-            $this->subject->render($timeSpan)
+            $this->subject->render($timeSpan),
         );
     }
 
@@ -135,7 +135,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             \date('Y-m-d', self::BEGIN_DATE) . $dash . \date('Y-m-d', $endDate),
-            $this->subject->render($timeSpan, $dash)
+            $this->subject->render($timeSpan, $dash),
         );
     }
 }

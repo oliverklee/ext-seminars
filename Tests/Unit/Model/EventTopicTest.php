@@ -46,7 +46,7 @@ final class EventTopicTest extends UnitTestCase
 
         self::assertSame(
             'Superhero',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -59,7 +59,7 @@ final class EventTopicTest extends UnitTestCase
 
         self::assertSame(
             'Superhero',
-            $this->subject->getRawTitle()
+            $this->subject->getRawTitle(),
         );
     }
 
@@ -73,12 +73,12 @@ final class EventTopicTest extends UnitTestCase
     public function getTeaserForEventTopicWithoutTeaserReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
 
         self::assertSame(
             '',
-            $this->subject->getTeaser()
+            $this->subject->getTeaser(),
         );
     }
 
@@ -91,12 +91,12 @@ final class EventTopicTest extends UnitTestCase
             [
                 'teaser' => 'wow, this is teasing',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
 
         self::assertSame(
             'wow, this is teasing',
-            $this->subject->getTeaser()
+            $this->subject->getTeaser(),
         );
     }
 
@@ -110,11 +110,11 @@ final class EventTopicTest extends UnitTestCase
     public function hasDescriptionForEventTopicWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
 
         self::assertFalse(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 }

@@ -123,7 +123,7 @@ class MailNotifier extends AbstractTask
         foreach ($this->getEventsToSendEventTakesPlaceReminderFor() as $event) {
             $this->sendRemindersToOrganizers(
                 $event,
-                'email_eventTakesPlaceReminder'
+                'email_eventTakesPlaceReminder',
             );
             $event->setEventTakesPlaceReminderSentFlag();
             $event->commitToDatabase();
@@ -139,7 +139,7 @@ class MailNotifier extends AbstractTask
         foreach ($this->getEventsToSendCancellationDeadlineReminderFor() as $event) {
             $this->sendRemindersToOrganizers(
                 $event,
-                'email_cancelationDeadlineReminder'
+                'email_cancelationDeadlineReminder',
             );
             $event->setCancelationDeadlineReminderSentFlag();
             $event->commitToDatabase();
@@ -168,7 +168,8 @@ class MailNotifier extends AbstractTask
         /** @var LegacyOrganizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
             $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-            $emailBuilder->from($sender)
+            $emailBuilder
+                ->from($sender)
                 ->to($organizer)
                 ->subject($subject)
                 ->text($this->customizeMessage($messageKey, $event, $organizer->getName()));
@@ -378,7 +379,7 @@ class MailNotifier extends AbstractTask
             } else {
                 throw new \UnexpectedValueException(
                     'Event status for event #' . $event->getUid() . ' was still "planned" after the status change.',
-                    1457982810
+                    1457982810,
                 );
             }
 

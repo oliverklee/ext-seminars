@@ -46,13 +46,13 @@ class EventMapper extends AbstractDataMapper
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
                         'cancelled',
-                        $queryBuilder->createNamedParameter(EventInterface::STATUS_PLANNED, Connection::PARAM_INT)
+                        $queryBuilder->createNamedParameter(EventInterface::STATUS_PLANNED, Connection::PARAM_INT),
                     ),
                     $queryBuilder->expr()->eq(
                         'automatic_confirmation_cancelation',
-                        $queryBuilder->createNamedParameter(1, Connection::PARAM_INT)
-                    )
-                )
+                        $queryBuilder->createNamedParameter(1, Connection::PARAM_INT),
+                    ),
+                ),
             )
             ->orderBy('uid')
             ->executeQuery();

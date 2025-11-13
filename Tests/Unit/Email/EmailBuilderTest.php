@@ -304,7 +304,7 @@ final class EmailBuilderTest extends UnitTestCase
         self::assertSame('plain', $firstAttachment->getMediaSubtype());
         self::assertStringContainsString(
             $fileName,
-            $firstAttachment->getPreparedHeaders()->get('content-disposition')->toString()
+            $firstAttachment->getPreparedHeaders()->get('content-disposition')->toString(),
         );
     }
 

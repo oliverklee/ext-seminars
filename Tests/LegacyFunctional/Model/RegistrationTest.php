@@ -63,7 +63,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertEquals(
             'registration for event',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -97,7 +97,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             $event,
-            $this->subject->getEvent()
+            $this->subject->getEvent(),
         );
     }
 
@@ -112,7 +112,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             $event,
-            $this->subject->getSeminar()
+            $this->subject->getSeminar(),
         );
     }
 
@@ -127,7 +127,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             $event,
-            $this->subject->getEvent()
+            $this->subject->getEvent(),
         );
     }
 
@@ -142,7 +142,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertSame(
             $event,
-            $this->subject->getEvent()
+            $this->subject->getEvent(),
         );
     }
 
@@ -159,7 +159,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertEquals(
             0,
-            $this->subject->getSeats()
+            $this->subject->getSeats(),
         );
     }
 
@@ -172,7 +172,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertEquals(
             42,
-            $this->subject->getSeats()
+            $this->subject->getSeats(),
         );
     }
 
@@ -188,7 +188,7 @@ final class RegistrationTest extends FunctionalTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasRegisteredThemselves()
+            $this->subject->hasRegisteredThemselves(),
         );
     }
 
@@ -200,7 +200,7 @@ final class RegistrationTest extends FunctionalTestCase
         $this->subject->setData(['registered_themselves' => true]);
 
         self::assertTrue(
-            $this->subject->hasRegisteredThemselves()
+            $this->subject->hasRegisteredThemselves(),
         );
     }
 
@@ -217,7 +217,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertEquals(
             '',
-            $this->subject->getAttendeesNames()
+            $this->subject->getAttendeesNames(),
         );
     }
 
@@ -230,7 +230,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertEquals(
             'John Doe',
-            $this->subject->getAttendeesNames()
+            $this->subject->getAttendeesNames(),
         );
     }
 
@@ -243,7 +243,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertEquals(
             'John Doe',
-            $this->subject->getAttendeesNames()
+            $this->subject->getAttendeesNames(),
         );
     }
 }

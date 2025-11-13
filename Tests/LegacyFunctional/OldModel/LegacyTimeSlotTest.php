@@ -46,7 +46,7 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
             [
                 'seminar' => $seminarUid,
                 'place' => 0,
-            ]
+            ],
         );
 
         $this->subject = new TestingLegacyTimeSlot($subjectUid);
@@ -69,7 +69,7 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     public function createFromUid(): void
     {
         self::assertTrue(
-            $this->subject->isOk()
+            $this->subject->isOk(),
         );
     }
 
@@ -84,7 +84,7 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     {
         self::assertEquals(
             0,
-            $this->subject->getPlace()
+            $this->subject->getPlace(),
         );
     }
 
@@ -94,7 +94,7 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     public function hasPlaceInitiallyReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasPlace()
+            $this->subject->hasPlace(),
         );
     }
 
@@ -104,13 +104,13 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     public function getPlaceReturnsUidOfPlaceSetViaSetPlace(): void
     {
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites'
+            'tx_seminars_sites',
         );
         $this->subject->setPlace($placeUid);
 
         self::assertEquals(
             $placeUid,
-            $this->subject->getPlace()
+            $this->subject->getPlace(),
         );
     }
 
@@ -120,12 +120,12 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     public function hasPlaceReturnsTrueIfPlaceIsSet(): void
     {
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites'
+            'tx_seminars_sites',
         );
         $this->subject->setPlace($placeUid);
 
         self::assertTrue(
-            $this->subject->hasPlace()
+            $this->subject->hasPlace(),
         );
     }
 
@@ -148,13 +148,13 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'a place']
+            ['title' => 'a place'],
         );
         $this->subject->setPlace($placeUid);
 
         self::assertEquals(
             'a place',
-            $this->subject->getPlaceShort()
+            $this->subject->getPlaceShort(),
         );
     }
 

@@ -113,7 +113,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration = new DummyConfiguration(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html',
-            ]
+            ],
         );
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
@@ -126,7 +126,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'title' => 'test organizer',
                 'email' => 'mail@example.com',
                 'email_footer' => 'organizer footer',
-            ]
+            ],
         );
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -139,7 +139,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'attendees_max' => 10,
                 'needs_registration' => 1,
                 'organizers' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
 
@@ -178,7 +178,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'isStaticTemplateLoaded' => 1,
                 'loginPID' => $this->loginPageUid,
                 'registerPID' => $this->registrationPageUid,
-            ]
+            ],
         );
     }
 
@@ -206,8 +206,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
                     'deadline_registration' => $this->now + 1000,
                     'needs_registration' => 1,
                     'queue_size' => 0,
-                ]
-            )
+                ],
+            ),
         );
         $this->fullyBookedSeminar->setNumberOfAttendances(10);
     }
@@ -226,7 +226,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'name' => 'Harry Callagan',
                 'email' => 'foo@bar.com',
-            ]
+            ],
         );
 
         $registrationUid = $this->testingFramework->createRecord(
@@ -237,7 +237,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'food' => 'something nice to eat',
                 'accommodation' => 'a nice, dry place',
                 'interests' => 'learning Ruby on Rails',
-            ]
+            ],
         );
 
         return new LegacyRegistration($registrationUid);
@@ -284,7 +284,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertGreaterThan(
             0,
-            $this->loginPageUid
+            $this->loginPageUid,
         );
     }
 
@@ -297,7 +297,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertGreaterThan(
             0,
-            $this->registrationPageUid
+            $this->registrationPageUid,
         );
     }
 
@@ -309,11 +309,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createFrontEndPages();
 
         self::assertNotNull(
-            $this->pi1
+            $this->pi1,
         );
         self::assertInstanceOf(
             DefaultController::class,
-            $this->pi1
+            $this->pi1,
         );
     }
 
@@ -326,7 +326,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertGreaterThan(
             0,
-            $this->frontEndUserUid
+            $this->frontEndUserUid,
         );
     }
 
@@ -349,7 +349,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertInstanceOf(
             LegacyEvent::class,
-            $this->fullyBookedSeminar
+            $this->fullyBookedSeminar,
         );
     }
 
@@ -361,7 +361,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createBookedOutSeminar();
 
         self::assertTrue(
-            $this->fullyBookedSeminar->getUid() > 0
+            $this->fullyBookedSeminar->getUid() > 0,
         );
     }
 
@@ -447,7 +447,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function canRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue(): void
     {
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -469,7 +469,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -483,11 +483,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $this->testingFramework->createAndLoginFrontEndUser(),
                 'seminar' => $this->seminarUid,
-            ]
+            ],
         );
 
         self::assertFalse(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -503,11 +503,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $this->testingFramework->createAndLoginFrontEndUser(),
                 'seminar' => $this->seminarUid,
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -521,7 +521,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $this->testingFramework->createAndLoginFrontEndUser(),
                 'seminar' => $this->seminarUid,
-            ]
+            ],
         );
 
         $event = new TestingLegacyEvent(
@@ -532,12 +532,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
                     'end_date' => $this->now + 2000,
                     'attendees_max' => 10,
                     'deadline_registration' => $this->now + 1000,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
-            $this->subject->canRegisterIfLoggedIn($event)
+            $this->subject->canRegisterIfLoggedIn($event),
         );
     }
 
@@ -549,7 +549,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createBookedOutSeminar();
 
         self::assertFalse(
-            $this->subject->canRegisterIfLoggedIn($this->fullyBookedSeminar)
+            $this->subject->canRegisterIfLoggedIn($this->fullyBookedSeminar),
         );
     }
 
@@ -561,7 +561,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -574,7 +574,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setNeedsRegistration(false);
 
         self::assertFalse(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -586,7 +586,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -599,7 +599,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -613,7 +613,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -628,7 +628,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar),
         );
     }
 
@@ -641,7 +641,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -654,7 +654,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -668,12 +668,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $this->testingFramework->createAndLoginFrontEndUser(),
                 'seminar' => $this->seminarUid,
-            ]
+            ],
         );
 
         self::assertSame(
             $this->translate('message_alreadyRegistered'),
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -689,12 +689,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $this->testingFramework->createAndLoginFrontEndUser(),
                 'seminar' => $this->seminarUid,
-            ]
+            ],
         );
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -707,7 +707,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_noVacancies'),
-            $this->subject->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->fullyBookedSeminar),
         );
     }
 
@@ -720,7 +720,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_seminarCancelled'),
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -734,7 +734,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_noRegistrationNecessary'),
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -747,7 +747,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -761,7 +761,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -776,7 +776,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -792,7 +792,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -813,7 +813,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'user' => $userUid,
                 'seminar' => $seminarUid,
                 'hidden' => 0,
-            ]
+            ],
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
@@ -825,7 +825,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ->where(
                 $query->expr()->eq('user', $query->createNamedParameter($userUid, Connection::PARAM_INT)),
                 $query->expr()->eq('seminar', $query->createNamedParameter($seminarUid, Connection::PARAM_INT)),
-                $query->expr()->eq('hidden', $query->createNamedParameter(1, Connection::PARAM_INT))
+                $query->expr()->eq('hidden', $query->createNamedParameter(1, Connection::PARAM_INT)),
             )
             ->executeQuery();
         $numberOfRows = $queryResult->fetchOne();
@@ -849,7 +849,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $userUid,
                 'seminar' => $seminarUid,
-            ]
+            ],
         );
         $waitingListRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -858,7 +858,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'seminar' => $seminarUid,
                 'seats' => 1,
                 'registration_queue' => Registration::STATUS_WAITING_LIST,
-            ]
+            ],
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
@@ -869,8 +869,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_attendances',
-                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $waitingListRegistrationUid]
-            )
+                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $waitingListRegistrationUid],
+            ),
         );
     }
 
@@ -890,7 +890,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $userUid,
                 'seminar' => $seminarUid,
-            ]
+            ],
         );
         $waitingListRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -899,7 +899,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'seminar' => $seminarUid,
                 'seats' => 1,
                 'registration_queue' => Registration::STATUS_WAITING_LIST,
-            ]
+            ],
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
@@ -910,8 +910,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_attendances',
-                ['registration_queue' => Registration::STATUS_WAITING_LIST, 'uid' => $waitingListRegistrationUid]
-            )
+                ['registration_queue' => Registration::STATUS_WAITING_LIST, 'uid' => $waitingListRegistrationUid],
+            ),
         );
     }
 
@@ -929,7 +929,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'user' => $userUid,
                 'seminar' => $seminarUid,
-            ]
+            ],
         );
         $queueRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -938,7 +938,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'seminar' => $seminarUid,
                 'seats' => 1,
                 'registration_queue' => Registration::STATUS_NONBINDING_RESERVATION,
-            ]
+            ],
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
@@ -949,8 +949,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_attendances',
-                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $queueRegistrationUid]
-            )
+                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $queueRegistrationUid],
+            ),
         );
     }
 
@@ -961,7 +961,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice(): void
     {
-        $subject = $this->getMockBuilder(RegistrationManager::class)
+        $subject = $this
+            ->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
 
@@ -972,7 +973,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $this->seminarUid,
             [
                 'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $pi1 = new DefaultController();
         $pi1->init();
@@ -980,7 +981,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $subject->notifyAttendee(
             $registration,
             $pi1,
-            'confirmationOnUnregistration'
+            'confirmationOnUnregistration',
         );
     }
 
@@ -989,7 +990,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice(): void
     {
-        $subject = $this->getMockBuilder(RegistrationManager::class)
+        $subject = $this
+            ->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -998,7 +1000,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['deadline_unregistration' => $this->now - Time::SECONDS_PER_DAY]
+            ['deadline_unregistration' => $this->now - Time::SECONDS_PER_DAY],
         );
 
         $pi1 = new DefaultController();
@@ -1012,7 +1014,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
-        $subject = $this->getMockBuilder(RegistrationManager::class)
+        $subject = $this
+            ->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -1026,7 +1029,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY]
+            ['deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY],
         );
 
         $pi1 = new DefaultController();
@@ -1042,7 +1045,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
 
-        $subject = $this->getMockBuilder(RegistrationManager::class)
+        $subject = $this
+            ->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
 
@@ -1056,12 +1060,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
-            ]
+            ],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $registrationUid,
-            ['registration_queue' => 1]
+            ['registration_queue' => 1],
         );
 
         $pi1 = new DefaultController();
@@ -1070,7 +1074,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $subject->notifyAttendee(
             $registration,
             $pi1,
-            'confirmationOnRegistrationForQueue'
+            'confirmationOnRegistrationForQueue',
         );
     }
 
@@ -1081,7 +1085,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
 
-        $subject = $this->getMockBuilder(RegistrationManager::class)
+        $subject = $this
+            ->getMockBuilder(RegistrationManager::class)
             ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
 
@@ -1095,12 +1100,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
-            ]
+            ],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $registrationUid,
-            ['registration_queue' => 1]
+            ['registration_queue' => 1],
         );
 
         $pi1 = new DefaultController();
@@ -1109,7 +1114,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $subject->notifyAttendee(
             $registration,
             $pi1,
-            'confirmationOnQueueUpdate'
+            'confirmationOnQueueUpdate',
         );
     }
 
@@ -1152,7 +1157,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['mute_notification_emails' => 1]
+            ['mute_notification_emails' => 1],
         );
 
         $this->email->expects(self::never())->method('send');
@@ -1253,7 +1258,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['needs_registration' => 1, 'attendees_max' => 2]
+            ['needs_registration' => 1, 'attendees_max' => 2],
         );
 
         $registration = $this->createRegistration();
@@ -1261,7 +1266,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertMatchesRegularExpression(
             '/' . $this->translate('label_vacancies') . ': 1\\n*$/',
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -1275,7 +1280,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['needs_registration' => 1, 'attendees_max' => 0]
+            ['needs_registration' => 1, 'attendees_max' => 0],
         );
 
         $registration = $this->createRegistration();
@@ -1284,7 +1289,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         self::assertStringContainsString(
             $this->translate('label_vacancies') . ': ' .
             $this->translate('label_unlimited'),
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -1302,7 +1307,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo inc.',
-            ]
+            ],
         );
 
         $registration = new LegacyRegistration($registrationUid);
@@ -1310,7 +1315,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_company'),
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -1328,7 +1333,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo inc.',
-            ]
+            ],
         );
 
         $registration = new LegacyRegistration($registrationUid);
@@ -1356,7 +1361,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyOrganizerEmail')->with(
             self::isInstanceOf(MailMessage::class),
             $registration,
-            'notification'
+            'notification',
         );
         $hook->expects(self::never())->method('modifyAdditionalEmail');
 
@@ -1430,17 +1435,17 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test organizer 2',
                 'email' => 'mail2@example.com',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $organizerUid
+            $organizerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['organizers' => 2]
+            ['organizers' => 2],
         );
 
         $this->email->expects(self::once())->method('send');
@@ -1462,17 +1467,17 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test organizer 2',
                 'email' => 'mail2@example.com',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $organizerUid
+            $organizerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['organizers' => 2]
+            ['organizers' => 2],
         );
 
         $registration = $this->createRegistration();
@@ -1497,17 +1502,17 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test organizer 2',
                 'email' => 'mail2@example.com',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $organizerUid
+            $organizerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['organizers' => 2]
+            ['organizers' => 2],
         );
 
         $registration = $this->createRegistration();
@@ -1530,17 +1535,17 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test organizer 2',
                 'email' => 'mail2@example.com',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $organizerUid
+            $organizerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['organizers' => 2]
+            ['organizers' => 2],
         );
 
         $registration = $this->createRegistration();
@@ -1561,7 +1566,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 1, 'attendees_max' => 42]
+            ['attendees_min' => 1, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1573,9 +1578,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
             sprintf(
                 $this->translate('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
-                ''
+                '',
             ),
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -1587,7 +1592,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 2, 'attendees_max' => 42]
+            ['attendees_min' => 2, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1606,7 +1611,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 2, 'attendees_max' => 42]
+            ['attendees_min' => 2, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1628,7 +1633,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 1, 'attendees_max' => 42]
+            ['attendees_min' => 1, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1643,9 +1648,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
             sprintf(
                 $this->translate('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
-                ''
+                '',
             ),
-            $firstEmail->getSubject()
+            $firstEmail->getSubject(),
         );
     }
 
@@ -1657,7 +1662,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 1, 'attendees_max' => 42]
+            ['attendees_min' => 1, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1679,7 +1684,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 1, 'attendees_max' => 42]
+            ['attendees_min' => 1, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1702,7 +1707,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
+            ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1721,7 +1726,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
+            ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1741,7 +1746,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 0, 'attendees_max' => 42]
+            ['attendees_min' => 0, 'attendees_max' => 42],
         );
 
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -1760,7 +1765,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_max' => 1]
+            ['attendees_max' => 1],
         );
 
         $registration = $this->createRegistration();
@@ -1770,9 +1775,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
             sprintf(
                 $this->translate('email_additionalNotificationIsFullSubject'),
                 $this->seminarUid,
-                ''
+                '',
             ),
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -1784,14 +1789,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_max' => 1]
+            ['attendees_max' => 1],
         );
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertStringContainsString(
             $this->translate('email_additionalNotificationIsFull'),
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -1803,7 +1808,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_min' => 5, 'attendees_max' => 5]
+            ['attendees_min' => 5, 'attendees_max' => 5],
         );
 
         $subject = new RegistrationManager();
@@ -1827,7 +1832,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'attendees_max' => 0,
                 'needs_registration' => 1,
-            ]
+            ],
         );
 
         $this->email->expects(self::once())->method('send');
@@ -1848,7 +1853,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'attendees_max' => 2,
                 'needs_registration' => 1,
-            ]
+            ],
         );
         $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
 
@@ -1857,7 +1862,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertMatchesRegularExpression(
             '/' . $this->translate('label_vacancies') . ': 1\\n*$/',
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -1873,7 +1878,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'attendees_max' => 0,
                 'needs_registration' => 1,
-            ]
+            ],
         );
         $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
 
@@ -1883,7 +1888,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         self::assertStringContainsString(
             $this->translate('label_vacancies') . ': '
             . $this->translate('label_unlimited'),
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -1895,7 +1900,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['attendees_max' => 1]
+            ['attendees_max' => 1],
         );
 
         $registrationOld = $this->createRegistration();
@@ -1911,7 +1916,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyAdditionalEmail')->with(
             self::isInstanceOf(MailMessage::class),
             $registration,
-            'IsFull'
+            'IsFull',
         );
 
         $hookClass = \get_class($hook);
@@ -2041,7 +2046,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setRegistrationQueue(false);
 
         self::assertFalse(
-            $this->subject->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar),
         );
     }
 
@@ -2053,7 +2058,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->subject->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar),
         );
     }
 
@@ -2067,7 +2072,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->subject->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar),
         );
     }
 
@@ -2081,7 +2086,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setRegistrationQueue(false);
 
         self::assertTrue(
-            $this->subject->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar),
         );
     }
 
@@ -2095,7 +2100,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->seminar->setRegistrationBeginDate(0);
 
         self::assertTrue(
-            $this->subject->registrationHasStarted($this->seminar)
+            $this->subject->registrationHasStarted($this->seminar),
         );
     }
 
@@ -2105,11 +2110,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function registrationHasStartedForEventWithRegistrationBeginInPastReturnsTrue(): void
     {
         $this->seminar->setRegistrationBeginDate(
-            $this->now - 42
+            $this->now - 42,
         );
 
         self::assertTrue(
-            $this->subject->registrationHasStarted($this->seminar)
+            $this->subject->registrationHasStarted($this->seminar),
         );
     }
 
@@ -2119,11 +2124,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function registrationHasStartedForEventWithRegistrationBeginInFutureReturnsFalse(): void
     {
         $this->seminar->setRegistrationBeginDate(
-            $this->now + 42
+            $this->now + 42,
         );
 
         self::assertFalse(
-            $this->subject->registrationHasStarted($this->seminar)
+            $this->subject->registrationHasStarted($this->seminar),
         );
     }
 

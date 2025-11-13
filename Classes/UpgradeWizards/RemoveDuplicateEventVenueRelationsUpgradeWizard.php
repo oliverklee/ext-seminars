@@ -20,7 +20,10 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  *
  * @internal
  */
-class RemoveDuplicateEventVenueRelationsUpgradeWizard implements UpgradeWizardInterface, RepeatableInterface, LoggerAwareInterface
+class RemoveDuplicateEventVenueRelationsUpgradeWizard implements
+    UpgradeWizardInterface,
+    RepeatableInterface,
+    LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
@@ -65,7 +68,8 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizard implements UpgradeWizardIn
 
     public function executeUpdate(): bool
     {
-        $queryResult = $this->getQueryBuilder()
+        $queryResult = $this
+            ->getQueryBuilder()
             ->select('uid_local', 'uid_foreign')
             ->from('tx_seminars_seminars_place_mm')
             ->orderBy('uid_local')
@@ -102,7 +106,7 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizard implements UpgradeWizardIn
 
         if ($this->logger instanceof LoggerAwareInterface) {
             $this->logger->info(
-                \sprintf('Removed %d duplicate event-venue relations.', $numberOfDeletions)
+                \sprintf('Removed %d duplicate event-venue relations.', $numberOfDeletions),
             );
         }
 

@@ -53,7 +53,7 @@ class CategoryBagBuilder extends AbstractBagBuilder
         if (!preg_match('/^(\\d+,)*\\d+$/', $cleanUids) || preg_match('/(^|,)0+(,|$)/', $cleanUids)) {
             throw new \InvalidArgumentException(
                 '$eventUids must be a comma-separated list of positive integers.',
-                1333292640
+                1333292640,
             );
         }
 
@@ -80,7 +80,7 @@ class CategoryBagBuilder extends AbstractBagBuilder
             throw new \BadMethodCallException(
                 'The event UIDs were empty. This means limitToEvents has not been called. ' .
                 'LimitToEvents has to be called before calling this function.',
-                1333292662
+                1333292662,
             );
         }
 

@@ -86,12 +86,12 @@ class SelectorWidget extends AbstractView
         $this->displayedSearchFields = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('displaySearchFormFields', 's_listView'),
-            true
+            true,
         );
 
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToEventTypes(
-            GeneralUtility::intExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
+            GeneralUtility::intExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true),
         );
         $builder->limitToOrganizers($this->getConfValueString('limitListViewToOrganizers', 's_listView'));
         $builder->limitToCategories($this->getConfValueString('limitListViewToCategories', 's_listView'));
@@ -198,7 +198,7 @@ class SelectorWidget extends AbstractView
         if ($this->seminarBag->isEmpty()) {
             throw new \BadMethodCallException(
                 'The seminar bag must not be empty when calling this function.',
-                1333293276
+                1333293276,
             );
         }
         if ($this->places instanceof Collection) {
@@ -216,7 +216,7 @@ class SelectorWidget extends AbstractView
                 'tx_seminars_sites',
                 'tx_seminars_seminars_place_mm',
                 'mm',
-                $queryBuilder->expr()->eq('mm.uid_foreign', $queryBuilder->quoteIdentifier('tx_seminars_sites.uid'))
+                $queryBuilder->expr()->eq('mm.uid_foreign', $queryBuilder->quoteIdentifier('tx_seminars_sites.uid')),
             )
             ->where($queryBuilder->expr()->in('mm.uid_local', $eventUidsParameter))
             ->orderBy('mm.sorting')
@@ -289,7 +289,7 @@ class SelectorWidget extends AbstractView
         if (!$this->selectorWidgetHookProvider instanceof SeminarSelectorWidget) {
             $this->selectorWidgetHookProvider = GeneralUtility::makeInstance(
                 HookProvider::class,
-                SeminarSelectorWidget::class
+                SeminarSelectorWidget::class,
             );
         }
 
@@ -332,7 +332,7 @@ class SelectorWidget extends AbstractView
                 throw new \InvalidArgumentException(
                     'The given search field . "' . $searchField . '" was not an allowed value. ' .
                     'Allowed values are: "event_type", "city", "place" or "organizer".',
-                    1333293298
+                    1333293298,
                 );
         }
 
@@ -356,7 +356,7 @@ class SelectorWidget extends AbstractView
 
         $this->setMarker(
             'searchbox_value',
-            \htmlspecialchars((string)($this->piVars['sword'] ?? ''), ENT_QUOTES | ENT_HTML5)
+            \htmlspecialchars((string)($this->piVars['sword'] ?? ''), ENT_QUOTES | ENT_HTML5),
         );
     }
 
@@ -377,7 +377,7 @@ class SelectorWidget extends AbstractView
             foreach ($dateArrays as $dropDownPart => $dateArray) {
                 $dropDowns .= $this->createDropDown(
                     $dateArray,
-                    $fromOrTo . '_' . $dropDownPart
+                    $fromOrTo . '_' . $dropDownPart,
                 );
             }
             $this->setMarker('options_date_' . $fromOrTo, $dropDowns);

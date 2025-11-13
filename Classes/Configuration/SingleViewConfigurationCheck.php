@@ -75,7 +75,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'back',
                 'requirements',
                 'dependencies',
-            ]
+            ],
         );
     }
 
@@ -85,7 +85,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'showSpeakerDetails',
             'This value specifies whether to show detailed information of the speakers in the single view.
             If this value is incorrect, the detailed information might be shown although this is not intended
-            (or vice versa).'
+            (or vice versa).',
         );
     }
 
@@ -95,7 +95,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'showSiteDetails',
             'This value specifies whether to show detailed information of the locations in the single view.
             If this value is incorrect, the detailed information might  be shown although this is not intended
-            (or vice versa).'
+            (or vice versa).',
         );
     }
 
@@ -104,7 +104,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfNonNegativeIntegerOrEmpty(
             'registrationsListPID',
             'This value specifies the page that contains the list of registrations for an event.
-            If this value is not set correctly, the link to that page will not work.'
+            If this value is not set correctly, the link to that page will not work.',
         );
     }
 
@@ -113,7 +113,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfNonNegativeIntegerOrEmpty(
             'registrationsVipListPID',
             'This value specifies the page that contains the list of registrations for an event.
-            If this value is not set correctly, the link to that page will not work.'
+            If this value is not set correctly, the link to that page will not work.',
         );
     }
 
@@ -128,7 +128,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfPositiveInteger(
             'seminarImageSingleViewWidth',
             'This value specifies the width of the image of a seminar.
-            If this value is not set, the image will be shown in full size.'
+            If this value is not set, the image will be shown in full size.',
         );
     }
 
@@ -137,7 +137,7 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfPositiveInteger(
             'seminarImageSingleViewHeight',
             'This value specifies the height of the image of a seminar.
-            If  this value is not set, the image will be shown in full size.'
+            If  this value is not set, the image will be shown in full size.',
         );
     }
 }

@@ -61,7 +61,7 @@ final class SingleViewTest extends FunctionalTestCase
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'what_to_display' => 'single_view',
-            ]
+            ],
         );
 
         $this->subject = $subject;

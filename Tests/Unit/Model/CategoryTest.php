@@ -34,7 +34,7 @@ final class CategoryTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getSingleViewPageUid()
+            $this->subject->getSingleViewPageUid(),
         );
     }
 
@@ -46,7 +46,7 @@ final class CategoryTest extends UnitTestCase
         $this->subject->setData(['single_view_page' => 0]);
 
         self::assertFalse(
-            $this->subject->hasSingleViewPageUid()
+            $this->subject->hasSingleViewPageUid(),
         );
     }
 
@@ -58,7 +58,7 @@ final class CategoryTest extends UnitTestCase
         $this->subject->setData(['single_view_page' => 42]);
 
         self::assertTrue(
-            $this->subject->hasSingleViewPageUid()
+            $this->subject->hasSingleViewPageUid(),
         );
     }
 }

@@ -129,7 +129,8 @@ class MyRegistrationsController extends ActionController
         $event = new BeforeAttendeeDownloadSentEvent($registration, $foundOriginalResource, $contentStream);
         $this->eventDispatcher->dispatch($event);
 
-        $response = $this->responseFactory->createResponse()
+        $response = $this->responseFactory
+            ->createResponse()
             // Must not be cached by a shared cache, such as a proxy server
             ->withHeader('Cache-Control', 'private')
             // Should be downloaded with the given filename

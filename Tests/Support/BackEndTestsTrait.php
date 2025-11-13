@@ -83,7 +83,7 @@ trait BackEndTestsTrait
         }
         $mockBackEndUser = $this->createPartialMock(
             BackendUserAuthentication::class,
-            ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC']
+            ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC'],
         );
         $mockBackEndUser->method('check')->willReturn(true);
         $mockBackEndUser->method('doesUserHaveAccess')->willReturn(true);

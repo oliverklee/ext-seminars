@@ -48,7 +48,7 @@ class SingleViewLinkBuilder
                 ['showUid' => $event->getUid()],
                 '',
                 false,
-                true
+                true,
             ),
         ];
 

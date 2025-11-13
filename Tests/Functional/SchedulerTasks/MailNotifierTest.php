@@ -130,7 +130,7 @@ final class MailNotifierTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $subject = $this->createPartialMock(
             MailNotifier::class,
-            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
+            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
         );
         $subject->setConfigurationPageUid(1);
 
@@ -148,7 +148,7 @@ final class MailNotifierTest extends FunctionalTestCase
     {
         $subject = $this->createPartialMock(
             MailNotifier::class,
-            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
+            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
         );
         $subject->setConfigurationPageUid(0);
 
@@ -167,7 +167,7 @@ final class MailNotifierTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $subject = $this->createPartialMock(
             MailNotifier::class,
-            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
+            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
         );
         $subject->setConfigurationPageUid(1);
         $this->registrationDigestMock->expects(self::once())->method('execute');
