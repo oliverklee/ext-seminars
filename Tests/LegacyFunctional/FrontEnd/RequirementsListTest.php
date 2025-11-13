@@ -55,7 +55,7 @@ final class RequirementsListTest extends FunctionalTestCase
             [
                 'pid' => $systemFolderPid,
                 'title' => 'Test event',
-            ]
+            ],
         );
 
         $this->pluginConfiguration = new DummyConfiguration();
@@ -63,7 +63,7 @@ final class RequirementsListTest extends FunctionalTestCase
 
         $this->subject = new RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -89,10 +89,10 @@ final class RequirementsListTest extends FunctionalTestCase
     public function renderWithoutSetSeminarThrowsException(): void
     {
         $this->expectException(
-            \BadMethodCallException::class
+            \BadMethodCallException::class,
         );
         $this->expectExceptionMessage(
-            'No event was set, please set an event before calling render'
+            'No event was set, please set an event before calling render',
         );
 
         $this->subject->render();
@@ -106,26 +106,26 @@ final class RequirementsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required & foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $requiredEvent,
-            'requirements'
+            'requirements',
         );
         $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
         self::assertStringContainsString(
             'required &amp; foo',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -140,26 +140,26 @@ final class RequirementsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $requiredEvent,
-            'requirements'
+            'requirements',
         );
         $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
         self::assertMatchesRegularExpression(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -171,39 +171,39 @@ final class RequirementsListTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $requiredEvent1,
-            'requirements'
+            'requirements',
         );
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_bar',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $requiredEvent2,
-            'requirements'
+            'requirements',
         );
         $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
         self::assertMatchesRegularExpression(
             '/required_foo.*required_bar/s',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

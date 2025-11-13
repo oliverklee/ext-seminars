@@ -32,7 +32,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'generalPriceInMail',
             'This value specifies which wording to use for the standard price in emails.
-            If this value is incorrect, the wrong wording might get used.'
+            If this value is incorrect, the wrong wording might get used.',
         );
     }
 
@@ -41,7 +41,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'enableRegistration',
             'This value specifies whether the extension will provide online registration.
-            If this value is incorrect, the online  registration will not be enabled or disabled correctly.'
+            If this value is incorrect, the online  registration will not be enabled or disabled correctly.',
         );
     }
 
@@ -67,7 +67,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'hideFieldsInNotificationMail',
             'These values specify the sections to hide in emails to organizers.
             A mistyped field name will cause the field to be included nonetheless.',
-            ['summary', 'seminardata', 'feuserdata', 'attendancedata']
+            ['summary', 'seminardata', 'feuserdata', 'attendancedata'],
         );
     }
 
@@ -102,7 +102,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
                 'enough_attendees',
                 'is_full',
                 'notes',
-            ]
+            ],
         );
     }
 
@@ -112,7 +112,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'showFeUserFieldsInNotificationMail',
             'These values specify the FE user fields to show in emails to organizers.
             A mistyped field name will cause the field to not get included.',
-            'fe_users'
+            'fe_users',
         );
     }
 
@@ -150,7 +150,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
                 'country',
                 'telephone',
                 'email',
-            ]
+            ],
         );
     }
 
@@ -159,7 +159,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'sendAdditionalNotificationEmails',
             'This value specifies whether organizers receive additional notification emails.
-            If this value is incorrect, emails might get sent when this is not intended (or vice versa).'
+            If this value is incorrect, emails might get sent when this is not intended (or vice versa).',
         );
     }
 
@@ -169,7 +169,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'sendNotification',
             'This value specifies whether a notification email should be sent to the organizer
             after a user has registered.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 
@@ -179,7 +179,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'sendNotificationOnQueueUpdate',
             'This value specifies whether a notification email should be sent to the organizer
             after the queue has been updated.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 
@@ -189,7 +189,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'sendNotificationOnRegistrationForQueue',
             'This value specifies whether a notification email should be sent to the organizer
             after someone registered for the queue.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 
@@ -199,7 +199,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'sendNotificationOnUnregistration',
             'This value specifies whether a notification email should be sent to the organizer
             after a user has unregistered.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 
@@ -208,7 +208,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfNonNegativeIntegerOrEmpty(
             'showVacanciesThreshold',
             'This value specifies down from which threshold the exact number of vancancies will be displayed.
-            If this value is incorrect, the number might get shown although this is not intended (or vice versa).'
+            If this value is incorrect, the number might get shown although this is not intended (or vice versa).',
         );
     }
 
@@ -260,7 +260,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
                 'first_name',
                 'last_name',
                 'unregistration_notice',
-            ]
+            ],
         );
     }
 
@@ -269,7 +269,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'sendConfirmation',
             'This value specifies whether a confirmation email should be sent to the user they have registered.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 
@@ -279,7 +279,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'sendConfirmationOnQueueUpdate',
             'This value specifies whether a confirmation email should be sent to the user
             after the queue has been updated.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 
@@ -290,7 +290,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'This value specifies whether a confirmation email should be sent
             to the user after the user has registered for the queue. If
             this value is not set correctly, the sending of notifications
-            probably will not work as expected.'
+            probably will not work as expected.',
         );
     }
 
@@ -299,7 +299,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'sendConfirmationOnUnregistration',
             'This value specifies whether a confirmation email should be sent to the user after they have unregistered.
-            If this value is not set correctly, the sending of notifications probably will not work as expected.'
+            If this value is not set correctly, the sending of notifications probably will not work as expected.',
         );
     }
 }

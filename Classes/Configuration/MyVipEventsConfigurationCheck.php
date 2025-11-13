@@ -21,7 +21,7 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkIfPositiveInteger(
             'registrationsVipListPID',
             'This value specifies the page that contains the list of registrations for an event.
-            If this value is not set correctly, the link to that page will not work.'
+            If this value is not set correctly, the link to that page will not work.',
         );
     }
 }

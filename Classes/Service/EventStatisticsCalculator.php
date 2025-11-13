@@ -56,7 +56,7 @@ class EventStatisticsCalculator implements SingletonInterface
             $waitingListSeats,
             $event->getMinimumNumberOfRegistrations(),
             $event->getMaximumNumberOfRegistrations(),
-            $event->hasWaitingList()
+            $event->hasWaitingList(),
         );
         $event->setStatistics($statistics);
     }

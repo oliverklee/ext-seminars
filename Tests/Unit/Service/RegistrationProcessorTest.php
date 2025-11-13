@@ -68,7 +68,7 @@ final class RegistrationProcessorTest extends UnitTestCase
             $this->eventRepositoryMock,
             $this->frontendUserRepositoryMock,
             $this->registrationGuardMock,
-            $this->registrationManagerMock
+            $this->registrationManagerMock,
         );
     }
 
@@ -110,9 +110,11 @@ final class RegistrationProcessorTest extends UnitTestCase
         $userUid = 99;
         $registration = new Registration();
         $user = new FrontendUser();
-        $this->registrationGuardMock->expects(self::once())->method('getFrontEndUserUidFromSession')
+        $this->registrationGuardMock
+            ->expects(self::once())->method('getFrontEndUserUidFromSession')
             ->willReturn($userUid);
-        $this->frontendUserRepositoryMock->expects(self::once())->method('findByUid')
+        $this->frontendUserRepositoryMock
+            ->expects(self::once())->method('findByUid')
             ->with($userUid)->willReturn($user);
 
         $this->subject->enrichWithMetadata($registration, new SingleEvent(), []);
@@ -126,7 +128,8 @@ final class RegistrationProcessorTest extends UnitTestCase
     public function enrichWithMetadataWithoutUserUidInSessionThrowsException(): void
     {
         $registration = new Registration();
-        $this->registrationGuardMock->expects(self::once())->method('getFrontEndUserUidFromSession')
+        $this->registrationGuardMock
+            ->expects(self::once())->method('getFrontEndUserUidFromSession')
             ->willReturn(null);
 
         $this->expectException(\RuntimeException::class);
@@ -143,9 +146,11 @@ final class RegistrationProcessorTest extends UnitTestCase
     {
         $userUid = 99;
         $registration = new Registration();
-        $this->registrationGuardMock->expects(self::once())->method('getFrontEndUserUidFromSession')
+        $this->registrationGuardMock
+            ->expects(self::once())->method('getFrontEndUserUidFromSession')
             ->willReturn($userUid);
-        $this->frontendUserRepositoryMock->expects(self::once())->method('findByUid')
+        $this->frontendUserRepositoryMock
+            ->expects(self::once())->method('findByUid')
             ->with($userUid)->willReturn(null);
 
         $this->expectException(\RuntimeException::class);
@@ -168,7 +173,7 @@ final class RegistrationProcessorTest extends UnitTestCase
         $this->subject->enrichWithMetadata(
             $registration,
             new SingleEvent(),
-            ['registrationRecordsStorageFolder' => (string)$folderUid]
+            ['registrationRecordsStorageFolder' => (string)$folderUid],
         );
 
         self::assertSame($folderUid, $registration->getPid());
@@ -312,7 +317,7 @@ final class RegistrationProcessorTest extends UnitTestCase
             [
                 ['name' => 'Baba Doe', 'email' => 'baba@example.com'],
                 ['name' => 'Boba Doe', 'email' => 'boba@example.com'],
-            ]
+            ],
         );
         $registration->setJsonEncodedAdditionAttendees($json);
         $this->subject->createAdditionalPersons($registration, 17);
@@ -581,7 +586,8 @@ final class RegistrationProcessorTest extends UnitTestCase
         $configurationMock = $this->createMock(LegacyConfiguration::class);
         GeneralUtility::addInstance(LegacyConfiguration::class, $configurationMock);
 
-        $this->registrationManagerMock->expects(self::once())->method('sendEmailsForNewRegistration')
+        $this->registrationManagerMock
+            ->expects(self::once())->method('sendEmailsForNewRegistration')
             ->with($configurationMock, $legacyRegistrationMock);
 
         $this->subject->sendEmails($registration);

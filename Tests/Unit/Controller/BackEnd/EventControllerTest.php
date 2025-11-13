@@ -93,7 +93,7 @@ final class EventControllerTest extends UnitTestCase
                 $this->permissionsMock,
                 $this->eventStatisticsCalculatorMock,
                 $this->pageRendererMock,
-            ]
+            ],
         );
         $this->subject = $subject;
 
@@ -204,7 +204,8 @@ final class EventControllerTest extends UnitTestCase
         $localizedMessage = 'Event deleted!';
         $this->stubRedirect();
 
-        $this->languageServiceMock->expects(self::once())->method('sL')
+        $this->languageServiceMock
+            ->expects(self::once())->method('sL')
             ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.eventDeleted')
             ->willReturn($localizedMessage);
         $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);
@@ -242,12 +243,13 @@ final class EventControllerTest extends UnitTestCase
      */
     public function searchActionPassesPermissionsToView(): void
     {
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
                 ['pageUid', self::anything()],
                 ['events', self::anything()],
-                ['searchTerm', self::anything()]
+                ['searchTerm', self::anything()],
             );
 
         $this->subject->searchAction(1, '');
@@ -260,12 +262,13 @@ final class EventControllerTest extends UnitTestCase
     {
         $pageUid = 8;
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', $pageUid],
                 ['events', self::anything()],
-                ['searchTerm', self::anything()]
+                ['searchTerm', self::anything()],
             );
 
         $this->subject->searchAction($pageUid, '');
@@ -280,14 +283,16 @@ final class EventControllerTest extends UnitTestCase
         $searchTerm = 'no dice';
 
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findBySearchTermInBackEndMode')
             ->with($pageUid, $searchTerm)->willReturn($events);
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['events', $events],
-                ['searchTerm', self::anything()]
+                ['searchTerm', self::anything()],
             );
 
         $this->subject->searchAction($pageUid, $searchTerm);
@@ -301,14 +306,16 @@ final class EventControllerTest extends UnitTestCase
         $pageUid = 8;
 
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findBySearchTermInBackEndMode')
             ->with($pageUid, '')->willReturn($events);
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['events', $events],
-                ['searchTerm', self::anything()]
+                ['searchTerm', self::anything()],
             );
 
         $this->subject->searchAction($pageUid);
@@ -320,9 +327,11 @@ final class EventControllerTest extends UnitTestCase
     public function searchActionEnrichesEventsWithRawData(): void
     {
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findBySearchTermInBackEndMode')
             ->with(self::anything(), self::anything())->willReturn($events);
-        $this->eventRepositoryMock->expects(self::once())->method('enrichWithRawData')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('enrichWithRawData')
             ->with($events);
 
         $this->subject->searchAction(1, '');
@@ -335,9 +344,11 @@ final class EventControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $events = [$event];
-        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findBySearchTermInBackEndMode')
             ->with(self::anything(), self::anything())->willReturn($events);
-        $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')
+        $this->eventStatisticsCalculatorMock
+            ->expects(self::once())->method('enrichWithStatistics')
             ->with($event);
 
         $this->subject->searchAction(1, '');
@@ -350,12 +361,13 @@ final class EventControllerTest extends UnitTestCase
     {
         $searchTerm = ' no dice ';
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['events', self::anything()],
-                ['searchTerm', \trim($searchTerm)]
+                ['searchTerm', \trim($searchTerm)],
             );
 
         $this->subject->searchAction(1, $searchTerm);
@@ -366,7 +378,8 @@ final class EventControllerTest extends UnitTestCase
      */
     public function searchActionLoadsJavaScriptModule(): void
     {
-        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+        $this->pageRendererMock
+            ->expects(self::once())->method('loadRequireJsModule')
             ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $this->subject->searchAction(1, 'specatacular event');

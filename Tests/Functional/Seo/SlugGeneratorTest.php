@@ -431,7 +431,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
         self::assertTrue($this->eventDispatcher->isDispatched());
         self::assertSame(
             'some-event',
-            $this->eventDispatcher->getEvent()->getSlugContext()->getSlugifiedTitle()
+            $this->eventDispatcher->getEvent()->getSlugContext()->getSlugifiedTitle(),
         );
     }
 

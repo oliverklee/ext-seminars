@@ -1266,7 +1266,7 @@ final class SingleEventTest extends UnitTestCase
             Price::PRICE_SPECIAL_EARLY_BIRD => new Price(
                 $specialEarlyBirdPriceAmount,
                 'price.specialEarlyBird',
-                Price::PRICE_SPECIAL_EARLY_BIRD
+                Price::PRICE_SPECIAL_EARLY_BIRD,
             ),
         ];
 
@@ -1307,7 +1307,7 @@ final class SingleEventTest extends UnitTestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(1668096769);
         $this->expectExceptionMessage(
-            'This event does not have a price with the code "' . Price::PRICE_EARLY_BIRD . '".'
+            'This event does not have a price with the code "' . Price::PRICE_EARLY_BIRD . '".',
         );
 
         $this->subject->getPriceByPriceCode(Price::PRICE_EARLY_BIRD);

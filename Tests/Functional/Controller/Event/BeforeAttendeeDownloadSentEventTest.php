@@ -57,7 +57,7 @@ final class BeforeAttendeeDownloadSentEventTest extends FunctionalTestCase
         $eventToDispatch = new BeforeAttendeeDownloadSentEvent(
             new Registration(),
             $this->createStub(ResourceInterface::class),
-            $this->createStub(StreamInterface::class)
+            $this->createStub(StreamInterface::class),
         );
         $this->eventDispatcher->dispatch($eventToDispatch);
 

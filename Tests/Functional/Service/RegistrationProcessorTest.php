@@ -43,7 +43,7 @@ final class RegistrationProcessorTest extends FunctionalTestCase
             $this->createStub(EventRepository::class),
             $this->createStub(FrontendUserRepository::class),
             $this->createStub(RegistrationGuard::class),
-            $this->createStub(RegistrationManager::class)
+            $this->createStub(RegistrationManager::class),
         );
     }
 

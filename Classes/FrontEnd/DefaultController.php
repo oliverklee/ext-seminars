@@ -222,13 +222,13 @@ class DefaultController extends TemplateHelper
                     $this->conf,
                     $this->whatToDisplay,
                     (int)($this->piVars['seminar'] ?? 0),
-                    $this->cObj
+                    $this->cObj,
                 );
                 $result = $registrationsList->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new RegistrationListConfigurationCheck(
                         $this->getConfigurationWithFlexForms(),
-                        'plugin.tx_seminars_pi1'
+                        'plugin.tx_seminars_pi1',
                     );
                     $configurationCheck->check();
                     $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
@@ -238,13 +238,13 @@ class DefaultController extends TemplateHelper
                 $categoryList = GeneralUtility::makeInstance(
                     CategoryList::class,
                     $this->conf,
-                    $this->cObj
+                    $this->cObj,
                 );
                 $result = $categoryList->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new CategoryListConfigurationCheck(
                         $this->getConfigurationWithFlexForms(),
-                        'plugin.tx_seminars_pi1'
+                        'plugin.tx_seminars_pi1',
                     );
                     $configurationCheck->check();
                     $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
@@ -369,7 +369,7 @@ class DefaultController extends TemplateHelper
                 $this->whatToDisplay,
                 0,
                 $this->getConfValueInteger('registrationsVipListPID'),
-                $this->getConfValueString('accessToFrontEndRegistrationLists')
+                $this->getConfValueString('accessToFrontEndRegistrationLists'),
             )
         ) {
             // So a link to the VIP list is possible.
@@ -379,7 +379,7 @@ class DefaultController extends TemplateHelper
                 $this->whatToDisplay,
                 $this->getConfValueInteger('registrationsListPID'),
                 0,
-                $this->getConfValueString('accessToFrontEndRegistrationLists')
+                $this->getConfValueString('accessToFrontEndRegistrationLists'),
             )
         ) {
             // No link to the VIP list ... so maybe to the list for the participants.
@@ -390,7 +390,7 @@ class DefaultController extends TemplateHelper
             $result = $this->cObj->getTypoLink(
                 $this->translate('label_listRegistrationsLink'),
                 (string)$targetPageId,
-                ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
+                ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()],
             );
         }
 
@@ -422,12 +422,12 @@ class DefaultController extends TemplateHelper
                 ['event' => $eventId],
                 '',
                 false,
-                true
+                true,
             );
         }
 
         $redirectUrl = GeneralUtility::locationHeaderUrl(
-            $this->cObj->typoLink_URL($linkConfiguration)
+            $this->cObj->typoLink_URL($linkConfiguration),
         );
 
         // XXX We need to do this workaround of manually encoding brackets in
@@ -436,7 +436,7 @@ class DefaultController extends TemplateHelper
         $redirectUrl = preg_replace(
             ['/\\[/', '/\\]/'],
             ['%5B', '%5D'],
-            $redirectUrl
+            $redirectUrl,
         );
 
         return $this->cObj->typoLink(
@@ -448,9 +448,9 @@ class DefaultController extends TemplateHelper
                     [
                         rawurlencode('tx_seminars_pi1[uid]') => $eventId,
                         'redirect_url' => $redirectUrl,
-                    ]
+                    ],
                 ),
-            ]
+            ],
         );
     }
 
@@ -485,7 +485,7 @@ class DefaultController extends TemplateHelper
         if ($this->isConfigurationCheckEnabled()) {
             $configurationCheck = new SingleViewConfigurationCheck(
                 $this->getConfigurationWithFlexForms(),
-                'plugin.tx_seminars_pi1'
+                'plugin.tx_seminars_pi1',
             );
             $configurationCheck->check();
             $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
@@ -657,7 +657,7 @@ class DefaultController extends TemplateHelper
 
         $this->setMarker(
             'accreditation_number',
-            \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5)
+            \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5),
         );
     }
 
@@ -702,7 +702,7 @@ class DefaultController extends TemplateHelper
             'place',
             $this->getConfValueBoolean('showSiteDetails', 's_template_special')
                 ? $this->seminar->getPlaceWithDetails($this)
-                : \htmlspecialchars($this->seminar->getPlaceShort(), ENT_QUOTES | ENT_HTML5)
+                : \htmlspecialchars($this->seminar->getPlaceShort(), ENT_QUOTES | ENT_HTML5),
         );
     }
 
@@ -859,7 +859,7 @@ class DefaultController extends TemplateHelper
         $this->setMarker('price_regular', $this->seminar->getCurrentPriceRegular());
         $this->hideSubparts(
             'price_special,price_earlybird_regular,price_earlybird_special',
-            'field_wrapper'
+            'field_wrapper',
         );
     }
 
@@ -872,7 +872,7 @@ class DefaultController extends TemplateHelper
             $this->setMarker('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
             $this->setMarker(
                 'message_earlybird_price_regular',
-                sprintf($this->translate('message_earlybird_price'), $this->seminar->getEarlyBirdDeadline())
+                sprintf($this->translate('message_earlybird_price'), $this->seminar->getEarlyBirdDeadline()),
             );
             $this->setMarker('price_regular', $this->seminar->getPriceRegular());
         } else {
@@ -894,7 +894,7 @@ class DefaultController extends TemplateHelper
                 $this->setMarker('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
                 $this->setMarker(
                     'message_earlybird_price_special',
-                    sprintf($this->translate('message_earlybird_price'), $this->seminar->getEarlyBirdDeadline())
+                    sprintf($this->translate('message_earlybird_price'), $this->seminar->getEarlyBirdDeadline()),
                 );
                 $this->setMarker('price_special', $this->seminar->getPriceSpecial());
             } else {
@@ -942,7 +942,7 @@ class DefaultController extends TemplateHelper
 
         $this->setMarker(
             'additional_information',
-            $this->renderAsRichText($this->seminar->getAdditionalInformation())
+            $this->renderAsRichText($this->seminar->getAdditionalInformation()),
         );
     }
 
@@ -964,7 +964,7 @@ class DefaultController extends TemplateHelper
             $encodedTitle = \htmlspecialchars((string)$file->getTitle(), ENT_QUOTES | ENT_HTML5);
             $encodedFileName = \htmlspecialchars(
                 $file->getNameWithoutExtension() . '.' . $file->getExtension(),
-                ENT_QUOTES | ENT_HTML5
+                ENT_QUOTES | ENT_HTML5,
             );
             $link = '<a href="' . $encodedUrl . '" title="' . $encodedTitle . '">' . $encodedFileName . '</a>';
             $this->setMarker('attached_file_name', $link);
@@ -1014,7 +1014,7 @@ class DefaultController extends TemplateHelper
 
         $this->setSubpart(
             'FIELD_WRAPPER_REQUIREMENTS',
-            $requirementsLists->render()
+            $requirementsLists->render(),
         );
     }
 
@@ -1039,7 +1039,7 @@ class DefaultController extends TemplateHelper
             $event = $eventMapper->find($dependencyUid);
             $this->setMarker(
                 'dependency_title',
-                $this->createSingleViewLink($event, $event->getTitle())
+                $this->createSingleViewLink($event, $event->getTitle()),
             );
             $output .= $this->getSubpart('SINGLE_DEPENDENCY');
         }
@@ -1127,7 +1127,7 @@ class DefaultController extends TemplateHelper
             'registration',
             $this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)
                 ? $this->getRegistrationManager()->getLinkToRegistrationPage($this, $this->seminar)
-                : $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar)
+                : $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar),
         );
     }
 
@@ -1142,7 +1142,7 @@ class DefaultController extends TemplateHelper
             $this->whatToDisplay,
             $this->getConfValueInteger('registrationsListPID'),
             $this->getConfValueInteger('registrationsVipListPID'),
-            $this->getConfValueString('accessToFrontEndRegistrationLists')
+            $this->getConfValueString('accessToFrontEndRegistrationLists'),
         );
 
         if (!$canViewListOfRegistrations) {
@@ -1166,7 +1166,7 @@ class DefaultController extends TemplateHelper
             'accreditation_number,date,time,place,room,speakers,organizers,' .
             'vacancies,deadline_registration,registration,' .
             'list_registrations,eventsnextday',
-            'field_wrapper'
+            'field_wrapper',
         );
     }
 
@@ -1210,7 +1210,7 @@ class DefaultController extends TemplateHelper
 
         $configurationCheck = new ListViewConfigurationCheck(
             $this->getConfigurationWithFlexForms(),
-            'plugin.tx_seminars_pi1'
+            'plugin.tx_seminars_pi1',
         );
         $configurationCheck->check();
 
@@ -1239,7 +1239,7 @@ class DefaultController extends TemplateHelper
                 \in_array(
                     $this->seminar->getRecordType(),
                     [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_TOPIC],
-                    true
+                    true,
                 )
             ) {
                 $this->setMarker('label_list_otherdates', $this->translate('label_list_dates'));
@@ -1299,7 +1299,7 @@ class DefaultController extends TemplateHelper
                 'age',
                 'price_from',
                 'price_to',
-            ]
+            ],
         );
 
         switch ($whatToDisplay) {
@@ -1311,7 +1311,7 @@ class DefaultController extends TemplateHelper
                     $result .= $this->getSubpart('ERROR_VIEW');
                     $result .= $this->getLoginLink(
                         $this->translate('message_pleaseLogIn'),
-                        (int)$this->getFrontEndController()->id
+                        (int)$this->getFrontEndController()->id,
                     );
                     $isOkay = false;
                 }
@@ -1324,7 +1324,7 @@ class DefaultController extends TemplateHelper
                     $result .= $this->getSubpart('ERROR_VIEW');
                     $result .= $this->getLoginLink(
                         $this->translate('message_pleaseLogIn'),
-                        (int)$this->getFrontEndController()->id
+                        (int)$this->getFrontEndController()->id,
                     );
                     $isOkay = false;
                 }
@@ -1332,7 +1332,7 @@ class DefaultController extends TemplateHelper
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new MyVipEventsConfigurationCheck(
                         $this->getConfigurationWithFlexForms(),
-                        'plugin.tx_seminars_pi1'
+                        'plugin.tx_seminars_pi1',
                     );
                     $configurationCheck->check();
                     $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
@@ -1355,7 +1355,7 @@ class DefaultController extends TemplateHelper
             } else {
                 $this->setMarker(
                     'error_text',
-                    $this->translate('message_noResults')
+                    $this->translate('message_noResults'),
                 );
                 $result .= $this->getSubpart('ERROR_VIEW');
             }
@@ -1404,14 +1404,14 @@ class DefaultController extends TemplateHelper
             $this->getListViewConfValueInteger('results_at_a_time'),
             0,
             1000,
-            20
+            20,
         );
         // maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
         $this->internal['maxPages'] = MathUtility::forceIntegerInRange(
             $this->getListViewConfValueInteger('maxPages'),
             0,
             1000,
-            2
+            2,
         );
 
         if ($whatToDisplay === 'my_events') {
@@ -1466,7 +1466,8 @@ class DefaultController extends TemplateHelper
         if ($builder instanceof EventBagBuilder) {
             $this->getListViewHookProvider()->executeHook('modifyEventBagBuilder', $this, $builder, $whatToDisplay);
         } elseif ($builder instanceof RegistrationBagBuilder) {
-            $this->getListViewHookProvider()
+            $this
+                ->getListViewHookProvider()
                 ->executeHook('modifyRegistrationBagBuilder', $this, $builder, $whatToDisplay);
         }
 
@@ -1654,7 +1655,7 @@ class DefaultController extends TemplateHelper
             $this->setMarker('event_type', \htmlspecialchars($this->seminar->getEventType(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker(
                 'accreditation_number',
-                \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5)
+                \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5),
             );
             $this->setMarker('credit_points', $this->seminar->getCreditPoints());
             $this->setMarker('teaser', $this->createSingleViewLink($event, $event->getTeaser()));
@@ -1679,7 +1680,7 @@ class DefaultController extends TemplateHelper
             $this->setMarker('organizers', $this->seminar->getOrganizers($this));
             $this->setMarker(
                 'target_groups',
-                \htmlspecialchars($this->seminar->getTargetGroupNames(), ENT_QUOTES | ENT_HTML5)
+                \htmlspecialchars($this->seminar->getTargetGroupNames(), ENT_QUOTES | ENT_HTML5),
             );
             $this->setMarker('attached_files', $this->getAttachedFilesListMarkerContent());
             $this->setMarker('vacancies', $this->seminar->getVacanciesString());
@@ -1780,7 +1781,7 @@ class DefaultController extends TemplateHelper
                 $label,
                 ['sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1)],
                 false,
-                true
+                true,
             );
         } else {
             $result = \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5);
@@ -1806,7 +1807,7 @@ class DefaultController extends TemplateHelper
         $selectorWidget = GeneralUtility::makeInstance(
             SelectorWidget::class,
             $this->conf,
-            $this->cObj
+            $this->cObj,
         );
 
         return $selectorWidget->render();
@@ -1829,14 +1830,14 @@ class DefaultController extends TemplateHelper
                 GeneralUtility::intExplode(
                     ',',
                     $this->getConfValueString('limitListViewToPlaces', 's_listView'),
-                    true
-                )
+                    true,
+                ),
             );
         }
 
         if (\is_array($this->piVars['city'] ?? null)) {
             $builder->limitToCities(
-                SelectorWidget::removeDummyOptionFromFormData($this->piVars['city'])
+                SelectorWidget::removeDummyOptionFromFormData($this->piVars['city']),
             );
         }
         $organizerUids = $this->getIntegerArrayFromRequest('organizer');
@@ -1864,8 +1865,8 @@ class DefaultController extends TemplateHelper
                 GeneralUtility::intExplode(
                     ',',
                     $this->getConfValueString('limitListViewToEventTypes', 's_listView'),
-                    true
-                )
+                    true,
+                ),
             );
         }
 
@@ -1955,7 +1956,7 @@ class DefaultController extends TemplateHelper
 
         $prefixedClasses = array_map(
             [$this, 'pi_getClassName'],
-            $classes
+            $classes,
         );
 
         return ' ' . implode(' ', $prefixedClasses);
@@ -1983,7 +1984,7 @@ class DefaultController extends TemplateHelper
         $permanentlyHiddenColumns = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('hideColumns', 's_template_special'),
-            true
+            true,
         );
 
         $this->unhideSubpartsArray($columnsToUnhide, $permanentlyHiddenColumns, 'LISTHEADER_WRAPPER');
@@ -2060,7 +2061,7 @@ class DefaultController extends TemplateHelper
                 'organizers',
                 'vacancies',
                 'registration',
-            ]
+            ],
         );
     }
 
@@ -2075,7 +2076,7 @@ class DefaultController extends TemplateHelper
     {
         if ($whatToDisplay !== 'my_events') {
             $this->hideColumns(
-                ['expiry', 'seats', 'total_price', 'status_registration']
+                ['expiry', 'seats', 'total_price', 'status_registration'],
             );
         }
     }
@@ -2089,7 +2090,7 @@ class DefaultController extends TemplateHelper
         $columns = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('hideColumns', 's_template_special'),
-            true
+            true,
         );
         $columns[] = 'country';
         $columns[] = 'language';
@@ -2108,15 +2109,15 @@ class DefaultController extends TemplateHelper
             throw new \InvalidArgumentException(
                 'The given speaker type "' . $speakerType .
                 '" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',
-                1333293103
+                1333293103,
             );
         }
 
         $this->setMarker(
             'label_' . $speakerType,
             $this->translate(
-                'label_' . $this->seminar->getLanguageKeySuffixForType($speakerType)
-            )
+                'label_' . $this->seminar->getLanguageKeySuffixForType($speakerType),
+            ),
         );
     }
 
@@ -2146,7 +2147,7 @@ class DefaultController extends TemplateHelper
             if ($organizer->hasDescription()) {
                 $this->setMarker(
                     'organizer_description_content',
-                    $this->renderAsRichText($organizer->getDescription())
+                    $this->renderAsRichText($organizer->getDescription()),
                 );
                 $description = $this->getSubpart('ORGANIZER_DESCRIPTION_ITEM');
             } else {
@@ -2171,7 +2172,7 @@ class DefaultController extends TemplateHelper
             $this->setMarker(
                 'registration',
                 $this->seminar->isUnregistrationPossible()
-                    ? $this->getRegistrationManager()->getLinkToUnregistrationPage($this, $this->registration) : ''
+                    ? $this->getRegistrationManager()->getLinkToUnregistrationPage($this, $this->registration) : '',
             );
 
             return;
@@ -2182,7 +2183,7 @@ class DefaultController extends TemplateHelper
         if ($registrationLink === '' && !$this->getRegistrationManager()->registrationHasStarted($this->seminar)) {
             $registrationLink = sprintf(
                 $this->translate('message_registrationOpensOn'),
-                $this->seminar->getRegistrationBegin()
+                $this->seminar->getRegistrationBegin(),
             );
         }
 
@@ -2243,7 +2244,7 @@ class DefaultController extends TemplateHelper
         $year = (int)($this->piVars['from_year'] ?? 0) > 0
             ? (int)($this->piVars['from_year'] ?? 0) : (int)date(
                 'Y',
-                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
             );
 
         return mktime(0, 0, 0, $month, $day, $year);
@@ -2267,7 +2268,7 @@ class DefaultController extends TemplateHelper
             ? (int)($this->piVars['to_year'] ?? 0)
             : (int)date(
                 'Y',
-                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
             );
 
         $day = (int)($this->piVars['to_day'] ?? 0);
@@ -2326,7 +2327,7 @@ class DefaultController extends TemplateHelper
             $encodedTitle = \htmlspecialchars((string)$file->getTitle(), ENT_QUOTES | ENT_HTML5);
             $encodedFileName = \htmlspecialchars(
                 $file->getNameWithoutExtension() . '.' . $file->getExtension(),
-                ENT_QUOTES | ENT_HTML5
+                ENT_QUOTES | ENT_HTML5,
             );
             $link = '<a href="' . $encodedUrl . '" title="' . $encodedTitle . '">' . $encodedFileName . '</a>';
             $this->setMarker('attached_files_single_title', $link);

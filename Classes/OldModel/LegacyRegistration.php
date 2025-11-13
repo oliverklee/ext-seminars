@@ -135,7 +135,7 @@ class LegacyRegistration extends AbstractModel
         if (!\is_array($data)) {
             throw new NotFoundException(
                 'The FE user with the UID ' . $uid . ' could not be retrieved.',
-                1390065114
+                1390065114,
             );
         }
 
@@ -758,7 +758,7 @@ class LegacyRegistration extends AbstractModel
 
         return \implode(
             "\n",
-            $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm')
+            $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm'),
         );
     }
 

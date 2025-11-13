@@ -49,12 +49,12 @@ final class EventDateTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
                 'title' => 'Supervillain',
-            ]
+            ],
         );
 
         self::assertSame(
             'Superhero',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -69,12 +69,12 @@ final class EventDateTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
                 'title' => 'Supervillain',
-            ]
+            ],
         );
 
         self::assertSame(
             'Supervillain',
-            $this->subject->getRawTitle()
+            $this->subject->getRawTitle(),
         );
     }
 
@@ -91,12 +91,12 @@ final class EventDateTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
-            ]
+            ],
         );
 
         self::assertEquals(
             '',
-            $this->subject->getTeaser()
+            $this->subject->getTeaser(),
         );
     }
 
@@ -111,12 +111,12 @@ final class EventDateTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
-            ]
+            ],
         );
 
         self::assertEquals(
             'wow, this is teasing',
-            $this->subject->getTeaser()
+            $this->subject->getTeaser(),
         );
     }
 
@@ -133,11 +133,11 @@ final class EventDateTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
-            ]
+            ],
         );
 
         self::assertFalse(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 
@@ -148,17 +148,17 @@ final class EventDateTest extends FunctionalTestCase
     {
         $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(
-                ['description' => 'this is a great event.']
+                ['description' => 'this is a great event.'],
             );
         $this->subject->setData(
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 }

@@ -31,7 +31,7 @@ final class EventBagTest extends FunctionalTestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'test event']
+            ['title' => 'test event'],
         );
 
         $this->subject = new EventBag();
@@ -54,7 +54,7 @@ final class EventBagTest extends FunctionalTestCase
     public function bagCanHaveAtLeastOneElement(): void
     {
         self::assertFalse(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 }

@@ -83,14 +83,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['hidden' => 1]
+            ['hidden' => 1],
         );
 
         $this->subject->setBackEndMode();
         $bag = $this->subject->build();
 
         self::assertFalse(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -104,12 +104,12 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'endtime' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - 1000,
-            ]
+            ],
         );
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -123,14 +123,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'endtime' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - 1000,
-            ]
+            ],
         );
 
         $this->subject->setBackEndMode();
         $bag = $this->subject->build();
 
         self::assertFalse(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -146,23 +146,23 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToPlaces([$siteUid]);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -173,13 +173,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->subject->limitToPlaces([$siteUid]);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -192,28 +192,28 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $siteUid1
+            $siteUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid2,
-            $siteUid2
+            $siteUid2,
         );
         $this->subject->limitToPlaces([$siteUid1, $siteUid2]);
         $bag = $this->subject->build();
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -224,7 +224,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->subject->limitToPlaces([$siteUid]);
         $this->subject->limitToPlaces();
@@ -232,7 +232,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -245,18 +245,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid1
+            $siteUid1,
         );
         $this->subject->limitToPlaces([$siteUid2]);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -269,24 +269,24 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid1
+            $siteUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid2
+            $siteUid2,
         );
         $this->subject->limitToPlaces([$siteUid1]);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -300,7 +300,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToPlaces([(string)$siteUid]);
         $bag = $this->subject->build();
@@ -350,7 +350,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
 
         $this->subject->limitToPlaces([$siteUid, $invalidUid]);
@@ -371,13 +371,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => 1]
+            ['cancelled' => 1],
         );
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -388,14 +388,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => 1]
+            ['cancelled' => 1],
         );
 
         $this->subject->ignoreCanceledEvents();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -406,7 +406,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED],
         );
 
         $this->subject->ignoreCanceledEvents();
@@ -414,7 +414,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -425,7 +425,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => 1]
+            ['cancelled' => 1],
         );
 
         $this->subject->allowCanceledEvents();
@@ -433,7 +433,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -444,7 +444,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => 1]
+            ['cancelled' => 1],
         );
 
         $this->subject->ignoreCanceledEvents();
@@ -453,7 +453,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -464,7 +464,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => 1]
+            ['cancelled' => 1],
         );
 
         $this->subject->allowCanceledEvents();
@@ -472,7 +472,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -524,7 +524,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('past');
@@ -532,7 +532,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -547,7 +547,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('past');
@@ -555,7 +555,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -571,14 +571,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('past');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -594,14 +594,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('past');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -616,14 +616,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('past');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -637,14 +637,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('past');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -666,7 +666,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('pastAndCurrent');
@@ -674,7 +674,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -689,7 +689,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('pastAndCurrent');
@@ -697,7 +697,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -713,7 +713,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('pastAndCurrent');
@@ -721,7 +721,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -737,14 +737,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('pastAndCurrent');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -759,14 +759,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('pastAndCurrent');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -780,14 +780,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('pastAndCurrent');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -809,14 +809,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('current');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -831,14 +831,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('current');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -854,7 +854,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('current');
@@ -862,7 +862,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -878,14 +878,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('current');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -900,14 +900,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('current');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -921,14 +921,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('current');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -950,14 +950,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('currentAndUpcoming');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -972,14 +972,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('currentAndUpcoming');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -995,7 +995,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('currentAndUpcoming');
@@ -1003,7 +1003,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1019,7 +1019,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('currentAndUpcoming');
@@ -1027,7 +1027,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1042,7 +1042,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('currentAndUpcoming');
@@ -1050,7 +1050,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1064,7 +1064,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('currentAndUpcoming');
@@ -1072,7 +1072,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1094,14 +1094,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcoming');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1116,14 +1116,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcoming');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1139,14 +1139,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcoming');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1162,7 +1162,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcoming');
@@ -1170,7 +1170,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1185,7 +1185,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcoming');
@@ -1193,7 +1193,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1207,7 +1207,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcoming');
@@ -1215,7 +1215,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1237,14 +1237,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcomingWithBeginDate');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1259,14 +1259,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcomingWithBeginDate');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1282,14 +1282,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcomingWithBeginDate');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1305,7 +1305,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcomingWithBeginDate');
@@ -1313,7 +1313,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1328,7 +1328,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcomingWithBeginDate');
@@ -1336,7 +1336,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1350,7 +1350,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('upcomingWithBeginDate');
@@ -1358,7 +1358,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1381,14 +1381,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1404,14 +1404,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1428,14 +1428,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1452,7 +1452,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
@@ -1460,7 +1460,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1478,7 +1478,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
                 'deadline_registration' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
@@ -1486,7 +1486,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1504,14 +1504,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
                 'deadline_registration' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1527,7 +1527,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
@@ -1535,7 +1535,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1550,7 +1550,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => 0,
                 'end_date' => 0,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('deadlineNotOver');
@@ -1558,7 +1558,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1579,7 +1579,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
@@ -1587,7 +1587,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1602,14 +1602,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1625,7 +1625,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
@@ -1633,7 +1633,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1649,7 +1649,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
@@ -1657,7 +1657,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1673,7 +1673,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
@@ -1681,7 +1681,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1697,14 +1697,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1720,14 +1720,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1741,14 +1741,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('today');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -1770,7 +1770,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('all');
@@ -1778,7 +1778,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1793,7 +1793,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('all');
@@ -1801,7 +1801,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1817,7 +1817,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('all');
@@ -1825,7 +1825,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1841,7 +1841,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_WEEK,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('all');
@@ -1849,7 +1849,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1864,7 +1864,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('all');
@@ -1872,7 +1872,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1886,7 +1886,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
 
         $this->subject->setTimeFrame('all');
@@ -1894,7 +1894,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1909,24 +1909,24 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
         $bag = $this->subject->build();
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1937,18 +1937,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes();
@@ -1956,7 +1956,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1967,18 +1967,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -1987,7 +1987,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -1997,14 +1997,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventTypesCanResultInOneEvent(): void
     {
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -2012,7 +2012,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2022,21 +2022,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventTypesCanResultInTwoEvents(): void
     {
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -2044,7 +2044,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2055,18 +2055,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -2074,11 +2074,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -2088,25 +2088,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventTypesWillExcludeEventsOfOtherTypes(): void
     {
         $typeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid1,
-            ]
+            ],
         );
 
         $typeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid2,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid1]);
@@ -2114,11 +2114,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid1,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -2129,29 +2129,29 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
 
         $typeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid1,
-            ]
+            ],
         );
 
         $typeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
 
         $this->subject->limitToEventTypes([$typeUid2]);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2166,14 +2166,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -2189,21 +2189,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventTypesFindsDateRecordForSingle(): void
     {
         $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -2211,7 +2211,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2221,18 +2221,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventTypesIgnoresTopicOfDateRecord(): void
     {
         $typeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid1,
-            ]
+            ],
         );
 
         $typeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2240,14 +2240,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'event_type' => $typeUid2,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid2]);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2257,25 +2257,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventTypesCanFindEventsFromMultipleTypes(): void
     {
         $typeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid1,
-            ]
+            ],
         );
 
         $typeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'event_type' => $typeUid2,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid1, $typeUid2]);
@@ -2283,7 +2283,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2298,7 +2298,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $typeUid,
-            ]
+            ],
         );
 
         $this->subject->limitToEventTypes([$typeUid]);
@@ -2324,7 +2324,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $typeUid = $this->testingFramework->createRecord('tx_seminars_event_types');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT, 'event_type' => $typeUid]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT, 'event_type' => $typeUid],
         );
 
         $this->subject->limitToEventTypes([$typeUid, $invalidUid]);
@@ -2344,27 +2344,27 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToCities(['test city 1']);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -2375,22 +2375,22 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 2']
+            ['city' => 'test city 2'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToCities(['test city 1']);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2401,36 +2401,36 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $siteUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 2']
+            ['city' => 'test city 2'],
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $siteUid1
+            $siteUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid2,
-            $siteUid2
+            $siteUid2,
         );
         $this->subject->limitToCities(['test city 1', 'test city 2']);
         $bag = $this->subject->build();
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2441,16 +2441,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToCities(['test city 2']);
         $this->subject->limitToCities();
@@ -2458,7 +2458,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2469,22 +2469,22 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToCities(['test city 2']);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2496,18 +2496,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid
+            $siteUid,
         );
         $this->subject->limitToCities(['test city 1']);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2518,32 +2518,32 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $siteUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 2']
+            ['city' => 'test city 2'],
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $siteUid1
+            $siteUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $siteUid2
+            $siteUid2,
         );
         $this->subject->limitToCities(['test city 1', 'test city 2']);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2554,32 +2554,32 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $siteUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 2']
+            ['city' => 'test city 2'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 2]
+            ['place' => 2],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid1
+            $siteUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $siteUid2
+            $siteUid2,
         );
         $this->subject->limitToCities(['test city 1']);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2590,32 +2590,32 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 1']
+            ['city' => 'test city 1'],
         );
         $siteUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'test city 3']
+            ['city' => 'test city 3'],
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 2]
+            ['place' => 2],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $siteUid1
+            $siteUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $siteUid2
+            $siteUid2,
         );
         $this->subject->limitToCities(['test city 2', 'test city 3']);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2650,14 +2650,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->subject->limitToTopicRecords();
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2668,13 +2668,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
         $this->subject->limitToTopicRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2685,13 +2685,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_DATE]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE],
         );
         $this->subject->limitToTopicRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2706,7 +2706,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
         $this->subject->limitToTopicRecords();
         $this->subject->removeLimitToTopicRecords();
@@ -2714,7 +2714,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2725,7 +2725,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_DATE]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE],
         );
         $this->subject->limitToTopicRecords();
         $this->subject->removeLimitToTopicRecords();
@@ -2733,7 +2733,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2748,14 +2748,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_DATE]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE],
         );
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2766,14 +2766,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2784,13 +2784,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2801,7 +2801,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->subject->limitToDateAndSingleRecords();
         $this->subject->removeLimitToDateAndSingleRecords();
@@ -2809,7 +2809,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2837,12 +2837,12 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['vips' => 1]
+            ['vips' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_feusers_mm',
             $eventUid,
-            $feUserUid
+            $feUserUid,
         );
 
         $this->subject->limitToEventManager($feUserUid);
@@ -2850,7 +2850,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2861,14 +2861,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->subject->limitToEventManager($feUserUid);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2879,7 +2879,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->subject->limitToEventManager($feUserUid);
@@ -2888,7 +2888,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -2903,14 +2903,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'begin_date' => 2 * Time::SECONDS_PER_DAY,
                 'end_date' => 60 * 60 + 2 * Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $event = new LegacyEvent($eventUid1);
         $this->subject->limitToEventsNextDay($event);
@@ -2918,11 +2918,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid2,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -2933,21 +2933,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'begin_date' => 0,
                 'end_date' => 60 * 60,
-            ]
+            ],
         );
         $event = new LegacyEvent($eventUid);
         $this->subject->limitToEventsNextDay($event);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2958,21 +2958,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'begin_date' => 3 * Time::SECONDS_PER_DAY,
                 'end_date' => 60 * 60 + 3 * Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $event = new LegacyEvent($eventUid);
         $this->subject->limitToEventsNextDay($event);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -2982,18 +2982,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToEventsNextDayWithEventWithEmptyEndDateThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
             'The event object given in the first parameter $event must ' .
-            'have an end date set.'
+            'have an end date set.',
         );
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->subject->limitToEventsNextDay(
-            new LegacyEvent($eventUid)
+            new LegacyEvent($eventUid),
         );
     }
 
@@ -3008,21 +3008,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $dateUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $date = new LegacyEvent($dateUid1);
         $this->subject->limitToOtherDatesForTopic($date);
@@ -3030,11 +3030,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid2,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3045,21 +3045,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $topic = new LegacyEvent($topicUid);
         $this->subject->limitToOtherDatesForTopic($topic);
@@ -3067,7 +3067,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -3077,15 +3077,15 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOtherDatesForTopicWithSingleEventRecordThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The first parameter $event must be either a date or a topic record.'
+            'The first parameter $event must be either a date or a topic record.',
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT],
         );
         $event = new LegacyEvent($eventUid);
         $this->subject->limitToOtherDatesForTopic($event);
@@ -3098,32 +3098,32 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $topicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid1,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid2,
-            ]
+            ],
         );
         $date = new LegacyEvent($dateUid1);
         $this->subject->limitToOtherDatesForTopic($date);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3134,28 +3134,28 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $date = new LegacyEvent($dateUid);
         $this->subject->limitToOtherDatesForTopic($date);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3166,25 +3166,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $topicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid1,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid2,
-            ]
+            ],
         );
         $date = new LegacyEvent($dateUid1);
         $this->subject->limitToOtherDatesForTopic($date);
@@ -3193,7 +3193,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             4,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -3204,21 +3204,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $date = new LegacyEvent($dateUid);
         $this->subject->limitToOtherDatesForTopic($date);
@@ -3227,7 +3227,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             3,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -3242,18 +3242,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado paprika event']
+            ['title' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch(',,');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3264,18 +3264,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado paprika event']
+            ['title' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado  paprika');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3286,18 +3286,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado paprika event']
+            ['title' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch(',  ,');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3308,18 +3308,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado paprika event']
+            ['title' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch('o');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3333,18 +3333,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'accreditation_number' => 'avocado paprika event',
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3358,13 +3358,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'accreditation_number' => 'paprika event',
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3375,18 +3375,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado paprika event']
+            ['title' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3397,13 +3397,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'paprika event']
+            ['title' => 'paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3414,18 +3414,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['subtitle' => 'avocado paprika event']
+            ['subtitle' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3436,13 +3436,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['subtitle' => 'paprika event']
+            ['subtitle' => 'paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3453,18 +3453,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['description' => 'avocado paprika event']
+            ['description' => 'avocado paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3475,13 +3475,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['description' => 'paprika event']
+            ['description' => 'paprika event'],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3492,30 +3492,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['title' => 'avocado paprika speaker']
+            ['title' => 'avocado paprika speaker'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $eventUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3526,25 +3526,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['title' => 'paprika speaker']
+            ['title' => 'paprika speaker'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $eventUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3555,30 +3555,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'avocado paprika place']
+            ['title' => 'avocado paprika place'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3589,25 +3589,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'paprika place']
+            ['title' => 'paprika place'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3618,30 +3618,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'avocado paprika city']
+            ['city' => 'avocado paprika city'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3652,25 +3652,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'paprika city']
+            ['city' => 'paprika city'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3681,25 +3681,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'avocado paprika event type']
+            ['title' => 'avocado paprika event type'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3710,20 +3710,20 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'paprika event type']
+            ['title' => 'paprika event type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3734,30 +3734,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'avocado paprika category']
+            ['title' => 'avocado paprika category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'categories' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3768,25 +3768,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'paprika category']
+            ['title' => 'paprika category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'categories' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3797,18 +3797,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado event paprika']
+            ['title' => 'avocado event paprika'],
         );
         $this->subject->limitToFullTextSearch('avocado paprika');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3819,18 +3819,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'avocado event paprika']
+            ['title' => 'avocado event paprika'],
         );
         $this->subject->limitToFullTextSearch('avocado,paprika');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3841,30 +3841,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['title' => 'avocado paprika place']
+            ['title' => 'avocado paprika place'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'target_groups' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_target_groups_mm',
             $eventUid,
-            $targetGroupUid
+            $targetGroupUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3875,25 +3875,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['title' => 'paprika place']
+            ['title' => 'paprika place'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'target_groups' => 1,
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_target_groups_mm',
             $eventUid,
-            $targetGroupUid
+            $targetGroupUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3911,14 +3911,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'title' => 'avocado paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
@@ -3926,11 +3926,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -3944,21 +3944,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'title' => 'paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -3972,14 +3972,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'subtitle' => 'avocado paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
@@ -3987,11 +3987,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4005,21 +4005,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'subtitle' => 'paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4033,14 +4033,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'description' => 'avocado paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
@@ -4048,11 +4048,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4066,21 +4066,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'description' => 'paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4091,26 +4091,26 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'avocado paprika category']
+            ['title' => 'avocado paprika category'],
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'categories' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $topicUid,
-            $categoryUid
+            $categoryUid,
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
@@ -4118,11 +4118,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4133,33 +4133,33 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'paprika category']
+            ['title' => 'paprika category'],
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'categories' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $topicUid,
-            $categoryUid
+            $categoryUid,
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4170,21 +4170,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'avocado paprika event type']
+            ['title' => 'avocado paprika event type'],
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
@@ -4192,11 +4192,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4207,28 +4207,28 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'paprika event type']
+            ['title' => 'paprika event type'],
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4246,18 +4246,18 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'accreditation_number' => 'avocado paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4271,13 +4271,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'accreditation_number' => 'paprika event',
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4288,30 +4288,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['title' => 'avocado paprika speaker']
+            ['title' => 'avocado paprika speaker'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $eventUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4322,25 +4322,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['title' => 'paprika speaker']
+            ['title' => 'paprika speaker'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $eventUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4351,30 +4351,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'avocado paprika place']
+            ['title' => 'avocado paprika place'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4385,25 +4385,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'paprika place']
+            ['title' => 'paprika place'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4414,30 +4414,30 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'avocado paprika city']
+            ['city' => 'avocado paprika city'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $eventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4448,25 +4448,25 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'paprika city']
+            ['city' => 'paprika city'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'place' => 1,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->limitToFullTextSearch('avocado');
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -4481,23 +4481,23 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['requirements' => 1]
+            ['requirements' => 1],
         );
         $requiredEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $eventUid,
-            $requiredEventUid
+            $requiredEventUid,
         );
         $this->subject->limitToRequiredEventTopics($eventUid);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4508,24 +4508,24 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['requirements' => 1]
+            ['requirements' => 1],
         );
         $requiredEventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $requiredEventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $eventUid,
-            $requiredEventUid1
+            $requiredEventUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $eventUid,
-            $requiredEventUid2
+            $requiredEventUid2,
         );
 
         $this->subject->limitToRequiredEventTopics($eventUid);
@@ -4533,7 +4533,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4544,24 +4544,24 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['requirements' => 1]
+            ['requirements' => 1],
         );
         $requiredEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $dependingEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $eventUid,
-            $requiredEventUid
+            $requiredEventUid,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid,
-            $eventUid
+            $eventUid,
         );
 
         $this->subject->limitToRequiredEventTopics($eventUid);
@@ -4569,11 +4569,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertNotEquals(
             $dependingEventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4588,23 +4588,23 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['requirements' => 1]
+            ['requirements' => 1],
         );
         $dependingEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid,
-            $eventUid
+            $eventUid,
         );
         $this->subject->limitToDependingEventTopics($eventUid);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4615,24 +4615,24 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['requirements' => 1]
+            ['requirements' => 1],
         );
         $dependingEventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $dependingEventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid1,
-            $eventUid
+            $eventUid,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid2,
-            $eventUid
+            $eventUid,
         );
 
         $this->subject->limitToDependingEventTopics($eventUid);
@@ -4640,7 +4640,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4651,24 +4651,24 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['requirements' => 1]
+            ['requirements' => 1],
         );
         $dependingEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $requiredEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid,
-            $eventUid
+            $eventUid,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $eventUid,
-            $requiredEventUid
+            $requiredEventUid,
         );
 
         $this->subject->limitToDependingEventTopics($eventUid);
@@ -4676,11 +4676,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertNotEquals(
             $requiredEventUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -4695,7 +4695,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelation_deadline_reminder_sent' => 0]
+            ['cancelation_deadline_reminder_sent' => 0],
         );
 
         $this->subject->limitToCancelationDeadlineReminderNotSent();
@@ -4703,7 +4703,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4714,7 +4714,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelation_deadline_reminder_sent' => 1]
+            ['cancelation_deadline_reminder_sent' => 1],
         );
 
         $this->subject->limitToCancelationDeadlineReminderNotSent();
@@ -4722,7 +4722,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4737,7 +4737,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_takes_place_reminder_sent' => 0]
+            ['event_takes_place_reminder_sent' => 0],
         );
 
         $this->subject->limitToEventTakesPlaceReminderNotSent();
@@ -4745,7 +4745,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4756,7 +4756,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_takes_place_reminder_sent' => 1]
+            ['event_takes_place_reminder_sent' => 1],
         );
 
         $this->subject->limitToEventTakesPlaceReminderNotSent();
@@ -4764,7 +4764,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4779,7 +4779,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_CANCELED);
@@ -4787,7 +4787,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4798,7 +4798,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_CANCELED);
@@ -4806,7 +4806,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4817,7 +4817,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_CANCELED);
@@ -4825,7 +4825,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4836,7 +4836,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_CONFIRMED);
@@ -4844,7 +4844,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4855,7 +4855,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_CONFIRMED);
@@ -4863,7 +4863,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4874,7 +4874,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_CONFIRMED);
@@ -4882,7 +4882,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4893,7 +4893,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_PLANNED);
@@ -4901,7 +4901,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4912,7 +4912,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_PLANNED);
@@ -4920,7 +4920,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4931,7 +4931,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED],
         );
 
         $this->subject->limitToStatus(EventInterface::STATUS_PLANNED);
@@ -4939,7 +4939,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4957,7 +4957,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->limitToDaysBeforeBeginDate(2);
@@ -4965,7 +4965,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -4979,7 +4979,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->limitToDaysBeforeBeginDate(3);
@@ -4987,7 +4987,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5001,7 +5001,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + (2 * Time::SECONDS_PER_DAY),
-            ]
+            ],
         );
 
         $this->subject->limitToDaysBeforeBeginDate(1);
@@ -5009,7 +5009,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5023,7 +5023,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - (2 * Time::SECONDS_PER_DAY),
-            ]
+            ],
         );
 
         $this->subject->limitToDaysBeforeBeginDate(1);
@@ -5031,7 +5031,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5047,7 +5047,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5064,7 +5064,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5075,14 +5075,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 42]
+            ['begin_date' => 42],
         );
         $this->subject->limitToEarliestBeginOrEndDate(42);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5093,14 +5093,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 42]
+            ['begin_date' => 42],
         );
         $this->subject->limitToEarliestBeginOrEndDate(21);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5111,13 +5111,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 42]
+            ['begin_date' => 42],
         );
         $this->subject->limitToEarliestBeginOrEndDate(84);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5128,7 +5128,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 21]
+            ['begin_date' => 21],
         );
 
         $this->subject->limitToEarliestBeginOrEndDate(42);
@@ -5138,7 +5138,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5153,7 +5153,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5169,7 +5169,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5180,14 +5180,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 42]
+            ['begin_date' => 42],
         );
         $this->subject->limitToLatestBeginOrEndDate(42);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5198,13 +5198,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 42]
+            ['begin_date' => 42],
         );
         $this->subject->limitToLatestBeginOrEndDate(21);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5215,14 +5215,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => 42]
+            ['begin_date' => 42],
         );
         $this->subject->limitToLatestBeginOrEndDate(84);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5233,14 +5233,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['end_date' => 42]
+            ['end_date' => 42],
         );
         $this->subject->limitToLatestBeginOrEndDate(42);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5251,13 +5251,13 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['end_date' => 42]
+            ['end_date' => 42],
         );
         $this->subject->limitToLatestBeginOrEndDate(21);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5268,14 +5268,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['end_date' => 42]
+            ['end_date' => 42],
         );
         $this->subject->limitToLatestBeginOrEndDate(84);
         $bag = $this->subject->build();
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5292,7 +5292,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5307,7 +5307,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['hidden' => 1]
+            ['hidden' => 1],
         );
 
         $this->subject->showHiddenRecords();
@@ -5315,7 +5315,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5326,7 +5326,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['hidden' => 0]
+            ['hidden' => 0],
         );
 
         $this->subject->showHiddenRecords();
@@ -5334,7 +5334,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5349,7 +5349,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['needs_registration' => 0]
+            ['needs_registration' => 0],
         );
 
         $this->subject->limitToEventsWithVacancies();
@@ -5357,7 +5357,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5368,7 +5368,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['needs_registration' => 1, 'attendees_max' => 0]
+            ['needs_registration' => 1, 'attendees_max' => 0],
         );
 
         $this->subject->limitToEventsWithVacancies();
@@ -5376,7 +5376,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5391,19 +5391,19 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 1,
-            ]
+            ],
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'seats' => 1]
+            ['seminar' => $eventUid, 'seats' => 1],
         );
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5414,19 +5414,19 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['needs_registration' => 1, 'attendees_max' => 1]
+            ['needs_registration' => 1, 'attendees_max' => 1],
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'seats' => 1]
+            ['seminar' => $eventUid, 'seats' => 1],
         );
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5441,14 +5441,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 10,
                 'offline_attendees' => 10,
-            ]
+            ],
         );
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5462,19 +5462,19 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 10,
-            ]
+            ],
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'seats' => 10]
+            ['seminar' => $eventUid, 'seats' => 10],
         );
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5489,19 +5489,19 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 10,
                 'offline_attendees' => 5,
-            ]
+            ],
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'seats' => 5]
+            ['seminar' => $eventUid, 'seats' => 5],
         );
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5512,7 +5512,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['needs_registration' => 1, 'attendees_max' => 10]
+            ['needs_registration' => 1, 'attendees_max' => 10],
         );
 
         $this->subject->limitToEventsWithVacancies();
@@ -5520,7 +5520,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5534,16 +5534,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOrganizersForOneProvidedOrganizerAndEventWithThisOrganizerFindsThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->limitToOrganizers((string)$organizerUid);
@@ -5551,7 +5551,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5561,17 +5561,17 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOrganizersForOneProvidedOrganizerAndEventWithoutOrganizerDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
 
         $this->subject->limitToOrganizers((string)$organizerUid);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5581,26 +5581,26 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOrganizersForOneProvidedOrganizerAndEventWithOtherOrganizerDoesNotFindThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid1,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->limitToOrganizers((string)$organizerUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5610,20 +5610,20 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOrganizersForTwoProvidedOrganizersAndEventWithFirstOrganizerFindsThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid1,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->limitToOrganizers($organizerUid1 . ',' . $organizerUid2);
@@ -5631,7 +5631,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5657,26 +5657,26 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOrganizersForProvidedOrganizerAndTwoEventsWithThisOrganizerFindsTheseEvents(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid1,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid2,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->limitToOrganizers((string)$organizerUid);
@@ -5684,7 +5684,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5695,17 +5695,17 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $dateUid = $this->testingFramework->createRecord(
@@ -5713,7 +5713,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
 
         $this->subject->limitToOrganizers((string)$organizerUid);
@@ -5721,11 +5721,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -5735,16 +5735,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToOrganizersForNoProvidedOrganizerFindsEventWithOrganizer(): void
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->limitToOrganizers('');
@@ -5752,7 +5752,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5788,16 +5788,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 50]
+            ['minimum_age' => 5, 'maximum_age' => 50],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(6);
@@ -5805,7 +5805,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5816,16 +5816,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 15, 'maximum_age' => 50]
+            ['minimum_age' => 15, 'maximum_age' => 50],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(15);
@@ -5833,7 +5833,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5844,16 +5844,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 15]
+            ['minimum_age' => 5, 'maximum_age' => 15],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(15);
@@ -5861,7 +5861,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5872,16 +5872,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 0, 'maximum_age' => 50]
+            ['minimum_age' => 0, 'maximum_age' => 50],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(15);
@@ -5889,7 +5889,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5900,23 +5900,23 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 0, 'maximum_age' => 50]
+            ['minimum_age' => 0, 'maximum_age' => 50],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(51);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5927,16 +5927,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 0]
+            ['minimum_age' => 5, 'maximum_age' => 0],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(15);
@@ -5944,7 +5944,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5955,23 +5955,23 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 0]
+            ['minimum_age' => 5, 'maximum_age' => 0],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(4);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -5981,7 +5981,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToAgeForEventWithoutTargetGroupAndAgeProvidedFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->subject->limitToAge(15);
@@ -5989,7 +5989,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -5999,16 +5999,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     public function limitToAgeForEventWithTargetGroupWithNoLimitsFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups'
+            'tx_seminars_target_groups',
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(15);
@@ -6016,7 +6016,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6027,26 +6027,26 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid1 = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 20, 'maximum_age' => 50]
+            ['minimum_age' => 20, 'maximum_age' => 50],
         );
         $targetGroupUid2 = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 20]
+            ['minimum_age' => 5, 'maximum_age' => 20],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid1,
-            'target_groups'
+            'target_groups',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid2,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(21);
@@ -6054,7 +6054,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6065,26 +6065,26 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid1 = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 50]
+            ['minimum_age' => 5, 'maximum_age' => 50],
         );
         $targetGroupUid2 = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 20]
+            ['minimum_age' => 5, 'maximum_age' => 20],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid1,
-            'target_groups'
+            'target_groups',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid2,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(6);
@@ -6092,7 +6092,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6103,16 +6103,16 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 15]
+            ['minimum_age' => 5, 'maximum_age' => 15],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->limitToAge(0);
@@ -6120,7 +6120,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6135,7 +6135,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 42]
+            ['price_regular' => 42],
         );
 
         $this->subject->limitToMaximumPrice(43);
@@ -6143,7 +6143,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6154,7 +6154,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 0]
+            ['price_regular' => 0],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6162,7 +6162,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6173,7 +6173,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 50]
+            ['price_regular' => 50],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6181,7 +6181,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6192,14 +6192,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 51]
+            ['price_regular' => 51],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6210,7 +6210,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 51, 'price_special' => 49]
+            ['price_regular' => 51, 'price_special' => 49],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6218,7 +6218,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6229,7 +6229,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 43, 'price_special' => 42]
+            ['price_regular' => 43, 'price_special' => 42],
         );
 
         $this->subject->limitToMaximumPrice(42);
@@ -6237,7 +6237,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6248,14 +6248,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 43, 'price_special' => 43]
+            ['price_regular' => 43, 'price_special' => 43],
         );
 
         $this->subject->limitToMaximumPrice(42);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6269,14 +6269,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular' => 49,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6284,11 +6284,11 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertSame(
             $dateUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -6302,21 +6302,21 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular' => 51,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6331,7 +6331,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_regular_early' => 49,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6339,7 +6339,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6354,7 +6354,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_regular_early' => 50,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6362,7 +6362,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6377,14 +6377,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_regular_early' => 51,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6399,14 +6399,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_regular_early' => 49,
                 'deadline_early_bird' => $this->past,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6421,7 +6421,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_special_early' => 49,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6429,7 +6429,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6444,7 +6444,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_special_early' => 50,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6452,7 +6452,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6467,14 +6467,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_special_early' => 51,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6488,14 +6488,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular' => 51,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6510,14 +6510,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_special_early' => 49,
                 'deadline_early_bird' => $this->past,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6532,14 +6532,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 49,
                 'price_regular_early' => 51,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6553,7 +6553,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular' => 49,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6561,7 +6561,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6576,7 +6576,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
                 'price_regular' => 51,
                 'price_special' => 49,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6584,7 +6584,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6598,7 +6598,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular' => 49,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(50);
@@ -6606,7 +6606,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6619,7 +6619,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             'tx_seminars_seminars',
             [
                 'price_regular' => 15,
-            ]
+            ],
         );
 
         $this->subject->limitToMaximumPrice(0);
@@ -6627,7 +6627,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6642,14 +6642,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 14]
+            ['price_regular' => 14],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6664,7 +6664,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6675,7 +6675,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 15]
+            ['price_regular' => 15],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6683,7 +6683,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6694,7 +6694,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 16]
+            ['price_regular' => 16],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6702,7 +6702,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6713,7 +6713,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_special' => 16]
+            ['price_special' => 16],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6721,7 +6721,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6732,7 +6732,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_special' => 15]
+            ['price_special' => 15],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6740,7 +6740,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6751,14 +6751,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_special' => 14]
+            ['price_special' => 14],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6772,7 +6772,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular' => 16,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6780,7 +6780,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6791,14 +6791,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['deadline_early_bird' => $this->future]
+            ['deadline_early_bird' => $this->future],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6812,14 +6812,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular_early' => 14,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6833,7 +6833,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular_early' => 15,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6841,7 +6841,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6855,7 +6855,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular_early' => 16,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6863,7 +6863,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6877,7 +6877,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_special' => 16,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6885,7 +6885,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6899,14 +6899,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_special_early' => 14,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6920,7 +6920,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_special_early' => 15,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6928,7 +6928,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6942,7 +6942,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_special_early' => 16,
                 'deadline_early_bird' => $this->future,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
@@ -6950,7 +6950,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -6964,14 +6964,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_regular_early' => 16,
                 'deadline_early_bird' => $this->past,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -6985,14 +6985,14 @@ final class EventBagBuilderTest extends FunctionalTestCase
             [
                 'price_special_early' => 16,
                 'deadline_early_bird' => $this->past,
-            ]
+            ],
         );
 
         $this->subject->limitToMinimumPrice(15);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -7003,7 +7003,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['price_regular' => 16]
+            ['price_regular' => 16],
         );
 
         $this->subject->limitToMinimumPrice(0);
@@ -7011,7 +7011,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 }

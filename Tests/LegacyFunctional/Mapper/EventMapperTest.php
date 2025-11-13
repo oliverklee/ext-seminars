@@ -65,14 +65,14 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 1]
+            ['organizers' => 1],
         );
         $organizerUid = MapperRegistry::get(OrganizerMapper::class)->getNewGhost()->getUid();
         \assert($organizerUid > 0);
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $uid,
-            $organizerUid
+            $organizerUid,
         );
 
         $model = $this->subject->find($uid);
@@ -86,20 +86,20 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers' => 1]
+            ['organizers' => 1],
         );
         $organizerUid = MapperRegistry::get(OrganizerMapper::class)->getNewGhost()->getUid();
         \assert($organizerUid > 0);
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $uid,
-            $organizerUid
+            $organizerUid,
         );
 
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$organizerUid,
-            $model->getOrganizers()->getUids()
+            $model->getOrganizers()->getUids(),
         );
     }
 
@@ -138,17 +138,17 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['registrations' => 1]
+            ['registrations' => 1],
         );
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $eventUid]
+            ['seminar' => $eventUid],
         );
 
         $event = $this->subject->find($eventUid);
         self::assertEquals(
             $registrationUid,
-            $event->getRegistrations()->getUids()
+            $event->getRegistrations()->getUids(),
         );
     }
 
@@ -172,7 +172,7 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => EventInterface::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1],
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -188,7 +188,7 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => EventInterface::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1],
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -203,7 +203,7 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1],
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -218,7 +218,7 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => EventInterface::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0]
+            ['cancelled' => EventInterface::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0],
         );
 
         $result = $this->subject->findForAutomaticStatusChange();

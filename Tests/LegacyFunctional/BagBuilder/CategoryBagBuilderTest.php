@@ -59,27 +59,27 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Title 2']
+            ['title' => 'Title 2'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Title 1']
+            ['title' => 'Title 1'],
         );
 
         $categoryBag = $this->subject->build();
         self::assertEquals(
             2,
-            $categoryBag->count()
+            $categoryBag->count(),
         );
 
         self::assertEquals(
             'Title 1',
-            $categoryBag->current()->getTitle()
+            $categoryBag->current()->getTitle(),
         );
         $categoryBag->next();
         self::assertEquals(
             'Title 2',
-            $categoryBag->current()->getTitle()
+            $categoryBag->current()->getTitle(),
         );
     }
 
@@ -95,21 +95,21 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRecord('tx_seminars_categories');
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -121,15 +121,15 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRecord('tx_seminars_categories');
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         $this->subject->limitToEvents('');
@@ -137,7 +137,7 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -286,15 +286,15 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
     public function limitToEventsCanResultInOneCategory(): void
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         $this->subject->limitToEvents((string)$eventUid);
@@ -302,7 +302,7 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -314,25 +314,25 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRecord('tx_seminars_categories');
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $categoryUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->limitToEvents((string)$eventUid);
@@ -340,7 +340,7 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -352,27 +352,27 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRecord('tx_seminars_categories');
 
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->limitToEvents($eventUid1 . ',' . $eventUid2);
@@ -380,7 +380,7 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -392,26 +392,26 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         $this->testingFramework->createRecord('tx_seminars_categories');
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         $this->subject->limitToEvents((string)$eventUid);
         $bag = $this->subject->build();
 
         self::assertFalse(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
         self::assertEquals(
             $categoryUid,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -421,27 +421,27 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
     public function limitToEventsWillExcludeCategoriesOfOtherEvents(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->limitToEvents((string)$eventUid1);
@@ -449,11 +449,11 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
         self::assertEquals(
             $categoryUid1,
-            $bag->current()->getUid()
+            $bag->current()->getUid(),
         );
     }
 
@@ -463,30 +463,30 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
     public function limitToEventsResultsInAnEmptyBagIfThereAreNoMatches(): void
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid
+            $categoryUid,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
 
         $this->subject->limitToEvents((string)$eventUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -500,11 +500,11 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
     public function sortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore(): void
     {
         $this->expectException(
-            \BadMethodCallException::class
+            \BadMethodCallException::class,
         );
         $this->expectExceptionMessage(
             'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called before ' .
-            'calling this function.'
+            'calling this function.',
         );
 
         $this->subject->sortByRelationOrder();

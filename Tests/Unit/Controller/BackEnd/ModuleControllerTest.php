@@ -95,7 +95,7 @@ final class ModuleControllerTest extends UnitTestCase
                 $this->eventStatisticsCalculatorMock,
                 $this->permissionsMock,
                 $this->pageRendererMock,
-            ]
+            ],
         );
         $this->subject = $subject;
 
@@ -171,12 +171,13 @@ final class ModuleControllerTest extends UnitTestCase
      */
     public function overviewActionPassesPermissionsToView(): void
     {
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
                 ['pageUid', self::anything()],
                 ['events', self::anything()],
-                ['numberOfRegistrations', self::anything()]
+                ['numberOfRegistrations', self::anything()],
             );
 
         $this->subject->overviewAction();
@@ -190,12 +191,13 @@ final class ModuleControllerTest extends UnitTestCase
         $pageUid = 8;
         $_GET['id'] = (string)$pageUid;
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', $pageUid],
                 ['events', self::anything()],
-                ['numberOfRegistrations', self::anything()]
+                ['numberOfRegistrations', self::anything()],
             );
 
         $this->subject->overviewAction();
@@ -207,9 +209,11 @@ final class ModuleControllerTest extends UnitTestCase
     public function overviewActionEnrichesEventsWithRawData(): void
     {
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findByPageUidInBackEndMode')
             ->with(self::anything())->willReturn($events);
-        $this->eventRepositoryMock->expects(self::once())->method('enrichWithRawData')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('enrichWithRawData')
             ->with($events);
 
         $this->subject->overviewAction();
@@ -222,9 +226,11 @@ final class ModuleControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $events = [$event];
-        $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findByPageUidInBackEndMode')
             ->with(self::anything())->willReturn($events);
-        $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')
+        $this->eventStatisticsCalculatorMock
+            ->expects(self::once())->method('enrichWithStatistics')
             ->with($event);
 
         $this->subject->overviewAction();
@@ -239,14 +245,16 @@ final class ModuleControllerTest extends UnitTestCase
         $_GET['id'] = (string)$pageUid;
 
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
+        $this->eventRepositoryMock
+            ->expects(self::once())->method('findByPageUidInBackEndMode')
             ->with($pageUid)->willReturn($events);
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['events', $events],
-                ['numberOfRegistrations', self::anything()]
+                ['numberOfRegistrations', self::anything()],
             );
 
         $this->subject->overviewAction();
@@ -261,14 +269,16 @@ final class ModuleControllerTest extends UnitTestCase
         $_GET['id'] = (string)$pageUid;
 
         $numberOfRegistrations = 42;
-        $this->registrationRepositoryMock->expects(self::once())->method('countRegularRegistrationsByPageUid')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('countRegularRegistrationsByPageUid')
             ->with($pageUid)->willReturn($numberOfRegistrations);
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock
+            ->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['events', self::anything()],
-                ['numberOfRegistrations', $numberOfRegistrations]
+                ['numberOfRegistrations', $numberOfRegistrations],
             );
 
         $this->subject->overviewAction();
@@ -279,7 +289,8 @@ final class ModuleControllerTest extends UnitTestCase
      */
     public function overviewActionLoadsJavaScriptModule(): void
     {
-        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+        $this->pageRendererMock
+            ->expects(self::once())->method('loadRequireJsModule')
             ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $this->subject->overviewAction();

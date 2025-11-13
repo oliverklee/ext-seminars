@@ -36,7 +36,7 @@ final class PlaceTest extends FunctionalTestCase
 
         self::assertEquals(
             'Nice place',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -70,7 +70,7 @@ final class PlaceTest extends FunctionalTestCase
 
         self::assertEquals(
             'Hicksville',
-            $this->subject->getCity()
+            $this->subject->getCity(),
         );
     }
 }

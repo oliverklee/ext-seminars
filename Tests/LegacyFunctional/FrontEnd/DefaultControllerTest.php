@@ -134,7 +134,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'accreditation_number' => '1 & 1',
                 'room' => 'Rooms 2 & 3',
                 'expiry' => mktime(0, 0, 0, 1, 1, 2008),
-            ]
+            ],
         );
 
         $this->subject = new TestingDefaultController();
@@ -154,7 +154,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                     'maxPages' => 5,
                 ],
                 'linkToSingleView' => 'always',
-            ]
+            ],
         );
         $this->subject->getTemplateCode();
         $this->subject->setLabels();
@@ -196,20 +196,20 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            $targetGroupData
+            $targetGroupData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_target_groups_mm',
             $this->seminarUid,
-            $uid
+            $uid,
         );
 
         $this->numberOfTargetGroups++;
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['target_groups' => $this->numberOfTargetGroups]
+            ['target_groups' => $this->numberOfTargetGroups],
         );
 
         return $uid;
@@ -230,7 +230,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'registration_queue' => Registration::STATUS_REGULAR,
-            ]
+            ],
         );
     }
 
@@ -244,12 +244,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_feusers_mm',
             $this->seminarUid,
-            $feUserUid
+            $feUserUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['vips' => 1]
+            ['vips' => 1],
         );
     }
 
@@ -265,20 +265,20 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            $categoryData
+            $categoryData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $this->seminarUid,
-            $uid
+            $uid,
         );
 
         $this->numberOfCategories++;
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['categories' => $this->numberOfCategories]
+            ['categories' => $this->numberOfCategories],
         );
 
         return $uid;
@@ -294,20 +294,20 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            $organizerData
+            $organizerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $this->seminarUid,
-            $organizerUid
+            $organizerUid,
         );
 
         $this->numberOfOrganizers++;
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['organizers' => $this->numberOfOrganizers]
+            ['organizers' => $this->numberOfOrganizers],
         );
     }
 
@@ -321,7 +321,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function addTargetGroupRelationReturnsUid(): void
     {
         self::assertTrue(
-            $this->addTargetGroupRelation() > 0
+            $this->addTargetGroupRelation() > 0,
         );
     }
 
@@ -333,7 +333,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->addTargetGroupRelation();
         self::assertNotEquals(
             $this->addTargetGroupRelation(),
-            $this->addTargetGroupRelation()
+            $this->addTargetGroupRelation(),
         );
     }
 
@@ -344,19 +344,19 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertEquals(
             0,
-            $this->numberOfTargetGroups
+            $this->numberOfTargetGroups,
         );
 
         $this->addTargetGroupRelation();
         self::assertEquals(
             1,
-            $this->numberOfTargetGroups
+            $this->numberOfTargetGroups,
         );
 
         $this->addTargetGroupRelation();
         self::assertEquals(
             2,
-            $this->numberOfTargetGroups
+            $this->numberOfTargetGroups,
         );
     }
 
@@ -369,19 +369,19 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertEquals(
             0,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid]),
         );
 
         $this->addTargetGroupRelation();
         self::assertEquals(
             1,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid]),
         );
 
         $this->addTargetGroupRelation();
         self::assertEquals(
             2,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid]),
         );
     }
 
@@ -396,7 +396,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $connection->count('*', 'fe_users', [])
+            $connection->count('*', 'fe_users', []),
         );
     }
 
@@ -421,7 +421,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $connection->count('*', 'tx_seminars_seminars', ['uid' => $this->seminarUid, 'vips' => 1])
+            $connection->count('*', 'tx_seminars_seminars', ['uid' => $this->seminarUid, 'vips' => 1]),
         );
     }
 
@@ -431,7 +431,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function addCategoryRelationReturnsPositiveUid(): void
     {
         self::assertTrue(
-            $this->addCategoryRelation() > 0
+            $this->addCategoryRelation() > 0,
         );
     }
 
@@ -442,7 +442,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertNotEquals(
             $this->addCategoryRelation(),
-            $this->addCategoryRelation()
+            $this->addCategoryRelation(),
         );
     }
 
@@ -453,19 +453,19 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertEquals(
             0,
-            $this->numberOfCategories
+            $this->numberOfCategories,
         );
 
         $this->addCategoryRelation();
         self::assertEquals(
             1,
-            $this->numberOfCategories
+            $this->numberOfCategories,
         );
 
         $this->addCategoryRelation();
         self::assertEquals(
             2,
-            $this->numberOfCategories
+            $this->numberOfCategories,
         );
     }
 
@@ -478,19 +478,19 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertEquals(
             0,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid]),
         );
 
         $this->addCategoryRelation();
         self::assertEquals(
             1,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid]),
         );
 
         $this->addCategoryRelation();
         self::assertEquals(
             2,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid]),
         );
     }
 
@@ -504,10 +504,10 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function pi1MustBeInitialized(): void
     {
         self::assertNotNull(
-            $this->subject
+            $this->subject,
         );
         self::assertTrue(
-            $this->subject->isInitialized()
+            $this->subject->isInitialized(),
         );
     }
 
@@ -520,7 +520,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertInstanceOf(
             LegacyEvent::class,
-            $this->subject->getSeminar()
+            $this->subject->getSeminar(),
         );
     }
 
@@ -531,7 +531,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             RegistrationManager::class,
-            $this->subject->getRegistrationManager()
+            $this->subject->getRegistrationManager(),
         );
     }
 
@@ -551,7 +551,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
-            ]
+            ],
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -562,13 +562,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -579,13 +579,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date 2',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -593,7 +593,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'tx_seminars_pi1%5BshowUid%5D=1337',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -607,7 +607,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue(
             'hideFields',
-            'eventsnextday'
+            'eventsnextday',
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -615,7 +615,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -626,13 +626,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $singleEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -643,13 +643,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test single 2',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -659,7 +659,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'tx_seminars_pi1%5BshowUid%5D=' . $singleEventUid,
-            $result
+            $result,
         );
     }
 
@@ -677,7 +677,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
-            ]
+            ],
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -688,13 +688,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -705,16 +705,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date 2',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -722,7 +722,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'tx_seminars_pi1%5BshowUid%5D=1337',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -733,7 +733,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'showOnlyEventsWithVacancies',
-            true
+            true,
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $topicUid = $this->testingFramework->createRecord(
@@ -742,7 +742,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
-            ]
+            ],
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -753,13 +753,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
-            ]
+            ],
         );
         $dateUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -770,23 +770,23 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Test date 2',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            ]
+            ],
         );
 
         $this->subject->piVars['showUid'] = $dateUid1;
 
         self::assertStringNotContainsString(
             'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -807,22 +807,22 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'title' => 'foo & bar',
                 'organization' => 'baz',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $this->seminarUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['speakers' => '1']
+            ['speakers' => '1'],
         );
 
         self::assertStringContainsString(
             'foo &amp; bar',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -843,22 +843,22 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'title' => 'John Doe',
                 'organization' => 'foo & bar',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $this->seminarUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['speakers' => '1']
+            ['speakers' => '1'],
         );
 
         self::assertStringContainsString(
             'foo &amp; bar',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -880,22 +880,22 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'foo & bar',
                 'organization' => 'baz',
                 'homepage' => 'www.foo.com',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $this->seminarUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['speakers' => '1']
+            ['speakers' => '1'],
         );
 
         self::assertMatchesRegularExpression(
             '#<a href="[a-z]+://www.foo.com".*>foo &amp; bar</a>#',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -917,22 +917,22 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'foo & bar',
                 'organization' => 'baz',
                 'homepage' => 'www.foo.com',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $this->seminarUid,
-            $speakerUid
+            $speakerUid,
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['speakers' => '1']
+            ['speakers' => '1'],
         );
 
         self::assertMatchesRegularExpression(
             '#<a href="[a-z]+://www.foo.com".*>foo &amp; bar</a>#',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -985,7 +985,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -1000,7 +1000,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -1018,22 +1018,22 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'a & place']
+            ['title' => 'a & place'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
         self::assertStringContainsString(
             'a &amp; place',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1047,22 +1047,22 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'a & place']
+            ['title' => 'a & place'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
         self::assertStringContainsString(
             'a &amp; place',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1076,22 +1076,22 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['place' => 1]
+            ['place' => 1],
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'over & the rainbow']
+            ['address' => 'over & the rainbow'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid,
-            $placeUid
+            $placeUid,
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
         self::assertStringContainsString(
             'over &amp; the rainbow',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1108,7 +1108,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS'),
         );
     }
 
@@ -1120,18 +1120,18 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            ['seminar' => $this->seminarUid]
+            ['seminar' => $this->seminarUid],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => 1]
+            ['timeslots' => 1],
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS'),
         );
     }
 
@@ -1147,18 +1147,18 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'begin_date' => mktime(9, 45, 0, 4, 2, 2020),
                 'end_date' => mktime(18, 30, 0, 4, 2, 2020),
-            ]
+            ],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => 1]
+            ['timeslots' => 1],
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         self::assertStringContainsString(
             '9:45&#8211;18:30',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1173,18 +1173,18 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'seminar' => $this->seminarUid,
                 'room' => 'room & 1',
-            ]
+            ],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => 1]
+            ['timeslots' => 1],
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         self::assertStringContainsString(
             'room &amp; 1',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1196,22 +1196,22 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            ['seminar' => $this->seminarUid]
+            ['seminar' => $this->seminarUid],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            ['seminar' => $this->seminarUid]
+            ['seminar' => $this->seminarUid],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => 2]
+            ['timeslots' => 2],
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS'),
         );
     }
 
@@ -1226,30 +1226,30 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'seminar' => $this->seminarUid,
                 'room' => 'room 1',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
                 'room' => 'room 2',
-            ]
+            ],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => 2]
+            ['timeslots' => 2],
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $result = $this->subject->main('', []);
         self::assertStringContainsString(
             'room 1',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'room 2',
-            $result
+            $result,
         );
     }
 
@@ -1264,7 +1264,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS'),
         );
     }
 
@@ -1279,7 +1279,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS'),
         );
     }
 
@@ -1289,7 +1289,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewCanContainOneHtmlSpecialcharedTargetGroupTitle(): void
     {
         $this->addTargetGroupRelation(
-            ['title' => 'group 1 & 2']
+            ['title' => 'group 1 & 2'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1297,7 +1297,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'group 1 &amp; 2',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1307,17 +1307,17 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function targetGroupsSubpartIsVisibleInSingleViewWithTwoTargetGroups(): void
     {
         $this->addTargetGroupRelation(
-            ['title' => 'group 1']
+            ['title' => 'group 1'],
         );
         $this->addTargetGroupRelation(
-            ['title' => 'group 2']
+            ['title' => 'group 2'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS'),
         );
     }
 
@@ -1327,10 +1327,10 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewCanContainTwoTargetGroupTitles(): void
     {
         $this->addTargetGroupRelation(
-            ['title' => 'group 1']
+            ['title' => 'group 1'],
         );
         $this->addTargetGroupRelation(
-            ['title' => 'group 2']
+            ['title' => 'group 2'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1339,11 +1339,11 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'group 1',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'group 2',
-            $result
+            $result,
         );
     }
 
@@ -1360,7 +1360,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS'),
         );
     }
 
@@ -1372,24 +1372,24 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $requiredEvent,
-            'requirements'
+            'requirements',
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS'),
         );
     }
 
@@ -1404,27 +1404,27 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $requiredEvent,
-            'requirements'
+            'requirements',
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertMatchesRegularExpression(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1441,7 +1441,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES'),
         );
     }
 
@@ -1456,23 +1456,23 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid,
-            $this->seminarUid
+            $this->seminarUid,
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES')
+            $this->subject->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES'),
         );
     }
 
@@ -1487,26 +1487,26 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid,
-            $this->seminarUid
+            $this->seminarUid,
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
             'depending_foo',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1521,26 +1521,26 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid,
-            $this->seminarUid
+            $this->seminarUid,
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
             '>depending_foo</a>',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1555,31 +1555,31 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 2,
-            ]
+            ],
         );
         $dependingEventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_foo',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid1,
-            $this->seminarUid
+            $this->seminarUid,
         );
         $dependingEventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_bar',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependingEventUid2,
-            $this->seminarUid
+            $this->seminarUid,
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1588,11 +1588,11 @@ final class DefaultControllerTest extends FunctionalTestCase
         $renderedOutput = $this->subject->main('', []);
         self::assertStringContainsString(
             'depending_bar',
-            $renderedOutput
+            $renderedOutput,
         );
         self::assertStringContainsString(
             'depending_foo',
-            $renderedOutput
+            $renderedOutput,
         );
     }
 
@@ -1611,9 +1611,9 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
-                    ['title' => 'foo & type']
+                    ['title' => 'foo & type'],
                 ),
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1621,7 +1621,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'foo &amp; type:',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1635,7 +1635,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertDoesNotMatchRegularExpression(
             '/: *Test &amp; event/',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1649,14 +1649,14 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewCanContainOneHtmlSpecialcharedCategoryTitle(): void
     {
         $this->addCategoryRelation(
-            ['title' => 'category & 1']
+            ['title' => 'category & 1'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
         self::assertStringContainsString(
             'category &amp; 1',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1666,10 +1666,10 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewCanContainTwoCategories(): void
     {
         $this->addCategoryRelation(
-            ['title' => 'category 1']
+            ['title' => 'category 1'],
         );
         $this->addCategoryRelation(
-            ['title' => 'category 2']
+            ['title' => 'category 2'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1678,11 +1678,11 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'category 1',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'category 2',
-            $result
+            $result,
         );
     }
 
@@ -1692,7 +1692,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewForCategoryWithoutIconDoesNotShowCategoryIcon(): void
     {
         $this->addCategoryRelation(
-            ['title' => 'category 1']
+            ['title' => 'category 1'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1700,7 +1700,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'category 1 <img src="',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1719,7 +1719,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $this->seminarUid,
                 'expiry' => mktime(0, 0, 0, 1, 1, 2008),
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1727,7 +1727,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '2008-01-01',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1742,7 +1742,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $this->seminarUid,
                 'expiry' => 0,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1750,7 +1750,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_expiry'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1768,7 +1768,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_paymentmethods'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1779,17 +1779,17 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
-            ['title' => 'Payment Method']
+            ['title' => 'Payment Method'],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['payment_methods' => 1]
+            ['payment_methods' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid
+            $paymentMethodUid,
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1797,7 +1797,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_paymentmethods'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1808,17 +1808,17 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
-            ['title' => 'Payment Method']
+            ['title' => 'Payment Method'],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['payment_methods' => 1]
+            ['payment_methods' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid
+            $paymentMethodUid,
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1826,7 +1826,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Payment Method',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1837,28 +1837,28 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $paymentMethodUid1 = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
-            ['title' => 'Payment Method 1']
+            ['title' => 'Payment Method 1'],
         );
         $paymentMethodUid2 = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
-            ['title' => 'Payment Method 2']
+            ['title' => 'Payment Method 2'],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
             [
                 'payment_methods' => 2,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid1
+            $paymentMethodUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid2
+            $paymentMethodUid2,
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1867,11 +1867,11 @@ final class DefaultControllerTest extends FunctionalTestCase
         $result = $this->subject->main('', []);
         self::assertStringContainsString(
             'Payment Method 1',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Payment Method 2',
-            $result
+            $result,
         );
     }
 
@@ -1883,17 +1883,17 @@ final class DefaultControllerTest extends FunctionalTestCase
         $paymentMethodTitle = '<b>Payment & Method</b>';
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
-            ['title' => $paymentMethodTitle]
+            ['title' => $paymentMethodTitle],
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['payment_methods' => 1]
+            ['payment_methods' => 1],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid
+            $paymentMethodUid,
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1901,7 +1901,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             \htmlspecialchars($paymentMethodTitle, ENT_QUOTES | ENT_HTML5),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1921,7 +1921,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             '###',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1938,7 +1938,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertMatchesRegularExpression(
             '/organizer 1.*organizer 2/s',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1948,7 +1948,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewForEventWithOrganizerWithHomepageHtmlSpecialcharsTitleOfOrganizer(): void
     {
         $this->addOrganizerRelation(
-            ['title' => 'foo<bar']
+            ['title' => 'foo<bar'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1956,7 +1956,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'foo&lt;bar',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1966,7 +1966,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function singleViewForEventWithOrganizerWithoutHomepageHtmlSpecialCharsTitleOfOrganizer(): void
     {
         $this->addOrganizerRelation(
-            ['title' => 'foo<bar']
+            ['title' => 'foo<bar'],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1974,7 +1974,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             \htmlspecialchars('foo<bar', ENT_QUOTES | ENT_HTML5),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -1992,7 +1992,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('message_missingSeminarNumber'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2004,7 +2004,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['hidden' => 1]
+            ['hidden' => 1],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -2012,7 +2012,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('message_wrongSeminarNumber'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2025,7 +2025,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['hidden' => 1]
+            ['hidden' => 1],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -2033,7 +2033,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('message_wrongSeminarNumber'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2050,7 +2050,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'hidden' => 1,
                 'title' => 'hidden event',
                 'owner_feuser' => $ownerUid,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -2058,7 +2058,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'hidden event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2071,7 +2071,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             'Something for you &amp; me',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2086,14 +2086,14 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
-                    ['title' => 'foo & type']
+                    ['title' => 'foo & type'],
                 ),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo &amp; type',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2104,7 +2104,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             '1 &amp; 1',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2116,21 +2116,21 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['place' => 1]
+            ['place' => 1],
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'a & place']
+            ['title' => 'a & place'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $this->seminarUid,
-            $placeUid
+            $placeUid,
         );
 
         self::assertStringContainsString(
             'a &amp; place',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2142,21 +2142,21 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['place' => 1]
+            ['place' => 1],
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'Bonn & Köln']
+            ['city' => 'Bonn & Köln'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $this->seminarUid,
-            $placeUid
+            $placeUid,
         );
 
         self::assertStringContainsString(
             'Bonn &amp; Köln',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2169,7 +2169,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'foo &amp; organizer',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2179,12 +2179,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function listViewShowsHtmlspecialcharedTargetGroupTitle(): void
     {
         $this->addTargetGroupRelation(
-            ['title' => 'group 1 & 2']
+            ['title' => 'group 1 & 2'],
         );
 
         self::assertStringContainsString(
             'group 1 &amp; 2',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2195,7 +2195,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertStringNotContainsString(
             '<img src="',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2206,7 +2206,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertStringNotContainsString(
             '###IMAGE###',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2217,7 +2217,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertStringNotContainsString(
             $this->translate('label_expiry'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2229,7 +2229,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->main('', []);
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
+            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_STATUS'),
         );
     }
 
@@ -2246,12 +2246,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2262,7 +2262,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'showOnlyEventsWithVacancies',
-            true
+            true,
         );
 
         $this->testingFramework->createRecord(
@@ -2273,12 +2273,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2293,13 +2293,13 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'pidList',
-            $this->testingFramework->createSystemFolder()
+            $this->testingFramework->createSystemFolder(),
         );
         $this->subject->main('', []);
 
         self::assertEquals(
             0,
-            $this->subject->internal['res_count']
+            $this->subject->internal['res_count'],
         );
     }
 
@@ -2312,7 +2312,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $this->subject->internal['res_count']
+            $this->subject->internal['res_count'],
         );
     }
 
@@ -2326,13 +2326,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Another event',
-            ]
+            ],
         );
         $this->subject->main('', []);
 
         self::assertEquals(
             2,
-            $this->subject->internal['res_count']
+            $this->subject->internal['res_count'],
         );
     }
 
@@ -2347,14 +2347,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 [
                     'pid' => $this->systemFolderPid,
                     'title' => 'Another event',
-                ]
+                ],
             );
         }
         $this->subject->main('', []);
 
         self::assertEquals(
             6,
-            $this->subject->internal['res_count']
+            $this->subject->internal['res_count'],
         );
     }
 
@@ -2374,32 +2374,32 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with category',
                 // the number of categories
                 'categories' => 2,
-            ]
+            ],
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'another category']
+            ['title' => 'another category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid2
+            $categoryUid2,
         );
         $this->subject->piVars['category'] = $categoryUid2;
 
         self::assertStringContainsString(
             'Event with category',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2415,18 +2415,18 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid);
         $this->subject->piVars['categories'][] = (string)$categoryUid;
 
         self::assertStringContainsString(
             'Event with category',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2448,7 +2448,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $fromTime);
@@ -2457,7 +2457,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event From',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2476,7 +2476,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $fromTime);
@@ -2485,7 +2485,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Foo Event From',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2503,7 +2503,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_month'] = date('n', $simTime);
@@ -2511,7 +2511,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event From',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2530,7 +2530,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $fromTime);
@@ -2538,7 +2538,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event From',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2556,7 +2556,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $simTime);
@@ -2564,7 +2564,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event From',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2582,14 +2582,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_year'] = date('Y', $simTime);
 
         self::assertStringContainsString(
             'Foo Event From',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2608,7 +2608,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['to_day'] = date('j', $toTime);
@@ -2617,7 +2617,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2636,7 +2636,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['to_day'] = date('j', $toTime);
@@ -2645,7 +2645,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2663,7 +2663,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['to_month'] = date('n', $simTime);
@@ -2671,7 +2671,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2690,7 +2690,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['to_day'] = date('j', $toTime);
@@ -2698,7 +2698,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2715,7 +2715,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['to_day'] = date('j', $simTime);
@@ -2723,7 +2723,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2740,14 +2740,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['to_year'] = date('Y', $simTime);
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2767,7 +2767,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $fromTime);
@@ -2779,7 +2779,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2799,7 +2799,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2807,7 +2807,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Bar Event To',
                 'begin_date' => $simTime,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $fromTime);
@@ -2821,11 +2821,11 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event To',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             'Bar Event To',
-            $output
+            $output,
         );
     }
 
@@ -2844,7 +2844,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'begin_date' => $simTime - 86000,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $simTime);
@@ -2856,7 +2856,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2875,7 +2875,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'begin_date' => $simTime + 86400,
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = date('j', $fromTime);
@@ -2887,7 +2887,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2901,7 +2901,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
-            ]
+            ],
         );
 
         $this->subject->piVars['from_day'] = 0;
@@ -2913,7 +2913,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2928,7 +2928,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 20]
+            ['minimum_age' => 5, 'maximum_age' => 20],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2937,22 +2937,22 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Foo Event To',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 50,
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->piVars['age'] = 15;
 
         self::assertStringContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -2963,7 +2963,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['minimum_age' => 5, 'maximum_age' => 20]
+            ['minimum_age' => 5, 'maximum_age' => 20],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2972,22 +2972,22 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Foo Event To',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 50,
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $targetGroupUid,
-            'target_groups'
+            'target_groups',
         );
 
         $this->subject->piVars['age'] = 4;
 
         self::assertStringNotContainsString(
             'Foo Event To',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3001,25 +3001,25 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function listViewForGivenOrganizerShowsEventWithOrganizer(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'Foo Event', 'pid' => $this->systemFolderPid]
+            ['title' => 'Foo Event', 'pid' => $this->systemFolderPid],
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->piVars['organizer'][] = $organizerUid;
 
         self::assertStringContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3029,18 +3029,18 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function listViewForGivenOrganizerDoesNotShowEventWithOtherOrganizer(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['title' => 'Foo Event', 'pid' => $this->systemFolderPid]
+            ['title' => 'Foo Event', 'pid' => $this->systemFolderPid],
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->piVars['organizer'][]
@@ -3048,7 +3048,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3067,14 +3067,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 21,
-            ]
+            ],
         );
 
         $this->subject->piVars['price_from'] = 20;
 
         self::assertStringContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3089,14 +3089,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 19,
-            ]
+            ],
         );
 
         $this->subject->piVars['price_to'] = 20;
 
         self::assertStringContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3111,7 +3111,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 21,
-            ]
+            ],
         );
 
         $this->subject->piVars['price_from'] = 20;
@@ -3119,7 +3119,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3134,7 +3134,7 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 23,
-            ]
+            ],
         );
 
         $this->subject->piVars['price_from'] = 20;
@@ -3142,7 +3142,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Foo Event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3160,21 +3160,21 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event B',
-            ]
+            ],
         );
 
         $this->subject->piVars['sort'] = 'title:0';
         $output = $this->subject->main('', []);
 
         self::assertTrue(
-            strpos($output, 'Event A') < strpos($output, 'Event B')
+            strpos($output, 'Event A') < strpos($output, 'Event B'),
         );
     }
 
@@ -3188,21 +3188,21 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event B',
-            ]
+            ],
         );
 
         $this->subject->piVars['sort'] = 'title:1';
         $output = $this->subject->main('', []);
 
         self::assertTrue(
-            strpos($output, 'Event B') < strpos($output, 'Event A')
+            strpos($output, 'Event B') < strpos($output, 'Event A'),
         );
     }
 
@@ -3228,7 +3228,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
@@ -3238,12 +3238,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid
+            $categoryUid,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -3253,12 +3253,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event B',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid
+            $categoryUid,
         );
 
         $this->subject->setConfigurationValue('sortListViewByCategory', 1);
@@ -3266,7 +3266,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $output = $this->subject->main('', []);
 
         self::assertTrue(
-            strpos($output, 'Event A') < strpos($output, 'Event B')
+            strpos($output, 'Event A') < strpos($output, 'Event B'),
         );
     }
 
@@ -3277,7 +3277,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
@@ -3287,12 +3287,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid
+            $categoryUid,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -3302,12 +3302,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event B',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid
+            $categoryUid,
         );
 
         $this->subject->setConfigurationValue('sortListViewByCategory', 1);
@@ -3315,7 +3315,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $output = $this->subject->main('', []);
 
         self::assertTrue(
-            strpos($output, 'Event B') < strpos($output, 'Event A')
+            strpos($output, 'Event B') < strpos($output, 'Event A'),
         );
     }
 
@@ -3326,7 +3326,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Category Y']
+            ['title' => 'Category Y'],
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3335,17 +3335,17 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Category X']
+            ['title' => 'Category X'],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3354,12 +3354,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event B',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->setConfigurationValue('sortListViewByCategory', 1);
@@ -3367,7 +3367,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $output = $this->subject->main('', []);
 
         self::assertTrue(
-            strpos($output, 'Event B') < strpos($output, 'Event A')
+            strpos($output, 'Event B') < strpos($output, 'Event A'),
         );
     }
 
@@ -3378,7 +3378,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Category X']
+            ['title' => 'Category X'],
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
@@ -3388,12 +3388,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid
+            $categoryUid,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -3403,12 +3403,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event B',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid
+            $categoryUid,
         );
 
         $this->subject->setConfigurationValue('sortListViewByCategory', 1);
@@ -3418,8 +3418,8 @@ final class DefaultControllerTest extends FunctionalTestCase
             1,
             mb_substr_count(
                 $this->subject->main('', []),
-                'Category X'
-            )
+                'Category X',
+            ),
         );
     }
 
@@ -3430,7 +3430,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Category Y']
+            ['title' => 'Category Y'],
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3439,17 +3439,17 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Category X']
+            ['title' => 'Category X'],
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3458,12 +3458,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 // the number of categories
                 'categories' => 1,
                 'title' => 'Event B',
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->setConfigurationValue('sortListViewByCategory', 1);
@@ -3472,11 +3472,11 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Category X',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             'Category Y',
-            $output
+            $output,
         );
     }
 
@@ -3497,12 +3497,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with teaser',
                 'teaser' => 'Test Teaser',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             '>Test Teaser</a>',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3529,16 +3529,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         $result = $this->subject->main('', []);
@@ -3564,22 +3564,22 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'end_date' => Time::SECONDS_PER_WEEK,
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
         $this->subject->createSeminar($eventUid);
 
         self::assertStringNotContainsString(
             'tx_seminars_pi1[category%5D=' . $categoryUid,
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3594,16 +3594,16 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'an event type']
+            ['title' => 'an event type'],
         );
         $this->subject->setConfigurationValue(
             'limitListViewToEventTypes',
-            $eventTypeUid
+            $eventTypeUid,
         );
 
         self::assertStringNotContainsString(
             'Test &amp; event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3614,7 +3614,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'an event type']
+            ['title' => 'an event type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3622,12 +3622,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            ]
+            ],
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'an event type']
+            ['title' => 'an event type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3635,22 +3635,22 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another type',
                 'event_type' => $eventTypeUid2,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToEventTypes',
-            $eventTypeUid1 . ',' . $eventTypeUid2
+            $eventTypeUid1 . ',' . $eventTypeUid2,
         );
 
         $result = $this->subject->main('', []);
         self::assertStringContainsString(
             'Event with type',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Event with another type',
-            $result
+            $result,
         );
     }
 
@@ -3661,7 +3661,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'an event type']
+            ['title' => 'an event type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3669,21 +3669,21 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            ]
+            ],
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'another eventType']
+            ['title' => 'another eventType'],
         );
         $this->subject->setConfigurationValue(
             'limitListViewToEventTypes',
-            $eventTypeUid2
+            $eventTypeUid2,
         );
 
         self::assertStringNotContainsString(
             'Event with type',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3694,7 +3694,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'an event type']
+            ['title' => 'an event type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3702,12 +3702,12 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            ]
+            ],
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'an event type']
+            ['title' => 'an event type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3715,23 +3715,23 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another type',
                 'event_type' => $eventTypeUid2,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToEventTypes',
-            $eventTypeUid1
+            $eventTypeUid1,
         );
         $this->subject->piVars['event_type'] = [$eventTypeUid2];
 
         $result = $this->subject->main('', []);
         self::assertStringNotContainsString(
             'Event with type',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Event with another type',
-            $result
+            $result,
         );
     }
 
@@ -3746,16 +3746,16 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->subject->setConfigurationValue(
             'limitListViewToCategories',
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringNotContainsString(
             'Test &amp; event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3771,16 +3771,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -3790,31 +3790,31 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with another category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToCategories',
-            $categoryUid1 . ',' . $categoryUid2
+            $categoryUid1 . ',' . $categoryUid2,
         );
 
         $result = $this->subject->main('', []);
         self::assertStringContainsString(
             'Event with category',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Event with another category',
-            $result
+            $result,
         );
     }
 
@@ -3830,30 +3830,30 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'another category']
+            ['title' => 'another category'],
         );
         $this->subject->setConfigurationValue(
             'limitListViewToCategories',
-            $categoryUid2
+            $categoryUid2,
         );
 
         self::assertStringNotContainsString(
             'Event with category',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -3869,16 +3869,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid1,
-            $categoryUid1
+            $categoryUid1,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -3888,32 +3888,32 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with another category',
                 // the number of categories
                 'categories' => 1,
-            ]
+            ],
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'a category']
+            ['title' => 'a category'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid2,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToCategories',
-            $categoryUid1
+            $categoryUid1,
         );
         $this->subject->piVars['category'] = $categoryUid2;
 
         $result = $this->subject->main('', []);
         self::assertStringNotContainsString(
             'Event with category',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Event with another category',
-            $result
+            $result,
         );
     }
 
@@ -3931,16 +3931,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with place',
                 // the number of places
                 'place' => 1,
-            ]
+            ],
         );
         $placeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'a place']
+            ['title' => 'a place'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid1,
-            $placeUid1
+            $placeUid1,
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -3950,32 +3950,32 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'Event with another place',
                 // the number of places
                 'place' => 1,
-            ]
+            ],
         );
         $placeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'a place']
+            ['title' => 'a place'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
             $eventUid2,
-            $placeUid2
+            $placeUid2,
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToPlaces',
-            $placeUid1
+            $placeUid1,
         );
         $this->subject->piVars['place'] = [$placeUid2];
 
         $result = $this->subject->main('', []);
         self::assertStringNotContainsString(
             'Event with place',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Event with another place',
-            $result
+            $result,
         );
     }
 
@@ -3989,32 +3989,32 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function listViewLimitedToOrganizersContainsEventsWithSelectedOrganizer(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 1',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToOrganizers',
-            $organizerUid
+            $organizerUid,
         );
 
         $result = $this->subject->main('', []);
 
         self::assertStringContainsString(
             'Event with organizer 1',
-            $result
+            $result,
         );
     }
 
@@ -4024,47 +4024,47 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function listViewLimitedToOrganizerExcludesEventsWithNotSelectedOrganizer(): void
     {
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 1',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid1,
             $organizerUid1,
-            'organizers'
+            'organizers',
         );
 
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 2',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid2,
             $organizerUid2,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToOrganizers',
-            $organizerUid1
+            $organizerUid1,
         );
 
         self::assertStringNotContainsString(
             'Event with organizer 2',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4074,42 +4074,42 @@ final class DefaultControllerTest extends FunctionalTestCase
     public function listViewLimitedToOrganizersFromSelectorWidgetIgnoresFlexFormsValues(): void
     {
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 1',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid1,
             $organizerUid1,
-            'organizers'
+            'organizers',
         );
 
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 2',
-            ]
+            ],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid2,
             $organizerUid2,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToOrganizers',
-            $organizerUid1
+            $organizerUid1,
         );
         $this->subject->piVars['organizer'] = [$organizerUid2];
 
@@ -4117,11 +4117,11 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Event with organizer 1',
-            $result
+            $result,
         );
         self::assertStringContainsString(
             'Event with organizer 2',
-            $result
+            $result,
         );
     }
 
@@ -4143,14 +4143,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4169,21 +4169,21 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 1,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistrationOnQueue'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4202,21 +4202,21 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             $this->translate('label_onlineRegistrationOnQueue'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4232,12 +4232,12 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $this->translate('label_onlinePrebooking'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4256,18 +4256,18 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 20,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4278,7 +4278,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $registrationBegin = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
             'date',
-            'timestamp'
+            'timestamp',
         ) + 20;
         $this->subject->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
@@ -4290,15 +4290,15 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => $registrationBegin,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             \sprintf($this->translate('message_registrationOpensOn'), \date('Y-m-d H:i', $registrationBegin)),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4317,18 +4317,18 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) - 42,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4346,15 +4346,15 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => 0,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4372,7 +4372,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Test &amp; event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4387,14 +4387,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createAndLoginFrontEndUser(),
                 'registration_queue' => Registration::STATUS_NONBINDING_RESERVATION,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
         self::assertStringContainsString(
             'Test &amp; event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4408,7 +4408,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Test &amp; event',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4422,7 +4422,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '2008-01-01',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4436,7 +4436,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $this->subject->main('', []);
         self::assertFalse(
-            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
+            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_EDIT'),
         );
     }
 
@@ -4454,18 +4454,18 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'category_foo']
+            ['title' => 'category_foo'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->seminarUid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         self::assertStringContainsString(
             'category_foo',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4488,18 +4488,18 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'currentEvent',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) - 20,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 20,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'currentEvent',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4518,18 +4518,18 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'title' => 'futureEvent',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 21,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             'futureEvent',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4544,7 +4544,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->main('', []);
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION')
+            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION'),
         );
     }
 
@@ -4557,7 +4557,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             $this->translate('label_date'),
-            $this->subject->getFieldHeader('date')
+            $this->subject->getFieldHeader('date'),
         );
     }
 
@@ -4570,7 +4570,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<a',
-            $this->subject->getFieldHeader('date')
+            $this->subject->getFieldHeader('date'),
         );
     }
 
@@ -4583,7 +4583,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'rel="nofollow"',
-            $this->subject->getFieldHeader('date')
+            $this->subject->getFieldHeader('date'),
         );
     }
 
@@ -4596,7 +4596,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             '<a',
-            $this->subject->getFieldHeader('date')
+            $this->subject->getFieldHeader('date'),
         );
     }
 
@@ -4609,7 +4609,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             '<a',
-            $this->subject->getFieldHeader('register')
+            $this->subject->getFieldHeader('register'),
         );
     }
 
@@ -4630,7 +4630,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'foo',
-            ]
+            ],
         );
         $this->testingFramework->logoutFrontEndUser();
 
@@ -4660,12 +4660,12 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'Event A',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4679,24 +4679,24 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event B',
-            ]
+            ],
         );
 
         $output = $this->subject->main('', []);
         self::assertStringContainsString(
             'Event A',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             'Event B',
-            $output
+            $output,
         );
     }
 
@@ -4712,26 +4712,26 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'descFlag' => 0,
                 'results_at_a_time' => 1,
                 'maxPages' => 5,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event B',
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             'Event B',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4747,27 +4747,27 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'descFlag' => 0,
                 'results_at_a_time' => 1,
                 'maxPages' => 5,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event B',
-            ]
+            ],
         );
 
         $this->subject->piVars['pointer'] = 1;
         self::assertStringContainsString(
             'Event B',
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4788,13 +4788,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         $this->subject->main('', []);
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -4811,13 +4811,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         $this->subject->main('', []);
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -4834,13 +4834,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         $this->subject->main('', []);
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -4857,13 +4857,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         $this->subject->main('', []);
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -4879,13 +4879,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         $this->subject->main('', []);
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -4901,13 +4901,13 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event A',
-            ]
+            ],
         );
 
         $this->subject->main('', []);
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
+            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES'),
         );
     }
 
@@ -4929,9 +4929,9 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -4939,7 +4939,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4958,16 +4958,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 1,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -4975,7 +4975,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistrationOnQueue'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -4994,16 +4994,16 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'queue_size' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -5011,7 +5011,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_onlineRegistrationOnQueue'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -5027,7 +5027,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -5035,7 +5035,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_onlinePrebooking'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -5053,13 +5053,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 40,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -5067,7 +5067,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -5078,7 +5078,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $registrationBegin = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
             'date',
-            'timestamp'
+            'timestamp',
         ) + 40;
         $this->subject->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
@@ -5089,10 +5089,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => $registrationBegin,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -5100,7 +5100,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             \sprintf($this->translate('message_registrationOpensOn'), \date('Y-m-d H:i', $registrationBegin)),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -5118,13 +5118,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) - 42,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -5132,7 +5132,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -5150,10 +5150,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'attendees_max' => 0,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 42,
                 'begin_date_registration' => 0,
-            ]
+            ],
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -5161,7 +5161,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_onlineRegistration'),
-            $this->subject->main('', [])
+            $this->subject->main('', []),
         );
     }
 
@@ -5179,13 +5179,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5201,13 +5201,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-1',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5223,13 +5223,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-2',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5245,13 +5245,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-0',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5265,13 +5265,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5285,13 +5285,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringNotContainsString(
             'tx-seminars-pi1-vacancies-0',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5305,13 +5305,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-unlimited',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5325,19 +5325,19 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setRegistrationDeadline(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) - 45
+                'timestamp',
+            ) - 45,
         );
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 45
+                'timestamp',
+            ) + 45,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-registration-deadline-over',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5351,13 +5351,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) - 45
+                'timestamp',
+            ) - 45,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-event-begin-date-over',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5374,13 +5374,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-has-registration-queue',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5397,13 +5397,13 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setBeginDate(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertStringNotContainsString(
             'tx-seminars-pi1-has-registration-queue',
-            $this->subject->getVacanciesClasses($event)
+            $this->subject->getVacanciesClasses($event),
         );
     }
 
@@ -5508,7 +5508,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $subject = $this->createPartialMock(
             TestingDefaultController::class,
-            ['limitForAdditionalParameters']
+            ['limitForAdditionalParameters'],
         );
         $subject->setContentObjectRenderer($this->createMock(ContentObjectRenderer::class));
         $subject->expects(self::once())->method('limitForAdditionalParameters');
@@ -5523,7 +5523,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $subject = $this->createPartialMock(
             TestingDefaultController::class,
-            ['limitForAdditionalParameters']
+            ['limitForAdditionalParameters'],
         );
         $subject->setContentObjectRenderer($this->createMock(ContentObjectRenderer::class));
         $subject->expects(self::once())->method('limitForAdditionalParameters');
@@ -5538,7 +5538,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $subject = $this->createPartialMock(
             TestingDefaultController::class,
-            ['limitForAdditionalParameters']
+            ['limitForAdditionalParameters'],
         );
         $subject->setContentObjectRenderer($this->createMock(ContentObjectRenderer::class));
         $subject->expects(self::never())->method('limitForAdditionalParameters');
@@ -5676,15 +5676,18 @@ final class DefaultControllerTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             TestingDefaultController::class,
-            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
+            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns'],
         );
-        $subject->method('isRegistrationEnabled')
+        $subject
+            ->method('isRegistrationEnabled')
             ->willReturn(true);
-        $subject->method('isLoggedIn')
+        $subject
+            ->method('isLoggedIn')
             ->willReturn(true);
 
         if ($getsHidden) {
-            $subject->expects(self::once())->method('hideColumns')
+            $subject
+                ->expects(self::once())->method('hideColumns')
                 ->with(['list_registrations']);
         } else {
             $subject->expects(self::never())->method('hideColumns');
@@ -5694,7 +5697,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'registrationsListPID' => $listPid,
                 'registrationsVipListPID' => $vipListPid,
-            ]
+            ],
         );
 
         $subject->hideListRegistrationsColumnIfNecessary($whatToDisplay);
@@ -5718,21 +5721,24 @@ final class DefaultControllerTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             TestingDefaultController::class,
-            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
+            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns'],
         );
-        $subject->method('isRegistrationEnabled')
+        $subject
+            ->method('isRegistrationEnabled')
             ->willReturn(true);
-        $subject->method('isLoggedIn')
+        $subject
+            ->method('isLoggedIn')
             ->willReturn(false);
 
-        $subject->expects(self::once())->method('hideColumns')
+        $subject
+            ->expects(self::once())->method('hideColumns')
             ->with(['list_registrations']);
 
         $subject->init(
             [
                 'registrationsListPID' => $listPid,
                 'registrationsVipListPID' => $vipListPid,
-            ]
+            ],
         );
 
         $subject->hideListRegistrationsColumnIfNecessary($whatToDisplay);
@@ -5756,21 +5762,24 @@ final class DefaultControllerTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             TestingDefaultController::class,
-            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
+            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns'],
         );
-        $subject->method('isRegistrationEnabled')
+        $subject
+            ->method('isRegistrationEnabled')
             ->willReturn(false);
-        $subject->method('isLoggedIn')
+        $subject
+            ->method('isLoggedIn')
             ->willReturn(true);
 
-        $subject->expects(self::once())->method('hideColumns')
+        $subject
+            ->expects(self::once())->method('hideColumns')
             ->with(['list_registrations']);
 
         $subject->init(
             [
                 'registrationsListPID' => $listPid,
                 'registrationsVipListPID' => $vipListPid,
-            ]
+            ],
         );
 
         $subject->hideListRegistrationsColumnIfNecessary($whatToDisplay);
@@ -5788,7 +5797,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5798,13 +5807,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'topic' => $topic,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 2000,
-            ]
+            ],
         );
         $this->subject->setConfigurationValue('what_to_display', 'topic_list');
 
@@ -5813,7 +5822,8 @@ final class DefaultControllerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')
+        $hook
+            ->expects(self::once())->method('modifyEventBagBuilder')
             ->with($this->subject, self::anything(), 'topic_list');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
@@ -5836,7 +5846,8 @@ final class DefaultControllerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')
+        $hook
+            ->expects(self::once())->method('modifyEventBagBuilder')
             ->with($this->subject, self::anything(), 'seminar_list');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
@@ -5857,7 +5868,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-            ]
+            ],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5867,13 +5878,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'topic' => $topicUId,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 2000,
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5883,13 +5894,13 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'topic' => $topicUId,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 11000, // > 1 day after first date
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 12000,
-            ]
+            ],
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = (string)$dateUid;
@@ -5901,7 +5912,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $hook->expects(self::exactly(2))->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::exactly(2))->method('modifyEventBagBuilder')->withConsecutive(
             [$this->subject, self::anything(), 'events_next_day'],
-            [$this->subject, self::anything(), 'other_dates']
+            [$this->subject, self::anything(), 'other_dates'],
         );
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
@@ -5927,7 +5938,8 @@ final class DefaultControllerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyMyEventsListRow')->with($this->subject);
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::never())->method('modifyEventBagBuilder');
-        $hook->expects(self::once())->method('modifyRegistrationBagBuilder')
+        $hook
+            ->expects(self::once())->method('modifyRegistrationBagBuilder')
             ->with($this->subject, self::anything(), 'my_events');
         // We don't test for the second parameter (the bag builder instance here)
         // because we cannot access it from the outside.
@@ -5953,7 +5965,8 @@ final class DefaultControllerTest extends FunctionalTestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')
+        $hook
+            ->expects(self::once())->method('modifyEventBagBuilder')
             ->with($this->subject, self::anything(), 'my_vip_events');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
@@ -5978,7 +5991,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
-            $this->subject->createSingleViewLink($event, 'foo')
+            $this->subject->createSingleViewLink($event, 'foo'),
         );
     }
 
@@ -5992,7 +6005,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '>foo</a>',
-            $this->subject->createSingleViewLink($event, 'foo')
+            $this->subject->createSingleViewLink($event, 'foo'),
         );
     }
 
@@ -6007,7 +6020,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '>foo</a>',
-            $this->subject->createSingleViewLink($event, 'foo')
+            $this->subject->createSingleViewLink($event, 'foo'),
         );
     }
 
@@ -6021,7 +6034,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertSame(
             'foo &amp; bar',
-            $this->subject->createSingleViewLink($event, 'foo & bar')
+            $this->subject->createSingleViewLink($event, 'foo & bar'),
         );
     }
 
@@ -6036,7 +6049,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '>foo &amp; bar</a>',
-            $this->subject->createSingleViewLink($event, 'foo & bar')
+            $this->subject->createSingleViewLink($event, 'foo & bar'),
         );
     }
 
@@ -6050,7 +6063,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertSame(
             'foo &amp; bar',
-            $this->subject->createSingleViewLink($event, 'foo & bar')
+            $this->subject->createSingleViewLink($event, 'foo & bar'),
         );
     }
 
@@ -6065,7 +6078,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertSame(
             'foo &amp; bar',
-            $this->subject->createSingleViewLink($event, 'foo & bar')
+            $this->subject->createSingleViewLink($event, 'foo & bar'),
         );
     }
 
@@ -6078,7 +6091,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Chaos &amp; Confusion',
-            $this->subject->createSingleViewLink($event, 'Chaos & Confusion')
+            $this->subject->createSingleViewLink($event, 'Chaos & Confusion'),
         );
     }
 
@@ -6091,7 +6104,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Chaos &amp; Confusion',
-            $this->subject->createSingleViewLink($event, 'Chaos & Confusion')
+            $this->subject->createSingleViewLink($event, 'Chaos & Confusion'),
         );
     }
 
@@ -6104,7 +6117,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Chaos & Confusion',
-            $this->subject->createSingleViewLink($event, 'Chaos & Confusion', false)
+            $this->subject->createSingleViewLink($event, 'Chaos & Confusion', false),
         );
     }
 

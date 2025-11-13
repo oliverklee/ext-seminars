@@ -57,13 +57,13 @@ final class OrganizerMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => 'Fabulous organizer']
+            ['title' => 'Fabulous organizer'],
         );
 
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Fabulous organizer',
-            $model->getName()
+            $model->getName(),
         );
     }
 }

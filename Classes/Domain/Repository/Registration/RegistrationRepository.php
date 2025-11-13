@@ -48,8 +48,8 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
         $query->matching(
             $query->logicalAnd(
                 $query->equals('seminar', $event),
-                $query->equals('user', $userUid)
-            )
+                $query->equals('user', $userUid),
+            ),
         );
 
         return $query->count() > 0;
@@ -67,7 +67,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
         $count = $connection->count(
             '*',
             $this->getTableName(),
-            ['pid' => $pageUid, 'registration_queue' => Registration::STATUS_REGULAR]
+            ['pid' => $pageUid, 'registration_queue' => Registration::STATUS_REGULAR],
         );
         \assert($count >= 0);
 
@@ -116,17 +116,18 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
     {
         $tableName = $this->getTableName();
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
-        $query = $queryBuilder->addSelectLiteral($queryBuilder->expr()->sum('seats'))
+        $query = $queryBuilder
+            ->addSelectLiteral($queryBuilder->expr()->sum('seats'))
             ->from($tableName)
             ->where(
                 $queryBuilder->expr()->eq(
                     'seminar',
-                    $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT),
                 ),
                 $queryBuilder->expr()->eq(
                     'registration_queue',
-                    $queryBuilder->createNamedParameter($status, Connection::PARAM_INT)
-                )
+                    $queryBuilder->createNamedParameter($status, Connection::PARAM_INT),
+                ),
             );
         $queryResult = $query->executeQuery();
 
@@ -171,8 +172,8 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
         $query->matching(
             $query->logicalAnd(
                 $query->equals('event', $eventUid),
-                $query->equals('status', $status)
-            )
+                $query->equals('status', $status),
+            ),
         );
 
         return $query->execute()->toArray();

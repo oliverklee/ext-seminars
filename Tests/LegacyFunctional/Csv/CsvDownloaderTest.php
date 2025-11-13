@@ -57,7 +57,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'pid' => $this->pid,
                 'begin_date' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
-            ]
+            ],
         );
 
         $this->subject = new CsvDownloader();
@@ -86,12 +86,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
             [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid),
         );
     }
 
@@ -110,12 +110,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
             [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid),
         );
     }
 
@@ -130,7 +130,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
             [
                 'endtime' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') - 1000,
-            ]
+            ],
         );
 
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
@@ -141,12 +141,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
             [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid),
         );
     }
 
@@ -164,12 +164,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registered_themselves' => 1,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'tx_seminars_attendances.registered_themselves',
-            $this->subject->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid),
         );
     }
 
@@ -187,12 +187,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'tx_seminars_attendances.company',
-            $this->subject->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid),
         );
     }
 
@@ -210,12 +210,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo bar inc.',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo bar inc.',
-            $this->subject->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid),
         );
     }
 
@@ -234,14 +234,14 @@ final class CsvDownloaderTest extends FunctionalTestCase
             [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         $_GET['eventUid'] = $this->eventUid;
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->main()
+            $this->subject->main(),
         );
     }
 
@@ -260,7 +260,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -269,18 +269,18 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $registrationsList
             = $this->subject->createListOfRegistrations($this->eventUid);
 
         self::assertStringContainsString(
             (string)$firstRegistrationUid,
-            $registrationsList
+            $registrationsList,
         );
         self::assertStringContainsString(
             (string)$secondRegistrationUid,
-            $registrationsList
+            $registrationsList,
         );
     }
 
@@ -299,14 +299,14 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'title' => 'Schöne Bären führen',
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         $_GET['eventUid'] = $this->eventUid;
 
         self::assertStringContainsString(
             'Schöne Bären führen',
-            $this->subject->main()
+            $this->subject->main(),
         );
     }
 
@@ -327,7 +327,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -336,18 +336,18 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                         ->getPropertyFromAspect('date', 'timestamp') + 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
 
         self::assertStringContainsString(
             (string)$firstRegistrationUid,
-            $registrationsList
+            $registrationsList,
         );
         self::assertStringContainsString(
             (string)$secondRegistrationUid,
-            $registrationsList
+            $registrationsList,
         );
     }
 
@@ -367,12 +367,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $frontEndUserUid,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo_user',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -392,12 +392,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $frontEndUserUid,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$registrationUid,
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -416,12 +416,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => 9999,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$registrationUid,
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -439,7 +439,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'crdate' => 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -447,13 +447,13 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'crdate' => 2,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             "\r\n" . $firstRegistrationUid . "\r\n" .
             $secondRegistrationUid . "\r\n",
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -472,7 +472,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -481,12 +481,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression(
             '/\\r\\n$/',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -505,12 +505,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo "" bar',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -529,12 +529,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             '"foo bar"',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -553,12 +553,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo ; bar',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             '"foo ; bar"',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -577,12 +577,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => "foo\nbar",
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             "\"foo\nbar\"",
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -601,12 +601,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             '"foo "" bar"',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -626,12 +626,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'title' => 'test',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo;test',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -656,7 +656,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'tx_seminars_attendances.address;tx_seminars_attendances.title',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -670,7 +670,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'name;',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -684,7 +684,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             ';address',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -698,7 +698,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         self::assertSame(
             "\r\n",
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -727,12 +727,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $frontEndUserUid = $this->testingFramework->createFrontEndUser('', ['email' => 'foo@bar.com']);
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['seminar' => $this->eventUid, 'user' => $frontEndUserUid]
+            ['seminar' => $this->eventUid, 'user' => $frontEndUserUid],
         );
 
         self::assertStringNotContainsString(
             'foo@bar.com',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 
@@ -749,7 +749,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
             [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $queueUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -757,12 +757,12 @@ final class CsvDownloaderTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => 1,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$queueUid,
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid),
         );
     }
 }

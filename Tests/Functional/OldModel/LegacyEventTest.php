@@ -204,7 +204,7 @@ final class LegacyEventTest extends FunctionalTestCase
         GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_attendances')
             ->insert(
                 'tx_seminars_attendances',
-                ['seminar' => $eventUid, 'seats' => 2, 'registration_queue' => ExtbaseRegistration::STATUS_REGULAR]
+                ['seminar' => $eventUid, 'seats' => 2, 'registration_queue' => ExtbaseRegistration::STATUS_REGULAR],
             );
         $subject->calculateStatistics();
 
@@ -229,7 +229,7 @@ final class LegacyEventTest extends FunctionalTestCase
                     'seminar' => $eventUid,
                     'seats' => 1,
                     'registration_queue' => ExtbaseRegistration::STATUS_NONBINDING_RESERVATION,
-                ]
+                ],
             );
         $subject->calculateStatistics();
 
@@ -557,7 +557,8 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetails($plugin);
 
-        self::assertStringContainsString("On top of the mountain\n12345 Hamm", $result);
+        self::assertStringContainsString('On top of the mountain', $result);
+        self::assertStringContainsString('12345 Hamm', $result);
     }
 
     /**

@@ -50,7 +50,7 @@ ExtensionManagementUtility::addTCAcolumns(
                 ],
             ],
         ],
-    ]
+    ],
 );
 
 ExtensionManagementUtility::addToAllTCAtypes(
@@ -58,5 +58,5 @@ ExtensionManagementUtility::addToAllTCAtypes(
     '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_users.divLabel.seminars, '
     . 'default_organizer, available_topics',
     '',
-    'after:image'
+    'after:image',
 );

@@ -94,7 +94,7 @@ class Salutation
         }
         $result .= ' ' . \sprintf(
             LocalizationUtility::translate('email_eventDate', 'seminars'),
-            $event->getDate('-')
+            $event->getDate('-'),
         );
 
         if ($event->hasTime() && !$event->hasTimeslots()) {

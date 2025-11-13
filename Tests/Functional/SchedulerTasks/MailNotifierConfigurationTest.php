@@ -74,7 +74,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
                     'label' => self::LABEL_PREFIX . 'schedulerTasks.fields.page-uid',
                 ],
             ],
-            $result
+            $result,
         );
     }
 
@@ -98,7 +98,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
                     'label' => self::LABEL_PREFIX . 'schedulerTasks.fields.page-uid',
                 ],
             ],
-            $result
+            $result,
         );
     }
 

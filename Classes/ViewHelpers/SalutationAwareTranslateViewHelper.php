@@ -54,7 +54,7 @@ class SalutationAwareTranslateViewHelper extends AbstractViewHelper
         $labelWithSalutation = TranslateViewHelper::renderStatic(
             $argumentsWithSalutation,
             $renderChildrenClosure,
-            $renderingContext
+            $renderingContext,
         );
 
         return $labelWithSalutation !== $keyWithSalutation

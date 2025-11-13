@@ -155,7 +155,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $this->setRecordPropertyString(
             'additional_information',
-            $additionalInformation
+            $additionalInformation,
         );
     }
 
@@ -374,13 +374,13 @@ class LegacyEvent extends AbstractTimeSpan
                 'tx_seminars_sites',
                 'tx_seminars_seminars_place_mm',
                 'mm',
-                $queryBuilder->expr()->eq('tx_seminars_sites.uid', $queryBuilder->quoteIdentifier('mm.uid_foreign'))
+                $queryBuilder->expr()->eq('tx_seminars_sites.uid', $queryBuilder->quoteIdentifier('mm.uid_foreign')),
             )
             ->where(
                 $queryBuilder->expr()->eq(
                     'mm.uid_local',
-                    $queryBuilder->createNamedParameter($this->getUid(), Connection::PARAM_INT)
-                )
+                    $queryBuilder->createNamedParameter($this->getUid(), Connection::PARAM_INT),
+                ),
             )
             ->orderBy('mm.sorting')
             ->executeQuery()->fetchAllAssociative();
@@ -435,7 +435,7 @@ class LegacyEvent extends AbstractTimeSpan
             . ' AND tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
             $mmTable,
             '',
-            'sorting'
+            'sorting',
         );
     }
 
@@ -469,11 +469,11 @@ class LegacyEvent extends AbstractTimeSpan
             $plugin->setMarker('speaker_item_title', $name);
             $plugin->setMarker(
                 'speaker_item_description',
-                $speaker->hasDescription() ? $speaker->getDescription() : ''
+                $speaker->hasDescription() ? $speaker->getDescription() : '',
             );
             $plugin->setMarker(
                 'speaker_image',
-                $speaker->hasImage() ? $this->renderSpeakerImage($speaker, $plugin) : ''
+                $speaker->hasImage() ? $this->renderSpeakerImage($speaker, $plugin) : '',
             );
             $result[] = $plugin->getSubpart('SPEAKER_LIST_ITEM');
         }
@@ -1600,7 +1600,7 @@ class LegacyEvent extends AbstractTimeSpan
             OrganizerBag::class,
             'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
             'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
-            'tx_seminars_seminars_organizing_partners_mm'
+            'tx_seminars_seminars_organizing_partners_mm',
         );
 
         /** @var LegacyOrganizer $organizer */
@@ -1833,7 +1833,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = $this->canViewRegistrationsListForLoginAccess(
                     $whichPlugin,
                     $registrationsListPID,
-                    $registrationsVipListPID
+                    $registrationsVipListPID,
                 );
                 break;
             case 'attendees_and_managers':
@@ -1842,7 +1842,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = $this->canViewRegistrationsListForAttendeesAndManagersAccess(
                     $whichPlugin,
                     $registrationsListPID,
-                    $registrationsVipListPID
+                    $registrationsVipListPID,
                 );
         }
 
@@ -1889,7 +1889,7 @@ class LegacyEvent extends AbstractTimeSpan
                     || $this->canViewRegistrationsList(
                         'my_vip_events',
                         0,
-                        $registrationsVipListPID
+                        $registrationsVipListPID,
                     );
                 break;
             case 'my_events':
@@ -1987,7 +1987,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $whichPlugin,
                 0,
                 0,
-                $accessLevel
+                $accessLevel,
             )
         ) {
             return $this->translate('message_accessDenied');
@@ -2144,8 +2144,9 @@ class LegacyEvent extends AbstractTimeSpan
 
         return \array_filter(
             $this->registrations,
-            static fn (array $registration): bool => (int)$registration['registration_queue']
-                === ExtbaseRegistration::STATUS_REGULAR
+            static fn (array $registration): bool
+                => (int)$registration['registration_queue']
+                === ExtbaseRegistration::STATUS_REGULAR,
         );
     }
 
@@ -2515,7 +2516,7 @@ class LegacyEvent extends AbstractTimeSpan
             case 'crdate':
                 $result = \date(
                     $this->getDateFormat() . ' ' . $this->getTimeFormat(),
-                    $this->getRecordPropertyInteger($trimmedKey)
+                    $this->getRecordPropertyInteger($trimmedKey),
                 );
                 break;
             case 'title':
@@ -2730,7 +2731,7 @@ class LegacyEvent extends AbstractTimeSpan
             'tx_seminars_timeslots.seminar = ' . $this->getUid(),
             '',
             '',
-            'tx_seminars_timeslots.begin_date ASC'
+            'tx_seminars_timeslots.begin_date ASC',
         );
     }
 
@@ -2805,10 +2806,12 @@ class LegacyEvent extends AbstractTimeSpan
             return [];
         }
 
-        $attachments = $this->getFileRepository()
+        $attachments = $this
+            ->getFileRepository()
             ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getUid());
         if ($this->isEventDate()) {
-            $attachmentsFromTopic = $this->getFileRepository()
+            $attachmentsFromTopic = $this
+                ->getFileRepository()
                 ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getTopicUid());
             $attachments = \array_merge($attachments, $attachmentsFromTopic);
         }
@@ -2944,7 +2947,7 @@ class LegacyEvent extends AbstractTimeSpan
         if (!$this->hasBeginDate()) {
             throw new \BadMethodCallException(
                 'The event has no begin date. Please call this function only if the event has a begin date.',
-                1333291877
+                1333291877,
             );
         }
         if (!$this->hasSpeakers()) {
@@ -2969,7 +2972,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $this->setRecordPropertyBoolean(
             'cancelation_deadline_reminder_sent',
-            true
+            true,
         );
     }
 
@@ -2980,7 +2983,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $this->setRecordPropertyBoolean(
             'event_takes_place_reminder_sent',
-            true
+            true,
         );
     }
 
@@ -3052,7 +3055,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         return \date(
             $this->getDateFormat() . ' ' . $this->getTimeFormat(),
-            $this->getRecordPropertyInteger('begin_date_registration')
+            $this->getRecordPropertyInteger('begin_date_registration'),
         );
     }
 
@@ -3168,7 +3171,7 @@ class LegacyEvent extends AbstractTimeSpan
         return $this->getAssociationAsArray(
             'tx_seminars_payment_methods',
             'tx_seminars_seminars_payment_methods_mm',
-            ['title', 'description']
+            ['title', 'description'],
         );
     }
 
@@ -3193,14 +3196,14 @@ class LegacyEvent extends AbstractTimeSpan
                 'mm',
                 $queryBuilder->expr()->eq(
                     $foreignTableName . '.uid',
-                    $queryBuilder->quoteIdentifier('mm.uid_foreign')
-                )
+                    $queryBuilder->quoteIdentifier('mm.uid_foreign'),
+                ),
             )
             ->where(
                 $queryBuilder->expr()->eq(
                     'mm.uid_local',
-                    $queryBuilder->createNamedParameter($this->getTopicOrSelfUid(), Connection::PARAM_INT)
-                )
+                    $queryBuilder->createNamedParameter($this->getTopicOrSelfUid(), Connection::PARAM_INT),
+                ),
             )
             ->orderBy('mm.sorting')
             ->orderBy('mm.sorting')

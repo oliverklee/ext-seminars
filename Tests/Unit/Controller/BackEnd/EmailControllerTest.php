@@ -69,7 +69,7 @@ final class EmailControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             EmailController::class,
             $methodsToMock,
-            [$moduleTemplateFactory, $this->permissionsMock, $this->emailServiceMock]
+            [$moduleTemplateFactory, $this->permissionsMock, $this->emailServiceMock],
         );
         $this->subject = $subject;
 
@@ -156,7 +156,7 @@ final class EmailControllerTest extends UnitTestCase
             ['event', $event],
             ['pageUid', self::anything()],
             ['subject', ''],
-            ['body', self::anything()]
+            ['body', self::anything()],
         );
 
         $this->subject->composeAction($event, 1);
@@ -175,7 +175,7 @@ final class EmailControllerTest extends UnitTestCase
             ['event', self::anything()],
             ['pageUid', $pageUid],
             ['subject', ''],
-            ['body', self::anything()]
+            ['body', self::anything()],
         );
 
         $this->subject->composeAction(new SingleEvent(), $pageUid);
@@ -193,7 +193,7 @@ final class EmailControllerTest extends UnitTestCase
             ['event', self::anything()],
             ['pageUid', self::anything()],
             ['subject', ''],
-            ['body', self::anything()]
+            ['body', self::anything()],
         );
 
         $this->subject->composeAction(new SingleEvent(), 1);
@@ -211,7 +211,7 @@ final class EmailControllerTest extends UnitTestCase
             ['event', self::anything()],
             ['pageUid', self::anything()],
             ['subject', self::anything()],
-            ['body', '']
+            ['body', ''],
         );
 
         $this->subject->composeAction(new SingleEvent(), 1);
@@ -230,7 +230,7 @@ final class EmailControllerTest extends UnitTestCase
             ['event', self::anything()],
             ['pageUid', self::anything()],
             ['subject', $subject],
-            ['body', self::anything()]
+            ['body', self::anything()],
         );
 
         $this->subject->composeAction(new SingleEvent(), 1, $subject, '');
@@ -249,7 +249,7 @@ final class EmailControllerTest extends UnitTestCase
             ['event', self::anything()],
             ['pageUid', self::anything()],
             ['subject', self::anything()],
-            ['body', $body]
+            ['body', $body],
         );
 
         $this->subject->composeAction(new SingleEvent(), 1, '', $body);
@@ -298,7 +298,8 @@ final class EmailControllerTest extends UnitTestCase
         $subject = 'email subject';
         $body = 'email body';
 
-        $this->emailServiceMock->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
+        $this->emailServiceMock
+            ->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
             ->with($event, $subject, $body);
 
         $this->subject->sendAction($event, $subject, $body);
@@ -317,7 +318,8 @@ final class EmailControllerTest extends UnitTestCase
         $subject = 'email subject';
         $body = 'email body';
 
-        $this->emailServiceMock->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
+        $this->emailServiceMock
+            ->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
             ->with($event, $subject, $body);
 
         $this->subject->sendAction($event, $subject, $body);

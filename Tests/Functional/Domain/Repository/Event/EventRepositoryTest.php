@@ -697,7 +697,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function findSingleEventsAndEventDatesByOwnerUidForUidZeroIgnoresEventWithoutOwner(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithoutOwner.csv'
+            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithoutOwner.csv',
         );
 
         $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(0);
@@ -711,7 +711,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function findSingleEventsAndEventDatesByOwnerUidFindsSingleEventWithTheProvidedOwnerUidOnAnyPage(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithOwnerOnPage.csv'
+            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/SingleEventWithOwnerOnPage.csv',
         );
 
         $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
@@ -767,7 +767,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function findSingleEventsAndEventDatesByOwnerUidSortsEventByInternalTitleInAscendingOrder(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/TwoSingleEventsWithOwner.csv'
+            __DIR__ . '/Fixtures/findSingleEventsAndEventDatesByOwnerUid/TwoSingleEventsWithOwner.csv',
         );
 
         $result = $this->subject->findSingleEventsAndEventDatesByOwnerUid(42);
@@ -796,14 +796,14 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function updateRegistrationCounterCacheForRegistrationsSetsCounterCacheToRegistrationsCount(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/persistence/SingleEventWithTwoRegistrationsWithZeroCounterCache.csv'
+            __DIR__ . '/Fixtures/persistence/SingleEventWithTwoRegistrationsWithZeroCounterCache.csv',
         );
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/persistence/SingleEventWithTwoRegistrationsWithTwoCounterCache.csv'
+            __DIR__ . '/Fixtures/persistence/SingleEventWithTwoRegistrationsWithTwoCounterCache.csv',
         );
     }
 
@@ -813,14 +813,14 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function updateRegistrationCounterCacheIgnoresHiddenRegistrations(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/persistence/SingleEventWithHiddenRegistrationWithZeroCounterCache.csv'
+            __DIR__ . '/Fixtures/persistence/SingleEventWithHiddenRegistrationWithZeroCounterCache.csv',
         );
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/persistence/SingleEventWithHiddenRegistrationWithZeroCounterCache.csv'
+            __DIR__ . '/Fixtures/persistence/SingleEventWithHiddenRegistrationWithZeroCounterCache.csv',
         );
     }
 
@@ -830,14 +830,14 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function updateRegistrationCounterCacheIgnoresDeletedRegistrations(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/persistence/SingleEventWithDeletedRegistrationWithZeroCounterCache.csv'
+            __DIR__ . '/Fixtures/persistence/SingleEventWithDeletedRegistrationWithZeroCounterCache.csv',
         );
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/persistence/SingleEventWithDeletedRegistrationWithZeroCounterCache.csv'
+            __DIR__ . '/Fixtures/persistence/SingleEventWithDeletedRegistrationWithZeroCounterCache.csv',
         );
     }
 
@@ -1468,7 +1468,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $result = $this->subject->findBySearchTermInBackEndMode(
             1,
-            'Timed single event with title on page'
+            'Timed single event with title on page',
         );
 
         self::assertCount(1, $result);
@@ -1486,7 +1486,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $result = $this->subject->findBySearchTermInBackEndMode(
             1,
-            'Deleted single event with title on page'
+            'Deleted single event with title on page',
         );
 
         self::assertSame([], $result);
@@ -1784,7 +1784,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $this->subject->duplicateViaDataHandler(1);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithScalarDataAndDuplicate.csv'
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithScalarDataAndDuplicate.csv',
         );
     }
 
@@ -1799,7 +1799,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $this->subject->duplicateViaDataHandler(1);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithToOneRelationsAndDuplicate.csv'
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithToOneRelationsAndDuplicate.csv',
         );
     }
 
@@ -1855,7 +1855,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $this->subject->duplicateViaDataHandler(1);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithoutRegistrations.csv'
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithoutRegistrations.csv',
         );
     }
 
@@ -1872,7 +1872,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $this->subject->duplicateViaDataHandler(1);
 
         $this->assertCSVDataSet(
-            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv'
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv',
         );
     }
 
@@ -2253,7 +2253,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function findUpcomingIgnoresSingleEventWithOutStartAndWithEndInFuture(): void
     {
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithEndInFuture.csv'
+            __DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithEndInFuture.csv',
         );
 
         $result = $this->subject->findUpcoming();

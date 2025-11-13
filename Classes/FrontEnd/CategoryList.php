@@ -51,7 +51,7 @@ class CategoryList extends AbstractView
             foreach ($categoryBag as $category) {
                 $link = $this->createLinkToListViewLimitedByCategory(
                     $category->getUid(),
-                    \htmlspecialchars($category->getTitle(), ENT_QUOTES | ENT_HTML5)
+                    \htmlspecialchars($category->getTitle(), ENT_QUOTES | ENT_HTML5),
                 );
                 $this->setMarker('category_title', $link);
 
@@ -89,7 +89,7 @@ class CategoryList extends AbstractView
         return $this->cObj->getTypoLink(
             $title,
             (string)$this->getConfValueInteger('listPID'),
-            ['tx_seminars_pi1[category]' => $categoryUid]
+            ['tx_seminars_pi1[category]' => $categoryUid],
         );
     }
 

@@ -85,7 +85,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -105,7 +105,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -125,7 +125,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -145,7 +145,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -165,7 +165,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -185,7 +185,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -205,7 +205,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -225,7 +225,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, true],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -245,7 +245,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -265,7 +265,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, true],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -285,7 +285,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, false],
-            ]
+            ],
         );
         $subject = new Permissions();
 
@@ -305,7 +305,7 @@ final class PermissionsTest extends UnitTestCase
                 ['tables_modify', self::EVENTS_TABLE_NAME, false],
                 ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
                 ['tables_modify', self::USERS_TABLE_NAME, true],
-            ]
+            ],
         );
         $subject = new Permissions();
 

@@ -65,7 +65,7 @@ final class EventTest extends FunctionalTestCase
 
         self::assertEquals(
             $registration->getUid(),
-            $this->subject->getRegularRegistrations()->getUids()
+            $this->subject->getRegularRegistrations()->getUids(),
         );
     }
 
@@ -82,7 +82,7 @@ final class EventTest extends FunctionalTestCase
         $this->subject->setRegistrations($registrations);
 
         self::assertTrue(
-            $this->subject->getRegularRegistrations()->isEmpty()
+            $this->subject->getRegularRegistrations()->isEmpty(),
         );
     }
 
@@ -97,15 +97,16 @@ final class EventTest extends FunctionalTestCase
         $registrations->add($registration);
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegularRegistrations']
+            ['getRegularRegistrations'],
         );
         $event->setData([]);
-        $event->method('getRegularRegistrations')
+        $event
+            ->method('getRegularRegistrations')
             ->willReturn($registrations);
 
         self::assertEquals(
             1,
-            $event->getRegisteredSeats()
+            $event->getRegisteredSeats(),
         );
     }
 
@@ -120,15 +121,16 @@ final class EventTest extends FunctionalTestCase
         $registrations->add($registration);
         $event = $this->createPartialMock(
             Event::class,
-            ['getRegularRegistrations']
+            ['getRegularRegistrations'],
         );
         $event->setData([]);
-        $event->method('getRegularRegistrations')
+        $event
+            ->method('getRegularRegistrations')
             ->willReturn($registrations);
 
         self::assertEquals(
             2,
-            $event->getRegisteredSeats()
+            $event->getRegisteredSeats(),
         );
     }
 

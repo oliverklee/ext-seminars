@@ -20,7 +20,7 @@ final class TestingLegacyEvent extends LegacyEvent
     {
         $this->setRecordPropertyInteger(
             'deadline_unregistration',
-            $unregistrationDeadline
+            $unregistrationDeadline,
         );
     }
 
@@ -114,7 +114,7 @@ final class TestingLegacyEvent extends LegacyEvent
     {
         $this->setRecordPropertyInteger(
             'organizing_partners',
-            $numberOfOrganizingPartners
+            $numberOfOrganizingPartners,
         );
     }
 
@@ -235,7 +235,7 @@ final class TestingLegacyEvent extends LegacyEvent
     {
         $this->setRecordPropertyBoolean(
             'allows_multiple_registrations',
-            $allowMultipleRegistrations
+            $allowMultipleRegistrations,
         );
     }
 
@@ -332,7 +332,7 @@ final class TestingLegacyEvent extends LegacyEvent
     {
         $this->setRecordPropertyInteger(
             'deadline_registration',
-            $registrationDeadline
+            $registrationDeadline,
         );
     }
 
@@ -356,7 +356,7 @@ final class TestingLegacyEvent extends LegacyEvent
     {
         $this->setRecordPropertyInteger(
             'begin_date_registration',
-            $registrationBeginDate
+            $registrationBeginDate,
         );
     }
 

@@ -14,7 +14,7 @@ defined('TYPO3') or die('Access denied.');
             'EXT:seminars/Resources/Public/Icons/Extension.svg',
         ],
         'list_type',
-        'seminars'
+        'seminars',
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_pi1'] = 'recursive,pages';
@@ -22,7 +22,7 @@ defined('TYPO3') or die('Access denied.');
 
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_pi1',
-        'FILE:EXT:seminars/Configuration/FlexForms/flexforms_pi1.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/flexforms_pi1.xml',
     );
 
     //
@@ -34,7 +34,7 @@ defined('TYPO3') or die('Access denied.');
         'EventArchive', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventArchive',
-        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+        'EXT:seminars/Resources/Public/Icons/Extension.svg', // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -46,7 +46,7 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventarchive'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventarchive',
-        'FILE:EXT:seminars/Configuration/FlexForms/EventArchive.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/EventArchive.xml',
     );
 
     //
@@ -58,7 +58,7 @@ defined('TYPO3') or die('Access denied.');
         'EventOutlook', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook',
-        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+        'EXT:seminars/Resources/Public/Icons/Extension.svg', // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -70,7 +70,7 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventoutlook'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventoutlook',
-        'FILE:EXT:seminars/Configuration/FlexForms/EventOutlook.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/EventOutlook.xml',
     );
 
     //
@@ -82,7 +82,7 @@ defined('TYPO3') or die('Access denied.');
         'EventSingleView', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView',
-        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+        'EXT:seminars/Resources/Public/Icons/Extension.svg', // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -95,7 +95,7 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventsingleview'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventsingleview',
-        'FILE:EXT:seminars/Configuration/FlexForms/EventSingleView.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/EventSingleView.xml',
     );
 
     //
@@ -107,7 +107,7 @@ defined('TYPO3') or die('Access denied.');
         'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration',
-        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+        'EXT:seminars/Resources/Public/Icons/Extension.svg', // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -120,7 +120,7 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventregistration'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventregistration',
-        'FILE:EXT:seminars/Configuration/FlexForms/EventRegistration.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/EventRegistration.xml',
     );
 
     //
@@ -132,7 +132,7 @@ defined('TYPO3') or die('Access denied.');
         'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor',
-        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+        'EXT:seminars/Resources/Public/Icons/Extension.svg', // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -145,7 +145,7 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_frontendeditor'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_frontendeditor',
-        'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml',
     );
 
     //
@@ -157,7 +157,7 @@ defined('TYPO3') or die('Access denied.');
         'MyRegistrations', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations',
-        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+        'EXT:seminars/Resources/Public/Icons/Extension.svg', // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -169,6 +169,6 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_myregistrations'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_myregistrations',
-        'FILE:EXT:seminars/Configuration/FlexForms/MyRegistrations.xml'
+        'FILE:EXT:seminars/Configuration/FlexForms/MyRegistrations.xml',
     );
 })();

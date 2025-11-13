@@ -57,7 +57,7 @@ final class CategoryMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'Lecture']
+            ['title' => 'Lecture'],
         );
         $model = $this->subject->find($uid);
 

@@ -63,7 +63,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '09:50' . ' ' . $this->translate('label_hours'),
-            $this->subject->getTime()
+            $this->subject->getTime(),
         );
     }
 
@@ -77,7 +77,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '09:50&#8211;18:30' . ' ' . $this->translate('label_hours'),
-            $this->subject->getTime()
+            $this->subject->getTime(),
         );
     }
 
@@ -91,7 +91,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '09:50-18:30' . ' ' . $this->translate('label_hours'),
-            $this->subject->getTime('-')
+            $this->subject->getTime('-'),
         );
     }
 
@@ -105,7 +105,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '09:50&#8211;18:30' . ' ' . $this->translate('label_hours'),
-            $this->subject->getTime()
+            $this->subject->getTime(),
         );
     }
 
@@ -192,7 +192,8 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
-        $hook->expects(self::once())->method('modifyTimeSpan')
+        $hook
+            ->expects(self::once())->method('modifyTimeSpan')
             ->with('09:50&#8211;18:30', $this->subject, '&#8211;')
             ->willReturn($modifiedValue);
 
@@ -202,7 +203,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             $modifiedValue . ' ' . $this->translate('label_hours'),
-            $this->subject->getTime()
+            $this->subject->getTime(),
         );
     }
 
@@ -225,7 +226,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '2010-01-01',
-            $this->subject->getDate()
+            $this->subject->getDate(),
         );
     }
 
@@ -249,7 +250,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '2010-01-01',
-            $this->subject->getDate()
+            $this->subject->getDate(),
         );
     }
 
@@ -263,7 +264,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         self::assertSame(
             '2010-01-01&#8211;2010-01-03',
-            $this->subject->getDate()
+            $this->subject->getDate(),
         );
     }
 
@@ -349,7 +350,8 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 3, 2010));
 
         $hook = $this->createMock(DateTimeSpan::class);
-        $hook->expects(self::once())->method('modifyDateSpan')
+        $hook
+            ->expects(self::once())->method('modifyDateSpan')
             ->with('2010-01-01&#8211;2010-01-03', $this->subject, '&#8211;')
             ->willReturn($modifiedValue);
         $hook->expects(self::never())->method('modifyTimeSpan');

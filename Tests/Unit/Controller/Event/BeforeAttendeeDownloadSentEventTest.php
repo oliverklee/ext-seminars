@@ -24,7 +24,7 @@ final class BeforeAttendeeDownloadSentEventTest extends UnitTestCase
         $subject = new BeforeAttendeeDownloadSentEvent(
             $registration,
             $this->createStub(ResourceInterface::class),
-            $this->createStub(StreamInterface::class)
+            $this->createStub(StreamInterface::class),
         );
 
         self::assertSame($registration, $subject->getRegistration());
@@ -39,7 +39,7 @@ final class BeforeAttendeeDownloadSentEventTest extends UnitTestCase
         $subject = new BeforeAttendeeDownloadSentEvent(
             new Registration(),
             $resource,
-            $this->createStub(StreamInterface::class)
+            $this->createStub(StreamInterface::class),
         );
 
         self::assertSame($resource, $subject->getFileResource());
@@ -54,7 +54,7 @@ final class BeforeAttendeeDownloadSentEventTest extends UnitTestCase
         $subject = new BeforeAttendeeDownloadSentEvent(
             new Registration(),
             $this->createStub(ResourceInterface::class),
-            $stream
+            $stream,
         );
 
         self::assertSame($stream, $subject->getContentStream());
@@ -70,7 +70,7 @@ final class BeforeAttendeeDownloadSentEventTest extends UnitTestCase
         $subject = new BeforeAttendeeDownloadSentEvent(
             new Registration(),
             $this->createStub(ResourceInterface::class),
-            $stream1
+            $stream1,
         );
 
         self::assertSame($stream1, $subject->getContentStream());

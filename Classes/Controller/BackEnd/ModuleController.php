@@ -63,7 +63,7 @@ class ModuleController extends ActionController
         $this->view->assign('events', $events);
         $this->view->assign(
             'numberOfRegistrations',
-            $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid)
+            $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid),
         );
 
         $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');

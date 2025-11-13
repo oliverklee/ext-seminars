@@ -157,7 +157,7 @@ final class EventDetailsElementTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<input type="hidden" name="data[tx_seminars_attendances][8][seminar]"',
-            $result
+            $result,
         );
     }
 

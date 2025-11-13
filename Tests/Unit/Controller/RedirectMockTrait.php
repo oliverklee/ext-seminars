@@ -20,13 +20,15 @@ trait RedirectMockTrait
     private function mockRedirect(...$arguments): void
     {
         if ((new Typo3Version())->getMajorVersion() < 12) {
-            $this->subject->expects(self::once())->method('redirect')
+            $this->subject
+                ->expects(self::once())->method('redirect')
                 ->with(...$arguments)
                 ->willThrowException(new StopActionException('redirectToUri', 1476045828));
             $this->expectException(StopActionException::class);
         } else {
             $redirectResponse = $this->createStub(RedirectResponse::class);
-            $this->subject->expects(self::once())->method('redirect')->with(...$arguments)
+            $this->subject
+                ->expects(self::once())->method('redirect')->with(...$arguments)
                 ->willReturn($redirectResponse);
         }
     }
@@ -34,7 +36,8 @@ trait RedirectMockTrait
     private function stubRedirect(): void
     {
         if ((new Typo3Version())->getMajorVersion() < 12) {
-            $this->subject->method('redirect')
+            $this->subject
+                ->method('redirect')
                 ->willThrowException(new StopActionException('redirectToUri', 1476045828));
             $this->expectException(StopActionException::class);
         } else {
@@ -49,13 +52,15 @@ trait RedirectMockTrait
     private function mockRedirectToUri(string $uri): void
     {
         if ((new Typo3Version())->getMajorVersion() < 12) {
-            $this->subject->expects(self::once())->method('redirectToUri')
+            $this->subject
+                ->expects(self::once())->method('redirectToUri')
                 ->with($uri)
                 ->willThrowException(new StopActionException('redirectToUri', 1476045828));
             $this->expectException(StopActionException::class);
         } else {
             $redirectResponse = $this->createStub(RedirectResponse::class);
-            $this->subject->expects(self::once())->method('redirectToUri')->with($uri)
+            $this->subject
+                ->expects(self::once())->method('redirectToUri')->with($uri)
                 ->willReturn($redirectResponse);
         }
     }

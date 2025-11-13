@@ -72,7 +72,7 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             EventUnregistrationController::class,
             ['htmlResponse', 'redirect', 'redirectToUri'],
-            [$this->registrationManagerMock]
+            [$this->registrationManagerMock],
         );
         $this->subject = $subject;
 
@@ -287,7 +287,8 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $registration->method('getUid')->willReturn($registrationUid);
         $this->stubRedirect();
 
-        $this->registrationManagerMock->expects(self::once())
+        $this->registrationManagerMock
+            ->expects(self::once())
             ->method('removeRegistration')->with($registrationUid, $this->legacyConfigurationMock);
 
         $this->subject->unregisterAction($registration);

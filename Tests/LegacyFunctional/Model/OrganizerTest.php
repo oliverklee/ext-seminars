@@ -42,7 +42,7 @@ final class OrganizerTest extends FunctionalTestCase
 
         self::assertEquals(
             'Fabulous organizer',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -59,7 +59,7 @@ final class OrganizerTest extends FunctionalTestCase
 
         self::assertEquals(
             'mail@example.com',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 
@@ -76,7 +76,7 @@ final class OrganizerTest extends FunctionalTestCase
 
         self::assertEquals(
             '',
-            $this->subject->getEmailFooter()
+            $this->subject->getEmailFooter(),
         );
     }
 
@@ -89,7 +89,7 @@ final class OrganizerTest extends FunctionalTestCase
 
         self::assertEquals(
             'Example Inc.',
-            $this->subject->getEmailFooter()
+            $this->subject->getEmailFooter(),
         );
     }
 
@@ -102,7 +102,7 @@ final class OrganizerTest extends FunctionalTestCase
 
         self::assertEquals(
             'Example Inc.',
-            $this->subject->getEmailFooter()
+            $this->subject->getEmailFooter(),
         );
     }
 
@@ -114,7 +114,7 @@ final class OrganizerTest extends FunctionalTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasEmailFooter()
+            $this->subject->hasEmailFooter(),
         );
     }
 
@@ -126,7 +126,7 @@ final class OrganizerTest extends FunctionalTestCase
         $this->subject->setEmailFooter('Example Inc.');
 
         self::assertTrue(
-            $this->subject->hasEmailFooter()
+            $this->subject->hasEmailFooter(),
         );
     }
 }

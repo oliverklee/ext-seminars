@@ -57,13 +57,13 @@ final class PlaceMapperTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'Nice place']
+            ['title' => 'Nice place'],
         );
 
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Nice place',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 }

@@ -358,7 +358,7 @@ abstract class AbstractModel
 
             $data = \array_merge(
                 $dataTemplate,
-                ['uid_foreign' => $foreignUid, 'sorting' => $recordCount + 1]
+                ['uid_foreign' => $foreignUid, 'sorting' => $recordCount + 1],
             );
             $connection->insert($mmTable, $data);
             $recordCount++;
@@ -486,7 +486,7 @@ abstract class AbstractModel
                 $foreignTable,
                 $mmTable,
                 'mm',
-                $query->expr()->eq('mm.uid_foreign', $query->quoteIdentifier($foreignTable . '.uid'))
+                $query->expr()->eq('mm.uid_foreign', $query->quoteIdentifier($foreignTable . '.uid')),
             )
             ->where($query->expr()->eq('mm.uid_local', $query->createNamedParameter($uid)))
             ->orderBy('mm.sorting')

@@ -31,7 +31,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'getTemplateCode',
                 'setLabels',
                 'createHelperObjects',
-            ]
+            ],
         );
         $controller->expects(self::once())->method('createSingleView');
         $controller->expects(self::never())->method('createListView');
@@ -55,7 +55,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'getTemplateCode',
                 'setLabels',
                 'createHelperObjects',
-            ]
+            ],
         );
         $controller->expects(self::once())->method('createSingleView');
         $controller->expects(self::never())->method('createListView');
@@ -79,7 +79,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'getTemplateCode',
                 'setLabels',
                 'createHelperObjects',
-            ]
+            ],
         );
         $controller->expects(self::once())->method('createSingleView');
         $controller->expects(self::never())->method('createListView');
@@ -105,7 +105,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'getTemplateCode',
                 'setLabels',
                 'createHelperObjects',
-            ]
+            ],
         );
         $controller->expects(self::once())->method('createListView')->with('seminar_list');
         $controller->expects(self::never())->method('createSingleView');
@@ -129,7 +129,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'getTemplateCode',
                 'setLabels',
                 'createHelperObjects',
-            ]
+            ],
         );
         $controller->expects(self::once())->method('createListView')->with('seminar_list');
         $controller->expects(self::never())->method('createSingleView');

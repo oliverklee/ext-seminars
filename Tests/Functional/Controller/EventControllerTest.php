@@ -212,7 +212,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInDifferentCities.csv'
+            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInDifferentCities.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -230,7 +230,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInSameCity.csv'
+            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInSameCity.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -263,7 +263,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInDifferentCities.csv'
+            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInDifferentCities.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -447,7 +447,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInDifferentCities.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInDifferentCities.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -465,7 +465,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInSameCity.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInSameCity.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -498,7 +498,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInDifferentCities.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInDifferentCities.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -538,7 +538,7 @@ final class EventControllerTest extends FunctionalTestCase
 
         $unlimited = LocalizationUtility::translate(
             'plugin.eventOutlook.events.property.vacancies.unlimited',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($unlimited);
         self::assertStringContainsString($unlimited, $html);
@@ -552,7 +552,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithMoreThanEnoughVacancies.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithMoreThanEnoughVacancies.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -569,7 +569,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithExactlyEnoughVacancies.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithExactlyEnoughVacancies.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -586,7 +586,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithLessThanEnoughVacancies.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithLessThanEnoughVacancies.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -625,7 +625,7 @@ final class EventControllerTest extends FunctionalTestCase
 
         $fullyBooked = LocalizationUtility::translate(
             'plugin.eventOutlook.events.property.vacancies.fullyBooked',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($fullyBooked);
         self::assertStringContainsString($fullyBooked, $html);
@@ -664,7 +664,7 @@ final class EventControllerTest extends FunctionalTestCase
 
         $expectedMessage = LocalizationUtility::translate(
             'plugin.eventOutlook.events.property.registration.register',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expectedMessage);
         self::assertStringContainsString($expectedMessage, $html);
@@ -677,7 +677,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacanciesAndWaitingList.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -697,7 +697,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacanciesAndWaitingList.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -706,7 +706,7 @@ final class EventControllerTest extends FunctionalTestCase
 
         $expectedMessage = LocalizationUtility::translate(
             'plugin.eventOutlook.events.property.registration.waitingList',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expectedMessage);
         self::assertStringContainsString($expectedMessage, $html);
@@ -734,7 +734,7 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithVacanciesAndDeadlineOver.csv'
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithVacanciesAndDeadlineOver.csv',
         );
 
         $request = (new InternalRequest())->withPageId(1);
@@ -752,7 +752,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -768,7 +769,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -784,7 +786,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureDateWithTopic.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -801,7 +804,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/Topic.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -817,7 +821,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithEventType.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -833,7 +838,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/SingleDayPastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -849,7 +855,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/SingleDayPastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -865,7 +872,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/MultiDayPastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -881,7 +889,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/SingleDayPastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -897,7 +906,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/MultiDayPastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -913,7 +923,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/MultiDayPastEvent.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -929,7 +940,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEventWithOneVenue.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -945,7 +957,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEventWithOneVenue.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -962,7 +975,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEventWithOneVenue.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -978,7 +992,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEventWithTwoVenuesInSameCity.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -995,7 +1010,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1011,7 +1027,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1041,7 +1058,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1058,10 +1076,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithVacanciesAndDeadlineOver.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithVacanciesAndDeadlineOver.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1077,14 +1096,15 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithUnlimitedSeats.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $unlimited = LocalizationUtility::translate(
             'plugin.eventSingleView.events.property.vacancies.unlimited',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($unlimited);
         self::assertStringContainsString($unlimited, $html);
@@ -1098,10 +1118,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithMoreThanEnoughVacancies.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithMoreThanEnoughVacancies.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1116,10 +1137,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithExactlyEnoughVacancies.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithExactlyEnoughVacancies.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1134,10 +1156,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithLessThanEnoughVacancies.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithLessThanEnoughVacancies.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1153,7 +1176,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneVacancy.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1169,14 +1193,15 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacancies.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $fullyBooked = LocalizationUtility::translate(
             'plugin.eventSingleView.events.property.vacancies.fullyBooked',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($fullyBooked);
         self::assertStringContainsString($fullyBooked, $html);
@@ -1191,7 +1216,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1207,7 +1233,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneSpeaker.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1223,7 +1250,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithTwoSpeakers.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1240,7 +1268,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneSpeaker.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1255,10 +1284,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithSpeakerWithExternalHomepage.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithSpeakerWithExternalHomepage.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1273,10 +1303,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithSpeakerWithInternalHomepage.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithSpeakerWithInternalHomepage.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1292,14 +1323,15 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneSpeaker.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $expectedLabel = LocalizationUtility::translate(
             'plugin.eventSingleView.events.property.speakers.one',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expectedLabel);
         self::assertStringContainsString($expectedLabel, $html);
@@ -1313,14 +1345,15 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithTwoSpeakers.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $expectedLabel = LocalizationUtility::translate(
             'plugin.eventSingleView.events.property.speakers.many',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expectedLabel);
         self::assertStringContainsString($expectedLabel, $html);
@@ -1334,7 +1367,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneVacancy.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1353,14 +1387,15 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneVacancy.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $expectedMessage = LocalizationUtility::translate(
             'plugin.eventSingleView.events.property.registration.register',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expectedMessage);
         self::assertStringContainsString($expectedMessage, $html);
@@ -1373,10 +1408,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1394,10 +1430,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1412,17 +1449,18 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $expectedMessage = LocalizationUtility::translate(
             'plugin.eventSingleView.events.property.registration.waitingList',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expectedMessage);
         self::assertStringContainsString($expectedMessage, $html);
@@ -1436,7 +1474,8 @@ final class EventControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacancies.csv');
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
@@ -1451,10 +1490,11 @@ final class EventControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithVacanciesAndDeadlineOver.csv'
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithVacanciesAndDeadlineOver.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(3)
+        $request = (new InternalRequest())
+            ->withPageId(3)
             ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();

@@ -84,7 +84,7 @@ final class LegacyEventTest extends FunctionalTestCase
                     'cu_decimal_point' => ',',
                     'cu_decimal_digits' => 2,
                     'cu_sub_divisor' => 100,
-                ]
+                ],
             );
         }
 
@@ -103,7 +103,7 @@ final class LegacyEventTest extends FunctionalTestCase
                 'object_type' => 0,
                 'queue_size' => 0,
                 'needs_registration' => 1,
-            ]
+            ],
         );
         $this->subject = new TestingLegacyEvent($uid);
     }
@@ -133,7 +133,7 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-            ]
+            ],
         );
         $this->pi1->getTemplateCode();
     }
@@ -153,16 +153,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            $targetGroupData
+            $targetGroupData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_target_groups_mm',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfTargetGroups(
-            $this->subject->getNumberOfTargetGroups() + 1
+            $this->subject->getNumberOfTargetGroups() + 1,
         );
 
         return $uid;
@@ -204,16 +204,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            $organizerData
+            $organizerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizing_partners_mm',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfOrganizingPartners(
-            $this->subject->getNumberOfOrganizingPartners() + 1
+            $this->subject->getNumberOfOrganizingPartners() + 1,
         );
 
         return $uid;
@@ -234,7 +234,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            $categoryData
+            $categoryData,
         );
 
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $uid);
@@ -258,16 +258,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            $organizerData
+            $organizerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfOrganizers(
-            $this->subject->getNumberOfOrganizers() + 1
+            $this->subject->getNumberOfOrganizers() + 1,
         );
 
         return $uid;
@@ -288,16 +288,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            $speakerData
+            $speakerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfSpeakers(
-            $this->subject->getNumberOfSpeakers() + 1
+            $this->subject->getNumberOfSpeakers() + 1,
         );
 
         return $uid;
@@ -318,16 +318,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            $speakerData
+            $speakerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm_partners',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfPartners(
-            $this->subject->getNumberOfPartners() + 1
+            $this->subject->getNumberOfPartners() + 1,
         );
 
         return $uid;
@@ -348,16 +348,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            $speakerData
+            $speakerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm_tutors',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfTutors(
-            $this->subject->getNumberOfTutors() + 1
+            $this->subject->getNumberOfTutors() + 1,
         );
 
         return $uid;
@@ -378,16 +378,16 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            $speakerData
+            $speakerData,
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm_leaders',
             $eventUid,
-            $uid
+            $uid,
         );
         $this->subject->setNumberOfLeaders(
-            $this->subject->getNumberOfLeaders() + 1
+            $this->subject->getNumberOfLeaders() + 1,
         );
 
         return $uid;
@@ -405,7 +405,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            $eventTypeData
+            $eventTypeData,
         );
 
         $this->subject->setEventType($uid);
@@ -447,7 +447,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addCategoryRelation();
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -458,7 +458,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addCategoryRelation(),
-            $this->addCategoryRelation()
+            $this->addCategoryRelation(),
         );
     }
 
@@ -469,19 +469,19 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfCategories()
+            $this->subject->getNumberOfCategories(),
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfCategories()
+            $this->subject->getNumberOfCategories(),
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfCategories()
+            $this->subject->getNumberOfCategories(),
         );
     }
 
@@ -496,19 +496,19 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid]),
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid]),
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid]),
         );
     }
 
@@ -518,7 +518,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function addTargetGroupRelationReturnsUid(): void
     {
         self::assertTrue(
-            $this->addTargetGroupRelation() > 0
+            $this->addTargetGroupRelation() > 0,
         );
     }
 
@@ -529,7 +529,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addTargetGroupRelation(),
-            $this->addTargetGroupRelation()
+            $this->addTargetGroupRelation(),
         );
     }
 
@@ -540,19 +540,19 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfTargetGroups()
+            $this->subject->getNumberOfTargetGroups(),
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfTargetGroups()
+            $this->subject->getNumberOfTargetGroups(),
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfTargetGroups()
+            $this->subject->getNumberOfTargetGroups(),
         );
     }
 
@@ -567,19 +567,19 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid]),
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid]),
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid]),
         );
     }
 
@@ -590,7 +590,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addPaymentMethodRelation(),
-            $this->addPaymentMethodRelation()
+            $this->addPaymentMethodRelation(),
         );
     }
 
@@ -601,19 +601,19 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfPaymentMethods()
+            $this->subject->getNumberOfPaymentMethods(),
         );
 
         $this->addPaymentMethodRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfPaymentMethods()
+            $this->subject->getNumberOfPaymentMethods(),
         );
 
         $this->addPaymentMethodRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfPaymentMethods()
+            $this->subject->getNumberOfPaymentMethods(),
         );
     }
 
@@ -625,7 +625,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addOrganizingPartnerRelation();
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -636,7 +636,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addOrganizingPartnerRelation(),
-            $this->addOrganizingPartnerRelation()
+            $this->addOrganizingPartnerRelation(),
         );
     }
 
@@ -654,8 +654,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_organizing_partners_mm',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addOrganizingPartnerRelation();
@@ -664,8 +664,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_organizing_partners_mm',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addOrganizingPartnerRelation();
@@ -674,8 +674,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_organizing_partners_mm',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
     }
 
@@ -687,7 +687,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addOrganizerRelation();
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -698,7 +698,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addOrganizerRelation(),
-            $this->addOrganizerRelation()
+            $this->addOrganizerRelation(),
         );
     }
 
@@ -709,19 +709,19 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfOrganizers()
+            $this->subject->getNumberOfOrganizers(),
         );
 
         $this->addOrganizerRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfOrganizers()
+            $this->subject->getNumberOfOrganizers(),
         );
 
         $this->addOrganizerRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfOrganizers()
+            $this->subject->getNumberOfOrganizers(),
         );
     }
 
@@ -733,7 +733,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addSpeakerRelation();
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -744,7 +744,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addSpeakerRelation(),
-            $this->addSpeakerRelation()
+            $this->addSpeakerRelation(),
         );
     }
 
@@ -759,19 +759,19 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid]),
         );
 
         $this->addSpeakerRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid]),
         );
 
         $this->addSpeakerRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid])
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid]),
         );
     }
 
@@ -783,7 +783,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addPartnerRelation([]);
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -794,7 +794,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addPartnerRelation([]),
-            $this->addPartnerRelation([])
+            $this->addPartnerRelation([]),
         );
     }
 
@@ -812,8 +812,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_partners',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addPartnerRelation([]);
@@ -822,8 +822,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_partners',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addPartnerRelation([]);
@@ -832,8 +832,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_partners',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
     }
 
@@ -845,7 +845,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addTutorRelation([]);
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -856,7 +856,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addTutorRelation([]),
-            $this->addTutorRelation([])
+            $this->addTutorRelation([]),
         );
     }
 
@@ -874,8 +874,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_tutors',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addTutorRelation([]);
@@ -884,8 +884,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_tutors',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addTutorRelation([]);
@@ -894,8 +894,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_tutors',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
     }
 
@@ -907,7 +907,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addLeaderRelation([]);
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -918,7 +918,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addLeaderRelation([]),
-            $this->addLeaderRelation([])
+            $this->addLeaderRelation([]),
         );
     }
 
@@ -936,8 +936,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_leaders',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addLeaderRelation([]);
@@ -946,8 +946,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_leaders',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
 
         $this->addLeaderRelation([]);
@@ -956,8 +956,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_leaders',
-                ['uid_local' => $eventUid]
-            )
+                ['uid_local' => $eventUid],
+            ),
         );
     }
 
@@ -969,7 +969,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $uid = $this->addEventTypeRelation([]);
 
         self::assertTrue(
-            $uid > 0
+            $uid > 0,
         );
     }
 
@@ -980,7 +980,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertNotSame(
             $this->addLeaderRelation([]),
-            $this->addLeaderRelation([])
+            $this->addLeaderRelation([]),
         );
     }
 
@@ -992,7 +992,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function isOk(): void
     {
         self::assertTrue(
-            $this->subject->isOk()
+            $this->subject->isOk(),
         );
     }
 
@@ -1005,7 +1005,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             'a test event',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -1019,13 +1019,13 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'a test topic',
-            ]
+            ],
         );
         $topic = new LegacyEvent($topicRecordUid);
 
         self::assertSame(
             'a test topic',
-            $topic->getTitle()
+            $topic->getTitle(),
         );
     }
 
@@ -1039,7 +1039,7 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'a test topic',
-            ]
+            ],
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1047,13 +1047,13 @@ final class LegacyEventTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
                 'title' => 'a test date',
-            ]
+            ],
         );
         $date = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             'a test topic',
-            $date->getTitle()
+            $date->getTitle(),
         );
     }
 
@@ -1066,7 +1066,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->subject->setBeginDate($this->now + 3600);
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1077,7 +1077,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->subject->setBeginDate($this->now + 3600);
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1089,7 +1089,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now - 7200);
         $this->subject->setEndDate($this->now - 3600);
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1101,7 +1101,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now - 7200);
         $this->subject->setEndDate($this->now - 3600);
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1113,7 +1113,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now - 3600);
         $this->subject->setEndDate($this->now + 3600);
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1125,7 +1125,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now - 3600);
         $this->subject->setEndDate($this->now + 3600);
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1160,7 +1160,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1172,7 +1172,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1185,7 +1185,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNeedsRegistration(false);
 
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1200,7 +1200,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(10);
 
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1216,7 +1216,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1232,7 +1232,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1244,11 +1244,11 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $this->now + 20
+            $this->now + 20,
         );
 
         self::assertFalse(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1260,11 +1260,11 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $this->now - 20
+            $this->now - 20,
         );
 
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1278,7 +1278,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationBeginDate(0);
 
         self::assertTrue(
-            $this->subject->canSomebodyRegister()
+            $this->subject->canSomebodyRegister(),
         );
     }
 
@@ -1293,7 +1293,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1307,7 +1307,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1321,7 +1321,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1335,7 +1335,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1349,7 +1349,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1363,7 +1363,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1376,7 +1376,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_seminarCancelled'),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1389,7 +1389,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_noRegistrationNecessary'),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1405,7 +1405,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_noVacancies'),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1422,7 +1422,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1434,15 +1434,15 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $this->now + 20
+            $this->now + 20,
         );
 
         self::assertSame(
             sprintf(
                 $this->translate('message_registrationOpensOn'),
-                $this->subject->getRegistrationBegin()
+                $this->subject->getRegistrationBegin(),
             ),
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1454,12 +1454,12 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $this->now - 20
+            $this->now - 20,
         );
 
         self::assertSame(
             '',
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1474,7 +1474,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->canSomebodyRegisterMessage()
+            $this->subject->canSomebodyRegisterMessage(),
         );
     }
 
@@ -1488,7 +1488,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertTrue(
-            $this->subject->needsRegistration()
+            $this->subject->needsRegistration(),
         );
     }
 
@@ -1500,7 +1500,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNeedsRegistration(false);
 
         self::assertFalse(
-            $this->subject->needsRegistration()
+            $this->subject->needsRegistration(),
         );
     }
 
@@ -1515,7 +1515,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setAttendancesMax(0);
 
         self::assertTrue(
-            $this->subject->hasUnlimitedVacancies()
+            $this->subject->hasUnlimitedVacancies(),
         );
     }
 
@@ -1528,7 +1528,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setAttendancesMax(1);
 
         self::assertFalse(
-            $this->subject->hasUnlimitedVacancies()
+            $this->subject->hasUnlimitedVacancies(),
         );
     }
 
@@ -1541,7 +1541,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setAttendancesMax(0);
 
         self::assertFalse(
-            $this->subject->hasUnlimitedVacancies()
+            $this->subject->hasUnlimitedVacancies(),
         );
     }
 
@@ -1554,7 +1554,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setAttendancesMax(1);
 
         self::assertFalse(
-            $this->subject->hasUnlimitedVacancies()
+            $this->subject->hasUnlimitedVacancies(),
         );
     }
 
@@ -1569,7 +1569,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertFalse(
-            $this->subject->isFull()
+            $this->subject->isFull(),
         );
     }
 
@@ -1582,7 +1582,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(1);
 
         self::assertFalse(
-            $this->subject->isFull()
+            $this->subject->isFull(),
         );
     }
 
@@ -1596,7 +1596,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertFalse(
-            $this->subject->isFull()
+            $this->subject->isFull(),
         );
     }
 
@@ -1610,7 +1610,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(1);
 
         self::assertTrue(
-            $this->subject->isFull()
+            $this->subject->isFull(),
         );
     }
 
@@ -1624,7 +1624,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(1);
 
         self::assertFalse(
-            $this->subject->isFull()
+            $this->subject->isFull(),
         );
     }
 
@@ -1638,7 +1638,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setNumberOfAttendances(2);
 
         self::assertTrue(
-            $this->subject->isFull()
+            $this->subject->isFull(),
         );
     }
 
@@ -1653,7 +1653,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->unregistrationDeadline,
-            $this->subject->getUnregistrationDeadlineAsTimestamp()
+            $this->subject->getUnregistrationDeadlineAsTimestamp(),
         );
     }
 
@@ -1666,7 +1666,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $this->subject->getUnregistrationDeadlineAsTimestamp()
+            $this->subject->getUnregistrationDeadlineAsTimestamp(),
         );
     }
 
@@ -1679,7 +1679,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '2030-01-01 09:00',
-            $this->subject->getUnregistrationDeadline()
+            $this->subject->getUnregistrationDeadline(),
         );
     }
 
@@ -1702,7 +1702,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->getUnregistrationDeadline()
+            $this->subject->getUnregistrationDeadline(),
         );
     }
 
@@ -1714,7 +1714,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setUnregistrationDeadline($this->unregistrationDeadline);
 
         self::assertTrue(
-            $this->subject->hasUnregistrationDeadline()
+            $this->subject->hasUnregistrationDeadline(),
         );
     }
 
@@ -1726,7 +1726,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setUnregistrationDeadline(0);
 
         self::assertFalse(
-            $this->subject->hasUnregistrationDeadline()
+            $this->subject->hasUnregistrationDeadline(),
         );
     }
 
@@ -1948,7 +1948,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->subject->hasRegistrationQueue()
+            $this->subject->hasRegistrationQueue(),
         );
     }
 
@@ -1960,7 +1960,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationQueue(false);
 
         self::assertFalse(
-            $this->subject->hasRegistrationQueue()
+            $this->subject->hasRegistrationQueue(),
         );
     }
 
@@ -1986,7 +1986,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasTargetGroupsIsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasTargetGroups()
+            $this->subject->hasTargetGroups(),
         );
     }
 
@@ -1998,7 +1998,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addTargetGroupRelation();
 
         self::assertTrue(
-            $this->subject->hasTargetGroups()
+            $this->subject->hasTargetGroups(),
         );
     }
 
@@ -2009,7 +2009,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getTargetGroupNames()
+            $this->subject->getTargetGroupNames(),
         );
     }
 
@@ -2023,7 +2023,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $title,
-            $this->subject->getTargetGroupNames()
+            $this->subject->getTargetGroupNames(),
         );
     }
 
@@ -2040,7 +2040,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $titleTargetGroup1 . ', ' . $titleTargetGroup2,
-            $this->subject->getTargetGroupNames()
+            $this->subject->getTargetGroupNames(),
         );
     }
 
@@ -2052,7 +2052,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasPaymentMethodsReturnsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasPaymentMethods()
+            $this->subject->hasPaymentMethods(),
         );
     }
 
@@ -2064,7 +2064,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addPaymentMethodRelation();
 
         self::assertTrue(
-            $this->subject->hasPaymentMethods()
+            $this->subject->hasPaymentMethods(),
         );
     }
 
@@ -2075,7 +2075,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getPaymentMethodsPlain()
+            $this->subject->getPaymentMethodsPlain(),
         );
     }
 
@@ -2089,7 +2089,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $title,
-            $this->subject->getPaymentMethodsPlain()
+            $this->subject->getPaymentMethodsPlain(),
         );
     }
 
@@ -2105,11 +2105,11 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $firstTitle,
-            $this->subject->getPaymentMethodsPlain()
+            $this->subject->getPaymentMethodsPlain(),
         );
         self::assertStringContainsString(
             $secondTitle,
-            $this->subject->getPaymentMethodsPlain()
+            $this->subject->getPaymentMethodsPlain(),
         );
     }
 
@@ -2120,7 +2120,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             [],
-            $this->subject->getPaymentMethods()
+            $this->subject->getPaymentMethods(),
         );
     }
 
@@ -2133,7 +2133,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             ['Payment Method'],
-            $this->subject->getPaymentMethods()
+            $this->subject->getPaymentMethods(),
         );
     }
 
@@ -2147,7 +2147,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             ['Payment Method 1', 'Payment Method 2'],
-            $this->subject->getPaymentMethods()
+            $this->subject->getPaymentMethods(),
         );
     }
 
@@ -2161,7 +2161,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             ['Payment Method 2', 'Payment Method 1'],
-            $this->subject->getPaymentMethods()
+            $this->subject->getPaymentMethods(),
         );
     }
 
@@ -2174,7 +2174,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getPaymentMethodsPlainShort()
+            $this->subject->getPaymentMethodsPlainShort(),
         );
     }
 
@@ -2188,7 +2188,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $title,
-            $this->subject->getPaymentMethodsPlainShort()
+            $this->subject->getPaymentMethodsPlainShort(),
         );
     }
 
@@ -2202,11 +2202,11 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Payment Method 1',
-            $this->subject->getPaymentMethodsPlainShort()
+            $this->subject->getPaymentMethodsPlainShort(),
         );
         self::assertStringContainsString(
             'Payment Method 2',
-            $this->subject->getPaymentMethodsPlainShort()
+            $this->subject->getPaymentMethodsPlainShort(),
         );
     }
 
@@ -2220,7 +2220,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "Payment Method 1\nPayment Method 2",
-            $this->subject->getPaymentMethodsPlainShort()
+            $this->subject->getPaymentMethodsPlainShort(),
         );
     }
 
@@ -2234,7 +2234,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             "Payment Method 1\r\nPayment Method 2",
-            $this->subject->getPaymentMethodsPlainShort()
+            $this->subject->getPaymentMethodsPlainShort(),
         );
     }
 
@@ -2247,7 +2247,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getSinglePaymentMethodPlain(0)
+            $this->subject->getSinglePaymentMethodPlain(0),
         );
     }
 
@@ -2261,7 +2261,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $title . "\n\n",
-            $this->subject->getSinglePaymentMethodPlain($uid)
+            $this->subject->getSinglePaymentMethodPlain($uid),
         );
     }
 
@@ -2276,7 +2276,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $title . ': ' . $description . "\n\n",
-            $this->subject->getSinglePaymentMethodPlain($uid)
+            $this->subject->getSinglePaymentMethodPlain($uid),
         );
     }
 
@@ -2289,7 +2289,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->getSinglePaymentMethodPlain($uid + 1)
+            $this->subject->getSinglePaymentMethodPlain($uid + 1),
         );
     }
 
@@ -2300,7 +2300,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getSinglePaymentMethodShort(0)
+            $this->subject->getSinglePaymentMethodShort(0),
         );
     }
 
@@ -2314,7 +2314,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $title,
-            $this->subject->getSinglePaymentMethodShort($uid)
+            $this->subject->getSinglePaymentMethodShort($uid),
         );
     }
 
@@ -2327,7 +2327,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->getSinglePaymentMethodShort($uid + 1)
+            $this->subject->getSinglePaymentMethodShort($uid + 1),
         );
     }
 
@@ -2359,7 +2359,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasEventTypeInitiallyReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasEventType()
+            $this->subject->hasEventType(),
         );
     }
 
@@ -2369,11 +2369,11 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasEventTypeReturnsTrueIfSingleEventHasNonZeroEventType(): void
     {
         $this->subject->setEventType(
-            $this->testingFramework->createRecord('tx_seminars_event_types')
+            $this->testingFramework->createRecord('tx_seminars_event_types'),
         );
 
         self::assertTrue(
-            $this->subject->hasEventType()
+            $this->subject->hasEventType(),
         );
     }
 
@@ -2384,7 +2384,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getEventType()
+            $this->subject->getEventType(),
         );
     }
 
@@ -2396,13 +2396,13 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setEventType(
             $this->testingFramework->createRecord(
                 'tx_seminars_event_types',
-                ['title' => 'foo type']
-            )
+                ['title' => 'foo type'],
+            ),
         );
 
         self::assertSame(
             'foo type',
-            $this->subject->getEventType()
+            $this->subject->getEventType(),
         );
     }
 
@@ -2417,22 +2417,22 @@ final class LegacyEventTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
-                    ['title' => 'foo type']
+                    ['title' => 'foo type'],
                 ),
-            ]
+            ],
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
-            ]
+            ],
         );
         $seminar = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             'foo type',
-            $seminar->getEventType()
+            $seminar->getEventType(),
         );
     }
 
@@ -2447,15 +2447,15 @@ final class LegacyEventTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
-                    ['title' => 'foo type']
+                    ['title' => 'foo type'],
                 ),
-            ]
+            ],
         );
         $seminar = new LegacyEvent($topicRecordUid);
 
         self::assertSame(
             'foo type',
-            $seminar->getEventType()
+            $seminar->getEventType(),
         );
     }
 
@@ -2470,7 +2470,7 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => 99999,
-            ]
+            ],
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2478,13 +2478,13 @@ final class LegacyEventTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
                 'event_type' => 199999,
-            ]
+            ],
         );
         $seminar = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             99999,
-            $seminar->getEventTypeUid()
+            $seminar->getEventTypeUid(),
         );
     }
 
@@ -2495,7 +2495,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getEventTypeUid()
+            $this->subject->getEventTypeUid(),
         );
     }
 
@@ -2507,7 +2507,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $eventTypeUid = $this->addEventTypeRelation([]);
         self::assertSame(
             $eventTypeUid,
-            $this->subject->getEventTypeUid()
+            $this->subject->getEventTypeUid(),
         );
     }
 
@@ -2519,7 +2519,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasOrganizingPartnersReturnsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasOrganizingPartners()
+            $this->subject->hasOrganizingPartners(),
         );
     }
 
@@ -2531,7 +2531,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizingPartnerRelation();
 
         self::assertTrue(
-            $this->subject->hasOrganizingPartners()
+            $this->subject->hasOrganizingPartners(),
         );
     }
 
@@ -2542,7 +2542,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfOrganizingPartners()
+            $this->subject->getNumberOfOrganizingPartners(),
         );
     }
 
@@ -2554,7 +2554,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizingPartnerRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfOrganizingPartners()
+            $this->subject->getNumberOfOrganizingPartners(),
         );
     }
 
@@ -2567,7 +2567,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizingPartnerRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfOrganizingPartners()
+            $this->subject->getNumberOfOrganizingPartners(),
         );
     }
 
@@ -2579,15 +2579,15 @@ final class LegacyEventTest extends FunctionalTestCase
     public function initiallyHasNoCategories(): void
     {
         self::assertFalse(
-            $this->subject->hasCategories()
+            $this->subject->hasCategories(),
         );
         self::assertSame(
             0,
-            $this->subject->getNumberOfCategories()
+            $this->subject->getNumberOfCategories(),
         );
         self::assertSame(
             [],
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -2599,15 +2599,15 @@ final class LegacyEventTest extends FunctionalTestCase
         $categoryUid = $this->addCategoryRelation(['title' => 'Test']);
 
         self::assertTrue(
-            $this->subject->hasCategories()
+            $this->subject->hasCategories(),
         );
         self::assertSame(
             1,
-            $this->subject->getNumberOfCategories()
+            $this->subject->getNumberOfCategories(),
         );
         self::assertSame(
             [$categoryUid => ['title' => 'Test']],
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -2620,26 +2620,26 @@ final class LegacyEventTest extends FunctionalTestCase
         $categoryUid2 = $this->addCategoryRelation(['title' => 'Test 2']);
 
         self::assertTrue(
-            $this->subject->hasCategories()
+            $this->subject->hasCategories(),
         );
         self::assertSame(
             2,
-            $this->subject->getNumberOfCategories()
+            $this->subject->getNumberOfCategories(),
         );
 
         $categories = $this->subject->getCategories();
 
         self::assertCount(
             2,
-            $categories
+            $categories,
         );
         self::assertSame(
             'Test 1',
-            $categories[$categoryUid1]['title']
+            $categories[$categoryUid1]['title'],
         );
         self::assertSame(
             'Test 2',
-            $categories[$categoryUid2]['title']
+            $categories[$categoryUid2]['title'],
         );
     }
 
@@ -2652,7 +2652,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $categoryUid2 = $this->addCategoryRelation(['title' => 'Test 2']);
 
         self::assertTrue(
-            $this->subject->hasCategories()
+            $this->subject->hasCategories(),
         );
 
         self::assertSame(
@@ -2660,7 +2660,7 @@ final class LegacyEventTest extends FunctionalTestCase
                 $categoryUid1 => ['title' => 'Test 1'],
                 $categoryUid2 => ['title' => 'Test 2'],
             ],
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -2680,7 +2680,7 @@ final class LegacyEventTest extends FunctionalTestCase
                 'seminar' => $eventUid,
                 'begin_date' => 200,
                 'room' => 'Room1',
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
@@ -2688,17 +2688,17 @@ final class LegacyEventTest extends FunctionalTestCase
                 'seminar' => $eventUid,
                 'begin_date' => 100,
                 'room' => 'Room2',
-            ]
+            ],
         );
 
         $timeSlotsWithMarkers = $this->subject->getTimeSlotsAsArrayWithMarkers();
         self::assertSame(
             $timeSlotsWithMarkers[0]['room'],
-            'Room2'
+            'Room2',
         );
         self::assertSame(
             $timeSlotsWithMarkers[1]['room'],
-            'Room1'
+            'Room1',
         );
     }
 
@@ -2710,7 +2710,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasOrganizersReturnsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasOrganizers()
+            $this->subject->hasOrganizers(),
         );
     }
 
@@ -2722,7 +2722,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation();
 
         self::assertTrue(
-            $this->subject->hasOrganizers()
+            $this->subject->hasOrganizers(),
         );
     }
 
@@ -2733,7 +2733,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfOrganizers()
+            $this->subject->getNumberOfOrganizers(),
         );
     }
 
@@ -2745,7 +2745,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfOrganizers()
+            $this->subject->getNumberOfOrganizers(),
         );
     }
 
@@ -2758,7 +2758,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfOrganizers()
+            $this->subject->getNumberOfOrganizers(),
         );
     }
 
@@ -2773,7 +2773,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->getOrganizers()
+            $this->subject->getOrganizers(),
         );
     }
 
@@ -2787,7 +2787,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'foo',
-            $this->subject->getOrganizers()
+            $this->subject->getOrganizers(),
         );
     }
 
@@ -2801,7 +2801,7 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'foo',
                 'homepage' => 'www.bar.com',
-            ]
+            ],
         );
 
         $result = $this->subject->getOrganizers();
@@ -2823,11 +2823,11 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'foo',
-            $organizers
+            $organizers,
         );
         self::assertStringContainsString(
             'bar',
-            $organizers
+            $organizers,
         );
     }
 
@@ -2840,7 +2840,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2856,7 +2856,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($organizer);
         self::assertSame(
             $organizer['title'],
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2872,7 +2872,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($organizer);
         self::assertSame(
             $organizer['title'] . ', ' . $organizer['homepage'],
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2882,19 +2882,19 @@ final class LegacyEventTest extends FunctionalTestCase
     public function getOrganizersRawForTwoOrganizersWithoutHomepageReturnsTwoOrganizers(): void
     {
         $this->addOrganizerRelation(
-            ['title' => 'test organizer 1', 'homepage' => '']
+            ['title' => 'test organizer 1', 'homepage' => ''],
         );
         $this->addOrganizerRelation(
-            ['title' => 'test organizer 2', 'homepage' => '']
+            ['title' => 'test organizer 2', 'homepage' => ''],
         );
 
         self::assertStringContainsString(
             'test organizer 1',
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
         self::assertStringContainsString(
             'test organizer 2',
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2907,22 +2907,22 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'test organizer 1',
                 'homepage' => 'test homepage 1',
-            ]
+            ],
         );
         $this->addOrganizerRelation(
             [
                 'title' => 'test organizer 2',
                 'homepage' => 'test homepage 2',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'test homepage 1',
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
         self::assertStringContainsString(
             'test homepage 2',
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2936,7 +2936,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "test organizer 1\ntest organizer 2",
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2950,7 +2950,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             "test organizer 1\r\ntest organizer 2",
-            $this->subject->getOrganizersRaw()
+            $this->subject->getOrganizersRaw(),
         );
     }
 
@@ -2963,7 +2963,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             [],
-            $this->subject->getOrganizersNameAndEmail()
+            $this->subject->getOrganizersNameAndEmail(),
         );
     }
 
@@ -2979,7 +2979,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($organizer);
         self::assertSame(
             ['"' . $organizer['title'] . '" <' . $organizer['email'] . '>'],
-            $this->subject->getOrganizersNameAndEmail()
+            $this->subject->getOrganizersNameAndEmail(),
         );
     }
 
@@ -3003,7 +3003,7 @@ final class LegacyEventTest extends FunctionalTestCase
                 '"' . $firstOrganizer['title'] . '" <' . $firstOrganizer['email'] . '>',
                 '"' . $secondOrganizer['title'] . '" <' . $secondOrganizer['email'] . '>',
             ],
-            $this->subject->getOrganizersNameAndEmail()
+            $this->subject->getOrganizersNameAndEmail(),
         );
     }
 
@@ -3014,7 +3014,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             [],
-            $this->subject->getOrganizersEmail()
+            $this->subject->getOrganizersEmail(),
         );
     }
 
@@ -3027,7 +3027,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($organizer);
         self::assertSame(
             [$organizer['email']],
-            $this->subject->getOrganizersEmail()
+            $this->subject->getOrganizersEmail(),
         );
     }
 
@@ -3042,7 +3042,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($secondOrganizer);
         self::assertSame(
             [$firstOrganizer['email'], $secondOrganizer['email']],
-            $this->subject->getOrganizersEmail()
+            $this->subject->getOrganizersEmail(),
         );
     }
 
@@ -3055,7 +3055,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             [],
-            $this->subject->getOrganizersFooter()
+            $this->subject->getOrganizersFooter(),
         );
     }
 
@@ -3068,7 +3068,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($organizer);
         self::assertSame(
             [$organizer['email_footer']],
-            $this->subject->getOrganizersFooter()
+            $this->subject->getOrganizersFooter(),
         );
     }
 
@@ -3086,7 +3086,7 @@ final class LegacyEventTest extends FunctionalTestCase
                 $firstOrganizer['email_footer'],
                 $secondOrganizer['email_footer'],
             ],
-            $this->subject->getOrganizersFooter()
+            $this->subject->getOrganizersFooter(),
         );
     }
 
@@ -3099,7 +3099,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             [],
-            $this->subject->getOrganizersFooter()
+            $this->subject->getOrganizersFooter(),
         );
     }
 
@@ -3113,7 +3113,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addOrganizerRelation($secondOrganizer);
         self::assertSame(
             [$secondOrganizer['email_footer']],
-            $this->subject->getOrganizersFooter()
+            $this->subject->getOrganizersFooter(),
         );
     }
 
@@ -3140,7 +3140,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $organizerUid,
-            $this->subject->getFirstOrganizer()->getUid()
+            $this->subject->getFirstOrganizer()->getUid(),
         );
     }
 
@@ -3154,7 +3154,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $firstOrganizerUid,
-            $this->subject->getFirstOrganizer()->getUid()
+            $this->subject->getFirstOrganizer()->getUid(),
         );
     }
 
@@ -3189,7 +3189,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfSpeakers()
+            $this->subject->getNumberOfSpeakers(),
         );
     }
 
@@ -3201,7 +3201,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addSpeakerRelation();
         self::assertSame(
             1,
-            $this->subject->getNumberOfSpeakers()
+            $this->subject->getNumberOfSpeakers(),
         );
     }
 
@@ -3214,7 +3214,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addSpeakerRelation();
         self::assertSame(
             2,
-            $this->subject->getNumberOfSpeakers()
+            $this->subject->getNumberOfSpeakers(),
         );
     }
 
@@ -3225,7 +3225,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfPartners()
+            $this->subject->getNumberOfPartners(),
         );
     }
 
@@ -3237,7 +3237,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addPartnerRelation([]);
         self::assertSame(
             1,
-            $this->subject->getNumberOfPartners()
+            $this->subject->getNumberOfPartners(),
         );
     }
 
@@ -3250,7 +3250,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addPartnerRelation([]);
         self::assertSame(
             2,
-            $this->subject->getNumberOfPartners()
+            $this->subject->getNumberOfPartners(),
         );
     }
 
@@ -3261,7 +3261,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfTutors()
+            $this->subject->getNumberOfTutors(),
         );
     }
 
@@ -3273,7 +3273,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addTutorRelation([]);
         self::assertSame(
             1,
-            $this->subject->getNumberOfTutors()
+            $this->subject->getNumberOfTutors(),
         );
     }
 
@@ -3286,7 +3286,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addTutorRelation([]);
         self::assertSame(
             2,
-            $this->subject->getNumberOfTutors()
+            $this->subject->getNumberOfTutors(),
         );
     }
 
@@ -3297,7 +3297,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             0,
-            $this->subject->getNumberOfLeaders()
+            $this->subject->getNumberOfLeaders(),
         );
     }
 
@@ -3309,7 +3309,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addLeaderRelation([]);
         self::assertSame(
             1,
-            $this->subject->getNumberOfLeaders()
+            $this->subject->getNumberOfLeaders(),
         );
     }
 
@@ -3322,7 +3322,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addLeaderRelation([]);
         self::assertSame(
             2,
-            $this->subject->getNumberOfLeaders()
+            $this->subject->getNumberOfLeaders(),
         );
     }
 
@@ -3332,16 +3332,16 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasSpeakersOfTypeIsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasSpeakersOfType()
+            $this->subject->hasSpeakersOfType(),
         );
         self::assertFalse(
-            $this->subject->hasSpeakersOfType('partners')
+            $this->subject->hasSpeakersOfType('partners'),
         );
         self::assertFalse(
-            $this->subject->hasSpeakersOfType('tutors')
+            $this->subject->hasSpeakersOfType('tutors'),
         );
         self::assertFalse(
-            $this->subject->hasSpeakersOfType('leaders')
+            $this->subject->hasSpeakersOfType('leaders'),
         );
     }
 
@@ -3352,22 +3352,22 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->addSpeakerRelation();
         self::assertTrue(
-            $this->subject->hasSpeakersOfType()
+            $this->subject->hasSpeakersOfType(),
         );
 
         $this->addPartnerRelation([]);
         self::assertTrue(
-            $this->subject->hasSpeakersOfType('partners')
+            $this->subject->hasSpeakersOfType('partners'),
         );
 
         $this->addTutorRelation([]);
         self::assertTrue(
-            $this->subject->hasSpeakersOfType('tutors')
+            $this->subject->hasSpeakersOfType('tutors'),
         );
 
         $this->addLeaderRelation([]);
         self::assertTrue(
-            $this->subject->hasSpeakersOfType('leaders')
+            $this->subject->hasSpeakersOfType('leaders'),
         );
     }
 
@@ -3377,7 +3377,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasSpeakersIsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasSpeakers()
+            $this->subject->hasSpeakers(),
         );
     }
 
@@ -3388,7 +3388,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->addSpeakerRelation();
         self::assertTrue(
-            $this->subject->hasSpeakers()
+            $this->subject->hasSpeakers(),
         );
     }
 
@@ -3398,7 +3398,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasPartnersIsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasPartners()
+            $this->subject->hasPartners(),
         );
     }
 
@@ -3409,7 +3409,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->addPartnerRelation([]);
         self::assertTrue(
-            $this->subject->hasPartners()
+            $this->subject->hasPartners(),
         );
     }
 
@@ -3419,7 +3419,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasTutorsIsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasTutors()
+            $this->subject->hasTutors(),
         );
     }
 
@@ -3430,7 +3430,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->addTutorRelation([]);
         self::assertTrue(
-            $this->subject->hasTutors()
+            $this->subject->hasTutors(),
         );
     }
 
@@ -3440,7 +3440,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasLeadersIsInitiallyFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasLeaders()
+            $this->subject->hasLeaders(),
         );
     }
 
@@ -3451,7 +3451,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->addLeaderRelation([]);
         self::assertTrue(
-            $this->subject->hasLeaders()
+            $this->subject->hasLeaders(),
         );
     }
 
@@ -3464,7 +3464,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3477,7 +3477,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test speaker',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3490,7 +3490,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test organization',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3503,7 +3503,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test homepage',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3516,12 +3516,12 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'organization' => 'test organization',
                 'homepage' => 'test homepage',
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression(
             '/test organization.*test homepage/',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3534,7 +3534,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test description',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3547,11 +3547,11 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'organization' => 'foo',
                 'description' => 'bar',
-            ]
+            ],
         );
         self::assertMatchesRegularExpression(
             '/foo.*bar/s',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3564,12 +3564,12 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'homepage' => 'test homepage',
                 'description' => 'test description',
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression(
             '/test homepage.*test description/s',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3583,11 +3583,11 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test speaker 1',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
         self::assertStringContainsString(
             'test speaker 2',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3597,19 +3597,19 @@ final class LegacyEventTest extends FunctionalTestCase
     public function getSpeakersWithDescriptionRawForTwoSpeakersWithOrganizationReturnsTwoSpeakersWithOrganization(): void
     {
         $this->addSpeakerRelation(
-            ['organization' => 'test organization 1']
+            ['organization' => 'test organization 1'],
         );
         $this->addSpeakerRelation(
-            ['organization' => 'test organization 2']
+            ['organization' => 'test organization 2'],
         );
 
         self::assertStringContainsString(
             'test organization 1',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
         self::assertStringContainsString(
             'test organization 2',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3623,7 +3623,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'test partner',
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3636,7 +3636,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test partner',
-            $this->subject->getSpeakersWithDescriptionRaw('partners')
+            $this->subject->getSpeakersWithDescriptionRaw('partners'),
         );
     }
 
@@ -3649,7 +3649,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test leader',
-            $this->subject->getSpeakersWithDescriptionRaw('leaders')
+            $this->subject->getSpeakersWithDescriptionRaw('leaders'),
         );
     }
 
@@ -3662,7 +3662,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test tutor',
-            $this->subject->getSpeakersWithDescriptionRaw('tutors')
+            $this->subject->getSpeakersWithDescriptionRaw('tutors'),
         );
     }
 
@@ -3676,7 +3676,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "foo\nbar",
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3690,7 +3690,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             "foo\r\nbar",
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3703,12 +3703,12 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'foo',
                 'description' => 'bar',
-            ]
+            ],
         );
 
         self::assertDoesNotMatchRegularExpression(
             "/foo\r\nbar/",
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3721,12 +3721,12 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'foo',
                 'description' => 'bar',
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression(
             "/foo\nbar/",
-            $this->subject->getSpeakersWithDescriptionRaw()
+            $this->subject->getSpeakersWithDescriptionRaw(),
         );
     }
 
@@ -3741,19 +3741,19 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort()
+            $this->subject->getSpeakersShort(),
         );
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort('partners')
+            $this->subject->getSpeakersShort('partners'),
         );
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort('tutors')
+            $this->subject->getSpeakersShort('tutors'),
         );
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort('leaders')
+            $this->subject->getSpeakersShort('leaders'),
         );
     }
 
@@ -3768,25 +3768,25 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addSpeakerRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort()
+            $this->subject->getSpeakersShort(),
         );
 
         $this->addPartnerRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort('partners')
+            $this->subject->getSpeakersShort('partners'),
         );
 
         $this->addTutorRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort('tutors')
+            $this->subject->getSpeakersShort('tutors'),
         );
 
         $this->addLeaderRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort('leaders')
+            $this->subject->getSpeakersShort('leaders'),
         );
     }
 
@@ -3803,28 +3803,28 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->createPi1();
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort()
+            $this->subject->getSpeakersShort(),
         );
 
         $this->addPartnerRelation($firstSpeaker);
         $this->addPartnerRelation($secondSpeaker);
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort('partners')
+            $this->subject->getSpeakersShort('partners'),
         );
 
         $this->addTutorRelation($firstSpeaker);
         $this->addTutorRelation($secondSpeaker);
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort('tutors')
+            $this->subject->getSpeakersShort('tutors'),
         );
 
         $this->addLeaderRelation($firstSpeaker);
         $this->addLeaderRelation($secondSpeaker);
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort('leaders')
+            $this->subject->getSpeakersShort('leaders'),
         );
     }
 
@@ -3842,7 +3842,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertMatchesRegularExpression(
             '/href="https:\\/\\/www.foo.com".*>test speaker/',
-            $this->subject->getSpeakersShort()
+            $this->subject->getSpeakersShort(),
         );
     }
 
@@ -3862,11 +3862,11 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'test speaker',
-            $shortSpeakerOutput
+            $shortSpeakerOutput,
         );
         self::assertStringNotContainsString(
             '<a',
-            $shortSpeakerOutput
+            $shortSpeakerOutput,
         );
     }
 
@@ -3878,7 +3878,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasSeparateDetailsPageIsFalseByDefault(): void
     {
         self::assertFalse(
-            $this->subject->hasSeparateDetailsPage()
+            $this->subject->hasSeparateDetailsPage(),
         );
     }
 
@@ -3896,12 +3896,12 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'a test event',
                 'details_page' => $detailsPageUid,
-            ]
+            ],
         );
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertTrue(
-            $event->hasSeparateDetailsPage()
+            $event->hasSeparateDetailsPage(),
         );
     }
 
@@ -3915,12 +3915,12 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'a test event',
                 'details_page' => 'www.example.com',
-            ]
+            ],
         );
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertTrue(
-            $event->hasSeparateDetailsPage()
+            $event->hasSeparateDetailsPage(),
         );
     }
 
@@ -3933,7 +3933,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getDetailsPage()
+            $this->subject->getDetailsPage(),
         );
     }
 
@@ -3951,13 +3951,13 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'a test event',
                 'details_page' => $detailsPageUid,
-            ]
+            ],
         );
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertSame(
             (string)$detailsPageUid,
-            $event->getDetailsPage()
+            $event->getDetailsPage(),
         );
     }
 
@@ -3972,13 +3972,13 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'title' => 'a test event',
                 'details_page' => $externalUrl,
-            ]
+            ],
         );
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertSame(
             $externalUrl,
-            $event->getDetailsPage()
+            $event->getDetailsPage(),
         );
     }
 
@@ -3990,7 +3990,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function isOwnerFeUserForNoOwnerReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->isOwnerFeUser()
+            $this->subject->isOwnerFeUser(),
         );
     }
 
@@ -4007,7 +4007,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setOwnerUid($userUid + 1);
 
         self::assertFalse(
-            $this->subject->isOwnerFeUser()
+            $this->subject->isOwnerFeUser(),
         );
     }
 
@@ -4023,7 +4023,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setOwnerUid($ownerUid);
 
         self::assertTrue(
-            $this->subject->isOwnerFeUser()
+            $this->subject->isOwnerFeUser(),
         );
     }
 
@@ -4056,7 +4056,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $ownerUid,
-            $this->subject->getOwner()->getUid()
+            $this->subject->getOwner()->getUid(),
         );
     }
 
@@ -4066,7 +4066,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function getOwnerForNoOwnerReturnsNull(): void
     {
         self::assertNull(
-            $this->subject->getOwner()
+            $this->subject->getOwner(),
         );
     }
 
@@ -4084,7 +4084,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setOwnerUid($ownerUid);
 
         self::assertTrue(
-            $this->subject->hasOwner()
+            $this->subject->hasOwner(),
         );
     }
 
@@ -4094,7 +4094,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasOwnerForNoOwnerReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasOwner()
+            $this->subject->hasOwner(),
         );
     }
 
@@ -4152,7 +4152,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '5',
-            $this->subject->getVacanciesString()
+            $this->subject->getVacanciesString(),
         );
     }
 
@@ -4168,7 +4168,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_fullyBooked'),
-            $this->subject->getVacanciesString()
+            $this->subject->getVacanciesString(),
         );
     }
 
@@ -4184,7 +4184,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_enough'),
-            $this->subject->getVacanciesString()
+            $this->subject->getVacanciesString(),
         );
     }
 
@@ -4200,7 +4200,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_enough'),
-            $this->subject->getVacanciesString()
+            $this->subject->getVacanciesString(),
         );
     }
 
@@ -4215,7 +4215,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_enough'),
-            $this->subject->getVacanciesString()
+            $this->subject->getVacanciesString(),
         );
     }
 
@@ -4230,7 +4230,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_enough'),
-            $this->subject->getVacanciesString()
+            $this->subject->getVacanciesString(),
         );
     }
 
@@ -4245,7 +4245,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'leaders_',
-            $this->subject->getLanguageKeySuffixForType('leaders')
+            $this->subject->getLanguageKeySuffixForType('leaders'),
         );
     }
 
@@ -4258,7 +4258,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '_unknown',
-            $this->subject->getLanguageKeySuffixForType('leaders')
+            $this->subject->getLanguageKeySuffixForType('leaders'),
         );
     }
 
@@ -4271,7 +4271,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '_single_',
-            $this->subject->getLanguageKeySuffixForType('speakers')
+            $this->subject->getLanguageKeySuffixForType('speakers'),
         );
     }
 
@@ -4285,7 +4285,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'speakers',
-            $this->subject->getLanguageKeySuffixForType('speakers')
+            $this->subject->getLanguageKeySuffixForType('speakers'),
         );
     }
 
@@ -4302,12 +4302,12 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                     'requirements' => 0,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
-            $topic->hasRequirements()
+            $topic->hasRequirements(),
         );
     }
 
@@ -4321,7 +4321,7 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 0,
-            ]
+            ],
         );
         $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
@@ -4329,12 +4329,12 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
-            $date->hasRequirements()
+            $date->hasRequirements(),
         );
     }
 
@@ -4345,22 +4345,22 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid,
-            'requirements'
+            'requirements',
         );
         $topic = new TestingLegacyEvent($topicUid);
 
         self::assertTrue(
-            $topic->hasRequirements()
+            $topic->hasRequirements(),
         );
     }
 
@@ -4371,17 +4371,17 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid,
-            'requirements'
+            'requirements',
         );
         $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
@@ -4389,12 +4389,12 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertTrue(
-            $date->hasRequirements()
+            $date->hasRequirements(),
         );
     }
 
@@ -4405,32 +4405,32 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid1,
-            'requirements'
+            'requirements',
         );
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid2,
-            'requirements'
+            'requirements',
         );
         $topic = new TestingLegacyEvent($topicUid);
 
         self::assertTrue(
-            $topic->hasRequirements()
+            $topic->hasRequirements(),
         );
     }
 
@@ -4447,12 +4447,12 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                     'dependencies' => 0,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
-            $topic->hasDependencies()
+            $topic->hasDependencies(),
         );
     }
 
@@ -4466,7 +4466,7 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 0,
-            ]
+            ],
         );
         $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
@@ -4474,12 +4474,12 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
-            $date->hasDependencies()
+            $date->hasDependencies(),
         );
     }
 
@@ -4493,24 +4493,24 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid,
-            $topicUid
+            $topicUid,
         );
         $topic = new TestingLegacyEvent($topicUid);
 
         self::assertTrue(
-            $topic->hasDependencies()
+            $topic->hasDependencies(),
         );
     }
 
@@ -4524,19 +4524,19 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid,
-            $topicUid
+            $topicUid,
         );
         $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
@@ -4544,12 +4544,12 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertTrue(
-            $date->hasDependencies()
+            $date->hasDependencies(),
         );
     }
 
@@ -4563,37 +4563,37 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 2,
-            ]
+            ],
         );
         $dependentTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid1,
-            $topicUid
+            $topicUid,
         );
         $dependentTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid2,
-            $topicUid
+            $topicUid,
         );
 
         $result = (new TestingLegacyEvent($topicUid))->hasDependencies();
 
         self::assertTrue(
-            $result
+            $result,
         );
     }
 
@@ -4613,7 +4613,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function getRequirementsForNoRequirementsReturnsEmptyBag(): void
     {
         self::assertTrue(
-            $this->subject->getRequirements()->isEmpty()
+            $this->subject->getRequirements()->isEmpty(),
         );
     }
 
@@ -4624,28 +4624,28 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid,
-            'requirements'
+            'requirements',
         );
 
         $result = (new TestingLegacyEvent($topicUid))->getRequirements();
 
         self::assertSame(
             1,
-            $result->count()
+            $result->count(),
         );
         self::assertSame(
             $requiredTopicUid,
-            $result->current()->getUid()
+            $result->current()->getUid(),
         );
     }
 
@@ -4656,17 +4656,17 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid,
-            'requirements'
+            'requirements',
         );
         $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
@@ -4674,19 +4674,19 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
-                ]
-            )
+                ],
+            ),
         );
 
         $result = $date->getRequirements();
 
         self::assertSame(
             1,
-            $result->count()
+            $result->count(),
         );
         self::assertSame(
             $requiredTopicUid,
-            $result->current()->getUid()
+            $result->current()->getUid(),
         );
     }
 
@@ -4697,34 +4697,34 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid1,
-            'requirements'
+            'requirements',
         );
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
             $requiredTopicUid2,
-            'requirements'
+            'requirements',
         );
 
         $requirements = (new TestingLegacyEvent($topicUid))->getRequirements();
 
         self::assertSame(
             2,
-            $requirements->count()
+            $requirements->count(),
         );
     }
 
@@ -4744,7 +4744,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function getDependenciesForNoDependenciesReturnsEmptyBag(): void
     {
         self::assertTrue(
-            $this->subject->getDependencies()->isEmpty()
+            $this->subject->getDependencies()->isEmpty(),
         );
     }
 
@@ -4758,30 +4758,30 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid,
-            $topicUid
+            $topicUid,
         );
 
         $result = (new TestingLegacyEvent($topicUid))->getDependencies();
 
         self::assertSame(
             1,
-            $result->count()
+            $result->count(),
         );
         self::assertSame(
             $dependentTopicUid,
-            $result->current()->getUid()
+            $result->current()->getUid(),
         );
     }
 
@@ -4795,19 +4795,19 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
-            ]
+            ],
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid,
-            $topicUid
+            $topicUid,
         );
         $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
@@ -4815,19 +4815,19 @@ final class LegacyEventTest extends FunctionalTestCase
                 [
                     'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
-                ]
-            )
+                ],
+            ),
         );
 
         $result = $date->getDependencies();
 
         self::assertSame(
             1,
-            $result->count()
+            $result->count(),
         );
         self::assertSame(
             $dependentTopicUid,
-            $result->current()->getUid()
+            $result->current()->getUid(),
         );
     }
 
@@ -4841,38 +4841,38 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 2,
-            ]
+            ],
         );
         $dependentTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid1,
-            $topicUid
+            $topicUid,
         );
         $dependentTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
             $dependentTopicUid2,
-            $topicUid
+            $topicUid,
         );
 
         $dependencies = (new TestingLegacyEvent($topicUid))->getDependencies();
 
         self::assertSame(
             2,
-            $dependencies->count()
+            $dependencies->count(),
         );
     }
 
@@ -4886,7 +4886,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertFalse(
-            $this->subject->isConfirmed()
+            $this->subject->isConfirmed(),
         );
     }
 
@@ -4898,7 +4898,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertTrue(
-            $this->subject->isConfirmed()
+            $this->subject->isConfirmed(),
         );
     }
 
@@ -4910,7 +4910,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
-            $this->subject->isConfirmed()
+            $this->subject->isConfirmed(),
         );
     }
 
@@ -4924,7 +4924,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertFalse(
-            $this->subject->isCanceled()
+            $this->subject->isCanceled(),
         );
     }
 
@@ -4936,7 +4936,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertTrue(
-            $this->subject->isCanceled()
+            $this->subject->isCanceled(),
         );
     }
 
@@ -4948,7 +4948,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertFalse(
-            $this->subject->isCanceled()
+            $this->subject->isCanceled(),
         );
     }
 
@@ -4962,7 +4962,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertTrue(
-            $this->subject->isPlanned()
+            $this->subject->isPlanned(),
         );
     }
 
@@ -4974,7 +4974,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertFalse(
-            $this->subject->isPlanned()
+            $this->subject->isPlanned(),
         );
     }
 
@@ -4986,7 +4986,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
-            $this->subject->isPlanned()
+            $this->subject->isPlanned(),
         );
     }
 
@@ -5001,8 +5001,8 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertTrue(
             $this->subject->getRecordPropertyBoolean(
-                'event_takes_place_reminder_sent'
-            )
+                'event_takes_place_reminder_sent',
+            ),
         );
     }
 
@@ -5017,8 +5017,8 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertTrue(
             $this->subject->getRecordPropertyBoolean(
-                'cancelation_deadline_reminder_sent'
-            )
+                'cancelation_deadline_reminder_sent',
+            ),
         );
     }
 
@@ -5033,7 +5033,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->subject->getBeginDateAsTimestamp(),
-            $this->subject->getCancelationDeadline()
+            $this->subject->getCancelationDeadline(),
         );
     }
 
@@ -5047,7 +5047,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->subject->getBeginDateAsTimestamp(),
-            $this->subject->getCancelationDeadline()
+            $this->subject->getCancelationDeadline(),
         );
     }
 
@@ -5062,7 +5062,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->subject->getBeginDateAsTimestamp(),
-            $this->subject->getCancelationDeadline()
+            $this->subject->getCancelationDeadline(),
         );
     }
 
@@ -5076,7 +5076,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->now - Time::SECONDS_PER_DAY,
-            $this->subject->getCancelationDeadline()
+            $this->subject->getCancelationDeadline(),
         );
     }
 
@@ -5091,7 +5091,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->now - (42 * Time::SECONDS_PER_DAY),
-            $this->subject->getCancelationDeadline()
+            $this->subject->getCancelationDeadline(),
         );
     }
 
@@ -5103,10 +5103,10 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate(0);
 
         $this->expectException(
-            \BadMethodCallException::class
+            \BadMethodCallException::class,
         );
         $this->expectExceptionMessage(
-            'The event has no begin date. Please call this function only if the event has a begin date.'
+            'The event has no begin date. Please call this function only if the event has a begin date.',
         );
 
         $this->subject->getCancelationDeadline();
@@ -5120,7 +5120,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasExpiryForNoExpiryReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasExpiry()
+            $this->subject->hasExpiry(),
         );
     }
 
@@ -5132,7 +5132,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setExpiry(42);
 
         self::assertTrue(
-            $this->subject->hasExpiry()
+            $this->subject->hasExpiry(),
         );
     }
 
@@ -5143,7 +5143,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getExpiry()
+            $this->subject->getExpiry(),
         );
     }
 
@@ -5156,7 +5156,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '2000-12-31',
-            $this->subject->getExpiry()
+            $this->subject->getExpiry(),
         );
     }
 
@@ -5180,7 +5180,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setUnregistrationDeadline(0);
         self::assertSame(
             '',
-            $this->subject->getEventData('deadline_unregistration')
+            $this->subject->getEventData('deadline_unregistration'),
         );
     }
 
@@ -5194,29 +5194,29 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $lodgingUid1 = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
             $eventUid,
-            $lodgingUid1
+            $lodgingUid1,
         );
 
         $lodgingUid2 = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
             $eventUid,
-            $lodgingUid2
+            $lodgingUid2,
         );
 
         $this->subject->setNumberOfLodgings(2);
 
         self::assertStringContainsString(
             "foo\nbar",
-            $this->subject->getEventData('lodgings')
+            $this->subject->getEventData('lodgings'),
         );
     }
 
@@ -5230,29 +5230,29 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $lodgingUid1 = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
             $eventUid,
-            $lodgingUid1
+            $lodgingUid1,
         );
 
         $lodgingUid2 = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
             $eventUid,
-            $lodgingUid2
+            $lodgingUid2,
         );
 
         $this->subject->setNumberOfLodgings(2);
 
         self::assertStringNotContainsString(
             "foo\r\nbar",
-            $this->subject->getEventData('lodgings')
+            $this->subject->getEventData('lodgings'),
         );
     }
 
@@ -5265,7 +5265,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "foo\nbar",
-            $this->subject->getEventData('description')
+            $this->subject->getEventData('description'),
         );
     }
 
@@ -5278,7 +5278,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "foo\nbar",
-            $this->subject->getEventData('description')
+            $this->subject->getEventData('description'),
         );
     }
 
@@ -5291,7 +5291,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "foo\nbar",
-            $this->subject->getEventData('description')
+            $this->subject->getEventData('description'),
         );
     }
 
@@ -5304,7 +5304,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             "foo\nbar",
-            $this->subject->getEventData('description')
+            $this->subject->getEventData('description'),
         );
     }
 
@@ -5318,7 +5318,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '-',
-            $this->subject->getEventData('date')
+            $this->subject->getEventData('date'),
         );
     }
 
@@ -5332,7 +5332,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '-',
-            $this->subject->getEventData('time')
+            $this->subject->getEventData('time'),
         );
     }
 
@@ -5355,7 +5355,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
-            $subject->getEventData('place')
+            $subject->getEventData('place'),
         );
     }
 
@@ -5385,7 +5385,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             "Hotel Ibis\nWasserwerk",
-            $subject->getEventData('place')
+            $subject->getEventData('place'),
         );
     }
 
@@ -5408,7 +5408,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
-            $subject->getEventData('place')
+            $subject->getEventData('place'),
         );
     }
 
@@ -5421,7 +5421,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             $this->subject->getTitle(),
-            $this->subject->dumpSeminarValues('title')
+            $this->subject->dumpSeminarValues('title'),
         );
     }
 
@@ -5432,7 +5432,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertStringContainsString(
             $this->translate('label_title'),
-            $this->subject->dumpSeminarValues('title')
+            $this->subject->dumpSeminarValues('title'),
         );
     }
 
@@ -5443,7 +5443,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertMatchesRegularExpression(
             '/\\n$/',
-            $this->subject->dumpSeminarValues('title')
+            $this->subject->dumpSeminarValues('title'),
         );
     }
 
@@ -5457,7 +5457,7 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertMatchesRegularExpression(
             '/.*' . $this->subject->getTitle() . '.*\\n.*' .
             $this->subject->getRecordPropertyString('description') . '/',
-            $this->subject->dumpSeminarValues('title,description')
+            $this->subject->dumpSeminarValues('title,description'),
         );
     }
 
@@ -5482,7 +5482,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('label_vacancies') . ": 0\n",
-            $this->subject->dumpSeminarValues('vacancies')
+            $this->subject->dumpSeminarValues('vacancies'),
         );
     }
 
@@ -5497,7 +5497,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('label_vacancies') . ": 1\n",
-            $this->subject->dumpSeminarValues('vacancies')
+            $this->subject->dumpSeminarValues('vacancies'),
         );
     }
 
@@ -5511,7 +5511,7 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(
             $this->translate('label_vacancies') . ': ' .
             $this->translate('label_unlimited') . "\n",
-            $this->subject->dumpSeminarValues('vacancies')
+            $this->subject->dumpSeminarValues('vacancies'),
         );
     }
 
@@ -5581,7 +5581,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationBeginDate(0);
 
         self::assertFalse(
-            $this->subject->hasRegistrationBegin()
+            $this->subject->hasRegistrationBegin(),
         );
     }
 
@@ -5593,7 +5593,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRegistrationBeginDate(42);
 
         self::assertTrue(
-            $this->subject->hasRegistrationBegin()
+            $this->subject->hasRegistrationBegin(),
         );
     }
 
@@ -5606,7 +5606,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $this->subject->getRegistrationBeginAsUnixTimestamp()
+            $this->subject->getRegistrationBeginAsUnixTimestamp(),
         );
     }
 
@@ -5619,7 +5619,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             42,
-            $this->subject->getRegistrationBeginAsUnixTimestamp()
+            $this->subject->getRegistrationBeginAsUnixTimestamp(),
         );
     }
 
@@ -5632,7 +5632,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $this->subject->getRegistrationBegin()
+            $this->subject->getRegistrationBegin(),
         );
     }
 
@@ -5655,7 +5655,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getDescription()
+            $this->subject->getDescription(),
         );
     }
 
@@ -5668,7 +5668,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             'this is a great event.',
-            $this->subject->getDescription()
+            $this->subject->getDescription(),
         );
     }
 
@@ -5678,7 +5678,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasDescriptionWithoutDescriptionReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 
@@ -5690,7 +5690,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setDescription('this is a great event.');
 
         self::assertTrue(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 
@@ -5703,7 +5703,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getAdditionalInformation()
+            $this->subject->getAdditionalInformation(),
         );
     }
 
@@ -5716,7 +5716,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             'this is good to know',
-            $this->subject->getAdditionalInformation()
+            $this->subject->getAdditionalInformation(),
         );
     }
 
@@ -5726,7 +5726,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function hasAdditionalInformationWithoutAdditionalInformationReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasAdditionalInformation()
+            $this->subject->hasAdditionalInformation(),
         );
     }
 
@@ -5738,7 +5738,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setAdditionalInformation('this is good to know');
 
         self::assertTrue(
-            $this->subject->hasAdditionalInformation()
+            $this->subject->hasAdditionalInformation(),
         );
     }
 
@@ -5757,13 +5757,13 @@ final class LegacyEventTest extends FunctionalTestCase
                 'deadline_registration' => 0,
                 'begin_date' => 0,
                 'end_date' => 0,
-            ]
+            ],
         );
         $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             0,
-            $subject->getLatestPossibleRegistrationTime()
+            $subject->getLatestPossibleRegistrationTime(),
         );
     }
 
@@ -5780,13 +5780,13 @@ final class LegacyEventTest extends FunctionalTestCase
                 'deadline_registration' => 0,
                 'begin_date' => $this->now,
                 'end_date' => 0,
-            ]
+            ],
         );
         $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now,
-            $subject->getLatestPossibleRegistrationTime()
+            $subject->getLatestPossibleRegistrationTime(),
         );
     }
 
@@ -5803,13 +5803,13 @@ final class LegacyEventTest extends FunctionalTestCase
                 'deadline_registration' => $this->now,
                 'begin_date' => $this->now + 1000,
                 'end_date' => 0,
-            ]
+            ],
         );
         $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now,
-            $subject->getLatestPossibleRegistrationTime()
+            $subject->getLatestPossibleRegistrationTime(),
         );
     }
 
@@ -5824,7 +5824,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             42,
-            $this->subject->getTopicInteger('credit_points')
+            $this->subject->getTopicInteger('credit_points'),
         );
     }
 
@@ -5838,21 +5838,21 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 42,
-            ]
+            ],
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
-            ]
+            ],
         );
 
         $date = new TestingLegacyEvent($dateRecordUid);
 
         self::assertSame(
             42,
-            $date->getTopicInteger('credit_points')
+            $date->getTopicInteger('credit_points'),
         );
     }
 
@@ -5866,7 +5866,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRecordPropertyInteger('credit_points', 0);
 
         self::assertFalse(
-            $this->subject->hasTopicInteger('credit_points')
+            $this->subject->hasTopicInteger('credit_points'),
         );
     }
 
@@ -5878,7 +5878,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRecordPropertyInteger('credit_points', 1);
 
         self::assertTrue(
-            $this->subject->hasTopicInteger('credit_points')
+            $this->subject->hasTopicInteger('credit_points'),
         );
     }
 
@@ -5890,7 +5890,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setRecordPropertyInteger('credit_points', -1);
 
         self::assertTrue(
-            $this->subject->hasTopicInteger('credit_points')
+            $this->subject->hasTopicInteger('credit_points'),
         );
     }
 
@@ -5904,20 +5904,20 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 0,
-            ]
+            ],
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
-            ]
+            ],
         );
 
         $date = new TestingLegacyEvent($dateRecordUid);
 
         self::assertFalse(
-            $date->hasTopicInteger('credit_points')
+            $date->hasTopicInteger('credit_points'),
         );
     }
 
@@ -5931,20 +5931,20 @@ final class LegacyEventTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 1,
-            ]
+            ],
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
-            ]
+            ],
         );
 
         $date = new TestingLegacyEvent($dateRecordUid);
 
         self::assertTrue(
-            $date->hasTopicInteger('credit_points')
+            $date->hasTopicInteger('credit_points'),
         );
     }
 
@@ -6114,13 +6114,16 @@ final class LegacyEventTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
+            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
         );
-        $subject->method('needsRegistration')
+        $subject
+            ->method('needsRegistration')
             ->willReturn(true);
-        $subject->method('isUserRegistered')
+        $subject
+            ->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
+        $subject
+            ->method('isUserVip')
             ->willReturn($isVip);
 
         if ($loggedIn) {
@@ -6135,8 +6138,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $subject->canViewRegistrationsList(
                 $whichPlugin,
                 $registrationsListPID,
-                $registrationsVipListPID
-            )
+                $registrationsVipListPID,
+            ),
         );
     }
 
@@ -6156,13 +6159,16 @@ final class LegacyEventTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
+            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
         );
-        $subject->method('needsRegistration')
+        $subject
+            ->method('needsRegistration')
             ->willReturn(true);
-        $subject->method('isUserRegistered')
+        $subject
+            ->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
+        $subject
+            ->method('isUserVip')
             ->willReturn($isVip);
 
         if ($loggedIn) {
@@ -6177,8 +6183,8 @@ final class LegacyEventTest extends FunctionalTestCase
             $subject->canViewRegistrationsList(
                 $whichPlugin,
                 $registrationsListPID,
-                $registrationsVipListPID
-            )
+                $registrationsVipListPID,
+            ),
         );
     }
 
@@ -6355,13 +6361,16 @@ final class LegacyEventTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip']
+            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
         );
-        $subject->method('needsRegistration')
+        $subject
+            ->method('needsRegistration')
             ->willReturn(true);
-        $subject->method('isUserRegistered')
+        $subject
+            ->method('isUserRegistered')
             ->willReturn($isRegistered);
-        $subject->method('isUserVip')
+        $subject
+            ->method('isUserVip')
             ->willReturn($isVip);
 
         if ($loggedIn) {
@@ -6377,8 +6386,8 @@ final class LegacyEventTest extends FunctionalTestCase
                 $whichPlugin,
                 $registrationsListPID,
                 $registrationsVipListPID,
-                'login'
-            )
+                'login',
+            ),
         );
     }
 
@@ -6394,7 +6403,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_noRegistrationNecessary'),
-            $subject->canViewRegistrationsListMessage('list_registrations')
+            $subject->canViewRegistrationsListMessage('list_registrations'),
         );
     }
 
@@ -6408,7 +6417,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_notLoggedIn'),
-            $subject->canViewRegistrationsListMessage('list_registrations')
+            $subject->canViewRegistrationsListMessage('list_registrations'),
         );
     }
 
@@ -6422,7 +6431,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_notLoggedIn'),
-            $subject->canViewRegistrationsListMessage('list_registrations', 'login')
+            $subject->canViewRegistrationsListMessage('list_registrations', 'login'),
         );
     }
 
@@ -6453,7 +6462,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_notLoggedIn'),
-            $subject->canViewRegistrationsListMessage('list_vip_registrations', $accessLevel)
+            $subject->canViewRegistrationsListMessage('list_vip_registrations', $accessLevel),
         );
     }
 
@@ -6486,10 +6495,11 @@ final class LegacyEventTest extends FunctionalTestCase
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'canViewRegistrationsList']
+            ['needsRegistration', 'canViewRegistrationsList'],
         );
         $subject->method('needsRegistration')->willReturn(true);
-        $subject->method('canViewRegistrationsList')
+        $subject
+            ->method('canViewRegistrationsList')
             ->with($whichPlugin, 0, 0, $accessLevel)
             ->willReturn(true);
 
@@ -6508,7 +6518,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'canViewRegistrationsList']
+            ['needsRegistration', 'canViewRegistrationsList'],
         );
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')->willReturn(true);
@@ -6520,7 +6530,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $subject->canViewRegistrationsListMessage('list_registrations')
+            $subject->canViewRegistrationsListMessage('list_registrations'),
         );
     }
 
@@ -6531,7 +6541,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
-            ['needsRegistration', 'canViewRegistrationsList']
+            ['needsRegistration', 'canViewRegistrationsList'],
         );
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')->willReturn(false);
@@ -6543,7 +6553,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             $this->translate('message_accessDenied'),
-            $subject->canViewRegistrationsListMessage('list_registrations')
+            $subject->canViewRegistrationsListMessage('list_registrations'),
         );
     }
 
@@ -6555,7 +6565,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function haveOrganizersBeenNotifiedAboutEnoughAttendeesByDefaultReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees(),
         );
     }
 
@@ -6566,12 +6576,12 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['organizers_notified_about_minimum_reached' => 1]
+            ['organizers_notified_about_minimum_reached' => 1],
         );
         $subject = new TestingLegacyEvent($uid);
 
         self::assertTrue(
-            $subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+            $subject->haveOrganizersBeenNotifiedAboutEnoughAttendees(),
         );
     }
 
@@ -6583,7 +6593,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setOrganizersBeenNotifiedAboutEnoughAttendees();
 
         self::assertTrue(
-            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees(),
         );
     }
 
@@ -6595,7 +6605,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function shouldMuteNotificationEmailsByDefaultReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->shouldMuteNotificationEmails()
+            $this->subject->shouldMuteNotificationEmails(),
         );
     }
 
@@ -6606,12 +6616,12 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['mute_notification_emails' => 1]
+            ['mute_notification_emails' => 1],
         );
         $subject = new TestingLegacyEvent($uid);
 
         self::assertTrue(
-            $subject->shouldMuteNotificationEmails()
+            $subject->shouldMuteNotificationEmails(),
         );
     }
 
@@ -6623,7 +6633,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->muteNotificationEmails();
 
         self::assertTrue(
-            $this->subject->shouldMuteNotificationEmails()
+            $this->subject->shouldMuteNotificationEmails(),
         );
     }
 
@@ -6635,7 +6645,7 @@ final class LegacyEventTest extends FunctionalTestCase
     public function shouldAutomaticallyConfirmOrCancelByDefaultReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->shouldAutomaticallyConfirmOrCancel()
+            $this->subject->shouldAutomaticallyConfirmOrCancel(),
         );
     }
 
@@ -6646,12 +6656,12 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['automatic_confirmation_cancelation' => 1]
+            ['automatic_confirmation_cancelation' => 1],
         );
         $subject = new TestingLegacyEvent($uid);
 
         self::assertTrue(
-            $subject->shouldAutomaticallyConfirmOrCancel()
+            $subject->shouldAutomaticallyConfirmOrCancel(),
         );
     }
 
@@ -6692,11 +6702,11 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC, 'price_on_request' => false]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC, 'price_on_request' => false],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_DATE, 'topic' => $topicUid]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE, 'topic' => $topicUid],
         );
         $date = new LegacyEvent($dateUid);
 
@@ -6710,11 +6720,11 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC, 'price_on_request' => true]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC, 'price_on_request' => true],
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_DATE, 'topic' => $topicUid]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE, 'topic' => $topicUid],
         );
         $date = new LegacyEvent($dateUid);
 

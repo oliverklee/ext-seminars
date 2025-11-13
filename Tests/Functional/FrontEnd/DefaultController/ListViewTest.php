@@ -76,7 +76,7 @@ final class ListViewTest extends FunctionalTestCase
                     'maxPages' => 5,
                 ],
                 'linkToSingleView' => 'always',
-            ]
+            ],
         );
 
         return $subject;

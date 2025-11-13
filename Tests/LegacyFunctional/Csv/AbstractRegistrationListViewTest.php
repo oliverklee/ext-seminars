@@ -91,21 +91,23 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'pid' => $this->pageUid,
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ),
-            ]
+            ],
         );
 
         $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
 
         $testCase = $this;
-        $subject->method('getFrontEndUserFieldKeys')
+        $subject
+            ->method('getFrontEndUserFieldKeys')
             ->willReturnCallback(
-                static fn (): array => $testCase->frontEndUserFieldKeys
+                static fn (): array => $testCase->frontEndUserFieldKeys,
             );
-        $subject->method('getRegistrationFieldKeys')
+        $subject
+            ->method('getRegistrationFieldKeys')
             ->willReturnCallback(
-                static fn (): array => $testCase->registrationFieldKeys
+                static fn (): array => $testCase->registrationFieldKeys,
             );
 
         $subject->setEventUid($this->eventUid);
@@ -238,7 +240,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         self::assertSame(
             '',
-            $subject->render()
+            $subject->render(),
         );
     }
 
@@ -256,12 +258,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -279,7 +281,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -287,20 +289,20 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         $registrationsList = $this->subject->render();
         self::assertStringContainsString(
             (string)$firstRegistrationUid,
-            $registrationsList
+            $registrationsList,
         );
         self::assertStringContainsString(
             (string)$secondRegistrationUid,
-            $registrationsList
+            $registrationsList,
         );
     }
 
@@ -319,12 +321,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $frontEndUserUid,
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo_user',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -343,12 +345,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $frontEndUserUid,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -366,12 +368,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => 9999,
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             (string)$registrationUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -388,7 +390,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'crdate' => 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -396,13 +398,13 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'seminar' => $this->eventUid,
                 'crdate' => 2,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             "\r\n" . $firstRegistrationUid . "\r\n" .
             $secondRegistrationUid . "\r\n",
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -420,7 +422,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -429,12 +431,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'crdate' => (int)GeneralUtility::makeInstance(Context::class)
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            ]
+            ],
         );
 
         self::assertMatchesRegularExpression(
             '/\\r\\n$/',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -453,12 +455,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo "" bar',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -477,12 +479,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            ]
+            ],
         );
 
         self::assertStringNotContainsString(
             '"foo bar"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -501,12 +503,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo ; bar',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             '"foo ; bar"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -525,12 +527,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => "foo\nbar",
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             "\"foo\nbar\"",
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -549,12 +551,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                     ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             '"foo "" bar"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -574,12 +576,12 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'title' => 'test',
-            ]
+            ],
         );
 
         self::assertStringContainsString(
             'foo;test',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -605,7 +607,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'tx_seminars_attendances.address;tx_seminars_attendances.title',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -618,7 +620,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'name;',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -631,7 +633,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             ';address',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -655,7 +657,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         self::assertSame(
             "sep=;\r\n\r\n",
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -668,7 +670,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         self::assertSame(
             "\r\n",
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -682,7 +684,8 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $modifiedResult = "modified CSV\r\n";
 
         $hook = $this->createMock(RegistrationListCsv::class);
-        $hook->expects(self::once())->method('modifyCsv')
+        $hook
+            ->expects(self::once())->method('modifyCsv')
             ->with($renderResult, $this->subject)
             ->willReturn($modifiedResult);
 

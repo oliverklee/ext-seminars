@@ -132,8 +132,8 @@ class EventRepository extends AbstractRawDataCapableRepository
             ->where(
                 $registrationQueryBuilder->expr()->eq(
                     'seminar',
-                    $registrationQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
-                )
+                    $registrationQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT),
+                ),
             );
         $registrationCountQueryResult = $registrationCountQuery->executeQuery();
         $registrationCount = (int)$registrationCountQueryResult->fetchOne();
@@ -145,8 +145,8 @@ class EventRepository extends AbstractRawDataCapableRepository
             ->where(
                 $eventQueryBuilder->expr()->eq(
                     'uid',
-                    $eventQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
-                )
+                    $eventQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT),
+                ),
             )
             ->set('registrations', (string)$registrationCount);
 
@@ -310,7 +310,7 @@ class EventRepository extends AbstractRawDataCapableRepository
                 $this->getTableName() => [
                     $uid => ['delete' => 1],
                 ],
-            ]
+            ],
         );
         $dataHandler->process_cmdmap();
     }
@@ -349,7 +349,8 @@ class EventRepository extends AbstractRawDataCapableRepository
         $matchers[] = $query->greaterThan('end', 0);
         $matchers[] = $query->lessThan('end', $this->now());
 
-        return $query->matching($query->logicalAnd(...$matchers))
+        return $query
+            ->matching($query->logicalAnd(...$matchers))
             ->setOrderings(['start' => QueryInterface::ORDER_DESCENDING])
             ->execute()->toArray();
     }
@@ -371,7 +372,8 @@ class EventRepository extends AbstractRawDataCapableRepository
         $noDateMatcher = $query->logicalAnd($query->equals('start', 0), $query->equals('end', 0));
         $matchers[] = $query->logicalOr($endMatcher, $noDateMatcher);
 
-        return $query->matching($query->logicalAnd(...$matchers))
+        return $query
+            ->matching($query->logicalAnd(...$matchers))
             ->setOrderings(['start' => QueryInterface::ORDER_ASCENDING])
             ->execute()->toArray();
     }

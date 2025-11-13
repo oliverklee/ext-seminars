@@ -59,7 +59,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function updateNecessaryForRegistrationWithoutSeparateBillingAddressWithUserReturnsTrue(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithUser.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithUser.csv',
         );
 
         self::assertTrue($this->subject->updateNecessary());
@@ -91,7 +91,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function updateNecessaryForRegistrationWithoutSeparateBillingAddressWithMissingReferenceUserReturnsTrue(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithMissingReferencedUser.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithMissingReferencedUser.csv',
         );
 
         self::assertTrue($this->subject->updateNecessary());
@@ -113,7 +113,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function updateNecessaryForHiddenRegistrationWithoutSeparateBillingAddressWithoutUserReturnsTrue(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'HiddenRegistrationWithoutSeparateBillingAddressWithoutUser.csv'
+            self::FIXTURES_PREFIX . 'HiddenRegistrationWithoutSeparateBillingAddressWithoutUser.csv',
         );
 
         self::assertTrue($this->subject->updateNecessary());
@@ -125,7 +125,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function updateNecessaryForDeletedRegistrationWithoutSeparateBillingAddressWithoutUserReturnsFalse(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithoutUser.csv'
+            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithoutUser.csv',
         );
 
         self::assertFalse($this->subject->updateNecessary());
@@ -149,13 +149,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateForRegistrationWithSeparateBillingAddressAndUserKeepsBillingEmailUnchanged(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressAndUserAndDifferentEmails.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressAndUserAndDifferentEmails.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressAndUserAndDifferentEmails.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressAndUserAndDifferentEmails.csv',
         );
     }
 
@@ -177,13 +177,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateForDeletedUserKeepsSeparateBillingAddressFlagOnNo(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithoutUser.csv'
+            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithoutUser.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithoutUser.csv'
+            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithoutUser.csv',
         );
     }
 
@@ -229,7 +229,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateForUserWithEmptyFullNameCopiesFirstAndLastNameFromUser(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithFirstAndLastName.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithFirstAndLastName.csv',
         );
 
         $this->subject->executeUpdate();
@@ -243,7 +243,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCanCopyStreetAddressFromUser(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithStreetAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithStreetAddress.csv',
         );
 
         $this->subject->executeUpdate();
@@ -305,7 +305,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCanCopyEmailAddressFromUser(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithEmailAddress.csv',
         );
 
         $this->subject->executeUpdate();
@@ -319,7 +319,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCanCopyDataFromHiddenUser(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithEmailAddressInHiddenUser.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithEmailAddressInHiddenUser.csv',
         );
 
         $this->subject->executeUpdate();
@@ -333,13 +333,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateDoesNotCopyDataFromDeletedUser(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithEmailAddressInDeletedUser.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithEmailAddressInDeletedUser.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithEmptyEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithEmptyEmailAddress.csv',
         );
     }
 
@@ -349,13 +349,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCanUpdateHiddenRegistration(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'HiddenRegistrationWithoutSeparateBillingAddressWithEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'HiddenRegistrationWithoutSeparateBillingAddressWithEmailAddress.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'HiddenRegistrationWithSeparateBillingAddressWithEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'HiddenRegistrationWithSeparateBillingAddressWithEmailAddress.csv',
         );
     }
 
@@ -365,13 +365,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateKeepsDeletedRegistrationUnchanged(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithEmailAddress.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'DeletedRegistrationWithoutSeparateBillingAddressWithEmailAddress.csv',
         );
     }
 
@@ -381,13 +381,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCropsFullName(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongFullName.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongFullName.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedFullName.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedFullName.csv',
         );
     }
 
@@ -397,13 +397,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateForUserWithEmptyFullNameCropsFirstAndLastName(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongFirstAndLastName.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongFirstAndLastName.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedFullNameFromFirstAndLast.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedFullNameFromFirstAndLast.csv',
         );
     }
 
@@ -413,13 +413,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCropsStreetAddress(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongStreetAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongStreetAddress.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedStreetAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedStreetAddress.csv',
         );
     }
 
@@ -441,13 +441,13 @@ class CopyBillingAddressToRegistrationsUpgradeWizardTest extends FunctionalTestC
     public function executeUpdateCropsEmailAddress(): void
     {
         $this->importCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithoutSeparateBillingAddressWithLongEmailAddress.csv',
         );
 
         $this->subject->executeUpdate();
 
         $this->assertCSVDataSet(
-            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedEmailAddress.csv'
+            self::FIXTURES_PREFIX . 'RegistrationWithSeparateBillingAddressWithCroppedEmailAddress.csv',
         );
     }
 

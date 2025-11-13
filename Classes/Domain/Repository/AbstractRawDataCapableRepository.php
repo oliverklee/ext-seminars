@@ -46,13 +46,14 @@ abstract class AbstractRawDataCapableRepository extends Repository
         $tableName = $this->getTableName();
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
         $queryBuilder->getRestrictions()->removeAll();
-        $query = $queryBuilder->select('*')
+        $query = $queryBuilder
+            ->select('*')
             ->from($tableName)
             ->where(
                 $queryBuilder->expr()->in(
                     'uid',
-                    $queryBuilder->createNamedParameter(\array_keys($modelsByUid), Connection::PARAM_INT_ARRAY)
-                )
+                    $queryBuilder->createNamedParameter(\array_keys($modelsByUid), Connection::PARAM_INT_ARRAY),
+                ),
             );
         $queryResult = $query->executeQuery();
         $rows = $queryResult->fetchAllAssociative();

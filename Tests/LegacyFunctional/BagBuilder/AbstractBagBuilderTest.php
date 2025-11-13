@@ -79,17 +79,17 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $testBag = $this->subject->build();
         self::assertEquals(
             2,
-            $testBag->count()
+            $testBag->count(),
         );
 
         self::assertEquals(
             $eventUid1,
-            $testBag->current()->getUid()
+            $testBag->current()->getUid(),
         );
         $testBag->next();
         self::assertEquals(
             $eventUid2,
-            $testBag->current()->getUid()
+            $testBag->current()->getUid(),
         );
     }
 
@@ -115,7 +115,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function builderInitiallyHasNoSourcePages(): void
     {
         self::assertFalse(
-            $this->subject->hasSourcePages()
+            $this->subject->hasSourcePages(),
         );
     }
 
@@ -127,7 +127,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
 
         self::assertTrue(
-            $this->subject->hasSourcePages()
+            $this->subject->hasSourcePages(),
         );
     }
 
@@ -139,7 +139,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->setSourcePages($this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1));
 
         self::assertTrue(
-            $this->subject->hasSourcePages()
+            $this->subject->hasSourcePages(),
         );
     }
 
@@ -151,7 +151,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->setSourcePages('; DROP TABLE tx_seminars_test;');
 
         self::assertFalse(
-            $this->subject->hasSourcePages()
+            $this->subject->hasSourcePages(),
         );
     }
 
@@ -162,18 +162,18 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -185,18 +185,18 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->setSourcePages('');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -207,12 +207,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
 
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
@@ -221,7 +221,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -233,18 +233,18 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->setSourcePages('');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -256,18 +256,18 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->setSourcePages('', 1);
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -278,12 +278,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
 
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
@@ -291,7 +291,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -302,12 +302,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid]
+            ['pid' => $this->dummySysFolderPid],
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $this->dummySysFolderPid + 1]
+            ['pid' => $this->dummySysFolderPid + 1],
         );
 
         $this->subject->setSourcePages($this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1));
@@ -315,7 +315,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -325,19 +325,19 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function builderIgnoresRecordsOnSubpageWithoutRecursion(): void
     {
         $subPagePid = $this->testingFramework->createSystemFolder(
-            $this->dummySysFolderPid
+            $this->dummySysFolderPid,
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subPagePid]
+            ['pid' => $subPagePid],
         );
 
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -347,12 +347,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function builderSelectsRecordsOnSubpageWithRecursion(): void
     {
         $subPagePid = $this->testingFramework->createSystemFolder(
-            $this->dummySysFolderPid
+            $this->dummySysFolderPid,
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subPagePid]
+            ['pid' => $subPagePid],
         );
 
         $this->subject->setSourcePages((string)$this->dummySysFolderPid, 1);
@@ -360,7 +360,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -370,19 +370,19 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function builderSelectsRecordsOnTwoSubpagesWithRecursion(): void
     {
         $subPagePid1 = $this->testingFramework->createSystemFolder(
-            $this->dummySysFolderPid
+            $this->dummySysFolderPid,
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subPagePid1]
+            ['pid' => $subPagePid1],
         );
 
         $subPagePid2 = $this->testingFramework->createSystemFolder(
-            $this->dummySysFolderPid
+            $this->dummySysFolderPid,
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subPagePid2]
+            ['pid' => $subPagePid2],
         );
 
         $this->subject->setSourcePages((string)$this->dummySysFolderPid, 1);
@@ -390,7 +390,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -400,18 +400,18 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function builderSelectsRecordsOnSubpageFromTwoParentsWithRecursion(): void
     {
         $subPagePid1 = $this->testingFramework->createSystemFolder(
-            $this->dummySysFolderPid
+            $this->dummySysFolderPid,
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subPagePid1]
+            ['pid' => $subPagePid1],
         );
 
         $parentPid2 = $this->testingFramework->createSystemFolder();
         $subPagePid2 = $this->testingFramework->createSystemFolder($parentPid2);
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subPagePid2]
+            ['pid' => $subPagePid2],
         );
 
         $this->subject->setSourcePages($this->dummySysFolderPid . ',' . $parentPid2, 1);
@@ -419,7 +419,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             2,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -429,22 +429,22 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function builderIgnoresRecordsOnSubpageWithTooShallowRecursion(): void
     {
         $subPagePid = $this->testingFramework->createSystemFolder(
-            $this->dummySysFolderPid
+            $this->dummySysFolderPid,
         );
         $subSubPagePid = $this->testingFramework->createSystemFolder(
-            $subPagePid
+            $subPagePid,
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['pid' => $subSubPagePid]
+            ['pid' => $subSubPagePid],
         );
 
         $this->subject->setSourcePages((string)$this->dummySysFolderPid, 1);
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -459,7 +459,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     {
         self::assertNotEquals(
             '',
-            $this->subject->getWhereClause()
+            $this->subject->getWhereClause(),
         );
     }
 
@@ -474,7 +474,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         // may be prefixed with the table name.
         self::assertStringContainsString(
             'pid IN (' . $this->dummySysFolderPid . ')',
-            $this->subject->getWhereClause()
+            $this->subject->getWhereClause(),
         );
     }
 
@@ -533,13 +533,13 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -551,12 +551,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -573,13 +573,13 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'foo', 'pid' => $this->dummySysFolderPid]
+            ['title' => 'foo', 'pid' => $this->dummySysFolderPid],
         );
         $bag = $this->subject->build();
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 
@@ -592,12 +592,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -610,12 +610,12 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            ['title' => 'bar', 'pid' => $this->dummySysFolderPid]
+            ['title' => 'bar', 'pid' => $this->dummySysFolderPid],
         );
         $bag = $this->subject->build();
 
         self::assertTrue(
-            $bag->isEmpty()
+            $bag->isEmpty(),
         );
     }
 
@@ -632,7 +632,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertContains(
             'tx_seminars_seminars',
-            $this->subject->getAdditionalTableNames()
+            $this->subject->getAdditionalTableNames(),
         );
     }
 
@@ -646,11 +646,11 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     public function removeAdditionalTableNameWithNotSetTableNameThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
             'The given additional table name does not exist in the list ' .
-            'of additional table names.'
+            'of additional table names.',
         );
 
         $this->subject->removeAdditionalTableName('tx_seminars_seminars');
@@ -666,7 +666,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertNotContains(
             'tx_seminars_seminars',
-            $this->subject->getAdditionalTableNames()
+            $this->subject->getAdditionalTableNames(),
         );
     }
 
@@ -683,7 +683,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             'field ASC',
-            $this->subject->getOrderBy()
+            $this->subject->getOrderBy(),
         );
     }
 
@@ -696,7 +696,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             '',
-            $this->subject->getOrderBy()
+            $this->subject->getOrderBy(),
         );
     }
 
@@ -712,17 +712,17 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $testBag = $this->subject->build();
         self::assertEquals(
             2,
-            $testBag->count()
+            $testBag->count(),
         );
 
         self::assertEquals(
             $eventUid2,
-            $testBag->current()->getUid()
+            $testBag->current()->getUid(),
         );
         $testBag->next();
         self::assertEquals(
             $eventUid1,
-            $testBag->current()->getUid()
+            $testBag->current()->getUid(),
         );
     }
 
@@ -739,7 +739,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             '0, 30',
-            $this->subject->getLimit()
+            $this->subject->getLimit(),
         );
     }
 
@@ -752,7 +752,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             '',
-            $this->subject->getLimit()
+            $this->subject->getLimit(),
         );
     }
 
@@ -768,7 +768,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         self::assertEquals(
             1,
-            $bag->count()
+            $bag->count(),
         );
     }
 }

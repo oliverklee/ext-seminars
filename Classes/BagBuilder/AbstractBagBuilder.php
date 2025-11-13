@@ -86,7 +86,7 @@ abstract class AbstractBagBuilder
             $this->orderBy,
             $this->limit,
             ($this->showHiddenRecords ? 1 : -1),
-            $this->ignoreTimingOfRecords
+            $this->ignoreTimingOfRecords,
         );
         return $bag;
     }
@@ -205,7 +205,7 @@ abstract class AbstractBagBuilder
         if (!isset($this->additionalTableNames[$additionalTableName])) {
             throw new \InvalidArgumentException(
                 'The given additional table name does not exist in the list of additional table names.',
-                1333292582
+                1333292582,
             );
         }
 

@@ -66,7 +66,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->subject = new RegistrationGuard(
             $this->registrationRepositoryMock,
             $this->eventStatisticsCalculatorMock,
-            $this->oneTimeAccountConnectorMock
+            $this->oneTimeAccountConnectorMock,
         );
     }
 
@@ -450,7 +450,8 @@ final class RegistrationGuardTest extends UnitTestCase
         $userUid = 47;
         $event = new SingleEvent();
         $event->setRegistrationRequired(true);
-        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+        $this->registrationRepositoryMock
+            ->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(false);
         $event->setMultipleRegistrationPossible(true);
 
@@ -465,7 +466,8 @@ final class RegistrationGuardTest extends UnitTestCase
         $userUid = 47;
         $event = new SingleEvent();
         $event->setRegistrationRequired(true);
-        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+        $this->registrationRepositoryMock
+            ->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(false);
         $event->setMultipleRegistrationPossible(true);
 
@@ -480,7 +482,8 @@ final class RegistrationGuardTest extends UnitTestCase
         $userUid = 47;
         $event = new SingleEvent();
         $event->setRegistrationRequired(true);
-        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+        $this->registrationRepositoryMock
+            ->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(true);
         $event->setMultipleRegistrationPossible(true);
 
@@ -495,7 +498,8 @@ final class RegistrationGuardTest extends UnitTestCase
         $userUid = 47;
         $event = new SingleEvent();
         $event->setRegistrationRequired(true);
-        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+        $this->registrationRepositoryMock
+            ->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(true);
         $event->setMultipleRegistrationPossible(false);
 
@@ -687,7 +691,7 @@ final class RegistrationGuardTest extends UnitTestCase
             static function (SingleEvent $event) use ($offlineRegistrations, $seatsLimit): void {
                 $statistics = new EventStatistics(0, $offlineRegistrations, 0, 0, $seatsLimit, false);
                 $event->setStatistics($statistics);
-            }
+            },
         );
 
         self::assertSame($seatsLimit - $offlineRegistrations, $this->subject->getVacancies($event));
@@ -709,7 +713,7 @@ final class RegistrationGuardTest extends UnitTestCase
             static function (SingleEvent $event) use ($offlineRegistrations, $seatsLimit): void {
                 $statistics = new EventStatistics(0, $offlineRegistrations, 0, 0, $seatsLimit, false);
                 $event->setStatistics($statistics);
-            }
+            },
         );
 
         $this->subject->getVacancies($event);

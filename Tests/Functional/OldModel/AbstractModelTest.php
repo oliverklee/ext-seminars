@@ -290,7 +290,7 @@ final class AbstractModelTest extends FunctionalTestCase
         self::assertSame(
             1,
             GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_test')
-                ->count('*', 'tx_seminars_test', ['title' => $title])
+                ->count('*', 'tx_seminars_test', ['title' => $title]),
         );
     }
 
@@ -368,7 +368,7 @@ final class AbstractModelTest extends FunctionalTestCase
         self::assertSame(
             0,
             GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_test')
-                ->count('*', 'tx_seminars_test', [])
+                ->count('*', 'tx_seminars_test', []),
         );
     }
 
@@ -400,7 +400,7 @@ final class AbstractModelTest extends FunctionalTestCase
         self::assertSame(
             1,
             GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_test')
-                ->count('*', 'tx_seminars_test', ['title' => $newTitle])
+                ->count('*', 'tx_seminars_test', ['title' => $newTitle]),
         );
     }
 

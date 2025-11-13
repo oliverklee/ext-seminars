@@ -61,7 +61,7 @@ final class EventDateMapperTest extends FunctionalTestCase
         $this->expectException(\BadMethodCallException::class);
 
         $model = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_EVENT_DATE]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE],
         );
 
         $model->getTopic();
@@ -79,7 +79,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             [
                 'topic' => $topicUid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-            ]
+            ],
         );
 
         self::assertInstanceOf(Event::class, $testingModel->getTopic());
@@ -99,7 +99,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic->getUid(),
-            ]
+            ],
         );
 
         self::assertInstanceOf(Collection::class, $date->getCategories());
@@ -116,7 +116,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
         \assert($categoryUid > 0);
@@ -124,7 +124,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $topicUid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         $model = $this->subject->find($uid);
@@ -142,7 +142,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
         $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
         \assert($categoryUid > 0);
@@ -150,13 +150,13 @@ final class EventDateMapperTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $topicUid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$categoryUid,
-            $model->getCategories()->getUids()
+            $model->getCategories()->getUids(),
         );
     }
 
@@ -173,7 +173,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
 
         self::assertNull($testingModel->getEventType());
@@ -192,7 +192,7 @@ final class EventDateMapperTest extends FunctionalTestCase
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
-            ]
+            ],
         );
 
         self::assertInstanceOf(EventType::class, $testingModel->getEventType());

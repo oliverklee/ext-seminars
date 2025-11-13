@@ -70,7 +70,7 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
     public function renderRendersViewHelperArguments(): void
     {
         $result = $this->renderViewHelper(
-            '<s:salutationAwareTranslate key="test-label-with-arguments" arguments="{0: \'Oli\'}"/>'
+            '<s:salutationAwareTranslate key="test-label-with-arguments" arguments="{0: \'Oli\'}"/>',
         );
 
         self::assertSame('Hello Oli!', $result);
@@ -82,7 +82,7 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
     public function renderWithoutAnySettingsWithFullLabelPathCanRenderLabelWithoutSalutationVersions(): void
     {
         $result = $this->renderViewHelper(
-            '<s:salutationAwareTranslate key="LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:test-label" />'
+            '<s:salutationAwareTranslate key="LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:test-label" />',
         );
 
         self::assertSame('This is a test label.', $result);
@@ -114,7 +114,7 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
     public function renderWithoutAnySettingsForLabelWithSalutationAndFallbackByDefaultRendersFormalLabel(): void
     {
         $result = $this->renderViewHelper(
-            '<s:salutationAwareTranslate key="test-label-with-salutation-and-fallback" />'
+            '<s:salutationAwareTranslate key="test-label-with-salutation-and-fallback" />',
         );
 
         self::assertSame('This is a test label with a fallback and a formal salutation.', $result);

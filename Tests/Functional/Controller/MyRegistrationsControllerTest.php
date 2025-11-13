@@ -112,7 +112,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $expected = LocalizationUtility::translate(
             'plugin.myRegistrations.messages.noRegistrations_formal',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expected);
         self::assertStringContainsString($expected, (string)$response->getBody());
@@ -125,7 +125,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationOfOtherUser.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationOfOtherUser.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -134,7 +134,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
 
         $expected = LocalizationUtility::translate(
             'plugin.myRegistrations.messages.noRegistrations_formal',
-            'seminars'
+            'seminars',
         );
         self::assertIsString($expected);
         self::assertStringContainsString($expected, (string)$response->getBody());
@@ -147,7 +147,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationOfOtherUser.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationOfOtherUser.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -166,7 +166,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForDeletedEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForDeletedEvent.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -181,7 +181,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForSingleDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForSingleDayEvent.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -198,7 +198,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForMultiDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForMultiDayEvent.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -215,7 +215,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationWithEventType.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationWithEventType.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -262,7 +262,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForEventDate.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/RegistrationForEventDate.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -296,7 +296,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/WaitingListRegistration.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/indexAction/WaitingListRegistration.csv',
         );
 
         $request = (new InternalRequest())->withPageId(7);
@@ -343,7 +343,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
             . 'tx_seminars_myregistrations%5Bregistration%5D=1';
         self::assertMatchesRegularExpression(
             '#' . $urlPrefix . '[^"]*">.*the event title#s',
-            (string)$response->getBody()
+            (string)$response->getBody(),
         );
     }
 
@@ -355,7 +355,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -378,7 +379,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -396,7 +398,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -416,7 +419,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -434,7 +438,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationOfOtherUser.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -454,7 +459,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -472,10 +478,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForEventDate.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForEventDate.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -494,10 +501,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithEventType.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithEventType.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -515,10 +523,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForSingleDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForSingleDayEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -536,10 +545,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForSingleDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForSingleDayEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -557,10 +567,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForMultiDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForMultiDayEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -578,10 +589,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForSingleDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForSingleDayEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -599,10 +611,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForMultiDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForMultiDayEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -620,10 +633,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForMultiDayEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationForMultiDayEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -641,10 +655,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithOneVenue.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithOneVenue.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -661,10 +676,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithOneVenue.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithOneVenue.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -682,10 +698,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithOneVenue.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithOneVenue.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -703,10 +720,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithTwoVenuesInSameCity.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithTwoVenuesInSameCity.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -725,10 +743,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/Registration.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -747,7 +766,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistration.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -767,10 +787,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/WaitingListRegistration.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/WaitingListRegistration.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -791,7 +812,8 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/showAction/NonBindingReservation.csv');
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -811,10 +833,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithUnregistrationPossible.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithUnregistrationPossible.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -829,7 +852,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         self::assertIsString($linkText);
         self::assertMatchesRegularExpression(
             '#' . $urlPrefix . '[^"]*">.*' . $linkText . '#s',
-            (string)$response->getBody()
+            (string)$response->getBody(),
         );
     }
 
@@ -840,10 +863,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithUnregistrationDeadlineOver.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithUnregistrationDeadlineOver.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -864,10 +888,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithoutTitle.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithoutTitle.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -890,10 +915,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithoutTitle.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithoutTitle.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -911,10 +937,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithTitle.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegularRegistrationWithDownloadWithTitle.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -932,10 +959,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/WaitingListRegistrationWithDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/WaitingListRegistrationWithDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -953,10 +981,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/NonBindingReservationWithDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/NonBindingReservationWithDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -974,10 +1003,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithDownloadStartInPast.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithDownloadStartInPast.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -995,10 +1025,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithDownloadStartInFuture.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/showAction/RegistrationWithDownloadStartInFuture.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'show')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[registration]', 1);
@@ -1016,10 +1047,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationWithoutEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationWithoutEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1040,10 +1072,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationWithoutDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationWithoutDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1064,10 +1097,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownloadFromOtherEvent.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownloadFromOtherEvent.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1088,10 +1122,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1110,10 +1145,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1132,10 +1168,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1154,10 +1191,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1176,10 +1214,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1198,10 +1237,11 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/MyRegistrationsController/FrontEndUserAndGroup.csv');
         $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/RegistrationAndDownload.csv',
         );
 
-        $request = (new InternalRequest())->withPageId(7)
+        $request = (new InternalRequest())
+            ->withPageId(7)
             ->withQueryParameter('tx_seminars_myregistrations[action]', 'downloadAttendeeAttachment')
             ->withQueryParameter('tx_seminars_myregistrations[controller]', 'MyRegistrations')
             ->withQueryParameter('tx_seminars_myregistrations[fileUid]', 1)
@@ -1211,7 +1251,7 @@ final class MyRegistrationsControllerTest extends FunctionalTestCase
         $response = $this->executeFrontendSubRequest($request, $requestContext);
 
         $expectedFileContents = \file_get_contents(
-            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/fileadmin/speaker.txt'
+            __DIR__ . '/Fixtures/MyRegistrationsController/downloadAttendeeAttachmentAction/fileadmin/speaker.txt',
         );
         self::assertSame($expectedFileContents, (string)$response->getBody());
     }

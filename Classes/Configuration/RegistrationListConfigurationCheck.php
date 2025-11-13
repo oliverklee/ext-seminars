@@ -25,7 +25,7 @@ class RegistrationListConfigurationCheck extends AbstractFrontEndConfigurationCh
             'showFeUserFieldsInRegistrationsList',
             'These values specify the FE user fields to show in the list of  registrations for an event.
             A mistyped field name will cause the contents of the field to not get displayed.',
-            'fe_users'
+            'fe_users',
         );
     }
 }

@@ -99,7 +99,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -120,7 +120,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -141,7 +141,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -162,7 +162,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'automatic_confirmation_cancelation' => 0,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -183,7 +183,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'automatic_confirmation_cancelation' => 0,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -219,7 +219,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
                 'deadline_registration' => 0,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -241,7 +241,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
                 'deadline_registration' => $this->future,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -263,7 +263,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
                 'deadline_registration' => $this->past,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -285,7 +285,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
                 'deadline_registration' => $this->past,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 
@@ -307,7 +307,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
                 'deadline_registration' => $this->past,
-            ]
+            ],
         );
         $event->setStatus(EventInterface::STATUS_PLANNED);
 

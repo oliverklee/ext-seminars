@@ -55,7 +55,7 @@ final class CategoryListTest extends FunctionalTestCase
                 'pidList' => $this->systemFolderPid,
                 'recursive' => 1,
             ],
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -80,11 +80,11 @@ final class CategoryListTest extends FunctionalTestCase
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'first category']
+            ['title' => 'first category'],
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'second category']
+            ['title' => 'second category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -93,30 +93,30 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 2,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid1
+            $categoryUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $output = $this->subject->render();
         self::assertStringContainsString(
             'first category',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             'second category',
-            $output
+            $output,
         );
     }
 
@@ -127,11 +127,11 @@ final class CategoryListTest extends FunctionalTestCase
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'category B']
+            ['title' => 'category B'],
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'category A']
+            ['title' => 'category A'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -140,25 +140,25 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 2,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid1
+            $categoryUid1,
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid2
+            $categoryUid2,
         );
 
         $output = $this->subject->render();
         self::assertTrue(
-            strpos($output, 'category A') < strpos($output, 'category B')
+            strpos($output, 'category A') < strpos($output, 'category B'),
         );
     }
 
@@ -168,11 +168,11 @@ final class CategoryListTest extends FunctionalTestCase
     public function renderCreatesCategoryListByUsingRecursion(): void
     {
         $systemSubFolderUid = $this->testingFramework->createSystemFolder(
-            $this->systemFolderPid
+            $this->systemFolderPid,
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -181,20 +181,20 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -206,7 +206,7 @@ final class CategoryListTest extends FunctionalTestCase
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -215,20 +215,20 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringNotContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -242,7 +242,7 @@ final class CategoryListTest extends FunctionalTestCase
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -251,20 +251,20 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -275,7 +275,7 @@ final class CategoryListTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -284,21 +284,21 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 1,
                 'cancelled' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringNotContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -309,7 +309,7 @@ final class CategoryListTest extends FunctionalTestCase
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -318,21 +318,21 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my_title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 1,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -343,12 +343,12 @@ final class CategoryListTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'timeframeInList',
-            'currentAndUpcoming'
+            'currentAndUpcoming',
         );
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -357,24 +357,24 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 2000,
                 'categories' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -385,12 +385,12 @@ final class CategoryListTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'timeframeInList',
-            'currentAndUpcoming'
+            'currentAndUpcoming',
         );
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -399,24 +399,24 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) - 2000,
                 'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) - 1000,
                 'categories' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringNotContainsString(
             'one category',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -431,7 +431,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['title' => 'one category']
+            ['title' => 'one category'],
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -440,20 +440,20 @@ final class CategoryListTest extends FunctionalTestCase
                 'title' => 'my title',
                 'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                     'date',
-                    'timestamp'
+                    'timestamp',
                 ) + 1000,
                 'categories' => 1,
-            ]
+            ],
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
             $eventUid,
-            $categoryUid
+            $categoryUid,
         );
 
         self::assertStringContainsString(
             'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

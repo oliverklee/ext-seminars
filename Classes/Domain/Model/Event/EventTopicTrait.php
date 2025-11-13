@@ -214,7 +214,7 @@ trait EventTopicTrait
             $prices[Price::PRICE_SPECIAL_EARLY_BIRD] = new Price(
                 $this->getSpecialEarlyBirdPrice(),
                 'price.specialEarlyBird',
-                Price::PRICE_SPECIAL_EARLY_BIRD
+                Price::PRICE_SPECIAL_EARLY_BIRD,
             );
         }
 
@@ -232,7 +232,7 @@ trait EventTopicTrait
         if (!isset($allPrices[$priceCode])) {
             throw new \UnexpectedValueException(
                 'This event does not have a price with the code "' . $priceCode . '".',
-                1668096769
+                1668096769,
             );
         }
 

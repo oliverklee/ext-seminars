@@ -183,7 +183,8 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         $event->setRegistrationRequired(true);
 
         $seatsFromRegistrations = 15;
-        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('countRegularSeatsByEvent')
             ->with($eventUid)->willReturn($seatsFromRegistrations);
 
         $this->subject->enrichWithStatistics($event);
@@ -204,7 +205,8 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         $event->setRegistrationRequired(false);
 
         $seatsFromRegistrations = 15;
-        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('countRegularSeatsByEvent')
             ->with($eventUid)->willReturn($seatsFromRegistrations);
 
         $this->subject->enrichWithStatistics($event);
@@ -226,7 +228,8 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         $event->setWaitingList(true);
 
         $waitingListSeats = 15;
-        $this->registrationRepositoryMock->expects(self::once())->method('countWaitingListSeatsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('countWaitingListSeatsByEvent')
             ->with($eventUid)->willReturn($waitingListSeats);
 
         $this->subject->enrichWithStatistics($event);
@@ -248,7 +251,8 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         $event->setWaitingList(false);
 
         $waitingListSeats = 15;
-        $this->registrationRepositoryMock->expects(self::once())->method('countWaitingListSeatsByEvent')
+        $this->registrationRepositoryMock
+            ->expects(self::once())->method('countWaitingListSeatsByEvent')
             ->with($eventUid)->willReturn($waitingListSeats);
 
         $this->subject->enrichWithStatistics($event);

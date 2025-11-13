@@ -47,7 +47,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
-            $this->getFrontEndController()->cObj
+            $this->getFrontEndController()->cObj,
         );
     }
 
@@ -92,7 +92,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertEquals(
             '',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -103,12 +103,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         self::assertStringContainsString(
             $this->translate('label_searching_hints'),
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -119,13 +119,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         self::assertStringContainsString(
             '<input type="submit" value="' .
             $this->translate('label_selector_submit') . '" />',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -136,13 +136,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         self::assertStringContainsString(
             '<input type="submit" value="' .
             $this->translate('label_selector_reset') . '"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -153,18 +153,18 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
         $this->subject->setConfigurationValue(
             'showEmptyEntryInOptionLists',
-            true
+            true,
         );
 
         self::assertStringContainsString(
             '<option value="0">' .
             $this->translate('label_selector_pleaseChoose') .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -175,18 +175,18 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type,city'
+            'event_type,city',
         );
 
         $output = $this->subject->render();
 
         self::assertStringContainsString(
             $this->translate('label_event_type'),
-            $output
+            $output,
         );
         self::assertStringContainsString(
             $this->translate('label_city'),
-            $output
+            $output,
         );
     }
 
@@ -198,12 +198,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
             'event_type,city,place,full_text_search,date,' .
-            'age,organizer,price'
+            'age,organizer,price',
         );
 
         self::assertStringNotContainsString(
             '###',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -236,8 +236,8 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertEquals(
             ['CH', 'DE'],
             SelectorWidget::removeDummyOptionFromFormData(
-                [0, 'CH', 'DE']
-            )
+                [0, 'CH', 'DE'],
+            ),
         );
     }
 
@@ -249,8 +249,8 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertEquals(
             ['CH', 'DE'],
             SelectorWidget::removeDummyOptionFromFormData(
-                ['CH', 0, 'DE']
-            )
+                ['CH', 0, 'DE'],
+            ),
         );
     }
 
@@ -262,8 +262,8 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertEquals(
             [],
             SelectorWidget::removeDummyOptionFromFormData(
-                []
-            )
+                [],
+            ),
         );
     }
 
@@ -278,13 +278,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_EVENT_TYPE')
+            $this->subject->isSubpartVisible('SEARCH_PART_EVENT_TYPE'),
         );
     }
 
@@ -295,23 +295,23 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $eventTypeTitle = 'test event type';
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => $eventTypeTitle]
+            ['title' => $eventTypeTitle],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid]
+            ['event_type' => $eventTypeUid],
         );
 
         self::assertStringContainsString(
             '<option value="' . $eventTypeUid . '">' . $eventTypeTitle .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -322,24 +322,24 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $eventTypeTitle = '< Test >';
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => $eventTypeTitle]
+            ['title' => $eventTypeTitle],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid]
+            ['event_type' => $eventTypeUid],
         );
 
         self::assertStringContainsString(
             '<option value="' . $eventTypeUid . '">' .
             \htmlspecialchars($eventTypeTitle, ENT_QUOTES | ENT_HTML5) .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -350,17 +350,17 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $eventTypeTitle = 'test event type';
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => $eventTypeTitle]
+            ['title' => $eventTypeTitle],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid]
+            ['event_type' => $eventTypeUid],
         );
 
         $this->subject->piVars['event_type'][] = (string)$eventTypeUid;
@@ -368,7 +368,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -379,27 +379,27 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $eventTypeTitle = 'foo';
         $eventTypeTitle2 = 'bar';
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => $eventTypeTitle]
+            ['title' => $eventTypeTitle],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid]
+            ['event_type' => $eventTypeUid],
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => $eventTypeTitle2]
+            ['title' => $eventTypeTitle2],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid2]
+            ['event_type' => $eventTypeUid2],
         );
 
         $this->subject->piVars['event_type'][] = (string)$eventTypeUid;
@@ -410,12 +410,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
             '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             $eventTypeUid2 . '" selected="selected">' . $eventTypeTitle2 .
             '</option>',
-            $output
+            $output,
         );
     }
 
@@ -426,13 +426,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[event_type][]" ' .
             'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -441,14 +441,15 @@ final class SelectorWidgetTest extends FunctionalTestCase
      */
     public function itemsInSearchBoxAreSortedAlphabetically(): void
     {
-        $subject = $this->getMockBuilder(SelectorWidget::class)
+        $subject = $this
+            ->getMockBuilder(SelectorWidget::class)
             ->onlyMethods(
                 [
                     'hasSearchField',
                     'getEventTypeData',
                     'getPlaceData',
                     'getCityData',
-                ]
+                ],
             )->setConstructorArgs(
                 [
                     [
@@ -457,20 +458,24 @@ final class SelectorWidgetTest extends FunctionalTestCase
                         'displaySearchFormFields' => 'event_type',
                     ],
                     $this->getFrontEndController()->cObj,
-                ]
+                ],
             )->getMock();
-        $subject->method('hasSearchField')
+        $subject
+            ->method('hasSearchField')
             ->willReturn(true);
-        $subject->expects(self::once())->method('getEventTypeData')
+        $subject
+            ->expects(self::once())->method('getEventTypeData')
             ->willReturn([1 => 'Foo', 2 => 'Bar']);
-        $subject->method('getPlaceData')
+        $subject
+            ->method('getPlaceData')
             ->willReturn([]);
-        $subject->method('getCityData')
+        $subject
+            ->method('getCityData')
             ->willReturn([]);
 
         $output = $subject->render();
         self::assertTrue(
-            strpos($output, 'Bar') < strpos($output, 'Foo')
+            strpos($output, 'Bar') < strpos($output, 'Foo'),
         );
     }
 
@@ -485,13 +490,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_PLACE')
+            $this->subject->isSubpartVisible('SEARCH_PART_PLACE'),
         );
     }
 
@@ -502,26 +507,26 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'place'
+            'place',
         );
         $placeTitle = 'test place';
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $placeTitle]
+            ['title' => $placeTitle],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid,
-            'place'
+            'place',
         );
 
         self::assertStringContainsString(
             '<option value="' . $placeUid . '">' . $placeTitle . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -532,27 +537,27 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'place'
+            'place',
         );
         $placeTitle = '<>';
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $placeTitle]
+            ['title' => $placeTitle],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid,
-            'place'
+            'place',
         );
 
         self::assertStringContainsString(
             '<option value="' . $placeUid . '">' .
             \htmlspecialchars($placeTitle, ENT_QUOTES | ENT_HTML5) . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -563,13 +568,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'place'
+            'place',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[place][]" ' .
             'id="tx_seminars_pi1-place" size="5" multiple="multiple">',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -580,28 +585,28 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'place'
+            'place',
         );
         $placeTitle = 'test place';
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $placeTitle]
+            ['title' => $placeTitle],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid,
-            'place'
+            'place',
         );
 
         $this->subject->piVars['place'][] = (string)$placeUid;
 
         self::assertStringContainsString(
             '<option value="' . $placeUid . '" selected="selected">' . $placeTitle . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -612,33 +617,33 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'place'
+            'place',
         );
         $placeTitle = 'foo';
         $placeTitle2 = 'bar';
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $placeTitle]
+            ['title' => $placeTitle],
         );
         $placeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => $placeTitle2]
+            ['title' => $placeTitle2],
         );
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid,
-            'place'
+            'place',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid2,
-            'place'
+            'place',
         );
 
         $this->subject->piVars['place'][] = (string)$placeUid;
@@ -649,12 +654,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             '<option value="' . $placeUid . '" selected="selected">' .
             $placeTitle . '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             '<option value="' . $placeUid2 . '" selected="selected">' .
             $placeTitle2 . '</option>',
-            $output
+            $output,
         );
     }
 
@@ -669,13 +674,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'place'
+            'place',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_CITY')
+            $this->subject->isSubpartVisible('SEARCH_PART_CITY'),
         );
     }
 
@@ -689,21 +694,21 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $cityName = 'test city';
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => $cityName]
+            ['city' => $cityName],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid,
-            'place'
+            'place',
         );
 
         self::assertStringContainsString(
             '<option value="' . $cityName . '">' . $cityName . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -718,41 +723,41 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         $placeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => $cityName1]
+            ['city' => $cityName1],
         );
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid1,
             $placeUid1,
-            'place'
+            'place',
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => $cityName2]
+            ['city' => $cityName2],
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid2,
             $placeUid2,
-            'place'
+            'place',
         );
 
         $output = $this->subject->render();
 
         self::assertStringContainsString(
             '<option value="' . $cityName1 . '">' . $cityName1 . '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             '<option value="' . $cityName2 . '">' . $cityName2 . '</option>',
-            $output
+            $output,
         );
     }
 
@@ -765,16 +770,16 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $cityTitle = 'test city';
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => $cityTitle]
+            ['city' => $cityTitle],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $placeUid,
-            'place'
+            'place',
         );
 
         $this->subject->piVars['city'][] = $cityTitle;
@@ -782,7 +787,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             '<option value="' . $cityTitle . '" selected="selected">' .
             $cityTitle . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -797,30 +802,30 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         $placeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => $cityTitle1]
+            ['city' => $cityTitle1],
         );
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid1,
             $placeUid1,
-            'place'
+            'place',
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => $cityTitle2]
+            ['city' => $cityTitle2],
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid2,
             $placeUid2,
-            'place'
+            'place',
         );
 
         $this->subject->piVars['city'][] = $cityTitle1;
@@ -831,12 +836,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             '<option value="' . $cityTitle1 . '" selected="selected">' .
             $cityTitle1 . '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             '<option value="' . $cityTitle2 . '" selected="selected">' .
             $cityTitle2 . '</option>',
-            $output
+            $output,
         );
     }
 
@@ -851,13 +856,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_TEXT')
+            $this->subject->isSubpartVisible('SEARCH_PART_TEXT'),
         );
     }
 
@@ -868,13 +873,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'full_text_search'
+            'full_text_search',
         );
 
         $this->subject->render();
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('SEARCH_PART_TEXT')
+            $this->subject->isSubpartVisible('SEARCH_PART_TEXT'),
         );
     }
 
@@ -885,7 +890,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'full_text_search'
+            'full_text_search',
         );
 
         $searchWord = 'foo bar';
@@ -893,7 +898,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $searchWord,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -904,7 +909,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'full_text_search'
+            'full_text_search',
         );
 
         $searchWord = '<>';
@@ -912,7 +917,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             \htmlspecialchars($searchWord, ENT_QUOTES | ENT_HTML5),
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -927,13 +932,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_DATE')
+            $this->subject->isSubpartVisible('SEARCH_PART_DATE'),
         );
     }
 
@@ -944,12 +949,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[from_day]"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -960,12 +965,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[from_month]"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -976,12 +981,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[from_year]"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -992,12 +997,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[to_day]"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1008,12 +1013,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[to_month]"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1024,12 +1029,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<select name="tx_seminars_pi1[to_year]"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1040,11 +1045,11 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
         $this->subject->setConfigurationValue(
             'numberOfYearsInDateFilter',
-            2
+            2,
         );
 
         $output = $this->subject->render();
@@ -1052,11 +1057,11 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<option value="' . $currentYear . '">' . $currentYear . '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             '<option value="' . ($currentYear + 1) . '">' . ($currentYear + 1) . '</option>',
-            $output
+            $output,
         );
     }
 
@@ -1067,12 +1072,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         self::assertStringContainsString(
             '<option value="0">&nbsp;</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1083,14 +1088,14 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
 
         $this->subject->piVars['to_month'] = 5;
 
         self::assertStringContainsString(
             '<option value="5" selected="selected">5</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1101,11 +1106,11 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
         $this->subject->setConfigurationValue(
             'numberOfYearsInDateFilter',
-            2
+            2,
         );
 
         $thisYear = date('Y');
@@ -1117,16 +1122,16 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             '<option value="2" selected="selected">2</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             '<option value="5" selected="selected">5</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             '<option value="' . $thisYear . '" selected="selected">' .
             $thisYear . '</option>',
-            $output
+            $output,
         );
     }
 
@@ -1137,16 +1142,16 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
         $this->subject->setConfigurationValue(
             'numberOfYearsInDateFilter',
-            2
+            2,
         );
 
         self::assertStringNotContainsString(
             'selected="selected"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1157,11 +1162,11 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'date'
+            'date',
         );
         $this->subject->setConfigurationValue(
             'numberOfYearsInDateFilter',
-            2
+            2,
         );
 
         $this->subject->piVars['from_day'] = 0;
@@ -1173,7 +1178,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'selected="selected"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1188,26 +1193,26 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'foo_type']
+            ['title' => 'foo_type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid]
+            ['event_type' => $eventTypeUid],
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToEventTypes',
-            $eventTypeUid
+            $eventTypeUid,
         );
 
         self::assertStringContainsString(
             'foo_type',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1218,30 +1223,30 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type'
+            'event_type',
         );
 
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'foo_type']
+            ['title' => 'foo_type'],
         );
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['title' => 'bar_type']
+            ['title' => 'bar_type'],
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['event_type' => $eventTypeUid2]
+            ['event_type' => $eventTypeUid2],
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToEventTypes',
-            $eventTypeUid
+            $eventTypeUid,
         );
 
         self::assertStringNotContainsString(
             'bar_type',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1256,28 +1261,28 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => 'Organizer Foo']
+            ['title' => 'Organizer Foo'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->testingFramework->createRecord('tx_seminars_seminars'),
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToOrganizers',
-            $organizerUid
+            $organizerUid,
         );
 
         self::assertStringContainsString(
             'Organizer Foo',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1288,32 +1293,32 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $organizerUid1 = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => 'Organizer Bar']
+            ['title' => 'Organizer Bar'],
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->testingFramework->createRecord('tx_seminars_seminars'),
             $organizerUid1,
-            'organizers'
+            'organizers',
         );
 
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
         );
 
         $this->subject->setConfigurationValue(
             'limitListViewToOrganizers',
-            $organizerUid2
+            $organizerUid2,
         );
 
         self::assertStringNotContainsString(
             'Organizer Bar',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1331,14 +1336,14 @@ final class SelectorWidgetTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->testingFramework->createRecord('tx_seminars_seminars'),
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         $this->subject->setConfigurationValue('limitListViewToCategories', $categoryUid);
 
         self::assertStringContainsString(
             'Category Foo',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1354,7 +1359,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->testingFramework->createRecord('tx_seminars_seminars'),
             $categoryUid1,
-            'categories'
+            'categories',
         );
 
         $categoryUid2 = $this->testingFramework->createRecord('tx_seminars_categories');
@@ -1363,7 +1368,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'Category Bar',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1378,13 +1383,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_AGE')
+            $this->subject->isSubpartVisible('SEARCH_PART_AGE'),
         );
     }
 
@@ -1395,13 +1400,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'age'
+            'age',
         );
 
         $this->subject->render();
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('SEARCH_PART_AGE')
+            $this->subject->isSubpartVisible('SEARCH_PART_AGE'),
         );
     }
 
@@ -1412,7 +1417,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'age'
+            'age',
         );
 
         $searchedAge = 15;
@@ -1420,7 +1425,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             (string)$searchedAge,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1431,7 +1436,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'age'
+            'age',
         );
 
         $searchedAge = 0;
@@ -1439,7 +1444,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'age]" value="' . $searchedAge . '"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1450,7 +1455,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'age'
+            'age',
         );
 
         $searchedAge = 'Hallo';
@@ -1458,7 +1463,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $searchedAge,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1473,13 +1478,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_ORGANIZER')
+            $this->subject->isSubpartVisible('SEARCH_PART_ORGANIZER'),
         );
     }
 
@@ -1490,28 +1495,28 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $organizerName = 'test organizer';
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => $organizerName]
+            ['title' => $organizerName],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         self::assertStringContainsString(
             '<option value="' . $organizerUid . '">' . $organizerName .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1522,29 +1527,29 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $organizerName = '< Organizer Name >';
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => $organizerName]
+            ['title' => $organizerName],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         self::assertStringContainsString(
             '<option value="' . $organizerUid . '">' .
             \htmlspecialchars($organizerName, ENT_QUOTES | ENT_HTML5) .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1555,22 +1560,22 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $organizerName = 'Organizer Name';
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => $organizerName]
+            ['title' => $organizerName],
         );
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
+            'tx_seminars_seminars',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->piVars['organizer'][] = (string)$organizerUid;
@@ -1578,7 +1583,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             $organizerUid . '" selected="selected">' . $organizerName .
             '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1589,7 +1594,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
@@ -1597,25 +1602,25 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $organizerName1 = 'Organizer 1';
         $organizerUid1 = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => $organizerName1]
+            ['title' => $organizerName1],
         );
         $organizerName2 = 'Organizer 2';
         $organizerUid2 = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['title' => $organizerName2]
+            ['title' => $organizerName2],
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid1,
-            'organizers'
+            'organizers',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $organizerUid2,
-            'organizers'
+            'organizers',
         );
 
         $this->subject->piVars['organizer'][] = (string)$organizerUid1;
@@ -1626,12 +1631,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             $organizerUid1 . '" selected="selected">' . $organizerName1 .
             '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             $organizerUid2 . '" selected="selected">' . $organizerName2 .
             '</option>',
-            $output
+            $output,
         );
     }
 
@@ -1642,13 +1647,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'organizer'
+            'organizer',
         );
 
         $this->subject->render();
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('SEARCH_PART_ORGANIZER')
+            $this->subject->isSubpartVisible('SEARCH_PART_ORGANIZER'),
         );
     }
 
@@ -1664,7 +1669,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_ORGANIZER')
+            $this->subject->isSubpartVisible('SEARCH_PART_ORGANIZER'),
         );
     }
 
@@ -1682,12 +1687,12 @@ final class SelectorWidgetTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $eventUid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         self::assertStringContainsString(
             '<option value="' . $categoryUid . '">' . $categoryName . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1705,15 +1710,15 @@ final class SelectorWidgetTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $eventUid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         self::assertStringContainsString(
             '<option value="' . $categoryUid . '">' . \htmlspecialchars(
                 $categoryName,
-                ENT_QUOTES | ENT_HTML5
+                ENT_QUOTES | ENT_HTML5,
             ) . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1731,14 +1736,14 @@ final class SelectorWidgetTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $eventUid,
             $categoryUid,
-            'categories'
+            'categories',
         );
 
         $this->subject->piVars['categories'][] = (string)$categoryUid;
 
         self::assertStringContainsString(
             $categoryUid . '" selected="selected">' . $categoryName . '</option>',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1760,13 +1765,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $eventUid,
             $categoryUid1,
-            'categories'
+            'categories',
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $eventUid,
             $categoryUid2,
-            'categories'
+            'categories',
         );
 
         $this->subject->piVars['categories'][] = (string)$categoryUid1;
@@ -1776,11 +1781,11 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $categoryUid1 . '" selected="selected">' . $categoryName1 . '</option>',
-            $output
+            $output,
         );
         self::assertStringContainsString(
             $categoryUid2 . '" selected="selected">' . $categoryName2 . '</option>',
-            $output
+            $output,
         );
     }
 
@@ -1793,7 +1798,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $this->subject->render();
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('SEARCH_PART_CATEGORIES')
+            $this->subject->isSubpartVisible('SEARCH_PART_CATEGORIES'),
         );
     }
 
@@ -1808,13 +1813,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'city'
+            'city',
         );
 
         $this->subject->render();
 
         self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_PRICE')
+            $this->subject->isSubpartVisible('SEARCH_PART_PRICE'),
         );
     }
 
@@ -1825,13 +1830,13 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $this->subject->render();
 
         self::assertTrue(
-            $this->subject->isSubpartVisible('SEARCH_PART_PRICE')
+            $this->subject->isSubpartVisible('SEARCH_PART_PRICE'),
         );
     }
 
@@ -1842,7 +1847,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $priceFrom = 10;
@@ -1850,7 +1855,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             (string)$priceFrom,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1861,7 +1866,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $priceTo = 50;
@@ -1869,7 +1874,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             (string)$priceTo,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1880,7 +1885,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $priceFrom = 0;
@@ -1888,7 +1893,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'price_from]" value="' . $priceFrom . '"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1899,7 +1904,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $priceTo = 0;
@@ -1907,7 +1912,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             'price_to]" value="' . $priceTo . '"',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1918,7 +1923,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $priceFrom = 'Hallo';
@@ -1926,7 +1931,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $priceFrom,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -1937,7 +1942,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'price'
+            'price',
         );
 
         $priceTo = 'Hallo';
@@ -1945,7 +1950,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $priceTo,
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

@@ -50,12 +50,12 @@ final class FrontEndUserTest extends FunctionalTestCase
     {
         $registration = new Registration();
         $this->subject->setData(
-            ['tx_seminars_registration' => $registration]
+            ['tx_seminars_registration' => $registration],
         );
 
         self::assertSame(
             $registration,
-            $this->subject->getRegistration()
+            $this->subject->getRegistration(),
         );
     }
 
@@ -69,7 +69,7 @@ final class FrontEndUserTest extends FunctionalTestCase
 
         self::assertSame(
             $registration,
-            $this->subject->getRegistration()
+            $this->subject->getRegistration(),
         );
     }
 
@@ -81,7 +81,7 @@ final class FrontEndUserTest extends FunctionalTestCase
         $this->subject->setRegistration();
 
         self::assertNull(
-            $this->subject->getRegistration()
+            $this->subject->getRegistration(),
         );
     }
 }

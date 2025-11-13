@@ -306,8 +306,8 @@ final class AbstractTimeSpanTest extends UnitTestCase
         $this->subject->setBeginDateAndTime(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) - 42
+                'timestamp',
+            ) - 42,
         );
 
         self::assertTrue($this->subject->hasStarted());
@@ -321,8 +321,8 @@ final class AbstractTimeSpanTest extends UnitTestCase
         $this->subject->setBeginDateAndTime(
             GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
                 'date',
-                'timestamp'
-            ) + 42
+                'timestamp',
+            ) + 42,
         );
 
         self::assertFalse($this->subject->hasStarted());

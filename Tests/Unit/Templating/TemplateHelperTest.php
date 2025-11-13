@@ -57,7 +57,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->init();
 
         self::assertTrue(
-            $this->subject->isInitialized()
+            $this->subject->isInitialized(),
         );
     }
 
@@ -149,7 +149,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             'bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -162,7 +162,7 @@ final class TemplateHelperTest extends UnitTestCase
     {
         self::assertSame(
             [],
-            $this->subject->getConfiguration()
+            $this->subject->getConfiguration(),
         );
     }
 
@@ -172,10 +172,10 @@ final class TemplateHelperTest extends UnitTestCase
     public function setConfigurationValueFailsWithAnEmptyKey(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$key must not be empty'
+            '$key must not be empty',
         );
 
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
@@ -190,7 +190,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->setConfigurationValue('test', 'This is a test.');
         self::assertSame(
             ['test' => 'This is a test.'],
-            $this->subject->getConfiguration()
+            $this->subject->getConfiguration(),
         );
     }
 
@@ -202,7 +202,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->setConfigurationValue('test', '');
         self::assertSame(
             ['test' => ''],
-            $this->subject->getConfiguration()
+            $this->subject->getConfiguration(),
         );
     }
 
@@ -214,7 +214,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->setConfigurationValue('test', 'This is a test.');
         self::assertSame(
             'This is a test.',
-            $this->subject->getConfValueString('test')
+            $this->subject->getConfValueString('test'),
         );
     }
 
@@ -300,12 +300,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => 'This is a test.']
+            ['test' => 'This is a test.'],
         );
 
         self::assertSame(
             'This is a test.',
-            $this->subject->getListViewConfValueString('test')
+            $this->subject->getListViewConfValueString('test'),
         );
     }
 
@@ -316,12 +316,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => ' string ']
+            ['test' => ' string '],
         );
 
         self::assertSame(
             'string',
-            $this->subject->getListViewConfValueString('test')
+            $this->subject->getListViewConfValueString('test'),
         );
     }
 
@@ -332,12 +332,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '']
+            ['test' => ''],
         );
 
         self::assertSame(
             '',
-            $this->subject->getListViewConfValueString('test')
+            $this->subject->getListViewConfValueString('test'),
         );
     }
 
@@ -348,12 +348,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            []
+            [],
         );
 
         self::assertSame(
             '',
-            $this->subject->getListViewConfValueString('test')
+            $this->subject->getListViewConfValueString('test'),
         );
     }
 
@@ -364,12 +364,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '123']
+            ['test' => '123'],
         );
 
         self::assertSame(
             123,
-            $this->subject->getListViewConfValueInteger('test')
+            $this->subject->getListViewConfValueInteger('test'),
         );
     }
 
@@ -380,12 +380,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '']
+            ['test' => ''],
         );
 
         self::assertSame(
             0,
-            $this->subject->getListViewConfValueInteger('test')
+            $this->subject->getListViewConfValueInteger('test'),
         );
     }
 
@@ -396,12 +396,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => 'string']
+            ['test' => 'string'],
         );
 
         self::assertSame(
             0,
-            $this->subject->getListViewConfValueInteger('test')
+            $this->subject->getListViewConfValueInteger('test'),
         );
     }
 
@@ -412,12 +412,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            []
+            [],
         );
 
         self::assertSame(
             0,
-            $this->subject->getListViewConfValueInteger('test')
+            $this->subject->getListViewConfValueInteger('test'),
         );
     }
 
@@ -428,11 +428,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '1']
+            ['test' => '1'],
         );
 
         self::assertTrue(
-            $this->subject->getListViewConfValueBoolean('test')
+            $this->subject->getListViewConfValueBoolean('test'),
         );
     }
 
@@ -443,11 +443,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '123']
+            ['test' => '123'],
         );
 
         self::assertTrue(
-            $this->subject->getListViewConfValueBoolean('test')
+            $this->subject->getListViewConfValueBoolean('test'),
         );
     }
 
@@ -458,11 +458,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '0']
+            ['test' => '0'],
         );
 
         self::assertFalse(
-            $this->subject->getListViewConfValueBoolean('test')
+            $this->subject->getListViewConfValueBoolean('test'),
         );
     }
 
@@ -473,11 +473,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            ['test' => '']
+            ['test' => ''],
         );
 
         self::assertFalse(
-            $this->subject->getListViewConfValueBoolean('test')
+            $this->subject->getListViewConfValueBoolean('test'),
         );
     }
 
@@ -488,11 +488,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->setConfigurationValue(
             'listView.',
-            []
+            [],
         );
 
         self::assertFalse(
-            $this->subject->getListViewConfValueBoolean('test')
+            $this->subject->getListViewConfValueBoolean('test'),
         );
     }
 
@@ -502,10 +502,10 @@ final class TemplateHelperTest extends UnitTestCase
     public function getListViewConfValueThrowsAnExceptionIfNoFieldNameWasProvided(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$fieldName must not be empty.'
+            '$fieldName must not be empty.',
         );
 
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
@@ -565,7 +565,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             'äöüßÄÖÜßéèáàóò',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -579,7 +579,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             \chr(228) . \chr(223),
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -592,11 +592,11 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- This is a comment. -->'
             . 'And some more text.';
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             $templateCode,
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -612,11 +612,11 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'Text after the subpart.';
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             $subpartContent,
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -628,12 +628,12 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
             'äöüßÄÖÜßéèáàóò' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
 
         self::assertSame(
             'äöüßÄÖÜßéèáàóò',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -646,12 +646,12 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
             \chr(228) . \chr(223) .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
 
         self::assertSame(
             \chr(228) . \chr(223),
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -671,11 +671,11 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###ANOTHER_SUBPART### -->'
             . 'Text after the subpart.';
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             $subpartContent,
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -691,11 +691,11 @@ final class TemplateHelperTest extends UnitTestCase
             . "<!-- ###MY_SUBPART### -->\n"
             . "Text after the subpart.\n";
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             $subpartContent,
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -715,11 +715,11 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'Text after the subpart.';
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             $subpartContent,
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -743,11 +743,11 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'Text after the subpart.';
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         self::assertSame(
             'outer start, inner start, ' . $subpartContent . 'inner end, outer end ',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -758,11 +758,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -774,13 +774,13 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . 'Some text. '
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubparts('MY_SUBPART');
 
         self::assertSame(
             '',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -792,13 +792,13 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
             'Some text. ' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
 
         self::assertSame(
             '',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -812,11 +812,11 @@ final class TemplateHelperTest extends UnitTestCase
     public function getInexistentMarkerWillReturnAnEmptyString(): void
     {
         $this->subject->processTemplate(
-            'foo'
+            'foo',
         );
         self::assertSame(
             '',
-            $this->subject->getMarker('bar')
+            $this->subject->getMarker('bar'),
         );
     }
 
@@ -826,13 +826,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function setAndGetInexistentMarkerSucceeds(): void
     {
         $this->subject->processTemplate(
-            'foo'
+            'foo',
         );
 
         $this->subject->setMarker('bar', 'test');
         self::assertSame(
             'test',
-            $this->subject->getMarker('bar')
+            $this->subject->getMarker('bar'),
         );
     }
 
@@ -842,13 +842,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function setAndGetExistingMarkerSucceeds(): void
     {
         $this->subject->processTemplate(
-            '###BAR###'
+            '###BAR###',
         );
 
         $this->subject->setMarker('bar', 'test');
         self::assertSame(
             'test',
-            $this->subject->getMarker('bar')
+            $this->subject->getMarker('bar'),
         );
     }
 
@@ -858,13 +858,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerAndGetMarkerCanHaveUtf8UmlautsInMarkerContent(): void
     {
         $this->subject->processTemplate(
-            '###BAR###'
+            '###BAR###',
         );
         $this->subject->setMarker('bar', 'äöüßÄÖÜßéèáàóò');
 
         self::assertSame(
             'äöüßÄÖÜßéèáàóò',
-            $this->subject->getMarker('bar')
+            $this->subject->getMarker('bar'),
         );
     }
 
@@ -874,14 +874,14 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerAndGetMarkerCanHaveIso88591UmlautsInMarkerContent(): void
     {
         $this->subject->processTemplate(
-            '###BAR###'
+            '###BAR###',
         );
         // 228 = ä, 223 = ß (in ISO8859-1)
         $this->subject->setMarker('bar', \chr(228) . \chr(223));
 
         self::assertSame(
             \chr(228) . \chr(223),
-            $this->subject->getMarker('bar')
+            $this->subject->getMarker('bar'),
         );
     }
 
@@ -891,12 +891,12 @@ final class TemplateHelperTest extends UnitTestCase
     public function setLowercaseMarkerInCompleteTemplate(): void
     {
         $this->subject->processTemplate(
-            'This is some template code. ###MARKER### More text.'
+            'This is some template code. ###MARKER### More text.',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'This is some template code. foo More text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -906,12 +906,12 @@ final class TemplateHelperTest extends UnitTestCase
     public function setUppercaseMarkerInCompleteTemplate(): void
     {
         $this->subject->processTemplate(
-            'This is some template code. ###MARKER### More text.'
+            'This is some template code. ###MARKER### More text.',
         );
         $this->subject->setMarker('MARKER', 'foo');
         self::assertSame(
             'This is some template code. foo More text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -923,12 +923,12 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . 'This is some template code. ###MARKER### More text.'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'This is some template code. foo More text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -940,12 +940,12 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . 'This is some template code. ###MARKER### More text.'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->setMarker('MARKER', 'foo');
         self::assertSame(
             'This is some template code. foo More text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -957,12 +957,12 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . '###MARKER### This is some template code. ###MARKER### More text.'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'foo This is some template code. foo More text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -972,19 +972,19 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerInCompleteTemplateTwoTimes(): void
     {
         $this->subject->processTemplate(
-            'This is some template code. ###MARKER### More text.'
+            'This is some template code. ###MARKER### More text.',
         );
 
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'This is some template code. foo More text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
 
         $this->subject->setMarker('marker', 'bar');
         self::assertSame(
             'This is some template code. bar More text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -996,19 +996,19 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . 'This is some template code. ###MARKER### More text.'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
 
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'This is some template code. foo More text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
 
         $this->subject->setMarker('marker', 'bar');
         self::assertSame(
             'This is some template code. bar More text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1018,14 +1018,14 @@ final class TemplateHelperTest extends UnitTestCase
     public function markerNamesArePrefixesBothUsed(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER### ###MY_MARKER_TOO###'
+            '###MY_MARKER### ###MY_MARKER_TOO###',
         );
 
         $this->subject->setMarker('my_marker', 'foo');
         $this->subject->setMarker('my_marker_too', 'bar');
         self::assertSame(
             'foo bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1035,14 +1035,14 @@ final class TemplateHelperTest extends UnitTestCase
     public function markerNamesAreSuffixesBothUsed(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER### ###ALSO_MY_MARKER###'
+            '###MY_MARKER### ###ALSO_MY_MARKER###',
         );
 
         $this->subject->setMarker('my_marker', 'foo');
         $this->subject->setMarker('also_my_marker', 'bar');
         self::assertSame(
             'foo bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1052,13 +1052,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function markerNamesArePrefixesFirstUsed(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER### ###MY_MARKER_TOO###'
+            '###MY_MARKER### ###MY_MARKER_TOO###',
         );
 
         $this->subject->setMarker('my_marker', 'foo');
         self::assertSame(
             'foo ###MY_MARKER_TOO###',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1068,13 +1068,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function markerNamesAreSuffixesFirstUsed(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER### ###ALSO_MY_MARKER###'
+            '###MY_MARKER### ###ALSO_MY_MARKER###',
         );
 
         $this->subject->setMarker('my_marker', 'foo');
         self::assertSame(
             'foo ###ALSO_MY_MARKER###',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1084,13 +1084,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function markerNamesArePrefixesSecondUsed(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER### ###MY_MARKER_TOO###'
+            '###MY_MARKER### ###MY_MARKER_TOO###',
         );
 
         $this->subject->setMarker('my_marker_too', 'bar');
         self::assertSame(
             '###MY_MARKER### bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1100,13 +1100,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function markerNamesAreSuffixesSecondUsed(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER### ###ALSO_MY_MARKER###'
+            '###MY_MARKER### ###ALSO_MY_MARKER###',
         );
 
         $this->subject->setMarker('also_my_marker', 'bar');
         self::assertSame(
             '###MY_MARKER### bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1118,14 +1118,14 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . '###MY_MARKER### ###MY_MARKER_TOO###'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
 
         $this->subject->setMarker('my_marker', 'foo');
         $this->subject->setMarker('my_marker_too', 'bar');
         self::assertSame(
             'foo bar',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1137,14 +1137,14 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
             . '###MY_MARKER### ###ALSO_MY_MARKER###'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
 
         $this->subject->setMarker('my_marker', 'foo');
         $this->subject->setMarker('also_my_marker', 'bar');
         self::assertSame(
             'foo bar',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1162,13 +1162,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###INNER_SUBPART### -->'
             . 'This is some subpart code.'
             . '<!-- ###INNER_SUBPART### -->'
-            . 'More text.'
+            . 'More text.',
         );
         self::assertSame(
             'This is some template code.'
             . 'This is some subpart code.'
             . 'More text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1186,7 +1186,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###INNER_SUBPART### -->'
             . 'This is other subpart code.'
             . '<!-- ###INNER_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         self::assertSame(
             'This is some template code.'
@@ -1194,7 +1194,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text.'
             . 'This is some subpart code.'
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1210,13 +1210,13 @@ final class TemplateHelperTest extends UnitTestCase
             . 'This is some subpart code.'
             . '<!-- ###INNER_SUBPART### -->'
             . 'More text.'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         self::assertSame(
             'This is some template code.'
             . 'This is some subpart code.'
             . 'More text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1236,7 +1236,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'This is other subpart code.'
             . '<!-- ###INNER_SUBPART### -->'
             . 'Even more text.'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         self::assertSame(
             'This is some template code.'
@@ -1244,7 +1244,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text.'
             . 'This is some subpart code.'
             . 'Even more text.',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1262,7 +1262,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY SUBPART### -->'
             . 'Some text.'
-            . '<!-- ###MY SUBPART### -->'
+            . '<!-- ###MY SUBPART### -->',
         );
 
         $this->subject->getSubpart('MY SUBPART');
@@ -1278,7 +1278,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SÜBPART### -->'
             . 'Some text.'
-            . '<!-- ###MY_SÜBPART### -->'
+            . '<!-- ###MY_SÜBPART### -->',
         );
 
         $this->subject->getSubpart('MY_SÜBPART');
@@ -1294,7 +1294,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART_### -->'
             . 'Some text.'
-            . '<!-- ###MY_SUBPART_### -->'
+            . '<!-- ###MY_SUBPART_### -->',
         );
 
         $this->subject->getSubpart('MY_SUBPART_');
@@ -1310,7 +1310,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###_MY_SUBPART### -->'
             . 'Some text.'
-            . '<!-- ###_MY_SUBPART### -->'
+            . '<!-- ###_MY_SUBPART### -->',
         );
 
         $this->subject->getSubpart('_MY_SUBPART');
@@ -1326,7 +1326,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###1_MY_SUBPART### -->'
             . 'Some text.'
-            . '<!-- ###1_MY_SUBPART### -->'
+            . '<!-- ###1_MY_SUBPART### -->',
         );
 
         $this->subject->getSubpart('1_MY_SUBPART');
@@ -1349,11 +1349,11 @@ final class TemplateHelperTest extends UnitTestCase
             . ' Some more text. '
             . '<!-- ###MY_SUBPART_TOO### -->'
             . 'bar'
-            . '<!-- ###MY_SUBPART_TOO### -->'
+            . '<!-- ###MY_SUBPART_TOO### -->',
         );
         self::assertSame(
             'foo Some more text. bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1369,11 +1369,11 @@ final class TemplateHelperTest extends UnitTestCase
             . ' Some more text. '
             . '<!-- ###ALSO_MY_SUBPART### -->'
             . 'bar'
-            . '<!-- ###ALSO_MY_SUBPART### -->'
+            . '<!-- ###ALSO_MY_SUBPART### -->',
         );
         self::assertSame(
             'foo Some more text. bar',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1389,11 +1389,11 @@ final class TemplateHelperTest extends UnitTestCase
             . ' Some more text. '
             . '<!-- ###MY_SUBPART_TOO### -->'
             . 'bar'
-            . '<!-- ###MY_SUBPART_TOO### -->'
+            . '<!-- ###MY_SUBPART_TOO### -->',
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1409,11 +1409,11 @@ final class TemplateHelperTest extends UnitTestCase
             . ' Some more text. '
             . '<!-- ###ALSO_MY_SUBPART### -->'
             . 'bar'
-            . '<!-- ###ALSO_MY_SUBPART### -->'
+            . '<!-- ###ALSO_MY_SUBPART### -->',
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -1429,11 +1429,11 @@ final class TemplateHelperTest extends UnitTestCase
             . ' Some more text. '
             . '<!-- ###MY_SUBPART_TOO### -->'
             . 'bar'
-            . '<!-- ###MY_SUBPART_TOO### -->'
+            . '<!-- ###MY_SUBPART_TOO### -->',
         );
         self::assertSame(
             'bar',
-            $this->subject->getSubpart('MY_SUBPART_TOO')
+            $this->subject->getSubpart('MY_SUBPART_TOO'),
         );
     }
 
@@ -1449,11 +1449,11 @@ final class TemplateHelperTest extends UnitTestCase
             . ' Some more text. '
             . '<!-- ###ALSO_MY_SUBPART### -->'
             . 'bar'
-            . '<!-- ###ALSO_MY_SUBPART### -->'
+            . '<!-- ###ALSO_MY_SUBPART### -->',
         );
         self::assertSame(
             'bar',
-            $this->subject->getSubpart('ALSO_MY_SUBPART')
+            $this->subject->getSubpart('ALSO_MY_SUBPART'),
         );
     }
 
@@ -1471,13 +1471,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1490,14 +1490,14 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . '<!-- ###MY_SUBPART### -->'
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'More text. ');
         $this->subject->hideSubparts('MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1511,14 +1511,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->unhideSubparts('MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'More text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1532,7 +1532,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART');
@@ -1540,7 +1540,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . 'More text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1556,13 +1556,13 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text. '
             . '<!-- ###MY_SUBPART### -->'
             . 'Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -1580,13 +1580,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###FIELD_WRAPPER_SUBTITLE### -->'
             . '</h3>'
             . '<!-- ###FIELD_WRAPPER_TITLE### -->'
-            . '<!-- ###SINGLE_VIEW###  -->'
+            . '<!-- ###SINGLE_VIEW###  -->',
         );
         $this->subject->hideSubparts('FIELD_WRAPPER_SUBTITLE');
         self::assertSame(
             '<h3 class="seminars-item-title">Title'
             . '</h3>',
-            $this->subject->getSubpart('SINGLE_VIEW')
+            $this->subject->getSubpart('SINGLE_VIEW'),
         );
     }
 
@@ -1602,14 +1602,14 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text. '
             . '<!-- ###MY_SUBPART### -->'
             . 'Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->unhideSubparts('MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'More text. '
             . 'Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -1625,7 +1625,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text. '
             . '<!-- ###MY_SUBPART### -->'
             . 'Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART');
@@ -1633,7 +1633,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . 'More text. '
             . 'Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -1650,14 +1650,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1');
         $this->subject->hideSubparts('MY_SUBPART_2');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1674,13 +1674,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1,MY_SUBPART_2');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1697,13 +1697,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_2,MY_SUBPART_1');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1720,13 +1720,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1, MY_SUBPART_2');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1743,7 +1743,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1');
         $this->subject->hideSubparts('MY_SUBPART_2');
@@ -1754,7 +1754,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text here.'
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1771,7 +1771,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1,MY_SUBPART_2');
         $this->subject->unhideSubparts('MY_SUBPART_1,MY_SUBPART_2');
@@ -1780,7 +1780,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text here.'
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1797,7 +1797,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1,MY_SUBPART_2');
         $this->subject->unhideSubparts('MY_SUBPART_2,MY_SUBPART_1');
@@ -1806,7 +1806,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text here.'
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1823,7 +1823,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1,MY_SUBPART_2');
         $this->subject->unhideSubparts('MY_SUBPART_1');
@@ -1831,7 +1831,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . 'More text here.'
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1848,7 +1848,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART_1,MY_SUBPART_2');
         $this->subject->unhideSubparts('MY_SUBPART_2');
@@ -1856,7 +1856,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1870,14 +1870,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text here. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART', 'MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1891,14 +1891,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text here. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART', 'MY_SUBPART,MY_OTHER_SUBPART');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1912,7 +1912,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text here. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART', 'MY_OTHER_SUBPART');
@@ -1920,7 +1920,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . 'More text here. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1936,14 +1936,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text here. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('SUBPART', 'SUBPART', 'MY');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1959,14 +1959,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text here. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('SUBPART', 'SUBPART,OTHER_SUBPART', 'MY');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -1982,7 +1982,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text here. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('SUBPART', 'OTHER_SUBPART', 'MY');
@@ -1990,7 +1990,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . 'More text here. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2001,10 +2001,10 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         self::assertFalse(
-            $this->subject->isSubpartVisible('')
+            $this->subject->isSubpartVisible(''),
         );
     }
 
@@ -2015,10 +2015,10 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         self::assertFalse(
-            $this->subject->isSubpartVisible('FOO')
+            $this->subject->isSubpartVisible('FOO'),
         );
     }
 
@@ -2029,10 +2029,10 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         self::assertTrue(
-            $this->subject->isSubpartVisible('MY_SUBPART')
+            $this->subject->isSubpartVisible('MY_SUBPART'),
         );
     }
 
@@ -2043,11 +2043,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         self::assertFalse(
-            $this->subject->isSubpartVisible('MY_SUBPART')
+            $this->subject->isSubpartVisible('MY_SUBPART'),
         );
     }
 
@@ -2058,12 +2058,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART');
         self::assertTrue(
-            $this->subject->isSubpartVisible('MY_SUBPART')
+            $this->subject->isSubpartVisible('MY_SUBPART'),
         );
     }
 
@@ -2074,14 +2074,14 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubparts('MY_SUBPART');
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         $this->subject->unhideSubparts('MY_SUBPART');
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2095,13 +2095,13 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2114,14 +2114,14 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. ' .
             '<!-- ###MY_SUBPART### -->' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'More text. ');
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2135,14 +2135,14 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->unhideSubpartsArray(['MY_SUBPART']);
         self::assertSame(
             'Some text. ' .
             'More text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2156,7 +2156,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART']);
@@ -2164,7 +2164,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. ' .
             'More text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2180,13 +2180,13 @@ final class TemplateHelperTest extends UnitTestCase
             'More text. ' .
             '<!-- ###MY_SUBPART### -->' .
             'Even more text.' .
-            '<!-- ###OUTER_SUBPART### -->'
+            '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -2204,13 +2204,13 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###FIELD_WRAPPER_SUBTITLE### -->' .
             '</h3>' .
             '<!-- ###FIELD_WRAPPER_TITLE### -->' .
-            '<!-- ###SINGLE_VIEW###  -->'
+            '<!-- ###SINGLE_VIEW###  -->',
         );
         $this->subject->hideSubpartsArray(['FIELD_WRAPPER_SUBTITLE']);
         self::assertSame(
             '<h3 class="seminars-item-title">Title' .
             '</h3>',
-            $this->subject->getSubpart('SINGLE_VIEW')
+            $this->subject->getSubpart('SINGLE_VIEW'),
         );
     }
 
@@ -2226,14 +2226,14 @@ final class TemplateHelperTest extends UnitTestCase
             'More text. ' .
             '<!-- ###MY_SUBPART### -->' .
             'Even more text.' .
-            '<!-- ###OUTER_SUBPART### -->'
+            '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->unhideSubpartsArray(['MY_SUBPART']);
         self::assertSame(
             'Some text. ' .
             'More text. ' .
             'Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -2249,7 +2249,7 @@ final class TemplateHelperTest extends UnitTestCase
             'More text. ' .
             '<!-- ###MY_SUBPART### -->' .
             'Even more text.' .
-            '<!-- ###OUTER_SUBPART### -->'
+            '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART']);
@@ -2257,7 +2257,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. ' .
             'More text. ' .
             'Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -2274,14 +2274,14 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1']);
         $this->subject->hideSubpartsArray(['MY_SUBPART_2']);
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2298,13 +2298,13 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1', 'MY_SUBPART_2']);
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2321,13 +2321,13 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_2', 'MY_SUBPART_1']);
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2344,7 +2344,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1']);
         $this->subject->hideSubpartsArray(['MY_SUBPART_2']);
@@ -2355,7 +2355,7 @@ final class TemplateHelperTest extends UnitTestCase
             'More text here.' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2372,7 +2372,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1', 'MY_SUBPART_2']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART_1', 'MY_SUBPART_2']);
@@ -2381,7 +2381,7 @@ final class TemplateHelperTest extends UnitTestCase
             'More text here.' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2398,7 +2398,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1', 'MY_SUBPART_2']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART_2', 'MY_SUBPART_1']);
@@ -2407,7 +2407,7 @@ final class TemplateHelperTest extends UnitTestCase
             'More text here.' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2424,7 +2424,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1', 'MY_SUBPART_2']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART_1']);
@@ -2432,7 +2432,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. ' .
             'More text here.' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2449,7 +2449,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART_1', 'MY_SUBPART_2']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART_2']);
@@ -2457,7 +2457,7 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. ' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2471,17 +2471,17 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text here. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(
             ['MY_SUBPART'],
-            ['MY_SUBPART']
+            ['MY_SUBPART'],
         );
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2495,17 +2495,17 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text here. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(
             ['MY_SUBPART'],
-            ['MY_SUBPART', 'MY_OTHER_SUBPART']
+            ['MY_SUBPART', 'MY_OTHER_SUBPART'],
         );
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2519,18 +2519,18 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text here. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(
             ['MY_SUBPART'],
-            ['MY_OTHER_SUBPART']
+            ['MY_OTHER_SUBPART'],
         );
         self::assertSame(
             'Some text. ' .
             'More text here. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2546,18 +2546,18 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text here. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(
             ['SUBPART'],
             ['SUBPART'],
-            'MY'
+            'MY',
         );
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2573,18 +2573,18 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text here. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(
             ['SUBPART'],
             ['SUBPART', 'OTHER_SUBPART'],
-            'MY'
+            'MY',
         );
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2600,19 +2600,19 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text here. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(
             ['SUBPART'],
             ['OTHER_SUBPART'],
-            'MY'
+            'MY',
         );
         self::assertSame(
             'Some text. ' .
             'More text here. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2623,11 +2623,11 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         self::assertFalse(
-            $this->subject->isSubpartVisible('MY_SUBPART')
+            $this->subject->isSubpartVisible('MY_SUBPART'),
         );
     }
 
@@ -2638,12 +2638,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART']);
         self::assertTrue(
-            $this->subject->isSubpartVisible('MY_SUBPART')
+            $this->subject->isSubpartVisible('MY_SUBPART'),
         );
     }
 
@@ -2654,14 +2654,14 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART']);
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         $this->subject->unhideSubpartsArray(['MY_SUBPART']);
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2737,14 +2737,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text.'
             . '<!-- ###MY_SUBPART### -->'
-            . ' Even more text.'
+            . ' Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         self::assertSame(
             'Some text. '
             . 'foo'
             . ' Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2758,12 +2758,12 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text.'
             . '<!-- ###MY_SUBPART### -->'
-            . ' Even more text.'
+            . ' Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2773,12 +2773,12 @@ final class TemplateHelperTest extends UnitTestCase
     public function setNewSubpartNotEmptyGetSubpart(): void
     {
         $this->subject->processTemplate(
-            'Some text.'
+            'Some text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         self::assertSame(
             'foo',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2794,12 +2794,12 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text.'
             . '<!-- ###MY_SUBPART### -->'
             . ' Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->setSubpart('MY_SUBPART', 'foo');
         self::assertSame(
             'Some text. foo Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -2813,13 +2813,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text.'
             . '<!-- ###MY_SUBPART### -->'
-            . ' Even more text.'
+            . ' Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', '');
         self::assertSame(
             'Some text. '
             . ' Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2833,12 +2833,12 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text.'
             . '<!-- ###MY_SUBPART### -->'
-            . ' Even more text.'
+            . ' Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', '');
         self::assertSame(
             '',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2854,12 +2854,12 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text.'
             . '<!-- ###MY_SUBPART### -->'
             . ' Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->setSubpart('MY_SUBPART', '');
         self::assertSame(
             'Some text.  Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -2870,13 +2870,13 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->setSubpart('MY_SUBPART', 'äöüßÄÖÜßéèáàóò');
 
         self::assertSame(
             'äöüßÄÖÜßéèáàóò',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2887,14 +2887,14 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             '<!-- ###MY_SUBPART### -->' .
-            '<!-- ###MY_SUBPART### -->'
+            '<!-- ###MY_SUBPART### -->',
         );
         // 228 = ä, 223 = ß (in ISO8859-1)
         $this->subject->setSubpart('MY_SUBPART', \chr(228) . \chr(223));
 
         self::assertSame(
             \chr(228) . \chr(223),
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -2912,14 +2912,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'This is some template code. ###MARKER### More text.'
             . '<!-- ###MY_SUBPART### -->'
-            . ' Even more text.'
+            . ' Even more text.',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'Some text. '
             . 'This is some template code. foo More text.'
             . ' Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2935,14 +2935,14 @@ final class TemplateHelperTest extends UnitTestCase
             . 'This is some template code. ###MARKER### More text.'
             . '<!-- ###MY_SUBPART### -->'
             . ' Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'Some text. '
             . 'This is some template code. foo More text.'
             . ' Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -2955,18 +2955,18 @@ final class TemplateHelperTest extends UnitTestCase
             'Some text. '
             . '<!-- ###MY_SUBPART### -->'
             . '<!-- ###MY_SUBPART### -->'
-            . ' Even more text.'
+            . ' Even more text.',
         );
         $this->subject->setSubpart(
             'MY_SUBPART',
-            'This is some template code. ###MARKER### More text.'
+            'This is some template code. ###MARKER### More text.',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'Some text. '
             . 'This is some template code. foo More text.'
             . ' Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -2981,18 +2981,18 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . '<!-- ###MY_SUBPART### -->'
             . ' Even more text.'
-            . '<!-- ###OUTER_SUBPART### -->'
+            . '<!-- ###OUTER_SUBPART### -->',
         );
         $this->subject->setSubpart(
             'MY_SUBPART',
-            'This is some template code. ###MARKER### More text.'
+            'This is some template code. ###MARKER### More text.',
         );
         $this->subject->setMarker('marker', 'foo');
         self::assertSame(
             'Some text. '
             . 'This is some template code. foo More text.'
             . ' Even more text.',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -3015,13 +3015,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'Text after the subpart.';
         $this->subject->processTemplate(
-            $templateCode
+            $templateCode,
         );
         $this->subject->setMarker('marker', 'foo ');
 
         self::assertSame(
             'outer start, inner start, foo inner end, outer end ',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -3036,12 +3036,12 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->processTemplate(
             'This is some template code. '
-            . '###FIRST_MARKER### ###MARKER### More text.'
+            . '###FIRST_MARKER### ###MARKER### More text.',
         );
         $this->subject->setMarker('marker', 'foo', 'first');
         self::assertSame(
             'This is some template code. foo ###MARKER### More text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3058,7 +3058,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->setSubpart('MY_SUBPART', 'foo', 'FIRST');
         self::assertSame(
@@ -3066,7 +3066,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'foo'
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3083,14 +3083,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('MY_SUBPART', 'FIRST');
         self::assertSame(
             'Some text. '
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3107,7 +3107,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###MY_SUBPART### -->'
             . 'More text there. '
             . '<!-- ###MY_SUBPART### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('FIRST_MY_SUBPART');
         $this->subject->unhideSubparts('MY_SUBPART', '', 'FIRST');
@@ -3116,7 +3116,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text here. '
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3133,13 +3133,13 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###FIRST_MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###FIRST_MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('1,2', 'FIRST_MY_SUBPART');
         self::assertSame(
             'Some text. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3156,7 +3156,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###FIRST_MY_SUBPART_2### -->'
             . 'More text there. '
             . '<!-- ###FIRST_MY_SUBPART_2### -->'
-            . 'Even more text.'
+            . 'Even more text.',
         );
         $this->subject->hideSubparts('FIRST_MY_SUBPART_1');
         $this->subject->hideSubparts('FIRST_MY_SUBPART_2');
@@ -3166,7 +3166,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'More text here. '
             . 'More text there. '
             . 'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3183,14 +3183,14 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['MY_SUBPART'], 'FIRST');
         self::assertSame(
             'Some text. ' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3207,16 +3207,16 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###FIRST_MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###FIRST_MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(
             ['1', '2'],
-            'FIRST_MY_SUBPART'
+            'FIRST_MY_SUBPART',
         );
         self::assertSame(
             'Some text. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3233,7 +3233,7 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###MY_SUBPART### -->' .
             'More text there. ' .
             '<!-- ###MY_SUBPART### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['FIRST_MY_SUBPART']);
         $this->subject->unhideSubpartsArray(['MY_SUBPART'], [''], 'FIRST');
@@ -3242,7 +3242,7 @@ final class TemplateHelperTest extends UnitTestCase
             'More text here. ' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3259,21 +3259,21 @@ final class TemplateHelperTest extends UnitTestCase
             '<!-- ###FIRST_MY_SUBPART_2### -->' .
             'More text there. ' .
             '<!-- ###FIRST_MY_SUBPART_2### -->' .
-            'Even more text.'
+            'Even more text.',
         );
         $this->subject->hideSubpartsArray(['FIRST_MY_SUBPART_1']);
         $this->subject->hideSubpartsArray(['FIRST_MY_SUBPART_2']);
         $this->subject->unhideSubpartsArray(
             ['1', '2'],
             [''],
-            'FIRST_MY_SUBPART'
+            'FIRST_MY_SUBPART',
         );
         self::assertSame(
             'Some text. ' .
             'More text here. ' .
             'More text there. ' .
             'Even more text.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3287,15 +3287,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotZeroWithPositiveInteger(): void
     {
         $this->subject->processTemplate(
-            '###MARKER###'
+            '###MARKER###',
         );
 
         self::assertTrue(
-            $this->subject->setMarkerIfNotZero('marker', 42)
+            $this->subject->setMarkerIfNotZero('marker', 42),
         );
         self::assertSame(
             '42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3305,15 +3305,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotZeroWithNegativeInteger(): void
     {
         $this->subject->processTemplate(
-            '###MARKER###'
+            '###MARKER###',
         );
 
         self::assertTrue(
-            $this->subject->setMarkerIfNotZero('marker', -42)
+            $this->subject->setMarkerIfNotZero('marker', -42),
         );
         self::assertSame(
             '-42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3323,15 +3323,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotZeroWithZero(): void
     {
         $this->subject->processTemplate(
-            '###MARKER###'
+            '###MARKER###',
         );
 
         self::assertFalse(
-            $this->subject->setMarkerIfNotZero('marker', 0)
+            $this->subject->setMarkerIfNotZero('marker', 0),
         );
         self::assertSame(
             '###MARKER###',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3341,15 +3341,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotZeroWithPositiveIntegerWithPrefix(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER###'
+            '###MY_MARKER###',
         );
 
         self::assertTrue(
-            $this->subject->setMarkerIfNotZero('marker', 42, 'MY')
+            $this->subject->setMarkerIfNotZero('marker', 42, 'MY'),
         );
         self::assertSame(
             '42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3359,15 +3359,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotZeroWithNegativeIntegerWithPrefix(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER###'
+            '###MY_MARKER###',
         );
 
         self::assertTrue(
-            $this->subject->setMarkerIfNotZero('marker', -42, 'MY')
+            $this->subject->setMarkerIfNotZero('marker', -42, 'MY'),
         );
         self::assertSame(
             '-42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3377,15 +3377,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotZeroWithZeroWithPrefix(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER###'
+            '###MY_MARKER###',
         );
 
         self::assertFalse(
-            $this->subject->setMarkerIfNotZero('marker', 0, 'MY')
+            $this->subject->setMarkerIfNotZero('marker', 0, 'MY'),
         );
         self::assertSame(
             '###MY_MARKER###',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3395,15 +3395,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotEmptyWithNotEmpty(): void
     {
         $this->subject->processTemplate(
-            '###MARKER###'
+            '###MARKER###',
         );
 
         self::assertTrue(
-            $this->subject->setMarkerIfNotEmpty('marker', 'foo')
+            $this->subject->setMarkerIfNotEmpty('marker', 'foo'),
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3413,15 +3413,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotEmptyWithEmpty(): void
     {
         $this->subject->processTemplate(
-            '###MARKER###'
+            '###MARKER###',
         );
 
         self::assertFalse(
-            $this->subject->setMarkerIfNotEmpty('marker', '')
+            $this->subject->setMarkerIfNotEmpty('marker', ''),
         );
         self::assertSame(
             '###MARKER###',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3431,15 +3431,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotEmptyWithNotEmptyWithPrefix(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER###'
+            '###MY_MARKER###',
         );
 
         self::assertTrue(
-            $this->subject->setMarkerIfNotEmpty('marker', 'foo', 'MY')
+            $this->subject->setMarkerIfNotEmpty('marker', 'foo', 'MY'),
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3449,15 +3449,15 @@ final class TemplateHelperTest extends UnitTestCase
     public function setMarkerIfNotEmptyWithEmptyWithPrefix(): void
     {
         $this->subject->processTemplate(
-            '###MY_MARKER###'
+            '###MY_MARKER###',
         );
 
         self::assertFalse(
-            $this->subject->setMarkerIfNotEmpty('marker', '', 'MY')
+            $this->subject->setMarkerIfNotEmpty('marker', '', 'MY'),
         );
         self::assertSame(
             '###MY_MARKER###',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3469,7 +3469,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3478,12 +3478,12 @@ final class TemplateHelperTest extends UnitTestCase
                 true,
                 'foo',
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3495,7 +3495,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertFalse(
@@ -3504,12 +3504,12 @@ final class TemplateHelperTest extends UnitTestCase
                 false,
                 'foo',
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3521,7 +3521,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3530,12 +3530,12 @@ final class TemplateHelperTest extends UnitTestCase
                 true,
                 'foo',
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3547,7 +3547,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertFalse(
@@ -3556,12 +3556,12 @@ final class TemplateHelperTest extends UnitTestCase
                 false,
                 'foo',
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3573,7 +3573,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertFalse(
@@ -3581,12 +3581,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 0,
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3598,7 +3598,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3606,12 +3606,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 42,
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3623,7 +3623,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3631,12 +3631,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 -42,
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '-42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3648,7 +3648,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertFalse(
@@ -3656,12 +3656,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 0,
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3673,7 +3673,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3681,12 +3681,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 42,
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3698,7 +3698,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3706,12 +3706,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 -42,
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '-42',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3723,7 +3723,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertFalse(
@@ -3731,12 +3731,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 '',
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3748,7 +3748,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3756,12 +3756,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 'foo',
                 '',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3773,7 +3773,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertFalse(
@@ -3781,12 +3781,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 '',
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             '',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3798,7 +3798,7 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->processTemplate(
             '<!-- ###WRAPPER_MARKER### -->'
             . '###MY_MARKER###'
-            . '<!-- ###WRAPPER_MARKER### -->'
+            . '<!-- ###WRAPPER_MARKER### -->',
         );
 
         self::assertTrue(
@@ -3806,12 +3806,12 @@ final class TemplateHelperTest extends UnitTestCase
                 'marker',
                 'foo',
                 'MY',
-                'WRAPPER'
-            )
+                'WRAPPER',
+            ),
         );
         self::assertSame(
             'foo',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
     }
 
@@ -3831,7 +3831,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '###MY_MARKER_3# '
             . '###MY_MARKER_4## '
             . '###MY_MARKER_5###'
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->setMarker('my_marker_1', 'test 1');
         $this->subject->setMarker('my_marker_2', 'test 2');
@@ -3845,7 +3845,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '###MY_MARKER_3# '
             . '###MY_MARKER_4## '
             . 'test 5',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
         self::assertSame(
             'test 1 '
@@ -3853,7 +3853,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '###MY_MARKER_3# '
             . '###MY_MARKER_4## '
             . 'test 5',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -3875,7 +3875,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###UNCLOSED_SUBPART_5### -->'
             . '<!-- ###OUTER_SUBPART### -->'
             . '<!-- ###UNCLOSED_SUBPART_6### -->'
-            . 'Text after.'
+            . 'Text after.',
         );
 
         self::assertSame(
@@ -3888,7 +3888,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '<!-- ###UNCLOSED_SUBPART_5### -->'
             . '<!-- ###UNCLOSED_SUBPART_6### -->'
             . 'Text after.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
         self::assertSame(
             '<!-- ###UNCLOSED_SUBPART_2### -->'
@@ -3896,7 +3896,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'Inner text. '
             . '<!-- ###UNCLOSED_SUBPART_4### -->'
             . '<!-- ###UNCLOSED_SUBPART_5### -->',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -3918,7 +3918,7 @@ final class TemplateHelperTest extends UnitTestCase
             . ' ###UNCLOSED_SUBPART_5### -->'
             . '<!-- ###OUTER_SUBPART### -->'
             . '<!-- ###UNCLOSED_SUBPART_6### -->'
-            . 'Text after.'
+            . 'Text after.',
         );
 
         self::assertSame(
@@ -3931,7 +3931,7 @@ final class TemplateHelperTest extends UnitTestCase
             . ' ###UNCLOSED_SUBPART_5### -->'
             . '<!-- ###UNCLOSED_SUBPART_6### -->'
             . 'Text after.',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
         self::assertSame(
             '<!-- ###UNCLOSED_SUBPART_2 -->'
@@ -3939,7 +3939,7 @@ final class TemplateHelperTest extends UnitTestCase
             . 'Inner text. '
             . '<!-- UNCLOSED_SUBPART_4### -->'
             . ' ###UNCLOSED_SUBPART_5### -->',
-            $this->subject->getSubpart('OUTER_SUBPART')
+            $this->subject->getSubpart('OUTER_SUBPART'),
         );
     }
 
@@ -3954,7 +3954,7 @@ final class TemplateHelperTest extends UnitTestCase
             . '###MARKER-2### '
             . '###marker_3### '
             . '###MÄRKER_4### '
-            . '<!-- ###MY_SUBPART### -->'
+            . '<!-- ###MY_SUBPART### -->',
         );
         $this->subject->setMarker('marker 1', 'foo');
         $this->subject->setMarker('marker-2', 'foo');
@@ -3966,14 +3966,14 @@ final class TemplateHelperTest extends UnitTestCase
             . '###MARKER-2### '
             . '###marker_3### '
             . '###MÄRKER_4### ',
-            $this->subject->getSubpart()
+            $this->subject->getSubpart(),
         );
         self::assertSame(
             '###MARKER 1### '
             . '###MARKER-2### '
             . '###marker_3### '
             . '###MÄRKER_4### ',
-            $this->subject->getSubpart('MY_SUBPART')
+            $this->subject->getSubpart('MY_SUBPART'),
         );
     }
 
@@ -3989,7 +3989,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             ['showUid' => 0, 'pointer' => 0, 'mode' => 0],
-            $this->subject->piVars
+            $this->subject->piVars,
         );
     }
 
@@ -4003,7 +4003,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             ['showUid' => 0, 'pointer' => 0, 'mode' => 0, 'additionalParameter' => 0],
-            $this->subject->piVars
+            $this->subject->piVars,
         );
     }
 
@@ -4023,7 +4023,7 @@ final class TemplateHelperTest extends UnitTestCase
                 'pointer' => 0,
                 'mode' => 0,
             ],
-            $this->subject->piVars
+            $this->subject->piVars,
         );
     }
 
@@ -4038,7 +4038,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             ['non-integer' => 'foo', 'showUid' => 0, 'pointer' => 0, 'mode' => 0],
-            $this->subject->piVars
+            $this->subject->piVars,
         );
     }
 
@@ -4053,7 +4053,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             ['showUid' => 1, 'pointer' => 0, 'mode' => 0],
-            $this->subject->piVars
+            $this->subject->piVars,
         );
     }
 
@@ -4073,7 +4073,7 @@ final class TemplateHelperTest extends UnitTestCase
 
         self::assertSame(
             $contentObject,
-            $this->subject->getContentObjectRenderer()
+            $this->subject->getContentObjectRenderer(),
         );
     }
 
@@ -4090,7 +4090,7 @@ final class TemplateHelperTest extends UnitTestCase
         $frontEndController = $GLOBALS['TSFE'];
         self::assertSame(
             $frontEndController->cObj,
-            $this->subject->getContentObjectRenderer()
+            $this->subject->getContentObjectRenderer(),
         );
     }
 }

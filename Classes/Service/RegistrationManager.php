@@ -160,7 +160,7 @@ class RegistrationManager implements SingletonInterface
         return $this->getContentObjectRendererFromPlugin($plugin)->getTypoLink(
             $this->getRegistrationLabel($event),
             (string)$plugin->getConfValueInteger('registerPID'),
-            ['tx_seminars_eventregistration[event]' => $event->getUid()]
+            ['tx_seminars_eventregistration[event]' => $event->getUid()],
         );
     }
 
@@ -214,7 +214,7 @@ class RegistrationManager implements SingletonInterface
                     'controller' => 'EventUnregistration',
                     'registration' => $registration->getUid(),
                 ],
-            ]
+            ],
         );
     }
 
@@ -272,7 +272,7 @@ class RegistrationManager implements SingletonInterface
         $this->getConnectionForTable('tx_seminars_attendances')->update(
             'tx_seminars_attendances',
             ['hidden' => 1, 'tstamp' => $this->nowAsTimestamp()],
-            ['uid' => $uid]
+            ['uid' => $uid],
         );
 
         $this->notifyAttendee($unregistration, $plugin, 'confirmationOnUnregistration');
@@ -313,7 +313,7 @@ class RegistrationManager implements SingletonInterface
                 $this->getConnectionForTable('tx_seminars_attendances')->update(
                     'tx_seminars_attendances',
                     ['registration_queue' => Registration::STATUS_REGULAR],
-                    ['uid' => $registration->getUid()]
+                    ['uid' => $registration->getUid()],
                 );
                 $vacancies -= $registration->getSeats();
 
@@ -353,11 +353,12 @@ class RegistrationManager implements SingletonInterface
         }
 
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-        $emailBuilder->to($user)
+        $emailBuilder
+            ->to($user)
             ->from($this->determineEmailSenderForEvent($event))
             ->replyTo($event->getFirstOrganizer())
             ->subject(
-                $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
+                $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-'),
             )
             ->text($this->buildEmailContent($oldRegistration, $helloSubjectPrefix));
         $emailBuilder->html($this->buildEmailContent($oldRegistration, $helloSubjectPrefix, true));
@@ -368,7 +369,8 @@ class RegistrationManager implements SingletonInterface
         $this->addCalendarAttachment($emailBuilder, $event->getUid());
         $email = $emailBuilder->build();
 
-        $this->getRegistrationEmailHookProvider()
+        $this
+            ->getRegistrationEmailHookProvider()
             ->executeHook('modifyAttendeeEmail', $email, $registration, $helloSubjectPrefix);
 
         $email->send();
@@ -422,7 +424,7 @@ class RegistrationManager implements SingletonInterface
             $normalizedVenueTitle = \str_replace(
                 ["\r\n", "\n"],
                 ', ',
-                \trim($firstVenue->getTitle() . ', ' . $firstVenue->getFullAddress())
+                \trim($firstVenue->getTitle() . ', ' . $firstVenue->getFullAddress()),
             );
             $content .= 'LOCATION:' . $normalizedVenueTitle . "\r\n";
         } elseif ($event->hasUsableWebinarUrl()) {
@@ -479,10 +481,11 @@ class RegistrationManager implements SingletonInterface
 
         $organizers = $event->getOrganizerBag();
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-        $emailBuilder->from($this->determineEmailSenderForEvent($event))
+        $emailBuilder
+            ->from($this->determineEmailSenderForEvent($event))
             ->replyTo($event->getFirstOrganizer())
             ->subject(
-                $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $registration->getTitle()
+                $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $registration->getTitle(),
             );
 
         /** @var list<LegacyOrganizer> $recipients */
@@ -501,7 +504,7 @@ class RegistrationManager implements SingletonInterface
         if ($configuration->hasString('showSeminarFieldsInNotificationMail')) {
             $template->setMarker(
                 'seminardata',
-                $event->dumpSeminarValues($configuration->getAsString('showSeminarFieldsInNotificationMail'))
+                $event->dumpSeminarValues($configuration->getAsString('showSeminarFieldsInNotificationMail')),
             );
         } else {
             $template->hideSubparts('seminardata', 'field_wrapper');
@@ -510,7 +513,7 @@ class RegistrationManager implements SingletonInterface
         if ($configuration->hasString('showFeUserFieldsInNotificationMail')) {
             $template->setMarker(
                 'feuserdata',
-                $registration->dumpUserValues($configuration->getAsString('showFeUserFieldsInNotificationMail'))
+                $registration->dumpUserValues($configuration->getAsString('showFeUserFieldsInNotificationMail')),
             );
         } else {
             $template->hideSubparts('feuserdata', 'field_wrapper');
@@ -520,8 +523,8 @@ class RegistrationManager implements SingletonInterface
             $template->setMarker(
                 'attendancedata',
                 $registration->dumpAttendanceValues(
-                    $configuration->getAsString('showAttendanceFieldsInNotificationMail')
-                )
+                    $configuration->getAsString('showAttendanceFieldsInNotificationMail'),
+                ),
             );
         } else {
             $template->hideSubparts('attendancedata', 'field_wrapper');
@@ -534,7 +537,8 @@ class RegistrationManager implements SingletonInterface
         $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $email = $emailBuilder->build();
-        $this->getRegistrationEmailHookProvider()
+        $this
+            ->getRegistrationEmailHookProvider()
             ->executeHook('modifyOrganizerEmail', $email, $registrationNew, $helloSubjectPrefix);
 
         $email->send();
@@ -567,15 +571,16 @@ class RegistrationManager implements SingletonInterface
         }
 
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-        $emailBuilder->from($this->determineEmailSenderForEvent($event))
+        $emailBuilder
+            ->from($this->determineEmailSenderForEvent($event))
             ->replyTo($event->getFirstOrganizer())
             ->text($this->getMessageForNotification($registration, $emailReason))
             ->subject(
                 \sprintf(
                     $this->translate('email_additionalNotification' . $emailReason . 'Subject'),
                     $event->getUid(),
-                    $event->getTitleAndDate('-')
-                )
+                    $event->getTitleAndDate('-'),
+                ),
             );
 
         /** @var list<LegacyOrganizer> $recipients */
@@ -590,7 +595,8 @@ class RegistrationManager implements SingletonInterface
         $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $email = $emailBuilder->build();
-        $this->getRegistrationEmailHookProvider()
+        $this
+            ->getRegistrationEmailHookProvider()
             ->executeHook('modifyAdditionalEmail', $email, $registrationNew, $emailReason);
 
         $email->send();
@@ -650,7 +656,7 @@ class RegistrationManager implements SingletonInterface
         if ($showSeminarFields !== '') {
             $template->setMarker(
                 'seminardata',
-                $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields)
+                $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields),
             );
         } else {
             $template->hideSubparts('seminardata', 'field_wrapper');
@@ -708,7 +714,7 @@ class RegistrationManager implements SingletonInterface
         $template->setMarker('html_mail_charset', 'utf-8');
         $template->hideSubparts(
             $this->getSharedConfiguration()->getAsString('hideFieldsInThankYouMail'),
-            $wrapperPrefix
+            $wrapperPrefix,
         );
 
         $this->setEmailIntroduction($helloSubjectPrefix, $registration);
@@ -811,7 +817,7 @@ class RegistrationManager implements SingletonInterface
         if ($registration->hasMethodOfPayment()) {
             $template->setMarker(
                 'paymentmethod',
-                $event->getSinglePaymentMethodPlain($registration->getMethodOfPaymentUid())
+                $event->getSinglePaymentMethodPlain($registration->getMethodOfPaymentUid()),
             );
         } else {
             $template->hideSubparts('paymentmethod', $wrapperPrefix);
@@ -883,7 +889,7 @@ class RegistrationManager implements SingletonInterface
             $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',
             $template,
             $registrationNew,
-            $helloSubjectPrefix
+            $helloSubjectPrefix,
         );
 
         if ($useHtml) {
@@ -1112,7 +1118,7 @@ class RegistrationManager implements SingletonInterface
 
         return \sprintf(
             $this->translate('email_unregistrationNotice'),
-            \date($format, $unregistrationDeadline)
+            \date($format, $unregistrationDeadline),
         );
     }
 

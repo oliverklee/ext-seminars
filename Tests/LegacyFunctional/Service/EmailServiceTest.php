@@ -61,7 +61,7 @@ final class EmailServiceTest extends FunctionalTestCase
             [
                 'title' => 'Brain Gourmets',
                 'email' => 'organizer@example.com',
-            ]
+            ],
         );
         $organizers = new Collection();
         $organizers->add($this->organizer);
@@ -74,7 +74,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'end_date' => mktime(18, 30, 0, 4, 3, 2016),
                 'registrations' => new Collection(),
                 'organizers' => $organizers,
-            ]
+            ],
         );
 
         $this->user = new FrontEndUser();
@@ -178,7 +178,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertSame(
             $subject,
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -196,7 +196,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertSame(
             $subjectPrefix . $this->event->getTitle(),
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -216,7 +216,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertSame(
             $subjectPrefix . $formattedDate,
-            $this->email->getSubject()
+            $this->email->getSubject(),
         );
     }
 
@@ -247,7 +247,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertSame(
             [$this->user->getEmailAddress() => $this->user->getName()],
-            $this->getToOfEmail($this->email)
+            $this->getToOfEmail($this->email),
         );
     }
 
@@ -330,7 +330,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Hello ' . $this->user->getName() . '!',
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -346,7 +346,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Event: ' . $this->event->getTitle(),
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 
@@ -364,7 +364,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'Date: ' . $formattedDate,
-            $this->email->getTextBody()
+            $this->email->getTextBody(),
         );
     }
 }

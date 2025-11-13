@@ -35,7 +35,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
             [
                 'title' => 'Test organizer',
                 'email' => 'foo@example.com',
-            ]
+            ],
         );
         $this->subject = new LegacyOrganizer($subjectUid);
 
@@ -47,7 +47,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
                 'email' => 'maximal-foo@example.com',
                 'email_footer' => "line 1\nline 2",
                 'description' => 'foo',
-            ]
+            ],
         );
         $this->maximalFixture = new LegacyOrganizer($maximalFixtureUid);
     }
@@ -69,7 +69,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     public function createFromUid(): void
     {
         self::assertTrue(
-            $this->subject->isOk()
+            $this->subject->isOk(),
         );
     }
 
@@ -84,7 +84,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             'Test organizer',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -94,7 +94,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     public function hasHomepageWithEmptyHomepageReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasHomepage()
+            $this->subject->hasHomepage(),
         );
     }
 
@@ -104,7 +104,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     public function hasHomepageWithHomepageReturnsTrue(): void
     {
         self::assertTrue(
-            $this->maximalFixture->hasHomepage()
+            $this->maximalFixture->hasHomepage(),
         );
     }
 
@@ -115,11 +115,11 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             '',
-            $this->subject->getHomepage()
+            $this->subject->getHomepage(),
         );
         self::assertEquals(
             'https://www.example.com/',
-            $this->maximalFixture->getHomepage()
+            $this->maximalFixture->getHomepage(),
         );
     }
 
@@ -130,7 +130,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             '',
-            $this->subject->getEmailFooter()
+            $this->subject->getEmailFooter(),
         );
     }
 
@@ -141,7 +141,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             "line 1\nline 2",
-            $this->maximalFixture->getEmailFooter()
+            $this->maximalFixture->getEmailFooter(),
         );
     }
 
@@ -152,7 +152,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             'foo@example.com',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 
@@ -166,7 +166,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasDescription()
+            $this->subject->hasDescription(),
         );
     }
 
@@ -176,7 +176,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     public function hasDescriptionForOrganizerWithDescriptionReturnsTrue(): void
     {
         self::assertTrue(
-            $this->maximalFixture->hasDescription()
+            $this->maximalFixture->hasDescription(),
         );
     }
 
@@ -187,7 +187,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             '',
-            $this->subject->getDescription()
+            $this->subject->getDescription(),
         );
     }
 
@@ -198,7 +198,7 @@ final class LegacyOrganizerTest extends FunctionalTestCase
     {
         self::assertEquals(
             'foo',
-            $this->maximalFixture->getDescription()
+            $this->maximalFixture->getDescription(),
         );
     }
 }

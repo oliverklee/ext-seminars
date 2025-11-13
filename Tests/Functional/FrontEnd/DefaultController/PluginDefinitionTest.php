@@ -74,7 +74,7 @@ final class PluginDefinitionTest extends FunctionalTestCase
 
         self::assertTrue(
             \method_exists(DefaultController::class, $methodName),
-            'Method ' . $methodName . ' does not exist in class ' . $className
+            'Method ' . $methodName . ' does not exist in class ' . $className,
         );
     }
 }

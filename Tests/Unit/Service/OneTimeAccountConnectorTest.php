@@ -57,7 +57,8 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
      */
     public function getOneTimeAccountUserUidForNullUserUidReturnsNull(): void
     {
-        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
+        $this->frontEndUserAuthenticationMock
+            ->method('getSessionData')->with('onetimeaccountUserUid')
             ->willReturn(null);
 
         self::assertNull($this->subject->getOneTimeAccountUserUid());
@@ -89,7 +90,8 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
     public function getOneTimeAccountUserUidForPositiveUserUidReturnsUserUid(): void
     {
         $userUid = 63;
-        $this->frontEndUserAuthenticationMock->method('getSessionData')
+        $this->frontEndUserAuthenticationMock
+            ->method('getSessionData')
             ->with('onetimeaccountUserUid')->willReturn($userUid);
 
         self::assertSame($userUid, $this->subject->getOneTimeAccountUserUid());
@@ -113,10 +115,12 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
     public function destroyOneTimeSessionForOneTimeSessionWithoutLoginRemovesUserUidFromSession(): void
     {
         $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
-        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
+        $this->frontEndUserAuthenticationMock
+            ->method('getSessionData')->with('onetimeaccountUserUid')
             ->willReturn(5);
 
-        $this->frontEndUserAuthenticationMock->expects(self::once())->method('setAndSaveSessionData')
+        $this->frontEndUserAuthenticationMock
+            ->expects(self::once())->method('setAndSaveSessionData')
             ->with('onetimeaccountUserUid', null);
 
         $this->subject->destroyOneTimeSession();
@@ -128,10 +132,12 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
     public function destroyOneTimeSessionForRegularLoginAndOneTimeSessionRemovesUserUidFromSession(): void
     {
         $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(true);
-        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
+        $this->frontEndUserAuthenticationMock
+            ->method('getSessionData')->with('onetimeaccountUserUid')
             ->willReturn(5);
 
-        $this->frontEndUserAuthenticationMock->expects(self::once())->method('setAndSaveSessionData')
+        $this->frontEndUserAuthenticationMock
+            ->expects(self::once())->method('setAndSaveSessionData')
             ->with('onetimeaccountUserUid', null);
 
         $this->subject->destroyOneTimeSession();

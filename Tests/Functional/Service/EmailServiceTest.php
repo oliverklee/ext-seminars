@@ -59,7 +59,7 @@ final class EmailServiceTest extends FunctionalTestCase
             [
                 'title' => 'Brain Gourmets',
                 'email' => 'organizer@example.com',
-            ]
+            ],
         );
         /** @var Collection<Organizer> $organizers */
         $organizers = new Collection();
@@ -71,7 +71,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'title' => 'A nice event',
                 'registrations' => new Collection(),
                 'organizers' => $organizers,
-            ]
+            ],
         );
 
         $user = new FrontEndUser();

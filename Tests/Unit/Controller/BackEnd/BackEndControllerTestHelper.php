@@ -50,7 +50,7 @@ trait BackEndControllerTestHelper
         return new ModuleTemplateFactory(
             $pageRenderMock,
             $this->createStub(IconFactory::class),
-            $this->createStub(FlashMessageService::class)
+            $this->createStub(FlashMessageService::class),
         );
     }
 }

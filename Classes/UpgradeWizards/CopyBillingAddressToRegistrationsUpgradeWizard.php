@@ -22,7 +22,10 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  *
  * @internal
  */
-class CopyBillingAddressToRegistrationsUpgradeWizard implements UpgradeWizardInterface, RepeatableInterface, LoggerAwareInterface
+class CopyBillingAddressToRegistrationsUpgradeWizard implements
+    UpgradeWizardInterface,
+    RepeatableInterface,
+    LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
@@ -60,9 +63,11 @@ class CopyBillingAddressToRegistrationsUpgradeWizard implements UpgradeWizardInt
     {
         $queryBuilder = $this->getRegistrationQueryBuilder();
 
-        $billingAddressCondition = $queryBuilder->expr()
+        $billingAddressCondition = $queryBuilder
+            ->expr()
             ->eq('separate_billing_address', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT));
-        $deletedCondition = $queryBuilder->expr()
+        $deletedCondition = $queryBuilder
+            ->expr()
             ->eq('deleted', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT));
         $query = $queryBuilder
             ->count('*')
@@ -82,9 +87,11 @@ class CopyBillingAddressToRegistrationsUpgradeWizard implements UpgradeWizardInt
         $registrationQueryBuilder = $this->getRegistrationQueryBuilder();
         $userQueryBuilder = $this->getUserQueryBuilder();
 
-        $billingAddressCondition = $registrationQueryBuilder->expr()
+        $billingAddressCondition = $registrationQueryBuilder
+            ->expr()
             ->eq('separate_billing_address', $registrationQueryBuilder->createNamedParameter(0, Connection::PARAM_INT));
-        $deletedCondition = $registrationQueryBuilder->expr()
+        $deletedCondition = $registrationQueryBuilder
+            ->expr()
             ->eq('deleted', $registrationQueryBuilder->createNamedParameter(0, Connection::PARAM_INT));
         $registrationsQuery = $registrationQueryBuilder
             ->select('*')
@@ -100,9 +107,11 @@ class CopyBillingAddressToRegistrationsUpgradeWizard implements UpgradeWizardInt
 
             $userUid = (int)($registration['user'] ?? 0);
             if ($userUid > 0) {
-                $uidCondition = $userQueryBuilder->expr()
+                $uidCondition = $userQueryBuilder
+                    ->expr()
                     ->eq('uid', $userQueryBuilder->createNamedParameter($userUid, Connection::PARAM_INT));
-                $deletedCondition = $userQueryBuilder->expr()
+                $deletedCondition = $userQueryBuilder
+                    ->expr()
                     ->eq('deleted', $userQueryBuilder->createNamedParameter(0, Connection::PARAM_INT));
                 $userQuery = $userQueryBuilder
                     ->select('*')
@@ -136,7 +145,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizard implements UpgradeWizardInt
         if ($this->logger instanceof LoggerAwareInterface) {
             $this->logger->info(
                 '{registrationCount} registrations updated with billing address',
-                ['registrationCount' => \count($registrations)]
+                ['registrationCount' => \count($registrations)],
             );
         }
 
