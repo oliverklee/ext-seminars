@@ -5,8 +5,9 @@
             <h2>
                 {event.title}
                 <f:if condition="{event.beginDateAsUnixTimeStamp}">
-                    (<f:format.date date="{event.beginDateAsUnixTimeStamp}"
-                                    format="{f:translate(key:'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:dateFormat')}"/>)
+                    <f:variable name="dateFormat"
+                                value="{f:translate(key: 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:dateFormat')}"/>
+                    ({f:format.date(date: event.beginDateAsUnixTimeStamp, format: dateFormat)})
                 </f:if>
             </h2>
             <table>
