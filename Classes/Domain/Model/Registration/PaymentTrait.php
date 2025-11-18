@@ -38,7 +38,7 @@ trait PaymentTrait
     protected $paymentMethod;
 
     /**
-     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 50})
      */
     protected string $orderReference = '';
 
