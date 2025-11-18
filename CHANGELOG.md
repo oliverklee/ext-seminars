@@ -48,7 +48,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Include the attendance mode in the registration emails (#4148, #4151)
 - Display prices with VAT in the new plugins (#4137, #4139, #4142)
 - Allow selecting the attendance mode when registering for hybrid events (#4128)
-- Add an order reference input to the registration form (#4122)
+- Add an order reference input to the registration form (#4122, #4596)
 - Add `Registration.orderReference` (#4121)
 - Also show non-binding reservations in the "my events" list (#4120)
 - Add a configuration whether to automatically succeed waiting list

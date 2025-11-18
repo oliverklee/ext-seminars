@@ -526,7 +526,7 @@
                         <f:translate key="{labelPrefix}.orderReference"/>
                     </label>
                     <div class="col-sm-10">
-                        <f:form.textfield property="orderReference" id="{idPrefix}-orderReference" maxlength="256"
+                        <f:form.textfield property="orderReference" id="{idPrefix}-orderReference" maxlength="50"
                                           class="form-control" errorClass="is-invalid"/>
                         <f:render partial="EventRegistration/ValidationResult"
                                   arguments="{property: 'orderReference'}"/>
