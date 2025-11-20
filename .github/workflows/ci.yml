@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -64,7 +64,7 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         env:
@@ -109,7 +109,7 @@ jobs:
     needs: php-lint
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         env:
@@ -180,7 +180,7 @@ jobs:
       DB_HOST: localhost
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         env:
@@ -257,7 +257,7 @@ jobs:
       DB_HOST: localhost
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         env:
@@ -328,7 +328,7 @@ jobs:
     timeout-minutes: 2
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Check scripts
         run: |
           Build/Scripts/runTests.sh -s shellcheck
@@ -338,7 +338,7 @@ jobs:
     timeout-minutes: 2
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Test if the documentation will render without warnings
         run: |
           docker run --rm --pull always -v $(pwd):/project \
