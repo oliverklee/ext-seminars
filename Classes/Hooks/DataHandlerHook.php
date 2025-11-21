@@ -33,11 +33,6 @@ class DataHandlerHook implements SingletonInterface
      */
     private const TABLE_TIME_SLOTS = 'tx_seminars_timeslots';
 
-    /**
-     * @var string
-     */
-    private const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
-
     private SlugGenerator $slugGenerator;
 
     public function __construct(SlugGenerator $slugGenerator)
@@ -99,7 +94,6 @@ class DataHandlerHook implements SingletonInterface
         }
 
         $updatedData = $originalData;
-        $this->copyPlacesFromTimeSlots($uid, $updatedData);
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
 
@@ -117,35 +111,6 @@ class DataHandlerHook implements SingletonInterface
         if ($updatedData !== $originalData) {
             $this->getConnectionForTable(self::TABLE_EVENTS)->update(self::TABLE_EVENTS, $updatedData, ['uid' => $uid]);
         }
-    }
-
-    private function copyPlacesFromTimeSlots(int $uid, array &$data): void
-    {
-        if ((int)$data['timeslots'] === 0) {
-            return;
-        }
-
-        $timeSlots = $this
-            ->getConnectionForTable(self::TABLE_TIME_SLOTS)
-            ->select(['*'], self::TABLE_TIME_SLOTS, ['seminar' => $uid])->fetchAllAssociative();
-
-        /** @var list<positive-int> $placesUids */
-        $placesUids = [];
-        foreach ($timeSlots as $timeSlot) {
-            $placeUid = (int)$timeSlot['place'];
-            if ($placeUid === 0) {
-                continue;
-            }
-            $placesUids[] = $placeUid;
-        }
-
-        $connection = $this->getConnectionForTable(self::TABLE_PLACES_ASSOCIATION);
-        $connection->delete(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid]);
-        foreach (\array_unique($placesUids, SORT_NUMERIC) as $placeUid) {
-            $connection->insert(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid, 'uid_foreign' => $placeUid]);
-        }
-
-        $data['place'] = \count($placesUids);
     }
 
     private function copyDatesFromTimeSlots(int $uid, array &$data): void

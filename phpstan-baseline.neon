@@ -1117,7 +1117,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 3
+			count: 2
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
@@ -1132,11 +1132,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyEndDateFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyPlacesFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
 
