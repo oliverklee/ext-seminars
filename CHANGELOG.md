@@ -7,10 +7,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Add documentation for the PSR-14 event for slug generation (#4467)
-
 ### Changed
 
+- Add `Permissions::isAdmin()` (#4608)
 - Reduce the length of the billing address fields (#4482)
 - Allow Emogrifier >= 8.0.0 (#4457)
 - Make the event statistics internal (#4075)
@@ -36,6 +35,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Documentation
 
 - Document the incompatibilities with `b13/bolt` (#4606)
+- Add documentation for the PSR-14 event for slug generation (#4467)
 
 ## 5.8.0: Usability features for the BE module
 

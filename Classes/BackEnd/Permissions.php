@@ -25,6 +25,11 @@ class Permissions implements SingletonInterface
     /**
      * @var bool
      */
+    private $admin;
+
+    /**
+     * @var bool
+     */
     private $readAccessToEvents;
 
     /**
@@ -50,10 +55,16 @@ class Permissions implements SingletonInterface
             throw new \BadMethodCallException('No BE user session found.', 1670069568);
         }
 
+        $this->admin = $user->isAdmin();
         $this->readAccessToEvents = $user->check('tables_select', self::EVENTS_TABLE_NAME);
         $this->readAccessToRegistrations = $user->check('tables_select', self::REGISTRATIONS_TABLE_NAME);
         $this->writeAccessToEvents = $user->check('tables_modify', self::EVENTS_TABLE_NAME);
         $this->writeAccessToRegistrations = $user->check('tables_modify', self::REGISTRATIONS_TABLE_NAME);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->admin;
     }
 
     public function hasReadAccessToEvents(): bool
