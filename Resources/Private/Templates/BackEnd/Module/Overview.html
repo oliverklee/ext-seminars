@@ -8,6 +8,10 @@
     <f:section name="Header"/>
 
     <f:section name="Content">
+        <f:if condition="{permissions.admin}">
+            <f:render partial="BackEnd/EarlyAccess"/>
+        </f:if>
+
         <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
 
         <f:if condition="{pageUid} <= 0">
