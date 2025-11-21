@@ -33,6 +33,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Avoid crashes for deleted lazy-loaded associations (#4110, #4116)
 - Avoid empty localized email subjects in some cases (#3867)
 
+### Documentation
+
+- Document the incompatibilities with `b13/bolt` (#4606)
+
 ## 5.8.0: Usability features for the BE module
 
 ### Added
