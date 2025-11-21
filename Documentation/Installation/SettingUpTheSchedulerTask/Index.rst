@@ -1,5 +1,10 @@
+=============================
 Setting up the Scheduler task
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=============================
+
+..  warning::
+    The CSV export currently will be empty if  the `b13/bolt` package is
+    installed.
 
 This extension offers a Scheduler Task to trigger actions. It can be configured to
 send reminders to the events' organizers
