@@ -253,7 +253,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Documentation
 
 - Document the incompatibilities with `b13/bolt` (#4604)
-- Announce the early-access program (#3784)
+- Announce the early-access program (#3784, #4610)
 
 ## 5.7.0: New fields, BE usability features, and deprecations
 
