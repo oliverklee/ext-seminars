@@ -631,63 +631,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     }
 
     /**
-     * @return int[][]
-     */
-    public function noPlacesToAddFromTimeSlotsDataProvider(): array
-    {
-        return [
-            'no time slots' => [1],
-            'time slots without place' => [2],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider noPlacesToAddFromTimeSlotsDataProvider
-     */
-    public function afterDatabaseOperationsOnUpdateForNoPlacesFromTimeSlotsNotAddsPlaces(int $uid): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook/NoPlacesFromTimeSlots.xml');
-
-        $this->processUpdateActionForSeminarsTable($uid);
-
-        $associationCount = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_seminars_seminars_place_mm')
-            ->count('*', 'tx_seminars_seminars_place_mm', ['uid_local' => $uid]);
-        self::assertSame(0, $associationCount);
-    }
-
-    /**
-     * @return array<string, array{0: positive-int, 1: positive-int}>
-     */
-    public function placesToAddFromTimeSlotsDataProvider(): array
-    {
-        return [
-            '1 time slot with place' => [1, 1],
-            '2 time slots with the same place' => [2, 1],
-            '2 time slots with different places' => [3, 2],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider placesToAddFromTimeSlotsDataProvider
-     */
-    public function afterDatabaseOperationsOnUpdateForFromTimeSlotsAddsPlacesToEvent(int $uid, int $expected): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook/PlacesFromTimeSlots.xml');
-
-        $this->processUpdateActionForSeminarsTable($uid);
-
-        $associationCount = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_seminars_seminars_place_mm')
-            ->count('*', 'tx_seminars_seminars_place_mm', ['uid_local' => $uid]);
-        self::assertSame($expected, $associationCount);
-    }
-
-    /**
      * @test
      */
     public function afterDatabaseOperationsForSingleEventWithSlugKeepsSlugUnchanged(): void

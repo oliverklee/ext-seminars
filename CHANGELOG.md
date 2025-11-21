@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid overwriting event venues for events with timeslots (#4602)
 - Do not move registrations when moving event records (#4550)
 - Display the billing city on the registration confirmation page (#4547)
 - Fully initialize reconstituted domain models (#4247)
