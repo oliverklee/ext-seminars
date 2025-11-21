@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Permissions::isAdmin()` (#4608)
 - Add documentation for the PSR-14 event for slug generation (#4466)
 - Show event details in the registration TCEforms (#4446, #4448)
 - Allow editing the FE users from the BE module (#4198)
