@@ -54,6 +54,8 @@ final class PermissionsTest extends UnitTestCase
      */
     public function classIsSingleton(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
+        $this->backendUserMock->method('check')->willReturn(true);
         self::assertInstanceOf(SingletonInterface::class, new Permissions());
     }
 
@@ -76,6 +78,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasReadAccessToEventsForNoAccessReturnsFalse(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -96,6 +99,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasReadAccessToEventsForAccessReturnsTrue(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, true],
@@ -116,6 +120,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasReadAccessToRegistrationsForNoAccessReturnsFalse(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -136,6 +141,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasReadAccessToRegistrationsForAccessReturnsTrue(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -156,6 +162,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasReadAccessToFrontEndUsersForNoAccessReturnsFalse(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -176,6 +183,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasReadAccessToFrontEndUsersForAccessReturnsTrue(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -196,6 +204,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasWriteAccessToEventsForNoAccessReturnsFalse(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -216,6 +225,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasWriteAccessToEventsForAccessReturnsTrue(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -236,6 +246,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasWriteAccessToRegistrationsForNoAccessReturnsFalse(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -256,6 +267,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasWriteAccessToRegistrationsForAccessReturnsTrue(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -276,6 +288,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasWriteAccessToFrontEndUsersForNoAccessReturnsFalse(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -296,6 +309,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function hasWriteAccessToFrontEndUsersForAccessReturnsTrue(): void
     {
+        $this->backendUserMock->method('isAdmin')->willReturn(false);
         $this->backendUserMock->method('check')->willReturnMap(
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
@@ -309,5 +323,31 @@ final class PermissionsTest extends UnitTestCase
         $subject = new Permissions();
 
         self::assertTrue($subject->hasWriteAccessToFrontEndUsers());
+    }
+
+    /**
+     * @return array<non-empty-string, array{0: bool}>
+     */
+    public static function booleanDataProvider(): array
+    {
+        return [
+            'true' => [true],
+            'false' => [false],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider booleanDataProvider
+     */
+    public function isAdminReturnsAdminStatusOfBackendUser(bool $isAdmin): void
+    {
+        $this->backendUserMock->method('check')->willReturn(true);
+        $this->backendUserMock->method('isAdmin')->willReturn($isAdmin);
+
+        $subject = new Permissions();
+
+        self::assertSame($isAdmin, $subject->isAdmin());
     }
 }
