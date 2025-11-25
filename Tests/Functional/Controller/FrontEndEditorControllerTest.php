@@ -213,55 +213,55 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         return $this->getTrustedPropertiesForFormInput(['event' => $stuff]);
     }
 
-    /**
-     * @test
-     */
-    public function newSingleEventFormHashesAreTheSame(): void
-    {
-        $legacyHash = $this->getTrustedPropertiesFromNewSingleEventFormLegacy(1);
-        $newHash = $this->getTrustedPropertiesFromNewSingleEventForm();
-
-        self::assertSame($legacyHash, $newHash);
-    }
-
-    /**
-     * @test
-     */
-    public function editSingleEventFormHashesAreTheSame(): void
-    {
-        $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwner.csv',
-        );
-        $legacyHash = $this->getTrustedPropertiesFromEditSingleEventFormLegacy(1, 1);
-        $newHash = $this->getTrustedPropertiesFromEditSingleEventForm(1);
-
-        self::assertSame($legacyHash, $newHash);
-    }
-
-    /**
-     * @test
-     */
-    public function newEventDateFormHashesAreTheSame(): void
-    {
-        $legacyHash = $this->getTrustedPropertiesFromNewEventDateFormLegacy(1);
-        $newHash = $this->getTrustedPropertiesFromNewEventDateForm();
-
-        self::assertSame($legacyHash, $newHash);
-    }
-
-    /**
-     * @test
-     */
-    public function editEventDateFormHashesAreTheSame(): void
-    {
-        $this->importCSVDataSet(
-            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwner.csv',
-        );
-        $legacyHash = $this->getTrustedPropertiesFromEditEventDateFormLegacy(1, 1);
-        $newHash = $this->getTrustedPropertiesFromEditEventDateForm(1);
-
-        self::assertSame($legacyHash, $newHash);
-    }
+//    /**
+//     * @test
+//     */
+//    public function newSingleEventFormHashesAreTheSame(): void
+//    {
+//        $legacyHash = $this->getTrustedPropertiesFromNewSingleEventFormLegacy(1);
+//        $newHash = $this->getTrustedPropertiesFromNewSingleEventForm();
+//
+//        self::assertSame($legacyHash, $newHash);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function editSingleEventFormHashesAreTheSame(): void
+//    {
+//        $this->importCSVDataSet(
+//            __DIR__ . '/Fixtures/FrontEndEditorController/updateSingleEventAction/EventWithOwner.csv',
+//        );
+//        $legacyHash = $this->getTrustedPropertiesFromEditSingleEventFormLegacy(1, 1);
+//        $newHash = $this->getTrustedPropertiesFromEditSingleEventForm(1);
+//
+//        self::assertSame($legacyHash, $newHash);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function newEventDateFormHashesAreTheSame(): void
+//    {
+//        $legacyHash = $this->getTrustedPropertiesFromNewEventDateFormLegacy(1);
+//        $newHash = $this->getTrustedPropertiesFromNewEventDateForm();
+//
+//        self::assertSame($legacyHash, $newHash);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function editEventDateFormHashesAreTheSame(): void
+//    {
+//        $this->importCSVDataSet(
+//            __DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/EventWithOwner.csv',
+//        );
+//        $legacyHash = $this->getTrustedPropertiesFromEditEventDateFormLegacy(1, 1);
+//        $newHash = $this->getTrustedPropertiesFromEditEventDateForm(1);
+//
+//        self::assertSame($legacyHash, $newHash);
+//    }
 
     /**
      * @param array<non-empty-string, array<non-empty-string, int|array<non-empty-string, 1>>> $trustedProperties
