@@ -7,7 +7,7 @@ conf.py:
     copyright: 2025
     project: Seminar Manager
     version: 5.8
-    release: 5.8.0
+    release: 5.8.1
     latex_documents:
     -   - Index
         - seminars.tex

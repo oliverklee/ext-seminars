@@ -9,13 +9,23 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Documentation
+
+## 5.8.1: Bugfixes and cleanup
+
+### Changed
+
 - Add `Permissions::isAdmin()` (#4608)
 - Reduce the length of the billing address fields (#4482)
 - Allow Emogrifier >= 8.0.0 (#4457)
 - Make the event statistics internal (#4075)
 - Move the webinar URL further up in the TCEforms (#3976)
-
-### Deprecated
 
 ### Removed
 
