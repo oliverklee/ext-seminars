@@ -982,7 +982,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]'
-            => $this->getTrustedPropertiesForEditSingleEventFormLegacy(1, 1),
+            => $this->getTrustedPropertiesForEditSingleEventForm(1, 1),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
             'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
@@ -1008,7 +1008,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]'
-            => $this->getTrustedPropertiesForEditSingleEventFormLegacy(1, 1),
+            => $this->getTrustedPropertiesForEditSingleEventForm(1, 1),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
             'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
@@ -1036,7 +1036,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]'
-            => $this->getTrustedPropertiesForEditSingleEventFormLegacy(1, 1),
+            => $this->getTrustedPropertiesForEditSingleEventForm(1, 1),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
             'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
@@ -1069,7 +1069,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]'
-            => $this->getTrustedPropertiesForEditSingleEventFormLegacy(1, 2),
+            => $this->getTrustedPropertiesForEditSingleEventForm(1, 2),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
             'tx_seminars_frontendeditor[event][internalTitle]' => 'event with owner',
@@ -1097,7 +1097,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]'
-            => $this->getTrustedPropertiesForEditSingleEventFormLegacy(1, 1),
+            => $this->getTrustedPropertiesForEditSingleEventForm(1, 1),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
             'tx_seminars_frontendeditor[event][internalTitle]' => 'Karaoke party',
@@ -1125,7 +1125,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $newTitle = 'Karaoke party';
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
             'tx_seminars_frontendeditor[__trustedProperties]'
-            => $this->getTrustedPropertiesForEditSingleEventFormLegacy(1, 1),
+            => $this->getTrustedPropertiesForEditSingleEventForm(1, 1),
             'tx_seminars_frontendeditor[action]' => 'updateSingleEvent',
             'tx_seminars_frontendeditor[event][__identity]' => '1',
             'tx_seminars_frontendeditor[event][internalTitle]' => $newTitle,
@@ -1540,7 +1540,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 1,
             ),
@@ -1568,7 +1568,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 1,
             ),
@@ -1598,7 +1598,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 1,
             ),
@@ -1628,7 +1628,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/updateEventDateAction/Topic.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 1,
             ),
@@ -1662,7 +1662,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 2,
             ),
@@ -1690,7 +1690,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $newTitle = 'Karaoke party';
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 1,
             ),
@@ -1718,7 +1718,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
 
         $newTitle = 'Karaoke party';
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForEditEventDateForm(
                 1,
                 1,
             ),
@@ -1900,7 +1900,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createSingleEventActionCreatesSingleEvent(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -1921,7 +1921,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createSingleEventActionSetsLoggedInUserAsOwnerOfProvidedEvent(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -1942,7 +1942,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createSingleEventActionSetsPidFromConfiguration(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -1963,7 +1963,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createSingleEventActionSetsSlug(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -1984,7 +1984,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createSingleEventActionCanSetNumberOfOfflineRegistrations(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -2010,7 +2010,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -2040,7 +2040,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 2,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -2065,7 +2065,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewSingleEventForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createSingleEvent',
@@ -2240,7 +2240,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createEventDateActionCreatesEventDate(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2261,7 +2261,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createEventDateActionSetsLoggedInUserAsOwnerOfProvidedEvent(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2282,7 +2282,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createEventDateActionSetsPidFromConfiguration(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2305,7 +2305,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/createEventDateAction/Topic.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2329,7 +2329,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/FrontEndEditorController/createEventDateAction/Topic.csv');
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2351,7 +2351,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
     public function createEventDateActionCanSetNumberOfOfflineRegistrations(): void
     {
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2377,7 +2377,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 1,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
@@ -2407,7 +2407,7 @@ final class FrontEndEditorControllerTest extends FunctionalTestCase
         );
 
         $request = (new InternalRequest())->withPageId(self::PAGE_UID)->withQueryParameters([
-            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateFormLegacy(
+            'tx_seminars_frontendeditor[__trustedProperties]' => $this->getTrustedPropertiesForNewEventDateForm(
                 2,
             ),
             'tx_seminars_frontendeditor[action]' => 'createEventDate',
