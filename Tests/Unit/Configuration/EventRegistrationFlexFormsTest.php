@@ -12,14 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventRegistrationFlexFormsTest extends UnitTestCase
 {
-    /**
-     * @var non-empty-string
-     */
     private const LOCALLANG_FILE_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
-
-    /**
-     * @var non-empty-string
-     */
     private const LABEL_KEY_PREFIX = 'plugin.eventRegistration.settings.fieldsToShow.';
 
     private EventRegistrationFlexForms $subject;

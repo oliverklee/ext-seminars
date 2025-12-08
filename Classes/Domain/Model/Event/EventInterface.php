@@ -15,34 +15,12 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 interface EventInterface extends DomainObjectInterface
 {
-    /**
-     * @var int
-     */
     public const TYPE_SINGLE_EVENT = 0;
-
-    /**
-     * @var int
-     */
     public const TYPE_EVENT_TOPIC = 1;
-
-    /**
-     * @var int
-     */
     public const TYPE_EVENT_DATE = 2;
 
-    /**
-     * @var int
-     */
     public const STATUS_PLANNED = 0;
-
-    /**
-     * @var int
-     */
     public const STATUS_CANCELED = 1;
-
-    /**
-     * @var int
-     */
     public const STATUS_CONFIRMED = 2;
 
     public function isHidden(): bool;

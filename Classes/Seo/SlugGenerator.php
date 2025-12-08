@@ -21,9 +21,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class SlugGenerator implements SingletonInterface
 {
-    /**
-     * @var non-empty-string
-     */
     private const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
 
     private EventDispatcherInterface $eventDispatcher;

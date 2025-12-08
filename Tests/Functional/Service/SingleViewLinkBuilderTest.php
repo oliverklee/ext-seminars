@@ -16,9 +16,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class SingleViewLinkBuilderTest extends FunctionalTestCase
 {
-    /**
-     * @var positive-int
-     */
     private const DEFAULT_SINGLE_VIEW_PAGE_UID = 3;
 
     protected array $testExtensionsToLoad = [

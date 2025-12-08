@@ -26,9 +26,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 abstract class TemplateHelper
 {
-    /**
-     * @var non-empty-string the regular expression used to find subparts
-     */
     private const LABEL_PATTERN = '/###(LABEL_([A-Z\\d_]+))###/';
 
     /**

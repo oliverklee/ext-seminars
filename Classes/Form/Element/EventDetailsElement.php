@@ -33,29 +33,10 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class EventDetailsElement extends GroupElement
 {
-    /**
-     * @var non-empty-string
-     */
     private const TABLE_NAME = 'tx_seminars_seminars';
-
-    /**
-     * @var non-empty-string
-     */
     private const ALL_EVENTS_OPENING_WRAPPER = '<div class="tx-seminars-event-details">';
-
-    /**
-     * @var non-empty-string
-     */
     private const ALL_EVENTS_CLOSING_WRAPPER = '</div>';
-
-    /**
-     * @var non-empty-string
-     */
     private const SINGLE_EVENT_OPENING_WRAPPER = '<p class="tx-seminars-event-details-event">';
-
-    /**
-     * @var non-empty-string
-     */
     private const SINGLE_EVENT_CLOSING_WRAPPER = '</p>';
 
     public function render(): array

@@ -26,9 +26,6 @@ class RegistrationController extends ActionController
 {
     use PageUidTrait;
 
-    /**
-     * @var non-empty-string
-     */
     private const CSV_FILENAME = 'registrations.csv';
 
     private ModuleTemplateFactory $moduleTemplateFactory;

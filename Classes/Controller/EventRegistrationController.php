@@ -25,9 +25,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventRegistrationController extends ActionController
 {
-    /**
-     * @var positive-int
-     */
     protected const MAXIMUM_BOOKABLE_SEATS = 10;
 
     protected RegistrationGuard $registrationGuard;

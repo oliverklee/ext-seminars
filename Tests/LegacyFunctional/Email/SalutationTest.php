@@ -24,14 +24,7 @@ final class SalutationTest extends FunctionalTestCase
 {
     use BackEndTestsTrait;
 
-    /**
-     * @var non-empty-string
-     */
     private const DATE_FORMAT = 'Y-m-d';
-
-    /**
-     * @var non-empty-string
-     */
     private const TIME_FORMAT = 'H:i';
 
     protected array $testExtensionsToLoad = [

@@ -25,7 +25,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
     ];
 
     /**
-     * @var positive-int some random date (2001-01-01 00:00:00 UTC)
+     * some random date (2001-01-01 00:00:00 UTC)
      */
     private const BEGIN_DATE = 978307200;
 

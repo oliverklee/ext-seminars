@@ -24,9 +24,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class EventRepository extends AbstractRawDataCapableRepository
 {
-    /**
-     * @var list<non-empty-string>
-     */
     private const FIELDS_NOT_TO_COPY = [
         'cancelation_deadline_reminder_sent',
         'cancelled',

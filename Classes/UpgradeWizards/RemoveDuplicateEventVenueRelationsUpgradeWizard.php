@@ -27,9 +27,6 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizard implements
 {
     use LoggerAwareTrait;
 
-    /**
-     * @var non-empty-string
-     */
     private const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
 
     public function getIdentifier(): string

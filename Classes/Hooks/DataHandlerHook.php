@@ -23,14 +23,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  */
 class DataHandlerHook implements SingletonInterface
 {
-    /**
-     * @var string
-     */
     private const TABLE_EVENTS = 'tx_seminars_seminars';
-
-    /**
-     * @var string
-     */
     private const TABLE_TIME_SLOTS = 'tx_seminars_timeslots';
 
     private SlugGenerator $slugGenerator;

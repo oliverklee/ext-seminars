@@ -101,7 +101,7 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
-			message: "#^Parameter &\\$configuration by\\-ref type of method OliverKlee\\\\Seminars\\\\Configuration\\\\EventRegistrationFlexForms\\:\\:buildFields\\(\\) expects array\\<string, array\\<string, string\\>\\>, array\\<string, array\\<int\\|string, array\\<int, string\\>\\|string\\>\\> given\\.$#"
+			message: "#^Parameter &\\$configuration by\\-ref type of method OliverKlee\\\\Seminars\\\\Configuration\\\\EventRegistrationFlexForms\\:\\:buildFields\\(\\) expects array\\<string, array\\<string, string\\>\\>, array\\<string, array\\<int\\|string, array\\<int, mixed\\>\\|string\\>\\> given\\.$#"
 			count: 1
 			path: Classes/Configuration/EventRegistrationFlexForms.php
 

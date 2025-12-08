@@ -17,9 +17,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  */
 class MailNotifierConfiguration extends AbstractAdditionalFieldProvider
 {
-    /**
-     * @var string
-     */
     private const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
 
     /**

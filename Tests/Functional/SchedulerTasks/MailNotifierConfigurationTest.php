@@ -20,9 +20,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class MailNotifierConfigurationTest extends FunctionalTestCase
 {
-    /**
-     * @var non-empty-string
-     */
     private const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
 
     protected array $coreExtensionsToLoad = ['scheduler'];
