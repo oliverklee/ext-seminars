@@ -1,2132 +1,2132 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file source-language="en" datatype="plaintext" original="messages">
-		<header/>
-		<body>
-			<trans-unit id="test-label">
-				<source>This is a test label.</source>
-			</trans-unit>
-			<trans-unit id="test-label-with-arguments">
-				<source>Hello %s!</source>
-			</trans-unit>
-			<trans-unit id="test-label-with-salutation_formal">
-				<source>This is a test label with a formal salutation.</source>
-			</trans-unit>
-			<trans-unit id="test-label-with-salutation_informal">
-				<source>This is a test label with an informal salutation.</source>
-			</trans-unit>
-			<trans-unit id="test-label-with-salutation-and-fallback">
-				<source>This is a test label with a fallback.</source>
-			</trans-unit>
-			<trans-unit id="test-label-with-salutation-and-fallback_informal">
-				<source>This is a test label with a fallback and an informal salutation.</source>
-			</trans-unit>
-			<trans-unit id="test-label-with-salutation-and-fallback_formal">
-				<source>This is a test label with a fallback and a formal salutation.</source>
-			</trans-unit>
-			<trans-unit id="pi1_title">
-				<source>Seminar Manager</source>
-			</trans-unit>
-			<trans-unit id="pi1_description">
-				<source>Displays seminars in the FE</source>
-			</trans-unit>
-			<trans-unit id="label_title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="label_description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="label_uid">
-				<source>Number</source>
-			</trans-unit>
-			<trans-unit id="label_registration_uid">
-				<source>Ticket ID</source>
-			</trans-unit>
-			<trans-unit id="label_event_type">
-				<source>Event type</source>
-			</trans-unit>
-			<trans-unit id="label_accreditation_number">
-				<source>Accreditation number</source>
-			</trans-unit>
-			<trans-unit id="label_credit_points">
-				<source>Credit points</source>
-			</trans-unit>
-			<trans-unit id="label_date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="label_time">
-				<source>Time</source>
-			</trans-unit>
-			<trans-unit id="label_place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="label_room">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="label_attendance_mode">
-				<source>On-site/online</source>
-			</trans-unit>
-			<trans-unit id="label_attendance_mode.onSite">
-				<source>on-site</source>
-			</trans-unit>
-			<trans-unit id="label_attendance_mode.online">
-				<source>online</source>
-			</trans-unit>
-			<trans-unit id="label_seats">
-				<source>Seats</source>
-			</trans-unit>
-			<trans-unit id="label_total_price">
-				<source>Total price</source>
-			</trans-unit>
-			<trans-unit id="label_attendees_names">
-				<source>Registered persons</source>
-			</trans-unit>
-			<trans-unit id="label_lodgings">
-				<source>Lodging options</source>
-			</trans-unit>
-			<trans-unit id="label_kids">
-				<source>Number of kids</source>
-			</trans-unit>
-			<trans-unit id="label_price">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="label_price_general">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="label_price_regular">
-				<source>Regular price</source>
-			</trans-unit>
-			<trans-unit id="label_price_regular_early">
-				<source>Early-bird price</source>
-			</trans-unit>
-			<trans-unit id="label_price_earlybird_regular">
-				<source>Early-bird price</source>
-			</trans-unit>
-			<trans-unit id="label_price_special">
-				<source>Special price</source>
-			</trans-unit>
-			<trans-unit id="label_price_special_early">
-				<source>Early-bird special price</source>
-			</trans-unit>
-			<trans-unit id="label_price_earlybird_special">
-				<source>Early-bird special price</source>
-			</trans-unit>
-			<trans-unit id="label_method_of_payment">
-				<source>Method of payment</source>
-			</trans-unit>
-			<trans-unit id="label_gender">
-				<source>Gender</source>
-			</trans-unit>
-			<trans-unit id="label_username">
-				<source>User name</source>
-			</trans-unit>
-			<trans-unit id="label_name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="label_address">
-				<source>Address</source>
-			</trans-unit>
-			<trans-unit id="label_zip">
-				<source>ZIP code</source>
-			</trans-unit>
-			<trans-unit id="label_city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="label_country">
-				<source>Country</source>
-			</trans-unit>
-			<trans-unit id="label_attendees">
-				<source>Attendees</source>
-			</trans-unit>
-			<trans-unit id="label_vacancies">
-				<source>Vacancies</source>
-			</trans-unit>
-			<trans-unit id="label_unlimited">
-				<source>unlimited</source>
-			</trans-unit>
-			<trans-unit id="label_enough_attendees">
-				<source>Enough attendees</source>
-			</trans-unit>
-			<trans-unit id="label_is_full">
-				<source>Is full</source>
-			</trans-unit>
-			<trans-unit id="label_paymentmethod">
-				<source>Selected method of payment</source>
-			</trans-unit>
-			<trans-unit id="label_billing_address">
-				<source>Billing address</source>
-			</trans-unit>
-			<trans-unit id="label_telephone">
-				<source>Phone</source>
-			</trans-unit>
-			<trans-unit id="label_email">
-				<source>Email address</source>
-			</trans-unit>
-			<trans-unit id="label_interests">
-				<source>Special interests</source>
-			</trans-unit>
-			<trans-unit id="label_expectations">
-				<source>Expectations</source>
-			</trans-unit>
-			<trans-unit id="label_background_knowledge">
-				<source>Background knowledge</source>
-			</trans-unit>
-			<trans-unit id="label_notes">
-				<source>Additional Notes</source>
-			</trans-unit>
-			<trans-unit id="label_webinar_url">
-				<source>Webinar URL</source>
-			</trans-unit>
-			<trans-unit id="label_seminardata">
-				<source>Seminar data</source>
-			</trans-unit>
-			<trans-unit id="label_feuserdata">
-				<source>Account data</source>
-			</trans-unit>
-			<trans-unit id="label_attendancedata">
-				<source>Data that has been entered on registration</source>
-			</trans-unit>
-			<trans-unit id="label_gender.I.0">
-				<source>Mr.</source>
-			</trans-unit>
-			<trans-unit id="label_gender.I.1">
-				<source>Ms.</source>
-			</trans-unit>
-			<trans-unit id="label_status.I.1">
-				<source>Student</source>
-			</trans-unit>
-			<trans-unit id="label_status.I.2">
-				<source>Job seeking</source>
-			</trans-unit>
-			<trans-unit id="label_status.I.3">
-				<source>Working</source>
-			</trans-unit>
-			<trans-unit id="label_status.I.4">
-				<source>Retired</source>
-			</trans-unit>
-			<trans-unit id="status_regular">
-				<source>regular</source>
-			</trans-unit>
-			<trans-unit id="status_waiting_list">
-				<source>waiting list</source>
-			</trans-unit>
-			<trans-unit id="status_nonbinding_reservation">
-				<source>nonbinding reservation</source>
-			</trans-unit>
-			<trans-unit id="label_yes">
-				<source>yes</source>
-			</trans-unit>
-			<trans-unit id="label_no">
-				<source>no</source>
-			</trans-unit>
-			<trans-unit id="label_hours">
-				<source>h</source>
-			</trans-unit>
-			<trans-unit id="label_checkboxes">
-				<source>Selected options</source>
-			</trans-unit>
-			<trans-unit id="message_notLoggedIn">
-				<source>Please log in first.</source>
-			</trans-unit>
-			<trans-unit id="message_notLoggedIn_informal">
-				<source>Please log in first.</source>
-			</trans-unit>
-			<trans-unit id="message_alreadyRegistered">
-				<source>You already have registered for this event.</source>
-			</trans-unit>
-			<trans-unit id="message_alreadyRegistered_informal">
-				<source>You already have registered for this event.</source>
-			</trans-unit>
-			<trans-unit id="message_missingSeminarNumber">
-				<source>
-					The even UID is missing from the URL. If you get this error message using a link on this page,
-					please notify the webmaster. Thank you!
-				</source>
-			</trans-unit>
-			<trans-unit id="message_wrongSeminarNumber">
-				<source>
-					There is no event with this number. If you get this error message using a link on this page,
-					please notify the webmaster. Thank you!
-				</source>
-			</trans-unit>
-			<trans-unit id="message_wrongSeminarNumber_informal">
-				<source>
-					There is no event with this number. If you get this error message using a link on this page,
-					please notify the webmaster. Thank you!
-				</source>
-			</trans-unit>
-			<trans-unit id="message_noRegistrationNecessary">
-				<source>For this event, no registration is necessary.</source>
-			</trans-unit>
-			<trans-unit id="message_seminarCancelled">
-				<source>Alas, this event has been canceled.</source>
-			</trans-unit>
-			<trans-unit id="message_seminarRegistrationIsClosed">
-				<source>Sorry, the registration period for this event is over.</source>
-			</trans-unit>
-			<trans-unit id="message_noVacancies">
-				<source>Sorry, there are no more vacancies.</source>
-			</trans-unit>
-			<trans-unit id="message_willBeAnnounced">
-				<source>will be announced</source>
-			</trans-unit>
-			<trans-unit id="message_forFree">
-				<source>free</source>
-			</trans-unit>
-			<trans-unit id="message_enough">
-				<source>enough</source>
-			</trans-unit>
-			<trans-unit id="message_fullyBooked">
-				<source>fully booked</source>
-			</trans-unit>
-			<trans-unit id="message_registrationOpensOn">
-				<source>starting %s</source>
-			</trans-unit>
-			<trans-unit id="message_accessDenied">
-				<source>Sorry, you don't have access to this part of the site.</source>
-			</trans-unit>
-			<trans-unit id="message_accessDenied_informal">
-				<source>Sorry, you don't have access to this part of the site.</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationSubject">
-				<source>Registration confirmation</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationHello">
-				<source>thank you for registering for the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationHello_informal">
-				<source>thank you for registering for the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_price">
-				<source>at the total price of %s</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnUnregistrationSubject">
-				<source>Unregistration confirmation</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnUnregistrationHello">
-				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnUnregistrationHello_informal">
-				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnRegistrationForQueueSubject">
-				<source>Registration for the waiting list confirmation</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnRegistrationForQueueHello">
-				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnRegistrationForQueueHello_informal">
-				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnQueueUpdateSubject">
-				<source>Registration became a regular registration confirmation</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnQueueUpdateHello">
-				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnQueueUpdateHello_informal">
-				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
-			</trans-unit>
-			<trans-unit id="email_unregistrationNotice">
-				<source>You will be able to unregister online until %s.</source>
-			</trans-unit>
-			<trans-unit id="email_unregistrationNotice_informal">
-				<source>You will be able to unregister online until %s.</source>
-			</trans-unit>
-			<trans-unit id="email_additionalNotificationEnoughRegistrations">
-				<source>Your event has now enough registrations to be held.</source>
-			</trans-unit>
-			<trans-unit id="email_additionalNotificationEnoughRegistrationsSubject">
-				<source>Event has enough registrations: %d - %s</source>
-			</trans-unit>
-			<trans-unit id="email_additionalNotificationIsFull">
-				<source>Your event is full, there are no empty seats left.</source>
-			</trans-unit>
-			<trans-unit id="email_additionalNotificationIsFullSubject">
-				<source>Event is full: %d - %s</source>
-			</trans-unit>
-			<trans-unit id="email_notificationSubject">
-				<source>Registration notification</source>
-			</trans-unit>
-			<trans-unit id="email_notificationHello">
-				<source>
-					Hello,
+  <file source-language="en" datatype="plaintext" original="messages">
+    <header/>
+    <body>
+      <trans-unit id="test-label">
+        <source>This is a test label.</source>
+      </trans-unit>
+      <trans-unit id="test-label-with-arguments">
+        <source>Hello %s!</source>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation_formal">
+        <source>This is a test label with a formal salutation.</source>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation_informal">
+        <source>This is a test label with an informal salutation.</source>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation-and-fallback">
+        <source>This is a test label with a fallback.</source>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation-and-fallback_informal">
+        <source>This is a test label with a fallback and an informal salutation.</source>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation-and-fallback_formal">
+        <source>This is a test label with a fallback and a formal salutation.</source>
+      </trans-unit>
+      <trans-unit id="pi1_title">
+        <source>Seminar Manager</source>
+      </trans-unit>
+      <trans-unit id="pi1_description">
+        <source>Displays seminars in the FE</source>
+      </trans-unit>
+      <trans-unit id="label_title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="label_description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="label_uid">
+        <source>Number</source>
+      </trans-unit>
+      <trans-unit id="label_registration_uid">
+        <source>Ticket ID</source>
+      </trans-unit>
+      <trans-unit id="label_event_type">
+        <source>Event type</source>
+      </trans-unit>
+      <trans-unit id="label_accreditation_number">
+        <source>Accreditation number</source>
+      </trans-unit>
+      <trans-unit id="label_credit_points">
+        <source>Credit points</source>
+      </trans-unit>
+      <trans-unit id="label_date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="label_time">
+        <source>Time</source>
+      </trans-unit>
+      <trans-unit id="label_place">
+        <source>Place</source>
+      </trans-unit>
+      <trans-unit id="label_room">
+        <source>Room</source>
+      </trans-unit>
+      <trans-unit id="label_attendance_mode">
+        <source>On-site/online</source>
+      </trans-unit>
+      <trans-unit id="label_attendance_mode.onSite">
+        <source>on-site</source>
+      </trans-unit>
+      <trans-unit id="label_attendance_mode.online">
+        <source>online</source>
+      </trans-unit>
+      <trans-unit id="label_seats">
+        <source>Seats</source>
+      </trans-unit>
+      <trans-unit id="label_total_price">
+        <source>Total price</source>
+      </trans-unit>
+      <trans-unit id="label_attendees_names">
+        <source>Registered persons</source>
+      </trans-unit>
+      <trans-unit id="label_lodgings">
+        <source>Lodging options</source>
+      </trans-unit>
+      <trans-unit id="label_kids">
+        <source>Number of kids</source>
+      </trans-unit>
+      <trans-unit id="label_price">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="label_price_general">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="label_price_regular">
+        <source>Regular price</source>
+      </trans-unit>
+      <trans-unit id="label_price_regular_early">
+        <source>Early-bird price</source>
+      </trans-unit>
+      <trans-unit id="label_price_earlybird_regular">
+        <source>Early-bird price</source>
+      </trans-unit>
+      <trans-unit id="label_price_special">
+        <source>Special price</source>
+      </trans-unit>
+      <trans-unit id="label_price_special_early">
+        <source>Early-bird special price</source>
+      </trans-unit>
+      <trans-unit id="label_price_earlybird_special">
+        <source>Early-bird special price</source>
+      </trans-unit>
+      <trans-unit id="label_method_of_payment">
+        <source>Method of payment</source>
+      </trans-unit>
+      <trans-unit id="label_gender">
+        <source>Gender</source>
+      </trans-unit>
+      <trans-unit id="label_username">
+        <source>User name</source>
+      </trans-unit>
+      <trans-unit id="label_name">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="label_address">
+        <source>Address</source>
+      </trans-unit>
+      <trans-unit id="label_zip">
+        <source>ZIP code</source>
+      </trans-unit>
+      <trans-unit id="label_city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="label_country">
+        <source>Country</source>
+      </trans-unit>
+      <trans-unit id="label_attendees">
+        <source>Attendees</source>
+      </trans-unit>
+      <trans-unit id="label_vacancies">
+        <source>Vacancies</source>
+      </trans-unit>
+      <trans-unit id="label_unlimited">
+        <source>unlimited</source>
+      </trans-unit>
+      <trans-unit id="label_enough_attendees">
+        <source>Enough attendees</source>
+      </trans-unit>
+      <trans-unit id="label_is_full">
+        <source>Is full</source>
+      </trans-unit>
+      <trans-unit id="label_paymentmethod">
+        <source>Selected method of payment</source>
+      </trans-unit>
+      <trans-unit id="label_billing_address">
+        <source>Billing address</source>
+      </trans-unit>
+      <trans-unit id="label_telephone">
+        <source>Phone</source>
+      </trans-unit>
+      <trans-unit id="label_email">
+        <source>Email address</source>
+      </trans-unit>
+      <trans-unit id="label_interests">
+        <source>Special interests</source>
+      </trans-unit>
+      <trans-unit id="label_expectations">
+        <source>Expectations</source>
+      </trans-unit>
+      <trans-unit id="label_background_knowledge">
+        <source>Background knowledge</source>
+      </trans-unit>
+      <trans-unit id="label_notes">
+        <source>Additional Notes</source>
+      </trans-unit>
+      <trans-unit id="label_webinar_url">
+        <source>Webinar URL</source>
+      </trans-unit>
+      <trans-unit id="label_seminardata">
+        <source>Seminar data</source>
+      </trans-unit>
+      <trans-unit id="label_feuserdata">
+        <source>Account data</source>
+      </trans-unit>
+      <trans-unit id="label_attendancedata">
+        <source>Data that has been entered on registration</source>
+      </trans-unit>
+      <trans-unit id="label_gender.I.0">
+        <source>Mr.</source>
+      </trans-unit>
+      <trans-unit id="label_gender.I.1">
+        <source>Ms.</source>
+      </trans-unit>
+      <trans-unit id="label_status.I.1">
+        <source>Student</source>
+      </trans-unit>
+      <trans-unit id="label_status.I.2">
+        <source>Job seeking</source>
+      </trans-unit>
+      <trans-unit id="label_status.I.3">
+        <source>Working</source>
+      </trans-unit>
+      <trans-unit id="label_status.I.4">
+        <source>Retired</source>
+      </trans-unit>
+      <trans-unit id="status_regular">
+        <source>regular</source>
+      </trans-unit>
+      <trans-unit id="status_waiting_list">
+        <source>waiting list</source>
+      </trans-unit>
+      <trans-unit id="status_nonbinding_reservation">
+        <source>nonbinding reservation</source>
+      </trans-unit>
+      <trans-unit id="label_yes">
+        <source>yes</source>
+      </trans-unit>
+      <trans-unit id="label_no">
+        <source>no</source>
+      </trans-unit>
+      <trans-unit id="label_hours">
+        <source>h</source>
+      </trans-unit>
+      <trans-unit id="label_checkboxes">
+        <source>Selected options</source>
+      </trans-unit>
+      <trans-unit id="message_notLoggedIn">
+        <source>Please log in first.</source>
+      </trans-unit>
+      <trans-unit id="message_notLoggedIn_informal">
+        <source>Please log in first.</source>
+      </trans-unit>
+      <trans-unit id="message_alreadyRegistered">
+        <source>You already have registered for this event.</source>
+      </trans-unit>
+      <trans-unit id="message_alreadyRegistered_informal">
+        <source>You already have registered for this event.</source>
+      </trans-unit>
+      <trans-unit id="message_missingSeminarNumber">
+        <source>
+          The even UID is missing from the URL. If you get this error message using a link on this page,
+          please notify the webmaster. Thank you!
+        </source>
+      </trans-unit>
+      <trans-unit id="message_wrongSeminarNumber">
+        <source>
+          There is no event with this number. If you get this error message using a link on this page,
+          please notify the webmaster. Thank you!
+        </source>
+      </trans-unit>
+      <trans-unit id="message_wrongSeminarNumber_informal">
+        <source>
+          There is no event with this number. If you get this error message using a link on this page,
+          please notify the webmaster. Thank you!
+        </source>
+      </trans-unit>
+      <trans-unit id="message_noRegistrationNecessary">
+        <source>For this event, no registration is necessary.</source>
+      </trans-unit>
+      <trans-unit id="message_seminarCancelled">
+        <source>Alas, this event has been canceled.</source>
+      </trans-unit>
+      <trans-unit id="message_seminarRegistrationIsClosed">
+        <source>Sorry, the registration period for this event is over.</source>
+      </trans-unit>
+      <trans-unit id="message_noVacancies">
+        <source>Sorry, there are no more vacancies.</source>
+      </trans-unit>
+      <trans-unit id="message_willBeAnnounced">
+        <source>will be announced</source>
+      </trans-unit>
+      <trans-unit id="message_forFree">
+        <source>free</source>
+      </trans-unit>
+      <trans-unit id="message_enough">
+        <source>enough</source>
+      </trans-unit>
+      <trans-unit id="message_fullyBooked">
+        <source>fully booked</source>
+      </trans-unit>
+      <trans-unit id="message_registrationOpensOn">
+        <source>starting %s</source>
+      </trans-unit>
+      <trans-unit id="message_accessDenied">
+        <source>Sorry, you don't have access to this part of the site.</source>
+      </trans-unit>
+      <trans-unit id="message_accessDenied_informal">
+        <source>Sorry, you don't have access to this part of the site.</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationSubject">
+        <source>Registration confirmation</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationHello">
+        <source>thank you for registering for the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationHello_informal">
+        <source>thank you for registering for the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_price">
+        <source>at the total price of %s</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnUnregistrationSubject">
+        <source>Unregistration confirmation</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnUnregistrationHello">
+        <source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnUnregistrationHello_informal">
+        <source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnRegistrationForQueueSubject">
+        <source>Registration for the waiting list confirmation</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnRegistrationForQueueHello">
+        <source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnRegistrationForQueueHello_informal">
+        <source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnQueueUpdateSubject">
+        <source>Registration became a regular registration confirmation</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnQueueUpdateHello">
+        <source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_confirmationOnQueueUpdateHello_informal">
+        <source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="email_unregistrationNotice">
+        <source>You will be able to unregister online until %s.</source>
+      </trans-unit>
+      <trans-unit id="email_unregistrationNotice_informal">
+        <source>You will be able to unregister online until %s.</source>
+      </trans-unit>
+      <trans-unit id="email_additionalNotificationEnoughRegistrations">
+        <source>Your event has now enough registrations to be held.</source>
+      </trans-unit>
+      <trans-unit id="email_additionalNotificationEnoughRegistrationsSubject">
+        <source>Event has enough registrations: %d - %s</source>
+      </trans-unit>
+      <trans-unit id="email_additionalNotificationIsFull">
+        <source>Your event is full, there are no empty seats left.</source>
+      </trans-unit>
+      <trans-unit id="email_additionalNotificationIsFullSubject">
+        <source>Event is full: %d - %s</source>
+      </trans-unit>
+      <trans-unit id="email_notificationSubject">
+        <source>Registration notification</source>
+      </trans-unit>
+      <trans-unit id="email_notificationHello">
+        <source>
+          Hello,
 
-					someone just has registered for an event:
-				</source>
-			</trans-unit>
-			<trans-unit id="email_notificationOnUnregistrationSubject">
-				<source>Unregistration notification</source>
-			</trans-unit>
-			<trans-unit id="email_notificationOnUnregistrationHello">
-				<source>
-					Hello,
+          someone just has registered for an event:
+        </source>
+      </trans-unit>
+      <trans-unit id="email_notificationOnUnregistrationSubject">
+        <source>Unregistration notification</source>
+      </trans-unit>
+      <trans-unit id="email_notificationOnUnregistrationHello">
+        <source>
+          Hello,
 
-					someone just has unregistered from an event:
-				</source>
-			</trans-unit>
-			<trans-unit id="email_notificationOnRegistrationForQueueSubject">
-				<source>Registration for waiting list notification</source>
-			</trans-unit>
-			<trans-unit id="email_notificationOnRegistrationForQueueHello">
-				<source>
-					Hello,
+          someone just has unregistered from an event:
+        </source>
+      </trans-unit>
+      <trans-unit id="email_notificationOnRegistrationForQueueSubject">
+        <source>Registration for waiting list notification</source>
+      </trans-unit>
+      <trans-unit id="email_notificationOnRegistrationForQueueHello">
+        <source>
+          Hello,
 
-					someone just has registered for the waiting list of an event:
-				</source>
-			</trans-unit>
-			<trans-unit id="email_notificationOnQueueUpdateSubject">
-				<source>Registration became a regular registration notification</source>
-			</trans-unit>
-			<trans-unit id="email_notificationOnQueueUpdateHello">
-				<source>
-					Hello,
+          someone just has registered for the waiting list of an event:
+        </source>
+      </trans-unit>
+      <trans-unit id="email_notificationOnQueueUpdateSubject">
+        <source>Registration became a regular registration notification</source>
+      </trans-unit>
+      <trans-unit id="email_notificationOnQueueUpdateHello">
+        <source>
+          Hello,
 
-					someone's registration just has become a regular registration of an event:
-				</source>
-			</trans-unit>
-			<trans-unit id="email_eventTakesPlaceReminderSubject">
-				<source>&quot;%event&quot; begins in %days days</source>
-			</trans-unit>
-			<trans-unit id="email_eventTakesPlaceReminder">
-				<source>
-					Hello %organizer,
+          someone's registration just has become a regular registration of an event:
+        </source>
+      </trans-unit>
+      <trans-unit id="email_eventTakesPlaceReminderSubject">
+        <source>&quot;%event&quot; begins in %days days</source>
+      </trans-unit>
+      <trans-unit id="email_eventTakesPlaceReminder">
+        <source>
+          Hello %organizer,
 
-					the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there
-					are %registrations registrations for this event.
-				</source>
-			</trans-unit>
-			<trans-unit id="email_cancelationDeadlineReminderSubject">
-				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
-			</trans-unit>
-			<trans-unit id="email_cancelationDeadlineReminder">
-				<source>
-					Hello %organizer,
+          the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there
+          are %registrations registrations for this event.
+        </source>
+      </trans-unit>
+      <trans-unit id="email_cancelationDeadlineReminderSubject">
+        <source>Cancelation deadline for &quot;%event&quot; has just passed</source>
+      </trans-unit>
+      <trans-unit id="email_cancelationDeadlineReminder">
+        <source>
+          Hello %organizer,
 
-					the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number:
-					%uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are
-					%registrations registrations for this event.
-				</source>
-			</trans-unit>
-			<trans-unit id="label_planned_disclaimer">
-				<source>
-					For this event to take place, a minimum number of registrations is needed. In case this number
-					is not reached, the event will not take place. Of course, you then will be notified as soon as
-					possible.
-				</source>
-			</trans-unit>
-			<trans-unit id="email_hello_informal">
-				<source>Dear</source>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_99">
-				<source>Dear</source>
-			</trans-unit>
-			<trans-unit id="email_eventDate">
-				<source>on %s</source>
-			</trans-unit>
-			<trans-unit id="email_timeFrom">
-				<source>from %s</source>
-			</trans-unit>
-			<trans-unit id="email_timeAt">
-				<source>at %s</source>
-			</trans-unit>
-			<trans-unit id="email_timeTo">
-				<source>to</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.mailNotifier.name">
-				<source>Email notifications</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.mailNotifier.description">
-				<source>
-					This tasks sends email notifications, including reminders that an event will take place shortly
-					or that the cancelation deadline is due.
-				</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.fields.page-uid">
-				<source>UID of the page with the TypoScript configuration</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.errors.page-uid">
-				<source>Please enter the UID of an existing page.</source>
-			</trans-unit>
-			<trans-unit id="email-event-canceled-subject">
-				<source>Event canceled: %eventTitle %eventDate</source>
-			</trans-unit>
-			<trans-unit id="email-event-confirmed-subject">
-				<source>Event confirmed: %eventTitle %eventDate</source>
-			</trans-unit>
-			<trans-unit id="email-event-canceled-body">
-				<source>
-					%salutation
+          the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number:
+          %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are
+          %registrations registrations for this event.
+        </source>
+      </trans-unit>
+      <trans-unit id="label_planned_disclaimer">
+        <source>
+          For this event to take place, a minimum number of registrations is needed. In case this number
+          is not reached, the event will not take place. Of course, you then will be notified as soon as
+          possible.
+        </source>
+      </trans-unit>
+      <trans-unit id="email_hello_informal">
+        <source>Dear</source>
+      </trans-unit>
+      <trans-unit id="email_hello_formal_99">
+        <source>Dear</source>
+      </trans-unit>
+      <trans-unit id="email_eventDate">
+        <source>on %s</source>
+      </trans-unit>
+      <trans-unit id="email_timeFrom">
+        <source>from %s</source>
+      </trans-unit>
+      <trans-unit id="email_timeAt">
+        <source>at %s</source>
+      </trans-unit>
+      <trans-unit id="email_timeTo">
+        <source>to</source>
+      </trans-unit>
+      <trans-unit id="schedulerTasks.mailNotifier.name">
+        <source>Email notifications</source>
+      </trans-unit>
+      <trans-unit id="schedulerTasks.mailNotifier.description">
+        <source>
+          This tasks sends email notifications, including reminders that an event will take place shortly
+          or that the cancelation deadline is due.
+        </source>
+      </trans-unit>
+      <trans-unit id="schedulerTasks.fields.page-uid">
+        <source>UID of the page with the TypoScript configuration</source>
+      </trans-unit>
+      <trans-unit id="schedulerTasks.errors.page-uid">
+        <source>Please enter the UID of an existing page.</source>
+      </trans-unit>
+      <trans-unit id="email-event-canceled-subject">
+        <source>Event canceled: %eventTitle %eventDate</source>
+      </trans-unit>
+      <trans-unit id="email-event-confirmed-subject">
+        <source>Event confirmed: %eventTitle %eventDate</source>
+      </trans-unit>
+      <trans-unit id="email-event-canceled-body">
+        <source>
+          %salutation
 
-					you registered for the event &quot;%eventTitle&quot; (%eventDate).
+          you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
-					Unfortunately, we had to cancel this event.
-				</source>
-			</trans-unit>
-			<trans-unit id="email-event-confirmed-body">
-				<source>
-					%salutation
+          Unfortunately, we had to cancel this event.
+        </source>
+      </trans-unit>
+      <trans-unit id="email-event-confirmed-body">
+        <source>
+          %salutation
 
-					you registered for the event &quot;%eventTitle&quot; (%eventDate).
+          you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
-					This event now has been confirmed.
-				</source>
-			</trans-unit>
-			<trans-unit id="message_onRequest">
-				<source>on request</source>
-			</trans-unit>
-			<trans-unit id="registrationDigestEmail_Subject">
-				<source>New registrations</source>
-			</trans-unit>
-			<trans-unit id="range">
-				<source>%1s–%2s</source>
-			</trans-unit>
-			<trans-unit id="dateFormat">
-				<source>Y-m-d</source>
-			</trans-unit>
-			<trans-unit id="timeFormat">
-				<source>H:i</source>
-			</trans-unit>
-			<trans-unit id="timeWithUnit">
-				<source>%1s</source>
-			</trans-unit>
-			<trans-unit id="decimalSeparator">
-				<source>.</source>
-			</trans-unit>
-			<trans-unit id="thousandsSeparator">
-				<source>,</source>
-			</trans-unit>
-			<trans-unit id="priceWithAndWithoutVat">
-				<source>%1$s incl. VAT (%2$s plus %3$s VAT)</source>
-			</trans-unit>
-			<trans-unit id="registrationTitleFormat">
-				<source>%1s / %2s, %3s</source>
-			</trans-unit>
-			<trans-unit id="message_403">
-				<source>Error 403. Sorry, you don't have access to this data.</source>
-			</trans-unit>
-			<trans-unit id="message_404">
-				<source>
-					Error 404. The requested page does not exist. If you get this error message using a link on this
-					page, please notify the webmaster. Thank you!
-				</source>
-			</trans-unit>
-			<trans-unit id="message_404_registrations">
-				<source>
-					Error 404. There is no event with this number. If you get this error message using a link on
-					this page, please notify the webmaster. Thank you!
-				</source>
-			</trans-unit>
-			<trans-unit id="message_emailToAttendeesSent">
-				<source>The email to the attendees has been sent.</source>
-			</trans-unit>
-			<trans-unit id="mlang_tabs_tab">
-				<source>Events</source>
-			</trans-unit>
-			<trans-unit id="mlang_labels_tabdescr">
-				<source>This module allows you to manage events and registrations.</source>
-			</trans-unit>
-			<trans-unit id="mlang_labels_tablabel">
-				<source>This module allows you to manage events and registrations.</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_general">
-				<source>General</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.what_to_display">
-				<source>What should be displayed:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_template_and_special">
-				<source>Templates and special properties</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.seminar_list">
-				<source>Event List</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.single_view">
-				<source>Event Single View</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.topic_list">
-				<source>Topic List</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.my_events">
-				<source>My Events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.my_vip_events">
-				<source>My Managed Events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.list_registrations">
-				<source>List of Registrations (for attendees)</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.list_vip_registrations">
-				<source>List of Registrations (for event managers)</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.category_list">
-				<source>Category List</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.listPID">
-				<source>Page that contains the seminar list:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.detailPID">
-				<source>Page that contains the detailed view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.myEventsPID">
-				<source>Page that contains the &quot;my events&quot; list:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.registerPID">
-				<source>Page that contains the event registration form:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.loginPID">
-				<source>Page that contains the login form:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.registrationsListPID">
-				<source>Page that contains the list of registrations (for attendees):</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.registrationsVipListPID">
-				<source>Page that contains the list of registrations (for event managers):</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.formal">
-				<source>formal</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.informal">
-				<source>informal</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_list_view">
-				<source>List view</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.displaySearchFormFields">
-				<source>Display search widget options:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.type">
-				<source>Event type</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.organizer">
-				<source>Organizer</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.categories">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.age">
-				<source>Age</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.price">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.textField">
-				<source>Full-text search</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToEventTypes">
-				<source>List events only of these types:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToCategories">
-				<source>List events only from these categories:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToPlaces">
-				<source>List events only at these places:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToOrganizers">
-				<source>List events only of these organizers:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies">
-				<source>Show only events which have vacancies:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees">
-				<source>Show attached files list only to attendees:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.startingpoint">
-				<source>Data source:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive">
-				<source>Recursion:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showSingleEvent">
-				<source>Which event should be shown in a detailed view?</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList">
-				<source>Only show events from this time-frame:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList1">
-				<source>all events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList2">
-				<source>past events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList3">
-				<source>past and current events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList4">
-				<source>current events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList5">
-				<source>current and upcoming events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList6">
-				<source>upcoming events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList7">
-				<source>events with the deadline in the future</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList8">
-				<source>today</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.hideFields">
-				<source>Hide fields in detailed view (comma-separated):</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showEmptyEntryInOptionLists">
-				<source>Show empty option in selector widget:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter">
-				<source>Number of years a user can search into the future:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.hideSearchForm">
-				<source>Hide the search form in list view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.hidePageBrowser">
-				<source>Hide the page browser in list view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.hideCanceledEvents">
-				<source>Hide canceled events in list view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sortListViewByCategory">
-				<source>Sort the list view by category:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.hideColumns">
-				<source>Hide column names in list view (comma-separated):</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.generalPriceInList">
-				<source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.generalPriceInSingle">
-				<source>
-					Use &quot;Price&quot; as heading for the standard price in the single view and the registration
-					page:
-				</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showSpeakerDetails">
-				<source>Show speaker details</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showSiteDetails">
-				<source>Show site details</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_registrationsListView">
-				<source>Registrations list view</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">
-				<source>Which FEuser fields to show in the list of registrations for an event</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList">
-				<source>Which registration fields to show in the list of registrations for an event:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.linkToSingleView">
-				<source>Link the single view from the list view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.always">
-				<source>always</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.never">
-				<source>never</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription">
-				<source>if the event has a description</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.fromTsSetup">
-				<source>(from TS setup)</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.0">
-				<source>0 levels (only selected page)</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.1">
-				<source>1 level</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.2">
-				<source>2 levels</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.3">
-				<source>3 levels</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.4">
-				<source>4 levels</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.5">
-				<source>Infinite</source>
-			</trans-unit>
-			<trans-unit id="pi_list_browseresults_prev">
-				<source>&lt; Previous</source>
-			</trans-unit>
-			<trans-unit id="pi_list_browseresults_page">
-				<source>Page</source>
-			</trans-unit>
-			<trans-unit id="pi_list_browseresults_next">
-				<source>Next &gt;</source>
-			</trans-unit>
-			<trans-unit id="pi_list_browseresults_displays">
-				<source>
-					Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of
-					###SPAN_BEGIN###%s&lt;/span&gt;
-				</source>
-			</trans-unit>
-			<trans-unit id="pi_list_browseresults_noResults">
-				<source>Sorry, no events were found.</source>
-			</trans-unit>
-			<trans-unit id="pi_list_searchBox_search">
-				<source>Search</source>
-			</trans-unit>
-			<trans-unit id="label_myevents">
-				<source>You are registered for the following events:</source>
-			</trans-unit>
-			<trans-unit id="label_myevents_informal">
-				<source>You are registered for the following events:</source>
-			</trans-unit>
-			<trans-unit id="label_myvipevents">
-				<source>You are an editor for the following events:</source>
-			</trans-unit>
-			<trans-unit id="label_myvipevents_informal">
-				<source>You are an editor for the following events:</source>
-			</trans-unit>
-			<trans-unit id="label_category">
-				<source>Category</source>
-			</trans-unit>
-			<trans-unit id="label_subtitle">
-				<source>Subtitle</source>
-			</trans-unit>
-			<trans-unit id="label_timeslots">
-				<source>Time slots</source>
-			</trans-unit>
-			<trans-unit id="label_expiry">
-				<source>License expiry</source>
-			</trans-unit>
-			<trans-unit id="label_speakers_single_unknown">
-				<source>Speaker</source>
-			</trans-unit>
-			<trans-unit id="label_speakers">
-				<source>Speakers</source>
-			</trans-unit>
-			<trans-unit id="label_partners_single_unknown">
-				<source>Partner</source>
-			</trans-unit>
-			<trans-unit id="label_partners">
-				<source>Partners</source>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_unknown">
-				<source>Tutor</source>
-			</trans-unit>
-			<trans-unit id="label_tutors">
-				<source>Tutors</source>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_unknown">
-				<source>Leader</source>
-			</trans-unit>
-			<trans-unit id="label_leaders">
-				<source>Leaders</source>
-			</trans-unit>
-			<trans-unit id="label_price_range">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="label_paymentmethods">
-				<source>Available methods of payment</source>
-			</trans-unit>
-			<trans-unit id="label_select_paymentmethod">
-				<source>Payment method:</source>
-			</trans-unit>
-			<trans-unit id="label_target_groups">
-				<source>Target Groups</source>
-			</trans-unit>
-			<trans-unit id="label_attached_files_short">
-				<source>Files</source>
-			</trans-unit>
-			<trans-unit id="label_requirements">
-				<source>Requirements</source>
-			</trans-unit>
-			<trans-unit id="label_dependencies">
-				<source>Required for</source>
-			</trans-unit>
-			<trans-unit id="label_organizers">
-				<source>Organizers</source>
-			</trans-unit>
-			<trans-unit id="label_organizing_partners">
-				<source>Organizing partners</source>
-			</trans-unit>
-			<trans-unit id="label_categories">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="label_deadline_registration">
-				<source>Deadline for registration</source>
-			</trans-unit>
-			<trans-unit id="label_status_registration">
-				<source>Status</source>
-			</trans-unit>
-			<trans-unit id="label_registration">
-				<source>Registration</source>
-			</trans-unit>
-			<trans-unit id="label_attached_files">
-				<source>Attached files</source>
-			</trans-unit>
-			<trans-unit id="label_onlineRegistration">
-				<source>register</source>
-			</trans-unit>
-			<trans-unit id="label_onlineRegistrationOnQueue">
-				<source>waiting list</source>
-			</trans-unit>
-			<trans-unit id="label_onlinePrebooking">
-				<source>prebook</source>
-			</trans-unit>
-			<trans-unit id="label_onlineUnregistration">
-				<source>unregister</source>
-			</trans-unit>
-			<trans-unit id="label_list_registrations">
-				<source>List of registrations</source>
-			</trans-unit>
-			<trans-unit id="label_listRegistrationsLink">
-				<source>View the list of registrations</source>
-			</trans-unit>
-			<trans-unit id="label_list_otherdates">
-				<source>Other dates for this topic</source>
-			</trans-unit>
-			<trans-unit id="label_list_dates">
-				<source>Dates for this topic</source>
-			</trans-unit>
-			<trans-unit id="label_eventsnextday">
-				<source>Subsequent events</source>
-			</trans-unit>
-			<trans-unit id="label_edit">
-				<source>Edit</source>
-			</trans-unit>
-			<trans-unit id="label_back">
-				<source>Back to listing</source>
-			</trans-unit>
-			<trans-unit id="label_register_additional_information">
-				<source>Additional information</source>
-			</trans-unit>
-			<trans-unit id="label_register_lodging_and_food">
-				<source>Lodging and food</source>
-			</trans-unit>
-			<trans-unit id="label_accommodation">
-				<source>
-					How are your lodging preferences (if possible a single room, a double room, no lodging)?
-				</source>
-			</trans-unit>
-			<trans-unit id="label_food">
-				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
-			</trans-unit>
-			<trans-unit id="label_known_from">
-				<source>How have you heard of this event?</source>
-			</trans-unit>
-			<trans-unit id="label_known_from_informal">
-				<source>How have you heard of this event?</source>
-			</trans-unit>
-			<trans-unit id="label_register_additional_attendees">
-				<source>Persons to register:</source>
-			</trans-unit>
-			<trans-unit id="label_registered_themselves">
-				<source>myself (too)</source>
-			</trans-unit>
-			<trans-unit id="label_firstname">
-				<source>First name:</source>
-			</trans-unit>
-			<trans-unit id="label_lastname">
-				<source>Last name:</source>
-			</trans-unit>
-			<trans-unit id="label_register_seats">
-				<source>Seats to book:</source>
-			</trans-unit>
-			<trans-unit id="label_legend_payment">
-				<source>Payment</source>
-			</trans-unit>
-			<trans-unit id="label_company">
-				<source>Company:</source>
-			</trans-unit>
-			<trans-unit id="label_gender.I.2">
-				<source>diverse</source>
-			</trans-unit>
-			<trans-unit id="label_foods">
-				<source>Food options</source>
-			</trans-unit>
-			<trans-unit id="label_register_all_terms">
-				<source>Registration terms</source>
-			</trans-unit>
-			<trans-unit id="label_terms">
-				<source>I accept the terms and conditions.</source>
-			</trans-unit>
-			<trans-unit id="label_terms_2">
-				<source>I accept the additional terms.</source>
-			</trans-unit>
-			<trans-unit id="label_timeslot_date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="label_timeslot_time">
-				<source>Time</source>
-			</trans-unit>
-			<trans-unit id="label_timeslot_room">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="label_timeslot_place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="label_selector_submit">
-				<source>Apply filter</source>
-			</trans-unit>
-			<trans-unit id="label_selector_pleaseChoose">
-				<source>please choose...</source>
-			</trans-unit>
-			<trans-unit id="label_selector_reset">
-				<source>Reset</source>
-			</trans-unit>
-			<trans-unit id="label_selector_searchbox">
-				<source>Search term</source>
-			</trans-unit>
-			<trans-unit id="label_to">
-				<source>to</source>
-			</trans-unit>
-			<trans-unit id="label_organizer">
-				<source>Organizer</source>
-			</trans-unit>
-			<trans-unit id="label_date_search">
-				<source>Period from</source>
-			</trans-unit>
-			<trans-unit id="label_age_search">
-				<source>Age:</source>
-			</trans-unit>
-			<trans-unit id="label_price_search">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="label_searching_hints">
-				<source>
-					You can shorten the list of events by applying one ore more filter criteria. To see the whole
-					list, just reset the filter.
-				</source>
-			</trans-unit>
-			<trans-unit id="label_searching_hints_informal">
-				<source>
-					You can shorten the list of events by applying one ore more filter criteria. To see the whole
-					list, just reset the filter.
-				</source>
-			</trans-unit>
-			<trans-unit id="label_we_offer_events_in_categories">
-				<source>Currently, we offer you events in the following categories:</source>
-			</trans-unit>
-			<trans-unit id="label_we_offer_events_in_categories_informal">
-				<source>Currently, we offer you events in the following categories:</source>
-			</trans-unit>
-			<trans-unit id="label_no_categories">
-				<source>Currently, we aren't offering any categorized events.</source>
-			</trans-unit>
-			<trans-unit id="label_waiting_list">
-				<source>Waiting list</source>
-			</trans-unit>
-			<trans-unit id="message_noResults">
-				<source>Sorry, currently no events could be found.</source>
-			</trans-unit>
-			<trans-unit id="message_pleaseLogIn">
-				<source>Please log in to view this page.</source>
-			</trans-unit>
-			<trans-unit id="message_pleaseLogIn_informal">
-				<source>Please log in to view this page.</source>
-			</trans-unit>
-			<trans-unit id="message_noRegistrations">
-				<source>For this event, there are no registrations yet.</source>
-			</trans-unit>
-			<trans-unit id="message_earlybird_price">
-				<source>price valid and bookable until %s</source>
-			</trans-unit>
-			<trans-unit id="message_noTargetGroupAgeNumber">
-				<source>Please enter only positive numbers as minimum and maximum age.</source>
-			</trans-unit>
-			<trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge">
-				<source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
-			</trans-unit>
-			<trans-unit id="speakerImage.alt">
-				<source>portrait image</source>
-			</trans-unit>
-			<trans-unit id="label_date_of_birth">
-				<source>Date of birth</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor">
-				<source>Front-end editor for events</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.eventCreation">
-				<source>Event creation</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType">
-				<source>Event type to create</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents">
-				<source>single events</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates">
-				<source>event dates</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
-				<source>Folder for the created events</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions">
-				<source>Display options</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow">
-				<source>categories</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories">
-				<source>categories</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
-				<source>description</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType">
-				<source>eventType</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.dateAndTime">
-				<source>date and time</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdDeadline">
-				<source>early-bird deadline</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationDeadline">
-				<source>registration deadline</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationRequired">
-				<source>registration required</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.waitingList">
-				<source>waiting list</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.minimumNumberOfRegistrations">
-				<source>required number of registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations">
-				<source>maximum number of registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.numberOfOfflineRegistrations">
-				<source>offline registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
-				<source>standard price</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdPrice">
-				<source>early-bird price</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.venues">
-				<source>venues</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.speakers">
-				<source>speakers</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.index.headline">
-				<source>Events I have created</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.edit.headline">
-				<source>Edit event</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.new.headline">
-				<source>Create new event</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.uid">
-				<source>UID</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.internalTitle">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.topic">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.categories">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.regularRegistrations">
-				<source>Registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.vacancies">
-				<source>Vacancies</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.events.property.vacancies.unlimited">
-				<source>unlimited</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.standardPrice">
-				<source>Standard price</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice">
-				<source>Early-bird price</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.eventType">
-				<source>Event type</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.start">
-				<source>Start</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.end">
-				<source>End</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline">
-				<source>Early-bird deadline</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.registrationDeadline">
-				<source>Registration deadline</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.registrationRequired">
-				<source>Registration is required</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.waitingList">
-				<source>Has a waiting list</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
-				<source>Required number of registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
-				<source>Maximum number of registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.numberOfOfflineRegistrations">
-				<source>Offline registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.venues">
-				<source>Venues</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.speakers">
-				<source>Speakers</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.property.organizers">
-				<source>Organizer</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.action.new">
-				<source>Create a new event</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.action.edit">
-				<source>Edit</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.action.cancel">
-				<source>Cancel</source>
-			</trans-unit>
-			<trans-unit id="plugin.frontEndEditor.action.save">
-				<source>Save</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration">
-				<source>Registration form for events</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.tab.pagesAndFolders">
-				<source>Pages and folders</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
-				<source>Page to display if this plugin is called with no event</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.loginPage">
-				<source>Login page (or with onetimeaccount)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage">
-				<source>Page with the terms &amp; conditions</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage.description">
-				<source>Activates the term &amp; conditions checkbox for all events.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsLinkTitle">
-				<source>Link title for the link to the page with the terms &amp; conditions</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.additionalTermsPage">
-				<source>Page with the additional registration terms</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.additionalTermsPage.description">
-				<source>Activates the additional conditions checkbox only for those events that use it.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.additionalTermsLinkTitle">
-				<source>Link title for the link to the page with the additional registration terms</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
-				<source>Folder in which to store the registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder">
-				<source>Create additional registered persons as FE user in this folder</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder.description">
-				<source>Activates that additional attendees will be saved as FE users.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
-				<source>Persons to register</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
-				<source>Maximum bookable seats per registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
-				<source>People register themselves (too) by default</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
-				<source>Show an email field for additional attendees</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.tab.formFields">
-				<source>Form fields</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow">
-				<source>Fields and data to show in the form</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.inputFields">
-				<source>Input fields</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode">
-				<source>attendance mode</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
-				<source>seats</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
-				<source>is registering themselves (too)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
-				<source>persons to register</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.interests">
-				<source>interests</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.expectations">
-				<source>expectations</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.backgroundKnowledge">
-				<source>background knowledge</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.knownFrom">
-				<source>Known from where?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments">
-				<source>comments</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
-				<source>price</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.orderReference">
-				<source>order reference</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
-				<source>Billing address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.separateBillingAddress">
-				<source>separate billing address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCompany">
-				<source>company</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingFullName">
-				<source>full name</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingStreetAddress">
-				<source>street address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingZipCode">
-				<source>ZIP code</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCity">
-				<source>city</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCountry">
-				<source>country</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingPhoneNumber">
-				<source>phone number</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingEmailAddress">
-				<source>email address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage">
-				<source>Confirmation page</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.personalData">
-				<source>personal data</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
-				<source>consent to terms &amp; conditions</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
-				<source>%1$s, %2$s</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid">
-				<source>%1$s, %2$s (event #%3$u)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.sorry">
-				<source>Sorry!</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
-				<source>Event registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
-				<source>Waiting list registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
-				<source>Your registration data</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.registrationData_informal">
-				<source>Your registration data</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.registrationSent_formal">
-				<source>Your registration has been sent.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
-				<source>Your registration has been sent.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.termsAndConditions">
-				<source>Terms and conditions</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.personalData_formal">
-				<source>Your personal data</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.personalData_informal">
-				<source>Your personal data</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.summary">
-				<source>Summary</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.fieldset.payment">
-				<source>Payment</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
-				<source>Billing address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.fieldset.personsToRegister">
-				<source>Persons to register</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.fieldset.foodAndAccommodation">
-				<source>Food and accommodation</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
-				<source>Additional information</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
-				<source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
-				<source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_formal">
-				<source>Thank you for registering for the waiting list of our event.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_informal">
-				<source>Thank you for registering for the waiting list of our event.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
-				<source>
-					The registration fee will only be payable once your registration has been changed from a waiting
-					list registration to a regular registration.
-				</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_informal">
-				<source>
-					The registration fee will only be payable once your registration has been changed from a waiting
-					list registration to a regular registration.
-				</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
-				<source>For this event, registration is not possible.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
-				<source>For this event, registration is not possible at the moment.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
-				<source>You are already registered for this event.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
-				<source>You are already registered for this event.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.error.fullyBooked">
-				<source>Unfortunately, there are no more vacancies.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.action.back">
-				<source>Back</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.action.continue">
-				<source>Continue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.action.registerForFree">
-				<source>Confirm registration (for free)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.action.registerWithCosts">
-				<source>Confirm registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.event">
-				<source>Event</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.interests_formal">
-				<source>What are your interests concerning this event?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.interests_informal">
-				<source>What are your interests concerning this event?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.expectations_formal">
-				<source>What are your expectations?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.expectations_informal">
-				<source>What are your expectations?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_formal">
-				<source>What are is your background knowledge?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_informal">
-				<source>What are is your background knowledge?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.knownFrom_formal">
-				<source>How did you hear about this event?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
-				<source>How did you hear about this event?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.comments">
-				<source>Other comments</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.attendanceMode">
-				<source>On-site/online</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
-				<source>on-site</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.attendanceMode.2">
-				<source>online</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.seats">
-				<source>Seats to book</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.registeredThemselves">
-				<source>I am registering myself (too).</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
-				<source>I am not registering myself.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
-				<source>Separate billing address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingAddress">
-				<source>Billing address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.company">
-				<source>Company</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.fullName">
-				<source>Full name</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.streetAddress">
-				<source>Street address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.zipCode">
-				<source>ZIP code</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.country">
-				<source>Country</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.phoneNumber">
-				<source>Phone number</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.emailAddress">
-				<source>Email address</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.registrationCheckboxes">
-				<source>Registration options</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.foodOptions">
-				<source>Food</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.accommodationOptions">
-				<source>Accommodation</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.attendeesNames">
-				<source>Persons to register</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.paymentMethod">
-				<source>Method of payment</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.priceCode">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.orderReference">
-				<source>Order reference</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price (incl. VAT)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.consentedToTermsAndConditions">
-				<source>I consent to the %1$s.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.consentedToAdditionalTerms">
-				<source>I consent to the %1$s.</source>
-			</trans-unit>
-			<trans-unit id="price.standard">
-				<source>Regular price</source>
-			</trans-unit>
-			<trans-unit id="price.earlyBird">
-				<source>Early-bird price</source>
-			</trans-unit>
-			<trans-unit id="price.special">
-				<source>Special price</source>
-			</trans-unit>
-			<trans-unit id="price.specialEarlyBird">
-				<source>Early-bird special price</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.heading.events">
-				<source>Events</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.heading.registrations">
-				<source>Registrations</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.heading.regularRegistrations">
-				<source>Regular registrations (%u)</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.heading.waitingListRegistrations">
-				<source>Registrations on the waiting list (%u)</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.heading.email">
-				<source>Send an email to all registered persons</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.selectFolder">
-				<source>Please select a folder in the page tree.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.noEventsInFolder">
-				<source>There are no event records in the selected folder.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.noRegistrationsInFolder">
-				<source>There are no event registration in the selected folder.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.noRegistrationsForEvent">
-				<source>This event does not have any registrations yet.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.numberOfEventsFound">
-				<source>%u event(s) found.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.uid">
-				<source>UID</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.internalTitle">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.seats">
-				<source>Seats</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.seats.minimum">
-				<source>required registrations for the event to take place</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.seats.maximum">
-				<source>maximum available seats at the event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.seats.noLimit">
-				<source>This event allows an unlimited registrations.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.invoicingStatus">
-				<source>Invoicing</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.invoicingStatus.invoiced">
-				<source>⏳ invoiced</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.invoicingStatus.paid">
-				<source>✅ paid</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.registrations">
-				<source>Registrations</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.registrations.regular">
-				<source>Regular registrations</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.registrations.waitingList">
-				<source>Registrations on the waiting list</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.registrations.enough">
-				<source>has enough registration to take place</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.registrations.fullyBooked">
-				<source>is fully booked</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.events.property.name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.registration.noName">
-				<source>(User %1$u)</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.registration.noUser">
-				<source>(deleted user)</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.createEvent">
-				<source>Create event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.editEvent">
-				<source>Edit event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.editRegistration">
-				<source>Edit registration</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.editFrontEndUser">
-				<source>Edit FE user</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.hideEvent">
-				<source>Hide event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.unhideEvent">
-				<source>Un-hide event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.deleteEvent">
-				<source>Delete event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.deleteRegistration">
-				<source>Delete registration</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.duplicateEvent">
-				<source>Duplicate event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.csvDownload">
-				<source>Download as CSV file</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.showRegistrations">
-				<source>show</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.showRegistrations.long">
-				<source>show registrations</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.backToEventList">
-				<source>Back to the event list</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.email">
-				<source>Email</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.email.long">
-				<source>Send an email to all registered persons</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.sendEmail">
-				<source>Send email</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.showAllEvents">
-				<source>Show all events</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.action.search">
-				<source>Search</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteEvent.title">
-				<source>Delete event</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteEvent.content">
-				<source>Do you really want to delete this event?</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteEvent.cancel">
-				<source>Cancel</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteEvent.okay">
-				<source>Delete</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteRegistration.title">
-				<source>Delete registration</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteRegistration.content">
-				<source>Do you really want to delete this registration?</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteRegistration.cancel">
-				<source>Cancel</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.confirm.deleteRegistration.okay">
-				<source>Delete</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.search.label">
-				<source>Search events</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.search.placeholder">
-				<source>UID or search term</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.email.subject">
-				<source>Subject</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.email.body">
-				<source>Email body</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.eventDeleted">
-				<source>The event has been deleted.</source>
-			</trans-unit>
-			<trans-unit id="backEndModule.message.registrationDeleted">
-				<source>The registration has been deleted.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.heading.sorry">
-				<source>Sorry!</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.heading.unregistration">
-				<source>Unregister from an event</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.heading.unregistrationSuccess">
-				<source>Unregistration sent</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.error.notLoggedIn">
-				<source>This content is only available after a login.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.error.registrationMissing">
-				<source>This registration does not exist.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_formal">
-				<source>You cannot unregister from this event now.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_informal">
-				<source>You cannot unregister from this event now.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
-				<source>Do you really want to unregister from this event?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
-				<source>Do you really want to unregister from this event?</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.action.cancel">
-				<source>Cancel and go back</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.action.unregister">
-				<source>Unregister</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_formal">
-				<source>Your registration to this event now has been canceled.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_informal">
-				<source>Your registration to this event now has been canceled.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive">
-				<source>Event archive</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders">
-				<source>Pages and folders</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid">
-				<source>Folders with the event records</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive">
-				<source>Recursion into subfolders</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.pagesAndFolders.singleViewPage">
-				<source>Page with the single view</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
-				<source>Display options</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns">
-				<source>Columns to show</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.date">
-				<source>date</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.eventType">
-				<source>event type</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.topic">
-				<source>topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.city">
-				<source>city</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.venue">
-				<source>venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.message.noEventsFound">
-				<source>No events found.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.events.property.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.events.property.eventType">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.events.property.topic">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.events.property.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventArchive.events.property.venue">
-				<source>Venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook">
-				<source>Event outlook</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders">
-				<source>Pages and folders</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid">
-				<source>Folders with the event records</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive">
-				<source>Recursion into subfolders</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage">
-				<source>Page with the single view</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage">
-				<source>Page with the event registration form</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
-				<source>Display options</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns">
-				<source>Columns to show</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.date">
-				<source>date</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.eventType">
-				<source>event type</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.topic">
-				<source>topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.city">
-				<source>city</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.venue">
-				<source>venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
-				<source>vacancies</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration">
-				<source>registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
-				<source>No events found.</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.eventType">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.topic">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.venue">
-				<source>Venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.vacancies">
-				<source>Vacancies</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
-				<source>full</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
-				<source>∞</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.registration">
-				<source>Registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.registration.register">
-				<source>registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
-				<source>waiting list</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView">
-				<source>Event single view</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.tab.pagesAndFolders">
-				<source>Pages and folders</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.pagesAndFolders.registrationPage">
-				<source>Page with the event registration form</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
-				<source>Display options</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay">
-				<source>Data to display</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
-				<source>title</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
-				<source>event type</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationTop">
-				<source>registration link (top)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
-				<source>date and time</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.venue">
-				<source>venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
-				<source>room</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.price">
-				<source>price</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
-				<source>vacancies</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
-				<source>description</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
-				<source>speakers</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationBottom">
-				<source>registration link (bottom)</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
-				<source>Date and time</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit">
-				<source>Start: %1s %2s</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit">
-				<source>End: %1s %2s</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.room">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.price">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.vacancies">
-				<source>Vacancies</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked">
-				<source>fully booked</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
-				<source>unlimited</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.venue">
-				<source>Venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.speakers.one">
-				<source>Speaker</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.speakers.many">
-				<source>Speakers</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
-				<source>Homepage</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.registration">
-				<source>Registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.registration.register">
-				<source>registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
-				<source>register for the waiting list</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations">
-				<source>My registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.tab.displayOptions">
-				<source>Display options</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns">
-				<source>Columns to show in the list view</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.date">
-				<source>date</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.eventType">
-				<source>event type</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.topic">
-				<source>topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.city">
-				<source>city</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.venue">
-				<source>venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.registrationStatus">
-				<source>registration status</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.unregistration">
-				<source>unregistration</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields">
-				<source>Fields to show in the single view</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.topic">
-				<source>topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.eventType">
-				<source>event type</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.registrationStatus">
-				<source>registration status</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.dateAndTime">
-				<source>date and time</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.venue">
-				<source>venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.room">
-				<source>room</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.unregistration">
-				<source>unregistration</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.downloads">
-				<source>downloads</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.error.notLoggedIn">
-				<source>Please log in to view this page.</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.error.notFound">
-				<source>Sorry, this page does not exist.</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal">
-				<source>You are not registered to any events yet.</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.messages.noRegistrations_informal">
-				<source>You are not registered to any events yet.</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.eventType">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.topic">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.venue">
-				<source>Venue</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.registrationStatus">
-				<source>Status</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
-				<source>regular</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.property.registrationStatus.1">
-				<source>waiting list</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
-				<source>nonbinding reservation</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.heading.unregistration">
-				<source>Unregistration</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.index.toUnregistrationForm">
-				<source>unregistration</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.show.heading.registrationStatus">
-				<source>Registration status</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.show.heading.unregistration">
-				<source>Unregistration</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
-				<source>proceed to unregistration</source>
-			</trans-unit>
-			<trans-unit id="plugin.myRegistrations.show.heading.downloads">
-				<source>Downloads</source>
-			</trans-unit>
-		</body>
-	</file>
+          This event now has been confirmed.
+        </source>
+      </trans-unit>
+      <trans-unit id="message_onRequest">
+        <source>on request</source>
+      </trans-unit>
+      <trans-unit id="registrationDigestEmail_Subject">
+        <source>New registrations</source>
+      </trans-unit>
+      <trans-unit id="range">
+        <source>%1s–%2s</source>
+      </trans-unit>
+      <trans-unit id="dateFormat">
+        <source>Y-m-d</source>
+      </trans-unit>
+      <trans-unit id="timeFormat">
+        <source>H:i</source>
+      </trans-unit>
+      <trans-unit id="timeWithUnit">
+        <source>%1s</source>
+      </trans-unit>
+      <trans-unit id="decimalSeparator">
+        <source>.</source>
+      </trans-unit>
+      <trans-unit id="thousandsSeparator">
+        <source>,</source>
+      </trans-unit>
+      <trans-unit id="priceWithAndWithoutVat">
+        <source>%1$s incl. VAT (%2$s plus %3$s VAT)</source>
+      </trans-unit>
+      <trans-unit id="registrationTitleFormat">
+        <source>%1s / %2s, %3s</source>
+      </trans-unit>
+      <trans-unit id="message_403">
+        <source>Error 403. Sorry, you don't have access to this data.</source>
+      </trans-unit>
+      <trans-unit id="message_404">
+        <source>
+          Error 404. The requested page does not exist. If you get this error message using a link on this
+          page, please notify the webmaster. Thank you!
+        </source>
+      </trans-unit>
+      <trans-unit id="message_404_registrations">
+        <source>
+          Error 404. There is no event with this number. If you get this error message using a link on
+          this page, please notify the webmaster. Thank you!
+        </source>
+      </trans-unit>
+      <trans-unit id="message_emailToAttendeesSent">
+        <source>The email to the attendees has been sent.</source>
+      </trans-unit>
+      <trans-unit id="mlang_tabs_tab">
+        <source>Events</source>
+      </trans-unit>
+      <trans-unit id="mlang_labels_tabdescr">
+        <source>This module allows you to manage events and registrations.</source>
+      </trans-unit>
+      <trans-unit id="mlang_labels_tablabel">
+        <source>This module allows you to manage events and registrations.</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_general">
+        <source>General</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.what_to_display">
+        <source>What should be displayed:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_template_and_special">
+        <source>Templates and special properties</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.seminar_list">
+        <source>Event List</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.single_view">
+        <source>Event Single View</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.topic_list">
+        <source>Topic List</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.my_events">
+        <source>My Events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.my_vip_events">
+        <source>My Managed Events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.list_registrations">
+        <source>List of Registrations (for attendees)</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.list_vip_registrations">
+        <source>List of Registrations (for event managers)</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.category_list">
+        <source>Category List</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.listPID">
+        <source>Page that contains the seminar list:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.detailPID">
+        <source>Page that contains the detailed view:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.myEventsPID">
+        <source>Page that contains the &quot;my events&quot; list:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.registerPID">
+        <source>Page that contains the event registration form:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.loginPID">
+        <source>Page that contains the login form:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.registrationsListPID">
+        <source>Page that contains the list of registrations (for attendees):</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.registrationsVipListPID">
+        <source>Page that contains the list of registrations (for event managers):</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.formal">
+        <source>formal</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.informal">
+        <source>informal</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_list_view">
+        <source>List view</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.displaySearchFormFields">
+        <source>Display search widget options:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.type">
+        <source>Event type</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.place">
+        <source>Place</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.organizer">
+        <source>Organizer</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.categories">
+        <source>Categories</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.age">
+        <source>Age</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.price">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.textField">
+        <source>Full-text search</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToEventTypes">
+        <source>List events only of these types:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToCategories">
+        <source>List events only from these categories:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToPlaces">
+        <source>List events only at these places:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToOrganizers">
+        <source>List events only of these organizers:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies">
+        <source>Show only events which have vacancies:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees">
+        <source>Show attached files list only to attendees:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.startingpoint">
+        <source>Data source:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive">
+        <source>Recursion:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showSingleEvent">
+        <source>Which event should be shown in a detailed view?</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList">
+        <source>Only show events from this time-frame:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList1">
+        <source>all events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList2">
+        <source>past events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList3">
+        <source>past and current events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList4">
+        <source>current events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList5">
+        <source>current and upcoming events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList6">
+        <source>upcoming events</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList7">
+        <source>events with the deadline in the future</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList8">
+        <source>today</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideFields">
+        <source>Hide fields in detailed view (comma-separated):</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showEmptyEntryInOptionLists">
+        <source>Show empty option in selector widget:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter">
+        <source>Number of years a user can search into the future:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideSearchForm">
+        <source>Hide the search form in list view:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.hidePageBrowser">
+        <source>Hide the page browser in list view:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideCanceledEvents">
+        <source>Hide canceled events in list view:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.sortListViewByCategory">
+        <source>Sort the list view by category:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideColumns">
+        <source>Hide column names in list view (comma-separated):</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.generalPriceInList">
+        <source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.generalPriceInSingle">
+        <source>
+          Use &quot;Price&quot; as heading for the standard price in the single view and the registration
+          page:
+        </source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showSpeakerDetails">
+        <source>Show speaker details</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showSiteDetails">
+        <source>Show site details</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_registrationsListView">
+        <source>Registrations list view</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">
+        <source>Which FEuser fields to show in the list of registrations for an event</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList">
+        <source>Which registration fields to show in the list of registrations for an event:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.linkToSingleView">
+        <source>Link the single view from the list view:</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.always">
+        <source>always</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.never">
+        <source>never</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription">
+        <source>if the event has a description</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.fromTsSetup">
+        <source>(from TS setup)</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.0">
+        <source>0 levels (only selected page)</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.1">
+        <source>1 level</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.2">
+        <source>2 levels</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.3">
+        <source>3 levels</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.4">
+        <source>4 levels</source>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.5">
+        <source>Infinite</source>
+      </trans-unit>
+      <trans-unit id="pi_list_browseresults_prev">
+        <source>&lt; Previous</source>
+      </trans-unit>
+      <trans-unit id="pi_list_browseresults_page">
+        <source>Page</source>
+      </trans-unit>
+      <trans-unit id="pi_list_browseresults_next">
+        <source>Next &gt;</source>
+      </trans-unit>
+      <trans-unit id="pi_list_browseresults_displays">
+        <source>
+          Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of
+          ###SPAN_BEGIN###%s&lt;/span&gt;
+        </source>
+      </trans-unit>
+      <trans-unit id="pi_list_browseresults_noResults">
+        <source>Sorry, no events were found.</source>
+      </trans-unit>
+      <trans-unit id="pi_list_searchBox_search">
+        <source>Search</source>
+      </trans-unit>
+      <trans-unit id="label_myevents">
+        <source>You are registered for the following events:</source>
+      </trans-unit>
+      <trans-unit id="label_myevents_informal">
+        <source>You are registered for the following events:</source>
+      </trans-unit>
+      <trans-unit id="label_myvipevents">
+        <source>You are an editor for the following events:</source>
+      </trans-unit>
+      <trans-unit id="label_myvipevents_informal">
+        <source>You are an editor for the following events:</source>
+      </trans-unit>
+      <trans-unit id="label_category">
+        <source>Category</source>
+      </trans-unit>
+      <trans-unit id="label_subtitle">
+        <source>Subtitle</source>
+      </trans-unit>
+      <trans-unit id="label_timeslots">
+        <source>Time slots</source>
+      </trans-unit>
+      <trans-unit id="label_expiry">
+        <source>License expiry</source>
+      </trans-unit>
+      <trans-unit id="label_speakers_single_unknown">
+        <source>Speaker</source>
+      </trans-unit>
+      <trans-unit id="label_speakers">
+        <source>Speakers</source>
+      </trans-unit>
+      <trans-unit id="label_partners_single_unknown">
+        <source>Partner</source>
+      </trans-unit>
+      <trans-unit id="label_partners">
+        <source>Partners</source>
+      </trans-unit>
+      <trans-unit id="label_tutors_single_unknown">
+        <source>Tutor</source>
+      </trans-unit>
+      <trans-unit id="label_tutors">
+        <source>Tutors</source>
+      </trans-unit>
+      <trans-unit id="label_leaders_single_unknown">
+        <source>Leader</source>
+      </trans-unit>
+      <trans-unit id="label_leaders">
+        <source>Leaders</source>
+      </trans-unit>
+      <trans-unit id="label_price_range">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="label_paymentmethods">
+        <source>Available methods of payment</source>
+      </trans-unit>
+      <trans-unit id="label_select_paymentmethod">
+        <source>Payment method:</source>
+      </trans-unit>
+      <trans-unit id="label_target_groups">
+        <source>Target Groups</source>
+      </trans-unit>
+      <trans-unit id="label_attached_files_short">
+        <source>Files</source>
+      </trans-unit>
+      <trans-unit id="label_requirements">
+        <source>Requirements</source>
+      </trans-unit>
+      <trans-unit id="label_dependencies">
+        <source>Required for</source>
+      </trans-unit>
+      <trans-unit id="label_organizers">
+        <source>Organizers</source>
+      </trans-unit>
+      <trans-unit id="label_organizing_partners">
+        <source>Organizing partners</source>
+      </trans-unit>
+      <trans-unit id="label_categories">
+        <source>Categories</source>
+      </trans-unit>
+      <trans-unit id="label_deadline_registration">
+        <source>Deadline for registration</source>
+      </trans-unit>
+      <trans-unit id="label_status_registration">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="label_registration">
+        <source>Registration</source>
+      </trans-unit>
+      <trans-unit id="label_attached_files">
+        <source>Attached files</source>
+      </trans-unit>
+      <trans-unit id="label_onlineRegistration">
+        <source>register</source>
+      </trans-unit>
+      <trans-unit id="label_onlineRegistrationOnQueue">
+        <source>waiting list</source>
+      </trans-unit>
+      <trans-unit id="label_onlinePrebooking">
+        <source>prebook</source>
+      </trans-unit>
+      <trans-unit id="label_onlineUnregistration">
+        <source>unregister</source>
+      </trans-unit>
+      <trans-unit id="label_list_registrations">
+        <source>List of registrations</source>
+      </trans-unit>
+      <trans-unit id="label_listRegistrationsLink">
+        <source>View the list of registrations</source>
+      </trans-unit>
+      <trans-unit id="label_list_otherdates">
+        <source>Other dates for this topic</source>
+      </trans-unit>
+      <trans-unit id="label_list_dates">
+        <source>Dates for this topic</source>
+      </trans-unit>
+      <trans-unit id="label_eventsnextday">
+        <source>Subsequent events</source>
+      </trans-unit>
+      <trans-unit id="label_edit">
+        <source>Edit</source>
+      </trans-unit>
+      <trans-unit id="label_back">
+        <source>Back to listing</source>
+      </trans-unit>
+      <trans-unit id="label_register_additional_information">
+        <source>Additional information</source>
+      </trans-unit>
+      <trans-unit id="label_register_lodging_and_food">
+        <source>Lodging and food</source>
+      </trans-unit>
+      <trans-unit id="label_accommodation">
+        <source>
+          How are your lodging preferences (if possible a single room, a double room, no lodging)?
+        </source>
+      </trans-unit>
+      <trans-unit id="label_food">
+        <source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
+      </trans-unit>
+      <trans-unit id="label_known_from">
+        <source>How have you heard of this event?</source>
+      </trans-unit>
+      <trans-unit id="label_known_from_informal">
+        <source>How have you heard of this event?</source>
+      </trans-unit>
+      <trans-unit id="label_register_additional_attendees">
+        <source>Persons to register:</source>
+      </trans-unit>
+      <trans-unit id="label_registered_themselves">
+        <source>myself (too)</source>
+      </trans-unit>
+      <trans-unit id="label_firstname">
+        <source>First name:</source>
+      </trans-unit>
+      <trans-unit id="label_lastname">
+        <source>Last name:</source>
+      </trans-unit>
+      <trans-unit id="label_register_seats">
+        <source>Seats to book:</source>
+      </trans-unit>
+      <trans-unit id="label_legend_payment">
+        <source>Payment</source>
+      </trans-unit>
+      <trans-unit id="label_company">
+        <source>Company:</source>
+      </trans-unit>
+      <trans-unit id="label_gender.I.2">
+        <source>diverse</source>
+      </trans-unit>
+      <trans-unit id="label_foods">
+        <source>Food options</source>
+      </trans-unit>
+      <trans-unit id="label_register_all_terms">
+        <source>Registration terms</source>
+      </trans-unit>
+      <trans-unit id="label_terms">
+        <source>I accept the terms and conditions.</source>
+      </trans-unit>
+      <trans-unit id="label_terms_2">
+        <source>I accept the additional terms.</source>
+      </trans-unit>
+      <trans-unit id="label_timeslot_date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="label_timeslot_time">
+        <source>Time</source>
+      </trans-unit>
+      <trans-unit id="label_timeslot_room">
+        <source>Room</source>
+      </trans-unit>
+      <trans-unit id="label_timeslot_place">
+        <source>Place</source>
+      </trans-unit>
+      <trans-unit id="label_selector_submit">
+        <source>Apply filter</source>
+      </trans-unit>
+      <trans-unit id="label_selector_pleaseChoose">
+        <source>please choose...</source>
+      </trans-unit>
+      <trans-unit id="label_selector_reset">
+        <source>Reset</source>
+      </trans-unit>
+      <trans-unit id="label_selector_searchbox">
+        <source>Search term</source>
+      </trans-unit>
+      <trans-unit id="label_to">
+        <source>to</source>
+      </trans-unit>
+      <trans-unit id="label_organizer">
+        <source>Organizer</source>
+      </trans-unit>
+      <trans-unit id="label_date_search">
+        <source>Period from</source>
+      </trans-unit>
+      <trans-unit id="label_age_search">
+        <source>Age:</source>
+      </trans-unit>
+      <trans-unit id="label_price_search">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="label_searching_hints">
+        <source>
+          You can shorten the list of events by applying one ore more filter criteria. To see the whole
+          list, just reset the filter.
+        </source>
+      </trans-unit>
+      <trans-unit id="label_searching_hints_informal">
+        <source>
+          You can shorten the list of events by applying one ore more filter criteria. To see the whole
+          list, just reset the filter.
+        </source>
+      </trans-unit>
+      <trans-unit id="label_we_offer_events_in_categories">
+        <source>Currently, we offer you events in the following categories:</source>
+      </trans-unit>
+      <trans-unit id="label_we_offer_events_in_categories_informal">
+        <source>Currently, we offer you events in the following categories:</source>
+      </trans-unit>
+      <trans-unit id="label_no_categories">
+        <source>Currently, we aren't offering any categorized events.</source>
+      </trans-unit>
+      <trans-unit id="label_waiting_list">
+        <source>Waiting list</source>
+      </trans-unit>
+      <trans-unit id="message_noResults">
+        <source>Sorry, currently no events could be found.</source>
+      </trans-unit>
+      <trans-unit id="message_pleaseLogIn">
+        <source>Please log in to view this page.</source>
+      </trans-unit>
+      <trans-unit id="message_pleaseLogIn_informal">
+        <source>Please log in to view this page.</source>
+      </trans-unit>
+      <trans-unit id="message_noRegistrations">
+        <source>For this event, there are no registrations yet.</source>
+      </trans-unit>
+      <trans-unit id="message_earlybird_price">
+        <source>price valid and bookable until %s</source>
+      </trans-unit>
+      <trans-unit id="message_noTargetGroupAgeNumber">
+        <source>Please enter only positive numbers as minimum and maximum age.</source>
+      </trans-unit>
+      <trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge">
+        <source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
+      </trans-unit>
+      <trans-unit id="speakerImage.alt">
+        <source>portrait image</source>
+      </trans-unit>
+      <trans-unit id="label_date_of_birth">
+        <source>Date of birth</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor">
+        <source>Front-end editor for events</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation">
+        <source>Event creation</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType">
+        <source>Event type to create</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.singleEvents">
+        <source>single events</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.eventType.eventDates">
+        <source>event dates</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.eventCreation.folderForCreatedEvents">
+        <source>Folder for the created events</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions">
+        <source>Display options</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow">
+        <source>categories</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.categories">
+        <source>categories</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.description">
+        <source>description</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.eventType">
+        <source>eventType</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.dateAndTime">
+        <source>date and time</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdDeadline">
+        <source>early-bird deadline</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationDeadline">
+        <source>registration deadline</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.registrationRequired">
+        <source>registration required</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.waitingList">
+        <source>waiting list</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.minimumNumberOfRegistrations">
+        <source>required number of registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.maximumNumberOfRegistrations">
+        <source>maximum number of registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.numberOfOfflineRegistrations">
+        <source>offline registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.standardPrice">
+        <source>standard price</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.earlyBirdPrice">
+        <source>early-bird price</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.venues">
+        <source>venues</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.displayOptions.fieldsToShow.speakers">
+        <source>speakers</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.index.headline">
+        <source>Events I have created</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.edit.headline">
+        <source>Edit event</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.new.headline">
+        <source>Create new event</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.uid">
+        <source>UID</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.internalTitle">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.topic">
+        <source>Topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.categories">
+        <source>Categories</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.regularRegistrations">
+        <source>Registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.vacancies">
+        <source>Vacancies</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.events.property.vacancies.unlimited">
+        <source>unlimited</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.standardPrice">
+        <source>Standard price</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice">
+        <source>Early-bird price</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.eventType">
+        <source>Event type</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.start">
+        <source>Start</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.end">
+        <source>End</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline">
+        <source>Early-bird deadline</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.registrationDeadline">
+        <source>Registration deadline</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.registrationRequired">
+        <source>Registration is required</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.waitingList">
+        <source>Has a waiting list</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
+        <source>Required number of registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
+        <source>Maximum number of registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.numberOfOfflineRegistrations">
+        <source>Offline registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.venues">
+        <source>Venues</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.speakers">
+        <source>Speakers</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.organizers">
+        <source>Organizer</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.new">
+        <source>Create a new event</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.edit">
+        <source>Edit</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.cancel">
+        <source>Cancel</source>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.save">
+        <source>Save</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration">
+        <source>Registration form for events</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
+        <source>Page to display if this plugin is called with no event</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.loginPage">
+        <source>Login page (or with onetimeaccount)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage">
+        <source>Page with the terms &amp; conditions</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage.description">
+        <source>Activates the term &amp; conditions checkbox for all events.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.termsAndConditionsLinkTitle">
+        <source>Link title for the link to the page with the terms &amp; conditions</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalTermsPage">
+        <source>Page with the additional registration terms</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalTermsPage.description">
+        <source>Activates the additional conditions checkbox only for those events that use it.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalTermsLinkTitle">
+        <source>Link title for the link to the page with the additional registration terms</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
+        <source>Folder in which to store the registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder">
+        <source>Create additional registered persons as FE user in this folder</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder.description">
+        <source>Activates that additional attendees will be saved as FE users.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
+        <source>Persons to register</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
+        <source>Maximum bookable seats per registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
+        <source>People register themselves (too) by default</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
+        <source>Show an email field for additional attendees</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.tab.formFields">
+        <source>Form fields</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow">
+        <source>Fields and data to show in the form</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.inputFields">
+        <source>Input fields</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode">
+        <source>attendance mode</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
+        <source>seats</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
+        <source>is registering themselves (too)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
+        <source>persons to register</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.interests">
+        <source>interests</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.expectations">
+        <source>expectations</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.backgroundKnowledge">
+        <source>background knowledge</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.knownFrom">
+        <source>Known from where?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments">
+        <source>comments</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
+        <source>price</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.orderReference">
+        <source>order reference</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
+        <source>Billing address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.separateBillingAddress">
+        <source>separate billing address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCompany">
+        <source>company</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingFullName">
+        <source>full name</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingStreetAddress">
+        <source>street address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingZipCode">
+        <source>ZIP code</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCity">
+        <source>city</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCountry">
+        <source>country</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingPhoneNumber">
+        <source>phone number</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingEmailAddress">
+        <source>email address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage">
+        <source>Confirmation page</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.personalData">
+        <source>personal data</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
+        <source>consent to terms &amp; conditions</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
+        <source>%1$s, %2$s</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid">
+        <source>%1$s, %2$s (event #%3$u)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.sorry">
+        <source>Sorry!</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.eventRegistration">
+        <source>Event registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
+        <source>Waiting list registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
+        <source>Your registration data</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationData_informal">
+        <source>Your registration data</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationSent_formal">
+        <source>Your registration has been sent.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
+        <source>Your registration has been sent.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.termsAndConditions">
+        <source>Terms and conditions</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.personalData_formal">
+        <source>Your personal data</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.personalData_informal">
+        <source>Your personal data</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.summary">
+        <source>Summary</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.payment">
+        <source>Payment</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+        <source>Billing address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.personsToRegister">
+        <source>Persons to register</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.foodAndAccommodation">
+        <source>Food and accommodation</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+        <source>Additional information</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
+        <source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
+        <source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_formal">
+        <source>Thank you for registering for the waiting list of our event.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_informal">
+        <source>Thank you for registering for the waiting list of our event.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
+        <source>
+          The registration fee will only be payable once your registration has been changed from a waiting
+          list registration to a regular registration.
+        </source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_informal">
+        <source>
+          The registration fee will only be payable once your registration has been changed from a waiting
+          list registration to a regular registration.
+        </source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
+        <source>For this event, registration is not possible.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
+        <source>For this event, registration is not possible at the moment.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
+        <source>You are already registered for this event.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
+        <source>You are already registered for this event.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.fullyBooked">
+        <source>Unfortunately, there are no more vacancies.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.back">
+        <source>Back</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.continue">
+        <source>Continue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.registerForFree">
+        <source>Confirm registration (for free)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.registerWithCosts">
+        <source>Confirm registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.event">
+        <source>Event</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.interests_formal">
+        <source>What are your interests concerning this event?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.interests_informal">
+        <source>What are your interests concerning this event?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.expectations_formal">
+        <source>What are your expectations?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.expectations_informal">
+        <source>What are your expectations?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_formal">
+        <source>What are is your background knowledge?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_informal">
+        <source>What are is your background knowledge?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.knownFrom_formal">
+        <source>How did you hear about this event?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
+        <source>How did you hear about this event?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.comments">
+        <source>Other comments</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode">
+        <source>On-site/online</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
+        <source>on-site</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.2">
+        <source>online</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.seats">
+        <source>Seats to book</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.registeredThemselves">
+        <source>I am registering myself (too).</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
+        <source>I am not registering myself.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
+        <source>Separate billing address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.billingAddress">
+        <source>Billing address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.company">
+        <source>Company</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.fullName">
+        <source>Full name</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.streetAddress">
+        <source>Street address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.zipCode">
+        <source>ZIP code</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.country">
+        <source>Country</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.phoneNumber">
+        <source>Phone number</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.emailAddress">
+        <source>Email address</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.registrationCheckboxes">
+        <source>Registration options</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.foodOptions">
+        <source>Food</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.accommodationOptions">
+        <source>Accommodation</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendeesNames">
+        <source>Persons to register</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.paymentMethod">
+        <source>Method of payment</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.priceCode">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.orderReference">
+        <source>Order reference</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.totalPrice">
+        <source>Total price (incl. VAT)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.consentedToTermsAndConditions">
+        <source>I consent to the %1$s.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.consentedToAdditionalTerms">
+        <source>I consent to the %1$s.</source>
+      </trans-unit>
+      <trans-unit id="price.standard">
+        <source>Regular price</source>
+      </trans-unit>
+      <trans-unit id="price.earlyBird">
+        <source>Early-bird price</source>
+      </trans-unit>
+      <trans-unit id="price.special">
+        <source>Special price</source>
+      </trans-unit>
+      <trans-unit id="price.specialEarlyBird">
+        <source>Early-bird special price</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.events">
+        <source>Events</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.registrations">
+        <source>Registrations</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.regularRegistrations">
+        <source>Regular registrations (%u)</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.waitingListRegistrations">
+        <source>Registrations on the waiting list (%u)</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.email">
+        <source>Send an email to all registered persons</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.selectFolder">
+        <source>Please select a folder in the page tree.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.noEventsInFolder">
+        <source>There are no event records in the selected folder.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.noRegistrationsInFolder">
+        <source>There are no event registration in the selected folder.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.noRegistrationsForEvent">
+        <source>This event does not have any registrations yet.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.numberOfEventsFound">
+        <source>%u event(s) found.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.uid">
+        <source>UID</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.internalTitle">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats">
+        <source>Seats</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats.minimum">
+        <source>required registrations for the event to take place</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats.maximum">
+        <source>maximum available seats at the event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats.noLimit">
+        <source>This event allows an unlimited registrations.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.invoicingStatus">
+        <source>Invoicing</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.invoicingStatus.invoiced">
+        <source>⏳ invoiced</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.invoicingStatus.paid">
+        <source>✅ paid</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations">
+        <source>Registrations</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.regular">
+        <source>Regular registrations</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.waitingList">
+        <source>Registrations on the waiting list</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.enough">
+        <source>has enough registration to take place</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.fullyBooked">
+        <source>is fully booked</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.name">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.registration.noName">
+        <source>(User %1$u)</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.registration.noUser">
+        <source>(deleted user)</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.createEvent">
+        <source>Create event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.editEvent">
+        <source>Edit event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.editRegistration">
+        <source>Edit registration</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.editFrontEndUser">
+        <source>Edit FE user</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.hideEvent">
+        <source>Hide event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.unhideEvent">
+        <source>Un-hide event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.deleteEvent">
+        <source>Delete event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.deleteRegistration">
+        <source>Delete registration</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.duplicateEvent">
+        <source>Duplicate event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.csvDownload">
+        <source>Download as CSV file</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.showRegistrations">
+        <source>show</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.showRegistrations.long">
+        <source>show registrations</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.backToEventList">
+        <source>Back to the event list</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.email">
+        <source>Email</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.email.long">
+        <source>Send an email to all registered persons</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.sendEmail">
+        <source>Send email</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.showAllEvents">
+        <source>Show all events</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.search">
+        <source>Search</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteEvent.title">
+        <source>Delete event</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteEvent.content">
+        <source>Do you really want to delete this event?</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteEvent.cancel">
+        <source>Cancel</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteEvent.okay">
+        <source>Delete</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteRegistration.title">
+        <source>Delete registration</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteRegistration.content">
+        <source>Do you really want to delete this registration?</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteRegistration.cancel">
+        <source>Cancel</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.confirm.deleteRegistration.okay">
+        <source>Delete</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.search.label">
+        <source>Search events</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.search.placeholder">
+        <source>UID or search term</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.email.subject">
+        <source>Subject</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.email.body">
+        <source>Email body</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.eventDeleted">
+        <source>The event has been deleted.</source>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.registrationDeleted">
+        <source>The registration has been deleted.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.heading.sorry">
+        <source>Sorry!</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.heading.unregistration">
+        <source>Unregister from an event</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.heading.unregistrationSuccess">
+        <source>Unregistration sent</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.notLoggedIn">
+        <source>This content is only available after a login.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.registrationMissing">
+        <source>This registration does not exist.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_formal">
+        <source>You cannot unregister from this event now.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_informal">
+        <source>You cannot unregister from this event now.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+        <source>Do you really want to unregister from this event?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+        <source>Do you really want to unregister from this event?</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.action.cancel">
+        <source>Cancel and go back</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.action.unregister">
+        <source>Unregister</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.message.unregistrationDone_formal">
+        <source>Your registration to this event now has been canceled.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.message.unregistrationDone_informal">
+        <source>Your registration to this event now has been canceled.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive">
+        <source>Event archive</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid">
+        <source>Folders with the event records</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive">
+        <source>Recursion into subfolders</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.singleViewPage">
+        <source>Page with the single view</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
+        <source>Display options</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns">
+        <source>Columns to show</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.date">
+        <source>date</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.eventType">
+        <source>event type</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.topic">
+        <source>topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.city">
+        <source>city</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.venue">
+        <source>venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.message.noEventsFound">
+        <source>No events found.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.eventType">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.topic">
+        <source>Topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.venue">
+        <source>Venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook">
+        <source>Event outlook</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid">
+        <source>Folders with the event records</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive">
+        <source>Recursion into subfolders</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage">
+        <source>Page with the single view</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage">
+        <source>Page with the event registration form</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
+        <source>Display options</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns">
+        <source>Columns to show</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.date">
+        <source>date</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.eventType">
+        <source>event type</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.topic">
+        <source>topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.city">
+        <source>city</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.venue">
+        <source>venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
+        <source>vacancies</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration">
+        <source>registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.message.noEventsFound">
+        <source>No events found.</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.eventType">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.topic">
+        <source>Topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.venue">
+        <source>Venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies">
+        <source>Vacancies</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
+        <source>full</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
+        <source>∞</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration">
+        <source>Registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration.register">
+        <source>registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
+        <source>waiting list</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView">
+        <source>Event single view</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.pagesAndFolders.registrationPage">
+        <source>Page with the event registration form</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
+        <source>Display options</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay">
+        <source>Data to display</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
+        <source>title</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
+        <source>event type</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationTop">
+        <source>registration link (top)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
+        <source>date and time</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.venue">
+        <source>venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
+        <source>room</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.price">
+        <source>price</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
+        <source>vacancies</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+        <source>description</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
+        <source>speakers</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationBottom">
+        <source>registration link (bottom)</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
+        <source>Date and time</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit">
+        <source>Start: %1s %2s</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit">
+        <source>End: %1s %2s</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.room">
+        <source>Room</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.price">
+        <source>Price</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies">
+        <source>Vacancies</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked">
+        <source>fully booked</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
+        <source>unlimited</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.venue">
+        <source>Venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.one">
+        <source>Speaker</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.many">
+        <source>Speakers</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
+        <source>Homepage</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration">
+        <source>Registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration.register">
+        <source>registration</source>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
+        <source>register for the waiting list</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations">
+        <source>My registrations</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.tab.displayOptions">
+        <source>Display options</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns">
+        <source>Columns to show in the list view</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.date">
+        <source>date</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.eventType">
+        <source>event type</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.topic">
+        <source>topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.city">
+        <source>city</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.venue">
+        <source>venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.registrationStatus">
+        <source>registration status</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.unregistration">
+        <source>unregistration</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields">
+        <source>Fields to show in the single view</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.topic">
+        <source>topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.eventType">
+        <source>event type</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.registrationStatus">
+        <source>registration status</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.dateAndTime">
+        <source>date and time</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.venue">
+        <source>venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.room">
+        <source>room</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.unregistration">
+        <source>unregistration</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.fields.downloads">
+        <source>downloads</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.error.notLoggedIn">
+        <source>Please log in to view this page.</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.error.notFound">
+        <source>Sorry, this page does not exist.</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.messages.noRegistrations_formal">
+        <source>You are not registered to any events yet.</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.messages.noRegistrations_informal">
+        <source>You are not registered to any events yet.</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.eventType">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.topic">
+        <source>Topic</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.venue">
+        <source>Venue</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.registrationStatus">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.0">
+        <source>regular</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.1">
+        <source>waiting list</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.property.registrationStatus.2">
+        <source>nonbinding reservation</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.heading.unregistration">
+        <source>Unregistration</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.index.toUnregistrationForm">
+        <source>unregistration</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.heading.registrationStatus">
+        <source>Registration status</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.heading.unregistration">
+        <source>Unregistration</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm">
+        <source>proceed to unregistration</source>
+      </trans-unit>
+      <trans-unit id="plugin.myRegistrations.show.heading.downloads">
+        <source>Downloads</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

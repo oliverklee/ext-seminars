@@ -1,661 +1,661 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file source-language="en" datatype="plaintext" original="messages">
-		<header/>
-		<body>
-			<trans-unit id="moduleFunction.tx_seminars_modfunc1">
-				<source>Seminars</source>
-			</trans-unit>
-			<trans-unit id="LGL.hidden">
-				<source>Hide</source>
-			</trans-unit>
-			<trans-unit id="LGL.starttime">
-				<source>Start</source>
-			</trans-unit>
-			<trans-unit id="LGL.endtime">
-				<source>Stop</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars">
-				<source>Event</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelGeneral">
-				<source>General</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.uid">
-				<source>Event number</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.0">
-				<source>Single event</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.1">
-				<source>Topic for multiple events</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.2">
-				<source>Date for a topic</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.slug">
-				<source>URL segment</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.subtitle">
-				<source>Subtitle</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.categories">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.teaser">
-				<source>Teaser text</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.topic">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_type">
-				<source>Event type</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time">
-				<source>Time</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.accreditation_number">
-				<source>Accreditation number</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.credit_points">
-				<source>Credit points</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.details_page">
-				<source>Page with the details view</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.additional_information">
-				<source>Additional information</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.checkboxes">
-				<source>Registration options with checkbox</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.uses_terms_2">
-				<source>Display the additional terms checkbox in the registration form</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.needs_registration">
-				<source>Needs registration</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations">
-				<source>Allows multiple registrations from the same person</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled">
-				<source>Status</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_planned">
-				<source>planned</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_canceled">
-				<source>canceled</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_confirmed">
-				<source>confirmed</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation">
-				<source>Set the status automatically</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.notes">
-				<source>Internal Notes</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attached_files">
-				<source>Downloads for registered persons</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.download_start_date">
-				<source>Downloads available starting at</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelSpeakers">
-				<source>Speakers</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.speakers">
-				<source>Speakers</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.partners">
-				<source>Partners</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.tutors">
-				<source>Tutors</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.leaders">
-				<source>Leaders</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelOrganizers">
-				<source>Organizer</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers">
-				<source>Organizers</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizing_partners">
-				<source>Organizing Partners</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent">
-				<source>Organizers have been reminded about this event being about to take place</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent">
-				<source>Organizers have been notified that the cancelation deadline has just passed</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime">
-				<source>Place/Time</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format">
-				<source>Event format</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format.on-site">
-				<source>on-site</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format.hybrid">
-				<source>hybrid</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format.online">
-				<source>online</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.webinar_url">
-				<source>Webinar URL</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date">
-				<source>Begin time and date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.end_date">
-				<source>End time and date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.timeslots">
-				<source>Time slots</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date_registration">
-				<source>Begin date for registration</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_registration">
-				<source>Registration deadline</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_early_bird">
-				<source>Early bird deadline</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_unregistration">
-				<source>Unregistration deadline</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.expiry">
-				<source>License expiry</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.room">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.tab.attendeeInformation">
-				<source>Information for attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelLodging">
-				<source>Lodging/Food</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.lodgings">
-				<source>Available lodgings</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.foods">
-				<source>Available foods</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAttendees">
-				<source>Attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees_min">
-				<source>Minimal number of attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees_max">
-				<source>Maximal number of attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.queue_size">
-				<source>Registration queue</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.offline_attendees">
-				<source>Number of offline-registered attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached">
-				<source>Organizers have been notified that the minimum number of attendees has been reached</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.mute_notification_emails">
-				<source>Mute the notification emails to the organizers</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.target_groups">
-				<source>Target groups</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees">
-				<source>Current number of attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.vacancies">
-				<source>Current number of vacancies</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.enough_attendees">
-				<source>Has enough registrations</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.is_full">
-				<source>Is full</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelPayment">
-				<source>Payment</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular">
-				<source>Regular price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_early">
-				<source>Regular price (early bird)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special">
-				<source>Special price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_early">
-				<source>Special price (early bird)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.payment_methods">
-				<source>Allowed methods of payment</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelBilling">
-				<source>Billing</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.billing_start">
-				<source>Start of the billing process</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAccess">
-				<source>Access</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.vips">
-				<source>Managers of this event</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.image">
-				<source>Image</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.requirements">
-				<source>Requirements</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.dependencies">
-				<source>Requirement for</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_on_request">
-				<source>Price on request</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.date_of_last_registration_digest">
-				<source>Date of last registration digest email</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.additional_email_text">
-				<source>Additional text for the thank-you email to the attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers">
-				<source>Speaker</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.title">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.organization">
-				<source>Organization</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.homepage">
-				<source>Homepage</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.image">
-				<source>Image</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.skills">
-				<source>Skills</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.notes">
-				<source>Internal Notes</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.address">
-				<source>Address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_work">
-				<source>Phone number (work)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_home">
-				<source>Phone numer (home)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_mobile">
-				<source>Phone number (mobile)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.email">
-				<source>Email address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.cancelation_period">
-				<source>Cancelation period (in days)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances">
-				<source>Registration</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelOverview">
-				<source>Overview</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBookingInformation">
-				<source>Booking Information</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelRegistrationComments">
-				<source>Registration Comments</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation">
-				<source>Billing</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress">
-				<source>Billing Address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.uid">
-				<source>Ticket ID</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.crdate">
-				<source>Registration date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.user">
-				<source>Front-end User</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.seminar">
-				<source>Event</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registration_queue">
-				<source>Status</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registration_queue.regular">
-				<source>regular registration</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registration_queue.waitingList">
-				<source>waiting list</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registration_queue.nonbindingReservation">
-				<source>nonbinding reservation</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price">
-				<source>Price to pay</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code">
-				<source>Price code</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.standard">
-				<source>Regular price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.earlyBird">
-				<source>Early-bird price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.special">
-				<source>Special price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.specialEarlyBird">
-				<source>Early-bird special price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.total_price">
-				<source>Total price for this attendance</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.invoice_date">
-				<source>Invoice date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.datepaid">
-				<source>Date of payment</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.invoice_number">
-				<source>Invoice number</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.customer_number">
-				<source>Customer number</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.method_of_payment">
-				<source>Method of payment</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.separate_billing_address">
-				<source>Separate billing address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.company">
-				<source>Company</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender">
-				<source>Gender</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.0">
-				<source>Mr.</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.1">
-				<source>Ms.</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.2">
-				<source>diverse</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.address">
-				<source>Street address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.zip">
-				<source>ZIP</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.country">
-				<source>Country</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.telephone">
-				<source>Telephone</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.email">
-				<source>Email</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.been_there">
-				<source>Has attended</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.checkboxes">
-				<source>Selected options</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.interests">
-				<source>Special interests</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.expectations">
-				<source>Expectations for the event</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.background_knowledge">
-				<source>Background knowledge</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.lodgings">
-				<source>Selected lodging options</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.accommodation">
-				<source>
-					How are your lodging preferences (if possible a single room, a double room, no lodging)?
-				</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.foods">
-				<source>Selected food options</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.food">
-				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.known_from">
-				<source>How have you heard of this event?</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.notes">
-				<source>Additional notes</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registered_themselves">
-				<source>Has signed up themselves (too)</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.seats">
-				<source>Number of seats</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendees_names">
-				<source>Additional registered persons</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.additional_persons">
-				<source>Additional registered persons</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.kids">
-				<source>Number of kids</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendance_mode">
-				<source>Attendance mode</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendance_mode.onSite">
-				<source>on-site</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendance_mode.online">
-				<source>online</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendance_mode.hybrid">
-				<source>hybrid</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.order_reference">
-				<source>Order reference</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites">
-				<source>Venue</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.title">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.address">
-				<source>Full address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.city">
-				<source>City</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.homepage">
-				<source>Homepage</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.directions">
-				<source>Directions</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.notes">
-				<source>Internal Notes</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.contact_person">
-				<source>Contact person</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.email_address">
-				<source>Email address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.phone_number">
-				<source>Phone number</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers">
-				<source>Organizer</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.title">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.homepage">
-				<source>Homepage</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.email">
-				<source>Email address</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.email_footer">
-				<source>Email footer</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods">
-				<source>Method of payment</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods.description">
-				<source>Detailed description for emails</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_event_types">
-				<source>Event type</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.single_view_page">
-				<source>Single view page for events of this type</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_checkboxes">
-				<source>Registration option with checkbox</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_checkboxes.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_lodgings">
-				<source>Lodging option</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_lodgings.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_foods">
-				<source>Food option</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_foods.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots">
-				<source>Time slot</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.begin_date">
-				<source>Begin date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.end_date">
-				<source>End date</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.room">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups">
-				<source>Target Groups</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.minimum_age">
-				<source>Minimum age</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.maximum_age">
-				<source>Maximum age</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_categories">
-				<source>Event category</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_categories.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_categories.single_view_page">
-				<source>Single view page for events in this category</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_skills">
-				<source>Skill</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_skills.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_pi1">
-				<source>Seminar Manager</source>
-			</trans-unit>
-			<trans-unit id="owner_feuser">
-				<source>Front-end user who has created this record</source>
-			</trans-unit>
-			<trans-unit id="fe_users.divLabel.seminars">
-				<source>Event management</source>
-			</trans-unit>
-			<trans-unit id="fe_users.default_organizer">
-				<source>Default organizer (for the FE editor)</source>
-			</trans-unit>
-			<trans-unit id="fe_users.available_topics">
-				<source>Available topics in the FE editor</source>
-			</trans-unit>
-		</body>
-	</file>
+  <file source-language="en" datatype="plaintext" original="messages">
+    <header/>
+    <body>
+      <trans-unit id="moduleFunction.tx_seminars_modfunc1">
+        <source>Seminars</source>
+      </trans-unit>
+      <trans-unit id="LGL.hidden">
+        <source>Hide</source>
+      </trans-unit>
+      <trans-unit id="LGL.starttime">
+        <source>Start</source>
+      </trans-unit>
+      <trans-unit id="LGL.endtime">
+        <source>Stop</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars">
+        <source>Event</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelGeneral">
+        <source>General</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.uid">
+        <source>Event number</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.object_type">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.object_type.I.0">
+        <source>Single event</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.object_type.I.1">
+        <source>Topic for multiple events</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.object_type.I.2">
+        <source>Date for a topic</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.slug">
+        <source>URL segment</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.subtitle">
+        <source>Subtitle</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.categories">
+        <source>Categories</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.teaser">
+        <source>Teaser text</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.topic">
+        <source>Topic</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.event_type">
+        <source>Event type</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.date">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.time">
+        <source>Time</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.accreditation_number">
+        <source>Accreditation number</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.credit_points">
+        <source>Credit points</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.details_page">
+        <source>Page with the details view</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.additional_information">
+        <source>Additional information</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.checkboxes">
+        <source>Registration options with checkbox</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.uses_terms_2">
+        <source>Display the additional terms checkbox in the registration form</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.needs_registration">
+        <source>Needs registration</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.allows_multiple_registrations">
+        <source>Allows multiple registrations from the same person</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.cancelled">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.cancelled_planned">
+        <source>planned</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.cancelled_canceled">
+        <source>canceled</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.cancelled_confirmed">
+        <source>confirmed</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation">
+        <source>Set the status automatically</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.notes">
+        <source>Internal Notes</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.attached_files">
+        <source>Downloads for registered persons</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.download_start_date">
+        <source>Downloads available starting at</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelSpeakers">
+        <source>Speakers</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.speakers">
+        <source>Speakers</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.partners">
+        <source>Partners</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.tutors">
+        <source>Tutors</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.leaders">
+        <source>Leaders</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelOrganizers">
+        <source>Organizer</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.organizers">
+        <source>Organizers</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.organizing_partners">
+        <source>Organizing Partners</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent">
+        <source>Organizers have been reminded about this event being about to take place</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent">
+        <source>Organizers have been notified that the cancelation deadline has just passed</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelPlaceTime">
+        <source>Place/Time</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.event_format">
+        <source>Event format</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.event_format.on-site">
+        <source>on-site</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.event_format.hybrid">
+        <source>hybrid</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.event_format.online">
+        <source>online</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.webinar_url">
+        <source>Webinar URL</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.begin_date">
+        <source>Begin time and date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.end_date">
+        <source>End time and date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.timeslots">
+        <source>Time slots</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.begin_date_registration">
+        <source>Begin date for registration</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.deadline_registration">
+        <source>Registration deadline</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.deadline_early_bird">
+        <source>Early bird deadline</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.deadline_unregistration">
+        <source>Unregistration deadline</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.expiry">
+        <source>License expiry</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.place">
+        <source>Place</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.room">
+        <source>Room</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.tab.attendeeInformation">
+        <source>Information for attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelLodging">
+        <source>Lodging/Food</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.lodgings">
+        <source>Available lodgings</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.foods">
+        <source>Available foods</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelAttendees">
+        <source>Attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.attendees_min">
+        <source>Minimal number of attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.attendees_max">
+        <source>Maximal number of attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.queue_size">
+        <source>Registration queue</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.offline_attendees">
+        <source>Number of offline-registered attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached">
+        <source>Organizers have been notified that the minimum number of attendees has been reached</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.mute_notification_emails">
+        <source>Mute the notification emails to the organizers</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.target_groups">
+        <source>Target groups</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.attendees">
+        <source>Current number of attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.vacancies">
+        <source>Current number of vacancies</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.enough_attendees">
+        <source>Has enough registrations</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.is_full">
+        <source>Is full</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelPayment">
+        <source>Payment</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.price_regular">
+        <source>Regular price</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.price_regular_early">
+        <source>Regular price (early bird)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.price_special">
+        <source>Special price</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.price_special_early">
+        <source>Special price (early bird)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.payment_methods">
+        <source>Allowed methods of payment</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelBilling">
+        <source>Billing</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.billing_start">
+        <source>Start of the billing process</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.divLabelAccess">
+        <source>Access</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.vips">
+        <source>Managers of this event</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.image">
+        <source>Image</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.requirements">
+        <source>Requirements</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.dependencies">
+        <source>Requirement for</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.price_on_request">
+        <source>Price on request</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.date_of_last_registration_digest">
+        <source>Date of last registration digest email</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_seminars.additional_email_text">
+        <source>Additional text for the thank-you email to the attendees</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers">
+        <source>Speaker</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.title">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.organization">
+        <source>Organization</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.homepage">
+        <source>Homepage</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.image">
+        <source>Image</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.skills">
+        <source>Skills</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.notes">
+        <source>Internal Notes</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.address">
+        <source>Address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.phone_work">
+        <source>Phone number (work)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.phone_home">
+        <source>Phone numer (home)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.phone_mobile">
+        <source>Phone number (mobile)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.email">
+        <source>Email address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_speakers.cancelation_period">
+        <source>Cancelation period (in days)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances">
+        <source>Registration</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.divLabelOverview">
+        <source>Overview</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.divLabelBookingInformation">
+        <source>Booking Information</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.divLabelRegistrationComments">
+        <source>Registration Comments</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.divLabelPaymentInformation">
+        <source>Billing</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.divLabelBillingAddress">
+        <source>Billing Address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.uid">
+        <source>Ticket ID</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.crdate">
+        <source>Registration date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.user">
+        <source>Front-end User</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.seminar">
+        <source>Event</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue.regular">
+        <source>regular registration</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue.waitingList">
+        <source>waiting list</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue.nonbindingReservation">
+        <source>nonbinding reservation</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.price">
+        <source>Price to pay</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.price_code">
+        <source>Price code</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.price_code.standard">
+        <source>Regular price</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.price_code.earlyBird">
+        <source>Early-bird price</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.price_code.special">
+        <source>Special price</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.price_code.specialEarlyBird">
+        <source>Early-bird special price</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.total_price">
+        <source>Total price for this attendance</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.invoice_date">
+        <source>Invoice date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.datepaid">
+        <source>Date of payment</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.invoice_number">
+        <source>Invoice number</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.customer_number">
+        <source>Customer number</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.method_of_payment">
+        <source>Method of payment</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.separate_billing_address">
+        <source>Separate billing address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.company">
+        <source>Company</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.name">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.gender">
+        <source>Gender</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.gender.I.0">
+        <source>Mr.</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.gender.I.1">
+        <source>Ms.</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.gender.I.2">
+        <source>diverse</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.address">
+        <source>Street address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.zip">
+        <source>ZIP</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.country">
+        <source>Country</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.telephone">
+        <source>Telephone</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.email">
+        <source>Email</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.been_there">
+        <source>Has attended</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.checkboxes">
+        <source>Selected options</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.interests">
+        <source>Special interests</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.expectations">
+        <source>Expectations for the event</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.background_knowledge">
+        <source>Background knowledge</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.lodgings">
+        <source>Selected lodging options</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.accommodation">
+        <source>
+          How are your lodging preferences (if possible a single room, a double room, no lodging)?
+        </source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.foods">
+        <source>Selected food options</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.food">
+        <source>Which kind of food do you prefer (normal, vegetarian, or a special diet)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.known_from">
+        <source>How have you heard of this event?</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.notes">
+        <source>Additional notes</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registered_themselves">
+        <source>Has signed up themselves (too)</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.seats">
+        <source>Number of seats</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendees_names">
+        <source>Additional registered persons</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.additional_persons">
+        <source>Additional registered persons</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.kids">
+        <source>Number of kids</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode">
+        <source>Attendance mode</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode.onSite">
+        <source>on-site</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode.online">
+        <source>online</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode.hybrid">
+        <source>hybrid</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.order_reference">
+        <source>Order reference</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites">
+        <source>Venue</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.title">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.address">
+        <source>Full address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.city">
+        <source>City</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.homepage">
+        <source>Homepage</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.directions">
+        <source>Directions</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.notes">
+        <source>Internal Notes</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.contact_person">
+        <source>Contact person</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.email_address">
+        <source>Email address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_sites.phone_number">
+        <source>Phone number</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_organizers">
+        <source>Organizer</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_organizers.title">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_organizers.description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_organizers.homepage">
+        <source>Homepage</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_organizers.email">
+        <source>Email address</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_organizers.email_footer">
+        <source>Email footer</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_payment_methods">
+        <source>Method of payment</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_payment_methods.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_payment_methods.description">
+        <source>Detailed description for emails</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_event_types">
+        <source>Event type</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_event_types.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_event_types.single_view_page">
+        <source>Single view page for events of this type</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_checkboxes">
+        <source>Registration option with checkbox</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_checkboxes.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_lodgings">
+        <source>Lodging option</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_lodgings.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_foods">
+        <source>Food option</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_foods.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_timeslots">
+        <source>Time slot</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_timeslots.begin_date">
+        <source>Begin date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_timeslots.end_date">
+        <source>End date</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_timeslots.place">
+        <source>Place</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_timeslots.room">
+        <source>Room</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_target_groups">
+        <source>Target Groups</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_target_groups.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_target_groups.minimum_age">
+        <source>Minimum age</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_target_groups.maximum_age">
+        <source>Maximum age</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_categories">
+        <source>Event category</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_categories.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_categories.single_view_page">
+        <source>Single view page for events in this category</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_skills">
+        <source>Skill</source>
+      </trans-unit>
+      <trans-unit id="tx_seminars_skills.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tt_content.list_type_pi1">
+        <source>Seminar Manager</source>
+      </trans-unit>
+      <trans-unit id="owner_feuser">
+        <source>Front-end user who has created this record</source>
+      </trans-unit>
+      <trans-unit id="fe_users.divLabel.seminars">
+        <source>Event management</source>
+      </trans-unit>
+      <trans-unit id="fe_users.default_organizer">
+        <source>Default organizer (for the FE editor)</source>
+      </trans-unit>
+      <trans-unit id="fe_users.available_topics">
+        <source>Available topics in the FE editor</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
