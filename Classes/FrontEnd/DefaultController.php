@@ -50,9 +50,6 @@ class DefaultController extends TemplateHelper
 {
     use SharedPluginConfiguration;
 
-    /**
-     * @var list<non-empty-string>
-     */
     private const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
 
     protected ?EventMapper $eventMapper = null;

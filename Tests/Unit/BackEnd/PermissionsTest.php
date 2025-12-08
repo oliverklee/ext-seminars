@@ -15,19 +15,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PermissionsTest extends UnitTestCase
 {
-    /**
-     * @var non-empty-string
-     */
     private const EVENTS_TABLE_NAME = 'tx_seminars_seminars';
-
-    /**
-     * @var non-empty-string
-     */
     private const REGISTRATIONS_TABLE_NAME = 'tx_seminars_attendances';
-
-    /**
-     * @var non-empty-string
-     */
     private const USERS_TABLE_NAME = 'fe_users';
 
     /**

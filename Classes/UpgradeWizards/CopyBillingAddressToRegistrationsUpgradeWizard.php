@@ -29,14 +29,7 @@ class CopyBillingAddressToRegistrationsUpgradeWizard implements
 {
     use LoggerAwareTrait;
 
-    /**
-     * @var non-empty-string
-     */
     private const TABLE_NAME_REGISTRATIONS = 'tx_seminars_attendances';
-
-    /**
-     * @var non-empty-string
-     */
     private const TABLE_NAME_USERS = 'fe_users';
 
     public function getIdentifier(): string

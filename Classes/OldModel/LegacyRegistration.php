@@ -16,9 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class LegacyRegistration extends AbstractModel
 {
-    /**
-     * @var array<non-empty-string, array{separator: non-empty-string, labelKey?: non-empty-string}>
-     */
     private const BILLING_ADDRESS_FIELDS = [
         'company' => ['separator' => "\n"],
         'gender' => ['separator' => ' '],

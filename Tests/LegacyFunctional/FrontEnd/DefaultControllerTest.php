@@ -36,18 +36,15 @@ final class DefaultControllerTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
+    private const CONFIGURATION = [
+        'currency' => 'EUR',
+    ];
+
     protected array $testExtensionsToLoad = [
         'sjbr/static-info-tables',
         'oliverklee/feuserextrafields',
         'oliverklee/oelib',
         'oliverklee/seminars',
-    ];
-
-    /**
-     * @var array<string, non-empty-string>
-     */
-    private const CONFIGURATION = [
-        'currency' => 'EUR',
     ];
 
     private TestingDefaultController $subject;

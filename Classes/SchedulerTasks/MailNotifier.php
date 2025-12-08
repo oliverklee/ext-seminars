@@ -31,9 +31,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  */
 class MailNotifier extends AbstractTask
 {
-    /**
-     * @var non-empty-string
-     */
     private const CSV_FILENAME = 'registrations.csv';
 
     /**

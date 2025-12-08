@@ -15,9 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class CsvDownloader
 {
-    /**
-     * @var non-empty-string
-     */
     private const CSV_FILENAME = 'registrations.csv';
 
     /**

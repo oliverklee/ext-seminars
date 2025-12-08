@@ -12,19 +12,8 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class Permissions implements SingletonInterface
 {
-    /**
-     * @var non-empty-string
-     */
     private const EVENTS_TABLE_NAME = 'tx_seminars_seminars';
-
-    /**
-     * @var non-empty-string
-     */
     private const REGISTRATIONS_TABLE_NAME = 'tx_seminars_attendances';
-
-    /**
-     * @var non-empty-string
-     */
     private const USERS_TABLE_NAME = 'fe_users';
 
     private bool $admin;

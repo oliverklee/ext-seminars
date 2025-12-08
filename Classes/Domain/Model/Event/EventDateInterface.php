@@ -19,19 +19,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 interface EventDateInterface extends EventInterface
 {
-    /**
-     * @var int<0, 2>
-     */
     public const EVENT_FORMAT_ON_SITE = 0;
-
-    /**
-     * @var int<0, 2>
-     */
     public const EVENT_FORMAT_HYBRID = 1;
-
-    /**
-     * @var int<0, 2>
-     */
     public const EVENT_FORMAT_ONLINE = 2;
 
     public function getStart(): ?\DateTime;

@@ -19,9 +19,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
 {
     use BackEndTestsTrait;
 
-    /**
-     * @var string
-     */
     private const TABLE_SEMINARS = 'tx_seminars_seminars';
 
     protected array $testExtensionsToLoad = [

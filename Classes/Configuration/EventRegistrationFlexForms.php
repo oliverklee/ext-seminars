@@ -11,19 +11,8 @@ namespace OliverKlee\Seminars\Configuration;
  */
 class EventRegistrationFlexForms
 {
-    /**
-     * @var non-empty-string
-     */
     private const LOCALLANG_FILE_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
-
-    /**
-     * @var non-empty-string
-     */
     private const LABEL_KEY_PREFIX = 'plugin.eventRegistration.settings.fieldsToShow.';
-
-    /**
-     * @var array<non-empty-string, list<non-empty-string>>
-     */
     protected const AVAILABLE_FIELDS = [
         'inputFields' => [
             'attendanceMode',

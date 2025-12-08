@@ -15,9 +15,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTestCase
 {
-    /**
-     * @var non-empty-string
-     */
     private const FIXTURES_PREFIX = __DIR__ . '/Fixtures/RemoveDuplicateEventVenueRelationsUpgradeWizard/';
 
     protected array $testExtensionsToLoad = [

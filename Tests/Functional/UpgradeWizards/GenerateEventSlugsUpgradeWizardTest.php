@@ -14,9 +14,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
 {
-    /**
-     * @var non-empty-string
-     */
     private const FIXTURES_PREFIX = __DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/';
 
     protected array $testExtensionsToLoad = [

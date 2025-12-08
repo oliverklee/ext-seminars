@@ -41,9 +41,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
     use EmailTrait;
     use MakeInstanceTrait;
 
-    /**
-     * @var non-empty-string
-     */
     private const EMAIL_TEMPLATE_PATH = 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html';
 
     /**

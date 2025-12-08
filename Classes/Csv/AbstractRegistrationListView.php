@@ -19,19 +19,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 abstract class AbstractRegistrationListView
 {
-    /**
-     * @var non-empty-string
-     */
     protected const COLUMN_SEPARATOR = ';';
-
-    /**
-     * @var string
-     */
     protected const LINE_SEPARATOR = "\r\n";
-
-    /**
-     * @var int the depth of the recursion for the back-end pages
-     */
     protected const RECURSION_DEPTH = 250;
 
     protected Configuration $configuration;
