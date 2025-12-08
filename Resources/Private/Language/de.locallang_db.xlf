@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:33Z" target-language="de">
+  <file source-language="en" datatype="plaintext" original="messages" target-language="de">
     <header/>
     <body>
       <trans-unit id="moduleFunction.tx_seminars_modfunc1" approved="yes">
@@ -623,11 +623,13 @@
         <source>Selected lodging options</source>
         <target state="final">Gewählte Unterbringungsmöglichkeiten</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.accommodation" approved="yes">
+      <trans-unit id="tx_seminars_attendances.accommodation">
         <source>
-					How are your lodging preferences (if possible a single room, a double room, no lodging)?
-				</source>
-        <target state="final">Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung)?</target>
+          How are your lodging preferences (if possible a single room, a double room, no lodging)?
+        </source>
+        <target state="needs-translation">
+          How are your lodging preferences (if possible a single room, a double room, no lodging)?
+        </target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.foods" approved="yes">
         <source>Selected food options</source>
