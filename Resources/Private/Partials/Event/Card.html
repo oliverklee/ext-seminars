@@ -1,0 +1,72 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <div class="event-detail__card p-3">
+        <div class="d-flex">
+            <f:render section="cardIcon"
+                      arguments="{
+                        cardIcon: cardIcon,
+                        iconClasses: iconClasses,
+                        iconSize: iconSize,
+                        iconColor: iconColor,
+                        cardImage: cardImage
+                      }">
+            </f:render>
+            <div class="event-detail__card-content{f:if(condition: cardIcon, then:' ps-2')}">
+                <{cardTitleType} class="h4 text-break fw-medium mb-3">
+                    {cardTitle -> f:format.raw()}
+                </{cardTitleType -> f:format.raw()}>
+                <div class="event-detail__card-body">
+                    {cardBody -> f:format.raw()}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <f:section name="cardIcon">
+        <f:variable name="iconClasses" value="event-detail__card-icon"/>
+
+        <f:switch expression="{cardIcon}">
+            <f:case value="attendanceMode">
+                <svg class="{iconClasses}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="{iconSize}" height="{iconSize}" aria-hidden="true">
+                    <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="var(--bs-{iconColor})" d="M448 304L467.9 304C483.4 304 496 291.4 496 275.9C496 268.3 492.9 261 487.4 255.7L283.5 59.1C276.1 52 266.3 48 256 48C245.7 48 235.9 52 228.5 59.1L24.6 255.7C19.1 261 16 268.3 16 275.9C16 291.4 28.6 304 44.1 304L64 304L64 448C64 483.3 92.7 512 128 512L213.7 512C221.1 505.4 230.1 500.6 240 498L240 368C240 362.5 240.7 357.1 242 352L232 352C218.7 352 208 341.3 208 328L208 280C208 266.7 218.7 256 232 256L280 256C293.3 256 304 266.7 304 280L304 304L448 304zM352 416L512 416L512 544L352 544L352 416zM288 384L288 544L256 544C247.2 544 240 551.2 240 560C240 586.5 261.5 608 288 608L576 608C602.5 608 624 586.5 624 560C624 551.2 616.8 544 608 544L576 544L576 384C576 366.3 561.7 352 544 352L320 352C302.3 352 288 366.3 288 384z"/>
+                </svg>
+            </f:case>
+            <f:case value="calendar">
+                <svg class="{iconClasses}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="{iconSize}" height="{iconSize}" aria-hidden="true">
+                    <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="var(--bs-{iconColor})" d="M224 64C241.7 64 256 78.3 256 96L256 128L384 128L384 96C384 78.3 398.3 64 416 64C433.7 64 448 78.3 448 96L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 96C192 78.3 206.3 64 224 64zM160 304L160 336C160 344.8 167.2 352 176 352L208 352C216.8 352 224 344.8 224 336L224 304C224 295.2 216.8 288 208 288L176 288C167.2 288 160 295.2 160 304zM288 304L288 336C288 344.8 295.2 352 304 352L336 352C344.8 352 352 344.8 352 336L352 304C352 295.2 344.8 288 336 288L304 288C295.2 288 288 295.2 288 304zM432 288C423.2 288 416 295.2 416 304L416 336C416 344.8 423.2 352 432 352L464 352C472.8 352 480 344.8 480 336L480 304C480 295.2 472.8 288 464 288L432 288zM160 432L160 464C160 472.8 167.2 480 176 480L208 480C216.8 480 224 472.8 224 464L224 432C224 423.2 216.8 416 208 416L176 416C167.2 416 160 423.2 160 432zM304 416C295.2 416 288 423.2 288 432L288 464C288 472.8 295.2 480 304 480L336 480C344.8 480 352 472.8 352 464L352 432C352 423.2 344.8 416 336 416L304 416zM416 432L416 464C416 472.8 423.2 480 432 480L464 480C472.8 480 480 472.8 480 464L480 432C480 423.2 472.8 416 464 416L432 416C423.2 416 416 423.2 416 432z"/>
+                </svg>
+            </f:case>
+            <f:case value="location">
+                <svg class="{iconClasses}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="{iconSize}" height="{iconSize}" aria-hidden="true">
+                    <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="var(--bs-{iconColor})" d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z"/>
+                </svg>
+            </f:case>
+            <f:case value="price">
+                <svg class="{iconClasses}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="{iconSize}" height="{iconSize}" aria-hidden="true">
+                    <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="var(--bs-{iconColor})" d="M128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 256C576 220.7 547.3 192 512 192L136 192C122.7 192 112 181.3 112 168C112 154.7 122.7 144 136 144L520 144C533.3 144 544 133.3 544 120C544 106.7 533.3 96 520 96L128 96zM480 320C497.7 320 512 334.3 512 352C512 369.7 497.7 384 480 384C462.3 384 448 369.7 448 352C448 334.3 462.3 320 480 320z"/>
+                </svg>
+            </f:case>
+            <f:case value="vacancy">
+                <svg class="{iconClasses}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="{iconSize}" height="{iconSize}" aria-hidden="true">
+                    <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="var(--bs-{iconColor})" d="M96 128C60.7 128 32 156.7 32 192L32 256C32 264.8 39.4 271.7 47.7 274.6C66.5 281.1 80 299 80 320C80 341 66.5 358.9 47.7 365.4C39.4 368.3 32 375.2 32 384L32 448C32 483.3 60.7 512 96 512L544 512C579.3 512 608 483.3 608 448L608 384C608 375.2 600.6 368.3 592.3 365.4C573.5 358.9 560 341 560 320C560 299 573.5 281.1 592.3 274.6C600.6 271.7 608 264.8 608 256L608 192C608 156.7 579.3 128 544 128L96 128zM448 400L448 240L192 240L192 400L448 400zM144 224C144 206.3 158.3 192 176 192L464 192C481.7 192 496 206.3 496 224L496 416C496 433.7 481.7 448 464 448L176 448C158.3 448 144 433.7 144 416L144 224z"/>
+                </svg>
+            </f:case>
+            <f:case value="speaker">
+                <svg class="{iconClasses} me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="{iconSize - 2}" height="{iconSize - 2}" aria-hidden="true">
+                    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="var(--bs-{iconColor})" d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
+                </svg>
+            </f:case>
+            <f:case value="cardImage">
+                {cardImage -> f:format.raw()}
+            </f:case>
+            <f:defaultCase>
+                <f:comment>No icon by default</f:comment>
+            </f:defaultCase>
+        </f:switch>
+    </f:section>
+</html>

@@ -63,6 +63,9 @@
       <trans-unit id="label_room">
         <source>Room</source>
       </trans-unit>
+      <trans-unit id="label_attendance_mode_label">
+        <source>Format</source>
+      </trans-unit>
       <trans-unit id="label_attendance_mode">
         <source>on-site/online</source>
       </trans-unit>
@@ -2010,6 +2013,9 @@
       <trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
         <source>unlimited</source>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.fewLeft">
+        <source>few tickets left</source>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.venue">
         <source>Venue</source>
       </trans-unit>
@@ -2029,7 +2035,7 @@
         <source>registration</source>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
-        <source>register for the waiting list</source>
+        <source>waiting list</source>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations">
         <source>My registrations</source>

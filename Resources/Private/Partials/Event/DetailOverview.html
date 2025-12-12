@@ -1,0 +1,140 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <div class="event-detail__cards mb-{classesSpacingValueRow} bg-body-tertiary rounded">
+        <div class="event-detail__cards-inner">
+            <f:comment>Attendance mode</f:comment>
+            <f:variable name="attendanceCardIcon" value="attendanceMode"/>
+            <f:variable name="attendanceCardTitle"><f:translate key="label_attendance_mode_label"/></f:variable>
+            <f:variable name="attendanceCardBody">
+                <oelib:isFieldEnabled fieldName="eventType">
+                    <f:if condition="{event.eventType}">
+                        <p class="mb-{classesSpacingValue}">
+                            {event.eventType.title}
+                        </p>
+                    </f:if>
+                </oelib:isFieldEnabled>
+
+                <f:render partial="Event/AttendanceMode" arguments="{event: event}"/>
+            </f:variable>
+
+            <f:render partial="Event/Card"
+                      arguments="{
+                          cardIcon: attendanceCardIcon,
+                          cardTitle: attendanceCardTitle,
+                          cardTitleType: 'h2',
+                          cardBody: attendanceCardBody,
+                          iconSize: iconSize,
+                          iconColor: iconColor
+                      }"
+            />
+
+            <f:comment>Date and time</f:comment>
+            <oelib:isFieldEnabled fieldName="dateAndTime">
+                <f:if condition="{event.start}">
+                    <f:variable name="dateTimeCardIcon" value="calendar"/>
+                    <f:variable name="dateTimeCardTitle"><f:translate key="plugin.eventSingleView.events.property.dateAndTime"/></f:variable>
+                    <f:variable name="dateTimeCardBody"><f:render partial="Event/DateAndTime" arguments="{event: event}"/></f:variable>
+
+                    <f:render partial="Event/Card"
+                              arguments="{
+                              cardIcon: dateTimeCardIcon,
+                              cardTitle: dateTimeCardTitle,
+                              cardTitleType: 'h2',
+                              cardBody: dateTimeCardBody,
+                              iconSize: iconSize,
+                              iconColor: iconColor
+                          }"
+                    />
+                </f:if>
+            </oelib:isFieldEnabled>
+
+            <f:comment>Venues</f:comment>
+            <oelib:isFieldEnabled fieldName="venue">
+                <f:if condition="{event.venues}">
+                    <f:variable name="venuesCardIcon" value="location"/>
+                    <f:variable name="venuesCardTitle"><f:translate key="plugin.eventSingleView.events.property.venue"/></f:variable>
+                    <f:variable name="venuesCardBody">
+                        <f:render partial="Event/Venues" arguments="{event: event}"/>
+                        <oelib:isFieldEnabled fieldName="room">
+                            <f:if condition="{event.room}">
+                                <div class="mb-{classesSpacingValue}">
+                                    <f:translate key="plugin.eventSingleView.events.property.room"/>: {event.room}
+                                </div>
+                            </f:if>
+                        </oelib:isFieldEnabled>
+                    </f:variable>
+
+                    <f:render partial="Event/Card"
+                              arguments="{
+                              cardIcon: venuesCardIcon,
+                              cardTitle: venuesCardTitle,
+                              cardTitleType: 'h2',
+                              cardBody: venuesCardBody,
+                              iconSize: iconSize,
+                              iconColor: iconColor
+                          }"
+                    />
+                </f:if>
+            </oelib:isFieldEnabled>
+
+            <f:comment>Price</f:comment>
+            <oelib:isFieldEnabled fieldName="price">
+                <f:if condition="{event.registrationPossibleByDate}">
+                    <f:variable name="priceCardIcon" value="price"/>
+                    <f:variable name="priceCardTitle"><f:translate key="plugin.eventSingleView.events.property.price"/></f:variable>
+                    <f:variable name="priceCardBody"><f:render partial="PriceWithVat" arguments="{amount: event.standardPrice}"/></f:variable>
+
+                    <f:render partial="Event/Card"
+                              arguments="{
+                              cardIcon: priceCardIcon,
+                              cardTitle: priceCardTitle,
+                              cardTitleType: 'h2',
+                              cardBody: priceCardBody,
+                              iconSize: iconSize,
+                              iconColor: iconColor
+                          }"
+                    />
+                </f:if>
+            </oelib:isFieldEnabled>
+
+            <f:comment>Vacancies</f:comment>
+            <oelib:isFieldEnabled fieldName="vacancies">
+                <f:if condition="{event.registrationRequired} && {event.registrationPossibleByDate}">
+                    <f:variable name="vacanciesCardIcon" value="vacancy"/>
+                    <f:variable name="vacanciesCardTitle"><f:translate key="plugin.eventSingleView.events.property.registration"/></f:variable>
+                    <f:variable name="vacanciesCardBody">
+                        <oelib:isFieldEnabled fieldName="registrationTop">
+                            <f:if condition="{settings.registrationPage} && {event.registrationRequired}">
+                                <f:if condition="{event.registrationPossibleByDate} && {statistics.anyVacancies}">
+                                    <div class="mt-{classesSpacingValue}">
+                                        <f:render partial="Event/RegistrationLink"
+                                                  arguments="{event: event, viewName: 'eventSingleView', buttonFullWidth: 1}"/>
+                                    </div>
+                                </f:if>
+                            </f:if>
+                        </oelib:isFieldEnabled>
+                        <oelib:isFieldEnabled fieldName="vacancies">
+                            <f:if condition="{event.registrationRequired} && {event.registrationPossibleByDate}">
+                                <div class="d-flex justify-content-center">
+                                    <f:render partial="Event/VacanciesIfRegistrationPossibleByDate"
+                                              arguments="{event: event, viewName: 'eventSingleView'}"/>
+                                </div>
+                            </f:if>
+                        </oelib:isFieldEnabled>
+                    </f:variable>
+
+                    <f:render partial="Event/Card"
+                              arguments="{
+                              cardIcon: vacanciesCardIcon,
+                              cardTitle: vacanciesCardTitle,
+                              cardTitleType: 'h2',
+                              cardBody: vacanciesCardBody,
+                              iconSize: iconSize,
+                              iconColor: iconColor
+                          }"
+                    />
+                </f:if>
+            </oelib:isFieldEnabled>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,60 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <div class="event-detail__intro row mb-{classesSpacingValueRow}">
+        <f:comment>Image placeholder</f:comment>
+        <f:render partial="Event/DetailImage" arguments="{_all}"/>
+
+        <f:comment>Title, badges, teaser / description</f:comment>
+        <div class="col-12 col-xl-7">
+            <div class="event-container">
+                <oelib:isFieldEnabled fieldName="title">
+                    <h1 class="mb-{classesSpacingValue}">
+                        {event.displayTitle}
+                    </h1>
+                </oelib:isFieldEnabled>
+
+                <f:comment>Badges: Event id, type, categories</f:comment>
+                <div class="event-detail__badges">
+                    <f:if condition="{event.topic.categories}">
+                        <f:for each="{event.topic.categories}" as="category" iteration="iteration">
+                            <span class="badge rounded-pill fs-6 fw-medium bg-info-subtle text-dark mb-{classesSpacingValue}">
+                                {category.title}
+                            </span>
+                        </f:for>
+                    </f:if>
+
+                    <span class="badge rounded-pill fs-6 fw-medium bg-body-secondary text-dark mb-{classesSpacingValue}">
+                        #{event.uid}
+                    </span>
+                </div>
+
+                <f:comment>Organizers</f:comment>
+                <f:if condition="{event.organizers}">
+                    <div class="event-detail__inner">
+                        <f:render partial="Event/Organizers" arguments="{_all}"></f:render>
+                    </div>
+                </f:if>
+
+                <f:comment>Teaser text / Description</f:comment>
+                <div class="event-detail__inner mb-{classesSpacingValueRow}">
+                    <div class="mt-{classesSpacingValue}">
+                        <f:if condition="{event.teaser}">
+                            <f:then>
+                                <oelib:isFieldEnabled fieldName="teaser">
+                                    {event.teaser -> f:format.html()}
+                                </oelib:isFieldEnabled>
+                            </f:then>
+                            <f:else>
+                                <oelib:isFieldEnabled fieldName="description">
+                                    <f:if condition="{event.description}">
+                                        {event.description -> f:format.html()}
+                                    </f:if>
+                                </oelib:isFieldEnabled>
+                            </f:else>
+                        </f:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

@@ -5,111 +5,35 @@
 
     <f:section name="main">
         <f:variable name="statistics" value="{event.statistics}"/>
+        <f:variable name="classesSpacingValue" value="3"/>
+        <f:variable name="classesSpacingValueRow" value="5"/>
+        <f:variable name="iconSize" value="27"/>
+        <f:variable name="iconColor" value="primary"/>
 
-        <oelib:isFieldEnabled fieldName="title">
-            <h1>
-                {event.displayTitle}
-            </h1>
-        </oelib:isFieldEnabled>
+        <f:comment>Intro</f:comment>
+        <f:render partial="Event/DetailIntro" arguments="{_all}"/>
 
-        <oelib:isFieldEnabled fieldName="eventType">
-            <f:if condition="{event.eventType}">
-                <h2>
-                    {event.eventType.title}
-                </h2>
-            </f:if>
-        </oelib:isFieldEnabled>
+        <f:comment>Overview</f:comment>
+        <f:render partial="Event/DetailOverview" arguments="{_all}"/>
 
-        <oelib:isFieldEnabled fieldName="registrationTop">
-            <f:if condition="{settings.registrationPage} && {event.registrationRequired}">
-                <f:if condition="{event.registrationPossibleByDate} && {statistics.anyVacancies}">
-                    <h3>
-                        <f:translate key="plugin.eventSingleView.events.property.registration"/>
-                    </h3>
-                    <p>
-                        <f:render partial="Event/RegistrationLink"
-                                  arguments="{event: event, viewName: 'eventSingleView'}"/>
-                    </p>
-                </f:if>
-            </f:if>
-        </oelib:isFieldEnabled>
+        <f:comment>Further information in accordions</f:comment>
+        <f:render partial="Event/DetailInformation" arguments="{_all}"/>
 
-        <oelib:isFieldEnabled fieldName="dateAndTime">
-            <f:if condition="{event.start}">
-                <h3>
-                    <f:translate key="plugin.eventSingleView.events.property.dateAndTime"/>
-                </h3>
-
-                <f:render partial="Event/DateAndTime" arguments="{event: event}"/>
-            </f:if>
-        </oelib:isFieldEnabled>
-
-        <oelib:isFieldEnabled fieldName="venue">
-            <f:if condition="{event.venues}">
-                <h3>
-                    <f:translate key="plugin.eventSingleView.events.property.venue"/>
-                </h3>
-
-                <f:render partial="Event/Venues" arguments="{event: event}"/>
-            </f:if>
-        </oelib:isFieldEnabled>
-
-        <oelib:isFieldEnabled fieldName="room">
-            <f:if condition="{event.room}">
-                <h3>
-                    <f:translate key="plugin.eventSingleView.events.property.room"/>
-                </h3>
-                <p>
-                    {event.room}
-                </p>
-            </f:if>
-        </oelib:isFieldEnabled>
-
-        <oelib:isFieldEnabled fieldName="price">
-            <f:if condition="{event.registrationPossibleByDate}">
-                <h3>
-                    <f:translate key="plugin.eventSingleView.events.property.price"/>
-                </h3>
-                <p>
-                    <f:render partial="PriceWithVat" arguments="{amount: event.standardPrice}"/>
-                </p>
-            </f:if>
-        </oelib:isFieldEnabled>
-
-        <oelib:isFieldEnabled fieldName="vacancies">
-            <f:if condition="{event.registrationRequired} && {event.registrationPossibleByDate}">
-                <h3>
-                    <f:translate key="plugin.eventSingleView.events.property.vacancies"/>
-                </h3>
-
-                <p>
-                    <f:render partial="Event/VacanciesIfRegistrationPossibleByDate"
-                              arguments="{event: event, viewName: 'eventSingleView'}"/>
-                </p>
-            </f:if>
-        </oelib:isFieldEnabled>
-
-        <oelib:isFieldEnabled fieldName="description">
-            <f:if condition="{event.description}">
-                {event.description -> f:format.html()}
-            </f:if>
-        </oelib:isFieldEnabled>
-
-        <oelib:isFieldEnabled fieldName="speakers">
-            <f:render partial="Event/SpeakersHeading" arguments="{event: event}"/>
-            <f:render partial="Event/Speakers" arguments="{event: event}"/>
-        </oelib:isFieldEnabled>
-
+        <f:comment>CTA bottom</f:comment>
         <oelib:isFieldEnabled fieldName="registrationBottom">
             <f:if condition="{settings.registrationPage} && {event.registrationRequired}">
                 <f:if condition="{event.registrationPossibleByDate} && {statistics.anyVacancies}">
-                    <h3>
-                        <f:translate key="plugin.eventSingleView.events.property.registration"/>
-                    </h3>
-                    <p>
-                        <f:render partial="Event/RegistrationLink"
-                                  arguments="{event: event, viewName: 'eventSingleView'}"/>
-                    </p>
+                    <div class="event-detail__cta-bottom row">
+                        <div class="col-12}">
+                            <h2 class="mb-3">
+                                <f:translate key="plugin.eventSingleView.events.property.registration"/>
+                            </h2>
+                            <p>
+                                <f:render partial="Event/RegistrationLink"
+                                          arguments="{event: event, viewName: 'eventSingleView'}"/>
+                            </p>
+                        </div>
+                    </div>
                 </f:if>
             </f:if>
         </oelib:isFieldEnabled>

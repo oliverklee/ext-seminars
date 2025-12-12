@@ -1,20 +1,14 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    <div class="row">
-        <f:for each="{event.venues}" as="venue">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {venue.title}
-                        </h5>
-                        <f:if condition="{venue.fullAddress}">
-                            <p class="card-text">
-                                {venue.fullAddress -> f:format.nl2br()}
-                            </p>
-                        </f:if>
-                    </div>
-                </div>
-            </div>
-        </f:for>
-    </div>
+    <f:for each="{event.venues}" as="venue" iteration="iteration">
+        <div class="text-left">
+            <h3 class="h6 mb-0{f:if(condition: venue.fullAddress, then: ' fw-bold')}">
+                {venue.title}
+            </h3>
+            <f:if condition="{venue.fullAddress}">
+                <p{f:if(condition: iteration.isLast, then: ' class="mb-0"', else: '')}>
+                {venue.fullAddress -> f:format.nl2br()}
+                </p>
+            </f:if>
+        </div>
+    </f:for>
 </html>

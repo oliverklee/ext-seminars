@@ -1,0 +1,31 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <div class="accordion-item">
+        <{accordionHeaderType} class="accordion-header">
+            <button class="accordion-button{f:if(condition: accordionIsOpen, then: '', else: ' collapsed')}"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{accordionId}"
+                    aria-expanded="{f:if(condition: accordionIsOpen, then: 'true', else: 'false')}"
+                    aria-controls="collapse{accordionId}">
+                <span class="h4 mb-0">{accordionHeader}</span>
+            </button>
+        </{accordionHeaderType}>
+
+        <div id="collapse{accordionId}"
+             class="accordion-collapse collapse{f:if(condition: accordionIsOpen, then: ' show')}"
+             data-bs-parent="#{accordionParentId}">
+            <div class="accordion-body">
+                <f:if condition="{accordionBodyWrap}">
+                    <f:then>
+                        <div class="event-container">
+                            {accordionBody -> f:format.raw()}
+                        </div>
+                    </f:then>
+                    <f:else>
+                        {accordionBody -> f:format.raw()}
+                    </f:else>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</html>

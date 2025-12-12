@@ -1,31 +1,57 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:variable name="speakers" value="{event.speakers}"/>
     <f:if condition="{speakers}">
-        <div class="row">
-            <f:for each="{speakers}" as="speaker">
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                {speaker.name}
-                            </h5>
-                            <f:if condition="{speaker.organization}">
-                                <h6 class="card-subtitle mb-2 text-body-secondary">
-                                    {speaker.organization}
-                                </h6>
-                            </f:if>
+        <div class="event-detail__cards">
+            <div class="event-detail__cards-inner">
+                <f:for each="{speakers}" as="speaker">
+                    <f:if condition="{speaker.image}">
+                        <f:then>
+                            <f:variable name="speakerCardIcon" value="cardImage"/>
+                            <f:variable name="speakerCardImage">
+                                <f:comment>TODO: replace dummy img src, figcaption and alt text</f:comment>
+                                <figure class="event-detail__speaker-image me-2 mb-0">
+                                    <img class="rounded-circle"
+                                         src="https://picsum.photos/id/237/100"
+                                         alt="{speaker.name} or other alternative text"
+                                         width="100" height="100"/>
+                                    <figcaption class="small pt-1">© {speaker.name}</figcaption>
+                                </figure>
+                            </f:variable>
+                        </f:then>
+                        <f:else>
+                            <f:variable name="speakerCardIcon" value="speaker"/>
+                        </f:else>
+                    </f:if>
 
-                            <f:if condition="{speaker.homepage}">
-                                <p>
-                                    <f:link.typolink parameter="{speaker.homepage}" class="card-link" target="_blank">
-                                        <f:translate key="plugin.eventSingleView.events.property.speakers.homepage"/>
-                                    </f:link.typolink>
-                                </p>
-                            </f:if>
-                        </div>
-                    </div>
-                </div>
-            </f:for>
+                    <f:variable name="speakerCardTitle">
+                        <span class="d-block mt-2">{speaker.name}</span>
+                    </f:variable>
+                    <f:variable name="speakerCardBody">
+                        <f:if condition="{speaker.organization}">
+                            <h4 class="h5 mb-2 text-body-secondary">{speaker.organization}</h4>
+                        </f:if>
+                        <f:if condition="{speaker.homepage}">
+                            <p>
+                                <f:link.typolink parameter="{speaker.homepage}" class="card-link" target="_blank">
+                                    <f:translate key="plugin.eventSingleView.events.property.speakers.homepage"/>
+                                </f:link.typolink>
+                            </p>
+                        </f:if>
+                    </f:variable>
+
+                    <f:render partial="Event/Card"
+                              arguments="{
+                                      cardIcon: speakerCardIcon,
+                                      cardImage: speakerCardImage,
+                                      cardTitle: speakerCardTitle,
+                                      cardTitleType: 'h3',
+                                      cardBody: speakerCardBody,
+                                      iconSize: 100,
+                                      iconColor: 'secondary-bg'
+                                  }"
+                    />
+                </f:for>
+            </div>
         </div>
     </f:if>
 </html>

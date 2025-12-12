@@ -227,3 +227,78 @@ form.tx-seminars-event-registration label {
         width: min(25%, 220px);
     }
 }
+
+/*
+ * Event detail page
+ */
+
+/*
+ * Intro
+ */
+@media screen and (min-width: 1200px) {
+    .event-detail__image {
+        min-height: 280px;
+    }
+}
+
+/*
+ * Text container
+ */
+.event-container {
+    width: clamp(50%, 100%, 900px);
+}
+
+/*
+ * Cards
+ */
+.event-detail__cards {
+    container-type: inline-size;
+    container-name: eventDetailOverviewCards;
+}
+
+.event-detail__cards-inner {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.event-detail__card {
+    width: 100%;
+}
+
+@container eventDetailOverviewCards (width > 550px) {
+    .event-detail__card {
+        width: 50%;
+    }
+}
+
+@container eventDetailOverviewCards (width > 800px) {
+    .event-detail__card {
+        width: 33%;
+    }
+}
+
+@container eventDetailOverviewCards (width > 1100px) {
+    .event-detail__card {
+        width: fit-content;
+        max-width: 33%;
+    }
+}
+
+@container eventDetailOverviewCards (width > 1400px) {
+    .event-detail__card {
+        max-width: 25%;
+    }
+
+    .event-detail__card-content {
+        padding-right: 2rem;
+    }
+}
+
+.event-detail__card-body {
+    width: fit-content;
+}
+
+.event-detail__speaker-image {
+    max-width: 100px;
+    text-align: center;
+}

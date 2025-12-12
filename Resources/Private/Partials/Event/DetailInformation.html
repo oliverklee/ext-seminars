@@ -1,0 +1,52 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:if condition="{event.speakers} || ({event.teaser} && {event.description})">
+        <f:variable name="accordionElementId" value="eventInformation"></f:variable>
+        <h2 class="mb-3"><f:translate key="label_register_additional_information"/></h2>
+        <div class="accordion mb-5" id="{accordionElementId}">
+            <f:comment>Speakers</f:comment>
+            <f:if condition="{event.speakers}">
+                <oelib:isFieldEnabled fieldName="speakers">
+                    <f:variable name="speakersAccordionId" value="Speakers"/>
+                    <f:variable name="speakersAccordionHeader"><f:render partial="Event/SpeakersHeading" arguments="{event: event}"/></f:variable>
+                    <f:variable name="speakersAccordionBody"><f:render partial="Event/Speakers" arguments="{event: event, iconSize: iconSize, iconColor: iconColor}"/></f:variable>
+
+                    <f:render partial="Event/AccordionItem"
+                              arguments="{
+                              accordionIsOpen: 1,
+                              accordionHeaderType: 'h3',
+                              accordionParentId: accordionElementId,
+                              accordionId: speakersAccordionId,
+                              accordionHeader: speakersAccordionHeader,
+                              accordionBody: speakersAccordionBody
+                          }"
+                    />
+                </oelib:isFieldEnabled>
+            </f:if>
+
+            <f:comment>Description (if teaser text is available)</f:comment>
+            <f:if condition="{event.teaser} && {event.description}">
+                <oelib:isFieldEnabled fieldName="description">
+                    <f:variable name="descriptionAccordionId" value="Description"/>
+                    <f:variable name="descriptionAccordionHeader"><f:translate key="label_description"/></f:variable>
+                    <f:variable name="descriptionAccordionBody">{event.description -> f:format.html()}</f:variable>
+                    <f:if condition="!{event.speakers}">
+                        <f:variable name="openDescription">1</f:variable>
+                    </f:if>
+
+                    <f:render partial="Event/AccordionItem"
+                              arguments="{
+                              accordionIsOpen: openDescription,
+                              accordionBodyWrap: 1,
+                              accordionHeaderType: 'h3',
+                              accordionParentId: accordionElementId,
+                              accordionId: descriptionAccordionId,
+                              accordionHeader: descriptionAccordionHeader,
+                              accordionBody: descriptionAccordionBody
+                        }"
+                    />
+                </oelib:isFieldEnabled>
+            </f:if>
+        </div>
+    </f:if>
+</html>
