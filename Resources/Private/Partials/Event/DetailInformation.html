@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:oelib="OliverKlee\Oelib\ViewHelpers"
       data-namespace-typo3-fluid="true">
-    <f:if condition="{event.speakers} || ({event.teaser} && {event.description})">
+    <f:if condition="{event.speakers} || ({event.teaser} && {event.description}) || {showTimeSlotsDemo}">
         <f:variable name="accordionElementId" value="eventInformation"></f:variable>
         <h2 class="mb-3"><f:translate key="label_register_additional_information"/></h2>
         <div class="accordion mb-5" id="{accordionElementId}">
@@ -46,6 +46,53 @@
                         }"
                     />
                 </oelib:isFieldEnabled>
+            </f:if>
+
+            <f:comment>Time slots demo</f:comment>
+            <f:if condition="{showTimeSlotsDemo}">
+                <f:variable name="timeSlotsAccordionId" value="TimeSlots"/>
+                <f:variable name="timeSlotsAccordionIdReadable" value="zeitbloecke"/>
+                <f:variable name="timeSlotsAccordionHeader"><f:translate key="label_timeslots"/></f:variable>
+                <f:variable name="timeSlotsAccordionBody">
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>10.11.2026 10:00 - 16:00 Uhr</strong>
+                            <p>Raum 1, Station - Hostel für Backpacker</p>
+                        </li>
+                        <li>
+                            <strong>11.11.2026 10:00 - 15:00 Uhr</strong>
+                            <p>Raum 2, Station - Hostel für Backpacker</p>
+                        </li>
+                        <li>
+                            <strong>12.11.2026 10:00 - 16:00 Uhr</strong>
+                            <p>Raum 3, Station - Hostel für Backpacker</p>
+                        </li>
+                        <li>
+                            <strong>13.11.2026 10:00 - 15:00 Uhr</strong>
+                            <p>Raum 4, Station - Hostel für Backpacker</p>
+                        </li>
+                        <li>
+                            <strong>14.11.2026 10:00 - 16:00 Uhr</strong>
+                            <p>Raum 5, Station - Hostel für Backpacker</p>
+                        </li>
+                    </ul>
+                </f:variable>
+                <f:if condition="!{event.speakers} && !({event.teaser} && {event.description})">
+                    <f:variable name="openTimeSlots">1</f:variable>
+                </f:if>
+
+                <f:render partial="Event/AccordionItem"
+                          arguments="{
+                          accordionIsOpen: openTimeSlots,
+                          accordionBodyWrap: 1,
+                          accordionHeaderType: 'h3',
+                          accordionParentId: accordionElementId,
+                          accordionId: timeSlotsAccordionId,
+                          accordionIdReadableAnchor: timeSlotsAccordionIdReadable,
+                          accordionHeader: timeSlotsAccordionHeader,
+                          accordionBody: timeSlotsAccordionBody
+                    }"
+                />
             </f:if>
         </div>
     </f:if>

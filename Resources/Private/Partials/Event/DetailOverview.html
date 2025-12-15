@@ -32,7 +32,14 @@
             <oelib:isFieldEnabled fieldName="dateAndTime">
                 <f:if condition="{event.start}">
                     <f:variable name="dateTimeCardIcon" value="calendar"/>
-                    <f:variable name="dateTimeCardTitle"><f:translate key="plugin.eventSingleView.events.property.dateAndTime"/></f:variable>
+                    <f:if condition="{showTimeSlotsDemo}">
+                        <f:then>
+                            <f:variable name="dateTimeCardTitle"><f:translate key="label_timeslots"/></f:variable>
+                        </f:then>
+                        <f:else>
+                            <f:variable name="dateTimeCardTitle"><f:translate key="plugin.eventSingleView.events.property.dateAndTime"/></f:variable>
+                        </f:else>
+                    </f:if>
                     <f:variable name="dateTimeCardBody"><f:render partial="Event/DateAndTime" arguments="{event: event}"/></f:variable>
 
                     <f:render partial="Event/Card"
