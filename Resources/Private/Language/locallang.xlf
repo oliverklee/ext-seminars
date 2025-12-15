@@ -487,8 +487,14 @@
       <trans-unit id="dateFormat">
         <source>Y-m-d</source>
       </trans-unit>
+      <trans-unit id="dateFormatStructuredData">
+        <source>Y-m-d</source>
+      </trans-unit>
       <trans-unit id="timeFormat">
         <source>H:i</source>
+      </trans-unit>
+      <trans-unit id="timeFormatStructuredData">
+        <source>H:i:s</source>
       </trans-unit>
       <trans-unit id="timeWithUnit">
         <source>%1s</source>

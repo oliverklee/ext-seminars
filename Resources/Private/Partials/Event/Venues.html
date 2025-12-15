@@ -11,4 +11,23 @@
             </f:if>
         </div>
     </f:for>
+
+    <f:section name="structuredData">
+        <f:if condition="{event.registrationRequired}">
+            <f:if condition="{event.eventFormat} == 2">
+                <f:then>
+                    "@type": "VirtualLocation"
+                </f:then>
+                <f:else>
+                    "name": "{venue.title}",
+                    "@type": "Place",
+                    "address": <f:format.raw>{</f:format.raw>
+                    "@type": "PostalAddress",
+                    "addressLocality": "{venue.city}"
+                    <f:if condition="{venue.fullAddress}">, "streetAddress": "{venue.fullAddress}"</f:if>
+                    <f:format.raw>}</f:format.raw>
+                </f:else>
+            </f:if>
+        </f:if>
+    </f:section>
 </html>

@@ -55,4 +55,29 @@
             </g>
         </svg>
     </f:section>
+
+    <f:section name="structuredData">
+        <f:if condition="{event.registrationRequired}">
+            <f:then>
+                <f:variable name="statistics" value="{event.statistics}"/>
+                <f:if condition="{event.unlimitedSeats}">
+                    <f:then>
+                        https://schema.org/InStock
+                    </f:then>
+                    <f:else if="{statistics.vacancies} >= {settings.enoughVacanciesThreshold}">
+                        https://schema.org/InStock
+                    </f:else>
+                    <f:else if="{statistics.fullyBooked}">
+                        https://schema.org/SoldOut
+                    </f:else>
+                    <f:else>
+                        https://schema.org/LimitedAvailability
+                    </f:else>
+                </f:if>
+            </f:then>
+            <f:else>
+                https://schema.org/InStock
+            </f:else>
+        </f:if>
+    </f:section>
 </html>

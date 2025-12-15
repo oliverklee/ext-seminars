@@ -15,4 +15,15 @@
             {organizer.name}{f:if(condition: iteration.isLast, then: '', else: ', ')}
         </f:for>
     </f:if>
+
+    <f:section name="structuredData">
+        <f:if condition="{event.organizers}">
+            <f:for each="{event.organizers}" as="organizer" iteration="iterator">
+                <f:format.raw>{</f:format.raw>
+                "name": "{organizer.name}"<f:if condition="{organizer.homepage}">,
+                "url": "{f:uri.typolink(parameter: organizer.homepage, absolute: true) -> f:format.raw()}"</f:if>
+                <f:format.raw>}</f:format.raw>{f:if(condition: iterator.isLast, then: '', else: ', ')}
+            </f:for>
+        </f:if>
+    </f:section>
 </html>

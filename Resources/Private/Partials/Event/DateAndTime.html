@@ -30,4 +30,26 @@
             </f:else>
         </f:if>
     </f:if>
+
+    <f:section name="startDateAndTimeStructuredData">
+        <f:if condition="{event.start}">
+            <f:spaceless>
+                {f:translate(key: 'dateFormatStructuredData') -> f:variable(name: 'dateFormatStructuredData')}
+                {f:translate(key: 'timeFormatStructuredData') -> f:variable(name: 'timeFormatStructuredData')}
+                <f:variable name="eventStartDateAndTime">{f:format.date(format: dateFormatStructuredData, date:event.start)}T{f:format.date(format: timeFormatStructuredData, date: event.start)}</f:variable>
+                {eventStartDateAndTime}
+            </f:spaceless>
+        </f:if>
+    </f:section>
+
+    <f:section name="endDateAndTimeStructuredData">
+        <f:if condition="{event.end}">
+            <f:spaceless>
+                {f:translate(key: 'dateFormatStructuredData') -> f:variable(name: 'dateFormatStructuredData')}
+                {f:translate(key: 'timeFormatStructuredData') -> f:variable(name: 'timeFormatStructuredData')}
+                <f:variable name="eventEndDateAndTime">{f:format.date(format: dateFormatStructuredData, date: event.end)}T{f:format.date(format: timeFormatStructuredData, date: event.end)}</f:variable>
+                {eventEndDateAndTime}
+            </f:spaceless>
+        </f:if>
+    </f:section>
 </html>

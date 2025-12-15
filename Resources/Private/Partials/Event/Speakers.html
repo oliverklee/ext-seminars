@@ -54,4 +54,20 @@
             </div>
         </div>
     </f:if>
+
+    <f:comment>TODO: replace image src</f:comment>
+    <f:section name="structuredData">
+        <f:if condition="{event.speakers}">
+            <f:for each="{event.speakers}" as="speaker" iteration="iterator">
+                <f:format.raw>{</f:format.raw>
+                "@type": "Person",
+                "name": "{speaker.name}"
+                <f:if condition="{speaker.homepage}">,
+                    "url": "{f:uri.typolink(parameter: speaker.homepage, absolute: true) -> f:format.raw()}"</f:if>
+                <f:if condition="{speaker.image}">,
+                    "image": "https://picsum.photos/id/237/100"</f:if>
+                <f:format.raw>}</f:format.raw>{f:if(condition: iterator.isLast, then: '', else: ', ')}
+            </f:for>
+        </f:if>
+    </f:section>
 </html>

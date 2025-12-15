@@ -1,0 +1,64 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:comment>
+        Source: https://developers.google.com/search/docs/appearance/structured-data/event
+        You can use Google's tool to test the results: https://search.google.com/test/rich-results
+
+        (1) Although a start date is not mandatory for schema.org's type Event,
+        Google will mark the data as invalid if no date has been specified.
+        This will also result in an error in Google Search Console.
+        So add structured data only if the event has a defined start date.
+
+        Best practices for addresses:
+        - If the event happens across several streets, define the starting location and mention the full details in description.
+        - If the event happens without a well-defined location, use the city name or the most representative location.
+        - If the event happens at multiple locations at the same time, create different events for each location.
+
+        Best practices for price:
+        - The lowest available price available for your tickets, including service charges and fees.
+          Don't forget to update it as prices change or tickets sell out.
+        - If the event is available without payment, fees, or service charges, set the price to 0.
+    </f:comment>
+
+    <f:variable name="eventStartDateAndTime"><f:spaceless><f:render partial="Event/DateAndTime" section="startDateAndTimeStructuredData" arguments="{event: event}"/></f:spaceless></f:variable>
+    <f:variable name="eventEndDateAndTime"><f:spaceless><f:render partial="Event/DateAndTime" section="endDateAndTimeStructuredData" arguments="{event: event}"/></f:spaceless></f:variable>
+    <f:variable name="offerLink"><f:uri.action controller="EventRegistration" action="checkPrerequisites" pageUid="{settings.registrationPage}" arguments="{event: event}" absolute="true"/></f:variable>
+    <f:variable name="price"><f:spaceless><f:render partial="Price" section="structuredData" arguments="{amount: event.standardPrice}"/></f:spaceless></f:variable>
+    <f:variable name="availability"><f:spaceless><f:render partial="Event/Vacancies" section="structuredData" arguments="{event: event}"/></f:spaceless></f:variable>
+    <f:variable name="performers"><f:spaceless><f:render partial="Event/Speakers" section="structuredData" arguments="{event: event}"/></f:spaceless></f:variable>
+    <f:variable name="organizers"><f:spaceless><f:render partial="Event/Organizers" section="structuredData" arguments="{event: event}"/></f:spaceless></f:variable>
+
+    <f:comment>
+        (1) Add structured data only if the event has a defined start date.
+    </f:comment>
+    <f:if condition="{eventStartDateAndTime}">
+        <f:for each="{event.venues}" as="venue" iteration="iteration">
+            <f:render section="jsonData" arguments="{_all}"/>
+        </f:for>
+    </f:if>
+
+    <f:section name="jsonData">
+        <f:asset.script identifier="eventSchema{iteration.index}" type="application/ld+json">
+            <f:variable name="location"><f:spaceless><f:render partial="Event/Venues" section="structuredData" arguments="{event: event, venue: venue}"/></f:spaceless></f:variable>
+            {
+                "@context": "https://schema.org",
+                "@type": "Event",
+                "name": <f:format.json>{event.displayTitle}</f:format.json>,
+                "startDate": <f:format.json>{eventStartDateAndTime -> f:spaceless()}</f:format.json>,
+                "endDate": <f:format.json>{eventEndDateAndTime -> f:spaceless()}</f:format.json>,
+                "eventStatus": "https://schema.org/EventScheduled",
+                "location": {<f:format.raw>{location}</f:format.raw>},
+                "description": <f:format.json>{event.description -> f:format.stripTags(allowedTags: '')}</f:format.json>,
+                "offers": {
+                    "@type": "Offer",
+                    "url": "<f:format.raw>{offerLink}</f:format.raw>",
+                    "price": "<f:format.raw>{price}</f:format.raw>",
+                    "priceCurrency": "EUR",
+                    "availability": "{availability}"
+                },
+                <f:if condition="{event.image}">"image": <f:format.json>{event.image}</f:format.json>,</f:if>
+                <f:if condition="{performers}">"performer": [{performers}],</f:if>
+                <f:if condition="{organizers}">"organizer": [{organizers}]</f:if>
+            }
+        </f:asset.script>
+    </f:section>
+</html>
