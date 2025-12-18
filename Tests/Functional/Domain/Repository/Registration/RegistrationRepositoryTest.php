@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Registration;
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
-use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\FrontendUser;
@@ -246,22 +245,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Registration::class, $result);
 
         self::assertInstanceOf(EventDate::class, $result->getEvent());
-    }
-
-    /**
-     * @test
-     *
-     * Note: This case usually should not happen. It is only possible if there are already registrations for a single
-     * event of event topic, and the event then gets changed to an event topic.
-     */
-    public function mapsEventAssociationWithEventTopic(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventTopic.xml');
-
-        $result = $this->subject->findByUid(1);
-        self::assertInstanceOf(Registration::class, $result);
-
-        self::assertInstanceOf(EventTopic::class, $result->getEvent());
     }
 
     /**

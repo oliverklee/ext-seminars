@@ -286,7 +286,7 @@ parameters:
 			path: Classes/Domain/Model/Registration/Registration.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getEvent\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\|null but returns object\\|null\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getEvent\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\EventDateInterface\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: Classes/Domain/Model/Registration/Registration.php
 

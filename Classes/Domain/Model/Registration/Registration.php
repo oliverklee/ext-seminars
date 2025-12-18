@@ -6,8 +6,7 @@ namespace OliverKlee\Seminars\Domain\Model\Registration;
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
-use OliverKlee\Seminars\Domain\Model\Event\EventDate;
-use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\RawDataInterface;
@@ -62,7 +61,7 @@ class Registration extends AbstractEntity implements RawDataInterface
 
     /**
      * @var Event|null
-     * @phpstan-var Event|LazyLoadingProxy|null
+     * @phpstan-var EventDateInterface|LazyLoadingProxy|null
      * @Lazy
      */
     protected $event;
@@ -155,31 +154,20 @@ class Registration extends AbstractEntity implements RawDataInterface
         $this->title = $name;
     }
 
-    public function getEvent(): ?Event
+    public function getEvent(): ?EventDateInterface
     {
         $event = $this->event;
         if ($event instanceof LazyLoadingProxy) {
             $event = $event->_loadRealInstance();
-            $this->event = ($event instanceof Event) ? $event : null;
+            $this->event = ($event instanceof EventDateInterface) ? $event : null;
         }
 
         return $event;
     }
 
-    public function setEvent(Event $event): void
+    public function setEvent(EventDateInterface $event): void
     {
         $this->event = $event;
-    }
-
-    /**
-     * Checks whether the associated event is set and of a type to which someone actually can register
-     * (a single event or an event date, but not an event topic).
-     */
-    public function hasValidEventType(): bool
-    {
-        $event = $this->getEvent();
-
-        return $event instanceof SingleEvent || $event instanceof EventDate;
     }
 
     /**
@@ -189,7 +177,7 @@ class Registration extends AbstractEntity implements RawDataInterface
      */
     public function hasNecessaryAssociations(): bool
     {
-        return $this->hasValidEventType() && $this->getUser() instanceof FrontendUser;
+        return ($this->getEvent() instanceof EventDateInterface) && ($this->getUser() instanceof FrontendUser);
     }
 
     /**

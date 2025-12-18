@@ -206,6 +206,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Ensure that `Registration::getEvent()` returns an `EventDateInterface` (#4668)
 - Avoid overwriting event venues for events with timeslots (#4601)
 - Make the registration digest template auto-formattable (#4586)
 - Do not move registrations when moving event records (#4549)

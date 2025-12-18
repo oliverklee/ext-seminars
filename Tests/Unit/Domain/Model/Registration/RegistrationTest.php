@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Registration;
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
-use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
-use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\FrontendUser;
@@ -104,25 +103,7 @@ final class RegistrationTest extends UnitTestCase
     }
 
     /**
-     * @test
-     */
-    public function hasValidEventTypeWithoutEventReturnsFalse(): void
-    {
-        self::assertFalse($this->subject->hasValidEventType());
-    }
-
-    /**
-     * @test
-     */
-    public function hasValidEventTypeWithEventTopicReturnsFalse(): void
-    {
-        $this->subject->setEvent(new EventTopic());
-
-        self::assertFalse($this->subject->hasValidEventType());
-    }
-
-    /**
-     * @return array<string, array{0: Event}>
+     * @return array<string, array{0: EventDateInterface}>
      */
     public function validEventTypesDataProvider(): array
     {
@@ -130,18 +111,6 @@ final class RegistrationTest extends UnitTestCase
             'single event' => [new SingleEvent()],
             'event date' => [new EventDate()],
         ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider validEventTypesDataProvider
-     */
-    public function hasValidEventTypeWithValidEventTypeReturnsTrue(Event $event): void
-    {
-        $this->subject->setEvent($event);
-
-        self::assertTrue($this->subject->hasValidEventType());
     }
 
     /**
@@ -233,7 +202,7 @@ final class RegistrationTest extends UnitTestCase
      *
      * @dataProvider validEventTypesDataProvider
      */
-    public function hasNecessaryAssociationsWithUserAndValidEventTypeReturnsTrue(Event $event): void
+    public function hasNecessaryAssociationsWithUserAndWithEventReturnsTrue(EventDateInterface $event): void
     {
         $this->subject->setUser(new FrontendUser());
         $this->subject->setEvent($event);
@@ -246,20 +215,9 @@ final class RegistrationTest extends UnitTestCase
      *
      * @dataProvider validEventTypesDataProvider
      */
-    public function hasNecessaryAssociationsWithoutUserAndWithValidEventTypeReturnsFalse(Event $event): void
+    public function hasNecessaryAssociationsWithoutUserAndWithEventReturnsFalse(EventDateInterface $event): void
     {
         $this->subject->setEvent($event);
-
-        self::assertFalse($this->subject->hasNecessaryAssociations());
-    }
-
-    /**
-     * @test
-     */
-    public function hasNecessaryAssociationsWithUserAndEventTopicReturnsFalse(): void
-    {
-        $this->subject->setUser(new FrontendUser());
-        $this->subject->setEvent(new EventTopic());
 
         self::assertFalse($this->subject->hasNecessaryAssociations());
     }
