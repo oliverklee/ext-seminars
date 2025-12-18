@@ -177,4 +177,9 @@ class NullEventTopic extends AbstractDomainObject implements EventTopicInterface
     {
         throw new \BadMethodCallException('NullEventTopic cannot have a slug.', 1757951419);
     }
+
+    public function hasDownloadableCertificate(): bool
+    {
+        return false;
+    }
 }

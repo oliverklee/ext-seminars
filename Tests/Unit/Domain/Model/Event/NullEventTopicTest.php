@@ -283,4 +283,12 @@ final class NullEventTopicTest extends UnitTestCase
 
         $this->subject->setSlug('some-slug');
     }
+
+    /**
+     * @test
+     */
+    public function hasDownloadableCertificateAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasDownloadableCertificate());
+    }
 }

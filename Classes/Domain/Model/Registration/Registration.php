@@ -415,4 +415,12 @@ class Registration extends AbstractEntity implements RawDataInterface
     {
         $this->consentedToAdditionalTerms = $consent;
     }
+
+    /**
+     * This is a stub method that gets overwritten by the `seminars_premium` extension.
+     */
+    public function hasDownloadableCertificate(): bool
+    {
+        return false;
+    }
 }

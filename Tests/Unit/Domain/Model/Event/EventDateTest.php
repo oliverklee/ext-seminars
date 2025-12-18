@@ -1779,4 +1779,12 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($date, $this->subject->getBillingStart());
     }
+
+    /**
+     * @test
+     */
+    public function hasDownloadableCertificateAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasDownloadableCertificate());
+    }
 }
