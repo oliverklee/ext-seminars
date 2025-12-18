@@ -523,23 +523,23 @@ die Anmeldung von jemandem wurde gerade zu einer regulären Anmeldung zu einer V
         <source>&quot;%event&quot; begins in %days days</source>
         <target state="final">"%event" beginnt in %days Tagen</target>
       </trans-unit>
-      <trans-unit id="email_eventTakesPlaceReminder">
+      <trans-unit id="email_eventTakesPlaceReminder" approved="yes">
         <source>
           Hello %organizer,
 
           the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there
           are %registrations registrations for this event.
         </source>
-        <target state="translated">
+        <target state="final">
 Hallo %organizer,
 
-die Veranstaltung "%event" (Veranstaltungsnummer: %uid) beginnt in %days Tagen. Zur Zeit gibt es %registrations Anmeldungen für diese Veranstaltung        </target>
+die Veranstaltung "%event" (Veranstaltungsnummer: %uid) beginnt in %days Tagen. Zur Zeit gibt es %registrations Anmeldungen für diese Veranstaltung.        </target>
       </trans-unit>
       <trans-unit id="email_cancelationDeadlineReminderSubject" approved="yes">
         <source>Cancelation deadline for &quot;%event&quot; has just passed</source>
         <target state="final">Ende der Absagefrist für "%event"</target>
       </trans-unit>
-      <trans-unit id="email_cancelationDeadlineReminder">
+      <trans-unit id="email_cancelationDeadlineReminder" approved="yes">
         <source>
           Hello %organizer,
 
@@ -547,18 +547,18 @@ die Veranstaltung "%event" (Veranstaltungsnummer: %uid) beginnt in %days Tagen. 
           %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are
           %registrations registrations for this event.
         </source>
-        <target state="translated">
+        <target state="final">
 Hallo %organizer,
 
-das Ende der Absagefrist für die Referent_innen der Veranstaltung "%event" wurde erreicht (Veranstaltungsnummer: %uid, Beginn: %begin_date). Zur Zeit ist diese Veranstaltung weder bestätigt noch abgesagt und es gibt %registrations Anmeldungen für diese Veranstaltung        </target>
+das Ende der Absagefrist für die Referent_innen der Veranstaltung "%event" wurde erreicht (Veranstaltungsnummer: %uid, Beginn: %begin_date). Zur Zeit ist diese Veranstaltung weder bestätigt noch abgesagt und es gibt %registrations Anmeldungen für diese Veranstaltung.        </target>
       </trans-unit>
-      <trans-unit id="label_planned_disclaimer">
+      <trans-unit id="label_planned_disclaimer" approved="yes">
         <source>
           For this event to take place, a minimum number of registrations is needed. In case this number
           is not reached, the event will not take place. Of course, you then will be notified as soon as
           possible.
         </source>
-        <target state="translated">
+        <target state="final">
 Eine Mindestteilnehmer­zahl ist Voraussetzung für die Durchführung dieser Veranstaltung. Wird diese nicht erreicht, findet die Veranstaltung nicht statt. Selbstver­ständlich werden wir Sie rechtzeitig informieren        </target>
       </trans-unit>
       <trans-unit id="email_hello_informal" approved="yes">
@@ -589,13 +589,13 @@ Eine Mindestteilnehmer­zahl ist Voraussetzung für die Durchführung dieser Ver
         <source>Email notifications</source>
         <target state="final">E-Mail-Benachrichtigungen</target>
       </trans-unit>
-      <trans-unit id="schedulerTasks.mailNotifier.description">
+      <trans-unit id="schedulerTasks.mailNotifier.description" approved="yes">
         <source>
           This tasks sends email notifications, including reminders that an event will take place shortly
           or that the cancelation deadline is due.
         </source>
-        <target state="translated">
-Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine Veranstaltung demnächst stattfindet oder dass die Absagefrist abläuft        </target>
+        <target state="final">
+Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine Veranstaltung demnächst stattfindet oder dass die Absagefrist abläuft.        </target>
       </trans-unit>
       <trans-unit id="schedulerTasks.fields.page-uid" approved="yes">
         <source>UID of the page with the TypoScript configuration</source>
@@ -613,7 +613,7 @@ Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine V
         <source>Event confirmed: %eventTitle %eventDate</source>
         <target state="final">Veranstaltung zugesagt: %eventTitle %eventDate</target>
       </trans-unit>
-      <trans-unit id="email-event-canceled-body">
+      <trans-unit id="email-event-canceled-body" approved="yes">
         <source>
           %salutation
 
@@ -621,14 +621,14 @@ Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine V
 
           Unfortunately, we had to cancel this event.
         </source>
-        <target state="translated">
+        <target state="final">
 %salutation
 
 Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.
 
 Leider mussten wir diese Veranstaltung absagen        </target>
       </trans-unit>
-      <trans-unit id="email-event-confirmed-body">
+      <trans-unit id="email-event-confirmed-body" approved="yes">
         <source>
           %salutation
 
@@ -636,7 +636,7 @@ Leider mussten wir diese Veranstaltung absagen        </target>
 
           This event now has been confirmed.
         </source>
-        <target state="translated">
+        <target state="final">
 %salutation
 
 Sie hatten sich für die Veranstaltung "%eventTitle" (%eventDate) angemeldet.
@@ -687,20 +687,20 @@ Wir konnten dieser Veranstaltung nun fest zusagen        </target>
         <source>Error 403. Sorry, you don't have access to this data.</source>
         <target state="final">Fehler 403. Sorry, Sie haben nicht die Berechtigung, auf diese Daten zuzugreifen.</target>
       </trans-unit>
-      <trans-unit id="message_404">
+      <trans-unit id="message_404" approved="yes">
         <source>
           Error 404. The requested page does not exist. If you get this error message using a link on this
           page, please notify the webmaster. Thank you!
         </source>
-        <target state="translated">
+        <target state="final">
 Fehler 404. Die angeforderte Seite existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank        </target>
       </trans-unit>
-      <trans-unit id="message_404_registrations">
+      <trans-unit id="message_404_registrations" approved="yes">
         <source>
           Error 404. There is no event with this number. If you get this error message using a link on
           this page, please notify the webmaster. Thank you!
         </source>
-        <target state="translated">
+        <target state="final">
 Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank        </target>
       </trans-unit>
       <trans-unit id="message_emailToAttendeesSent" approved="yes">
@@ -951,12 +951,12 @@ Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese
         <source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
         <target state="final">"Preis" als Überschrift für den Standardpreis in der Listenansicht benutzen:</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.generalPriceInSingle">
+      <trans-unit id="seminars.pi_flexform.generalPriceInSingle" approved="yes">
         <source>
           Use &quot;Price&quot; as heading for the standard price in the single view and the registration
           page:
         </source>
-        <target state="translated">
+        <target state="final">
 "Preis" als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen        </target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.showSpeakerDetails" approved="yes">
@@ -1035,12 +1035,12 @@ Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese
         <source>Next &gt;</source>
         <target state="final">Nächste &gt;</target>
       </trans-unit>
-      <trans-unit id="pi_list_browseresults_displays">
+      <trans-unit id="pi_list_browseresults_displays" approved="yes">
         <source>
           Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of
           ###SPAN_BEGIN###%s&lt;/span&gt;
         </source>
-        <target state="translated">
+        <target state="final">
 Zeige Ergebnisse ###SPAN_BEGIN###%s bis %s&lt;/span&gt; von ###SPAN_BEGIN###%s&lt;/span&gt;        </target>
       </trans-unit>
       <trans-unit id="pi_list_browseresults_noResults" approved="yes">
@@ -1223,11 +1223,11 @@ Zeige Ergebnisse ###SPAN_BEGIN###%s bis %s&lt;/span&gt; von ###SPAN_BEGIN###%s&l
         <source>Lodging and food</source>
         <target state="final">Unterbringung und Verpflegung</target>
       </trans-unit>
-      <trans-unit id="label_accommodation">
+      <trans-unit id="label_accommodation" approved="yes">
         <source>
           How are your lodging preferences (if possible a single room, a double room, no lodging)?
         </source>
-        <target state="translated">
+        <target state="final">
 Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung)?        </target>
       </trans-unit>
       <trans-unit id="label_food" approved="yes">
@@ -1342,20 +1342,20 @@ Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, kein
         <source>Price</source>
         <target state="final">Preis</target>
       </trans-unit>
-      <trans-unit id="label_searching_hints">
+      <trans-unit id="label_searching_hints" approved="yes">
         <source>
           You can shorten the list of events by applying one ore more filter criteria. To see the whole
           list, just reset the filter.
         </source>
-        <target state="translated">
+        <target state="final">
 Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück        </target>
       </trans-unit>
-      <trans-unit id="label_searching_hints_informal">
+      <trans-unit id="label_searching_hints_informal" approved="yes">
         <source>
           You can shorten the list of events by applying one ore more filter criteria. To see the whole
           list, just reset the filter.
         </source>
-        <target state="translated">
+        <target state="final">
 Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setze den Filter bitte zurück.        </target>
       </trans-unit>
       <trans-unit id="label_we_offer_events_in_categories" approved="yes">
@@ -1894,21 +1894,21 @@ Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Vera
         <source>Thank you for registering for the waiting list of our event.</source>
         <target state="final">Dank dir für deine Wartelisten-Anmeldung zu dieser Veranstaltung.</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
+      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal" approved="yes">
         <source>
           The registration fee will only be payable once your registration has been changed from a waiting
           list registration to a regular registration.
         </source>
-        <target state="translated">
+        <target state="final">
 					Die Teilnahmegebühr wird erst fällig, wenn Ihre Anmeldung von der Warteliste nachrückt.
 				        </target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_informal">
+      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_informal" approved="yes">
         <source>
           The registration fee will only be payable once your registration has been changed from a waiting
           list registration to a regular registration.
         </source>
-        <target state="translated">
+        <target state="final">
 					Die Teilnahmegebühr wird erst fällig, wenn deine Anmeldung von der Warteliste nachrückt.
 				        </target>
       </trans-unit>
@@ -2740,9 +2740,9 @@ Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Vera
         <source>registration status</source>
         <target state="final">Anmeldestatus</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.certificateOfAttendance">
+      <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.certificateOfAttendance" approved="yes">
         <source>certificate of attendance</source>
-        <target state="needs-translation">certificate of attendance</target>
+        <target state="final">Teilnahmebescheinigung</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.settings.displayOptions.columns.unregistration" approved="yes">
         <source>unregistration</source>
@@ -2824,17 +2824,17 @@ Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Vera
         <source>Status</source>
         <target state="final">Status</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.index.heading.certificateOfAttendance">
+      <trans-unit id="plugin.myRegistrations.index.heading.certificateOfAttendance" approved="yes">
         <source>Certificate</source>
-        <target state="needs-translation">Certificate</target>
+        <target state="final">Bescheinigung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.index.downloadCertificateOfAttendance.short">
+      <trans-unit id="plugin.myRegistrations.index.downloadCertificateOfAttendance.short" approved="yes">
         <source>📄 Download</source>
-        <target state="needs-translation">📄 Download</target>
+        <target state="final">📄 Herunterladen</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.index.downloadCertificateOfAttendance.long">
+      <trans-unit id="plugin.myRegistrations.index.downloadCertificateOfAttendance.long" approved="yes">
         <source>📄 Download the certificate of attendance</source>
-        <target state="needs-translation">📄 Download the certificate of attendance</target>
+        <target state="final">📄 Die Teilnahmebescheinigung herunterladen</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.property.registrationStatus.0" approved="yes">
         <source>regular</source>
@@ -2860,17 +2860,17 @@ Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Vera
         <source>Registration status</source>
         <target state="final">Anmeldestatus</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.show.heading.certificateOfAttendance">
+      <trans-unit id="plugin.myRegistrations.show.heading.certificateOfAttendance" approved="yes">
         <source>Certificate of attendance</source>
-        <target state="needs-translation">Certificate of attendance</target>
+        <target state="final">Teilnahmebescheinigung</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.show.heading.unregistration" approved="yes">
         <source>Unregistration</source>
         <target state="final">Abmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.myRegistrations.show.downloadCertificateOfAttendance">
+      <trans-unit id="plugin.myRegistrations.show.downloadCertificateOfAttendance" approved="yes">
         <source>📄 Download the certificate of attendance</source>
-        <target state="needs-translation">📄 Download the certificate of attendance</target>
+        <target state="final">📄 Die Teilnahmebescheinigung herunterladen</target>
       </trans-unit>
       <trans-unit id="plugin.myRegistrations.show.toUnregistrationForm" approved="yes">
         <source>proceed to unregistration</source>
