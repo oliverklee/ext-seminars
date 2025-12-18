@@ -1400,4 +1400,12 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertTrue($this->subject->isPaid());
     }
+
+    /**
+     * @test
+     */
+    public function hasDownloadableCertificateAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasDownloadableCertificate());
+    }
 }

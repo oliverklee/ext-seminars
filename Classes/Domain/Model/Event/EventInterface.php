@@ -99,4 +99,9 @@ interface EventInterface extends DomainObjectInterface
     public function getSlug(): string;
 
     public function setSlug(string $slug): void;
+
+    /**
+     * This is a stub method that gets overwritten by the `seminars_premium` extension.
+     */
+    public function hasDownloadableCertificate(): bool;
 }

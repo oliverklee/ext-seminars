@@ -665,4 +665,12 @@ final class EventTopicTest extends UnitTestCase
     {
         self::assertTrue($this->subject->isEventTopic());
     }
+
+    /**
+     * @test
+     */
+    public function hasDownloadableCertificateAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasDownloadableCertificate());
+    }
 }
