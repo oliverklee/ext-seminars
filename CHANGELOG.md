@@ -7,8 +7,20 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Add `Permissions::isAdmin()` (#4608)
-- Add documentation for the PSR-14 event for slug generation (#4466)
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Documentation
+
+## 5.9.0: BE module usability improvements
+
+### Added
+
 - Show event details in the registration TCEforms (#4446, #4448)
 - Allow editing the FE users from the BE module (#4198)
 - Display the registration date in the registration TCEforms (#4155)
@@ -17,13 +29,22 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 - Make a BE label in the billing address more specific (#4534)
 - Make the registration title editable in the backend (#4532)
-- Reduce the length of the billing address fields (#4481)
-- Allow Emogrifier >= 8.0.0 (#4456)
 - Improve the hover texts in the BE module (#4196)
+
+### Fixed
+
+- Make some billing address fields longer (#4144)
+- Improve display of users without a full name in the BE module (#4112)
+
+## 5.8.1: Bugfixes and cleanup
+
+### Changed
+
+- Add `Permissions::isAdmin()` (#4608)
+- Reduce the length of the billing address fields (#4482)
+- Allow Emogrifier >= 8.0.0 (#4457)
 - Make the event statistics internal (#4075)
 - Move the webinar URL further up in the TCEforms (#3976)
-
-### Deprecated
 
 ### Removed
 
@@ -31,20 +52,19 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
-- Avoid overwriting event venues for events with timeslots (#4602)
-- Do not move registrations when moving event records (#4550)
-- Display the billing city on the registration confirmation page (#4547)
-- Fully initialize reconstituted domain models (#4247)
+- Avoid overwriting event venues for events with timeslots (#4603)
+- Do not move registrations when moving event records (#4551)
+- Display the billing city on the registration confirmation page (#4548)
+- Fully initialize reconstituted domain models (#4248)
 - Change the registration status from a checkbox to a drop-down (#4192)
 - Fix a copy'n'paste error in a label (#4127)
-- Make some billing address fields longer (#4144)
-- Improve display of users without a full name in the BE module (#4112)
 - Avoid crashes for deleted lazy-loaded associations (#4110, #4116)
 - Avoid empty localized email subjects in some cases (#3867)
 
 ### Documentation
 
-- Document the incompatibilities with `b13/bolt` (#4605)
+- Document the incompatibilities with `b13/bolt` (#4606)
+- Add documentation for the PSR-14 event for slug generation (#4467)
 
 ## 5.8.0: Usability features for the BE module
 
