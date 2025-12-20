@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Seminar Manager',
     'description' => 'Allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.',
-    'version' => '5.8.0',
+    'version' => '5.9.0',
     'category' => 'plugin',
     'constraints' => [
         'depends' => [
