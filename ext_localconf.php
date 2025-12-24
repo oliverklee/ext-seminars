@@ -102,49 +102,31 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_copyBillingAddressToRegistrations']
         = CopyBillingAddressToRegistrationsUpgradeWizard::class;
 
+    $archiveActions = [EventController::class => 'archive'];
+    ExtensionUtility::configurePlugin('Seminars', 'EventArchive', $archiveActions);
+
+    $outlookActions = [EventController::class => 'outlook'];
+    ExtensionUtility::configurePlugin('Seminars', 'EventOutlook', $outlookActions);
+
+    $singleViewActions = [EventController::class => 'show'];
+    ExtensionUtility::configurePlugin('Seminars', 'EventSingleView', $singleViewActions);
+
+    $registrationActions = [
+        EventRegistrationController::class => 'checkPrerequisites, deny, new, confirm, create, thankYou',
+        EventUnregistrationController::class => 'checkPrerequisites, deny, confirm, unregister, thankYou',
+    ];
+    $nonCacheableRegistrationActions = [
+        EventRegistrationController::class => 'checkPrerequisites, new, confirm, create, thankYou',
+        EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
+    ];
     ExtensionUtility::configurePlugin(
         'Seminars',
-        'EventArchive', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [EventController::class => 'archive'],
-        // no non-cacheable actions
-        [],
+        'EventRegistration',
+        $registrationActions,
+        $nonCacheableRegistrationActions,
     );
 
-    ExtensionUtility::configurePlugin(
-        'Seminars',
-        'EventOutlook', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [EventController::class => 'outlook'],
-        // no non-cacheable actions
-        [],
-    );
-
-    ExtensionUtility::configurePlugin(
-        'Seminars',
-        'EventSingleView', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [EventController::class => 'show'],
-        // no non-cacheable actions
-        [],
-    );
-
-    ExtensionUtility::configurePlugin(
-        'Seminars',
-        'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [
-            EventRegistrationController::class => 'checkPrerequisites, deny, new, confirm, create, thankYou',
-            EventUnregistrationController::class => 'checkPrerequisites, deny, confirm, unregister, thankYou',
-        ],
-        // non-cacheable actions
-        [
-            EventRegistrationController::class => 'checkPrerequisites, new, confirm, create, thankYou',
-            EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
-        ],
-    );
-
-    $frontEndEditorActions = [
+    $frontEndEditorActionMethods = [
         'index',
         'editSingleEvent',
         'updateSingleEvent',
@@ -155,29 +137,14 @@ defined('TYPO3') or die('Access denied.');
         'newEventDate',
         'createEventDate',
     ];
-    ExtensionUtility::configurePlugin(
-        'Seminars',
-        'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)],
-        // non-cacheable actions
-        [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)],
-    );
+    $frontEndEditorActions = [FrontEndEditorController::class => \implode(', ', $frontEndEditorActionMethods)];
+    ExtensionUtility::configurePlugin('Seminars', 'FrontEndEditor', $frontEndEditorActions, $frontEndEditorActions);
 
-    ExtensionUtility::configurePlugin(
-        'Seminars',
-        'MyRegistrations', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [
-            MyRegistrationsController::class => 'index, show, notLoggedIn, notFound, downloadAttendeeAttachment',
-            EventUnregistrationController::class => 'checkPrerequisites, deny, confirm, unregister, thankYou',
-        ],
-        // non-cacheable actions
-        [
-            MyRegistrationsController::class => 'index, show, downloadAttendeeAttachment',
-            EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
-        ],
-    );
+    $myRegistrationsActions = [
+        MyRegistrationsController::class => 'index, show, notLoggedIn, notFound, downloadAttendeeAttachment',
+        EventUnregistrationController::class => 'checkPrerequisites, deny, confirm, unregister, thankYou',
+    ];
+    ExtensionUtility::configurePlugin('Seminars', 'MyRegistrations', $myRegistrationsActions, $myRegistrationsActions);
 
     // Register the custom render types.
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1749486974] = [
