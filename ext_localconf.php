@@ -34,7 +34,7 @@ defined('TYPO3') or die('Access denied.');
     ExtensionManagementUtility::addPItoST43(
         'seminars',
         'Classes/FrontEnd/DefaultController.php',
-        '_pi1'
+        '_pi1',
     );
     ExtensionManagementUtility::addTypoScript(
         'seminars',
@@ -43,7 +43,7 @@ defined('TYPO3') or die('Access denied.');
         plugin.' . ExtensionManagementUtility::getCN('seminars')
         . '_pi1.userFunc = ' . DefaultController::class . '->main
         ',
-        43
+        43,
     );
 
     ExtensionManagementUtility::addTypoScript(
@@ -54,7 +54,7 @@ defined('TYPO3') or die('Access denied.');
         . ExtensionManagementUtility::getCN('seminars') . '_pi1
         tt_content.shortcut.20.conf.tx_seminars_seminars.CMD = singleView
     ',
-        43
+        43,
     );
 
     $languagePrefix = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.';
@@ -85,14 +85,14 @@ defined('TYPO3') or die('Access denied.');
         $iconRegistry->registerIcon(
             $key,
             BitmapIconProvider::class,
-            ['source' => 'EXT:seminars/Resources/Public/Icons/' . $fileName]
+            ['source' => 'EXT:seminars/Resources/Public/Icons/' . $fileName],
         );
     }
 
     ExtensionManagementUtility::addPageTSConfig(
         '
     <INCLUDE_TYPOSCRIPT: source="FILE:EXT:seminars/Configuration/TsConfig/ContentElementWizard.txt">
-'
+',
     );
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_generateEventSlugs']
@@ -108,7 +108,7 @@ defined('TYPO3') or die('Access denied.');
         // all actions
         [EventController::class => 'archive'],
         // no non-cacheable actions
-        []
+        [],
     );
 
     ExtensionUtility::configurePlugin(
@@ -117,7 +117,7 @@ defined('TYPO3') or die('Access denied.');
         // all actions
         [EventController::class => 'outlook'],
         // no non-cacheable actions
-        []
+        [],
     );
 
     ExtensionUtility::configurePlugin(
@@ -126,7 +126,7 @@ defined('TYPO3') or die('Access denied.');
         // all actions
         [EventController::class => 'show'],
         // no non-cacheable actions
-        []
+        [],
     );
 
     ExtensionUtility::configurePlugin(
@@ -141,7 +141,7 @@ defined('TYPO3') or die('Access denied.');
         [
             EventRegistrationController::class => 'checkPrerequisites, new, confirm, create, thankYou',
             EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
-        ]
+        ],
     );
 
     $frontEndEditorActions = [
@@ -161,7 +161,7 @@ defined('TYPO3') or die('Access denied.');
         // all actions
         [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)],
         // non-cacheable actions
-        [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)]
+        [FrontEndEditorController::class => \implode(', ', $frontEndEditorActions)],
     );
 
     ExtensionUtility::configurePlugin(
@@ -176,7 +176,7 @@ defined('TYPO3') or die('Access denied.');
         [
             MyRegistrationsController::class => 'index, show, downloadAttendeeAttachment',
             EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
-        ]
+        ],
     );
 
     // Register the custom render types.
@@ -191,6 +191,6 @@ defined('TYPO3') or die('Access denied.');
 if (ExtensionManagementUtility::isLoaded('seo')) {
     $GLOBALS['TYPO3_CONF_VARS']['FE']['additionalCanonicalizedUrlParameters'] = \array_merge(
         $GLOBALS['TYPO3_CONF_VARS']['FE']['additionalCanonicalizedUrlParameters'] ?? [],
-        ['tx_seminars_pi1[showUid]']
+        ['tx_seminars_pi1[showUid]'],
     );
 }
