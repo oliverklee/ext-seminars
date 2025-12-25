@@ -80,6 +80,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Suggest the `seminars_premium` extension (#4676)
 - Rely on the Core to autogenerate the MM tables (#4577, #4578)
 - Make a BE label in the billing address more specific (#4533)
 - Make the registration title editable in the backend (#4531)

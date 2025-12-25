@@ -75,6 +75,7 @@
 	},
 	"suggest": {
 		"oliverklee/onetimeaccount": "for event registration without an explicit FE login",
+		"oliverklee/seminars_premium": "for premium functionality",
 		"typo3/cms-install": "for running the upgrade wizards"
 	},
 	"prefer-stable": true,
