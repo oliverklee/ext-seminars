@@ -31,7 +31,7 @@ return RectorConfig::configure()
     ])
     ->withPhpVersion(PhpVersion::PHP_74)
     ->withPhpSets(
-        true
+        true,
     )
     // Note: We're only enabling a single set by default to improve performance. (Rector needs at least a single set to
     // run.)

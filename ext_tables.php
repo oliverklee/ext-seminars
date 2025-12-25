@@ -27,7 +27,7 @@ $boot = static function (): void {
             'access' => 'user,group',
             'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.svg',
             'labels' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
-        ]
+        ],
     );
 };
 
