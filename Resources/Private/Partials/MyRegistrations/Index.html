@@ -24,6 +24,11 @@
                             <f:translate key="plugin.myRegistrations.index.heading.registrationStatus"/>
                         </th>
                     </oelib:isFieldEnabled>
+                    <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="certificateOfAttendance">
+                        <th scope="col">
+                            <f:translate key="plugin.myRegistrations.index.heading.certificateOfAttendance"/>
+                        </th>
+                    </oelib:isFieldEnabled>
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +59,19 @@
                                 <td>
                                     <f:translate
                                         key="plugin.myRegistrations.property.registrationStatus.{registration.status}"/>
+                                </td>
+                            </oelib:isFieldEnabled>
+                            <oelib:isFieldEnabled configurationKey="columnsToShow" fieldName="certificateOfAttendance">
+                                <td>
+                                    <f:if condition="{registration.downloadableCertificate}">
+                                        <f:link.action controller="Certificate" action="show"
+                                                       arguments="{registration: registration}"
+                                                       title="{f:translate(key: 'plugin.myRegistrations.index.downloadCertificateOfAttendance.long')}"
+                                                       target="_blank">
+                                            <f:translate
+                                                key="plugin.myRegistrations.index.downloadCertificateOfAttendance.short"/>
+                                        </f:link.action>
+                                    </f:if>
                                 </td>
                             </oelib:isFieldEnabled>
                         </tr>

@@ -46,6 +46,12 @@
                                         </numIndex>
                                         <numIndex index="1">registrationStatus</numIndex>
                                     </numIndex>
+                                    <numIndex index="6" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.myRegistrations.settings.displayOptions.columns.certificateOfAttendance
+                                        </numIndex>
+                                        <numIndex index="1">certificateOfAttendance</numIndex>
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
